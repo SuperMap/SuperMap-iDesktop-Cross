@@ -38,7 +38,6 @@ import com.supermap.desktop.process.ui.ToolBoxMenu;
 import com.supermap.desktop.process.util.WorkflowUtil;
 import com.supermap.desktop.ui.controls.Dockbar;
 import com.supermap.desktop.ui.controls.DockbarManager;
-import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.NodeDataType;
 import com.supermap.desktop.ui.controls.TreeNodeData;
 import com.supermap.desktop.ui.controls.WorkspaceTree;
@@ -52,6 +51,7 @@ import com.supermap.desktop.utilities.XmlUtilities;
 import com.supermap.layout.MapLayout;
 import com.supermap.realspace.Scene;
 import org.flexdock.docking.DockingManager;
+import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
 import org.w3c.dom.Element;
 
 import javax.swing.*;
@@ -70,7 +70,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 
-public class FormBase extends JFrame implements IFormMain {
+public class FormBase extends JRibbonFrame implements IFormMain {
 
 	/**
 	 *
@@ -161,16 +161,16 @@ public class FormBase extends JFrame implements IFormMain {
 			WorkEnvironment workEnvironment = Application.getActiveApplication().getWorkEnvironmentManager().getActiveWorkEnvironment();
 
 			workEnvironment.mergeUIElements();
-			this.loadFrameMenu(workEnvironment);
+//			this.loadFrameMenu(workEnvironment);
 
 			// 初始化最近文件列表
 			RecentFileUtilties.initRecentFileMenu(RecentFileUtilties.FILE_TYPE_WORKSPACE);
 			RecentFileUtilties.initRecentFileMenu(RecentFileUtilties.FILE_TYPE_DATASOURCE);
 
 			initLayout();
-			this.toolbarManager.load(workEnvironment);
-//			this.ribbonManager.load(getRibbon(), workEnvironment);
-			this.contextMenuManager.load(workEnvironment);
+//			this.toolbarManager.load(workEnvironment);
+			this.ribbonManager.load(getRibbon(), workEnvironment);
+//			this.contextMenuManager.load(workEnvironment);
 			this.statusbarManager.load(workEnvironment);
 			this.dockbarManager.load(workEnvironment);
 			this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -322,11 +322,11 @@ public class FormBase extends JFrame implements IFormMain {
 	}
 
 	private void initLayout() {
-//		this.getContentPane().add(this.dockbarManager.getDockPort());
-		this.setLayout(new GridBagLayout());
-		this.add(jMenuBarMain, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER));
-		this.add(this.toolbarManager.getToolbarsContainer(), new GridBagConstraintsHelper(0, 1, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setInsets(0, 0, 0, 5));
-		this.add(this.dockbarManager.getDockPort(), new GridBagConstraintsHelper(0, 2, 1, 1).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER));
+		this.getContentPane().add(this.dockbarManager.getDockPort());
+//		this.setLayout(new GridBagLayout());
+//		this.add(jMenuBarMain, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER));
+//		this.add(this.toolbarManager.getToolbarsContainer(), new GridBagConstraintsHelper(0, 1, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setInsets(0, 0, 0, 5));
+//		this.add(this.dockbarManager.getDockPort(), new GridBagConstraintsHelper(0, 2, 1, 1).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER));
 	}
 
 	@Override
