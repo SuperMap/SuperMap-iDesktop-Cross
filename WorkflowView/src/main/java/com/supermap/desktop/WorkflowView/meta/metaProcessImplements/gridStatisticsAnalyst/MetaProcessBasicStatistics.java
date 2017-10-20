@@ -18,6 +18,8 @@ import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
+import javax.swing.*;
+
 /**
  * Created By Chens on 2017/8/15 0015
  */
@@ -61,7 +63,7 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 			sourceDatasource.setSelectedItem(datasetGrid.getDatasource());
 			sourceDataset.setSelectedItem(datasetGrid);
 		}
-		textAreaResult.setEnabled(false);
+		((JTextArea)((JScrollPane)((JPanel)textAreaResult.getParameterPanel().getPanel()).getComponent(0)).getViewport().getView()).setEditable(false);
 	}
 
 	private void initParameterConstraint() {

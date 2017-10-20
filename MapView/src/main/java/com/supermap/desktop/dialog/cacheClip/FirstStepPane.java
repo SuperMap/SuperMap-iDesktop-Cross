@@ -18,6 +18,7 @@ import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableRenderer;
@@ -123,6 +124,7 @@ public class FirstStepPane extends JPanel implements IState {
 	public JPasswordField textFieldUserPassword;
 	private JPasswordField textFieldConfirmPassword;
 	public JTextField textFieldServerName;
+	private JButton buttonGetServer;
 	private String sciPath;
 
 	private double originMapCacheScale[];
@@ -286,14 +288,20 @@ public class FirstStepPane extends JPanel implements IState {
 		@Override
 		public void focusLost(FocusEvent e) {
 			textFieldServerNameGetFocus = false;
-			if (StringUtilities.isNullOrEmpty(textFieldServerName.getText())) {
-				textFieldServerName.setText(MapViewProperties.getString("MapCache_MongoDB_DefaultServerName"));
-			}
-			mongoDBConnectSate = isDBValidate();
+
 //			updateDBNames();
 			fireEnabled(enabled());
 		}
 	};
+
+	private ActionListener serverGettingListener=new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mongoDBConnectSate = isDBValidate();
+			updateDBNames();
+		}
+	};
+
 	private DocumentListener databaseNameChangeListener = new DocumentListener() {
 		@Override
 		public void insertUpdate(DocumentEvent e) {
@@ -345,22 +353,23 @@ public class FirstStepPane extends JPanel implements IState {
 		storeType.setBorder(BorderFactory.createTitledBorder(MapViewProperties.getString("MapCache_SaveSetting")));
 		storeType.setLayout(new GridBagLayout());
 		storeType.add(this.labelSaveType, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10));
-		storeType.add(this.comboBoxSaveType, new GridBagConstraintsHelper(2, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(5, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.comboBoxSaveType, new GridBagConstraintsHelper(2, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(5, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelServerName, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 0));
 		storeType.add(this.textFieldServerName, new GridBagConstraintsHelper(2, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.buttonGetServer, new GridBagConstraintsHelper(3, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelDatabaseName, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		storeType.add(this.helpProviderForDatabaseName, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 0, 5, 0));
-		storeType.add(this.comboBoxDatabaseName, new GridBagConstraintsHelper(2, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.comboBoxDatabaseName, new GridBagConstraintsHelper(2, 2, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelUserName, new GridBagConstraintsHelper(0, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
-		storeType.add(this.textFieldUserName, new GridBagConstraintsHelper(2, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.textFieldUserName, new GridBagConstraintsHelper(2, 3, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelUserPassword, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
-		storeType.add(this.textFieldUserPassword, new GridBagConstraintsHelper(2, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10));
+		storeType.add(this.textFieldUserPassword, new GridBagConstraintsHelper(2, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10));
 		storeType.add(this.labelMutiTenseVersion, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10).setWeight(1, 0));
-		storeType.add(this.comboBoxMutiTenseVersion, new GridBagConstraintsHelper(2, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.comboBoxMutiTenseVersion, new GridBagConstraintsHelper(2, 5, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelConfirmPassword, new GridBagConstraintsHelper(0, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		storeType.add(this.warningProviderPasswordNotSame, new GridBagConstraintsHelper(1, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 0, 5, 10));
-		storeType.add(this.textFieldConfirmPassword, new GridBagConstraintsHelper(2, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
-		storeType.add(this.checkBoxFilterSelectionObjectInLayer, new GridBagConstraintsHelper(0, 7, 3, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
+		storeType.add(this.textFieldConfirmPassword, new GridBagConstraintsHelper(2, 6, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.checkBoxFilterSelectionObjectInLayer, new GridBagConstraintsHelper(0, 7, 4, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		this.comboBoxDatabaseName.setEditable(true);
 		JPanel panelRight = new JPanel();
 		panelRight.setLayout(new GridBagLayout());
@@ -464,10 +473,12 @@ public class FirstStepPane extends JPanel implements IState {
 		this.textFieldCacheName.getDocument().addDocumentListener(this.cacheNameTextChangeListener);
 		this.comboBoxSaveType.addItemListener(this.saveTypeListener);
 		this.textFieldServerName.addFocusListener(this.serverNameFocusListener);
+		this.buttonGetServer.addActionListener(this.serverGettingListener);
 		this.fileChooserControlFileCache.addFileChangedListener(this.chooseCacheFilePathTextChangeListener);
 		this.comboBoxDatabaseName.getComponent(0).addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				mongoDBConnectSate = isDBValidate();
 				updateDBNames();
 			}
 		});
@@ -495,6 +506,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.textFieldCacheName.getDocument().removeDocumentListener(this.cacheNameTextChangeListener);
 		this.comboBoxSaveType.removeItemListener(this.saveTypeListener);
 		this.textFieldServerName.removeFocusListener(this.serverNameFocusListener);
+		this.buttonGetServer.removeActionListener(this.serverGettingListener);
 		this.fileChooserControlFileCache.removePathChangedListener(this.chooseCacheFilePathTextChangeListener);
 		((JTextField) this.comboBoxDatabaseName.getEditor().getEditorComponent()).getDocument().removeDocumentListener(this.databaseNameChangeListener);
 		this.textFieldUserName.getDocument().removeDocumentListener(this.passwordChangeListener);
@@ -508,6 +520,7 @@ public class FirstStepPane extends JPanel implements IState {
 				|| currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_GeoPackage"))) {
 			this.labelServerName.setVisible(false);
 			this.textFieldServerName.setVisible(false);
+			this.buttonGetServer.setVisible(false);
 			this.labelDatabaseName.setVisible(false);
 			this.helpProviderForDatabaseName.setVisible(false);
 			this.comboBoxDatabaseName.setVisible(false);
@@ -541,7 +554,10 @@ public class FirstStepPane extends JPanel implements IState {
 		} else if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDB")) || currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
 			this.labelServerName.setVisible(true);
 			this.textFieldServerName.setVisible(true);
-			this.textFieldServerName.setText(MapViewProperties.getString("MapCache_MongoDB_DefaultServerName"));
+			if (StringUtilities.isNullOrEmpty(textFieldServerName.getText())) {
+				textFieldServerName.setText(MapViewProperties.getString("MapCache_MongoDB_DefaultServerName"));
+			}
+			this.buttonGetServer.setVisible(true);
 			this.labelDatabaseName.setVisible(true);
 			this.helpProviderForDatabaseName.setVisible(true);
 			this.comboBoxDatabaseName.setVisible(true);
@@ -843,6 +859,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.buttonSelectInverse.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
 		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonGetServer.setText(CoreProperties.getString("String_Label_VersionCheck"));
 
 		this.labelVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
 		this.labelSplitMode.setText(MapViewProperties.getString("MapCache_LabelSplitMode"));
@@ -910,6 +927,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.textFieldUserPassword = new JPasswordField();
 		this.textFieldConfirmPassword = new JPasswordField();
 		this.textFieldServerName = new JTextField();
+		this.buttonGetServer = new JButton();
 		initToolBar();
 	}
 

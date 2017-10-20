@@ -70,12 +70,14 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
+				Datasource tempDatasource = comboBoxDatasource.getSelectedDatasource();
 				if (null != panelImports) {
 					for (PanelImport tempPanelImport : panelImports) {
-						tempPanelImport.getResultset().getComboBoxDatasource().setSelectedDatasource(comboBoxDatasource.getSelectedDatasource());
+						tempPanelImport.getResultset().getComboBoxDatasource().setSelectedDatasource(tempDatasource);
 					}
 				} else {
-					importSetting.setTargetDatasource(comboBoxDatasource.getSelectedDatasource());
+					importSetting.setTargetDatasource(tempDatasource);
+					textFieldDatasetName.setText(tempDatasource.getDatasets().getAvailableDatasetName(textFieldDatasetName.getText()));
 				}
 			}
 		}
@@ -542,6 +544,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		} else if (!StringUtilities.isNullOrEmpty(importSetting.getTargetDatasetName()) && panelImports == null) {
 			String availableName = this.comboBoxDatasource.getSelectedDatasource().getDatasets().getAvailableDatasetName(importSetting.getTargetDatasetName());
 			this.textFieldDatasetName.setText(availableName);
+			this.importSetting.setTargetDatasetName(availableName);
 		} else if (StringUtilities.isNullOrEmpty(importSetting.getTargetDatasetName()) && panelImports == null) {
 			String textInfo = FileUtilities.getFileAlias(this.importSetting.getSourceFilePath());
 			if (null != textInfo) {

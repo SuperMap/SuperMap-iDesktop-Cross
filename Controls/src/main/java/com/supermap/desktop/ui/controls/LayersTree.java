@@ -14,7 +14,6 @@ import com.supermap.desktop.dialog.symbolDialogs.SymbolDialog;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
-import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.mapping.*;
 
 import javax.swing.*;
@@ -39,7 +38,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 图层管理树控件
@@ -112,9 +110,6 @@ public class LayersTree extends JTree {
 	}
 
 	private void initDrag() {
-		if (SystemPropertyUtilities.isLinux() && this.getRowHeight() == -1) {
-			this.setRowHeight(17);
-		}
 		this.setDragEnabled(true);
 		dragSource = DragSource.getDefaultDragSource();
 		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, new LayersTreeDragGestureListener());
@@ -802,7 +797,10 @@ public class LayersTree extends JTree {
 				DefaultMutableTreeNode removedNode = groupNodeMap.get(layerGroup);
 
 				if (parentNode != null && removedNode != null) {
-					parentNode.remove(removedNode);
+					// fix by lixiaoyao 移除图层分组时应该移除model中的节点，不是父节点中子节点
+					DefaultTreeModel model = (DefaultTreeModel) getModel();
+					model.removeNodeFromParent(removedNode);
+//					parentNode.remove(removedNode);
 				}
 			} else {
 				DefaultTreeModel model = (DefaultTreeModel) getModel();
@@ -1072,11 +1070,6 @@ public class LayersTree extends JTree {
 						((ThemeGridRange) tempTheme).getItem(i).setVisible(isVisible);
 					}
 				}
-			} else if (layer instanceof LayerGroup) {
-				LayerGroup layerGroup = (LayerGroup) layer;
-				for (int i = 0; i < layerGroup.getCount(); i++) {
-					layerGroup.get(i).setVisible(isVisible);
-				}
 			}
 		}
 
@@ -1114,6 +1107,10 @@ public class LayersTree extends JTree {
 
 	public boolean isHitTestInfo() {
 		return isHitTestInfo;
+	}
+
+	public void setHitTestInfo(boolean hitTestInfo) {
+		isHitTestInfo = hitTestInfo;
 	}
 
 	private void updateLater() {

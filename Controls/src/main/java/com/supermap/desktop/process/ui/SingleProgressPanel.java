@@ -4,7 +4,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.tasks.IWorkerView;
-import com.supermap.desktop.process.tasks.ProcessWorker;
 import com.supermap.desktop.process.tasks.SingleProgress;
 import com.supermap.desktop.process.tasks.Worker;
 import com.supermap.desktop.ui.controls.progress.RoundProgressBar;
@@ -57,7 +56,7 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 		this.labelTitle.setText(title);
 	}
 
-	public void setWorker(ProcessWorker worker) {
+	public void setWorker(Worker worker) {
 		if (worker == null) {
 			throw new NullPointerException("worker can not be null.");
 		}

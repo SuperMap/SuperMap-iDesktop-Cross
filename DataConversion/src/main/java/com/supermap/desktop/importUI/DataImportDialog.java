@@ -700,13 +700,14 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 					String filePath = oldImportSetting.getSourceFilePath();
 					newImportSetting.setTargetDatasource(oldImportSetting.getTargetDatasource());
 					newImportSetting.setSourceFilePath(filePath);
+					newImportSetting.setTargetDatasetName(oldImportSetting.getTargetDatasetName());
 					tempFileInfo.setImportSetting(newImportSetting);
 					PanelImport panelImport = (PanelImport) importPanelFactory.createPanelImport(DataImportDialog.this, tempFileInfo);
 					setImportTitle(newImportSetting);
 					int selectRow = table.getSelectedRow();
 					panelImports.remove(selectRow);
 					panelImports.add(selectRow, panelImport);
-					CommonUtilities.replace(panelImportInfo, (JPanel) panelImport);
+					CommonUtilities.replace(panelImportInfo,panelImport);
 				}
 			};
 			this.steppedComboBox.addItemListener(this.aListener);

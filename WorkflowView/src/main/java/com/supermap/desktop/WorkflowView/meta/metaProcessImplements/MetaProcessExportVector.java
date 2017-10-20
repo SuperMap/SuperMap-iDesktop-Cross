@@ -159,7 +159,8 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 			this.exportFieldName.setEnabled(true);
 			//默认设置为导出表头
 			this.exportFieldName.setSelectedItem(true);
-			if (((Dataset) newExportSetting.getSourceData()).getType().equals(DatasetType.POINT)) {
+			DatasetType tempType = ((Dataset) newExportSetting.getSourceData()).getType();
+			if (tempType.equals(DatasetType.POINT) || tempType.equals(DatasetType.POINT3D)) {
 				this.exportPointAsWKT.setEnabled(!(newExportSetting instanceof ExportSettingExcel));
 				this.exportPointAsWKT.setSelectedItem(String.valueOf(((ExportSettingCSV) newExportSetting).GetIsExportPointAsWKT()));
 			}
@@ -213,7 +214,8 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 		}
 		if (exportSetting instanceof ExportSettingCSV) {
 			((ExportSettingCSV) exportSetting).setIsExportFieldName(Boolean.valueOf(exportFieldName.getSelectedItem().toString()));
-			if (((Dataset) exportSetting.getSourceData()).getType().equals(DatasetType.POINT)) {
+			DatasetType tempType = ((Dataset) exportSetting.getSourceData()).getType();
+			if (tempType.equals(DatasetType.POINT) || tempType.equals(DatasetType.POINT3D)) {
 				((ExportSettingCSV) exportSetting).setIsExportPointAsWKT(Boolean.valueOf(exportPointAsWKT.getSelectedItem().toString()));
 			}
 		}

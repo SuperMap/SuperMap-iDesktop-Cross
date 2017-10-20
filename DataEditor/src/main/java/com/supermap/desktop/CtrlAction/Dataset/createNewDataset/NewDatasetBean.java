@@ -140,6 +140,8 @@ public class NewDatasetBean {
 						DatasetImage datasetImage = datasource.getDatasets().create(info);
 						try {
 							datasetImage = datasource.getDatasets().create(info);
+							// 设置新建数据集投影坐标系和数据源保持一致
+							datasetImage.setPrjCoordSys(datasource.getPrjCoordSys());
 						} catch (Exception e) {
 							Application.getActiveApplication().getOutput().output(MessageFormat.format(DataEditorProperties.getString("String_CreateNewDT_Failed"), datasetName, datasource.getAlias()));
 						}
@@ -174,6 +176,8 @@ public class NewDatasetBean {
 						DatasetGrid datasetGrid = datasource.getDatasets().create(info);
 						try {
 							datasetGrid = datasource.getDatasets().create(info);
+							// 设置新建数据集投影坐标系和数据源保持一致
+							datasetGrid.setPrjCoordSys(datasource.getPrjCoordSys());
 						} catch (Exception e) {
 							Application.getActiveApplication().getOutput().output(MessageFormat.format(DataEditorProperties.getString("String_CreateNewDT_Failed"), datasetName, datasource.getAlias()));
 						}
@@ -197,6 +201,8 @@ public class NewDatasetBean {
 					Dataset dataset = null;
 					try {
 						dataset = datasource.getDatasets().create(info);
+						// 设置新建数据集投影坐标系和数据源保持一致
+						dataset.setPrjCoordSys(datasource.getPrjCoordSys());
 					} catch (Exception e) {
 						Application.getActiveApplication().getOutput().output(MessageFormat.format(DataEditorProperties.getString("String_CreateNewDT_Failed"), datasetName, datasource.getAlias()));
 					}

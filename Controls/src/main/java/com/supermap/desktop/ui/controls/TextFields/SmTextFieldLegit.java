@@ -141,7 +141,7 @@ public class SmTextFieldLegit extends JTextField {
 	@Override
 	public void setEditable(boolean b) {
 		super.setEditable(b);
-		this.setFocusable(b);
+		//this.setFocusable(b);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.supermap.desktop.CtrlAction;
+package com.supermap.desktop.CtrlAction.transformationForm.CtrlAction;
 
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
@@ -24,6 +24,19 @@ public class CtrlActionBatchPrjTranslator extends CtrlAction {
 
 	@Override
 	public boolean enable() {
+		//boolean enable = false;
+		//if (null != Application.getActiveApplication().getWorkspace().getDatasources() && Application.getActiveApplication().getWorkspace().getDatasources().getCount() > 0) {
+		//	Datasources datasources = Application.getActiveApplication().getWorkspace().getDatasources();
+		//	for (int i = 0; i < datasources.getCount(); i++) {
+		//		Datasource tempDatasource = datasources.get(i);
+		//		if (!tempDatasource.isReadOnly() && tempDatasource.getPrjCoordSys().getType() != PrjCoordSysType.PCS_NON_EARTH) {
+		//			enable = true;
+		//			break;
+		//		}
+		//	}
+		//}
+		//return enable;
+
 		return null != DatasetUtilities.getDefaultDataset();
 	}
 }

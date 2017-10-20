@@ -62,7 +62,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 				.addGroup(groupLayout.createSequentialGroup()
 						.addContainerGap(10, Short.MAX_VALUE)
 						.addComponent(this.buttonCancel)));
-		
+
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addComponent(this.labelMessage)
 				.addComponent(this.progressBar, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT)

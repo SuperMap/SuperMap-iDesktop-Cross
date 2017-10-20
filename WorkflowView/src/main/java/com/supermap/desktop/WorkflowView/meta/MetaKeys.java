@@ -93,6 +93,7 @@ public class MetaKeys {
 	public static final String INCREMENTAL_AUTO_CORRELATION = "IncrementalAutoCorrelation";
 	public static final String AVERAGE_NEAREST_NEIGHBOR = "AverageNearestNeighbor";
 	public static final String OPTIMIZED_HOT_SPOT_ANALYST = "OptimizedHotSpotAnalyst";
+	public static final String COLLECT_EVENTS="CollectEvents";
 
 	//数据处理
 	public static final String AGGREGATE_POINTS = "AggregatePoints";
@@ -110,6 +111,8 @@ public class MetaKeys {
 	public static final String ALGEBRA_OPERATION="AlgebraOperation";
 	public static final String DATA_UPDATE="DataUpdate";
 	public static final String RASTER_RECLASS="RasterReclass";
+	public static final String INTEGRATE="Integrate";
+	public static final String GRID_SLICE="GridSlice";
 
 	//类型转换
 	public static final String CONVERSION_POINT_TO_LINE = "Conversion_PointToLine";

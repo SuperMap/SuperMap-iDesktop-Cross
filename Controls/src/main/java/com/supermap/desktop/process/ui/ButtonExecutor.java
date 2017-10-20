@@ -15,14 +15,15 @@ import java.awt.event.MouseMotionListener;
 public class ButtonExecutor extends JButton implements MouseListener, MouseMotionListener {
 	public final static int READY = 1;
 	public final static int RUNNING = 2;
-	public final static int CANCELLED = 3;
+	public final static int CANCELLING = 3;
 	public final static int COMPLETED = 4;
 
 	private final static Icon ICON_READY_NORMAL = ProcessResources.getIcon("/processresources/task/image_run.png");
 	private final static Icon ICON_READY_HOT = ProcessResources.getIcon("/processresources/task/image_run_hot.png");
-	private final static Icon ICON_RUN_NORMAL = ProcessResources.getIcon("/processresources/task/image_cancel.png");
-	private final static Icon ICON_RUN_HOT = ProcessResources.getIcon("/processresources/task/image_cancel_hot.png");
-	private final static Icon ICON_CANCELLED = ControlsResources.getIcon("/controlsresources/ToolBar/Image_stop_pressed.png");
+	private final static Icon ICON_READY_UNABLE = ProcessResources.getIcon("/processresources/task/image_run_unable.png");
+	private final static Icon ICON_RUNNING_NORMAL = ProcessResources.getIcon("/processresources/task/image_cancel.png");
+	private final static Icon ICON_RUNNING_HOT = ProcessResources.getIcon("/processresources/task/image_cancel_hot.png");
+	private final static Icon ICON_CANCELLING = ControlsResources.getIcon("/controlsresources/ToolBar/Image_stop_pressed.png");
 	private final static Icon ICON_COMPLETED_NOMAL = ProcessResources.getIcon("/processresources/task/image_finish.png");
 	private final static Icon ICON_COMPLETED_HOT = ProcessResources.getIcon("/processresources/task/image_run.png");
 
@@ -34,6 +35,7 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 	public final static int NORMAL = 1;
 	public final static int HOT = 2;
 
+	private boolean isEnabled = true;
 	private int procedure = READY;
 	private int status = NORMAL;
 
@@ -83,15 +85,15 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 					break;
 					case RUNNING: {
 						if (ButtonExecutor.this.status == NORMAL) {
-							setIcon(ICON_RUN_NORMAL);
+							setIcon(ICON_RUNNING_NORMAL);
 						} else if (ButtonExecutor.this.status == HOT) {
-							setIcon(ICON_RUN_HOT);
+							setIcon(ICON_RUNNING_HOT);
 						}
 						setToolTipText(TIP_RUNNING);
 					}
 					break;
-					case CANCELLED: {
-						setIcon(ICON_CANCELLED);
+					case CANCELLING: {
+						setIcon(ICON_CANCELLING);
 						setToolTipText(TIP_CANCELLED);
 					}
 					break;
@@ -131,11 +133,11 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 			}
 			break;
 			case RUNNING: {
-				setProcedure(CANCELLED);
+				setProcedure(CANCELLING);
 				this.cancel.run();
 			}
 			break;
-			case CANCELLED:
+			case CANCELLING:
 			default:
 				break;
 		}

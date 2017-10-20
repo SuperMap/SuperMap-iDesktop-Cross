@@ -471,7 +471,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 			}
 			this.comboBoxCADVersion.setSelectedItem(selectItem(tempExportSetting));
 		}
-		if (tempExportSetting instanceof ExportSettingCSV && (tempExportSetting instanceof ExportSettingExcel)) {
+		if (tempExportSetting instanceof ExportSettingCSV && !(tempExportSetting instanceof ExportSettingExcel)) {
 			this.checkBoxExportFieldName.setEnabled(true);
 			//默认设置为导出表头
 			this.checkBoxExportFieldName.setSelected(true);

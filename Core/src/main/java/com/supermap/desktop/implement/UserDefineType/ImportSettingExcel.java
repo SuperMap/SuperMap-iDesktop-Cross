@@ -23,9 +23,9 @@ public class ImportSettingExcel extends ImportSettingCSV {
 		try {
 			XlsUtilities.importSettingExcel = this;
 			if (this.getSourceFilePath().endsWith("xls")) {
-				result = XlsUtilities.importXlsFile(this.getTargetDatasource(), this.getSourceFilePath(), this.getFirstRowIsField());
+				result = XlsUtilities.importXlsFile(this.getTargetDatasetName(),this.getTargetDatasource(), this.getSourceFilePath(), this.getFirstRowIsField());
 			} else {
-				result = XlsUtilities.importXlsxFile(this.getTargetDatasource(), this.getSourceFilePath(), this.getFirstRowIsField());
+				result = XlsUtilities.importXlsxFile(this.getTargetDatasetName(),this.getTargetDatasource(), this.getSourceFilePath(), this.getFirstRowIsField());
 			}
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);

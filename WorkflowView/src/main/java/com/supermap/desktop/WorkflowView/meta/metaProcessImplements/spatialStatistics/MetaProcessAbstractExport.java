@@ -119,7 +119,6 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		EqualDatasourceConstraint constraint = new EqualDatasourceConstraint();
 		constraint.constrained(datasource, ParameterDatasource.DATASOURCE_FIELD_NAME);
 		constraint.constrained(dataset, ParameterSingleDataset.DATASOURCE_FIELD_NAME);
-		Dataset dataset = DatasetUtilities.getDefaultDataset();
 		this.supportType = new ParameterComboBox(ProcessProperties.getString("String_ExportType"));
 		this.supportType.setEnabled(false);
 		this.targetName = new ParameterTextField(ProcessProperties.getString("String_TargetName"));

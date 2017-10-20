@@ -37,13 +37,14 @@ import static com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSet
 import static com.supermap.desktop.ui.controls.prjcoordsys.XMLProjectionTag.GEOCOORDSYS_CAPTION;
 
 // @formatter:off
+
 /**
  * 先不做自定义投影 投影描述的文件是从 iDesktop .NET 迁移过来的，而 Java版的实现与投影描述文件的结构略有不同。
  * 在配置文件中，分组信息是以 GroupCaption 子节点的形式写在了每一个定义里，它们是同级平行关系，
  * 而在本类的实现中， 分组与子项是上下层级关系。
- * 
- * @author highsad
  *
+ * @author highsad
+ * 优化：支持树节点的定制-yuanR2017.10.18
  */
 // @formatter:on
 public class JDialogPrjCoordSysSettings extends SmDialog {
@@ -303,7 +304,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.CENTER)
 				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(centerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
-		
+
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED)
@@ -385,7 +386,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						.addGap(10, 10, Short.MAX_VALUE)
 						.addComponent(this.buttonApply)
 						.addComponent(this.buttonClose)));
-		
+
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addComponent(this.splitPaneMain, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
@@ -1137,7 +1138,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	private void save() {
-			XmlUtilities.saveXml(projectionConfigPath, projectionDoc, "UTF-8");
+		XmlUtilities.saveXml(projectionConfigPath, projectionDoc, "UTF-8");
 	}
 
 	private boolean removeGeoFormDoc(CoordSysDefine coordSysDefine) {
@@ -1237,6 +1238,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 描述一个坐标系
 	 *
 	 * @author highsad
+	 * 坐标系定义类
 	 */
 	public class CoordSysDefine {
 		public static final int USER_DEFINED = -1; // 用户自定义
@@ -1649,4 +1651,24 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		}
 	}
 
+	/**
+	 * 外部去除节点，定制
+	 * 未完成
+	 * yuanR2017.10.18
+	 *
+	 * @param num
+	 */
+	public void removeRoot(int[] num) {
+		for (int i = 0; i < num.length; i++) {
+			switch (num[i]) {
+				case CoordSysDefine.NONE_ERRTH:
+					DefaultMutableTreeNode node = (DefaultMutableTreeNode) getNodeByDefine((DefaultMutableTreeNode) this.treePrjCoordSys.getModel().getRoot(), currentPrjDefine.getParent());
+					// HOW TO DO 隐藏节点？
+				case CoordSysDefine.PROJECTION_SYSTEM:
+
+				case CoordSysDefine.GEOGRAPHY_COORDINATE:
+
+			}
+		}
+	}
 }

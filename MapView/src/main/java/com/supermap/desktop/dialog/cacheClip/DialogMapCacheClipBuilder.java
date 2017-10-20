@@ -136,7 +136,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
 		initComponents();
 		initResources();
 		initLayout();
-		registEvents();
+		registerEvents();
 		this.componentList.add(this.buttonStep);
 		this.componentList.add(this.buttonOk);
 		this.componentList.add(this.buttonCancel);
@@ -151,7 +151,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
 		this.nextStepPane.removeEnabledListener(this.nextStepEnabledListener);
 	}
 
-	private void registEvents() {
+	private void registerEvents() {
 		removeEvents();
 		this.buttonStep.addActionListener(this.stepListener);
 		this.buttonCancel.addActionListener(this.cancelListener);
@@ -287,7 +287,6 @@ public class DialogMapCacheClipBuilder extends SmDialog {
 		firstStepPane.textFieldCacheName.requestFocus();
 		getContentPane().repaint();
 	}
-
 
 	//Change panel
 	private void changePanel(boolean flag) {

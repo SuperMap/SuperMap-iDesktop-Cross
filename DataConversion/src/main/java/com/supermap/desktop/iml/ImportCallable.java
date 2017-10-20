@@ -33,6 +33,7 @@ public class ImportCallable extends UpdateProgressCallable {
 	private JTable table;
 	private ImportSetting importSetting;
 	private DataImportDialog dataImportDialog;
+	private ImportSetting resultImportSetting = null;
 	private SpatialIndexType[] spatialIndexTypes = {SpatialIndexType.MULTI_LEVEL_GRID, SpatialIndexType.QTREE, SpatialIndexType.RTREE, SpatialIndexType.TILE, SpatialIndexType.PRIMARY};
 
 	public ImportCallable(List<ImportInfo> fileInfos, DataImportDialog dataImportDialog) {
@@ -43,7 +44,7 @@ public class ImportCallable extends UpdateProgressCallable {
 
 	@Override
 	public Boolean call() {
-		final HashMap<String, Integer> map = new HashMap<String, Integer>();
+		final HashMap<String, Integer> map = new HashMap();
 		Datasources datasources = Application.getActiveApplication().getWorkspace().getDatasources();
 		for (int i = 0; i < datasources.getCount(); i++) {
 			map.put(datasources.get(i).getAlias(), 0);
@@ -59,10 +60,10 @@ public class ImportCallable extends UpdateProgressCallable {
 					datasets.add(dataset);
 					java.util.List<Dataset> closedDatasets = DatasetUIUtilities.sureDatasetClosed(datasets);
 					if (closedDatasets.size() > 0) {
-						doImport(i, dataImport, map);
+						resultImportSetting = doImport(i, dataImport, map);
 					}
 				} else {
-					doImport(i, dataImport, map);
+					resultImportSetting = doImport(i, dataImport, map);
 				}
 			}
 		} catch (Exception e2) {
@@ -76,6 +77,9 @@ public class ImportCallable extends UpdateProgressCallable {
 						if (entry.getValue() > 0) {
 							UICommonToolkit.refreshSelectedDatasourceNode(entry.getKey());
 						}
+					}
+					if (null != resultImportSetting && null != resultImportSetting.getTargetDatasource().getDatasets().get(resultImportSetting.getTargetDatasetName())) {
+						UICommonToolkit.refreshSelectedDatasetNode(resultImportSetting.getTargetDatasource().getDatasets().get(resultImportSetting.getTargetDatasetName()));
 					}
 				}
 			});
@@ -95,7 +99,8 @@ public class ImportCallable extends UpdateProgressCallable {
 		return true;
 	}
 
-	private void doImport(int i, DataImport dataImport, HashMap<String, Integer> map) {
+	private ImportSetting doImport(int i, DataImport dataImport, HashMap<String, Integer> map) {
+		ImportSetting successImportSetting = null;
 		PercentProgress percentProgress = new PercentProgress(i);
 		long startTime;
 		long endTime;
@@ -105,8 +110,9 @@ public class ImportCallable extends UpdateProgressCallable {
 			startTime = System.currentTimeMillis(); // 获取开始时间
 			UserDefineImportResult result = ((ImportSettingGPX) importSetting).run();
 			if (null != result.getSuccess()) {
-				map.put(result.getSuccess().getTargetDatasource().getAlias(),
-						map.get(result.getSuccess().getTargetDatasource().getAlias()) + 1);
+				successImportSetting = result.getSuccess();
+				map.put(successImportSetting.getTargetDatasource().getAlias(),
+						map.get(successImportSetting.getTargetDatasource().getAlias()) + 1);
 			}
 			endTime = System.currentTimeMillis(); // 获取结束时间
 			time = endTime - startTime;
@@ -122,8 +128,9 @@ public class ImportCallable extends UpdateProgressCallable {
 			if (null != result) {
 				for (UserDefineImportResult tempResult : result) {
 					if (null != tempResult && null != tempResult.getSuccess()) {
-						map.put(tempResult.getSuccess().getTargetDatasource().getAlias(),
-								map.get(tempResult.getSuccess().getTargetDatasource().getAlias()) + 1);
+						successImportSetting = tempResult.getSuccess();
+						map.put(successImportSetting.getTargetDatasource().getAlias(),
+								map.get(successImportSetting.getTargetDatasource().getAlias()) + 1);
 						printMessage(tempResult, time);
 					}
 				}
@@ -136,8 +143,9 @@ public class ImportCallable extends UpdateProgressCallable {
 			startTime = System.currentTimeMillis(); // 获取开始时间
 			ImportResult result = dataImport.run();
 			if (null != result.getSucceedSettings() && result.getSucceedSettings().length > 0) {
-				map.put(result.getSucceedSettings()[0].getTargetDatasource().getAlias(),
-						map.get(result.getSucceedSettings()[0].getTargetDatasource().getAlias()) + 1);
+				successImportSetting = result.getSucceedSettings()[0];
+				map.put(successImportSetting.getTargetDatasource().getAlias(),
+						map.get(successImportSetting.getTargetDatasource().getAlias()) + 1);
 			}
 			endTime = System.currentTimeMillis(); // 获取结束时间
 			time = endTime - startTime;
@@ -149,7 +157,7 @@ public class ImportCallable extends UpdateProgressCallable {
 
 				updateRows(fileInfos);
 		if (null != percentProgress && percentProgress.isCancel()) {
-			return;
+			return null;
 		}
 		if (!dataImportDialog.isVisible())
 
@@ -157,6 +165,7 @@ public class ImportCallable extends UpdateProgressCallable {
 			importSetting.dispose();
 		}
 		dataImport.dispose();
+		return successImportSetting;
 	}
 
 	/**

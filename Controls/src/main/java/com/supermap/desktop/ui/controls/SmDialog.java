@@ -11,7 +11,7 @@ public abstract class SmDialog extends JDialog implements WindowListener {
 
 	/**
 	 * 将要实现tab键切换顺序的控件添加到容器中
-	 * 
+	 *
 	 * @return
 	 */
 	protected ArrayList<Component> componentList = new ArrayList<Component>();
@@ -53,7 +53,7 @@ public abstract class SmDialog extends JDialog implements WindowListener {
 
 	/**
 	 * 覆盖JDialog的createRootPane方 法已达到焦点在子类窗体内部时，点击 Enter，Esc时实现子类自定义的确定， 取消功能
-	 * 
+	 *
 	 * @return
 	 */
 	@Override

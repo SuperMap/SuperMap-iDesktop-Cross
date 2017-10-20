@@ -38,7 +38,7 @@
 
     <properties>
         <objects.groupId>com.supermap</objects.groupId>
-        <objects.version>9.0.0</objects.version>
+        <objects.version>9.0.1</objects.version>
         <bundle.version>1.0.0.qualifier</bundle.version>
     </properties>
 

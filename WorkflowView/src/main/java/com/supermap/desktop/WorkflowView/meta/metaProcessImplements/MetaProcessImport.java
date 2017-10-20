@@ -182,7 +182,7 @@ public class MetaProcessImport extends MetaProcess {
 			UserDefineImportResult result = ((ImportSettingGPX) importSetting).run();
 			if (null != result) {
 				isSuccessful = true;
-				updateDatasource(result.getSuccess());
+				updateDataset(result.getSuccess());
 				endTime = System.currentTimeMillis(); // 获取结束时间
 				time = endTime - startTime;
 				printMessage(result, time);
@@ -207,7 +207,7 @@ public class MetaProcessImport extends MetaProcess {
 				for (UserDefineImportResult tempResult : result) {
 					if (null != tempResult && null != tempResult.getSuccess()) {
 						isSuccessful = true;
-						updateDatasource(tempResult.getSuccess());
+						updateDataset(tempResult.getSuccess());
 						printMessage(tempResult, time);
 					} else {
 						Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_ImportFailed"));
@@ -237,7 +237,7 @@ public class MetaProcessImport extends MetaProcess {
 		ImportSetting[] succeedSettings = result.getSucceedSettings();
 		if (succeedSettings.length > 0) {
 			isSuccessful = true;
-			updateDatasource(succeedSettings[0]);
+			updateDataset(succeedSettings[0]);
 			endTime = System.currentTimeMillis(); // 获取结束时间
 			time = endTime - startTime;
 			printMessage(result, time);
@@ -276,13 +276,13 @@ public class MetaProcessImport extends MetaProcess {
 		}
 	}
 
-	private void updateDatasource(ImportSetting succeedSetting) {
+	private void updateDataset(final ImportSetting succeedSetting) {
 		final Datasource datasource = succeedSetting.getTargetDatasource();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				if (null != datasource) {
-					UICommonToolkit.refreshSelectedDatasourceNode(datasource.getAlias());
+				if (null != datasource && null != datasource.getDatasets().get(succeedSetting.getTargetDatasetName())) {
+					UICommonToolkit.refreshSelectedDatasetNode(datasource.getDatasets().get(succeedSetting.getTargetDatasetName()));
 				}
 			}
 		});

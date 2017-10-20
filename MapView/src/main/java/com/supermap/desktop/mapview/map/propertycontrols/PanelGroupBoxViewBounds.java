@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * @author YuanR
- *         地图输出为图片设置范围panel
+ * 地图输出为图片设置范围panel
  */
 public class PanelGroupBoxViewBounds extends JPanel {
 
@@ -216,19 +216,19 @@ public class PanelGroupBoxViewBounds extends JPanel {
 		@Override
 		public void focusLost(FocusEvent e) {
 			// 当失去焦点时，将文本框中数字设置千分位
-			if (!textFieldCurrentViewLeft.getTextField().getText().isEmpty() && e.getSource().equals(textFieldCurrentViewLeft.getTextField())) {
+			if (!StringUtilities.isNullOrEmpty(textFieldCurrentViewLeft.getTextField().getText().toString()) && e.getSource().equals(textFieldCurrentViewLeft.getTextField())) {
 				String temp = textFieldCurrentViewLeft.getTextField().getText();
 				temp = DoubleUtilities.getFormatString(DoubleUtilities.stringToValue(temp));
 				textFieldCurrentViewLeft.getTextField().setText(temp);
-			} else if (!textFieldCurrentViewBottom.getTextField().getText().isEmpty() && e.getSource().equals(textFieldCurrentViewBottom.getTextField())) {
+			} else if (!StringUtilities.isNullOrEmpty(textFieldCurrentViewBottom.getTextField().getText().toString()) && e.getSource().equals(textFieldCurrentViewBottom.getTextField())) {
 				String temp = textFieldCurrentViewBottom.getTextField().getText();
 				temp = DoubleUtilities.getFormatString(DoubleUtilities.stringToValue(temp));
 				textFieldCurrentViewBottom.getTextField().setText(temp);
-			} else if (!textFieldCurrentViewRight.getTextField().getText().isEmpty() && e.getSource().equals(textFieldCurrentViewRight.getTextField())) {
+			} else if (!StringUtilities.isNullOrEmpty(textFieldCurrentViewRight.getTextField().getText().toString()) && e.getSource().equals(textFieldCurrentViewRight.getTextField())) {
 				String temp = textFieldCurrentViewRight.getTextField().getText();
 				temp = DoubleUtilities.getFormatString(DoubleUtilities.stringToValue(temp));
 				textFieldCurrentViewRight.getTextField().setText(temp);
-			} else if (!textFieldCurrentViewLeft.getTextField().getText().isEmpty() && e.getSource().equals(textFieldCurrentViewTop.getTextField())) {
+			} else if (!StringUtilities.isNullOrEmpty(textFieldCurrentViewTop.getTextField().getText().toString()) && e.getSource().equals(textFieldCurrentViewTop.getTextField())) {
 				String temp = textFieldCurrentViewTop.getTextField().getText();
 				temp = DoubleUtilities.getFormatString(DoubleUtilities.stringToValue(temp));
 				textFieldCurrentViewTop.getTextField().setText(temp);

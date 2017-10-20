@@ -163,15 +163,16 @@ public class StatisticsFieldPanel extends JPanel {
 				FieldInfo fieldInfo = fieldInfos.get(i);
 				//只处理非系统字段，不包含二进制、日期型--参考.net来的
 				if (!fieldInfo.isSystemField() && fieldInfo.getType() != FieldType.DATETIME && fieldInfo.getType() != FieldType.LONGBINARY) {
-					boolean fieldInfoAddOnce = false;
+//					boolean fieldInfoAddOnce = false;
 					ArrayList<StatisticsType> supportedStatisticsType = getSupportedStatisticsType(fieldInfo.getType());
 					for (StatisticsType statisticsType : supportedStatisticsType) {
 						StatisticsFieldInfo statisticsFieldInfo = new StatisticsFieldInfo(fieldInfo.getName(), fieldInfo.getType(), statisticsType, true);
 						this.statisticsFieldInfoAll.add(statisticsFieldInfo);//添加所有合理的字段、统计组合
-						if (!fieldInfoAddOnce) {
-							this.statisticsFieldInfoIncluded.add(statisticsFieldInfo);//默认初始化表格只显示每个字段一次
-							fieldInfoAddOnce = true;
-						}
+						// fix by lixiaoyao 2017/10/17   度量地理分布中所有功能初始时默认不添加任何字段
+//						if (!fieldInfoAddOnce) {
+//							this.statisticsFieldInfoIncluded.add(statisticsFieldInfo);//默认初始化表格只显示每个字段一次
+//							fieldInfoAddOnce = true;
+//						}
 					}
 				}
 			}
@@ -315,14 +316,14 @@ public class StatisticsFieldPanel extends JPanel {
 	}
 
 	private void initResource() {
-		buttonScreening.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_Screening.png"));
-		buttonAddNew.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
+		buttonScreening.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddField.png"));
+		buttonAddNew.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_CreateField.png"));
 		buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		buttonDel.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 
-		buttonScreening.setToolTipText(CommonProperties.getString(CommonProperties.fieldScreening));
-		buttonAddNew.setToolTipText(CommonProperties.getString(CommonProperties.AddField));
+		buttonScreening.setToolTipText(CommonProperties.getString(CommonProperties.AddField));
+		buttonAddNew.setToolTipText(CommonProperties.getString(CommonProperties.createField));
 		buttonSelectAll.setToolTipText(CommonProperties.getString(CommonProperties.selectAll));
 		buttonSelectInvert.setToolTipText(CommonProperties.getString(CommonProperties.selectInverse));
 		buttonDel.setToolTipText(CommonProperties.getString(CommonProperties.Delete));
@@ -503,7 +504,7 @@ public class StatisticsFieldPanel extends JPanel {
 		private ArrayList<StatisticsFieldInfo> selectedInfos = new ArrayList<>();
 
 		public JDialogAdd() {
-			this.setTitle(CommonProperties.getString("String_FieldScreening"));
+			this.setTitle(CommonProperties.getString(CommonProperties.AddField));
 			this.initComponent();
 			this.initLayout();
 			this.registerListener();

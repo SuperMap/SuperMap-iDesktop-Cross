@@ -138,11 +138,12 @@ public class XlsUtilities {
 	/**
 	 * 导入扩展名为xls的excel
 	 *
+	 * @param xlsName
 	 * @param datasource      目标数据源
 	 * @param filePath        文件目录
 	 * @param importFieldName 是否将首行导入为字段名称
 	 */
-	public static UserDefineImportResult[] importXlsxFile(Datasource datasource, String filePath, boolean importFieldName) {
+	public static UserDefineImportResult[] importXlsxFile(String xlsName, Datasource datasource, String filePath, boolean importFieldName) {
 		UserDefineImportResult[] importResults = null;
 		try {
 			File xlsFile = new File(filePath);
@@ -150,8 +151,12 @@ public class XlsUtilities {
 				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_FileNotExistsError"), filePath));
 				return null;
 			}
-			String xlsName = xlsFile.getName();
-			xlsName = xlsName.substring(0, xlsName.indexOf("."));
+
+			String tempXlsName = xlsFile.getName();
+			tempXlsName = tempXlsName.substring(0, tempXlsName.indexOf("."));
+			if (xlsName.equals(tempXlsName)) {
+				xlsName = tempXlsName;
+			}
 			FileInputStream stream = new FileInputStream(filePath);
 			XSSFWorkbook workbook = new XSSFWorkbook(stream);
 			XSSFSheet sheet;
@@ -261,11 +266,12 @@ public class XlsUtilities {
 	/**
 	 * 导入扩展名为xls的excel
 	 *
+	 * @param xlsName         目标名称
 	 * @param datasource      目标数据源
 	 * @param filePath        文件目录
 	 * @param importFieldName 是否将首行导入为字段名称
 	 */
-	public static UserDefineImportResult[] importXlsFile(Datasource datasource, String filePath, boolean importFieldName) {
+	public static UserDefineImportResult[] importXlsFile(String xlsName, Datasource datasource, String filePath, boolean importFieldName) {
 		UserDefineImportResult[] importResults = null;
 		try {
 			File xlsFile = new File(filePath);
@@ -273,8 +279,11 @@ public class XlsUtilities {
 				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_FileNotExistsError"), filePath));
 				return null;
 			}
-			String xlsName = xlsFile.getName();
-			xlsName = xlsName.substring(0, xlsName.indexOf("."));
+			String tempXlsName = xlsFile.getName();
+			tempXlsName = tempXlsName.substring(0, tempXlsName.indexOf("."));
+			if (xlsName.equals(tempXlsName)) {
+				xlsName = tempXlsName;
+			}
 			FileInputStream stream = new FileInputStream(filePath);
 			HSSFWorkbook workbook = new HSSFWorkbook(stream);
 			HSSFSheet sheet;
@@ -620,7 +629,7 @@ public class XlsUtilities {
 		datasource.open(connectionInfo);
 		DatasetVector dataset = (DatasetVector) datasource.getDatasets().get("Grids");
 //		exportXlsFile(dataset, "test2.xls", true, null);
-		importXlsFile(datasource, "test2.xls", false);
+		importXlsFile("", datasource, "test2.xls", false);
 	}
 
 }

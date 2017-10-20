@@ -56,20 +56,25 @@ public class ImportSettingSetter {
 									continue;
 								}
 								ArrayList<String> fields = new ArrayList();
-								Object setXFieldName = ((ISelectionParameter) reflectInfo.mixReflectInfo.get("setXFieldName")).getSelectedItem();
-								if (null != setXFieldName) {
+								String setXFieldName = (String) ((ParameterComboBox) reflectInfo.mixReflectInfo.get("setXFieldName")).getSelectedData();
+								if (!StringUtilities.isNullOrEmpty(setXFieldName) && !" ".equals(setXFieldName)) {
 									fields.add(setXFieldName.toString());
 								}
-								Object setYFieldName = ((ISelectionParameter) reflectInfo.mixReflectInfo.get("setYFieldName")).getSelectedItem();
-								if (null != setYFieldName) {
+								String setYFieldName = (String) ((ParameterComboBox) reflectInfo.mixReflectInfo.get("setYFieldName")).getSelectedData();
+								if (!StringUtilities.isNullOrEmpty(setYFieldName) && !" ".equals(setYFieldName)) {
 									fields.add(setYFieldName.toString());
 								}
-								Object setZFieldName = ((ISelectionParameter) reflectInfo.mixReflectInfo.get("setZFieldName")).getSelectedItem();
-								if (null != setZFieldName) {
+								String setZFieldName = (String) ((ParameterComboBox) reflectInfo.mixReflectInfo.get("setZFieldName")).getSelectedData();
+								if (!StringUtilities.isNullOrEmpty(setZFieldName) && !" ".equals(setZFieldName)) {
 									fields.add(setZFieldName.toString());
 								}
 								arg = fields.toArray(new String[fields.size()]);
 							}
+						} else if ("setIndexAsGeometry".equals(methodName)) {
+							if (!reflectInfo.parameter.isEnabled()) {
+								continue;
+							}
+							arg = ((ParameterComboBox) reflectInfo.parameter).getSelectedData();
 						} else {
 							Object selectItem = ((ISelectionParameter) reflectInfo.parameter).getSelectedItem();
 							if (null == selectItem || "".equals(selectItem.toString())) {
