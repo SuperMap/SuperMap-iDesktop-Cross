@@ -67,6 +67,7 @@ public class FrameActivator implements BundleActivator {
 		Application.getActiveApplication().setMainFrame(mainFrame);
 		mainFrame.loadProcesses();
 		mainFrame.loadUI();
+//		mainFrame.setVisible(true);
 	}
 
 	/*

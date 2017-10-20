@@ -43,19 +43,19 @@
     </properties>
 
     <!--配置远程仓库地址-->
-    <repositories>
-        <repository>
-            <id>ispeco</id>
-            <url>http://maven.supermapol.com/</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+    <!--<repository>-->
+    <!--<id>ispeco</id>-->
+    <!--<url>http://maven.supermapol.com/</url>-->
+    <!--</repository>-->
+    <!--</repositories>-->
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>ispeco</id>
-            <url>http://maven.supermapol.com/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+    <!--<id>ispeco</id>-->
+    <!--<url>http://maven.supermapol.com/</url>-->
+    <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
 
     <build>
 

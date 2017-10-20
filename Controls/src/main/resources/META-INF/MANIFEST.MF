@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1507866524704
+Bnd-LastModified: 1508202494203
 Build-Jdk: 1.7.0_80
-Built-By: lixiaoyao
+Built-By: Administrator
 Bundle-Activator: com.supermap.desktop.controls.ControlsActivator
 Bundle-ClassPath: .,lib/commons-lang-2.6.jar
 Bundle-ManifestVersion: 2
@@ -110,7 +110,7 @@ Export-Package: com.supermap.desktop.controls.colorScheme;version="1.0.0
  upermap.desktop.ui.mdi.events,com.supermap.desktop.ui.mdi.layout,com.su
  permap.desktop.ui.mdi.plaf",com.supermap.desktop.ui.mdi.layout;version=
  "1.0.0";uses:="com.supermap.desktop.ui.mdi",com.supermap.desktop.ui.mdi
- .MdiTabsContextMenu;uses:="com.supermap.desktop.ui.mdi";version="1.0.0"
+ .MdiTabsContextMenu;version="1.0.0";uses:="com.supermap.desktop.ui.mdi"
  ,com.supermap.desktop.ui.mdi.plaf.feature;version="1.0.0";uses:="com.su
  permap.desktop.ui.mdi,com.supermap.desktop.ui.mdi.action",com.supermap.
  desktop.ui.mdi.plaf;version="1.0.0";uses:="com.supermap.desktop.ui.mdi,
