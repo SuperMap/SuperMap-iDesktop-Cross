@@ -534,7 +534,7 @@ public class FlamingoUtilities {
 			RibbonBandResizePolicy policy2 = resizePolicies.get(i + 1);
 			int width1 = policy1.getPreferredWidth(height, 4);
 			int width2 = policy2.getPreferredWidth(height, 4);
-			if (width1 < width2) {
+			if (width1 < 0) {//< width2
 				// create the trace message
 				StringBuilder builder = new StringBuilder();
 				builder.append("Inconsistent preferred widths\n");

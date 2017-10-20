@@ -170,7 +170,7 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 			initLayout();
 //			this.toolbarManager.load(workEnvironment);
 			this.ribbonManager.load(getRibbon(), workEnvironment);
-//			this.contextMenuManager.load(workEnvironment);
+			this.contextMenuManager.load(workEnvironment);
 			this.statusbarManager.load(workEnvironment);
 			this.dockbarManager.load(workEnvironment);
 			this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

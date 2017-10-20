@@ -285,10 +285,7 @@
                             com.mongodb.*,
                             net.sf.image4j.codec.*,
                             net.sourceforge.pinyin4j.*,
-                            org.pushingpixels.lafplugin.*,
-                            org.pushingpixels.lafwidget.*,
-                            org.pushingpixels.substance.*,
-                            org.pushingpixels.flamingo.*,
+                            org.pushingpixels.*
                         </Export-Package>
                     </instructions>
                 </configuration>

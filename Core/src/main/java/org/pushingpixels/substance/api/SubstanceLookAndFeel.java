@@ -1141,12 +1141,12 @@ public abstract class SubstanceLookAndFeel extends BasicLookAndFeel {
 			if (SubstanceLookAndFeel.labelBundleClassLoader == null) {
 				SubstanceLookAndFeel.LABEL_BUNDLE = ResourceBundle
 						.getBundle(
-								"org.pushingpixels.substance.internal.resources.Labels",
+								"Labels",
 								Locale.getDefault());
 			} else {
 				SubstanceLookAndFeel.LABEL_BUNDLE = ResourceBundle
 						.getBundle(
-								"org.pushingpixels.substance.internal.resources.Labels",
+								"Labels",
 								Locale.getDefault(),
 								SubstanceLookAndFeel.labelBundleClassLoader);
 			}
