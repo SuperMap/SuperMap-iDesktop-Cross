@@ -1,8 +1,6 @@
 package com.supermap.desktop.ui.mdi;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.ui.mdi.NextAndPrePageStrategy.INextAndPrePageStrategy;
-import com.supermap.desktop.ui.mdi.NextAndPrePageStrategy.LayoutVisibleIndexStrategy;
 import com.supermap.desktop.ui.mdi.action.*;
 import com.supermap.desktop.ui.mdi.events.*;
 import com.supermap.desktop.ui.mdi.exception.MdiActionModeException;
@@ -64,13 +62,6 @@ public class MdiGroup extends JComponent {
 	 * 除非没有 page，否则默认总有一个 page 被选中。
 	 */
 	private MdiPage activePage = null;
-
-	/**
-	 * 上一页跟下一页的控制策略，默认是以LayoutVisibleIndexStrategy来控制显示及上一页和下一页。
-	 */
-	private INextAndPrePageStrategy nextAndPrePageStrategy=new LayoutVisibleIndexStrategy();
-
-	private boolean isChangeActivePage=false;
 
 	private Object userObject; // 用户对象，用来做一些用户自定义标识什么的
 
@@ -244,7 +235,6 @@ public class MdiGroup extends JComponent {
 		}
 
 		final MdiPage oldActivePage = this.activePage;
-		this.isChangeActivePage=true;
 		this.eventsHelper.firePageActivating(new PageActivatingEvent(this, activePage, oldActivePage));
 		this.activePage = activePage;
 		// 更改状态重绘
@@ -679,22 +669,6 @@ public class MdiGroup extends JComponent {
 
 	public void floatPage(int pageIndex) {
 		// TODO
-	}
-
-	public INextAndPrePageStrategy getNextAndPrePageStrategy() {
-		return this.nextAndPrePageStrategy;
-	}
-
-	public void setNextAndPrePageStrategy(INextAndPrePageStrategy nextAndPrePageStrategy) {
-		this.nextAndPrePageStrategy = nextAndPrePageStrategy;
-	}
-
-	public void setChangeActivePage(boolean changeActivePage) {
-		isChangeActivePage = changeActivePage;
-	}
-
-	public boolean isChangeActivePage() {
-		return this.isChangeActivePage;
 	}
 
 	/**

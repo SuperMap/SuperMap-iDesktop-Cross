@@ -9,7 +9,9 @@ import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.LayersTree;
 import com.supermap.desktop.ui.controls.NodeDataType;
 import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerGroup;
+import com.supermap.mapping.Map;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -29,18 +31,23 @@ public class CtrlActionUnLayerGroup extends CtrlAction {
 		if (this.selectedNodeData != null && this.selectedNodeData.getData() instanceof LayerGroup &&
 				iForm != null && iForm instanceof FormMap) {
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
-			int originSelectedRowIndex=layersTree.getRowForPath(layersTree.getSelectionPath());
+			int originSelectedRowIndex = layersTree.getRowForPath(layersTree.getSelectionPath());
 			FormMap formMap = (FormMap) iForm;
 			LayerGroup layerGroup = (LayerGroup) this.selectedNodeData.getData();
 			layerGroup.ungroup();
 			formMap.getMapControl().getMap().refresh();
-
-//			layersTree.setSelectionRow(0);
-//			layersTree.firePropertyChangeWithLayerSelect();
-//			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
-//			layersTree.expandRow(layersTree.getMaxSelectionRow());
-//			layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
-//			layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+//			System.out.println("Current count is:");
+			System.out.println(formMap.getMapControl().getMap().getLayers().getCount());
+			Map map = formMap.getMapControl().getMap();
+			try {
+				for (int i = 0; i < map.getLayers().getCount(); i++) {
+					Layer layer = map.getLayers().get(i);
+				}
+			} catch (Exception ex) {
+				System.out.println("Current count is:");
+				System.out.println(map.getLayers().getCount());
+				Application.getActiveApplication().getOutput().output(ex);
+			}
 		}
 	}
 

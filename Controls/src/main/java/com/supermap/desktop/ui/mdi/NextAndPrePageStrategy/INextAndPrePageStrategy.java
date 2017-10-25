@@ -15,5 +15,5 @@ public interface INextAndPrePageStrategy {
 	public int getLastVisibleTabIndex();
 
 	public void resetVisibleIndex(MdiGroup mdiGroup, int effectiveWidth, List<IMdiFeature> features, int firstVisibleTabIndex,
-	                                       int lastVisibleTabIndex, int tabGap);
+	                              int lastVisibleTabIndex, int tabGap, boolean isActivePageChanged);
 }
