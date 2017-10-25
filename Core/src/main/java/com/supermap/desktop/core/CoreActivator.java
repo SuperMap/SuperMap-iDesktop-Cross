@@ -1,5 +1,6 @@
 package com.supermap.desktop.core;
 
+import com.alibaba.fastjson.JSONArray;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.exception.SmUncaughtExceptionHandler;
@@ -10,13 +11,10 @@ import com.supermap.desktop.icloud.commontypes.ApplyFormalLicenseResponse;
 import com.supermap.desktop.icloud.commontypes.ApplyTrialLicenseResponse;
 import com.supermap.desktop.icloud.commontypes.LicenseId;
 import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.properties.Properties;
 import com.supermap.desktop.utilities.LogUtilities;
 import com.supermap.desktop.utilities.SplashScreenUtilities;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleEvent;
-import org.osgi.framework.SynchronousBundleListener;
+import org.osgi.framework.*;
 
 import java.io.File;
 
@@ -110,6 +108,17 @@ public class CoreActivator implements BundleActivator {
 	}
 
 	private void startUp(final BundleContext context, String licenseStr) {
+		//获取Maven传入的值,以实现国际化
+		String desktopCrossStartArgs = System.getProperty("DesktopCrossStartArgs");
+		JSONArray fileLists = (JSONArray) JSONArray.parse(desktopCrossStartArgs);
+		if (fileLists != null && fileLists.size() != 0) {
+			String language = (String) fileLists.get(0);
+			if (language.equals("zh_CN")) {
+				Properties.setLocale("zh", "CN");
+			} else if (language.equals("en_US")) {
+				Properties.setLocale("en", "US");
+			}
+		}
 		if ("null".equals(licenseStr)) {
 			startUp(context);
 			return;
