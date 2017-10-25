@@ -37,7 +37,7 @@ public class WorkEnvironmentManager {
 					name = "Default";
 				}
 				if (language.equals("en_US")) {
-					name = "en_US";
+					name = "Default_EN_US";
 				}
 			} else {
 				String language = name;
@@ -45,7 +45,7 @@ public class WorkEnvironmentManager {
 					name = "Default";
 				}
 				if (language.equals("en_US")) {
-					name = "en_US";
+					name = "Default_EN_US";
 				}
 			}
 			String workEnvironmentPath = PathUtilities.getFullPathName(_XMLTag.g_FolderWorkEnvironment, true);
