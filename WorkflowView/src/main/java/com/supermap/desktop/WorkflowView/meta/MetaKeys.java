@@ -51,7 +51,11 @@ public class MetaKeys {
 	public static final String CALCULATE_SLOPE = "CalculateSlope";
 	public static final String CALCULATE_HILLSHADE = "CalculateHillShade";
 	public static final String CALCULATE_ORTHOIMAGE = "CalculateOrthoImage";
-	//栅格统计
+    public static final String CALCULATE_CURVATURE = "CalculateCurvature";
+    public static final String CUT_FILL = "CutFill";
+    public static final String CUT_FILL_INVERSE = "CutFillInverse";
+    public static final String CUT_FILL_REGION = "CutFillRegion";
+    //栅格统计
 	public static final String GRID_ANALYST_SETTING = "GridAnalystSetting";
 	public static final String BASIC_STATISTIC = "BasicStatistics";
 	public static final String COMMON_STATISTIC = "CommonStatistics";

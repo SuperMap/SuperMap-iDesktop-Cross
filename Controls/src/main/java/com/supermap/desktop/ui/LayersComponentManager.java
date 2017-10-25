@@ -18,6 +18,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class LayersComponentManager extends JComponent {
     /**
@@ -31,6 +32,7 @@ public class LayersComponentManager extends JComponent {
     private Boolean isContextMenuBuilded = false;
     private JPopupMenu layerWMSPopupMenu;
     private TreePath[] oldPaths;
+    private ArrayList<TreePath> legalPaths;
 
     /**
      * Create the panel.
@@ -79,22 +81,27 @@ public class LayersComponentManager extends JComponent {
 
     private void layersTreeSelectedLegalPath(TreeSelectionEvent e) {
         TreePath[] selectionPaths = layersTree.getSelectionPaths();
-        if (!isPathLegal(selectionPaths)) {
-            layersTree.setSelectionPaths(oldPaths);
-        } else {
-            oldPaths = selectionPaths == null ? null : selectionPaths.clone();
+        if (selectionPaths != null) {
+            if (selectionPaths.length > 1) {
+                layersTree.setSelectionPaths(getLegalPaths());
+            } else {
+                legalPaths = new ArrayList<>();
+                legalPaths.add(selectionPaths[0]);
+            }
         }
     }
 
-    private boolean isPathLegal(TreePath[] treePaths) {
-        if (null != treePaths && 0 < treePaths.length) {
-            for (TreePath treePath : treePaths) {
-                if (!treePath.getParentPath().equals(treePaths[0].getParentPath())) {
-                    return false;
-                }
+    private TreePath[] getLegalPaths() {
+        TreePath[] selectionPaths = layersTree.getSelectionPaths();
+        TreePath parentPath = legalPaths.get(0).getParentPath();
+        for (TreePath selectionPath : selectionPaths) {
+            if (selectionPath.getParentPath().equals(parentPath)) {
+                legalPaths.add(selectionPath);
             }
         }
-        return true;
+        TreePath[] result = new TreePath[legalPaths.size()];
+
+        return legalPaths.toArray(result);
     }
 
     private void initialize() {
