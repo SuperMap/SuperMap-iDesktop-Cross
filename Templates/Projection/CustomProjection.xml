@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<SuperMapProjectionDefine xmlns:sml="http://www.supermap.com/sml">
+    <sml:FavoriteCoordSysDefines>
+        <sml:FavoriteCoordSysDefine>
+            <sml:FavoriteGroupCaption>French Coordinate Systems</sml:FavoriteGroupCaption>
+            <sml:FavoriteCoordSysCaption>France II</sml:FavoriteCoordSysCaption>
+            <sml:FavoriteCoordSysType>27582</sml:FavoriteCoordSysType>
+            <sml:CoordinateReferenceSystem/>
+        </sml:FavoriteCoordSysDefine>
+        <sml:FavoriteCoordSysDefine>
+            <sml:FavoriteGroupCaption>French Coordinate Systems</sml:FavoriteGroupCaption>
+            <sml:FavoriteCoordSysCaption>France III</sml:FavoriteCoordSysCaption>
+            <sml:FavoriteCoordSysType>27583</sml:FavoriteCoordSysType>
+            <sml:CoordinateReferenceSystem/>
+        </sml:FavoriteCoordSysDefine>
+    </sml:FavoriteCoordSysDefines>
+
+    <sml:CustomCoordSysDefines>
+        <sml:CustomCoordSysDefine>
+            <sml:CustomCoordSysCaption>Observ. Meteorologico 1939</sml:CustomCoordSysCaption>
+            <sml:CustomCoordSysType>37245</sml:CustomCoordSysType>
+            <sml:GeographicCoordinateSystem/>
+        </sml:CustomCoordSysDefine>
+        <sml:CustomCoordSysDefine>
+            <sml:CustomCoordSysCaption>S-42 Hungary</sml:CustomCoordSysCaption>
+            <sml:CustomCoordSysType>37257</sml:CustomCoordSysType>
+            <sml:GeographicCoordinateSystem/>
+        </sml:CustomCoordSysDefine>
+    </sml:CustomCoordSysDefines>
+</SuperMapProjectionDefine>
