@@ -1,5 +1,7 @@
 package com.supermap.desktop;
 
+import com.alibaba.fastjson.JSONArray;
+import com.supermap.desktop.properties.Properties;
 import com.supermap.desktop.utilities.PathUtilities;
 import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Element;
@@ -24,19 +26,37 @@ public class WorkEnvironmentManager {
 
 	public Boolean initialize() {
 		Boolean result = false;
+		String name = Properties.getLocale().getLanguage() + "_" + Properties.getLocale().getCountry();
 		try {
 			// 遍历所有工作环境
+			String desktopCrossStartArgs = System.getProperty("DesktopCrossStartArgs");
+			JSONArray fileLists = (JSONArray) JSONArray.parse(desktopCrossStartArgs);
+			if (fileLists != null && fileLists.size() != 0) {
+				String language = (String) fileLists.get(0);
+				if (language.equals("zh_CN")) {
+					name = "Default";
+				}
+				if (language.equals("en_US")) {
+					name = "Default_EN_US";
+				}
+			} else {
+				String language = name;
+				if (language.equals("zh_CN")) {
+					name = "Default";
+				}
+				if (language.equals("en_US")) {
+					name = "Default_EN_US";
+				}
+			}
 			String workEnvironmentPath = PathUtilities.getFullPathName(_XMLTag.g_FolderWorkEnvironment, true);
 			File file = new File(workEnvironmentPath);
 			File[] files = file.listFiles();
 			for (File file1 : files) {
 				// 遍历所有目录
 				List<String> plugins = new ArrayList<String>();
-
-				if (file1.isDirectory()) {
+				if (file1.isDirectory() && name.equalsIgnoreCase(file1.getName())) {
 					String[] pathPrams = new String[]{workEnvironmentPath, file1.getName()};
 					String workEnvironmentPathTemp = PathUtilities.combinePath(pathPrams, true);
-
 					File[] childFiles = file1.listFiles();
 					for (File childFile : childFiles) {
 						// 读取配置文件字符串也用XML的接口去读，同时也要有我们的命名空间
@@ -57,10 +77,7 @@ public class WorkEnvironmentManager {
 					if (plugins.size() >= 2) {
 						WorkEnvironment item = new WorkEnvironment(file1.getName());
 						this.workEnvironments.add(item);
-
-						if (item.getName().toLowerCase().equalsIgnoreCase(_XMLTag.getG_strWorkEnvironment())) {
-							this.activeWorkEnvironment = item;
-						}
+						this.activeWorkEnvironment = item;
 					}
 				}
 			}

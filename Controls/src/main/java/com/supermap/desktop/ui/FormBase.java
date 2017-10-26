@@ -130,7 +130,6 @@ public class FormBase extends JFrame implements IFormMain {
 		try {
 			// 首先融合UI信息
 			WorkEnvironment workEnvironment = Application.getActiveApplication().getWorkEnvironmentManager().getActiveWorkEnvironment();
-
 			workEnvironment.mergeUIElements();
 			this.loadFrameMenu(workEnvironment);
 
@@ -278,7 +277,7 @@ public class FormBase extends JFrame implements IFormMain {
 			String filePath = currentFilePath.toLowerCase();
 			if (filePath.endsWith("smwu") || filePath.endsWith("sxwu")) {
 				WorkspaceUIUtilities.openWorkspace(filePath);
-			} else {
+			} else if (filePath.endsWith("udb")) {
 				DatasourceOpenFileUtilties.openDatasourceFile(new File(filePath), false);
 			}
 		}

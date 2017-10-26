@@ -199,9 +199,9 @@ public class _XMLTag {
 	 * @return
 	 */
 
-	public static String getG_strWorkEnvironment() {
+	public static String getG_strWorkEnvironment(String name) {
 		if (_XMLTag.g_strWorkEnvironment == null) {
-			_XMLTag.g_strWorkEnvironment = "Default";
+			_XMLTag.g_strWorkEnvironment = name;
 		}
 		return _XMLTag.g_strWorkEnvironment;
 
