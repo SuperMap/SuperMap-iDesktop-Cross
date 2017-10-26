@@ -31,7 +31,6 @@ public class LayersComponentManager extends JComponent {
     // 临时的变量，现在还没有自动加载Dockbar，所以暂时用这个变量测试
     private Boolean isContextMenuBuilded = false;
     private JPopupMenu layerWMSPopupMenu;
-    private TreePath[] oldPaths;
     private ArrayList<TreePath> legalPaths;
 
     /**
