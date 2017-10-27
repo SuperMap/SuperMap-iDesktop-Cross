@@ -24,9 +24,29 @@ public class XMLRibbon extends XMLCommand {
 	public void merge(XMLCommand otherCommand) {
 		if (otherCommand instanceof XMLRibbon) {
 			XMLRibbon otherRibbon = (XMLRibbon) otherCommand;
-			if (otherRibbon.)
+			for (int i = 0; i < otherRibbon.getLength(); i++) {
+				XMLCommand otherRibbonCommand = otherRibbon.getCommandAtIndex(i);
+				boolean isContain = false;
+				for (XMLCommand command : commands) {
+					if (command.canMerge() && command.getID().equals(otherRibbonCommand.getID())) {
+						command.merge(otherRibbonCommand);
+						isContain = true;
+					}
+					if (!isContain) {
+						command.copyTo(this);
+					}
+				}
+			}
 		}
 
+	}
+
+	private XMLCommand getCommandAtIndex(int i) {
+		return commands.get(i);
+	}
+
+	private int getLength() {
+		return commands.size();
 	}
 
 	@Override

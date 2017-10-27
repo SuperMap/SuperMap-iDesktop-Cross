@@ -2,6 +2,7 @@ package com.supermap.desktop.ui.xmlRibbons;
 
 import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.ui.XMLCommand;
+import com.supermap.desktop.ui.XMLCommandBase;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -13,9 +14,9 @@ import java.util.ArrayList;
 public class XMLRibbonBand extends XMLCommand {
 	private ArrayList<XMLCommand> commands = new ArrayList<>();
 
-	public XMLRibbonBand(PluginInfo pluginInfo, XMLRibbon parent) {
+	public XMLRibbonBand(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo, parent);
-
+		canMerge = true;
 	}
 
 	@Override
@@ -58,5 +59,21 @@ public class XMLRibbonBand extends XMLCommand {
 			command.initialize(item);
 		}
 		return command;
+	}
+
+	@Override
+	public void merge(XMLCommand otherCommand) {
+		// TODO: 2017/10/27
+		super.merge(otherCommand);
+	}
+
+	@Override
+	public XMLCommandBase copyTo(XMLCommandBase parent) {
+		return super.copyTo(parent);
+	}
+
+	@Override
+	protected XMLCommandBase createNew(XMLCommandBase parent) {
+		return new XMLRibbonBand(getPluginInfo(), parent);
 	}
 }
