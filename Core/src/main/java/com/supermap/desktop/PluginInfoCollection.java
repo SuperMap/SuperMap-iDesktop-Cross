@@ -5,6 +5,7 @@ import com.supermap.desktop.ui.XMLDockbars;
 import com.supermap.desktop.ui.XMLMenus;
 import com.supermap.desktop.ui.XMLStatusbars;
 import com.supermap.desktop.ui.XMLToolbars;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbons;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class PluginInfoCollection extends ArrayList<PluginInfo> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	XMLRibbons xmlRibbons = null;
 
 	public PluginInfoCollection() {
 		// do nothing
@@ -87,11 +90,19 @@ public class PluginInfoCollection extends ArrayList<PluginInfo> {
 	}
 
 	public void mergeUIElements() {
+		this.mergeRibbons();
 		this.mergeFrameMenus();
 		this.mergeContextMenus();
 		this.mergeStatusbars();
 		this.mergeToolBars();
 		this.mergeDockBars();
+	}
+
+	private void mergeRibbons() {
+		xmlRibbons = new XMLRibbons();
+		for (PluginInfo pluginInfo : this) {
+			this.xmlRibbons.merge(pluginInfo.getRibbons());
+		}
 	}
 
 	public Boolean mergeFrameMenus() {

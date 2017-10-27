@@ -22,9 +22,14 @@ public class _XMLTag {
 	public static final String g_NodeFrameMenu = "frameMenu";
 	public static final String g_NodeContextMenu = "contextMenu";
 	public static final String g_NodeContextMenus = "contextMenus";
+	public static final String g_NodeRibbons = "ribbons";
+	public static final String g_NodeRibbon = "ribbon";
 	public static final String g_NodeProcess = "process";
 	public static final String g_NodeProcesses = "processes";
 	public static final String g_NodeProcessGroup = "processGroup";
+	public static final String g_NodeRibbonPopupMenuItem = "ribbonPopupMenuItem";
+	public static final String g_NodeRibbonPopupMenuSeparator = "ribbonPopupMenuSeparator";
+	public static final String g_NodeRibbonGallery = "gallery";
 
 	public static final String g_NodeSubItems = "subItems";
 	public static final String g_NodeGalleryItems = "galleryItems";
@@ -47,6 +52,7 @@ public class _XMLTag {
 
 	public static final String g_ControlBoxItem = "box";
 	public static final String g_ControlButton = "button";
+	public static final String g_Gallery = "gallery";
 	public static final String g_ControlButtonDropdown = "buttonDropdown";
 	public static final String g_ControlDockbarName = "dockbar";
 	public static final String g_ControlComboBox = "comboBox";

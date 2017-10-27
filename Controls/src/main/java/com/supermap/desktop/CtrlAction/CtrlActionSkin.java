@@ -5,6 +5,11 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
+import org.pushingpixels.flamingo.api.common.JCommandMenuButton;
+import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
+import org.pushingpixels.flamingo.api.common.popup.JCommandPopupMenu;
+import org.pushingpixels.flamingo.api.common.popup.JPopupPanel;
+import org.pushingpixels.flamingo.api.common.popup.PopupPanelCallback;
 import org.pushingpixels.flamingo.api.ribbon.JRibbon;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonBand;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
@@ -57,6 +62,11 @@ public class CtrlActionSkin extends CtrlAction {
 
 	@Override
 	protected void run() {
+		skinTest();
+		ribbonTest();
+	}
+
+	private void skinTest() {
 		JDialog jDialog = new JDialog();
 		SubstanceSkin[] skins = new SubstanceSkin[]{
 				new AutumnSkin(),
@@ -95,10 +105,54 @@ public class CtrlActionSkin extends CtrlAction {
 		contentPane.setLayout(new GridBagLayout());
 		contentPane.add(objectJComboBox, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(1, 1).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 10, 10, 0));
 		contentPane.add(jButton, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 1).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 5, 10, 10));
-//		ribbonTest();
+		jDialog.setVisible(true);
 	}
 
 	private void ribbonTest() {
+		JRibbonFrame frame = new JRibbonFrame();
+
+		JRibbonBand band1 = new JRibbonBand("Hello", null);
+		band1.setResizePolicies((List) Arrays.asList(
+				new CoreRibbonResizePolicies.None(band1.getControlPanel()),
+				new IconRibbonBandResizePolicy(band1.getControlPanel())));
+		JCommandButton button1 = new JCommandButton("Square", null);
+		button1.setCommandButtonKind(JCommandButton.CommandButtonKind.POPUP_ONLY);
+		button1.setPopupCallback(new PopupPanelCallback() {
+			@Override
+			public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+				JCommandPopupMenu menu = new JCommandPopupMenu();
+				menu.addMenuButton(new JCommandMenuButton("你好Menu",
+						new EmptyResizableIcon(23)));
+				menu.addMenuButton(new JCommandMenuButton("HelloMenu", null));
+				menu.addMenuSeparator();
+				return menu;
+			}
+		});
+		JCommandButton button2 = new JCommandButton("Circle", null);
+		JCommandButton button3 = new JCommandButton("Triangle", null);
+		JCommandButton button4 = new JCommandButton("Star", null);
+
+//				band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
+//				band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
+		JRibbonBand ribbonBandChild = new JRibbonBand("child", null);
+		ribbonBandChild.setResizePolicies((List) Arrays.asList(
+				new CoreRibbonResizePolicies.Mirror(ribbonBandChild.getControlPanel()),
+				new IconRibbonBandResizePolicy(ribbonBandChild.getControlPanel())));
+		ribbonBandChild.addCommandButton(button3, RibbonElementPriority.TOP);
+		ribbonBandChild.addCommandButton(button4, RibbonElementPriority.TOP);
+		ribbonBandChild.addCommandButton(button1, RibbonElementPriority.TOP);
+		ribbonBandChild.addCommandButton(button2, RibbonElementPriority.TOP);
+
+//				band1.addCommandButton(button1, RibbonElementPriority.TOP);
+//				band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
+		RibbonTask task1 = new RibbonTask("One", ribbonBandChild);
+		frame.getRibbon().addTask(task1);
+		frame.pack();
+
+		frame.setVisible(true);
+	}
+
+	public static void main(String[] args) {
 		JRibbonFrame jRibbonFrame = new JRibbonFrame();
 		JRibbon ribbon = jRibbonFrame.getRibbon();
 //		ribbon.addTaskbarComponent(new JButton("haha"));
