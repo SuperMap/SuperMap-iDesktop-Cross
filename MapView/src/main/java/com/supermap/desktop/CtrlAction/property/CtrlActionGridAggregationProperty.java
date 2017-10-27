@@ -35,13 +35,15 @@ public class CtrlActionGridAggregationProperty extends CtrlAction {
 		try {
 			if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
 				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-				Layer layer = formMap.getActiveLayers()[0];
-				if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
-					if (layer instanceof LayerGridAggregation || layer instanceof LayerHeatmap) {
+                if (formMap.getActiveLayers().length > 0) {
+                    Layer layer = formMap.getActiveLayers()[0];
+                    if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
+                        if (layer instanceof LayerGridAggregation || layer instanceof LayerHeatmap) {
 
-					} else {
-						result = true;
-					}
+                        } else {
+                            result = true;
+                        }
+                    }
 				}
 			}
 		} catch (Exception e) {

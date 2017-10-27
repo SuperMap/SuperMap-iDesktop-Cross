@@ -596,13 +596,12 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                 return true;
             }
 
-            if (column == FIELD_TYPE) {
-                EngineType engineType = datasetVector.getDatasource().getEngineType();
-                return (!fieldInfos.get(row).isSystemField && (engineType.equals(EngineType.MYSQL) || engineType.equals(EngineType.ORACLEPLUS) || engineType.equals(EngineType.SQLPLUS)
-                        || engineType.equals(EngineType.MYSQLPlus) || engineType.equals(EngineType.KINGBASE) || engineType.equals(EngineType.POSTGRESQL)));
-            }
-
             if (this.uneditableRows.contains(row)) {
+                if (column == FIELD_TYPE) {
+                    EngineType engineType = datasetVector.getDatasource().getEngineType();
+                    return (!fieldInfos.get(row).isSystemField && (engineType.equals(EngineType.MYSQL) || engineType.equals(EngineType.ORACLEPLUS) || engineType.equals(EngineType.SQLPLUS)
+                            || engineType.equals(EngineType.MYSQLPlus) || engineType.equals(EngineType.KINGBASE) || engineType.equals(EngineType.POSTGRESQL)));
+                }
                 return false;
             }
 
