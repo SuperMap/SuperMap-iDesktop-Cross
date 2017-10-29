@@ -4,6 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.ui.XMLCommandBase;
+import com.supermap.desktop.utilities.StringUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -13,11 +14,12 @@ import java.util.ArrayList;
  * @author XiaJT
  */
 public class XMLRibbon extends XMLCommand {
-	private ArrayList<XMLCommand> commands = null;
+	private ArrayList<XMLCommand> commands = new ArrayList<>();
 	private String formClassName;
 
 	public XMLRibbon(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo, parent);
+		canMerge = true;
 	}
 
 	@Override
@@ -28,24 +30,26 @@ public class XMLRibbon extends XMLCommand {
 				XMLCommand otherRibbonCommand = otherRibbon.getCommandAtIndex(i);
 				boolean isContain = false;
 				for (XMLCommand command : commands) {
-					if (command.canMerge() && command.getID().equals(otherRibbonCommand.getID())) {
+					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(otherRibbonCommand.getID())) {
 						command.merge(otherRibbonCommand);
 						isContain = true;
+						break;
 					}
-					if (!isContain) {
-						command.copyTo(this);
-					}
+
+				}
+				if (!isContain) {
+					otherRibbonCommand.copyTo(this);
 				}
 			}
 		}
 
 	}
 
-	private XMLCommand getCommandAtIndex(int i) {
+	public XMLCommand getCommandAtIndex(int i) {
 		return commands.get(i);
 	}
 
-	private int getLength() {
+	public int getLength() {
 		return commands.size();
 	}
 
@@ -61,7 +65,7 @@ public class XMLRibbon extends XMLCommand {
 				if (item.getNodeType() == Node.ELEMENT_NODE) {
 					XMLCommand xmlCommand = this.buildCommand((Element) item);
 					if (xmlCommand != null) {
-						addCommand(xmlCommand);
+						addSubItem(xmlCommand);
 					}
 				}
 			}
@@ -72,16 +76,17 @@ public class XMLRibbon extends XMLCommand {
 		return true;
 	}
 
-	private void addCommand(XMLCommand xmlCommand) {
+	@Override
+	public void addSubItem(XMLCommandBase xmlCommand) {
 		for (int i = 0; i < commands.size(); i++) {
 			XMLCommand command = commands.get(i);
 			if (command.getIndex() > xmlCommand.getIndex()) {
-				commands.add(i, xmlCommand);
+				commands.add(i, (XMLCommand) xmlCommand);
 				break;
 			}
 		}
 		if (!commands.contains(xmlCommand)) {
-			commands.add(xmlCommand);
+			commands.add((XMLCommand) xmlCommand);
 		}
 	}
 
@@ -95,5 +100,17 @@ public class XMLRibbon extends XMLCommand {
 			xmlCommand.initialize(item);
 		}
 		return xmlCommand;
+	}
+
+	@Override
+	protected XMLCommandBase createNew(XMLCommandBase parent) {
+		XMLRibbon xmlRibbon = new XMLRibbon(getPluginInfo(), parent);
+		xmlRibbon.commands = commands;
+		xmlRibbon.formClassName = formClassName;
+		return xmlRibbon;
+	}
+
+	public String getFormClassName() {
+		return this.formClassName;
 	}
 }

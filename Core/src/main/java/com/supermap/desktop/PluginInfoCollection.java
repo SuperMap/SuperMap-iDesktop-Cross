@@ -45,7 +45,16 @@ public class PluginInfoCollection extends ArrayList<PluginInfo> {
 		return this.xmlFrameMenus;
 	}
 
+	public XMLRibbons getXmlRibbons() {
+		return xmlRibbons;
+	}
+
+	public void setXmlRibbons(XMLRibbons xmlRibbons) {
+		this.xmlRibbons = xmlRibbons;
+	}
+
 	public void setFrameMenus(XMLMenus xmlFrameMenus) {
+
 		this.xmlFrameMenus = xmlFrameMenus;
 	}
 

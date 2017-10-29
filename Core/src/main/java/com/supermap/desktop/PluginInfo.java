@@ -1,11 +1,8 @@
 package com.supermap.desktop;
 
+import com.supermap.desktop.Interface.IToolbarManager;
 import com.supermap.desktop.enums.XMLCommandType;
-import com.supermap.desktop.ui.XMLDockbars;
-import com.supermap.desktop.ui.XMLMenus;
-import com.supermap.desktop.ui.XMLStatusbars;
-import com.supermap.desktop.ui.XMLToolbar;
-import com.supermap.desktop.ui.XMLToolbars;
+import com.supermap.desktop.ui.*;
 import com.supermap.desktop.ui.xmlRibbons.XMLRibbons;
 import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Document;
@@ -326,14 +323,17 @@ public class PluginInfo {
 
 						if (childElement.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeToolbar)) {
 							String id = childElement.getAttribute(_XMLTag.g_AttributionID);
-							XMLToolbar xmlToolbar = Application.getActiveApplication().getMainFrame().getToolbarManager().get(id).getXMLToolbar();
+							IToolbarManager toolbarManager = Application.getActiveApplication().getMainFrame().getToolbarManager();
+							if (toolbarManager != null && toolbarManager.get(id) != null) {
+								XMLToolbar xmlToolbar = toolbarManager.get(id).getXMLToolbar();
+								if (xmlToolbar != null) {
+									childElement.setAttribute(_XMLTag.g_AttributionIndex, Integer.toString(xmlToolbar.getIndex()));
 
-							if (xmlToolbar != null) {
-								childElement.setAttribute(_XMLTag.g_AttributionIndex, Integer.toString(xmlToolbar.getIndex()));
-
-								childElement.setAttribute(_XMLTag.g_AttributionVisible, Boolean.toString(xmlToolbar.getVisible()));
-								childElement.setAttribute(_XMLTag.g_RowIndex, Integer.toString(xmlToolbar.getRowIndex()));
+									childElement.setAttribute(_XMLTag.g_AttributionVisible, Boolean.toString(xmlToolbar.getVisible()));
+									childElement.setAttribute(_XMLTag.g_RowIndex, Integer.toString(xmlToolbar.getRowIndex()));
+								}
 							}
+
 						}
 					}
 				}

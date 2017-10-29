@@ -8,21 +8,6 @@ import com.supermap.desktop.utilities.JOptionPaneUtilities;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
-import org.pushingpixels.flamingo.api.common.JCommandButton;
-import org.pushingpixels.flamingo.api.common.JCommandMenuButton;
-import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
-import org.pushingpixels.flamingo.api.common.popup.JCommandPopupMenu;
-import org.pushingpixels.flamingo.api.common.popup.JPopupPanel;
-import org.pushingpixels.flamingo.api.common.popup.PopupPanelCallback;
-import org.pushingpixels.flamingo.api.ribbon.JRibbonBand;
-import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
-import org.pushingpixels.flamingo.api.ribbon.RibbonElementPriority;
-import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
-import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
-import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class ControlsActivator implements BundleActivator {
 	ServiceRegistration<?> registration = null;
@@ -45,47 +30,47 @@ public class ControlsActivator implements BundleActivator {
 			Application.getActiveApplication().getPluginManager().addPlugin("SuperMap.Desktop.Controls", context.getBundle());
 			ProcessEnv.INSTANCE.addParametersUIPackage("com.supermap.desktop.process.parameters.ParameterPanels", "SuperMap.Desktop.Controls");
 		}
-		JRibbonFrame frame = new JRibbonFrame();
-
-		JRibbonBand band1 = new JRibbonBand("Hello", null);
-		band1.setResizePolicies((List) Arrays.asList(
-				new CoreRibbonResizePolicies.None(band1.getControlPanel()),
-				new IconRibbonBandResizePolicy(band1.getControlPanel())));
-		JCommandButton button1 = new JCommandButton("Square", null);
-		button1.setCommandButtonKind(JCommandButton.CommandButtonKind.POPUP_ONLY);
-		button1.setPopupCallback(new PopupPanelCallback() {
-			@Override
-			public JPopupPanel getPopupPanel(JCommandButton commandButton) {
-				JCommandPopupMenu menu = new JCommandPopupMenu();
-				menu.addMenuButton(new JCommandMenuButton("你好Menu",
-						new EmptyResizableIcon(23)));
-				menu.addMenuButton(new JCommandMenuButton("HelloMenu", null));
-				menu.addMenuSeparator();
-				return menu;
-			}
-		});
-		JCommandButton button2 = new JCommandButton("Circle", null);
-		JCommandButton button3 = new JCommandButton("Triangle", null);
-		JCommandButton button4 = new JCommandButton("Star", null);
-
-//				band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
-//				band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
-		JRibbonBand ribbonBandChild = new JRibbonBand("child", null);
-		ribbonBandChild.setResizePolicies((List) Arrays.asList(
-				new CoreRibbonResizePolicies.Mirror(ribbonBandChild.getControlPanel()),
-				new IconRibbonBandResizePolicy(ribbonBandChild.getControlPanel())));
-		ribbonBandChild.addCommandButton(button3, RibbonElementPriority.TOP);
-		ribbonBandChild.addCommandButton(button4, RibbonElementPriority.TOP);
-		ribbonBandChild.addCommandButton(button1, RibbonElementPriority.TOP);
-		ribbonBandChild.addCommandButton(button2, RibbonElementPriority.TOP);
-
-//				band1.addCommandButton(button1, RibbonElementPriority.TOP);
-//				band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
-		RibbonTask task1 = new RibbonTask("One", ribbonBandChild);
-		frame.getRibbon().addTask(task1);
-		frame.pack();
-
-		frame.setVisible(true);
+//		JRibbonFrame frame = new JRibbonFrame();
+//
+//		JRibbonBand band1 = new JRibbonBand("Hello", null);
+//		band1.setResizePolicies((List) Arrays.asList(
+//				new CoreRibbonResizePolicies.None(band1.getControlPanel()),
+//				new IconRibbonBandResizePolicy(band1.getControlPanel())));
+//		JCommandButton button1 = new JCommandButton("Square", null);
+//		button1.setCommandButtonKind(JCommandButton.CommandButtonKind.POPUP_ONLY);
+//		button1.setPopupCallback(new PopupPanelCallback() {
+//			@Override
+//			public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+//				JCommandPopupMenu menu = new JCommandPopupMenu();
+//				menu.addMenuButton(new JCommandMenuButton("你好Menu",
+//						new EmptyResizableIcon(23)));
+//				menu.addMenuButton(new JCommandMenuButton("HelloMenu", null));
+//				menu.addMenuSeparator();
+//				return menu;
+//			}
+//		});
+//		JCommandButton button2 = new JCommandButton("Circle", null);
+//		JCommandButton button3 = new JCommandButton("Triangle", null);
+//		JCommandButton button4 = new JCommandButton("Star", null);
+//
+////				band1.addCommandButton(button3, RibbonElementPriority.MEDIUM);
+////				band1.addCommandButton(button4, RibbonElementPriority.MEDIUM);
+//		JRibbonBand ribbonBandChild = new JRibbonBand("child", null);
+//		ribbonBandChild.setResizePolicies((List) Arrays.asList(
+//				new CoreRibbonResizePolicies.Mirror(ribbonBandChild.getControlPanel()),
+//				new IconRibbonBandResizePolicy(ribbonBandChild.getControlPanel())));
+//		ribbonBandChild.addCommandButton(button3, RibbonElementPriority.TOP);
+//		ribbonBandChild.addCommandButton(button4, RibbonElementPriority.TOP);
+//		ribbonBandChild.addCommandButton(button1, RibbonElementPriority.TOP);
+//		ribbonBandChild.addCommandButton(button2, RibbonElementPriority.TOP);
+//
+////				band1.addCommandButton(button1, RibbonElementPriority.TOP);
+////				band1.addCommandButton(button2, RibbonElementPriority.MEDIUM);
+//		RibbonTask task1 = new RibbonTask("One", ribbonBandChild);
+//		frame.getRibbon().addTask(task1);
+//		frame.pack();
+//
+//		frame.setVisible(true);
 //		JDialog jDialog = new JDialog();
 //		SubstanceSkin[] skins = new SubstanceSkin[]{
 //				new AutumnSkin(),

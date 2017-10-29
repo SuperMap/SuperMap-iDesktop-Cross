@@ -3,6 +3,7 @@ package com.supermap.desktop.ui.xmlRibbons;
 import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.ui.XMLCommandBase;
+import com.supermap.desktop.utilities.StringUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -28,23 +29,24 @@ public class XMLRibbonBand extends XMLCommand {
 				XMLCommand xmlCommand = this.buildCommand(((Element) item));
 				if (xmlCommand != null) {
 					xmlCommand.initialize(((Element) item));
-					addCommand(xmlCommand);
+					addSubItem(xmlCommand);
 				}
 			}
 		}
 		return true;
 	}
 
-	private void addCommand(XMLCommand xmlCommand) {
+	@Override
+	public void addSubItem(XMLCommandBase xmlCommand) {
 		for (int i = 0; i < commands.size(); i++) {
 			XMLCommand command = commands.get(i);
 			if (command.getIndex() > xmlCommand.getIndex()) {
-				commands.add(i, xmlCommand);
+				commands.add(i, (XMLCommand) xmlCommand);
 				break;
 			}
 		}
 		if (!commands.contains(xmlCommand)) {
-			commands.add(xmlCommand);
+			commands.add((XMLCommand) xmlCommand);
 		}
 	}
 
@@ -53,18 +55,39 @@ public class XMLRibbonBand extends XMLCommand {
 		XMLCommand command = null;
 		if (nodeName.equals(g_ControlButton)) {
 			command = new XmlRibbonButton(getPluginInfo(), this);
-			command.initialize(item);
 		} else if (nodeName.equals(g_Gallery)) {
 			command = new XmlGallery(getPluginInfo(), this);
-			command.initialize(item);
 		}
 		return command;
 	}
 
 	@Override
 	public void merge(XMLCommand otherCommand) {
-		// TODO: 2017/10/27
-		super.merge(otherCommand);
+		if (otherCommand instanceof XMLRibbonBand) {
+			XMLRibbonBand otherCommandBand = (XMLRibbonBand) otherCommand;
+			for (int i = 0; i < otherCommandBand.getLength(); i++) {
+				XMLCommand mergeCommand = otherCommandBand.getCommandAtIndex(i);
+				boolean isContain = false;
+				for (XMLCommand command : commands) {
+					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(mergeCommand.getID())) {
+						command.merge(mergeCommand);
+						isContain = true;
+						break;
+					}
+				}
+				if (!isContain) {
+					mergeCommand.copyTo(this);
+				}
+			}
+		}
+	}
+
+	public XMLCommand getCommandAtIndex(int i) {
+		return commands.get(i);
+	}
+
+	public int getLength() {
+		return commands.size();
 	}
 
 	@Override
@@ -74,6 +97,8 @@ public class XMLRibbonBand extends XMLCommand {
 
 	@Override
 	protected XMLCommandBase createNew(XMLCommandBase parent) {
-		return new XMLRibbonBand(getPluginInfo(), parent);
+		XMLRibbonBand xmlRibbonBand = new XMLRibbonBand(getPluginInfo(), parent);
+		xmlRibbonBand.commands = commands;
+		return xmlRibbonBand;
 	}
 }

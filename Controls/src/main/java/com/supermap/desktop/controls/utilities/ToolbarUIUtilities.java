@@ -2,10 +2,13 @@ package com.supermap.desktop.controls.utilities;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
+import com.supermap.desktop.Interface.IFormMain;
 import com.supermap.desktop.Interface.IToolbar;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmToolbar;
 import com.supermap.desktop.ui.ToolbarManager;
+import org.pushingpixels.flamingo.api.ribbon.*;
+import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +25,8 @@ public class ToolbarUIUtilities {
 	 * 刷新工具条
 	 */
 	public static void updataToolbarsState() {
+		updateRibbonState();
+
 		if (Application.getActiveApplication() == null || Application.getActiveApplication().getMainFrame() == null
 				|| Application.getActiveApplication().getMainFrame().getToolbarManager() == null) {
 			return;
@@ -61,6 +66,41 @@ public class ToolbarUIUtilities {
 					}
 				}
 
+			}
+		}
+	}
+
+	private static void updateRibbonState() {
+		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
+		if (mainFrame instanceof JRibbonFrame) {
+			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
+			for (int i = 0; i < ribbon.getTaskCount(); i++) {
+				RibbonTask task = ribbon.getTask(i);
+				updateRibbonTaskState(task);
+			}
+		}
+	}
+
+	private static void updateRibbonTaskState(RibbonTask task) {
+		for (AbstractRibbonBand<?> abstractRibbonBand : task.getBands()) {
+			updateRibbonBandTask(abstractRibbonBand);
+		}
+	}
+
+	private static void updateRibbonBandTask(AbstractRibbonBand<?> abstractRibbonBand) {
+		if (abstractRibbonBand instanceof JRibbonBand) {
+			JBandControlPanel controlPanel = ((JRibbonBand) abstractRibbonBand).getControlPanel();
+			if (controlPanel != null) {
+
+				for (int i = 0; i < controlPanel.getComponentCount(); i++) {
+					if (controlPanel.getComponent(i) instanceof IBaseItem && ((IBaseItem) controlPanel.getComponent(i)).getCtrlAction() != null) {
+						try {
+							controlPanel.getComponent(i).setEnabled(((IBaseItem) controlPanel.getComponent(i)).getCtrlAction().enable());
+						} catch (Exception e) {
+							// 谁写的enable出问题了啊，丫的！
+						}
+					}
+				}
 			}
 		}
 	}

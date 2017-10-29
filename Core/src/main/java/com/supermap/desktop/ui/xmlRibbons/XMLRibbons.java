@@ -85,17 +85,23 @@ public class XMLRibbons extends XMLCommandBase {
 					xmlRibbon.initialize((Element) item);
 				}
 				if (xmlRibbon != null) {
-					for (int j = 0; j < this.ribbons.size(); j++) {
-						if (ribbons.get(j).getIndex() > xmlRibbon.getIndex()) {
-							ribbons.add(j, xmlRibbon);
-							break;
-						}
-					}
-					if (!ribbons.contains(xmlRibbon)) {
-						ribbons.add(xmlRibbon);
-					}
+					addSubItem(xmlRibbon);
 				}
 			}
+		}
+	}
+
+
+	@Override
+	public void addSubItem(XMLCommandBase xmlRibbon) {
+		for (int j = 0; j < this.ribbons.size(); j++) {
+			if (ribbons.get(j).getIndex() > xmlRibbon.getIndex()) {
+				ribbons.add(j, (XMLRibbon) xmlRibbon);
+				break;
+			}
+		}
+		if (!ribbons.contains(xmlRibbon)) {
+			ribbons.add((XMLRibbon) xmlRibbon);
 		}
 	}
 

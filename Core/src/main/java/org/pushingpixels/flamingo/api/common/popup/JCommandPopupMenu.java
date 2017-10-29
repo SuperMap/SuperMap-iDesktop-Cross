@@ -350,4 +350,6 @@ public class JCommandPopupMenu extends JPopupPanel implements ScrollableHost {
 	public void setToDismissOnChildClick(boolean toDismissOnChildClick) {
 		this.toDismissOnChildClick = toDismissOnChildClick;
 	}
+
+
 }

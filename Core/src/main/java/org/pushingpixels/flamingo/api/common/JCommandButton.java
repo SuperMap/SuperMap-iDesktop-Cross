@@ -159,6 +159,7 @@ public class JCommandButton extends AbstractCommandButton {
 	 */
 	protected String popupKeyTip;
 
+
 	/**
 	 * Enumerates the available command button kinds.
 	 *
