@@ -511,6 +511,9 @@ public class FormTabular extends FormBaseChild implements IFormTabular {
 
 		@Override
 		public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			if (renderer instanceof Component) {
+				((Component) renderer).setForeground(null);
+			}
 			Component component = super.prepareRenderer(renderer, row, column);
 
 			if (!this.isCellEditable(row, column)) {
@@ -826,8 +829,8 @@ public class FormTabular extends FormBaseChild implements IFormTabular {
 	}
 
 	@Override
-	public boolean doStatisticAnalust(StatisticMode statisticMode, String successMessage) {
-		int selectColumn = jTableTabular.getSelectedColumn();
+    public boolean doStatisticAnalyst(StatisticMode statisticMode, String successMessage) {
+        int selectColumn = jTableTabular.getSelectedColumn();
 		// 进行统计分析时，需要判断下是否进行了隐藏系统字段,确保分析的列数正确-yuanR2017.9.19
 		if (GlobalParameters.isTabularHiddenSystemField()) {
 			int fieldInfoCount = recordset.getDataset().getFieldInfos().getCount();

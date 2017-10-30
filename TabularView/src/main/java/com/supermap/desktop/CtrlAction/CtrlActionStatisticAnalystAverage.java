@@ -16,8 +16,8 @@ public class CtrlActionStatisticAnalystAverage extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.AVERAGE, TabularViewProperties.getString("String_StatisticAnalyst_Average"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.AVERAGE, TabularViewProperties.getString("String_StatisticAnalyst_Average"));
+    }
 	
 	@Override
 	public boolean enable(){
