@@ -1042,13 +1042,13 @@ public class BasicRibbonUI extends RibbonUI {
 							}
 							titleToShow += "...";
 						}
-						if (ltr) {
-							BasicGraphicsUtils.drawString(g2d, titleToShow, -1, startX + 5,
+//						if (ltr) {
+						BasicGraphicsUtils.drawString(g2d, titleToShow, -1, (int) (startX + 0.5 * (width - fm.stringWidth(titleToShow))),
 									yOffset);
-						} else {
-							BasicGraphicsUtils.drawString(g2d, titleToShow, -1,
-									startX + width - 5 - fm.stringWidth(titleToShow), yOffset);
-						}
+//						} else {
+//							BasicGraphicsUtils.drawString(g2d, titleToShow, -1,
+//									startX + width - 5 - fm.stringWidth(titleToShow), yOffset);
+//						}
 
 						// separator lines
 						Color color = FlamingoUtilities.getBorderColor();
