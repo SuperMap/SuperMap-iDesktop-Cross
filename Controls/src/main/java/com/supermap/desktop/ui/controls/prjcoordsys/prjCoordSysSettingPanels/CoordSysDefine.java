@@ -10,6 +10,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * 描述一个坐标系
@@ -24,6 +25,7 @@ public class CoordSysDefine {
 	public static final int NONE_ERRTH = -3; // 平面坐标系
 	public static final int GEOGRAPHY_COORDINATE = -4; // 地理坐标系
 	public static final int FAVORITE_COORDINATE = -5; // 收藏夹
+	public static final int CUSTOM_COORDINATE = -6; // 自定义
 
 	private CoordSysDefine parent;
 	private String caption = "";
@@ -201,11 +203,9 @@ public class CoordSysDefine {
 			if (this.children.isEmpty()) {
 				list.add(this);
 			} else {
-				for (int i = 0; i < this.children.size(); i++) {
-					CoordSysDefine[] leaves = this.children.get(i).getAllLeaves();
-					for (int leafIndex = 0; leafIndex < leaves.length; leafIndex++) {
-						list.add(leaves[leafIndex]);
-					}
+				for (CoordSysDefine aChildren : this.children) {
+					CoordSysDefine[] leaves = aChildren.getAllLeaves();
+					Collections.addAll(list, leaves);
 				}
 			}
 		} catch (Exception e) {
