@@ -16,8 +16,9 @@ public class XmlCommandUtilities {
 	private static final Dimension DEFAULT_ICON_SIZE = new Dimension(23, 23);
 
 	public static Image getXmlCommandImage(XMLCommand xmlCommand) {
-		String[] pathPrams = new String[]{PathUtilities.getRootPathName(), xmlCommand.getImageFile()};
-		String path = PathUtilities.combinePath(pathPrams, false);
+        String imagePath = xmlCommand.getImageFile().replace("\\", "/");
+        String[] pathPrams = new String[]{PathUtilities.getRootPathName(), imagePath};
+        String path = PathUtilities.combinePath(pathPrams, false);
 		File file = new File(path);
 		Image image = null;
 		if (file.exists()) {
