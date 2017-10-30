@@ -1,34 +1,16 @@
 package com.supermap.desktop.utilities;
 
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.GeoStyle3D;
-import com.supermap.data.GeoText;
-import com.supermap.data.GeoText3D;
-import com.supermap.data.Geometry;
-import com.supermap.data.Geometry3D;
-import com.supermap.data.Point2D;
-import com.supermap.data.PrjCoordSys;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormManager;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.properties.CoreProperties;
-import com.supermap.mapping.Layer;
-import com.supermap.mapping.LayerGroup;
-import com.supermap.mapping.LayerSettingVector;
-import com.supermap.mapping.Layers;
-import com.supermap.mapping.Map;
-import com.supermap.mapping.ThemeLabel;
-import com.supermap.mapping.TrackingLayer;
+import com.supermap.mapping.*;
 import com.supermap.ui.MapControl;
-import org.apache.commons.lang.NullArgumentException;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -174,7 +156,11 @@ public class MapUtilities {
 	 */
 	public static Layer findLayer(Layer layer, String name) {
 		Layer resultLayer = null;
-		if (layer instanceof LayerGroup) {
+		//fix by lixiaoyao  当查找的图层所属于LayerGroup，并且名字想等时，优先考虑名字想等的情况，再考虑属于Group的情况，
+		// 否则始终找不到LayerGroup
+		if (name.equals(layer.getName())) {
+			resultLayer = layer;
+		}else if (layer instanceof LayerGroup) {
 			LayerGroup tempLayerGroup = (LayerGroup) layer;
 			for (int i = 0; i < tempLayerGroup.getCount(); i++) {
 				resultLayer = findLayer(tempLayerGroup.get(i), name);
@@ -182,8 +168,6 @@ public class MapUtilities {
 					break;
 				}
 			}
-		} else if (name.equals(layer.getName())) {
-			resultLayer = layer;
 		}
 		return resultLayer;
 	}

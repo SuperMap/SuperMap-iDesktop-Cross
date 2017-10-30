@@ -60,43 +60,47 @@ class VisibleDecorator implements TreeNodeDecorator {
 	}
 
 	private void setState(Object data) {
-		if (data instanceof Layer) {
-			Layer layer = (Layer) data;
-			if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 || Double.compare(layer.getMinVisibleScale(), 0) != 0) {
-				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-				double currentScale = formMap.getMapControl().getMap().getScale();
-				if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 && Double.compare(layer.getMinVisibleScale(), 0) != 0) {
-					if (Double.compare(currentScale, layer.getMaxVisibleScale()) != -1) {
-						if (Double.compare(currentScale, layer.getMinVisibleScale()) != -1) {
-							drawLine(true, UNAVAILABLE_COLOR);
-							drawLine(false, WARNING_COLOR);
-						}
+		try {
+			if (data instanceof Layer) {
+				Layer layer = (Layer) data;
+				if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 || Double.compare(layer.getMinVisibleScale(), 0) != 0) {
+					IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+					double currentScale = formMap.getMapControl().getMap().getScale();
+					if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 && Double.compare(layer.getMinVisibleScale(), 0) != 0) {
+						if (Double.compare(currentScale, layer.getMaxVisibleScale()) != -1) {
+							if (Double.compare(currentScale, layer.getMinVisibleScale()) != -1) {
+								drawLine(true, UNAVAILABLE_COLOR);
+								drawLine(false, WARNING_COLOR);
+							}
 //					else {
 //						No greater than or equal to the MaxVisibleScale and smaller than the MinVisibleScale
 //					}
-					} else {
+						} else {
+							if (Double.compare(currentScale, layer.getMinVisibleScale()) != -1) {
+								drawLine(true, NO_WARNING_COLOR);
+								drawLine(false, NO_WARNING_COLOR);
+							} else {
+								drawLine(true, WARNING_COLOR);
+								drawLine(false, UNAVAILABLE_COLOR);
+							}
+						}
+					} else if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 && Double.compare(layer.getMinVisibleScale(), 0) == 0) {
+						if (Double.compare(currentScale, layer.getMaxVisibleScale()) != -1) {
+							drawLine(false, WARNING_COLOR);
+						} else {
+							drawLine(false, NO_WARNING_COLOR);
+						}
+					} else if (Double.compare(layer.getMaxVisibleScale(), 0) == 0 && Double.compare(layer.getMinVisibleScale(), 0) != 0) {
 						if (Double.compare(currentScale, layer.getMinVisibleScale()) != -1) {
 							drawLine(true, NO_WARNING_COLOR);
-							drawLine(false, NO_WARNING_COLOR);
 						} else {
 							drawLine(true, WARNING_COLOR);
-							drawLine(false, UNAVAILABLE_COLOR);
 						}
-					}
-				} else if (Double.compare(layer.getMaxVisibleScale(), 0) != 0 && Double.compare(layer.getMinVisibleScale(), 0) == 0) {
-					if (Double.compare(currentScale, layer.getMaxVisibleScale()) != -1) {
-						drawLine(false, WARNING_COLOR);
-					} else {
-						drawLine(false, NO_WARNING_COLOR);
-					}
-				} else if (Double.compare(layer.getMaxVisibleScale(), 0) == 0 && Double.compare(layer.getMinVisibleScale(), 0) != 0) {
-					if (Double.compare(currentScale, layer.getMinVisibleScale()) != -1) {
-						drawLine(true, NO_WARNING_COLOR);
-					} else {
-						drawLine(true, WARNING_COLOR);
 					}
 				}
 			}
+		}catch (Exception e){
+			// do nothing
 		}
 	}
 }

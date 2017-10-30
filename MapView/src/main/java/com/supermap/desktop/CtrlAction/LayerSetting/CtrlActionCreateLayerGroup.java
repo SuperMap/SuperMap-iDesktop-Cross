@@ -37,7 +37,8 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 			layerGroup.addGroup(layerGroupName);
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
-			layersTree.expandRow(layersTree.getMaxSelectionRow());
+//			layersTree.expandRow(layersTree.getMaxSelectionRow());
+//			layersTree.clearSelection();
 			layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 			layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 		}
