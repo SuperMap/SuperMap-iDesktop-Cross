@@ -83,7 +83,7 @@ public interface IFormTabular extends IForm {
 	/**
 	 * 统计信息
 	 */
-	boolean doStatisticAnalust(StatisticMode statisticMode, String successMessage);
+    boolean doStatisticAnalyst(StatisticMode statisticMode, String successMessage);
 
 	/**
 	 * 获取字段类型

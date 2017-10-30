@@ -16,8 +16,8 @@ public class CtrlActionStatisticAnalystStdDeviation extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.STDDEVIATION, TabularViewProperties.getString("String_StatisticAnalyst_StdDeviation"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.STDDEVIATION, TabularViewProperties.getString("String_StatisticAnalyst_StdDeviation"));
+    }
 	
 	@Override
 	public boolean enable(){

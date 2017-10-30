@@ -16,8 +16,8 @@ public class CtrlActionStatisticAnalystVariance extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.VARIANCE, TabularViewProperties.getString("String_StatisticAnalyst_Variance"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.VARIANCE, TabularViewProperties.getString("String_StatisticAnalyst_Variance"));
+    }
 	
 	@Override
 	public boolean enable(){

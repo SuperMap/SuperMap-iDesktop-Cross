@@ -43,21 +43,23 @@ public class MetaProcessCalculateCurvature extends MetaProcess {
         sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
         numberZFactor = new ParameterNumber(ProcessProperties.getString("String_Label_ZFactor"));
         resultDatasource = new ParameterDatasourceConstrained();
-        textFieldAverageCurvature = new ParameterNumber(ProcessProperties.getString("String_Label_AverageCurvatureDataset"));
-        textFieldProfileCurvature = new ParameterNumber(ProcessProperties.getString("String_Label_ProfileCurvatureDataset"));
-        textFieldPlanCurvature = new ParameterNumber(ProcessProperties.getString("String_Label_PlanCurvatureDataset"));
+        textFieldAverageCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_AverageCurvatureDataset"));
+        textFieldProfileCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_ProfileCurvatureDataset"));
+        textFieldPlanCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_PlanCurvatureDataset"));
 
         ParameterCombine sourceCombine = new ParameterCombine();
         sourceCombine.setDescribe(INPUT_DATA);
-        sourceCombine.addParameters(sourceDatasource, sourceDataset, numberZFactor);
+        sourceCombine.addParameters(sourceDatasource, sourceDataset);
+
+        ParameterCombine settingCombine = new ParameterCombine();
+        settingCombine.setDescribe(SETTING_PANEL_DESCRIPTION);
+        settingCombine.addParameters(numberZFactor);
 
         ParameterCombine resultCombine = new ParameterCombine();
         resultCombine.setDescribe(RESULT_PANEL_DESCRIPTION);
-        resultCombine.addParameters(resultDatasource, textFieldAverageCurvature);
-        resultCombine.addParameters(resultDatasource, textFieldProfileCurvature);
-        resultCombine.addParameters(resultDatasource, textFieldPlanCurvature);
+        resultCombine.addParameters(resultDatasource, textFieldAverageCurvature, textFieldProfileCurvature, textFieldPlanCurvature);
 
-        parameters.setParameters(sourceCombine, resultCombine);
+        parameters.setParameters(sourceCombine, settingCombine, resultCombine);
         parameters.addInputParameters(INPUT_DATA, DatasetTypes.GRID, sourceCombine);
         parameters.addOutputParameters(AVERAGE_CURVATURE, ProcessOutputResultProperties.getString("String_Result_AverageCurvatureDataset"), DatasetTypes.GRID, textFieldAverageCurvature);
         parameters.addOutputParameters(PROFILE_CURVATURE, ProcessOutputResultProperties.getString("String_Result_ProfileCurvatureDataset"), DatasetTypes.GRID, textFieldProfileCurvature);
