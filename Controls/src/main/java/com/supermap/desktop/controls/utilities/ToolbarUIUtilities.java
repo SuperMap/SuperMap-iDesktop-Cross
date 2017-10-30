@@ -7,7 +7,12 @@ import com.supermap.desktop.Interface.IToolbar;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmToolbar;
 import com.supermap.desktop.ui.ToolbarManager;
-import org.pushingpixels.flamingo.api.ribbon.*;
+import org.pushingpixels.flamingo.api.ribbon.AbstractRibbonBand;
+import org.pushingpixels.flamingo.api.ribbon.JRibbon;
+import org.pushingpixels.flamingo.api.ribbon.JRibbonBand;
+import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
+import org.pushingpixels.flamingo.api.ribbon.RibbonContextualTaskGroup;
+import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 
 import javax.swing.*;
@@ -77,6 +82,14 @@ public class ToolbarUIUtilities {
 			for (int i = 0; i < ribbon.getTaskCount(); i++) {
 				RibbonTask task = ribbon.getTask(i);
 				updateRibbonTaskState(task);
+			}
+			for (int i = 0; i < ribbon.getContextualTaskGroupCount(); i++) {
+				RibbonContextualTaskGroup contextualTaskGroup = ribbon.getContextualTaskGroup(i);
+				if (ribbon.isVisible(contextualTaskGroup)) {
+					for (int j = 0; j < contextualTaskGroup.getTaskCount(); j++) {
+						updateRibbonTaskState(contextualTaskGroup.getTask(j));
+					}
+				}
 			}
 		}
 	}

@@ -33,7 +33,7 @@ public class ToolBarDrag {
 
 			if (currentToolbar != null) {
 
-				int putPlace = ToolbarUIUtilties.getPutPlace(currentToolbar.getParent().getBounds(), point, (int) currentToolbar.getX());
+				int putPlace = ToolbarUtilities.getPutPlace(currentToolbar.getParent().getBounds(), point, (int) currentToolbar.getX());
 				if (currentToolbar != toolbar || lastPlace != putPlace) {
 					removedDrewLine();
 					toolbar = currentToolbar;
@@ -69,14 +69,14 @@ public class ToolBarDrag {
 			graphics.setColor(color);
 			Rectangle rect = toolbar.getVisibleRect();
 			switch (lastPlace) {
-				case ToolbarUIUtilties.PUT_LEFT:
+				case ToolbarUtilities.PUT_LEFT:
 					graphics.fillRect(rect.x + 12, rect.y, lineWidth, rect.height);
 					break;
-				case ToolbarUIUtilties.PUT_DOWN:
+				case ToolbarUtilities.PUT_DOWN:
 
 					graphics.fillRect(rect.x + 12, rect.y + rect.height - 2, rect.width, lineWidth);
 					break;
-				case ToolbarUIUtilties.PUT_RIGHT:
+				case ToolbarUtilities.PUT_RIGHT:
 					graphics.fillRect(rect.x + rect.width - 2, rect.y, lineWidth, rect.height);
 			}
 		}

@@ -7,14 +7,14 @@ import java.awt.*;
 /**
  * @author XiaJT
  */
-public class ToolbarUIUtilties {
+public class ToolbarUtilities {
 
 	public static final int PUT_UP = 1;
 	public static final int PUT_LEFT = 2;
 	public static final int PUT_DOWN = 3;
 	public static final int PUT_RIGHT = 4;
 
-	private ToolbarUIUtilties() {
+	private ToolbarUtilities() {
 		// 工具类
 	}
 

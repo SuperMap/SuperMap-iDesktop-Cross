@@ -29,16 +29,16 @@ public class MyMetalToolBarUI extends MetalToolBarUI {
 			if (deepestComponent instanceof ToolBarContainer) {
 				deepestComponent = ((ToolBarContainer) deepestComponent).getComponent(((ToolBarContainer) deepestComponent).getComponentCount() - 1);
 			}
-			if (ToolbarUIUtilties.isSmToolBarSon(deepestComponent)) {
+			if (ToolbarUtilities.isSmToolBarSon(deepestComponent)) {
 				// 插入
 				int index = ((SmToolbar) toolBar).getIndex();
-				SmToolbar resultToolBar = ToolbarUIUtilties.getParentToolBar(deepestComponent);
+				SmToolbar resultToolBar = ToolbarUtilities.getParentToolBar(deepestComponent);
 				Rectangle contaninerBounds = resultToolBar.getParent().getBounds();
-				int putPlace = ToolbarUIUtilties.getPutPlace(contaninerBounds, p, resultToolBar.getX());
-				if (putPlace == ToolbarUIUtilties.PUT_DOWN) {
+				int putPlace = ToolbarUtilities.getPutPlace(contaninerBounds, p, resultToolBar.getX());
+				if (putPlace == ToolbarUtilities.PUT_DOWN) {
 					int toolBarContainerIndex = ((ToolBarContainer) resultToolBar.getParent()).getIndex() + 1;
 					super.setFloating(b, p);
-					ToolbarUIUtilties.addToDown(toolBarContainerIndex, (SmToolbar) toolBar);
+					ToolbarUtilities.addToDown(toolBarContainerIndex, (SmToolbar) toolBar);
 				} else if (resultToolBar != toolBar) {
 
 					Container parent = resultToolBar.getParent();
@@ -56,7 +56,7 @@ public class MyMetalToolBarUI extends MetalToolBarUI {
 									break;
 								}
 								if (component.getIndex() == placeIndex) {
-									if (putPlace == ToolbarUIUtilties.PUT_RIGHT) {
+									if (putPlace == ToolbarUtilities.PUT_RIGHT) {
 										int temp = component.getIndex();
 										component.setIndex(index);
 										index = temp;
@@ -79,7 +79,7 @@ public class MyMetalToolBarUI extends MetalToolBarUI {
 									break;
 								}
 								if (component.getIndex() == placeIndex) {
-									if (putPlace == ToolbarUIUtilties.PUT_LEFT) {
+									if (putPlace == ToolbarUtilities.PUT_LEFT) {
 										int temp = component.getIndex();
 										component.setIndex(index);
 										index = temp;
