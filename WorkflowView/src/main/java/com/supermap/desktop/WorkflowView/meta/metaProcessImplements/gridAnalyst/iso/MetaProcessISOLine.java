@@ -23,10 +23,10 @@ public class MetaProcessISOLine extends MetaProcessISO {
 	public MetaProcessISOLine() {
 		setTitle(CommonProperties.getString("String_SurfaceISOLine"));
 		OUTPUT_DATA_TYPE = ProcessOutputResultProperties.getString("String_SurfaceAnalyst_ISOLineResult");
-		super.initParameters();
-		super.initParameterConstraint();
-		super.initParametersState();
-		super.initParametersListener();
+		initParameters();
+		initParameterConstraint();
+		initParametersState();
+		initParametersListener();
 	}
 
 	@Override
