@@ -9,6 +9,7 @@ public class MetaKeys {
 	public static final String MULTIBUFFER = "MultiBuffer";
 	public static final String IMPORT = "Import";
 	public static final String PROJECTIONTRANSFORM = "ProjectionTransform";
+	public static final String POINTPROJECTIONTRANSFORM = "PointProjectionTransform";
 	public static final String SET_PROJECTION = "SetProjection";
 	public static final String EXPORTGRID = "ExportGrid";
 	public static final String EXPORTVECTOR = "ExportVector";
@@ -50,7 +51,11 @@ public class MetaKeys {
 	public static final String CALCULATE_SLOPE = "CalculateSlope";
 	public static final String CALCULATE_HILLSHADE = "CalculateHillShade";
 	public static final String CALCULATE_ORTHOIMAGE = "CalculateOrthoImage";
-	//栅格统计
+    public static final String CALCULATE_CURVATURE = "CalculateCurvature";
+    public static final String CUT_FILL = "CutFill";
+    public static final String CUT_FILL_INVERSE = "CutFillInverse";
+    public static final String CUT_FILL_REGION = "CutFillRegion";
+    //栅格统计
 	public static final String GRID_ANALYST_SETTING = "GridAnalystSetting";
 	public static final String BASIC_STATISTIC = "BasicStatistics";
 	public static final String COMMON_STATISTIC = "CommonStatistics";
@@ -93,6 +98,7 @@ public class MetaKeys {
 	public static final String INCREMENTAL_AUTO_CORRELATION = "IncrementalAutoCorrelation";
 	public static final String AVERAGE_NEAREST_NEIGHBOR = "AverageNearestNeighbor";
 	public static final String OPTIMIZED_HOT_SPOT_ANALYST = "OptimizedHotSpotAnalyst";
+	public static final String COLLECT_EVENTS="CollectEvents";
 
 	//数据处理
 	public static final String AGGREGATE_POINTS = "AggregatePoints";
@@ -110,6 +116,8 @@ public class MetaKeys {
 	public static final String ALGEBRA_OPERATION="AlgebraOperation";
 	public static final String DATA_UPDATE="DataUpdate";
 	public static final String RASTER_RECLASS="RasterReclass";
+	public static final String INTEGRATE="Integrate";
+	public static final String GRID_SLICE="GridSlice";
 
 	//类型转换
 	public static final String CONVERSION_POINT_TO_LINE = "Conversion_PointToLine";

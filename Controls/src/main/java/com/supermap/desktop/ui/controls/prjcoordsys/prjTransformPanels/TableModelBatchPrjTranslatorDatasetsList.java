@@ -1,7 +1,6 @@
 package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 
 import com.supermap.data.Dataset;
-import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
 import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.ui.controls.DataCell;
@@ -76,7 +75,9 @@ public class TableModelBatchPrjTranslatorDatasetsList extends DefaultTableModel 
 		if (column == TABLE_COLUMN_ISSELECTED) {
 			dataList.get(row).setSelected((Boolean) aValue);
 		} else if (column == TABLE_COLUMN_TARGETDATASETNAME) {
-			dataList.get(row).setResultDatasetName(dataList.get(row).getTargetDatasource().getDatasets().getAvailableDatasetName(aValue.toString()));
+			if (null != dataList.get(row).getTargetDatasource()) {
+				dataList.get(row).setResultDatasetName(dataList.get(row).getTargetDatasource().getDatasets().getAvailableDatasetName(aValue.toString()));
+			}
 		}
 		fireTableDataChanged();
 	}
@@ -94,12 +95,19 @@ public class TableModelBatchPrjTranslatorDatasetsList extends DefaultTableModel 
 		return super.getColumnClass(columnIndex);
 	}
 
-	public void setDataList(Datasets datasets, Datasource targetDatasource) {
+	public void setDataList(ArrayList<Dataset> datasets, Datasource targetDatasource) {
 		this.dataList.clear();
-		if (targetDatasource != null && datasets != null && datasets.getCount() > 0) {
-			for (int i = 0; i < datasets.getCount(); i++) {
-				dataList.add(new TableData(true, datasets.get(i), targetDatasource.getDatasets().getAvailableDatasetName(datasets.get(i).getName()), targetDatasource));
+		if (datasets != null && datasets.size() > 0) {
+			if (targetDatasource != null) {
+				for (int i = 0; i < datasets.size(); i++) {
+					dataList.add(new TableData(true, datasets.get(i), targetDatasource.getDatasets().getAvailableDatasetName(datasets.get(i).getName()), targetDatasource));
+				}
+			} else {
+				for (int i = 0; i < datasets.size(); i++) {
+					dataList.add(new TableData(true, datasets.get(i), datasets.get(i).getName(), null));
+				}
 			}
+
 		}
 		fireTableDataChanged();
 	}

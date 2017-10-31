@@ -4,10 +4,9 @@ import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IContextMenuManager;
-import com.supermap.desktop.ui.controls.Layer3DsTree;
-import com.supermap.desktop.ui.controls.LayersTree;
-import com.supermap.desktop.ui.controls.NodeDataType;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.controls.utilities.ControlsResources;
+import com.supermap.desktop.ui.controls.*;
 import com.supermap.mapping.*;
 import com.supermap.realspace.Scene;
 
@@ -16,7 +15,11 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class LayersComponentManager extends JComponent {
 	/**
@@ -26,10 +29,15 @@ public class LayersComponentManager extends JComponent {
 	private javax.swing.JScrollPane jScrollPane = null;
 	private transient LayersTree layersTree = null;
 	private transient Layer3DsTree layer3DsTree = null;
+	private JToolBar toolBar;
+	private final String urlStr = "/coreresources/ToolBar/";
+	private ComponentDropDown addLayerGroup;
+	private JMenuItem jMenuItemAddLayerRootGroup;
+	private JMenuItem jMenuItemAddLayerGroup;
 	// 临时的变量，现在还没有自动加载Dockbar，所以暂时用这个变量测试
 	private Boolean isContextMenuBuilded = false;
 	private JPopupMenu layerWMSPopupMenu;
-	private TreePath[] oldPaths;
+	private ArrayList<TreePath> legalPaths;
 
 	/**
 	 * Create the panel.
@@ -46,13 +54,17 @@ public class LayersComponentManager extends JComponent {
 		this.jScrollPane = new javax.swing.JScrollPane();
 		this.layersTree = new LayersTree();
 		this.layer3DsTree = new Layer3DsTree();
+		this.toolBar = new JToolBar();
+
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(this.jScrollPane,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(this.jScrollPane,
-				javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE));
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addComponent(this.toolBar,50,50,50)
+				.addComponent(this.jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createSequentialGroup()
+				.addComponent(this.toolBar,23, 23, 23)
+				.addComponent(this.jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE));
 
 		this.layersTree.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
@@ -78,22 +90,27 @@ public class LayersComponentManager extends JComponent {
 
 	private void layersTreeSelectedLegalPath(TreeSelectionEvent e) {
 		TreePath[] selectionPaths = layersTree.getSelectionPaths();
-		if (!isPathLegal(selectionPaths)) {
-			layersTree.setSelectionPaths(oldPaths);
-		} else {
-			oldPaths = selectionPaths == null ? null : selectionPaths.clone();
+		if (selectionPaths != null) {
+			if (selectionPaths.length > 1) {
+				layersTree.setSelectionPaths(getLegalPaths());
+			} else {
+				legalPaths = new ArrayList<>();
+				legalPaths.add(selectionPaths[0]);
+			}
 		}
 	}
 
-	private boolean isPathLegal(TreePath[] treePaths) {
-		if (null != treePaths && 0 < treePaths.length) {
-			for (TreePath treePath : treePaths) {
-				if (!treePath.getParentPath().equals(treePaths[0].getParentPath())) {
-					return false;
-				}
+	private TreePath[] getLegalPaths() {
+		TreePath[] selectionPaths = layersTree.getSelectionPaths();
+		TreePath parentPath = legalPaths.get(0).getParentPath();
+		for (TreePath selectionPath : selectionPaths) {
+			if (selectionPath.getParentPath().equals(parentPath)) {
+				legalPaths.add(selectionPath);
 			}
 		}
-		return true;
+		TreePath[] result = new TreePath[legalPaths.size()];
+
+		return legalPaths.toArray(result);
 	}
 
 	private void initialize() {
@@ -107,24 +124,81 @@ public class LayersComponentManager extends JComponent {
 	}
 
 	private void initializeToolBar() {
-		// 默认实现，后续进行初始化操作
+		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
+		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
+		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
+		JPopupMenu popupMenuScale = new JPopupMenu();
+		popupMenuScale.add(this.jMenuItemAddLayerRootGroup);
+		popupMenuScale.add(this.jMenuItemAddLayerGroup);
+		this.addLayerGroup.setPopupMenu(popupMenuScale);
+		this.addLayerGroup.setToolTip(ControlsProperties.getString("String_CreateLayerRootGroup"));
+		this.addLayerGroup.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
+		this.toolBar.add(this.addLayerGroup);
+		this.toolBar.setFloatable(false);
+		this.toolBar.setVisible(false);
+		registerEvents();
 	}
+
+	private void registerEvents(){
+		this.addLayerGroup.getDisplayButton().removeActionListener(this.addLayerRootGroupListener);
+		this.addLayerGroup.getDisplayButton().addActionListener(this.addLayerRootGroupListener);
+		this.jMenuItemAddLayerRootGroup.removeActionListener(this.addLayerRootGroupListener);
+		this.jMenuItemAddLayerGroup.removeActionListener(this.addLayerGroupListener);
+		this.jMenuItemAddLayerRootGroup.addActionListener(this.addLayerRootGroupListener);
+		this.jMenuItemAddLayerGroup.addActionListener(this.addLayerGroupListener);
+	}
+
+	private ActionListener addLayerRootGroupListener=new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (layersTree!=null && layersTree.getMap()!= null) {
+				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
+				layersTree.getMap().getLayers().addGroup(layerGroupName);
+				int selectRow = layersTree.getRowCount() - 1;
+				layersTree.setSelectionRow(selectRow);
+				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
+			}
+		}
+	};
+
+	private ActionListener addLayerGroupListener=new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			TreeNodeData selectedNodeData = null;
+			if (layersTree != null && layersTree.getMap()!= null && layersTree.getSelectionCount() == 1) {
+				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
+				selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
+				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP) {
+					String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
+					LayerGroup layerGroup = (LayerGroup) selectedNodeData.getData();
+					layerGroup.addGroup(layerGroupName);
+					layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+					layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+				}
+			}
+		}
+	};
 
 	private void initializeResources() {
 		// 默认实现，后续进行初始化操作
 	}
 
 	//  Create by lixiaoyao 2017/10/10
-	// 当点击鼠标右键时，当坐标Y超出图层树当前显示的高度时那么不需要改变图层树当前选择的对象，
+	// 当点击鼠标右键时，当坐标超出图层树当前显示的高度时那么不需要改变图层树当前选择的对象，
 	// 如果没超过那么就需要改变图层树中当前选择的对象，效果类似于工作空间树
-	private void layersTreeSelectDataChange(java.awt.event.MouseEvent e){
+	private void layersTreeSelectDataChange(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1) {
-			if (e.getY()<=this.layersTree.getRowCount()*this.layersTree.getRowHeight()) {
-				TreePath mouseLocationPath = this.layersTree.getClosestPathForLocation(e.getX(), e.getY());
-				if (mouseLocationPath != null && mouseLocationPath.getPath() != null && mouseLocationPath.getPath().length > 0
-						&& !this.layersTree.isPathSelected(mouseLocationPath)) {
-					this.layersTree.setSelectionPath(mouseLocationPath);
+			TreePath closestPathForLocation = this.layersTree.getClosestPathForLocation(e.getX(), e.getY());
+			if (closestPathForLocation != null) {
+				Rectangle pathBounds = layersTree.getPathBounds(closestPathForLocation);
+				if (pathBounds != null && e.getY() >= pathBounds.y && e.getY() < (pathBounds.y + pathBounds.height)
+						&& closestPathForLocation.getPath().length > 0 && !this.layersTree.isPathSelected(closestPathForLocation)) {
+					this.layersTree.setSelectionPath(closestPathForLocation);
 				}
+			}
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
+			if (this.layersTree.getPathForLocation(e.getX(), e.getY()) == null) {
+				layersTree.clearSelection();
 			}
 		}
 	}
@@ -133,25 +207,25 @@ public class LayersComponentManager extends JComponent {
 		try {
 			int buttonType = evt.getButton();
 			int clickCount = evt.getClickCount();
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layersTree.getLastSelectedPathComponent();
-			if (selectedNode != null) {
-				TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-				if (buttonType == MouseEvent.BUTTON3 && clickCount == 1 && this.layersTree.getLastSelectedPathComponent() != null) {
+//			if (selectedNode != null) {
+				if (buttonType == MouseEvent.BUTTON3 && clickCount == 1) {
 
 					if (!this.isContextMenuBuilded) {
 						this.buildContextMenu();
 					}
-					JPopupMenu popupMenu=null;
-					if (evt.getY()<=this.layersTree.getRowCount()*this.layersTree.getRowHeight()) {
+					JPopupMenu popupMenu = null;
+					DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layersTree.getLastSelectedPathComponent();
+					if (selectedNode !=null && evt.getY() <= this.layersTree.getRowCount() * this.layersTree.getRowHeight()) {
+						TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
 						popupMenu = this.getPopupMenu(selectedNodeData);
-					}else{// fix by lixiaoyao 2017/10/11 当点击的鼠标Y大于树当前显示的高度时，显示图层树的右键菜单
-						popupMenu=this.layersTreeToolBarPopupMenu;
+					} else if (evt.getY() > this.layersTree.getRowCount() * this.layersTree.getRowHeight()){// fix by lixiaoyao 2017/10/11 当点击的鼠标Y大于树当前显示的高度时，显示图层树的右键菜单
+						popupMenu = this.layersTreeToolBarPopupMenu;
 					}
 					if (popupMenu != null) {
 						popupMenu.show(this.layersTree, evt.getX(), evt.getY());
 					}
 				}
-			}
+//			}
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
@@ -275,6 +349,9 @@ public class LayersComponentManager extends JComponent {
 	}
 
 	public void setMap(Map map) {
+		if (!this.toolBar.isVisible()){
+			this.toolBar.setVisible(true);
+		}
 		this.jScrollPane.setViewportView(this.layersTree);
 
 		// 这里先这么绕一下，保证每次设置 map 都会生效，绕过相同地图不处理的问题。
@@ -299,6 +376,9 @@ public class LayersComponentManager extends JComponent {
 	}
 
 	public void setScene(Scene scene) {
+		if (!this.toolBar.isVisible()){
+			this.toolBar.setVisible(true);
+		}
 		this.jScrollPane.setViewportView(this.layer3DsTree);
 
 		// 这里先这么绕一下，保证每次设置 map 都会生效，绕过相同地图不处理的问题。

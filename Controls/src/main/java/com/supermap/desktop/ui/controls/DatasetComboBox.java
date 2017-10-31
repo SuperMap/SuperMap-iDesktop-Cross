@@ -14,15 +14,15 @@ import java.awt.event.ItemEvent;
  * 数据集下拉列表控件
  *
  * @author YuanR 2017.2.14
- *         <p>
- *         提供的构造方法：
- *         默认构造空的ComboBox（可以通过setDatasets（）方法重新填充，并支持setSupportedDatasetTypes（））
- *         数据集集合类构造（通过  DatasetComboBox(Datasets datasets) 进行构造）
- *         <p>
- *         可获得的参数：
- *         SupportedDatasetTypes、SelectedDataset、构建的datasets
- *         <p>
- *         重构ComboBox的实现方式，直接将数据集存入item，再通过setRenderer(new ListDataCellRender());进行显示及图标的渲染
+ * <p>
+ * 提供的构造方法：
+ * 默认构造空的ComboBox（可以通过setDatasets（）方法重新填充，并支持setSupportedDatasetTypes（））
+ * 数据集集合类构造（通过  DatasetComboBox(Datasets datasets) 进行构造）
+ * <p>
+ * 可获得的参数：
+ * SupportedDatasetTypes、SelectedDataset、构建的datasets
+ * <p>
+ * 重构ComboBox的实现方式，直接将数据集存入item，再通过setRenderer(new ListDataCellRender());进行显示及图标的渲染
  */
 
 public class DatasetComboBox extends JComboBox<Dataset> {

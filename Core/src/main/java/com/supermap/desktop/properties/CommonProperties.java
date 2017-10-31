@@ -88,5 +88,5 @@ public class CommonProperties extends Properties {
 	public static final String moveToNext = "String_MoveToNext";
 	public static final String moveToForward = "String_MoveToForward";
 	public static final String moveToLast = "String_MoveToLast";
-	public static final String fieldScreening = "String_FieldScreening";
+	public static final String createField = "String_FieldCreate";
 }

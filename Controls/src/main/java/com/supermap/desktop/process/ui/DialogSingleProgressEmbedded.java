@@ -104,7 +104,7 @@ public class DialogSingleProgressEmbedded extends SmDialog implements IWorkerVie
 			isCancelledWhenClosing = true;
 			labelMessage.setText(ControlsProperties.getString("String_Canceling"));
 			labelRemainTime.setText("");
-			buttonRun.setProcedure(ButtonExecutor.CANCELLED);
+			buttonRun.setProcedure(ButtonExecutor.CANCELLING);
 			worker.cancel();
 		}
 	}

@@ -18,6 +18,7 @@ import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableRenderer;
@@ -296,9 +297,6 @@ public class FirstStepPane extends JPanel implements IState {
 	private ActionListener serverGettingListener=new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (StringUtilities.isNullOrEmpty(textFieldServerName.getText())) {
-				textFieldServerName.setText(MapViewProperties.getString("MapCache_MongoDB_DefaultServerName"));
-			}
 			mongoDBConnectSate = isDBValidate();
 			updateDBNames();
 		}
@@ -480,6 +478,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.comboBoxDatabaseName.getComponent(0).addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				mongoDBConnectSate = isDBValidate();
 				updateDBNames();
 			}
 		});
@@ -555,6 +554,9 @@ public class FirstStepPane extends JPanel implements IState {
 		} else if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDB")) || currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
 			this.labelServerName.setVisible(true);
 			this.textFieldServerName.setVisible(true);
+			if (StringUtilities.isNullOrEmpty(textFieldServerName.getText())) {
+				textFieldServerName.setText(MapViewProperties.getString("MapCache_MongoDB_DefaultServerName"));
+			}
 			this.buttonGetServer.setVisible(true);
 			this.labelDatabaseName.setVisible(true);
 			this.helpProviderForDatabaseName.setVisible(true);
@@ -857,7 +859,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.buttonSelectInverse.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
 		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
-		this.buttonGetServer.setText(MapViewProperties.getString("String_GetServerName"));
+		this.buttonGetServer.setText(CoreProperties.getString("String_Label_VersionCheck"));
 
 		this.labelVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
 		this.labelSplitMode.setText(MapViewProperties.getString("MapCache_LabelSplitMode"));

@@ -5,6 +5,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.implement.CtrlAction;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.mapping.Layer;
 
 public class CtrlActionClearVisibleScale extends CtrlAction {
@@ -25,7 +26,10 @@ public class CtrlActionClearVisibleScale extends CtrlAction {
 			formMap.getMapControl().getMap().refresh();
 			// 手动触发更改事件
 			formMap.setActiveLayers(formMap.getActiveLayers());
-		} catch (Exception e) {
+            for (Layer layer : formMap.getActiveLayers()) {
+                UICommonToolkit.getLayersManager().getLayersTree().refreshNode(layer);
+            }
+        } catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
 	}

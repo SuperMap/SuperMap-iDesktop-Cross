@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by highsad on 2017/4/20.
@@ -15,27 +17,34 @@ import java.awt.event.MouseMotionListener;
 public class ButtonExecutor extends JButton implements MouseListener, MouseMotionListener {
 	public final static int READY = 1;
 	public final static int RUNNING = 2;
-	public final static int CANCELLED = 3;
+	public final static int CANCELLING = 3;
 	public final static int COMPLETED = 4;
 
 	private final static Icon ICON_READY_NORMAL = ProcessResources.getIcon("/processresources/task/image_run.png");
 	private final static Icon ICON_READY_HOT = ProcessResources.getIcon("/processresources/task/image_run_hot.png");
-	private final static Icon ICON_RUN_NORMAL = ProcessResources.getIcon("/processresources/task/image_cancel.png");
-	private final static Icon ICON_RUN_HOT = ProcessResources.getIcon("/processresources/task/image_cancel_hot.png");
-	private final static Icon ICON_CANCELLED = ControlsResources.getIcon("/controlsresources/ToolBar/Image_stop_pressed.png");
+	private final static Icon ICON_READY_UNABLE = ProcessResources.getIcon("/processresources/task/image_run_unable.png");
+	private final static Icon ICON_RUNNING_NORMAL = ProcessResources.getIcon("/processresources/task/image_cancel.png");
+	private final static Icon ICON_RUNNING_HOT = ProcessResources.getIcon("/processresources/task/image_cancel_hot.png");
+	private final static Icon ICON_RUNNING_UNABLE = ProcessResources.getIcon("/processresources/task/image_cancel_unable.png");
+	private final static Icon ICON_CANCELLING = ControlsResources.getIcon("/controlsresources/ToolBar/Image_stop_pressed.png");
 	private final static Icon ICON_COMPLETED_NOMAL = ProcessResources.getIcon("/processresources/task/image_finish.png");
 	private final static Icon ICON_COMPLETED_HOT = ProcessResources.getIcon("/processresources/task/image_run.png");
 
 	private final static String TIP_READY = CommonProperties.getString(CommonProperties.Run);
 	private final static String TIP_RUNNING = CommonProperties.getString(CommonProperties.Cancel);
-	private final static String TIP_CANCELLED = CommonProperties.getString(CommonProperties.BeingCanceled);
+	private final static String TIP_CANCELLING = CommonProperties.getString(CommonProperties.BeingCanceled);
 	private final static String TIP_COMPLETED = CommonProperties.getString(CommonProperties.ReRun);
 
 	public final static int NORMAL = 1;
 	public final static int HOT = 2;
-
+	private boolean isExecutorEnabled = true;
 	private int procedure = READY;
 	private int status = NORMAL;
+
+	private Map<Integer, Icon> normalIconMap = new HashMap<>();
+	private Map<Integer, Icon> hotIconMap = new HashMap<>();
+	private Map<Integer, Icon> unableIconMap = new HashMap<>();
+	private Map<Integer, String> tipsMap = new HashMap<>();
 
 	private Runnable run;
 	private Runnable cancel;
@@ -46,7 +55,41 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 		setContentAreaFilled(false);
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		initIconMaps();
+		initTips();
 		refresh();
+	}
+
+	private void initIconMaps() {
+		this.normalIconMap.put(ButtonExecutor.READY, ICON_READY_NORMAL);
+		this.normalIconMap.put(ButtonExecutor.RUNNING, ICON_RUNNING_NORMAL);
+		this.normalIconMap.put(ButtonExecutor.CANCELLING, ICON_CANCELLING);
+		this.normalIconMap.put(ButtonExecutor.COMPLETED, ICON_COMPLETED_NOMAL);
+
+		this.hotIconMap.put(ButtonExecutor.READY, ICON_READY_HOT);
+		this.hotIconMap.put(ButtonExecutor.RUNNING, ICON_RUNNING_HOT);
+		this.hotIconMap.put(ButtonExecutor.CANCELLING, ICON_CANCELLING);
+		this.hotIconMap.put(ButtonExecutor.COMPLETED, ICON_COMPLETED_HOT);
+
+		this.unableIconMap.put(ButtonExecutor.READY, ICON_READY_UNABLE);
+		this.unableIconMap.put(ButtonExecutor.RUNNING, ICON_RUNNING_UNABLE);
+		this.unableIconMap.put(ButtonExecutor.CANCELLING, ICON_CANCELLING);
+		this.unableIconMap.put(ButtonExecutor.COMPLETED, ICON_COMPLETED_NOMAL);
+	}
+
+	private void initTips() {
+		this.tipsMap.put(ButtonExecutor.READY, TIP_READY);
+		this.tipsMap.put(ButtonExecutor.RUNNING, TIP_RUNNING);
+		this.tipsMap.put(ButtonExecutor.CANCELLING, TIP_CANCELLING);
+		this.tipsMap.put(ButtonExecutor.COMPLETED, TIP_COMPLETED);
+	}
+
+	public boolean isExecutorEnabled() {
+		return isExecutorEnabled;
+	}
+
+	public void setExecutorEnabled(boolean enable) {
+		isExecutorEnabled = enable;
 	}
 
 	public int getProcedure() {
@@ -71,44 +114,22 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				switch (ButtonExecutor.this.procedure) {
-					case READY: {
-						if (ButtonExecutor.this.status == NORMAL) {
-							setIcon(ICON_READY_NORMAL);
-						} else if (ButtonExecutor.this.status == HOT) {
-							setIcon(ICON_READY_HOT);
-						}
-						setToolTipText(TIP_READY);
-					}
-					break;
-					case RUNNING: {
-						if (ButtonExecutor.this.status == NORMAL) {
-							setIcon(ICON_RUN_NORMAL);
-						} else if (ButtonExecutor.this.status == HOT) {
-							setIcon(ICON_RUN_HOT);
-						}
-						setToolTipText(TIP_RUNNING);
-					}
-					break;
-					case CANCELLED: {
-						setIcon(ICON_CANCELLED);
-						setToolTipText(TIP_CANCELLED);
-					}
-					break;
-					case COMPLETED: {
-						if (ButtonExecutor.this.status == NORMAL) {
-							setIcon(ICON_COMPLETED_NOMAL);
-						} else if (ButtonExecutor.this.status == HOT) {
-							setIcon(ICON_COMPLETED_HOT);
-						}
-						setToolTipText(TIP_COMPLETED);
-					}
-					break;
-					default:
-						break;
-				}
+				setIcon(getAppropriateIcon());
+				setToolTipText(tipsMap.get(procedure));
 			}
 		});
+	}
+
+	private Icon getAppropriateIcon() {
+		if (!isExecutorEnabled()) {
+			return this.unableIconMap.get(this.procedure);
+		} else if (this.status == ButtonExecutor.NORMAL) {
+			return this.normalIconMap.get(this.procedure);
+		} else if (this.status == ButtonExecutor.HOT) {
+			return this.hotIconMap.get(this.procedure);
+		} else {
+			return ICON_READY_NORMAL;
+		}
 	}
 
 	@Override
@@ -123,6 +144,10 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (!isExecutorEnabled()) {
+			return;
+		}
+
 		switch (this.procedure) {
 			case READY:
 			case COMPLETED: {
@@ -131,11 +156,11 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 			}
 			break;
 			case RUNNING: {
-				setProcedure(CANCELLED);
+				setProcedure(CANCELLING);
 				this.cancel.run();
 			}
 			break;
-			case CANCELLED:
+			case CANCELLING:
 			default:
 				break;
 		}

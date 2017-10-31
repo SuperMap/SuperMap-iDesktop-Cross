@@ -55,25 +55,28 @@ public class ParameterDatasetPanel extends SwingPanel {
 			}
 		}
 	};
+
 	private DatasourceOpenedListener datasourceOpenedListener = new DatasourceOpenedListener() {
 		@Override
 		public void datasourceOpened(DatasourceOpenedEvent datasourceOpenedEvent) {
 			datasourcesChanged();
 		}
 	};
+
 	private DatasetDeletedListener datasetDeletedListener = new DatasetDeletedListener() {
 		@Override
 		public void DatasetDeleted(DatasetDeletedEvent datasetDeletedEvent) {
 			datasetsChanged();
 		}
 	};
-	;
+
 	private DatasetDeletedAllListener datasetDeletedAllListener = new DatasetDeletedAllListener() {
 		@Override
 		public void datasetDeletedAll(DatasetDeletedAllEvent datasetDeletedAllEvent) {
 			datasetsChanged();
 		}
 	};
+
 	private DatasetCreatedListener datasetCreatedListener = new DatasetCreatedListener() {
 		@Override
 		public void datasetCreated(DatasetCreatedEvent datasetCreatedEvent) {

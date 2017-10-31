@@ -1,10 +1,16 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
+/**
+ * 增加自定义和收藏夹
+ * yuanR2017.10.24
+ */
 public class XMLProjectionTag {
 	public static final String FILE_STARTUP_XML = "../Configuration/SuperMap.Desktop.Startup.xml";
 	public static final String PROJECTION = "projection";
 	public static final String DEFAULT = "default";
 	public static final String PROJECTION_XML = "../Templates/Projection/Projection.xml";
+	public static final String CUSTOMPROJECTION_XML = "../Templates/Projection/CustomProjection.xml";
+	public static final String FAVORITEPROJECTION_XML = "../Templates/Projection/FavoriteProjection.xml";
 
 	public static final String NAMESPACEURL = "http://www.supermap.com/sml";
 	// 1
@@ -44,13 +50,29 @@ public class XMLProjectionTag {
 	public static final String FIRSTPOINT_LONGITUDE = "sml:FirstPointLongitude";
 	public static final String SECONDPOINT_LONGITUDE = "sml:SecondPointLongitude";
 
-	// 隶属于 Root
+	//  地理坐标系
 	public static final String GEOCOORDSYS_DEFINES = "sml:PJGeoCoordSysDefines";
 	public static final String GEOCOORDSYS_CAPTION_DEFAULT = "sml:DefaultPJGeoCoordSysCaption";
 	public static final String GEOCOORDSYS_DEFINE = "sml:PJGeoCoordSysDefine";
 	public static final String GEOGROUP_CATION = "sml:PJGeoGroupCaption"; // 新增内容
 	public static final String GEOCOORDSYS_CAPTION = "sml:PJGeoCoordSysCaption";
 	public static final String GEOCOORDSYS_TYPE = "sml:PJGeoCoordSysType";
+
+	//  自定义坐标系
+	//public static final String CUSTOMCOORDSYS_DEFINES = "sml:CustomCoordSysDefines";
+	//public static final String CUSTOMCOORDSYS_CAPTION_DEFAULT = "sml:DefaultCustomCoordSysCaption";
+	//public static final String CUSTOMCOORDSYS_DEFINE = "sml:CustomCoordSysDefine";
+	//public static final String CUSTOMGROUP_CATION = "sml:CustomGroupCaption"; // 新增内容
+	//public static final String CUSTOMCOORDSYS_CAPTION = "sml:CustomCoordSysCaption";
+	//public static final String CUSTOMCOORDSYS_TYPE = "sml:CustomCoordSysType";
+
+	// 收藏夹坐标系
+	//public static final String FAVORITECOORDSYS_DEFINES = "sml:FavoriteCoordSysDefines";
+	//public static final String FAVORITECOORDSYS_CAPTION_DEFAULT = "sml:DefaultFavoriteCoordSysCaption";
+	//public static final String FAVORITECOORDSYS_DEFINE = "sml:FavoriteCoordSysDefine";
+	//public static final String FAVORITEGROUP_CATION = "sml:FavoriteGroupCaption"; // 新增内容
+	//public static final String FAVORITECOORDSYS_CAPTION = "sml:FavoriteCoordSysCaption";
+	//public static final String FAVORITECOORDSYS_TYPE = "sml:FavoriteCoordSysType";
 
 	private XMLProjectionTag() {
 		// 工具类不提供构造函数

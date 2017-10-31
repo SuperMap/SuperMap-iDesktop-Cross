@@ -26,6 +26,7 @@ public abstract class MetaProcessCalTerrain extends MetaProcess {
 	protected ParameterSingleDataset sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 	protected ParameterSaveDataset parameterSaveDataset = new ParameterSaveDataset();
 	protected ParameterCombine parameterCombineResultDataset = new ParameterCombine();
+    protected ParameterCombine parameterCombineSourceDataset;
 
 	public MetaProcessCalTerrain() {
 		initParameters();
@@ -39,8 +40,8 @@ public abstract class MetaProcessCalTerrain extends MetaProcess {
 	}
 
 	private void initParameters() {
-		ParameterCombine parameterCombineSourceDataset = new ParameterCombine();
-		parameterCombineSourceDataset.addParameters(this.datasource, this.sourceDataset);
+        parameterCombineSourceDataset = new ParameterCombine();
+        parameterCombineSourceDataset.addParameters(this.datasource, this.sourceDataset);
 		parameterCombineSourceDataset.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
 
 		this.parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.GRID, parameterCombineSourceDataset);

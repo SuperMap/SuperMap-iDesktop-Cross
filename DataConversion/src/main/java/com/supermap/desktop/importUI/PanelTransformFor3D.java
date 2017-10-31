@@ -386,7 +386,6 @@ public class PanelTransformFor3D extends PanelTransform {
 		this.textFieldPositionZ.getDocument().addDocumentListener(this.documentListener);
 		this.buttonPrjSet.addActionListener(this.prjsetListener);
 		this.fileChooserControlImportPrjFile.addFileChangedListener(this.importPrjFileListener);
-//        this.fileChooserControlImportPrjFile.getButton().addActionListener(this.importPrjFileListener);
 	}
 
 	@Override

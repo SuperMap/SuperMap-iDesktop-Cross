@@ -5,7 +5,6 @@ import com.supermap.desktop.ui.controls.comboBox.SearchItemValueGetter;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.tree.TreeNode;
-import java.util.Locale;
 
 /**
  * @author XiaJT
@@ -29,14 +28,15 @@ public class SmTreeSearchComboBoxModel<T extends TreeNode> extends SearchBoxMode
 		if (StringUtilities.isNullOrEmpty(keyWord)) {
 			return;
 		}
-		String country = Locale.getDefault().getCountry();
-		switch (country) {
-			case "CN":
-				searchInChinese(keyWord);
-				break;
-			default:
-				searchDirect(keyWord);
-		}
+//		String country = Locale.getDefault().getCountry();
+//		switch (country) {
+//			case "CN":
+//				searchInChinese(keyWord);
+//				break;
+//			default:
+//				searchDirect(keyWord);
+//		}
+		searchInChinese(keyWord);// 暂时直接当做中文搜索，后面需要做国际化版本匹配时再修改
 		if (this.comboBox.isPopupVisible()) {
 			this.comboBox.hidePopup();
 		}

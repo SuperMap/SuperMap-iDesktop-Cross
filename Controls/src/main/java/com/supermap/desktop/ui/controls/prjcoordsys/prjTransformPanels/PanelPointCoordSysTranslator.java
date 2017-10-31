@@ -3,7 +3,8 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.controls.TextFields.DMSTextField;
+import com.supermap.desktop.ui.controls.TextFields.DMSLatitudeTextField;
+import com.supermap.desktop.ui.controls.TextFields.DMSLongitudeTextField;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -40,8 +41,8 @@ public class PanelPointCoordSysTranslator extends JPanel {
 	private UnitMeterTextField unitMeterTextFieldX = new UnitMeterTextField();
 	private UnitMeterTextField unitMeterTextFieldY = new UnitMeterTextField();
 	// 单位为“度、分、秒”的textField
-	private DMSTextField textFieldLongitudeValue = new DMSTextField();
-	private DMSTextField textFieldLatitudeValue = new DMSTextField();
+	private DMSLongitudeTextField textFieldLongitudeValue = new DMSLongitudeTextField();
+	private DMSLatitudeTextField textFieldLatitudeValue = new DMSLatitudeTextField();
 	// 单位为“度”的textField
 	private UnitDegreeTextField unitDegreeTextFieldLongtitude = new UnitDegreeTextField();
 	private UnitDegreeTextField unitDegreeTextFieldLatitude = new UnitDegreeTextField();
@@ -145,6 +146,54 @@ public class PanelPointCoordSysTranslator extends JPanel {
 	}
 
 	public void initStates() {
+		this.unitDegreeTextFieldLongtitude.getTextField().setToolTipText(ControlsProperties.getString("String_RangeSection") + "[-180,180]");
+		this.unitDegreeTextFieldLongtitude.setSmTextFieldLegit(new ISmTextFieldLegit() {
+			@Override
+			public boolean isTextFieldValueLegit(String textFieldValue) {
+				if (StringUtilities.isNullOrEmpty(textFieldValue)) {
+					return false;
+				}
+				try {
+					Double value = Double.valueOf(textFieldValue.replace("-", ""));
+					if (value > 180) {
+						return false;
+					}
+				} catch (Exception e) {
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public String getLegitValue(String currentValue, String backUpValue) {
+				return backUpValue;
+			}
+		});
+		this.unitDegreeTextFieldLatitude.getTextField().setToolTipText(ControlsProperties.getString("String_RangeSection") + "[-90,90]");
+		this.unitDegreeTextFieldLatitude.setSmTextFieldLegit(new ISmTextFieldLegit() {
+			@Override
+			public boolean isTextFieldValueLegit(String textFieldValue) {
+				if (StringUtilities.isNullOrEmpty(textFieldValue)) {
+					return false;
+				}
+				try {
+					Double value = Double.valueOf(textFieldValue.replace("-", ""));
+					if (value > 90) {
+						return false;
+					}
+				} catch (Exception e) {
+					return false;
+				}
+				return true;
+			}
+
+			@Override
+			public String getLegitValue(String currentValue, String backUpValue) {
+				return backUpValue;
+			}
+		});
+
+		this.checkBoxShowAsDMS.setEnabled(false);
 		setComponentVisible();
 	}
 
@@ -170,14 +219,18 @@ public class PanelPointCoordSysTranslator extends JPanel {
 		this.textFieldLatitudeValue.setVisible(this.checkBoxShowAsDMS.isSelected());
 	}
 
-
-	public void setComponentEnabled(Boolean enabled) {
-		this.unitMeterTextFieldX.setTextFieldEnabled(enabled);
-		this.unitMeterTextFieldY.setTextFieldEnabled(enabled);
-		this.unitDegreeTextFieldLongtitude.setTextFieldEnabled(enabled);
-		this.unitDegreeTextFieldLatitude.setTextFieldEnabled(enabled);
-		this.textFieldLongitudeValue.setPanelEnabled(enabled);
-		this.textFieldLatitudeValue.setPanelEnabled(enabled);
+	/**
+	 * 设置面板不可编辑但可以赋值其内容，并不是不可用
+	 *
+	 * @param enabled
+	 */
+	public void setComponentEditable(Boolean enabled) {
+		this.unitMeterTextFieldX.setTextFieldEditable(enabled);
+		this.unitMeterTextFieldY.setTextFieldEditable(enabled);
+		this.unitDegreeTextFieldLongtitude.setTextFieldEditable(enabled);
+		this.unitDegreeTextFieldLatitude.setTextFieldEditable(enabled);
+		this.textFieldLongitudeValue.setPanelEditable(enabled);
+		this.textFieldLatitudeValue.setPanelEditable(enabled);
 		this.checkBoxShowAsDMS.setEnabled(!(getCurrentModel() == METERMODEL));
 	}
 
@@ -213,6 +266,8 @@ public class PanelPointCoordSysTranslator extends JPanel {
 			// 米——>度，需要考虑是否超出限制的问题
 			if (StringUtilities.getNumber(this.unitMeterTextFieldX.getTextField().getText()) >= -180 && StringUtilities.getNumber(this.unitMeterTextFieldX.getTextField().getText()) <= 180) {
 				this.unitDegreeTextFieldLongtitude.getTextField().setText(this.unitMeterTextFieldX.getTextField().getText().toString());
+			}
+			if (StringUtilities.getNumber(this.unitMeterTextFieldY.getTextField().getText()) >= -90 && StringUtilities.getNumber(this.unitMeterTextFieldY.getTextField().getText()) <= 90) {
 				this.unitDegreeTextFieldLatitude.getTextField().setText(this.unitMeterTextFieldY.getTextField().getText().toString());
 			}
 			this.lastModel = this.currentModel;
@@ -282,9 +337,10 @@ public class PanelPointCoordSysTranslator extends JPanel {
 				// 度textField键盘输入限定
 				String text = textField.getText();
 				//“-”负号在首位，并且只能输入一次
-				if (!StringUtilities.isNullOrEmpty(text) && keyChar == KeyEvent.VK_MINUS) {// keyChar == 45代表负号
+				if (textField.getCaretPosition() != 0 && keyChar == KeyEvent.VK_MINUS || text.contains("-") && keyChar == KeyEvent.VK_MINUS) {// keyChar == 45代表负号
 					e.consume();
 				}
+
 				//“.”不能在首位，并且只能输入一次
 				if (StringUtilities.isNullOrEmpty(text) && keyChar == KeyEvent.VK_PERIOD || text.contains(".") && keyChar == KeyEvent.VK_PERIOD) {//keyChar == 46代表小数点
 					e.consume();
@@ -366,8 +422,8 @@ public class PanelPointCoordSysTranslator extends JPanel {
 			this.textField.removeEvents();
 		}
 
-		public void setTextFieldEnabled(Boolean enabled) {
-			this.textField.setEnabled(enabled);
+		public void setTextFieldEditable(Boolean enabled) {
+			this.textField.setEditable(enabled);
 		}
 	}
 
@@ -390,7 +446,7 @@ public class PanelPointCoordSysTranslator extends JPanel {
 				// 度textField键盘输入限定
 				String text = textField.getText();
 				//“-”负号在首位，并且只能输入一次
-				if (!StringUtilities.isNullOrEmpty(text) && keyChar == KeyEvent.VK_MINUS) {// keyChar == 45代表负号
+				if (textField.getCaretPosition() != 0 && keyChar == KeyEvent.VK_MINUS || text.contains("-") && keyChar == KeyEvent.VK_MINUS) {// keyChar == 45代表负号
 					e.consume();
 				}
 				//“.”不能在首位，并且只能输入一次
@@ -467,8 +523,11 @@ public class PanelPointCoordSysTranslator extends JPanel {
 		private void registEvents() {
 			removeListener();
 			this.textField.addKeyListener(this.keyAdapter);
-			this.textField.setSmTextFieldLegit(iSmTextFieldLegit);
+			//this.textField.setSmTextFieldLegit(iSmTextFieldLegit);
+		}
 
+		public void setSmTextFieldLegit(ISmTextFieldLegit iSmTextFieldLegit) {
+			this.textField.setSmTextFieldLegit(iSmTextFieldLegit);
 		}
 
 		private void removeListener() {
@@ -476,8 +535,8 @@ public class PanelPointCoordSysTranslator extends JPanel {
 			this.textField.removeEvents();
 		}
 
-		public void setTextFieldEnabled(Boolean enabled) {
-			this.textField.setEnabled(enabled);
+		public void setTextFieldEditable(Boolean enabled) {
+			this.textField.setEditable(enabled);
 		}
 	}
 }

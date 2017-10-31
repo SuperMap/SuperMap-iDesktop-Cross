@@ -233,14 +233,15 @@ class LayersTreeCellEditor implements TreeCellEditor, KeyListener, ActionListene
 		if (layersTree != null) {
 			if (layersTree.getSelectionCount() == 1) {
                 if (!isSelectedLayersContained(e.getPaths(), layersTree.getSelectionPath()) && layersTree.isHitTestInfo()) {
-                    TreePath[] selectionPaths = new TreePath[e.getPaths().length + 1];
-                    for (int i = 0; i < e.getPaths().length; i++) {
-                        selectionPaths[i] = e.getPaths()[i];
-                    }
-                    selectionPaths[e.getPaths().length] = layersTree.getSelectionPath();
-                    layersTree.setSelectionPaths(selectionPaths);
-                }
-                lastPath = layersTree.getSelectionPath();
+					layersTree.setHitTestInfo(false);
+					TreePath[] selectionPaths = new TreePath[e.getPaths().length + 1];
+					for (int i = 0; i < e.getPaths().length; i++) {
+						selectionPaths[i] = e.getPaths()[i];
+					}
+					selectionPaths[e.getPaths().length] = layersTree.getSelectionPath();
+					layersTree.setSelectionPaths(selectionPaths);
+				}
+				lastPath = layersTree.getSelectionPath();
 			} else {
 				lastPath = null;
 			}

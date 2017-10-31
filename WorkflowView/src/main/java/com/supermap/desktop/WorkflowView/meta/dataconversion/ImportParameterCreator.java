@@ -643,7 +643,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		parameterRadioButton.setSelectedItem(parameterDataNodes[0]);
 		ReflectInfo chooseFile = new ReflectInfo();
 		chooseFile.methodName = "";
-		String moduleName = "ImportPrjFileFromProcess";
+		String moduleName = "ImportPrjFile";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.buildFileFilters(
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFiles"), "prj", "xml"),

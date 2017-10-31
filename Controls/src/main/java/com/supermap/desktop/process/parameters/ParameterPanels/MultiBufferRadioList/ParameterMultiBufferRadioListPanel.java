@@ -30,7 +30,7 @@ public class ParameterMultiBufferRadioListPanel extends PanelMultiBufferRadioLis
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				if (e.getType() == TableModelEvent.UPDATE) {
-					parameterMultiBufferRadioList.setRadioList(radioLists);
+					parameterMultiBufferRadioList.setSelectedItem(radioLists);
 				}
 			}
 		});

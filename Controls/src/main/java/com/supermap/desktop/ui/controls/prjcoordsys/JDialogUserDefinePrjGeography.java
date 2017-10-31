@@ -23,7 +23,6 @@ public class JDialogUserDefinePrjGeography extends SmDialog {
 	private SmButton buttonOk = new SmButton();
 	private SmButton buttonCancle = new SmButton();
 
-
 	public JDialogUserDefinePrjGeography() {
 		super();
 		init();

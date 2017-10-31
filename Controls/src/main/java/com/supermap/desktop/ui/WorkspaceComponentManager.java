@@ -566,8 +566,8 @@ public class WorkspaceComponentManager extends JComponent {
 			// 右键
 			if (buttonType == MouseEvent.BUTTON3 && clickCount == 1) {
 				//  fix by lixiaoyao 2017/10/10
-				// 当当前点击的坐标Y超出树当前显示的高度时不需要显示右键菜单，否则显示的右键菜单是当前选中的对象对应的右键菜单，不合理
-				if (evt.getY()<=this.workspaceTree.getRowCount()*this.workspaceTree.getRowHeight()) {
+				// 当当前点击的坐标超出树当前显示的高度时不需要显示右键菜单，否则显示的右键菜单是当前选中的对象对应的右键菜单，不合理
+				if (this.workspaceTree.getRowForLocation(evt.getX(),evt.getY())!=-1) {
 					TreePath[] selectedPaths = this.workspaceTree.getSelectionPaths();
 					CopyOnWriteArrayList<TreeNodeData> selectedNodeDatas = new CopyOnWriteArrayList<TreeNodeData>();
 					for (TreePath selectedPath : selectedPaths) {

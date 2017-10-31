@@ -60,10 +60,8 @@ public class MetaProcessDissolve extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.LINE, DatasetType.REGION);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
-		sourceDataset.setRequisite(true);
+
 		this.comboBoxDissolveMode = new ParameterComboBox();
 		this.comboBoxDissolveMode.setDescribe(ProcessProperties.getString("String_DissolveMode"));
 		this.numberDissolveTolerance = new ParameterNumber();
@@ -79,7 +77,7 @@ public class MetaProcessDissolve extends MetaProcess {
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(SOURCE_PANEL_DESCRIPTION);
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 
 		ParameterCombine parameterCombineParent = new ParameterCombine(ParameterCombine.HORIZONTAL);
@@ -168,7 +166,7 @@ public class MetaProcessDissolve extends MetaProcess {
 
 			String datasetName = resultDataset.getDatasetName();
 			datasetName = resultDataset.getResultDatasource().getDatasets().getAvailableDatasetName(datasetName);
-			DatasetVector src = null;
+			DatasetVector src;
 			if (this.getParameters().getInputs().getData(INPUT_DATA).getValue() != null) {
 				src = (DatasetVector) this.getParameters().getInputs().getData(INPUT_DATA).getValue();
 			} else {

@@ -189,6 +189,32 @@ public class DatasourceComboBox extends JComboBox<Datasource> {
 	}
 
 	/**
+	 * 重置控件
+	 *
+	 * @param datasources
+	 * @param selectedDatasource
+	 */
+	public void resetComboBox(ArrayList<Datasource> datasources, Datasource selectedDatasource) {
+		removeAllItems();
+		int selectedIndex = 0;
+
+		for (int i = 0; i < datasources.size(); i++) {
+			Datasource datasource = datasources.get(i);
+			this.addItem(datasource);
+			if (datasource == selectedDatasource) {
+				selectedIndex = getItemCount() - 1;
+			}
+		}
+
+		if (getItemCount() > 0) {
+			setSelectedIndex(selectedIndex);
+		} else {
+			setSelectedIndex(-1);
+		}
+	}
+
+
+	/**
 	 * @param datasources
 	 * @return
 	 */

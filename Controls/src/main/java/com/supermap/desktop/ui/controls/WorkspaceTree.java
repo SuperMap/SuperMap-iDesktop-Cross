@@ -770,6 +770,21 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		return isEditable();
 	}
 
+	// fix by lixiaoyao 2017/10/16
+	// 重写此方法，在根据坐标获取RowIndex时，不考虑x坐标，只需要考虑Y坐标；
+	// 实现只有当坐标Y超出树显示范围时，不改变选择对象，在范围内则改变选择对象
+	@Override
+	public TreePath getPathForLocation(int x, int y) {
+		TreePath closestPath = getClosestPathForLocation(x, y);
+
+		if (closestPath != null) {
+			Rectangle pathBounds = getPathBounds(closestPath);
+			if (pathBounds != null && y >= pathBounds.y && y < (pathBounds.y + pathBounds.height))
+				return closestPath;
+		}
+		return null;
+	}
+
 	/**
 	 * This method buildWorkspaceTree build workspace tree
 	 */
@@ -855,9 +870,6 @@ public class WorkspaceTree extends JTree implements IDisposable {
 	 * 初始化方法
 	 */
 	private void init() {
-		if (SystemPropertyUtilities.isLinux()) {
-			this.setRowHeight(17);
-		}
 		treeRenderer = new WorkspaceTreeCellRenderer(currentWorkspace);
 		setCellRenderer(treeRenderer);
 
@@ -1490,8 +1502,8 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		public void mousePressed(MouseEvent e) {
 			if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1) {
 				//  fix by lixiaoyao 2017/10/10
-				// 当当前点击的坐标Y超出树当前显示的高度那么不需要改变工作空间树当前选择的对象
-				if (e.getY() <= WorkspaceTree.this.getRowCount() * WorkspaceTree.this.getRowHeight()) {
+				// 当当前点击的坐标超出树当前显示的高度那么不需要改变工作空间树当前选择的对象
+				if (WorkspaceTree.this.getRowForLocation(e.getX(), e.getY()) != -1) {
 					TreePath mouseLocationPath = WorkspaceTree.this.getClosestPathForLocation(e.getX(), e.getY());
 					if (mouseLocationPath != null && mouseLocationPath.getPath() != null && mouseLocationPath.getPath().length > 0
 							&& !WorkspaceTree.this.isPathSelected(mouseLocationPath)) {

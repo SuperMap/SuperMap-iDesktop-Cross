@@ -25,14 +25,14 @@ public class ParameterDataset extends AbstractParameter implements ISelectionPar
 	public void setSelectedItem(Object value) {
 		if (value instanceof Dataset) {
 			Dataset oldValue = this.dataset;
-			dataset = (Dataset) value;
-			firePropertyChangeListener(new PropertyChangeEvent(this, "value", oldValue, dataset));
+			this.dataset = (Dataset) value;
+			firePropertyChangeListener(new PropertyChangeEvent(this, "value", oldValue, this.dataset));
 		}
 	}
 
 	@Override
 	public Object getSelectedItem() {
-		return dataset;
+		return this.dataset;
 	}
 
 	@Override

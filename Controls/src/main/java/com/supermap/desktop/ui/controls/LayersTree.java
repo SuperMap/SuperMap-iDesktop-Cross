@@ -14,7 +14,6 @@ import com.supermap.desktop.dialog.symbolDialogs.SymbolDialog;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
-import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.mapping.*;
 
 import javax.swing.*;
@@ -37,6 +36,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -61,12 +61,14 @@ public class LayersTree extends JTree {
 	private DragSource dragSource;
 	private int draggedNodeIndex = -1;
 	private int dropTargetNodeIndex = -1;
+	private boolean isMoveLayerForLayerGroup = false;
 
 	private DefaultMutableTreeNode dropTargetNode = null;
 	private DefaultMutableTreeNode draggedNode = null;
 	private DefaultTreeModel treeModeltemp;
 	private boolean isUp = false;
 	private boolean isHitTestInfo = false;
+	private static final Color MOVE_COLOR = (new JTable()).getSelectionBackground();
 
 	private static DataFlavor localObjectFlavor;
 	private static DataFlavor[] supportedFlavors = {localObjectFlavor};
@@ -111,9 +113,6 @@ public class LayersTree extends JTree {
 	}
 
 	private void initDrag() {
-		if (SystemPropertyUtilities.isLinux()) {
-			this.setRowHeight(17);
-		}
 		this.setDragEnabled(true);
 		dragSource = DragSource.getDefaultDragSource();
 		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, new LayersTreeDragGestureListener());
@@ -193,7 +192,7 @@ public class LayersTree extends JTree {
 
 			int offset = x - this.getUI().getPathBounds(this, path).x;
 			/*
-	         * 修改为使用Render来计算点击的Icon类型 modified by gouyu 2010-12-24
+			 * 修改为使用Render来计算点击的Icon类型 modified by gouyu 2010-12-24
 			 */
 			result = ((LayersTreeCellRenderer) this.getCellRenderer()).getHitTestIconType(node, offset);
 		}
@@ -383,7 +382,7 @@ public class LayersTree extends JTree {
 		Theme theme = layer.getTheme();
 		if (layer instanceof LayerHeatmap) {
 			result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.HEAT_MAP));
-		}else if (layer instanceof LayerGridAggregation) {
+		} else if (layer instanceof LayerGridAggregation) {
 			result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.GRID_AGGREGATION));
 		} else if (theme == null) {
 			if (dataset == null) {
@@ -422,7 +421,7 @@ public class LayersTree extends JTree {
 			int type = theme.getType().value();
 
 				/*
-                 * 如果是1(ThemeUnique)、2(ThemeRange)、8(ThemeCustom)就使用自己的构造 以在专题图的基础上增加编辑功能 modified by gouyu 2010-12-23
+				 * 如果是1(ThemeUnique)、2(ThemeRange)、8(ThemeCustom)就使用自己的构造 以在专题图的基础上增加编辑功能 modified by gouyu 2010-12-23
 				 */
 			if (type != 1 && type != 2 && type != 8) {
 				result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER_THEME));
@@ -573,6 +572,15 @@ public class LayersTree extends JTree {
 			DefaultMutableTreeNode parentNode = groupNodeMap.get(group);
 
 			Layer layer = event.getLayer();
+			// fix by lixiaoyao 2017/10/24
+			// Make sure that the same layer in a layergroup adds only one tree node
+			for (int i = 0; i < parentNode.getChildCount(); i++) {
+				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) parentNode.getChildAt(i);
+				TreeNodeData treeNodeData = (TreeNodeData) treeNode.getUserObject();
+				if (layer.equals(treeNodeData.getData())) {
+					return;
+				}
+			}
 			DefaultTreeModel model = (DefaultTreeModel) getModel();
 			// 将节点插入到与图层索引一致处
 			int index = group.indexOf(layer);
@@ -590,7 +598,9 @@ public class LayersTree extends JTree {
 		public void layerRemoved(LayerRemovedEvent event) {
 			LayerGroup group = (LayerGroup) event.getSource();
 			DefaultMutableTreeNode parentNode = groupNodeMap.get(group);
-
+			if (event.getIndex() >= parentNode.getChildCount() || parentNode.getChildCount() == 0) {
+				return;
+			}
 			DefaultTreeModel model = (DefaultTreeModel) getModel();
 			model.removeNodeFromParent((MutableTreeNode) parentNode.getChildAt(event.getIndex()));
 		}
@@ -801,7 +811,10 @@ public class LayersTree extends JTree {
 				DefaultMutableTreeNode removedNode = groupNodeMap.get(layerGroup);
 
 				if (parentNode != null && removedNode != null) {
-					parentNode.remove(removedNode);
+					// fix by lixiaoyao 移除图层分组时应该移除model中的节点，不是父节点中子节点
+					DefaultTreeModel model = (DefaultTreeModel) getModel();
+					model.removeNodeFromParent(removedNode);
+//					parentNode.remove(removedNode);
 				}
 			} else {
 				DefaultTreeModel model = (DefaultTreeModel) getModel();
@@ -882,7 +895,7 @@ public class LayersTree extends JTree {
 						int type = hitTestInfo.getIconType().value();
 						Object[] selectedObjects = getCurrentSelectObjects();
 
-						if (selectedObjects.length > 1) {
+						if (selectedObjects != null && selectedObjects.length > 1) {
 							switch (type) {
 								case 1:
 									setCaseOne(selectedObjects, obj);
@@ -954,7 +967,7 @@ public class LayersTree extends JTree {
 			if (obj instanceof Layer) {
 				Layer layer = (Layer) obj;
 				layer.setVisible(!layer.isVisible());
-				themeItemSetting(layer,layer.isVisible());
+				themeItemSetting(layer, layer.isVisible());
 			}
 			if (obj instanceof ThemeUniqueItem) {
 				ThemeUniqueItem item = (ThemeUniqueItem) obj;
@@ -983,62 +996,63 @@ public class LayersTree extends JTree {
 			}
 		}
 
-		private void setCaseFour(Object[] objects,Layer layer) {
+		private void setCaseFour(Object[] objects, Layer layer) {
 			boolean isSnapable = !layer.isSnapable();
 			for (int i = 0; i < objects.length; i++) {
-				((Layer)objects[i]).setSnapable(((Layer)objects[i]).isVisible() && isSnapable);
+				((Layer) objects[i]).setSnapable(((Layer) objects[i]).isVisible() && isSnapable);
 			}
 		}
+
 		//cross暂时没有开放多图层编辑，这个还用不到
-		private void setCaseThree(Object[] objects,Layer layer) {
+		private void setCaseThree(Object[] objects, Layer layer) {
 			boolean isEditable = !layer.isEditable();
 			for (int i = 0; i < objects.length; i++) {
-				((Layer)objects[i]).setEditable(((Layer)objects[i]).isVisible() && isEditable);
+				((Layer) objects[i]).setEditable(((Layer) objects[i]).isVisible() && isEditable);
 			}
 		}
 
-		private void setCaseTwo(Object[] objects,Layer layer) {
+		private void setCaseTwo(Object[] objects, Layer layer) {
 			boolean isSelectable = !layer.isSelectable();
 			for (int i = 0; i < objects.length; i++) {
-				((Layer)objects[i]).setSelectable(((Layer)objects[i]).isVisible() && isSelectable);
+				((Layer) objects[i]).setSelectable(((Layer) objects[i]).isVisible() && isSelectable);
 			}
 		}
 
-		private void setCaseOne(Object[] objects,Object object) {
+		private void setCaseOne(Object[] objects, Object object) {
 			boolean isVisible;
 			if (object instanceof Layer) {
 				Layer layer = (Layer) object;
 				isVisible = !layer.isVisible();
-				for (Object object1:objects) {
+				for (Object object1 : objects) {
 					Layer layer1 = ((Layer) object1);
 					layer1.setVisible(isVisible);
-					themeItemSetting(layer1,isVisible);
+					themeItemSetting(layer1, isVisible);
 				}
-			}else if (object instanceof ThemeUniqueItem) {
+			} else if (object instanceof ThemeUniqueItem) {
 				ThemeUniqueItem item = (ThemeUniqueItem) object;
 				isVisible = !item.isVisible();
 				for (Object o : objects) {
 					((ThemeUniqueItem) o).setVisible(isVisible);
 				}
-			}else if (object instanceof ThemeRangeItem) {
+			} else if (object instanceof ThemeRangeItem) {
 				ThemeRangeItem item = (ThemeRangeItem) object;
 				isVisible = !item.isVisible();
 				for (Object o : objects) {
 					((ThemeRangeItem) o).setVisible(isVisible);
 				}
-			}else if (object instanceof ThemeGridUniqueItem) {
+			} else if (object instanceof ThemeGridUniqueItem) {
 				ThemeGridUniqueItem item = (ThemeGridUniqueItem) object;
 				isVisible = !item.isVisible();
 				for (Object o : objects) {
 					((ThemeGridUniqueItem) o).setVisible(isVisible);
 				}
-			}else if (object instanceof ThemeGridRangeItem) {
+			} else if (object instanceof ThemeGridRangeItem) {
 				ThemeGridRangeItem item = (ThemeGridRangeItem) object;
 				isVisible = !item.isVisible();
 				for (Object o : objects) {
 					((ThemeGridRangeItem) o).setVisible(isVisible);
 				}
-			}else if (object instanceof ThemeLabelItem) {
+			} else if (object instanceof ThemeLabelItem) {
 				ThemeLabelItem item = (ThemeLabelItem) object;
 				isVisible = !item.isVisible();
 				for (Object o : objects) {
@@ -1054,27 +1068,22 @@ public class LayersTree extends JTree {
 					for (int i = 0; i < ((ThemeUnique) tempTheme).getCount(); i++) {
 						((ThemeUnique) tempTheme).getItem(i).setVisible(isVisible);
 					}
-				}else if (tempTheme instanceof ThemeRange && 0 < ((ThemeRange) tempTheme).getCount()) {
+				} else if (tempTheme instanceof ThemeRange && 0 < ((ThemeRange) tempTheme).getCount()) {
 					for (int i = 0; i < ((ThemeRange) tempTheme).getCount(); i++) {
 						((ThemeRange) tempTheme).getItem(i).setVisible(isVisible);
 					}
-				}else if (tempTheme instanceof ThemeLabel && 0 < ((ThemeLabel) tempTheme).getCount()) {
+				} else if (tempTheme instanceof ThemeLabel && 0 < ((ThemeLabel) tempTheme).getCount()) {
 					for (int i = 0; i < ((ThemeLabel) tempTheme).getCount(); i++) {
 						((ThemeLabel) tempTheme).getItem(i).setVisible(isVisible);
 					}
-				}else if (tempTheme instanceof ThemeGridUnique && 0 < ((ThemeGridUnique) tempTheme).getCount()) {
+				} else if (tempTheme instanceof ThemeGridUnique && 0 < ((ThemeGridUnique) tempTheme).getCount()) {
 					for (int i = 0; i < ((ThemeGridUnique) tempTheme).getCount(); i++) {
 						((ThemeGridUnique) tempTheme).getItem(i).setVisible(isVisible);
 					}
-				}else if (tempTheme instanceof ThemeGridRange && 0 < ((ThemeGridRange) tempTheme).getCount()) {
+				} else if (tempTheme instanceof ThemeGridRange && 0 < ((ThemeGridRange) tempTheme).getCount()) {
 					for (int i = 0; i < ((ThemeGridRange) tempTheme).getCount(); i++) {
 						((ThemeGridRange) tempTheme).getItem(i).setVisible(isVisible);
 					}
-				}
-			} else if (layer instanceof LayerGroup) {
-				LayerGroup layerGroup = (LayerGroup) layer;
-				for (int i = 0; i < layerGroup.getCount(); i++) {
-					layerGroup.get(i).setVisible(isVisible);
 				}
 			}
 		}
@@ -1113,6 +1122,10 @@ public class LayersTree extends JTree {
 
 	public boolean isHitTestInfo() {
 		return isHitTestInfo;
+	}
+
+	public void setHitTestInfo(boolean hitTestInfo) {
+		isHitTestInfo = hitTestInfo;
 	}
 
 	private void updateLater() {
@@ -1411,7 +1424,6 @@ public class LayersTree extends JTree {
 	}
 
 
-
 	/**
 	 * DragGestureListener:当该（子）类的对象检测到拖动启动动作时，调用此接口
 	 *
@@ -1424,12 +1436,14 @@ public class LayersTree extends JTree {
 			TreePath path = getClosestPathForLocation(clickPoint.x, clickPoint.y);
 			if (path != null && null != path.getLastPathComponent()) {
 				draggedNode = (DefaultMutableTreeNode) path.getLastPathComponent();
-				draggedNodeIndex = ((DefaultMutableTreeNode) LayersTree.this.getModel().getRoot()).getIndex(draggedNode);
+				draggedNodeIndex = LayersTree.this.getRowForPath(path);
+//				draggedNodeIndex = ((DefaultMutableTreeNode) LayersTree.this.getModel().getRoot()).getIndex(draggedNode);
 				dropTargetNodeIndex = -1;
 
 				// 判断拖拽的两个节点的父节点是否是根节点
-				if (getRowForPath(getSelectionPath()) == -1 || !draggedNode.getParent().equals(getModel().getRoot()))
-					return;
+				// 目前暂且不需要做如此严格的控制，是不是父节点who care
+//				if (getRowForPath(getSelectionPath()) == -1 || !draggedNode.getParent().equals(getModel().getRoot()))
+//					return;
 				Transferable trans = new RJLTransferable(draggedNode);
 				dge.startDrag(DragSource.DefaultMoveDrop, trans, new MyDragSourceAdapter());
 			}
@@ -1486,15 +1500,19 @@ public class LayersTree extends JTree {
 			recordBounds = null;
 			oldNode = null;
 			DataFlavor[] dataFlavors = dtde.getTransferable().getTransferDataFlavors();
-			if (dataFlavors[0] != null) {
+			if (dataFlavors[0] != null && !isMoveLayerForLayerGroup) {
 				// 拖进来的奇奇怪怪的东西屏蔽掉。以后在这里做判断拖工作空间树的东西进来的时候增加图层。
 				return;
 			}
 			oldRow = getRowForPath(getSelectionPath());
 			try {
-				if (oldRow == -1 || dropTargetNodeIndex == -1 || draggedNodeIndex == dropTargetNodeIndex)
+				if (oldRow == -1 || draggedNodeIndex == dropTargetNodeIndex || dropTargetNode == null)
 					return;
-				moveRow();
+				if (isMoveLayerForLayerGroup) {
+					moveLayerForLayerGroup();
+				} else {
+					moveRow();
+				}
 			} catch (Exception e) {
 				Application.getActiveApplication().getOutput().output(e);
 			}
@@ -1515,8 +1533,8 @@ public class LayersTree extends JTree {
 
 				// Make sure we aren't already scrolled all the way down
 				if (tree.getHeight() - treeVisibleRectangle.y != vp.getHeight()) {
-	                /*
-                     * Get Y coordinate for scrolling down
+				    /*
+				     * Get Y coordinate for scrolling down
 					 */
 					if (vp.getHeight() - vpMousePosition.y < 30 && vp.getHeight() - vpMousePosition.y > 0) {
 						newY = treeVisibleRectangle.y + (30 + vpMousePosition.y - vp.getHeight()) * 2;
@@ -1525,7 +1543,7 @@ public class LayersTree extends JTree {
 
 				// Make sure we aren't already scrolled all the way up
 				if (newY == null && treeVisibleRectangle.y != 0) {
-	                /*
+				    /*
 					 * Get Y coordinate for scrolling up
 					 */
 					if (30 > vpMousePosition.y && vpMousePosition.y > 0) {
@@ -1550,22 +1568,32 @@ public class LayersTree extends JTree {
 			if (isPathSelected(treePath) || treePath == null) {
 				dropTargetNode = null;
 				dropTargetNodeIndex = -1;
+				clearRecordBounds((Graphics2D) getGraphics());
 				return;
 			} else {
 				dropTargetNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
 				// 如果目标节点跟被拖拽节点的父节点不同，则将目标节点回滚到上一次
-				if (null != draggedNode && !dropTargetNode.getParent().equals(draggedNode.getParent())) {
-					dropTargetNode = oldNode;
-					dropTargetNodeIndex = -1;
-					return;
-				}
+//				if (null != draggedNode && !dropTargetNode.getParent().equals(draggedNode.getParent())) {
+//					dropTargetNode = oldNode;
+//					dropTargetNodeIndex = -1;
+//					return;
+//				}
 				if (oldNode == null || oldRow == -1) {
 					oldNode = dropTargetNode;
 					oldRow = getRowForPath(getSelectionPath());
 				}
 			}
-			if (oldNode != null)
+			if (oldNode != null) {
+				Rectangle pathBounds = getPathBounds(treePath);
+				if (pathBounds != null) {
+					if (dragPoint.getY() > (pathBounds.y + pathBounds.height / 2)) {
+						isUp = false;
+					} else {
+						isUp = true;
+					}
+				}
 				repaintTree();
+			}
 		}
 
 		/**
@@ -1573,36 +1601,58 @@ public class LayersTree extends JTree {
 		 */
 		private void repaintTree() {
 			Graphics2D graphics2D = (Graphics2D) getGraphics();
-			Color color = graphics2D.getColor();
 			Rectangle bounds = getPathBounds(treePath);
 			if (bounds == null) {
 				bounds = new Rectangle(0, 0, 0, 0);
 			}
-			dropTargetNodeIndex = ((DefaultMutableTreeNode) getModel().getRoot()).getIndex(dropTargetNode);
-
-			// 被拖拽的节点索引大于目标节点索引，则表示向上拖拽，否则表示向下，在相应的位置画线
-			if (draggedNodeIndex > dropTargetNodeIndex) {
-				graphics2D.drawLine(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
-				isUp = true;
-			} else if (draggedNodeIndex < dropTargetNodeIndex) {
-				graphics2D.drawLine(bounds.x, bounds.y + bounds.height, bounds.x + bounds.width, bounds.y + bounds.height);
-				isUp = false;
-			}
-
-			if (recordBounds == null) {
-				recordBounds = bounds;
+			clearRecordBounds(graphics2D);//画线前先清除
+			dropTargetNodeIndex = LayersTree.this.getRowForPath(treePath);
+			// 不能只考虑根节点
+//			dropTargetNodeIndex = ((DefaultMutableTreeNode) getModel().getRoot()).getIndex(dropTargetNode);
+			TreeNodeData dropTargetNodeData = (TreeNodeData) dropTargetNode.getUserObject();
+			graphics2D.setColor(MOVE_COLOR);
+			isMoveLayerForLayerGroup = dropTargetNodeData.getType() == NodeDataType.LAYER_GROUP;
+			if (isMoveLayerForLayerGroup) {
+				dropTargetNodeIndex = LayersTree.this.getRowForPath(treePath);
+//				if (draggedNodeIndex > dropTargetNodeIndex) {
+//					isUp = true;
+//				} else if (draggedNodeIndex < dropTargetNodeIndex) {
+//					isUp = false;
+//				}
+				graphics2D.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
 			} else {
-				if (!recordBounds.equals(bounds)) {
-					// 将graphics2D置为白色，用于清除上一次的线
-					graphics2D.setColor(Color.white);
-					if (isUp) {
-						graphics2D.drawLine(recordBounds.x, recordBounds.y, recordBounds.x + recordBounds.width, recordBounds.y);
-					} else {
-						graphics2D.drawLine(recordBounds.x, recordBounds.y + recordBounds.height, recordBounds.x + recordBounds.width, recordBounds.y
-								+ recordBounds.height);
-					}
+				// 被拖拽的节点索引大于目标节点索引，则表示向上拖拽，否则表示向下，在相应的位置画线
+				if (isUp) {
+//				if (draggedNodeIndex > dropTargetNodeIndex) {
+					graphics2D.drawLine(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
+
+//					graphics2D.drawLine(bounds.x, bounds.y + bounds.height, bounds.x + bounds.width, bounds.y + bounds.height);
+//					isUp = true;
+				} else {
+
+					graphics2D.drawLine(bounds.x, bounds.y + bounds.height, bounds.x + bounds.width, bounds.y + bounds.height);
+//					isUp = false;
 				}
 			}
+
+//			if (recordBounds == null) {
+//				recordBounds = bounds;
+//			} else {
+//				if (!recordBounds.equals(bounds)) {
+			// 将graphics2D置为白色，用于清除上一次的线
+//					graphics2D.setColor(Color.white);
+//					if (!isMoveLayerForLayerGroup) {
+//						if (isUp) {
+//							graphics2D.drawLine(recordBounds.x, recordBounds.y, recordBounds.x + recordBounds.width, recordBounds.y);
+//						} else {
+//							graphics2D.drawLine(recordBounds.x, recordBounds.y + recordBounds.height, recordBounds.x + recordBounds.width, recordBounds.y
+//									+ recordBounds.height);
+//						}
+//					} else {
+//					graphics2D.drawRect(recordBounds.x, recordBounds.y, recordBounds.width, recordBounds.height);
+//					}
+//				}
+//			}
 			recordBounds = bounds;
 			oldNode = dropTargetNode;
 			oldRow = getRowForPath(getSelectionPath());
@@ -1610,16 +1660,23 @@ public class LayersTree extends JTree {
 			JPanel panel = (JPanel) getCellRenderer().getTreeCellRendererComponent(LayersTree.this, oldNode, false, isExpanded(treePath),
 					getModel().isLeaf(oldNode), oldRow, false);
 			panel.repaint();
-			// 将graphics2D置回原来的颜色
-			graphics2D.setColor(color);
+		}
+
+		private void clearRecordBounds(Graphics2D graphics2D) {
+			if (recordBounds != null) {
+				graphics2D.setColor(Color.white);
+				graphics2D.drawRect(recordBounds.x, recordBounds.y, recordBounds.width, recordBounds.height);
+			}
 		}
 	}
 
-	private void moveRow() {
+	private void moveRowOld() {
 		if (dropTargetNodeIndex == -1) {
 			return;
 		}
 		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) getModel().getRoot();
+		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
+		Layer layerGroupTarget = (Layer) dropTargetNodeData.getData();
 		int[] selectionRows = getSelectionRows();
 		Integer[] integers = new Integer[selectionRows.length];
 		for (int i = 0; i < selectionRows.length; i++) {
@@ -1640,10 +1697,17 @@ public class LayersTree extends JTree {
 				lowerCount++;
 			}
 			count++;
-			draggedNode = (DefaultMutableTreeNode) parent.getChildAt(currentIndex);
-			((DefaultTreeModel) getModel()).removeNodeFromParent(draggedNode);
-			((DefaultTreeModel) getModel()).insertNodeInto(draggedNode, parent, tempTargetRow);
-			currentMap.getLayers().moveTo(currentIndex, tempTargetRow);
+//			draggedNode = (DefaultMutableTreeNode) parent.getChildAt(currentIndex);
+			draggedNode = (DefaultMutableTreeNode) this.getPathForRow(currentIndex).getLastPathComponent();
+			if (layerGroupTarget.getParentGroup() != null) {
+				TreeNodeData draggedNodeData = (TreeNodeData) draggedNode.getUserObject();
+				Layer layerDragged = (Layer) draggedNodeData.getData();
+				layerGroupTarget.getParentGroup().insert(layerGroupTarget.getParentGroup().indexOf(layerGroupTarget) + count, layerDragged);
+			} else {
+				((DefaultTreeModel) getModel()).removeNodeFromParent(draggedNode);
+				((DefaultTreeModel) getModel()).insertNodeInto(draggedNode, parent, tempTargetRow);
+				currentMap.getLayers().moveTo(currentIndex, tempTargetRow);
+			}
 		}
 		if (isUp) {
 			lowerCount++;
@@ -1651,6 +1715,264 @@ public class LayersTree extends JTree {
 		setSelectionInterval(dropTargetNodeIndex - lowerCount + 1, dropTargetNodeIndex + selectionRows.length - lowerCount);
 		currentMap.refresh();
 		dropTargetNodeIndex = -1;
+	}
+
+	private void moveRow() {
+		if (dropTargetNodeIndex == -1) {
+			return;
+		}
+
+		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
+		Layer layerTarget = (Layer) dropTargetNodeData.getData();
+		int[] selectionRows = getSelectionRows();
+		ArrayList<Layer> selectedLayer = new ArrayList<>();
+		Arrays.sort(selectionRows);
+		for (int i = 0; i < selectionRows.length; i++) {
+			DefaultMutableTreeNode selectedTreeNode = (DefaultMutableTreeNode) this.getPathForRow(selectionRows[i]).getLastPathComponent();
+			TreeNodeData draggedNodeData = (TreeNodeData) selectedTreeNode.getUserObject();
+			selectedLayer.add((Layer) draggedNodeData.getData());
+		}
+
+
+		int startIndex = -1;
+		if (layerTarget.getParentGroup() != null) {
+			startIndex = layerTarget.getParentGroup().indexOf(layerTarget);
+		} else {
+			startIndex = this.currentMap.getLayers().indexOf(layerTarget.getName());
+		}
+		boolean isMoveUp = true; //判断是向上还是向下移动
+		boolean isLayerGroupMove = false;  // 判断是否在同个LayerGroup内上下移动
+
+		if (layerTarget.getParentGroup() == null) {
+			if (!isUp && this.currentMap.getLayers().indexOf(selectedLayer.get(0).getName()) - 1 ==
+					this.currentMap.getLayers().indexOf(layerTarget.getName()) || isUp &&
+					this.currentMap.getLayers().indexOf(selectedLayer.get(selectedLayer.size() - 1).getName()) + 1 ==
+							this.currentMap.getLayers().indexOf(layerTarget.getName())) {
+				return;
+			}
+			if (selectedLayer.get(0).getParentGroup() == null &&
+					startIndex > this.currentMap.getLayers().indexOf(selectedLayer.get(0).getName())) {
+				isMoveUp = false;
+			}
+		} else {
+			if (selectedLayer.get(0).getParentGroup() != null &&
+					selectedLayer.get(0).getParentGroup().equals(layerTarget.getParentGroup())) {
+				if (startIndex > layerTarget.getParentGroup().indexOf(selectedLayer.get(0))) {
+					isMoveUp = false;
+				}
+				isLayerGroupMove = true;
+				if (!isUp && layerTarget.getParentGroup().indexOf(selectedLayer.get(0)) - 1 ==
+						layerTarget.getParentGroup().indexOf(layerTarget) || isUp &&
+						layerTarget.getParentGroup().indexOf(selectedLayer.get(selectedLayer.size() - 1)) + 1 ==
+								layerTarget.getParentGroup().indexOf(layerTarget)) {
+					return;
+				}
+			}
+		}
+		if (isMoveUp && !isUp) {
+			startIndex += 1;
+		}
+		int lowerCount = 0;
+		for (int i = 0; i < selectedLayer.size(); i++) {
+			Layer layer = selectedLayer.get(i);
+			if (layerTarget.getParentGroup() != null) {
+				if (layer instanceof LayerGroup) {
+					this.reload();
+				}
+				try {
+					if (!isLayerGroupMove || isMoveUp) {
+						layerTarget.getParentGroup().insert(startIndex + i, layer);
+					} else {
+						if (layerTarget.getParentGroup().indexOf(layer) > startIndex) {
+							lowerCount++;
+							layerTarget.getParentGroup().insert(startIndex + lowerCount, layer);
+						} else {
+							layerTarget.getParentGroup().insert(startIndex, layer);
+						}
+					}
+				} catch (Exception e) {
+					continue;
+				}
+			} else {
+				if (layer.getParentGroup() == null) {
+					if (!isMoveUp) {
+						if (this.currentMap.getLayers().indexOf(layer.getName()) > startIndex) {
+							lowerCount++;
+							this.currentMap.getLayers().moveTo(this.currentMap.getLayers().indexOf(layer.getName()),
+									startIndex + lowerCount);
+						} else {
+							this.currentMap.getLayers().moveTo(this.currentMap.getLayers().indexOf(layer.getName()),
+									startIndex);
+						}
+					} else {
+						this.currentMap.getLayers().moveTo(this.currentMap.getLayers().indexOf(layer.getName()),
+								startIndex + i);
+					}
+				} else {
+					this.currentMap.getLayers().insert(startIndex + i, layer);
+				}
+			}
+		}
+		this.currentMap.refresh();
+		dropTargetNodeIndex = -1;
+		this.reload();
+	}
+
+	// 理论上来说moveRow 可以替换moveLayerForLayerGroup，但是有问题，等组件那边那个问题盖完之后再看具体能不能替换
+	private void moveLayerForLayerGroup() {
+		if (!this.isMoveLayerForLayerGroup || this.dropTargetNode == null) {
+			return;
+		}
+
+		int[] selectionRows = getSelectionRows();
+		Arrays.sort(selectionRows);
+		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
+		LayerGroup layerGroupTarget = (LayerGroup) dropTargetNodeData.getData();
+		ArrayList<Layer> selectedLayer = new ArrayList<>();
+		for (int i = 0; i < selectionRows.length; i++) {
+			DefaultMutableTreeNode selectedTreeNode = (DefaultMutableTreeNode) this.getPathForRow(selectionRows[i]).getLastPathComponent();
+			TreeNodeData draggedNodeData = (TreeNodeData) selectedTreeNode.getUserObject();
+			selectedLayer.add((Layer) draggedNodeData.getData());
+		}
+
+		for (int i = 0; i < selectedLayer.size(); i++) {
+			Layer layer = selectedLayer.get(i);
+			if (layer instanceof LayerGroup) {
+				if (!isHaveLayerGroup(layerGroupTarget, (LayerGroup) layer)) {
+					// Copy a new map, otherwise the layerGroup of the current map cannot be moved to targetLayerGroup after deleting
+					Map copyMap = new Map(this.currentMap.getWorkspace());
+					copyMap.fromXML(this.currentMap.toXML());
+					Layer tempLayer = MapUtilities.findLayerByName(copyMap, layer.getName());
+					MapUtilities.removeLayer(this.currentMap, layer.getName());
+					moveLayerGroup(layerGroupTarget, (LayerGroup) tempLayer);
+				}
+			} else {
+				int selectRowIndex = 0;
+				if (layer.getParentGroup() != null) {
+					if (layerGroupTarget.indexOf(layer) == -1) {
+						layerGroupTarget.add(layer);
+					}
+				} else {
+					layerGroupTarget.add(layer);
+					this.currentMap.getLayers().remove(layer);
+					selectRowIndex = layerGroupTarget.getCount();
+				}
+//				lowerCount++;
+//				this.expandRow(this.dropTargetNodeIndex - count);
+			}
+			this.currentMap.refresh();
+		}
+		dropTargetNodeIndex = -1;
+//		TreePath visiblePath = new TreePath(getTreeModel().getPathToRoot(this.dropTargetNode));
+//		this.expandPath(visiblePath);
+		this.reload();
+	}
+
+	private void moveLayerForLayerGroup(int t) {
+		if (!this.isMoveLayerForLayerGroup) {
+			return;
+		}
+
+		int[] selectionRows = getSelectionRows();
+		Integer[] integers = new Integer[selectionRows.length];
+		for (int i = 0; i < selectionRows.length; i++) {
+			integers[i] = selectionRows[i];
+		}
+		Arrays.sort(integers);
+		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
+		LayerGroup layerGroupTarget = (LayerGroup) dropTargetNodeData.getData();
+		int count = 0; // 记录有多少图层移动到本图层之前
+		int lowerCount = 0;
+		for (int i = 0; i < selectionRows.length; i++) {
+			int currentIndex = integers[i];
+			int tempTargetRow = this.dropTargetNodeIndex;
+			if (currentIndex < tempTargetRow) {
+				currentIndex -= count;
+				count++;
+			}
+			this.draggedNode = (DefaultMutableTreeNode) this.getPathForRow(currentIndex).getLastPathComponent();
+			TreeNodeData draggedNodeData = (TreeNodeData) this.draggedNode.getUserObject();
+			Layer layer = (Layer) draggedNodeData.getData();
+			if (layer instanceof LayerGroup) {
+				if (!isHaveLayerGroup(layerGroupTarget, (LayerGroup) layer)) {
+					// Copy a new map, otherwise the layerGroup of the current map cannot be moved to targetLayerGroup after deleting
+					Map copyMap = new Map(this.currentMap.getWorkspace());
+					copyMap.fromXML(this.currentMap.toXML());
+					Layer tempLayer = MapUtilities.findLayerByName(copyMap, layer.getName());
+					MapUtilities.removeLayer(this.currentMap, layer.getName());
+					moveLayerGroup(layerGroupTarget, (LayerGroup) tempLayer);
+//				TreePath visiblePath = new TreePath(getTreeModel().getPathToRoot(this.dropTargetNode));
+//				this.expandPath(visiblePath);
+				}
+			} else {
+				DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) this.draggedNode.getParent();
+				TreeNodeData parentNodeData = (TreeNodeData) parentNode.getUserObject();
+				int selectRowIndex = 0;
+				if (parentNodeData != null && parentNodeData.getType() == NodeDataType.LAYER_GROUP) {
+					if (layerGroupTarget.indexOf(layer) == -1) {
+						layerGroupTarget.insert(lowerCount, layer);
+//					layerGroupTarget.add(layer);
+						selectRowIndex = i + 1;
+					}
+				} else {
+					layerGroupTarget.insert(lowerCount, layer);
+					this.currentMap.getLayers().remove(layer);
+					selectRowIndex = layerGroupTarget.getCount();
+				}
+				lowerCount++;
+				this.expandRow(this.dropTargetNodeIndex - count);
+//				System.out.println(this.getRowCount());
+//				System.out.println("22222222222222222222222222222222");
+//				this.getTreeModel().reload();
+//				System.out.println(this.getRowCount());
+//				this.setSelectionRow(this.dropTargetNodeIndex - count+selectRowIndex);
+			}
+			this.currentMap.refresh();
+		}
+		this.updateUI();
+	}
+
+	// Create by lixiaoyao  2017/10/24
+	// When moving is the whole LayerGroup, copy layerGroup to layerTargetGroup
+	// If not necessary, please do not modify, code logic is more complex。
+	private void moveLayerGroup(LayerGroup layerTargetGroup, LayerGroup layerGroup) {
+		layerTargetGroup.addGroup(layerGroup.getName());
+		LayerGroup tempGroup = null;
+		for (int i = 0; i < layerTargetGroup.getCount(); i++) {
+			if (layerTargetGroup.get(i).getName().equals(layerGroup.getName())) {
+				tempGroup = (LayerGroup) layerTargetGroup.get(i);
+			}
+		}
+		if (layerGroup.getCount() > 0) {
+			int originCount = layerGroup.getCount();
+			int layerCount = 0;
+			for (int i = 0; i < originCount; i++) {
+				if (layerGroup.get(i - layerCount) instanceof LayerGroup) {
+					moveLayerGroup(tempGroup, (LayerGroup) layerGroup.get(i - layerCount));
+				} else {
+					tempGroup.add(layerGroup.get(i - layerCount));
+					layerCount++;
+				}
+			}
+		}
+	}
+
+	//Craete by lixiaoyao 2017/10/25
+	// The child node is forbidden to move to the parent node or the parent node moves to the child node
+	private boolean isHaveLayerGroup(LayerGroup layerTargetGroup, LayerGroup layerGroup) {
+		boolean result = false;
+		ArrayList<Layer> layerArrayList = MapUtilities.getLayers(layerGroup, true);
+		for (int i = 0; i < layerArrayList.size(); i++) {
+			if (layerArrayList.get(i) instanceof LayerGroup && layerArrayList.get(i).getName().equals(layerTargetGroup.getName())) {
+				result = true;
+				break;
+			}
+		}
+		if (!result && layerTargetGroup.getCount() > 0 && layerGroup.getParentGroup() != null
+				&& layerGroup.getParentGroup().getName().equals(layerTargetGroup.getName())) {
+			result = true;
+		}
+		return result;
 	}
 
 	/**
@@ -1661,7 +1983,11 @@ public class LayersTree extends JTree {
 	private class MyDragSourceAdapter extends DragSourceAdapter {
 		@Override
 		public void dragDropEnd(DragSourceDropEvent dsde) {
-			moveRow();
+			if (isMoveLayerForLayerGroup) {
+				moveLayerForLayerGroup();
+			} else {
+				moveRow();
+			}
 			dropTargetNode = null;
 			draggedNode = null;
 			LayersTree.this.repaint();

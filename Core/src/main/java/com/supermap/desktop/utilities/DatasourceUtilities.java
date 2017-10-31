@@ -537,6 +537,25 @@ public class DatasourceUtilities {
 	}
 
 	/**
+	 * 获得默认的数据源，不考虑是否为只读-yuanR2017.10.18
+	 *
+	 * @return
+	 */
+	public static Datasource getDefaultDatasource() {
+		Datasource[] activeDatasources = Application.getActiveApplication().getActiveDatasources();
+		if (activeDatasources != null) {
+			for (Datasource activeDatasource : activeDatasources) {
+				return activeDatasource;
+			}
+		}
+		Datasources datasources = Application.getActiveApplication().getWorkspace().getDatasources();
+		for (int i = 0; i < datasources.getCount(); i++) {
+			return datasources.get(i);
+		}
+		return null;
+	}
+
+	/**
 	 * 根据数据源链接信息,从当前工作空间中获取数据源
 	 *
 	 * @param connectionInfo

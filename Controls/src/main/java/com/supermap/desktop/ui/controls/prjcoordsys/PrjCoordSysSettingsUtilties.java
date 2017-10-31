@@ -5,7 +5,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.ui.controls.comboBox.SearchItemValueGetter;
-import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings.CoordSysDefine;
+import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.CoordSysDefine;
 import com.supermap.desktop.utilities.PrjCoordSysTypeUtilities;
 import com.supermap.desktop.utilities.PrjCoordSysUtilities;
 
@@ -18,7 +18,7 @@ public class PrjCoordSysSettingsUtilties {
 
 	/**
 	 * 根据投影定义获取对应的投影对象
-	 * 
+	 *
 	 * @return
 	 */
 	private PrjCoordSysSettingsUtilties() {
@@ -47,7 +47,7 @@ public class PrjCoordSysSettingsUtilties {
 
 	/**
 	 * 根据投影定义获取对应的地理坐标系对象
-	 * 
+	 *
 	 * @param define
 	 * @return
 	 */
@@ -72,7 +72,7 @@ public class PrjCoordSysSettingsUtilties {
 
 	/**
 	 * 获取指定投影定义的详细描述信息
-	 * 
+	 *
 	 * @param define
 	 * @return
 	 */

@@ -6,6 +6,7 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.Map;
 
@@ -33,7 +34,10 @@ public class CtrlActionLayerCurrentScaleToMinVisible extends CtrlAction {
 			currentMap.refresh();
 			// 手动触发更改事件
 			formMap.setActiveLayers(formMap.getActiveLayers());
-		} catch (Exception e) {
+            for (Layer layer : formMap.getActiveLayers()) {
+                UICommonToolkit.getLayersManager().getLayersTree().refreshNode(layer);
+            }
+        } catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
 	}

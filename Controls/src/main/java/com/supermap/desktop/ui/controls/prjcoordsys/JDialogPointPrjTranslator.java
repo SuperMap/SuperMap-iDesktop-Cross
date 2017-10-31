@@ -145,7 +145,7 @@ public class JDialogPointPrjTranslator extends SmDialog {
 	private void initializeComponents() {
 		this.panelTargetCoordSysSource = new PanelTargetCoordSys(this.doSomeSource);
 		this.panelTargetCoordSysResult = new PanelTargetCoordSys(this.doSomeResult);
-		this.panelReferSysTransSettings = new PanelReferSysTransSettings();
+		this.panelReferSysTransSettings = new PanelReferSysTransSettings("HORIZONTAL");
 	}
 
 	private void initializeResources() {
@@ -174,7 +174,7 @@ public class JDialogPointPrjTranslator extends SmDialog {
 
 	private void initStates() {
 		// 结果坐标点面板不可用，仅作显示
-		this.panelPointCoordSysTranslatorResult.setComponentEnabled(false);
+		this.panelPointCoordSysTranslatorResult.setComponentEditable(false);
 	}
 
 	private void initListener() {

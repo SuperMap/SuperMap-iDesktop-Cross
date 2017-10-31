@@ -10,18 +10,10 @@ import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.map.propertycontrols.PanelGroupBoxViewBounds;
 import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.controls.FileChooserButtonListener;
-import com.supermap.desktop.ui.controls.FileChooserPathChangedListener;
-import com.supermap.desktop.ui.controls.JFileChooserControl;
-import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.ui.controls.SmFileChoose;
+import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
 import com.supermap.desktop.ui.controls.borderPanel.PanelButton;
-import com.supermap.desktop.utilities.CursorUtilities;
-import com.supermap.desktop.utilities.DoubleUtilities;
-import com.supermap.desktop.utilities.MapUtilities;
-import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.SystemPropertyUtilities;
+import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.ImageType;
 import com.supermap.mapping.Map;
 
@@ -43,7 +35,7 @@ import java.text.MessageFormat;
 
 /**
  * @author YuanR
- *         地图输出为图片窗体
+ * 地图输出为图片窗体
  */
 public class DialogMapOutputPicture extends SmDialog {
 

@@ -16,8 +16,8 @@ public class CtrlActionStatisticAnalystMax extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.MAX, TabularViewProperties.getString("String_StatisticAnalyst_Max"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.MAX, TabularViewProperties.getString("String_StatisticAnalyst_Max"));
+    }
 	
 	@Override
 	public boolean enable(){

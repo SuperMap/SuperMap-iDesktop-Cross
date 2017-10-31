@@ -226,7 +226,7 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 			isLeft = (Boolean) this.comboBoxBufferLeftOrRight.getSelectedData();
 		}
 		//缓冲半径列表
-		ArrayList<Double> radioLists = this.parameterMultiBufferRadioList.getRadioLists();
+		ArrayList<Double> radioLists = this.parameterMultiBufferRadioList.getSelectedItem();
 		if (radioLists.size() == 0) {
 			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_BufferRadiusListNull"));
 			return false;

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 // @formatter:off
+
 /**
  * MdiGroup 不能单独存在，与 MdiPane 强制绑定，因此不提供开放构造方法。 使用 MdiPane 创建一个 Group，@see
  * MdiPane.createGroup()
- * 
- * @author highsad
  *
+ * @author highsad
  */
 // @formatter:on
 public class MdiGroup extends JComponent {
@@ -237,7 +237,6 @@ public class MdiGroup extends JComponent {
 		final MdiPage oldActivePage = this.activePage;
 		this.eventsHelper.firePageActivating(new PageActivatingEvent(this, activePage, oldActivePage));
 		this.activePage = activePage;
-
 		// 更改状态重绘
 		revalidate();
 		repaint();

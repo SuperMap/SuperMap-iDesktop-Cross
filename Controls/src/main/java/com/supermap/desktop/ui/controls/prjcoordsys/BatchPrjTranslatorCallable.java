@@ -56,13 +56,13 @@ public class BatchPrjTranslatorCallable extends UpdateProgressCallable {
 							.getActiveApplication()
 							.getOutput()
 							.output(MessageFormat.format(ControlsProperties.getString("String_CoordSysTrans_RasterSuccess"),
-									doDataList.get(i).getDataset().getDatasource().getAlias(), doDataList.get(i).getDataset().getName(), doDataList.get(i).getTargetDatasource().getAlias(), doDataList.get(i).getResultDatasetName()));
+									doDataList.get(i).getDataset().getName(), doDataList.get(i).getDataset().getDatasource().getAlias(), doDataList.get(i).getResultDatasetName(), doDataList.get(i).getTargetDatasource().getAlias()));
 				} else {
 					Application
 							.getActiveApplication()
 							.getOutput()
 							.output(MessageFormat.format(ControlsProperties.getString("String_CoordSysTrans_Failed"),
-									doDataList.get(i).getDataset().getDatasource().getAlias(), doDataList.get(i).getDataset().getName()));
+									doDataList.get(i).getDataset().getName(), doDataList.get(i).getDataset().getDatasource().getAlias()));
 				}
 			}
 		} catch (Exception e) {
@@ -89,9 +89,9 @@ public class BatchPrjTranslatorCallable extends UpdateProgressCallable {
 			try {
 				int totalPercent = (int) ((100 * this.i + arg0.getPercent()) / doDataList.size());
 				updateProgressTotal(arg0.getPercent(),
-						MessageFormat.format(ControlsProperties.getString("String_BeginTrans_Dataset"), doDataList.get(i).getDataset().getName()),
+						MessageFormat.format(ControlsProperties.getString("string_CurrentTransformingDataset"), i + 1, doDataList.size()),
 						totalPercent,
-						MessageFormat.format(ControlsProperties.getString("string_CurrentTransformingDataset"), i + 1, doDataList.size()));
+						MessageFormat.format(ControlsProperties.getString("String_BeginTrans_Dataset"), doDataList.get(i).getDataset().getName()));
 			} catch (CancellationException e) {
 				arg0.setCancel(true);
 				doDataList.get(i).getDataset().removeSteppedListener(this);
