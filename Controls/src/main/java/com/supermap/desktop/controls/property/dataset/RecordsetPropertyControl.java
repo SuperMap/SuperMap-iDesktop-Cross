@@ -378,7 +378,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             // 应用属性的修改
             for (int i = 0; i < tableModel.getRowCount(); i++) {
                 FieldData fieldData = tableModel.getRowData(i);
-                applyChangeType(fieldData);
+                applyChangeField(fieldData);
                 fieldData.applyChange();
             }
 
@@ -419,21 +419,148 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             this.isCellValueChange = false;
             this.modifieds.clear();
             setComponentsEnabled();
+            fillComponents();
         }
     }
 
-    private void applyChangeType(FieldData fieldData) {
-        if (!fieldData.isNew && fieldData.fieldInfo.getType() != fieldData.type) {
+    private void applyChangeField(FieldData fieldData) {
+        if (isFieldChangeLegal(fieldData)) {
             FieldInfo fieldInfo = new FieldInfo();
             fieldInfo.setName(fieldData.name);
             fieldInfo.setCaption(fieldData.caption);
             fieldInfo.setDefaultValue(fieldData.defaultValue);
             fieldInfo.setType(fieldData.type);
             fieldInfo.setRequired(fieldData.isRequired);
-            Application.getActiveApplication().getOutput().output(fieldInfos.modify(fieldData.name, fieldInfo) ?
-                    ControlsProperties.getString("String_ChangeFieldTypeSuccessful") :
-                    ControlsProperties.getString("String_ChangeFieldTypeFailed"));
+            Application.getActiveApplication().getOutput().output(MessageFormat.format(fieldInfos.modify(fieldData.name, fieldInfo) ?
+                    ControlsProperties.getString("String_ChangeFieldSuccessful") :
+                    ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
         }
+    }
+
+    private boolean isFieldChangeLegal(FieldData fieldData) {
+        FieldType origin = fieldData.fieldInfo.getType();
+        FieldType change = fieldData.type;
+        if (!fieldData.isNew) {
+            if (origin != change) {
+                if (origin == FieldType.BYTE) {
+                    if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
+                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR ||
+                            change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.INT16) {
+                    if (change == FieldType.INT32 || change == FieldType.INT64 ||
+                            change == FieldType.SINGLE || change == FieldType.DOUBLE ||
+                            change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.BYTE || change == FieldType.CHAR) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.INT32) {
+                    if (change == FieldType.INT64 || change == FieldType.SINGLE || change == FieldType.DOUBLE ||
+                            change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.INT64) {
+                    if (change == FieldType.SINGLE || change == FieldType.DOUBLE ||
+                            change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16 || change == FieldType.INT32) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.SINGLE) {
+                    if (change == FieldType.DOUBLE || change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16
+                            || change == FieldType.INT32 || change == FieldType.INT64) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.DOUBLE) {
+                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16
+                            || change == FieldType.INT32 || change == FieldType.INT64 || change == FieldType.SINGLE) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.BOOLEAN) {
+                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.DATETIME) {
+                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.LONGBINARY) {
+                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.CHAR) {
+                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.TEXT) {
+                    if (change == FieldType.WTEXT) {
+                        return true;
+                    } else if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
+                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR || change == FieldType.BYTE) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else if (origin == FieldType.WTEXT) {
+                    if (change == FieldType.TEXT) {
+                        return true;
+                    } else if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
+                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR || change == FieldType.BYTE) {
+                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
+                        return confirmResult == 0;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                } else {
+                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
+                        return true;
+                    } else {
+                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+                    }
+                }
+            } else if (fieldData.fieldInfo.getMaxLength() != fieldData.maxLength) {
+                return true;
+            } else if (fieldData.fieldInfo.isRequired() != fieldData.isRequired) {
+                return true;
+            } else if (!fieldData.fieldInfo.getCaption().equals(fieldData.caption)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void tableSelectionChanged(ListSelectionEvent e) {
@@ -597,10 +724,14 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             }
 
             if (this.uneditableRows.contains(row)) {
-                if (column == FIELD_TYPE) {
-                    EngineType engineType = datasetVector.getDatasource().getEngineType();
-                    return (!fieldInfos.get(row).isSystemField && (engineType.equals(EngineType.MYSQL) || engineType.equals(EngineType.ORACLEPLUS) || engineType.equals(EngineType.SQLPLUS)
-                            || engineType.equals(EngineType.MYSQLPlus) || engineType.equals(EngineType.KINGBASE) || engineType.equals(EngineType.POSTGRESQL)));
+                EngineType engineType = datasetVector.getDatasource().getEngineType();
+                FieldType type = getRowData(row).getType();
+                boolean isEngineSupport = (!fieldInfos.get(row).isSystemField && (engineType.equals(EngineType.MYSQL) || engineType.equals(EngineType.ORACLEPLUS)
+                        || engineType.equals(EngineType.SQLPLUS) || engineType.equals(EngineType.KINGBASE) || engineType.equals(EngineType.POSTGRESQL)));
+                if (column == FIELD_TYPE || column == IS_REQUIRED) {
+                    return isEngineSupport;
+                } else if (column == MAX_LENGTH) {
+                    return isEngineSupport && (type == FieldType.TEXT || type == FieldType.WTEXT);
                 }
                 return false;
             }
@@ -931,12 +1062,6 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                 }
                 if (this.fieldInfo.isRequired() != this.isRequired) {
                     this.fieldInfo.setRequired(this.isRequired);
-                }
-            } else {
-                if (!this.fieldInfo.getCaption().equals(this.caption)) {
-                    this.fieldInfo.setCaption(this.caption);
-                } else if (!this.fieldInfo.getType().equals(this.type)) {
-                    this.fieldInfo.setType(this.type);
                 }
             }
         }

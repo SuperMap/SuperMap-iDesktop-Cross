@@ -17,8 +17,8 @@ public class CtrlActionStatisticAnalystSum extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.SUM, TabularViewProperties.getString("String_StatisticAnalyst_Sum"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.SUM, TabularViewProperties.getString("String_StatisticAnalyst_Sum"));
+    }
 	
 	@Override
 	public boolean enable(){

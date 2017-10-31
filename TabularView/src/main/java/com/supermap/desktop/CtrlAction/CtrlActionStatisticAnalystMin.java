@@ -16,8 +16,8 @@ public class CtrlActionStatisticAnalystMin extends CtrlAction{
 
 	@Override
 	public void run(){
-		((IFormTabular)Application.getActiveApplication().getActiveForm()).doStatisticAnalust(StatisticMode.MIN, TabularViewProperties.getString("String_StatisticAnalyst_Min"));
-	}
+        ((IFormTabular) Application.getActiveApplication().getActiveForm()).doStatisticAnalyst(StatisticMode.MIN, TabularViewProperties.getString("String_StatisticAnalyst_Min"));
+    }
 	
 	@Override
 	public boolean enable(){
