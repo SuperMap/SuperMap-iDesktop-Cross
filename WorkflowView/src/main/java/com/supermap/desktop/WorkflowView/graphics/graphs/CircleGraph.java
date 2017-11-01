@@ -5,19 +5,26 @@ import com.supermap.desktop.WorkflowView.graphics.connection.IConnectable;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 /**
- * Created by highsad on 2017/1/19.
+ * Created by xie on 2017/10/18.
  */
-public class EllipseGraph extends AbstractGraph implements IConnectable {
+public class CircleGraph extends AbstractGraph implements IConnectable {
 
-	public EllipseGraph(GraphCanvas canvas) {
-		super(canvas, new Ellipse2D.Double(0, 0, 120, 40));
+
+	public CircleGraph(GraphCanvas canvas, Shape shape) {
+		super(canvas, new Ellipse2D.Double(0, 0, 24, 24));
+	}
+
+	@Override
+	public IGraph getConnector() {
+		return this;
 	}
 
 	@Override
 	public Ellipse2D getShape() {
-		return (Ellipse2D) super.getShape();
+		return (Ellipse2D) super.shape;
 	}
 
 	@Override
@@ -31,18 +38,8 @@ public class EllipseGraph extends AbstractGraph implements IConnectable {
 	}
 
 	@Override
-	public boolean contains(Point p) {
-		return getShape().contains(p);
-	}
-
-	@Override
 	protected void onPaint(Graphics g) {
-		g.setColor(new Color(87,223,52));
+		g.setColor(Color.LIGHT_GRAY);
 		((Graphics2D) g).fill(this.shape);
-	}
-
-	@Override
-	public IGraph getConnector() {
-		return this;
 	}
 }

@@ -451,7 +451,9 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo reflectInfoCharset = new ReflectInfo();
 		reflectInfoCharset.methodName = "setSourceFileCharset";
 		parameterCharset = new ParameterCharset();
-		if ((importSetting instanceof ImportSettingTAB || importSetting instanceof ImportSettingMIF) && importSetting.getTargetDataInfos("").getCount() > 0) {
+		if ((importSetting instanceof ImportSettingTAB || importSetting instanceof ImportSettingMIF
+				|| importSetting instanceof ImportSettingSimpleJson || importSetting instanceof ImportSettingGeoJson)
+				&& importSetting.getTargetDataInfos("").getCount() > 0) {
 			ImportDataInfos dataInfos = importSetting.getTargetDataInfos("");
 			parameterCharset.setSelectedItem(dataInfos.get(0).getSourceCharset());
 			importSetting.setSourceFileCharset(dataInfos.get(0).getSourceCharset());

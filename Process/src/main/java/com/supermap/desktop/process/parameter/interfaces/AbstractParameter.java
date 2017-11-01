@@ -4,6 +4,7 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.parameter.events.*;
 import com.supermap.desktop.process.parameter.interfaces.datas.Irequisite;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.event.EventListenerList;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public abstract class AbstractParameter implements IParameter, Irequisite {
 
-
+	private Type valueType;
 	protected IParameterPanel panel;
 	public static final String PROPERTY_VALE = "value";
 	protected IParameters parameters;
@@ -312,5 +313,13 @@ public abstract class AbstractParameter implements IParameter, Irequisite {
 	@Override
 	public void setComplexParameter(boolean complexParameter) {
 		this.isComplexParameter = complexParameter;
+	}
+
+	public Type getValueType() {
+		return valueType;
+	}
+
+	public void setValueType(Type valueType) {
+		this.valueType = valueType;
 	}
 }
