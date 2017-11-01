@@ -74,7 +74,8 @@ public class LayersTreeCellRenderer implements TreeCellRenderer {
 
 				if (decorator instanceof VisibleDecorator) {
 					// 只读控制
-					if ((data.getData() instanceof Layer) && (((Layer) data.getData()).getDataset() != null || data.getType() == NodeDataType.LAYER_GROUP)) {
+					if ((data.getData() instanceof Layer) && (((Layer) data.getData()).getDataset() != null
+							|| data.getType() == NodeDataType.LAYER_GROUP || data.getType()==NodeDataType.LAYER_SNAPSHOT)) {
 						iconType = HitTestIconType.VISIBLE;
 					} else {
 						iconType = HitTestIconType.VISIBLE;
@@ -331,6 +332,15 @@ public class LayersTreeCellRenderer implements TreeCellRenderer {
 		layerGroupList.add(new LayerGroupNodeDecorator());
 		layerGroupDecoratorList.add(layerGroupList);
 		decoratorsMap.put(NodeDataType.LAYER_GROUP, layerGroupDecoratorList);
+
+		/*
+		 * 快照分组子项
+		 */
+		ArrayList<ArrayList<TreeNodeDecorator>> layerSnapshotDecoratorList = prepareDecoratorListsForLayerChangeVisible();
+		ArrayList<TreeNodeDecorator> layerSnapshotList = new ArrayList<TreeNodeDecorator>();
+		layerSnapshotList.add(new LayerSnapshotNodeDecorator());
+		layerSnapshotDecoratorList.add(layerSnapshotList);
+		decoratorsMap.put(NodeDataType.LAYER_SNAPSHOT, layerSnapshotDecoratorList);
 
 		/*
 		 * 未知类型图层

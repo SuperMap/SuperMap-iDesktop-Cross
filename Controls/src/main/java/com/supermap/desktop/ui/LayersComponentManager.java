@@ -34,6 +34,7 @@ public class LayersComponentManager extends JComponent {
 	private ComponentDropDown addLayerGroup;
 	private JMenuItem jMenuItemAddLayerRootGroup;
 	private JMenuItem jMenuItemAddLayerGroup;
+	private JMenuItem jMenuItemAddLayerSnapshot;
 	// 临时的变量，现在还没有自动加载Dockbar，所以暂时用这个变量测试
 	private Boolean isContextMenuBuilded = false;
 	private JPopupMenu layerWMSPopupMenu;
@@ -126,11 +127,13 @@ public class LayersComponentManager extends JComponent {
 	private void initializeToolBar() {
 		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
+		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
 		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
-		JPopupMenu popupMenuScale = new JPopupMenu();
-		popupMenuScale.add(this.jMenuItemAddLayerRootGroup);
-		popupMenuScale.add(this.jMenuItemAddLayerGroup);
-		this.addLayerGroup.setPopupMenu(popupMenuScale);
+		JPopupMenu popupMenuLayerGroup = new JPopupMenu();
+		popupMenuLayerGroup.add(this.jMenuItemAddLayerRootGroup);
+		popupMenuLayerGroup.add(this.jMenuItemAddLayerGroup);
+		popupMenuLayerGroup.add(this.jMenuItemAddLayerSnapshot);
+		this.addLayerGroup.setPopupMenu(popupMenuLayerGroup);
 		this.addLayerGroup.setToolTip(ControlsProperties.getString("String_CreateLayerRootGroup"));
 		this.addLayerGroup.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.toolBar.add(this.addLayerGroup);
@@ -144,8 +147,10 @@ public class LayersComponentManager extends JComponent {
 		this.addLayerGroup.getDisplayButton().addActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerRootGroup.removeActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerGroup.removeActionListener(this.addLayerGroupListener);
+		this.jMenuItemAddLayerSnapshot.removeActionListener(this.addLayerSnapshotListener);
 		this.jMenuItemAddLayerRootGroup.addActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerGroup.addActionListener(this.addLayerGroupListener);
+		this.jMenuItemAddLayerSnapshot.addActionListener(this.addLayerSnapshotListener);
 	}
 
 	private ActionListener addLayerRootGroupListener=new ActionListener() {
@@ -175,6 +180,19 @@ public class LayersComponentManager extends JComponent {
 					layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 					layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 				}
+			}
+		}
+	};
+
+	private ActionListener addLayerSnapshotListener=new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (layersTree!=null && layersTree.getMap()!= null) {
+				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("SnapshotLayer");
+				layersTree.getMap().getLayers().insertLayerSnapshot(layersTree.getMap().getLayers().getCount(),layerGroupName);
+				int selectRow = layersTree.getRowCount() - 1;
+				layersTree.setSelectionRow(selectRow);
+				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 			}
 		}
 	};
