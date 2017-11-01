@@ -9,21 +9,21 @@ import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.LayersTree;
 
 /**
- * Created by lixiaoyao on 2017/10/11.
+ * Created by lixiaoyao on 2017/10/31.
  */
-public class CtrlActionCreateRootLayerGroup extends CtrlAction {
+public class CtrlActionCreateLayerSnapshot extends CtrlAction {
 
-	public CtrlActionCreateRootLayerGroup(IBaseItem caller, IForm formClass) {
+	public CtrlActionCreateLayerSnapshot(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
 	}
 
 	@Override
 	public void run() {
-		IForm iForm=Application.getActiveApplication().getActiveForm();
+		IForm iForm= Application.getActiveApplication().getActiveForm();
 		if (iForm instanceof FormMap){
 			FormMap formMap=(FormMap)iForm;
-			String layerGroupName=formMap.getMapControl().getMap().getLayers().getAvailableCaption("LayerGroup");
-			formMap.getMapControl().getMap().getLayers().addGroup(layerGroupName);
+			String layerSnapshotName=formMap.getMapControl().getMap().getLayers().getAvailableCaption("SnapshotLayer");
+			formMap.getMapControl().getMap().getLayers().insertLayerSnapshot(formMap.getMapControl().getMap().getLayers().getCount(),layerSnapshotName);
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			int selectRow=layersTree.getRowCount()-1;
 			layersTree.setSelectionRow(selectRow);
