@@ -30,8 +30,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TasksManager {
 	private final static int WORKFLOW_STATE_NORMAL = 0;
 	private final static int WORKFLOW_STATE_RUNNING = 1;
-	private final static int WORKFLOW_STATE_COMPLETED = 2;
-	private final static int WORKFLOW_STATE_INTERRUPTED = 3;
+	public final static int WORKFLOW_STATE_COMPLETED = 2;
+	public final static int WORKFLOW_STATE_INTERRUPTED = 3;
 
 	public final static int WORKER_STATE_RUNNING = 1;
 	public final static int WORKER_STATE_READY = 2;
@@ -80,6 +80,10 @@ public class TasksManager {
 
 	public int getStatus() {
 		return status;
+	}
+
+	public void setStatus(int status){
+		this.status = status;
 	}
 
 	public ProcessWorker getWorkerByProcess(IProcess process) {
@@ -167,7 +171,7 @@ public class TasksManager {
 		// 待定
 	}
 
-	private void initialize() {
+	public void initialize() {
 		Vector<IProcess> processes = this.workflow.getProcesses();
 		for (IProcess process : processes) {
 			if (this.workflow.isLeadingProcess(process) && process.isReady(new ReadyEvent(this, false))) {
@@ -176,7 +180,7 @@ public class TasksManager {
 		}
 	}
 
-	private synchronized void reset() {
+	public synchronized void reset() {
 		this.workflow.setEditable(true);
 
 		taskStateManager.reset();
@@ -275,4 +279,7 @@ public class TasksManager {
 		}
 	}
 
+	public Timer getScheduler() {
+		return scheduler;
+	}
 }

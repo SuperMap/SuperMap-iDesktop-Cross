@@ -10,6 +10,7 @@ import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CommonProperties;
@@ -43,7 +44,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 	private ParameterNumber interval;
 	private ParameterNumber resampleTolerance;
 	private ParameterComboBox smoothMethod;
-	private ParameterNumber smoothNess;
+	private ParameterNumber smoothness;
 
 
 	public MetaProcessISO() {
@@ -77,7 +78,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
 				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		this.smoothMethod.setSelectedItem(selectedNode);
-		this.smoothNess.setEnabled(false);
+		this.smoothness.setEnabled(false);
 		reloadValue();
 	}
 
@@ -94,22 +95,26 @@ public abstract class MetaProcessISO extends MetaProcess {
 		this.minISOLine = new ParameterTextField(CommonProperties.getString("String_MINISOLine"));
 		this.isoLine = new ParameterTextField(CommonProperties.getString("String_ISOData"));
 		this.datumValue = new ParameterNumber(CommonProperties.getString("String_DatumValue"));
+		this.datumValue.setValueType(BasicTypes.NUMBER);
 		datumValue.setSelectedItem("0");
 		this.interval = new ParameterNumber(CommonProperties.getString("String_Interval"));
+		this.interval.setValueType(BasicTypes.NUMBER);
 		interval.setMinValue(0);
 		interval.setIsIncludeMin(false);
 		interval.setSelectedItem("100");
 
 		this.resampleTolerance = new ParameterNumber(CommonProperties.getString("String_ResampleTolerance"));
+		this.resampleTolerance.setValueType(BasicTypes.NUMBER);
 		resampleTolerance.setMinValue(0);
 		resampleTolerance.setSelectedItem(0);
 		resampleTolerance.setIsIncludeMin(true);
 		this.smoothMethod = new ParameterComboBox().setDescribe(CommonProperties.getString("String_SmoothMethod"));
-		this.smoothNess = new ParameterNumber(CommonProperties.getString("String_SmoothNess"));
-		smoothNess.setMinValue(2);
-		smoothNess.setMaxValue(5);
-		smoothNess.setMaxBit(0);
-		this.smoothNess.setSelectedItem("2");
+		this.smoothness = new ParameterNumber(CommonProperties.getString("String_SmoothNess"));
+		this.smoothness.setValueType(BasicTypes.NUMBER);
+		smoothness.setMinValue(2);
+		smoothness.setMaxValue(5);
+		smoothness.setMaxBit(0);
+		this.smoothness.setSelectedItem("2");
 
 		ParameterCombine sourceData = new ParameterCombine();
 		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
@@ -124,7 +129,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 
 		ParameterCombine paramSet = new ParameterCombine();
 		paramSet.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
-		paramSet.addParameters(datumValue, interval, resampleTolerance, smoothMethod, smoothNess);
+		paramSet.addParameters(datumValue, interval, resampleTolerance, smoothMethod, smoothness);
 		this.parameters.setParameters(sourceData, paramSet, resultInfo, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.GRID, sourceData);
 		this.parameters.addOutputParameters(OUTPUT_DATA, OUTPUT_DATA_TYPE, DatasetTypes.LINE_POLYGON_VECTOR, targetData);
@@ -135,7 +140,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals(ParameterComboBox.comboBoxValue)) {
-					smoothNess.setEnabled(smoothMethod.getSelectedIndex() != 0);
+					smoothness.setEnabled(smoothMethod.getSelectedIndex() != 0);
 				}
 			}
 		});
@@ -201,7 +206,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 			surfaceExtractParameter.setInterval(Double.valueOf(interval.getSelectedItem()));
 			surfaceExtractParameter.setResampleTolerance(Double.valueOf(resampleTolerance.getSelectedItem()));
 			surfaceExtractParameter.setSmoothMethod((SmoothMethod) ((ParameterDataNode) smoothMethod.getSelectedItem()).getData());
-			surfaceExtractParameter.setSmoothness(Integer.valueOf(smoothNess.getSelectedItem()));
+			surfaceExtractParameter.setSmoothness(Integer.valueOf(smoothness.getSelectedItem()));
 			SurfaceAnalyst.addSteppedListener(steppedListener);
 
 			DatasetGrid src;
