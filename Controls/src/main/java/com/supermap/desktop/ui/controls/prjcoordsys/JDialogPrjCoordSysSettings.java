@@ -1420,9 +1420,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
 			result.setCaption(prjCoordSys.getName());
-			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName).setFolderNode(true);
+			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
 			if (userDefine == null) {
-				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName);
+				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
 				String grantParentName = ControlsProperties.getString("String_Customize");
