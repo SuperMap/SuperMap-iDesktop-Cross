@@ -127,7 +127,7 @@ public class LayersComponentManager extends JComponent {
 	private void initializeToolBar() {
 		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
-		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
+		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/controlsImage/Image_Layer_LayerSnapshot.png"));
 		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
 		JPopupMenu popupMenuLayerGroup = new JPopupMenu();
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerRootGroup);
@@ -227,7 +227,7 @@ public class LayersComponentManager extends JComponent {
 	// 当点击鼠标右键时，当坐标超出图层树当前显示的高度时那么不需要改变图层树当前选择的对象，
 	// 如果没超过那么就需要改变图层树中当前选择的对象，效果类似于工作空间树
 	private void layersTreeSelectDataChange(MouseEvent e) {
-		if ((e.getButton() == MouseEvent.BUTTON3 || e.getButton()==MouseEvent.BUTTON1)&& e.getClickCount() == 1) {
+		if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1) {
 			TreePath closestPathForLocation = this.layersTree.getClosestPathForLocation(e.getX(), e.getY());
 			if (closestPathForLocation != null) {
 				Rectangle pathBounds = layersTree.getPathBounds(closestPathForLocation);

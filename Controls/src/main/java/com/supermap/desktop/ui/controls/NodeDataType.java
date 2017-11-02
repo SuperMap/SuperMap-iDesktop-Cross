@@ -134,4 +134,7 @@ public class NodeDataType extends Enum {
     //add by liwenfa 2017-08-23
     public static final NodeDataType HEAT_MAP = new NodeDataType(3023, 3023);
     public static final NodeDataType GRID_AGGREGATION = new NodeDataType(3024, 3024);
+
+    //add by lixiaoyao 2017/10/31
+    public static final NodeDataType LAYER_SNAPSHOT = new NodeDataType(3025,3025);
 }
