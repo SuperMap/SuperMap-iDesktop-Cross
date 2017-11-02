@@ -1,15 +1,7 @@
 package com.supermap.desktop.controls.utilities;
 
-import com.supermap.data.Datasource;
-import com.supermap.data.DatasourceConnectionInfo;
-import com.supermap.data.Datasources;
-import com.supermap.data.EngineFamilyType;
-import com.supermap.data.EngineInfo;
-import com.supermap.data.EngineType;
-import com.supermap.data.Environment;
-import com.supermap.data.ErrorInfo;
+import com.supermap.data.*;
 import com.supermap.data.Toolkit;
-import com.supermap.data.Workspace;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.JDialogConfirm;
@@ -19,12 +11,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmFileChoose;
-import com.supermap.desktop.utilities.CursorUtilities;
-import com.supermap.desktop.utilities.DatasourceUtilities;
-import com.supermap.desktop.utilities.LogUtilities;
-import com.supermap.desktop.utilities.RecentFileUtilties;
-import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.SystemPropertyUtilities;
+import com.supermap.desktop.utilities.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,9 +29,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author X
  */
 public class DatasourceOpenFileUtilties {
-	private static final String WINDOWS_FILE_CHOOSE_UI = "com.sun.java.swing.plaf.windows.WindowsFileChooserUI";
-	private static final String GTK_FILE_CHOOSE_UI = "com.sun.java.swing.plaf.gtk.GTKFileChooserUI";
-	private static final String MEYAL_FILE_CHOOSE_UI = "javax.swing.plaf.metal.MetalFileChooserUI";
+	public static final String WINDOWS_FILE_CHOOSE_UI = "com.sun.java.swing.plaf.windows.WindowsFileChooserUI";
+	public static final String GTK_FILE_CHOOSE_UI = "com.sun.java.swing.plaf.gtk.GTKFileChooserUI";
+	public static final String MEYAL_FILE_CHOOSE_UI = "javax.swing.plaf.metal.MetalFileChooserUI";
 	/**
 	 * 是否不询问直接使用只读参数
 	 */

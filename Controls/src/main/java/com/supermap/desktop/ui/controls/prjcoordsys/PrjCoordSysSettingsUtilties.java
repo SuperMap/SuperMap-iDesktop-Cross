@@ -31,7 +31,7 @@ public class PrjCoordSysSettingsUtilties {
 		try {
 			// 没有子项，则为具体的投影定义
 			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED) {
+				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED && define.getCoordSysCode() != -1) {
 					PrjCoordSysType type = (PrjCoordSysType) Enum.parse(PrjCoordSysType.class, define.getCoordSysCode());
 					result = new PrjCoordSys(type);
 					result.setName(define.getCaption());
@@ -56,7 +56,7 @@ public class PrjCoordSysSettingsUtilties {
 
 		try {
 			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED) {
+				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED && define.getCoordSysCode() != -1) {
 					GeoCoordSysType type = (GeoCoordSysType) Enum.parse(GeoCoordSysType.class, define.getCoordSysCode());
 					result = new GeoCoordSys(type, GeoSpatialRefType.SPATIALREF_EARTH_LONGITUDE_LATITUDE);
 					result.setName(define.getCaption());

@@ -40,6 +40,8 @@ public class CoordSysDefine {
 
 	private PrjCoordSys prjCoordSys = null;
 	private GeoCoordSys geoCoordSys = null;
+	// 增加一个属性，判断是否为文件夹节点
+	private Boolean isFolderNode = false;
 
 	public CoordSysDefine(int coordSysType) {
 		this.coordSysType = coordSysType;
@@ -229,5 +231,14 @@ public class CoordSysDefine {
 		if (this.prjCoordSys != null) {
 			this.prjCoordSys.dispose();
 		}
+	}
+
+	public Boolean getIsFolderNode() {
+		return this.isFolderNode;
+	}
+
+	public CoordSysDefine setFolderNode(Boolean isFolderNode) {
+		this.isFolderNode = isFolderNode;
+		return this;
 	}
 }

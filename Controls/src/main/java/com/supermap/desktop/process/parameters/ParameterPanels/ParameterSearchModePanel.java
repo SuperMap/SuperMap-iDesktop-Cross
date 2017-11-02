@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.analyst.spatialanalyst.SearchMode;
 import com.supermap.data.Dataset;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.ParameterSearchModeInfo;
@@ -234,6 +235,12 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
         textFieldSearchCount.setMinValue(1);
         textFieldMaxPointCount.setMinValue(4);
         textFieldMaxPointCount.setIncludeMin(false);
+	    ComponentUIUtilities.setName(this.radioSearchModelCount, parameter.getDescribe() + "_radio");
+	    ComponentUIUtilities.setName(this.radioSearchModelRadius, parameter.getDescribe() + "_radio1");
+	    ComponentUIUtilities.setName(this.radioSearchModelQuadTree, parameter.getDescribe() + "_radio2");
+	    ComponentUIUtilities.setName(this.textFieldMaxRadius, parameter.getDescribe() + "_textField");
+	    ComponentUIUtilities.setName(this.textFieldMaxPointCount, parameter.getDescribe() + "_textField1");
+	    ComponentUIUtilities.setName(this.textFieldSearchCount, parameter.getDescribe() + "_textField2");
     }
 
     private void initLayout() {

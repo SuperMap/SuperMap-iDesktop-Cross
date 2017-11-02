@@ -4,6 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
@@ -63,6 +64,8 @@ public class ParameterDatasetChooserPanel extends SwingPanel implements IParamet
 	private void initResources() {
 		this.labelDatasetName.setText(CommonProperties.getString("String_Label_Dataset"));
 		this.buttonChooseDataset.setText(CommonProperties.getString("String_Choose"));
+		ComponentUIUtilities.setName(this.buttonChooseDataset, parameter.getDescribe() + "_button");
+		ComponentUIUtilities.setName(this.textFieldDatasetName, parameter.getDescribe() + "_textField");
 	}
 
 	private void initLayout() {

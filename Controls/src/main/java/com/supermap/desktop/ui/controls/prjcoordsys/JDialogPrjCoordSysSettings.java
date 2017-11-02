@@ -32,6 +32,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,12 +60,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private static final String DEFAULT_PROJECTION_CONFIG_PATH = "/controlsresources/Projection.xml";
 	private static final String DEFAULT_GROUPCAPTION = "Default";
 
-	private JToolBar toolBar;
 	private JLabel labelPath;
 	private JTextField textFieldPath;
 	private TextFieldSearch textFieldSearch;
 
-	private JToolBar toolBarButton;
 	private JButton buttonImport;
 	private JButton buttonExport;
 	private JButton buttonFavorites;
@@ -87,19 +86,19 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	// 平面坐标系定义集合
 	private transient CoordSysDefine noneEarth = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, null,
-			ControlsProperties.getString("String_NoneEarth"));
+			ControlsProperties.getString("String_NoneEarth")).setFolderNode(true);
 	// 投影坐标系统定义集合
 	private transient CoordSysDefine projectionSystem = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM, null,
-			ControlsProperties.getString("String_PrjCoorSys"));
+			ControlsProperties.getString("String_PrjCoorSys")).setFolderNode(true);
 	// 地理坐标系定义集合
 	private transient CoordSysDefine geographyCoordinate = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE, null,
-			ControlsProperties.getString("String_GeoCoordSys"));
+			ControlsProperties.getString("String_GeoCoordSys")).setFolderNode(true);
 	// 自定义坐标系集合
 	private transient CoordSysDefine customCoordinate = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, null,
-			ControlsProperties.getString("String_Customize"));
+			ControlsProperties.getString("String_Customize")).setFolderNode(true);
 	// 收藏夹坐标系集合
 	private transient CoordSysDefine favoriteCoordinate = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, null,
-			ControlsProperties.getString("String_MyFavorite"));
+			ControlsProperties.getString("String_MyFavorite")).setFolderNode(true);
 
 	// 当前选中的坐标系
 	private transient CoordSysDefine currentPrjDefine = null;
@@ -127,6 +126,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private CoordSysDefine currentRowData;
 	private CoordSysDefine rootDefine;
 	private String userDefineGeoParentName = "UserGeoCoordsys";
+	private String userDefineParentNameFromEPSG = "UserCoordsysFromEPSG";
 	private String userDefinePrjParentName = "UserPrjCoordsys";
 	private String userImportCoordsysParentName = "UserImportCoordsys";
 
@@ -190,15 +190,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
 								ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 					}
-					SmFileChoose smFileChoose = new SmFileChoose(moduleName);
-					if (smFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
-						File file = smFileChoose.getSelectedFile();
-						getPrjCoordSysFromImportFile(file.getPath());
+					SmFileChoose prjFileImportFileChoose = new SmFileChoose(moduleName);
+					if (prjFileImportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+						File file = prjFileImportFileChoose.getSelectedFile();
 						importCoordsys(getPrjCoordSysFromImportFile(file.getPath()));
 					}
 				}
 			} else if (e.getSource() == buttonExport || e.getSource() == menuItemExportCoordSys) {
-				if (isImportEnable()) {
+				if (isExportEnable()) {
 					exportCoordsys();
 				}
 			} else if (e.getSource() == buttonNewCoordSys) {
@@ -208,15 +207,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			} else if (e.getSource() == menuItemNewGeoCoordSys) {
 				newGeoCoordsys();
 			} else if (e.getSource() == menuItemNewFormEPSG) {
-				System.out.println("menuItemNewFormEPSG");
-
+				newCoordsysFromEPSG();
 			} else if (e.getSource() == buttonFavorites || e.getSource() == menuItemAddFavorites) {
 				// 将选中的投影添加到收藏夹当中
 				addCoordsysToFavorites();
 			} else if (e.getSource() == menuItemDelete || e.getSource() == buttonDelete) {
 				deleteCoordsys();
 			} else if (e.getSource() == buttonNewGroup || e.getSource() == menuItemNewGroup) {
-
+				// todo 新建组
 			} else if (e.getSource() == textFieldSearch) {
 				textFieldSearchAction();
 			}
@@ -455,19 +453,19 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private JToolBar createToolBar() {
-		this.toolBar = new JToolBar();
-		this.toolBar.setFloatable(false);
+		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
 		this.labelPath = new JLabel("ProjectionPath:");
 		this.textFieldPath = new JTextField();
 		this.textFieldPath.setEditable(false);
 		this.textFieldSearch = new TextFieldSearch();
 		textFieldSearch.setPreferredSize(new Dimension(150, 30));
-		this.toolBar.add(this.labelPath);
-		this.toolBar.addSeparator(new Dimension(5, 5));
-		this.toolBar.add(this.textFieldPath);
-		this.toolBar.addSeparator(new Dimension(5, 5));
-		this.toolBar.add(this.textFieldSearch);
-		return this.toolBar;
+		toolBar.add(this.labelPath);
+		toolBar.addSeparator(new Dimension(5, 5));
+		toolBar.add(this.textFieldPath);
+		toolBar.addSeparator(new Dimension(5, 5));
+		toolBar.add(this.textFieldSearch);
+		return toolBar;
 	}
 
 	/**
@@ -477,8 +475,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private JToolBar createToolBarButton() {
-		this.toolBarButton = new JToolBar();
-		this.toolBarButton.setFloatable(false);
+		JToolBar toolBarButton = new JToolBar();
+		toolBarButton.setFloatable(false);
 
 		this.buttonImport = new JButton(ControlsProperties.getString("String_Button_ImportCoordsys"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Import.png"));
 		this.buttonExport = new JButton(ControlsProperties.getString("String_Button_ExportCoordsys"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Export.png"));
@@ -495,16 +493,16 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.popupMenuNewCoordSys.add(this.menuItemNewGeoCoordSys);
 		this.popupMenuNewCoordSys.add(this.menuItemNewFormEPSG);
 
-		this.toolBarButton.add(this.buttonImport);
-		this.toolBarButton.add(this.buttonExport);
-		this.toolBarButton.addSeparator();
-		this.toolBarButton.add(this.buttonFavorites);
-		this.toolBarButton.add(this.buttonNewCoordSys);
-		this.toolBarButton.add(this.buttonNewGroup);
-		this.toolBarButton.addSeparator();
-		this.toolBarButton.add(this.buttonDelete);
+		toolBarButton.add(this.buttonImport);
+		toolBarButton.add(this.buttonExport);
+		toolBarButton.addSeparator();
+		toolBarButton.add(this.buttonFavorites);
+		toolBarButton.add(this.buttonNewCoordSys);
+		toolBarButton.add(this.buttonNewGroup);
+		toolBarButton.addSeparator();
+		toolBarButton.add(this.buttonDelete);
 
-		return this.toolBarButton;
+		return toolBarButton;
 	}
 
 
@@ -675,7 +673,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 		for (int i = 0; i < units.length; i++) {
 			Unit unit = (Unit) units[i];
-			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, this.noneEarth, unit.toString());
+			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, this.noneEarth, unit.toString()).setFolderNode(false);
 			coordSysDefine.setCoordSysCode(unit.value());
 		}
 	}
@@ -701,7 +699,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private CoordSysDefine createPrjCoordSysDefine(Node prjCoordSysNode, CoordSysDefine coordSysDefine, Document doc) {
-		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM).setFolderNode(false);
 
 		NodeList nodes = prjCoordSysNode.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -712,7 +710,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					String groupCaption = node.getTextContent();
 					CoordSysDefine parent = coordSysDefine.getChildByCaption(groupCaption);
 					if (parent == null) {
-						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption);
+						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption).setFolderNode(true);
 					}
 					parent.add(result);
 				} else if (node.getNodeName().equalsIgnoreCase(XMLProjectionTag.PRJCOORDSYS_CAPTION)) {
@@ -760,7 +758,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private CoordSysDefine createGeoCoordSysDefine(Node geoCoordSysNode, CoordSysDefine coordSysDefine, Document doc) {
-		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE).setFolderNode(false);
 
 		NodeList nodes = geoCoordSysNode.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -770,7 +768,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					String groupCaption = node.getTextContent();
 					CoordSysDefine parent = coordSysDefine.getChildByCaption(groupCaption);
 					if (parent == null) {
-						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption);
+						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption).setFolderNode(true);
 					}
 					parent.add(result);
 				} else if (node.getNodeName().equalsIgnoreCase(GEOCOORDSYS_CAPTION)) {
@@ -1082,6 +1080,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonImport.setEnabled(isImportEnable());
 		this.buttonExport.setEnabled(isExportEnable());
 		this.buttonFavorites.setEnabled(isAddFavoritesEnable());
+		this.buttonNewGroup.setEnabled(isNewGroupEnable());
 		this.menuItemNewGeoCoordSys.setEnabled(isNewGeoCoordsysEnable());
 		this.menuItemNewPrjCoordSys.setEnabled(isNewPrjCoordsysEnable());
 		this.menuItemNewFormEPSG.setEnabled(isNewCoordsysFromEPSGEnable());
@@ -1155,57 +1154,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			this.menuItemExportCoordSys.addActionListener(this.actionListener);
 			this.menuItemAddFavorites.addActionListener(this.actionListener);
 			this.menuItemNewGroup.addActionListener(this.actionListener);
-			//menuItemUserDefine = new JMenuItem(ControlsProperties.getString("String_Button_NewCoordSys"));
-			//menuItemNewGroup.addActionListener(new ActionListener() {
-			//	@Override
-			//	public void actionPerformed(ActionEvent e) {
-			//		if (currentRowData != null) {
-			//			if (currentRowData.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-			//				JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
-			//				geography.setGeOCoordSys(PrjCoordSysSettingsUtilties.getGeoCoordSys(currentPrjDefine));
-			//				if (geography.showDialog() == DialogResult.OK) {
-			//					GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
-			//					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-			//					result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
-			//					result.setGeoCoordSys(geoCoordSys);
-			//					result.setCaption(geoCoordSys.getName());
-			//					CoordSysDefine userDefine = geographyCoordinate.getChildByCaption(userDefineParentName);
-			//					if (userDefine == null) {
-			//						userDefine = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE, geographyCoordinate, userDefineParentName);
-			//					}
-			//					if (userDefine.add(result)) {
-			//						String geoCoorSys = ControlsProperties.getString("String_GeoCoordSys");
-			//						addToTree(result, userDefineParentName, userDefine, geoCoorSys);
-			//						addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
-			//					}
-			//				}
-			//			} else if (currentRowData.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-			//				JDialogUserDefinePrjProjection dialogUserDefinePrjProjection = new JDialogUserDefinePrjProjection();
-			//				dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(currentPrjDefine));
-			//				if (dialogUserDefinePrjProjection.showDialog() == DialogResult.OK) {
-			//					PrjCoordSys prjCoordSys = dialogUserDefinePrjProjection.getPrjCoordSys();
-			//					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
-			//					result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
-			//					result.setPrjCoordSys(prjCoordSys);
-			//					result.setCaption(prjCoordSys.getName());
-			//					CoordSysDefine userDefine = projectionSystem.getChildByCaption(userDefineParentName);
-			//					if (userDefine == null) {
-			//						userDefine = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM, projectionSystem, userDefineParentName);
-			//					}
-			//					if (userDefine.add(result)) {
-			//						String geoCoorSys = ControlsProperties.getString("String_PrjCoorSys");
-			//						addToTree(result, userDefineParentName, userDefine, geoCoorSys);
-			//						addProjToDocument(result, projectionDoc, projectionConfigPath);
-			//					}
-			//				}
-			//				dialogUserDefinePrjProjection.clean();
-			//			}
-			//		}
-			//	}
-			//});
 
-
-			popupmenu.addPopupMenuListener(new PopupMenuListener() {
+			this.popupmenu.addPopupMenuListener(new PopupMenuListener() {
 				@Override
 				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 					menuItemNewGeoCoordSys.setEnabled(isNewGeoCoordsysEnable());
@@ -1230,7 +1180,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			});
 		}
 
-		return popupmenu;
+		return this.popupmenu;
 	}
 
 
@@ -1238,33 +1188,32 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private boolean isDeleteEnable() {
-		return currentPrjDefine != null && currentPrjDefine.getParent() != null
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE
+		return this.currentPrjDefine != null && !this.currentPrjDefine.getIsFolderNode()
 				&& (currentPrjDefine.getParent().getCoordSysType() == CoordSysDefine.CUSTOM_COORDINATE ||
 				currentPrjDefine.getParent().getCoordSysType() == CoordSysDefine.FAVORITE_COORDINATE);
+
 	}
 
 	private boolean isNewGroupEnable() {
-		return true;
+		return false;
 	}
 
 	private boolean isNewGeoCoordsysEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE;
 
 	}
 
 	private boolean isNewPrjCoordsysEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM;
 
 	}
 
 	private boolean isNewCoordsysFromEPSGEnable() {
-		return false;
+		return true;
 	}
 
 	private boolean isImportEnable() {
@@ -1272,25 +1221,19 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	private boolean isExportEnable() {
-		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
-				(this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM ||
-						this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE);
+		return this.currentPrjDefine != null && this.currentPrjDefine.getCoordSysType() != CoordSysDefine.NONE_ERRTH &&
+				(!this.currentPrjDefine.getIsFolderNode() || this.currentPrjDefine.size() > 0);
 	}
 
 	private boolean isAddFavoritesEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
-				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE &&
-				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getParent().getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE &&
 				!this.currentPrjDefine.getCoordSysTypeDescription().equals(ControlsProperties.getString("String_NoneEarth"));
 	}
 
 	private boolean isButtonApplyEnable() {
-		return this.currentPrjDefine != null && this.currentPrjDefine.size() == 0
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE;
+		return this.currentPrjDefine != null && !currentPrjDefine.getIsFolderNode();
 	}
 
 	/**
@@ -1307,15 +1250,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCaption(this.currentPrjDefine.getCaption());
 				CoordSysDefine userDefine = this.favoriteCoordinate.getChildByCaption(DEFAULT_GROUPCAPTION);
 				if (userDefine == null) {
-					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION);
+					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION).setFolderNode(true);
 				}
 				if (userDefine.add(result)) {
 					addToTree(result, DEFAULT_GROUPCAPTION, userDefine, grantParentName);
 					addGeoCoorSysToDocument(result, this.favoriteProjectionDoc, this.favoriteProjectionConfigPath);
 				}
 			} else if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-				//JDialogUserDefinePrjProjection dialogUserDefinePrjProjection = new JDialogUserDefinePrjProjection();
-				//dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(currentPrjDefine));
 
 				CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 				result.setCoordSysCode(this.currentPrjDefine.getCoordSysCode());
@@ -1323,7 +1264,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCaption(this.currentPrjDefine.getCaption());
 				CoordSysDefine userDefine = this.favoriteCoordinate.getChildByCaption(DEFAULT_GROUPCAPTION);
 				if (userDefine == null) {
-					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION);
+					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION).setFolderNode(true);
 				}
 				if (userDefine.add(result)) {
 					addToTree(result, DEFAULT_GROUPCAPTION, userDefine, grantParentName);
@@ -1342,16 +1283,16 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		if (geography.showDialog() == DialogResult.OK) {
 			GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
+			result.setCoordSysCode(-1);
 			result.setGeoCoordSys(geoCoordSys);
 			result.setCaption(geoCoordSys.getName());
 			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefineGeoParentName);
 			if (userDefine == null) {
-				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName);
+				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userDefineGeoParentName, userDefine, geoCoorSys);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userDefineGeoParentName, userDefine, grantParentName);
 				addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
 			}
 		}
@@ -1374,11 +1315,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			result.setCaption(prjCoordSys.getName());
 			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefinePrjParentName);
 			if (userDefine == null) {
-				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName);
+				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userDefinePrjParentName, userDefine, geoCoorSys);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userDefinePrjParentName, userDefine, grantParentName);
 				addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
 			}
 		}
@@ -1386,8 +1327,62 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	/**
+	 * 通过EPSG新建坐标系
+	 */
+	private void newCoordsysFromEPSG() {
+		JDialogNewCoordsysFromEPSG dialogNewCoordsysFromEPSG = new JDialogNewCoordsysFromEPSG();
+		if (dialogNewCoordsysFromEPSG.showDialog() == DialogResult.OK) {
+			try {
+				PrjCoordSys prjCoordSys = new PrjCoordSys();
+				prjCoordSys.fromEPSGCode(dialogNewCoordsysFromEPSG.getCode());
+				if (prjCoordSys.getType().equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE)) {
+					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+					result.setCoordSysCode(-1);
+					result.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
+					if (dialogNewCoordsysFromEPSG.getUseDefaultNameCheck().isSelected()) {
+						result.setCaption(prjCoordSys.getGeoCoordSys().getName());
+					} else {
+						result.setCaption(dialogNewCoordsysFromEPSG.getNameTextField().getText());
+					}
+					CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefineParentNameFromEPSG);
+					if (userDefine == null) {
+						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineParentNameFromEPSG).setFolderNode(true);
+					}
+					if (userDefine.add(result)) {
+						String grantParentName = ControlsProperties.getString("String_Customize");
+						addToTree(result, userDefineParentNameFromEPSG, userDefine, grantParentName);
+						addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
+					}
+				} else {
+					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+					result.setCoordSysCode(-1);
+					result.setPrjCoordSys(prjCoordSys);
+					if (dialogNewCoordsysFromEPSG.getUseDefaultNameCheck().isSelected()) {
+						result.setCaption(prjCoordSys.getName());
+					} else {
+						result.setCaption(dialogNewCoordsysFromEPSG.getNameTextField().getText());
+					}
+					CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefineParentNameFromEPSG);
+					if (userDefine == null) {
+						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineParentNameFromEPSG).setFolderNode(true);
+					}
+					if (userDefine.add(result)) {
+						String grantParentName = ControlsProperties.getString("String_Customize");
+						addToTree(result, userDefineParentNameFromEPSG, userDefine, grantParentName);
+						addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
+					}
+				}
+			} catch (Exception ex) {
+
+			}
+		}
+	}
+
+
+	/**
 	 * 删除坐标系
 	 */
+
 	private void deleteCoordsys() {
 		if (isDeleteEnable()) {
 			if (UICommonToolkit.showConfirmDialog(ControlsProperties.getString("String_DelSelectedItem_Warning")) == 0) {
@@ -1410,27 +1405,32 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	/**
-	 * 导入投影到自定义
+	 * 导入坐标系到自定义
 	 */
 	private void importCoordsys(PrjCoordSys prjCoordSys) {
 		if (prjCoordSys != null && !prjCoordSys.getType().equals(PrjCoordSysType.PCS_NON_EARTH)) {
-			CoordSysDefine result = null;
-			if (prjCoordSys.getType().equals(prjCoordSys.equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE))) {
+			CoordSysDefine result;
+			if (prjCoordSys.getType().equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE)) {
 				result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+				result.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
 			} else {
 				result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+				result.setPrjCoordSys(prjCoordSys);
 			}
 			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
-			result.setPrjCoordSys(prjCoordSys);
 			result.setCaption(prjCoordSys.getName());
-			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
+			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName).setFolderNode(true);
 			if (userDefine == null) {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userImportCoordsysParentName, userDefine, geoCoorSys);
-				addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userImportCoordsysParentName, userDefine, grantParentName);
+				if (result.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+					addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				} else if (result.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+					addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				}
 			}
 		}
 	}
@@ -1439,9 +1439,85 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 导出投影到xxx
 	 */
 	private void exportCoordsys() {
+		int successedNum = 0;
+		String moduleName = "ExportPrjFile";
+		if (!SmFileChoose.isModuleExist(moduleName)) {
+			// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
+			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "noExist");
+			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+					ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
+		}
+		SmFileChoose prjFileExportFileChoose = new SmFileChoose(moduleName);
+		prjFileExportFileChoose.setSelectedFile(new File(currentPrjDefine.getCaption()));
 
+		if (prjFileExportFileChoose.getTextField() != null) {
+			prjFileExportFileChoose.getTextField().setEnabled(false);
+		}
+		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+			// 开始进行投影导出
+			if (this.currentPrjDefine.getIsFolderNode()) {
+				CoordSysDefine[] allCoordSysDefine = this.currentPrjDefine.getAllLeaves().clone();
+				String folderName = prjFileExportFileChoose.getFilePath().replace(".noExist", "");
+				if (!FileUtilities.exists(folderName)) {
+					File file = new File(folderName);
+					file.mkdir();
+				}
+				for (int i = 0; i < allCoordSysDefine.length; i++) {
+					if (!allCoordSysDefine[i].getIsFolderNode()) {
+						PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
+						if (allCoordSysDefine[i].getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+							GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(allCoordSysDefine[i]).clone();
+							exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+							exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+							exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+						} else if (allCoordSysDefine[i].getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+							try {
+								exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(allCoordSysDefine[i]).clone();
+							} catch (Exception ex) {
+								continue;
+							}
+						}
+						if (export(exportPrjCoordSys, folderName + "//" + exportPrjCoordSys.getName() + ".xml")) {
+							successedNum++;
+						}
+					}
+				}
+			} else {
+				// 选中非文件夹节点，直接导出即可
+				PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
+				if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+					GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentPrjDefine).clone();
+					exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+					exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+					exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+				} else if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+					exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentPrjDefine).clone();
+				}
+				if (export(exportPrjCoordSys, prjFileExportFileChoose.getFilePath().replace("noExist", "xml"))) {
+					successedNum++;
+				}
+			}
+
+			if (successedNum > 0) {
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedNum));
+			} else {
+				Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
+			}
+		}
 	}
 
+	/**
+	 * 导出通用方法
+	 */
+	public Boolean export(PrjCoordSys prjCoordSys, String path) {
+		Boolean isSuccess = false;
+		try {
+			isSuccess = prjCoordSys.toFile(path, PrjFileVersion.UGC60);
+		} catch (Exception ex) {
+
+		}
+		return isSuccess;
+	}
 
 	private void addGeoCoorSysToDocument(CoordSysDefine result, Document targetDocument, String path) {
 		Element defines = (Element) targetDocument.getElementsByTagName(XMLProjectionTag.GEOCOORDSYS_DEFINES).item(0);
