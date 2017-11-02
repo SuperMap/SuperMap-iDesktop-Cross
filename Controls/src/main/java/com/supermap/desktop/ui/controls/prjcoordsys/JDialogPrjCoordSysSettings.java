@@ -175,11 +175,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private transient ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == buttonApply) {
+			if (e.getSource().equals(buttonApply)) {
 				buttonApplyClicked();
-			} else if (e.getSource() == buttonClose) {
+			} else if (e.getSource().equals(buttonClose)) {
 				buttonCloseClicked();
-			} else if (e.getSource() == buttonImport || e.getSource() == menuItemImportCoordSys) {
+			} else if (e.getSource().equals(buttonImport) || e.getSource().equals(menuItemImportCoordSys)) {
 				if (isImportEnable()) {
 					String moduleName = "ImportPrjFile";
 					if (!SmFileChoose.isModuleExist(moduleName)) {
@@ -196,26 +196,27 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						importCoordsys(getPrjCoordSysFromImportFile(file.getPath()));
 					}
 				}
-			} else if (e.getSource() == buttonExport || e.getSource() == menuItemExportCoordSys) {
+			} else if (e.getSource().equals(buttonExport) || e.getSource().equals(menuItemExportCoordSys)) {
 				if (isExportEnable()) {
 					exportCoordsys();
 				}
-			} else if (e.getSource() == buttonNewCoordSys) {
+			} else if (e.getSource().equals(buttonNewCoordSys)) {
+
 				popupMenuNewCoordSys.show(buttonNewCoordSys, 0, buttonNewCoordSys.getHeight());
-			} else if (e.getSource() == menuItemNewPrjCoordSys) {
+			} else if (e.getSource().equals(menuItemNewPrjCoordSys)) {
 				newPrjCoordsys();
-			} else if (e.getSource() == menuItemNewGeoCoordSys) {
+			} else if (e.getSource().equals(menuItemNewGeoCoordSys)) {
 				newGeoCoordsys();
-			} else if (e.getSource() == menuItemNewFormEPSG) {
+			} else if (e.getSource().equals(menuItemNewFormEPSG)) {
 				newCoordsysFromEPSG();
-			} else if (e.getSource() == buttonFavorites || e.getSource() == menuItemAddFavorites) {
+			} else if (e.getSource().equals(buttonFavorites) || e.getSource().equals(menuItemAddFavorites)) {
 				// 将选中的投影添加到收藏夹当中
 				addCoordsysToFavorites();
-			} else if (e.getSource() == menuItemDelete || e.getSource() == buttonDelete) {
+			} else if (e.getSource().equals(menuItemDelete) || e.getSource().equals(buttonDelete)) {
 				deleteCoordsys();
-			} else if (e.getSource() == buttonNewGroup || e.getSource() == menuItemNewGroup) {
+			} else if (e.getSource().equals(buttonNewGroup) || e.getSource().equals(menuItemNewGroup)) {
 				// todo 新建组
-			} else if (e.getSource() == textFieldSearch) {
+			} else if (e.getSource().equals(textFieldSearch)) {
 				textFieldSearchAction();
 			}
 		}
