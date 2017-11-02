@@ -3,6 +3,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 import com.supermap.analyst.spatialanalyst.FunctionType;
 import com.supermap.analyst.spatialanalyst.GridHistogram;
 import com.supermap.analyst.spatialanalyst.HistogramSegmentInfo;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
@@ -18,7 +19,10 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -46,6 +50,11 @@ public class ParameterHistogramPanel extends SwingPanel implements IParameterPan
 		initComponent();
 		this.parameterHistogram.setGroupCount(Integer.parseInt(numCount.getText()));
 		this.parameterHistogram.setCreate(checkBox.isSelected());
+		ComponentUIUtilities.setName(this.checkBox, parameter.getDescribe() + "_checkBox");
+		ComponentUIUtilities.setName(this.numCount, parameter.getDescribe() + "_textField");
+		ComponentUIUtilities.setName(this.comboBoxFunction, parameter.getDescribe() + "_comboBox1");
+		ComponentUIUtilities.setName(this.histogramPanel, parameter.getDescribe() + "_panel");
+		ComponentUIUtilities.setName(this.scrollPane, parameter.getDescribe() + "_scrollPane");
 
 		panel.setLayout(new GridBagLayout());
 		panel.add(checkBox, new GridBagConstraintsHelper(0, 0, 2, 1).setWeight(1, 1).setFill(GridBagConstraints.HORIZONTAL).setInsets(0,0,5,0));

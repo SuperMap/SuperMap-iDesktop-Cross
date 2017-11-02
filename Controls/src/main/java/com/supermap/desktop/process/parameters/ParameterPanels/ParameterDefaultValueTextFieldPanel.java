@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.ParameterUpdateValueEvent;
 import com.supermap.desktop.process.parameter.events.UpdateValueListener;
@@ -46,6 +47,7 @@ public class ParameterDefaultValueTextFieldPanel extends SwingPanel implements I
 		textField.setText(String.valueOf(this.parameterDefaultValueTextField.getSelectedItem()));
 		textField.setDefaulWarningText(this.parameterDefaultValueTextField.getDefaultWarningValue());
 		//textField.setToolTipText(this.parameterDefaultValueTextField.getToolTip());
+		ComponentUIUtilities.setName(this.textField, parameter.getDescribe());
 		initLayout();
 		initListeners();
 	}

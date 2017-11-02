@@ -34,13 +34,15 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 			FormMap formMap = (FormMap) iForm;
 			String layerGroupName = formMap.getMapControl().getMap().getLayers().getAvailableCaption("LayerGroup");
 			LayerGroup layerGroup = (LayerGroup) this.selectedNodeData.getData();
-			layerGroup.addGroup(layerGroupName);
+			layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
+			formMap.getMapControl().getMap().refresh();
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
-//			layersTree.expandRow(layersTree.getMaxSelectionRow());
+			layersTree.reload();
+//			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
+//			layersTree.expandPath(new TreePath(((DefaultTreeModel)layersTree.getModel()).getPathToRoot(selectedNode)));
 //			layersTree.clearSelection();
-			layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
-			layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+//			layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+//			layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 		}
 	}
 
@@ -51,7 +53,8 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 		if (layersTree != null && layersTree.getSelectionCount() == 1) {
 			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
 			this.selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-			if (this.selectedNodeData.getType() == NodeDataType.LAYER_GROUP) {
+			if (this.selectedNodeData.getType() == NodeDataType.LAYER_GROUP ||
+					this.selectedNodeData.getType() == NodeDataType.LAYER_SNAPSHOT) {
 				enable = true;
 			}
 		}

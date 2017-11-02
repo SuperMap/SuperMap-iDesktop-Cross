@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListener;
@@ -130,6 +131,7 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 				this.datasetComboBox.setSelectedDataset(selectedItem);
 			}
 		}
+		ComponentUIUtilities.setName(this.datasetComboBox, parameter.getDescribe());
 	}
 
 	private void setSelectedDatasource(Datasource datasource) {

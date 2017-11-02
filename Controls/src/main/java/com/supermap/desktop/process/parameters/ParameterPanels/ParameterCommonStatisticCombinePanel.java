@@ -2,7 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
@@ -10,12 +10,9 @@ import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListe
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterCommonStatisticCombine;
-import com.supermap.desktop.process.parameter.ipls.ParameterDatasetChooseTable;
 import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.TextFields.NumTextFieldLegit;
-import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
-import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -26,8 +23,6 @@ import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created By Chens on 2017/8/21 0021
@@ -73,6 +68,10 @@ public class ParameterCommonStatisticCombinePanel extends SwingPanel {
 		if (null != this.parameterCommonStatisticCombine.getDataset()) {
 			this.datasetChooseForParameter.setSupportDatasetTypes(new DatasetType[]{this.parameterCommonStatisticCombine.getDataset().getType()});
 		}
+		ComponentUIUtilities.setName(this.radioButtonValue, "ParameterCommonStatisticCombinePanel" + "_radioButtonValue");
+		ComponentUIUtilities.setName(this.radioButtonDatasets, "ParameterCommonStatisticCombinePanel" + "_radioButtonDatasets");
+		ComponentUIUtilities.setName(this.textFieldLegit, "ParameterCommonStatisticCombinePanel" + "_textFieldLegit");
+		ComponentUIUtilities.setName(this.datasetChooseForParameter, "ParameterCommonStatisticCombinePanel" + "_datasetChooseForParameter");
 	}
 
 	private void initLayout() {

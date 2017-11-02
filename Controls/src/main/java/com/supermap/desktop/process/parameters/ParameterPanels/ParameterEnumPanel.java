@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.ParameterComboBoxCellRender;
 import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
@@ -38,6 +39,7 @@ public class ParameterEnumPanel extends SwingPanel {
 		label.setText(getDescribe());
 		initComboBoxItems();
 		comboBox.setSelectedItem(this.parameterEnum.getSelectedItem());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
 		initListeners();
 		initLayout();
 	}

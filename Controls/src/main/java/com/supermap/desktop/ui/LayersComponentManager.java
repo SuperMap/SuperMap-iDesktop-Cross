@@ -127,7 +127,7 @@ public class LayersComponentManager extends JComponent {
 	private void initializeToolBar() {
 		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
-		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
+		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/controlsImage/Image_Layer_LayerSnapshot.png"));
 		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
 		JPopupMenu popupMenuLayerGroup = new JPopupMenu();
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerRootGroup);
@@ -144,10 +144,12 @@ public class LayersComponentManager extends JComponent {
 
 	private void registerEvents(){
 		this.addLayerGroup.getDisplayButton().removeActionListener(this.addLayerRootGroupListener);
-		this.addLayerGroup.getDisplayButton().addActionListener(this.addLayerRootGroupListener);
+		this.addLayerGroup.getArrowButton().removeActionListener(this.arrawButtonListener);
 		this.jMenuItemAddLayerRootGroup.removeActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerGroup.removeActionListener(this.addLayerGroupListener);
 		this.jMenuItemAddLayerSnapshot.removeActionListener(this.addLayerSnapshotListener);
+		this.addLayerGroup.getDisplayButton().addActionListener(this.addLayerRootGroupListener);
+		this.addLayerGroup.getArrowButton().addActionListener(this.arrawButtonListener);
 		this.jMenuItemAddLayerRootGroup.addActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerGroup.addActionListener(this.addLayerGroupListener);
 		this.jMenuItemAddLayerSnapshot.addActionListener(this.addLayerSnapshotListener);
@@ -160,7 +162,7 @@ public class LayersComponentManager extends JComponent {
 				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
 				layersTree.getMap().getLayers().addGroup(layerGroupName);
 				int selectRow = layersTree.getRowCount() - 1;
-				layersTree.setSelectionRow(selectRow);
+				layersTree.clearSelection();
 				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 			}
 		}
@@ -173,12 +175,14 @@ public class LayersComponentManager extends JComponent {
 			if (layersTree != null && layersTree.getMap()!= null && layersTree.getSelectionCount() == 1) {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
 				selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP) {
+				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP || selectedNodeData.getType()==NodeDataType.LAYER_SNAPSHOT) {
 					String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
 					LayerGroup layerGroup = (LayerGroup) selectedNodeData.getData();
-					layerGroup.addGroup(layerGroupName);
-					layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
-					layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+					layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
+					layersTree.getMap().refresh();
+					layersTree.reload();
+//					layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+//					layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
 				}
 			}
 		}
@@ -191,8 +195,26 @@ public class LayersComponentManager extends JComponent {
 				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("SnapshotLayer");
 				layersTree.getMap().getLayers().insertLayerSnapshot(layersTree.getMap().getLayers().getCount(),layerGroupName);
 				int selectRow = layersTree.getRowCount() - 1;
-				layersTree.setSelectionRow(selectRow);
+				layersTree.clearSelection();
 				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
+			}
+		}
+	};
+
+	private ActionListener arrawButtonListener=new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			TreeNodeData selectedNodeData = null;
+			if (layersTree != null && layersTree.getMap()!= null && layersTree.getSelectionCount() == 1) {
+				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
+				selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
+				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP || selectedNodeData.getType() == NodeDataType.LAYER_SNAPSHOT) {
+					jMenuItemAddLayerGroup.setEnabled(true);
+				}else{
+					jMenuItemAddLayerGroup.setEnabled(false);
+				}
+			}else{
+				jMenuItemAddLayerGroup.setEnabled(false);
 			}
 		}
 	};
@@ -214,11 +236,12 @@ public class LayersComponentManager extends JComponent {
 					this.layersTree.setSelectionPath(closestPathForLocation);
 				}
 			}
-		} else if (e.getButton() == MouseEvent.BUTTON1) {
-			if (this.layersTree.getPathForLocation(e.getX(), e.getY()) == null) {
-				layersTree.clearSelection();
-			}
 		}
+//		else if (e.getButton() == MouseEvent.BUTTON1) {
+//			if (this.layersTree.getPathForLocation(e.getX(), e.getY()) == null) {
+//				layersTree.clearSelection();
+//			}
+//		}
 	}
 
 	private void layersTreeMousePressed(java.awt.event.MouseEvent evt) {

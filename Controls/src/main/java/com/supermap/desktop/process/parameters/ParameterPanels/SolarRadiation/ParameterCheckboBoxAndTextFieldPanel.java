@@ -1,6 +1,7 @@
 package com.supermap.desktop.process.parameters.ParameterPanels.SolarRadiation;
 
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
@@ -39,6 +40,8 @@ public class ParameterCheckboBoxAndTextFieldPanel extends SwingPanel {
 		this.checkBox.setSelected(true);
 		this.textField = new SmTextFieldLegit();
 		this.textField.setText(this.checkboBoxAndTextField.getSelectedItem());
+		ComponentUIUtilities.setName(this.checkBox, parameter.getDescribe() + "_checkBox");
+		ComponentUIUtilities.setName(this.textField, parameter.getDescribe() + "_textField");
 	}
 
 	private void initLayout() {

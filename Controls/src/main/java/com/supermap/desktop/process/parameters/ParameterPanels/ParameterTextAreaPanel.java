@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
@@ -104,6 +105,7 @@ public class ParameterTextAreaPanel extends SwingPanel implements IParameterPane
 		if (parameterTextArea.isWrapStyleWord()) {
 			this.textArea.setWrapStyleWord(parameterTextArea.isWrapStyleWord());
 		}
+		ComponentUIUtilities.setName(this.textArea, parameter.getDescribe());
 	}
 
 }

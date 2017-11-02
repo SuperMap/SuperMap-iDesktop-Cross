@@ -4,6 +4,7 @@ import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
@@ -71,6 +72,8 @@ public class ParameterSaveDatasetPanel extends SwingPanel implements IParameterP
 		labelDataset = new JLabel(CommonProperties.getString("String_Label_Dataset"));
 		datasourceComboBox = new DatasourceComboBox();
 		textFieldDataset = new SmTextFieldLegit();
+		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescribe() + "_comboBox");
+		ComponentUIUtilities.setName(this.textFieldDataset, parameter.getDescribe() + "_textField");
 		textFieldDataset.setSmTextFieldLegit(new ISmTextFieldLegit() {
 			@Override
 			public boolean isTextFieldValueLegit(String textFieldValue) {
