@@ -19,10 +19,10 @@ public class MetaProcessISORegion extends MetaProcessISO {
 	public MetaProcessISORegion() {
 		setTitle(CommonProperties.getString("String_SurfaceISORegion"));
 		OUTPUT_DATA_TYPE = ProcessOutputResultProperties.getString("String_SurfaceAnalyst_ISORegionResult");
-		initParameters();
-		initParameterConstraint();
-		initParametersState();
-		initParametersListener();
+		super.initParameters();
+		super.initParameterConstraint();
+		super.initParametersState();
+		super.initParametersListener();
 	}
 
 	@Override
