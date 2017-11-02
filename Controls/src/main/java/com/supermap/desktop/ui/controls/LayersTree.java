@@ -1797,6 +1797,12 @@ public class LayersTree extends JTree {
 					startIndex > this.currentMap.getLayers().indexOf(selectedLayer.get(0).getName())) {
 				isMoveUp = false;
 			}
+			if (layerTarget instanceof LayerGroup && this.layerGroupMoveMode == LAYER_GROUP_MOVE_TOP && !isMoveUp) {
+				startIndex -= 1;
+				if (startIndex < 0) {
+					startIndex = 0;
+				}
+			}
 		} else if (selectedLayer.get(0).getParentGroup() != null && // LayerGroup中的拖动
 				selectedLayer.get(0).getParentGroup().equals(layerTarget.getParentGroup())) {
 			if (startIndex > layerTarget.getParentGroup().indexOf(selectedLayer.get(0))) {
@@ -2072,16 +2078,16 @@ public class LayersTree extends JTree {
 		}
 	}
 
-	private class MyTreeExpansionListener implements TreeExpansionListener{
+	private class MyTreeExpansionListener implements TreeExpansionListener {
 
 		@Override
-		public void treeExpanded(TreeExpansionEvent event){
-			IFormMap formMap=(IFormMap) Application.getActiveApplication().getActiveForm();
+		public void treeExpanded(TreeExpansionEvent event) {
+			IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
 			formMap.getMapControl().getMap().getLayers();
 		}
 
 		@Override
-		public void treeCollapsed(TreeExpansionEvent event){
+		public void treeCollapsed(TreeExpansionEvent event) {
 
 		}
 	}
