@@ -47,10 +47,6 @@ public class ParameterSwitch extends AbstractParameter {
 	}
 
 
-	public int getCount() {
-		return nodes.size();
-	}
-
 	public void switchParameter(IParameter parameter) {
 		IParameter oldValue = this.currentParameter;
 		if (parameter != null && parameter.getParameters() == null) {

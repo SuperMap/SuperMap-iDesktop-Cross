@@ -30,6 +30,7 @@ public class CtrlActionCreateRootLayerGroup extends CtrlAction {
 			layersTree.clearSelection();
 			layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 		}
+//		Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_CurrentFunctionDeveloping"));
 	}
 
 	@Override
