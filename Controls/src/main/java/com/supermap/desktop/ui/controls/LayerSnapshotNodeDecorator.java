@@ -22,7 +22,7 @@ public class LayerSnapshotNodeDecorator implements TreeNodeDecorator {
 					BufferedImage.TYPE_INT_ARGB);
 			Graphics graphics = bufferedImage.getGraphics();
 			graphics.drawImage(
-					InternalImageIconFactory.LAYER_GROUP.getImage(), 0,
+					InternalImageIconFactory.LAYER_SNAPSHOT.getImage(), 0,
 					0, label);
 			icon.setImage(bufferedImage);
 
