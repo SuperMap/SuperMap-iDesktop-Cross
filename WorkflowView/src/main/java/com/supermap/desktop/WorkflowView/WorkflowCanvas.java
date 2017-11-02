@@ -1,6 +1,7 @@
 package com.supermap.desktop.WorkflowView;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
 import com.supermap.desktop.WorkflowView.graphics.connection.ConnectionLineGraph;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingEvent;
@@ -52,7 +53,7 @@ public class WorkflowCanvas extends GraphCanvas
 	private GraphArithmeticAction arithmeticAction = new GraphArithmeticAction(this);
 	private CirculationAction circulationAction = new CirculationAction(this);
 	private ParametersSettingAction parametersSetting = new ParametersSettingAction(this);
-	private Iterator iterator;
+	private CirculationIterator iterator;
 	private CirculationGraph circulationGraph;
 
 	public WorkflowCanvas(Workflow workflow) {
@@ -433,11 +434,11 @@ public class WorkflowCanvas extends GraphCanvas
 		return outputMap;
 	}
 
-	public Iterator getIterator() {
+	public CirculationIterator getIterator() {
 		return iterator;
 	}
 
-	public void setIterator(Iterator iterator) {
+	public void setIterator(CirculationIterator iterator) {
 		this.iterator = iterator;
 	}
 

@@ -30,30 +30,31 @@ public class CirculationAction extends CanvasActionAdapter {
 	}
 
 	public void addCirculationGraph(CirculationType circulationType) {
-		this.circulationGraph = new CirculationGraph(workflowCanvas, circulationType);
-		Point screenLocation = new Point(305, 336);
-		Point canvasLocation = this.workflowCanvas.getCoordinateTransform().inverse(screenLocation);
-		this.workflowCanvas.setCirculationGraph(this.circulationGraph);
-		this.circulationGraph.setLocation(canvasLocation);
-		this.workflowCanvas.addGraph(this.circulationGraph);
-		int locationX = circulationGraph.getLocation().x + circulationGraph.getWidth() * 3 / 2;
-		int locationY = circulationGraph.getLocation().y + circulationGraph.getHeight() / 2 - 20;
+		if (null == circulationGraph) {
+			this.circulationGraph = new CirculationGraph(workflowCanvas, circulationType);
+			Point screenLocation = new Point(305, 336);
+			Point canvasLocation = this.workflowCanvas.getCoordinateTransform().inverse(screenLocation);
+			this.workflowCanvas.setCirculationGraph(this.circulationGraph);
+			this.circulationGraph.setLocation(canvasLocation);
+			this.workflowCanvas.addGraph(this.circulationGraph);
+			int locationX = circulationGraph.getLocation().x + circulationGraph.getWidth() * 3 / 2;
+			int locationY = circulationGraph.getLocation().y + circulationGraph.getHeight() / 2 - 20;
 
-		Point point = new Point(locationX, locationY);
-		OutputData outputData = circulationGraph.getOutputData();
-		this.outputGraph = new CirculationOutputGraph(this.workflowCanvas, outputData);
-		this.outputGraph.setLocation(point);
-		this.workflowCanvas.getOutputMap().put(outputData, outputGraph);
-		this.workflowCanvas.addGraph(this.outputGraph);
-		// 添加 process 和 output 之间的连接线
-		lineGraph = new ConnectionLineGraph(this.workflowCanvas, circulationGraph, outputGraph);
-		this.workflowCanvas.getOutputLinesMap().put(outputData, lineGraph);
-		this.workflowCanvas.addGraph(lineGraph);
-		this.workflowCanvas.repaint();
-		circulationDialog = new CirculationDialog(circulationType, false, outputData);
-		this.workflowCanvas.setIterator(circulationDialog.iterator());
-		CirculationOutputDialog = new CirculationDialog(circulationType, true, outputData);
-		;
+			Point point = new Point(locationX, locationY);
+			OutputData outputData = circulationGraph.getOutputData();
+			this.outputGraph = new CirculationOutputGraph(this.workflowCanvas, outputData);
+			this.outputGraph.setLocation(point);
+			this.workflowCanvas.getOutputMap().put(outputData, outputGraph);
+			this.workflowCanvas.addGraph(this.outputGraph);
+			// 添加 process 和 output 之间的连接线
+			lineGraph = new ConnectionLineGraph(this.workflowCanvas, circulationGraph, outputGraph);
+			this.workflowCanvas.getOutputLinesMap().put(outputData, lineGraph);
+			this.workflowCanvas.addGraph(lineGraph);
+			this.workflowCanvas.repaint();
+			circulationDialog = new CirculationDialog(circulationType, false, outputData);
+			this.workflowCanvas.setIterator(circulationDialog.iterator());
+			CirculationOutputDialog = new CirculationDialog(circulationType, true, outputData);
+		}
 	}
 
 	@Override

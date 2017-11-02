@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * Created by xie on 2017/10/27.
  */
-public class CirculationForParameters extends AbstractCirculationParameters implements Iterator {
+public class CirculationForParameters extends AbstractCirculationParameters implements CirculationIterator {
 	private ParameterTextField startValue;
 	private ParameterTextField endValue;
 	private ParameterTextField iteratorValue;
@@ -52,7 +52,7 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 	}
 
 	@Override
-	protected void reset() {
+	public void reset() {
 		count = 0;
 		if (StringUtilities.isInteger(startValue.getSelectedItem())) {
 			nowValue = start = Integer.valueOf(startValue.getSelectedItem());
@@ -68,6 +68,6 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 
 	@Override
 	public void remove() {
-		reset();
+
 	}
 }

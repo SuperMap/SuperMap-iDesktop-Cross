@@ -5,6 +5,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
+import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.tasks.TasksManager;
 
@@ -34,8 +35,8 @@ public class CtrlActionRun extends CtrlAction {
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
-								Iterator iterator = formWorkflow.iterator();
-								iterator.remove();
+								CirculationIterator iterator = formWorkflow.iterator();
+								iterator.reset();
 								while (iterator.hasNext()) {
 									formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
 									if (formWorkflow.getTasksManager().getStatus() == TasksManager.WORKFLOW_STATE_COMPLETED
