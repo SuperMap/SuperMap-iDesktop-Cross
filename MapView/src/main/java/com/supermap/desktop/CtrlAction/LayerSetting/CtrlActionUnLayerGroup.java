@@ -39,7 +39,7 @@ public class CtrlActionUnLayerGroup extends CtrlAction {
 				layerGroup.ungroup();
 				formMap.getMapControl().getMap().refresh();
 			}
-//			System.out.println(formMap.getMapControl().getMap().getLayers().getCount());
+			System.out.println(formMap.getMapControl().getMap().getLayers().getCount());
 			Map map = formMap.getMapControl().getMap();
 			try {
 				for (int i = 0; i < map.getLayers().getCount(); i++) {
