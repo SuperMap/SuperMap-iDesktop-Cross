@@ -32,6 +32,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,15 +191,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
 								ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 					}
-					SmFileChoose smFileChoose = new SmFileChoose(moduleName);
-					if (smFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
-						File file = smFileChoose.getSelectedFile();
-						getPrjCoordSysFromImportFile(file.getPath());
+					SmFileChoose prjFileImportFileChoose = new SmFileChoose(moduleName);
+					if (prjFileImportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+						File file = prjFileImportFileChoose.getSelectedFile();
 						importCoordsys(getPrjCoordSysFromImportFile(file.getPath()));
 					}
 				}
 			} else if (e.getSource() == buttonExport || e.getSource() == menuItemExportCoordSys) {
-				if (isImportEnable()) {
+				if (isExportEnable()) {
 					exportCoordsys();
 				}
 			} else if (e.getSource() == buttonNewCoordSys) {
@@ -1273,9 +1273,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private boolean isExportEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
-				(this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM ||
-						this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE);
+				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.NONE_ERRTH;
 	}
 
 	private boolean isAddFavoritesEnable() {
@@ -1350,8 +1348,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userDefineGeoParentName, userDefine, geoCoorSys);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userDefineGeoParentName, userDefine, grantParentName);
 				addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
 			}
 		}
@@ -1377,8 +1375,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userDefinePrjParentName, userDefine, geoCoorSys);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userDefinePrjParentName, userDefine, grantParentName);
 				addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
 			}
 		}
@@ -1410,38 +1408,99 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	/**
-	 * 导入投影到自定义
+	 * 导入坐标系到自定义
 	 */
 	private void importCoordsys(PrjCoordSys prjCoordSys) {
 		if (prjCoordSys != null && !prjCoordSys.getType().equals(PrjCoordSysType.PCS_NON_EARTH)) {
 			CoordSysDefine result = null;
-			if (prjCoordSys.getType().equals(prjCoordSys.equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE))) {
+			if (prjCoordSys.getType().equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE)) {
 				result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+				result.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
 			} else {
 				result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+				result.setPrjCoordSys(prjCoordSys);
 			}
 			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
-			result.setPrjCoordSys(prjCoordSys);
 			result.setCaption(prjCoordSys.getName());
 			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
 			if (userDefine == null) {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName);
 			}
 			if (userDefine.add(result)) {
-				String geoCoorSys = ControlsProperties.getString("String_Customize");
-				addToTree(result, userImportCoordsysParentName, userDefine, geoCoorSys);
-				addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				String grantParentName = ControlsProperties.getString("String_Customize");
+				addToTree(result, userImportCoordsysParentName, userDefine, grantParentName);
+				if (result.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+					addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				} else if (result.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+					addProjToDocument(result, customProjectionDoc, customProjectionConfigPath);
+				}
 			}
 		}
 	}
 
 	/**
 	 * 导出投影到xxx
+	 * todo 优化导出方法，满足除去平面坐标系无法导出，单个文件及文件夹，以及文件夹包含文件夹都可以进行导出
 	 */
 	private void exportCoordsys() {
+		int successedNum = 0;
+		String moduleName = "ExportPrjFile";
+		if (!SmFileChoose.isModuleExist(moduleName)) {
+			// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
+			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "noExist");
+			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+					ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
+		}
+		SmFileChoose prjFileExportFileChoose = new SmFileChoose(moduleName);
+		prjFileExportFileChoose.setSelectedFile(new File(currentPrjDefine.getCaption()));
 
+		if (prjFileExportFileChoose.getTextField() != null) {
+			prjFileExportFileChoose.getTextField().setEnabled(false);
+		}
+		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+			// 开始进行投影导出
+			if (this.currentPrjDefine.size() > 1) {
+				String folderName = prjFileExportFileChoose.getFilePath().replace(".noExist", "");
+				if (!FileUtilities.exists(folderName)) {
+					File file = new File(folderName);
+					file.mkdir();
+				}
+				for (int i = 0; i < this.currentPrjDefine.size(); i++) {
+					PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
+					if (this.currentPrjDefine.get(i).getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentPrjDefine.get(i)).clone();
+						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+						exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+					} else if (this.currentPrjDefine.get(i).getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+						exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentPrjDefine.get(i)).clone();
+					}
+					if (exportPrjCoordSys.toFile(folderName + "//" + exportPrjCoordSys.getName() + ".xml", PrjFileVersion.UGC60)) {
+						successedNum++;
+					}
+				}
+			} else {
+				PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
+				if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+					GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentPrjDefine).clone();
+					exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+					exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+					exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+				} else if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+					exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentPrjDefine).clone();
+				}
+				if (exportPrjCoordSys.toFile(prjFileExportFileChoose.getFilePath().replace("noExist", "xml"), PrjFileVersion.UGC60)) {
+					successedNum++;
+				}
+			}
+
+			if (successedNum > 0) {
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedNum));
+			} else {
+				Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
+			}
+		}
 	}
-
 
 	private void addGeoCoorSysToDocument(CoordSysDefine result, Document targetDocument, String path) {
 		Element defines = (Element) targetDocument.getElementsByTagName(XMLProjectionTag.GEOCOORDSYS_DEFINES).item(0);

@@ -2,16 +2,13 @@ package com.supermap.desktop.ui.controls;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.controls.utilities.DatasourceOpenFileUtilties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.FileUtilities;
 import com.supermap.desktop.utilities.PathUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.XmlUtilities;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -543,5 +540,24 @@ public class SmFileChoose extends JFileChooser {
 
 	public void setOwer(JFrame ower) {
 		this.ower = ower;
+	}
+
+	/**
+	 * 获得文件选择器中的文件名TextField
+	 *
+	 * @return
+	 */
+	public JTextField getTextField() {
+		if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.WINDOWS_FILE_CHOOSE_UI)) {
+			return ((JTextField) ((JPanel) ((JPanel) ((JPanel) this.getComponent(2)).getComponent(2)).getComponent(2)).getComponent(1));
+		} else if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.GTK_FILE_CHOOSE_UI)) {
+			//((JPanel) prjFileExportFileChoose.getComponent(1)).getComponent(0).setEnabled(false);
+			return null;
+		} else if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.MEYAL_FILE_CHOOSE_UI)) {
+			//((JPanel) prjFileExportFileChoose.getComponent(2)).getComponent(0).setEnabled(false);
+			return null;
+		} else {
+			return null;
+		}
 	}
 }
