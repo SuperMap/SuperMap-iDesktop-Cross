@@ -90,7 +90,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup()
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.coordsysNameLabel)
-						.addGap(20)
+						.addGap(14)
 						.addComponent(this.nameTextField))
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.codeLabel)
