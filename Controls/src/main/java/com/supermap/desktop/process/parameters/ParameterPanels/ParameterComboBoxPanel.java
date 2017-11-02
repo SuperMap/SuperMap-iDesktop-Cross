@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.ParameterComboBoxCellRender;
@@ -39,7 +40,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	public ParameterComboBoxPanel(IParameter parameterComboBox) {
 		super(parameterComboBox);
 		this.parameterComboBox = ((ParameterComboBox) parameterComboBox);
-		this.comboBox.setName("ParameterComboBoxPanel_" + parameterComboBox.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
 		ArrayList<ParameterDataNode> items = this.parameterComboBox.getItems();
 		if (items != null && items.size() > 0) {
 			for (ParameterDataNode item : items) {

@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
@@ -39,6 +40,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 			this.datasetTypeComboBox.setAllShown(true);
 		}
 		this.datasetTypeComboBox.setSelectedItem(this.parameterDatasetType.getSelectedItem());
+		ComponentUIUtilities.setName(this.datasetTypeComboBox, parameter.getDescribe());
 		initLayout();
 		initListener();
 		if (datasetTypeComboBox.getSelectedIndex() == -1 && datasetTypeComboBox.getItemCount() > 0) {

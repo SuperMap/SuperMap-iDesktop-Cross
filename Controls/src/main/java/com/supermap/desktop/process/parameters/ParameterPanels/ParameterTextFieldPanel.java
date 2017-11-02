@@ -1,6 +1,7 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.ParameterUpdateValueEvent;
 import com.supermap.desktop.process.parameter.events.UpdateValueListener;
@@ -44,6 +45,7 @@ public class ParameterTextFieldPanel extends SwingPanel implements IParameterPan
 		textField.setText(String.valueOf(this.parameterTextField.getSelectedItem()));
 		textField.setToolTipText(this.parameterTextField.getToolTip());
 		this.smTextFieldLegit = ((ParameterTextField) parameterTextField).getSmTextFieldLegit();
+		ComponentUIUtilities.setName(this.textField, parameter.getDescribe());
 
 		initLayout();
 		initListeners();

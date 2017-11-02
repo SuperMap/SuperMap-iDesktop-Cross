@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.analyst.spatialanalyst.*;
 import com.supermap.data.*;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
@@ -19,8 +20,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created By Chens on 2017/8/16 0016
@@ -89,6 +88,15 @@ public class ParameterShapeTypePanel extends SwingPanel implements IParameterPan
 		textFieldOuterRadius = new NumTextFieldLegit();
 		textFieldStartAngle = new NumTextFieldLegit();
 		textFieldEndAngle = new NumTextFieldLegit();
+		ComponentUIUtilities.setName(this.comboBoxShapeType, "ParameterShapeTypePanel" + "_comboBoxShapeType");
+		ComponentUIUtilities.setName(this.comboBoxUnitType, "ParameterShapeTypePanel" + "_comboBoxUnitType");
+		ComponentUIUtilities.setName(this.textFieldWidth, "ParameterShapeTypePanel" + "_textFieldWidth");
+		ComponentUIUtilities.setName(this.textFieldHeight, "ParameterShapeTypePanel" + "_textFieldHeight");
+		ComponentUIUtilities.setName(this.textFieldRadius, "ParameterShapeTypePanel" + "_textFieldRadius");
+		ComponentUIUtilities.setName(this.textFieldInnerRadius, "ParameterShapeTypePanel" + "_textFieldInnerRadius");
+		ComponentUIUtilities.setName(this.textFieldOuterRadius, "ParameterShapeTypePanel" + "_textFieldOuterRadius");
+		ComponentUIUtilities.setName(this.textFieldStartAngle, "ParameterShapeTypePanel" + "_textFieldStartAngle");
+		ComponentUIUtilities.setName(this.textFieldEndAngle, "ParameterShapeTypePanel" + "_textFieldEndAngle");
 	}
 
 	private void initResources() {
