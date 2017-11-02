@@ -42,7 +42,7 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 		public void run() {
 			labelMessage.setText(ControlsProperties.getString("String_Canceling"));
 			labelRemainTime.setText("");
-			cancel();
+			SingleProgressPanel.this.worker.cancel();
 		}
 	};
 
@@ -118,10 +118,6 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 		this.labelTitle.setVisible(isVisible);
 	}
 
-	public void cancel() {
-		this.worker.cancel();
-	}
-
 	public void reset() {
 		this.progressBar.setProgress(0);
 		this.labelMessage.setText("");
@@ -131,10 +127,6 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 
 	@Override
 	public void update(SingleProgress chunk) {
-
-		// 进入这个方法就表示已经开始运行，更新按钮状态
-//		this.buttonRun.setProcedure(ButtonExecutor.RUNNING);
-
 		if (chunk.isIndeterminate()) {
 			this.progressBar.updateProgressIndeterminate();
 			this.labelMessage.setText(chunk.getMessage());
@@ -148,6 +140,21 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 			this.labelRemainTime.setVisible(true);
 			progressBar.setDrawString(true);
 		}
+	}
+
+	@Override
+	public void running() {
+
+	}
+
+	@Override
+	public void cancelling() {
+
+	}
+
+	@Override
+	public void cancelled() {
+
 	}
 
 	@Override

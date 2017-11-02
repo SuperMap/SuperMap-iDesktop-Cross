@@ -137,6 +137,21 @@ public class DialogSingleProgressEmbedded extends SmDialog implements IWorkerVie
 	}
 
 	@Override
+	public void running() {
+		// do nothing
+	}
+
+	@Override
+	public void cancelling() {
+		// do nothing
+	}
+
+	@Override
+	public void cancelled() {
+		// do nothing
+	}
+
+	@Override
 	public void done() {
 		try {
 			this.labelRemainTime.setText("");
