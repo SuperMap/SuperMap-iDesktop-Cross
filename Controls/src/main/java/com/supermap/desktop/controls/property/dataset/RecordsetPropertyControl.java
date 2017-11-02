@@ -17,6 +17,7 @@ import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.FieldTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.TabularUtilities;
+import com.supermap.desktop.utilities.fieldTypeConverted.FieldTypeConvertedUtilities;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -32,6 +33,7 @@ import java.awt.event.ItemListener;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
 
 /**
  * FieldInfo 添加到 DatasetVector 之后，就只有 Caption 可以进行修改。
@@ -75,6 +77,18 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             }
         }
     };
+
+    /*private transient TableModelListener tableModelListener = new TableModelListener() {
+        @Override
+        public void tableChanged(TableModelEvent e) {
+            if (e.getType() == TableModelEvent.UPDATE && tableRecordset.getEditingColumn() == 3) {
+                int editingRow = tableRecordset.getEditingRow();
+                FieldType fieldType = ((RecordsetPropertyTableModel) tableRecordset.getModel()).getRowData(editingRow).type;
+                FieldType result = FieldTypeConvertedUtilities.getConvertedFieldType(fieldInfos.get(editingRow).getType(), fieldType);
+                tableRecordset.setValueAt(FieldTypeUtilities.getFieldTypeName(result), editingRow, 3);
+            }
+        }
+    };*/
 
     private transient ItemListener itemListener = new ItemListener() {
 
@@ -329,7 +343,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
         }
     }
 
-    // @formatter:off
+// @formatter:off
 
     /**
      * 添加删除行的操作记录，如果删除的是还未应用的添加行，那么直接移除这一条添加行的操作记录即可。
@@ -339,7 +353,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
      *
      * @param deletedData
      */
-    // @formatter:on
+// @formatter:on
     private void addDeletedFieldModifiedData(FieldData deletedData) {
         boolean isAdded = false; // 即将要删除的数据是否之前新增的行
 
@@ -441,122 +455,8 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
         FieldType origin = fieldData.fieldInfo.getType();
         FieldType change = fieldData.type;
         if (!fieldData.isNew) {
-            if (origin != change) {
-                if (origin == FieldType.BYTE) {
-                    if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
-                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR ||
-                            change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.INT16) {
-                    if (change == FieldType.INT32 || change == FieldType.INT64 ||
-                            change == FieldType.SINGLE || change == FieldType.DOUBLE ||
-                            change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.BYTE || change == FieldType.CHAR) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.INT32) {
-                    if (change == FieldType.INT64 || change == FieldType.SINGLE || change == FieldType.DOUBLE ||
-                            change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.INT64) {
-                    if (change == FieldType.SINGLE || change == FieldType.DOUBLE ||
-                            change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16 || change == FieldType.INT32) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.SINGLE) {
-                    if (change == FieldType.DOUBLE || change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16
-                            || change == FieldType.INT32 || change == FieldType.INT64) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.DOUBLE) {
-                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.BYTE || change == FieldType.CHAR || change == FieldType.INT16
-                            || change == FieldType.INT32 || change == FieldType.INT64 || change == FieldType.SINGLE) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.BOOLEAN) {
-                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.DATETIME) {
-                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.LONGBINARY) {
-                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.CHAR) {
-                    if (change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.TEXT) {
-                    if (change == FieldType.WTEXT) {
-                        return true;
-                    } else if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
-                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR || change == FieldType.BYTE) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else if (origin == FieldType.WTEXT) {
-                    if (change == FieldType.TEXT) {
-                        return true;
-                    } else if (change == FieldType.INT16 || change == FieldType.INT32 || change == FieldType.INT64 ||
-                            change == FieldType.SINGLE || change == FieldType.DOUBLE || change == FieldType.CHAR || change == FieldType.BYTE) {
-                        int confirmResult = UICommonToolkit.showConfirmDialog(MessageFormat.format(ControlsProperties.getString("String_ConfirmChangeFieldType"), fieldData.name));
-                        return confirmResult == 0;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                } else {
-                    if (change == FieldType.CHAR || change == FieldType.TEXT || change == FieldType.WTEXT) {
-                        return true;
-                    } else {
-                        Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
-                    }
-                }
-            } else if (fieldData.fieldInfo.getMaxLength() != fieldData.maxLength) {
-                return true;
-            } else if (fieldData.fieldInfo.isRequired() != fieldData.isRequired) {
-                return true;
-            } else if (!fieldData.fieldInfo.getCaption().equals(fieldData.caption)) {
+            if (origin != change || fieldData.fieldInfo.getMaxLength() != fieldData.maxLength ||
+                    fieldData.fieldInfo.isRequired() != fieldData.isRequired || !fieldData.fieldInfo.getCaption().equals(fieldData.caption)) {
                 return true;
             }
         }
@@ -827,8 +727,15 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                         currentCellValueChanged = true;
                     }
                 } else if (columnIndex == FIELD_TYPE) {
-                    this.fieldInfos.get(rowIndex).setType(FieldTypeUtilities.getFieldType((String) aValue));
-                    this.fieldInfos.get(rowIndex).setMaxLength(FieldTypeUtilities.getFieldTypeMaxLength(FieldTypeUtilities.getFieldType((String) aValue)));
+                    FieldType fieldType = FieldTypeUtilities.getFieldType((String) aValue);
+                    if (!this.getRowData(rowIndex).isNew) {
+                        FieldType convertedFieldType = FieldTypeConvertedUtilities.getConvertedFieldType(fieldInfos.get(rowIndex).type, fieldType);
+                        this.fieldInfos.get(rowIndex).setType(convertedFieldType);
+                        this.fieldInfos.get(rowIndex).setMaxLength(FieldTypeUtilities.getFieldTypeMaxLength(convertedFieldType));
+                    } else {
+                        this.fieldInfos.get(rowIndex).setType(fieldType);
+                        this.fieldInfos.get(rowIndex).setMaxLength(FieldTypeUtilities.getFieldTypeMaxLength(fieldType));
+                    }
                     this.fireTableDataChanged();
                     currentCellValueChanged = true;
                 } else if (columnIndex == MAX_LENGTH) {
