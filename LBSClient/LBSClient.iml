@@ -37,7 +37,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.l2fprod:skinlf:6.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jclarion:image4j:0.7" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.addressmatching:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.addressmatching:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.addressmatching.jar!/" />
         </CLASSES>
@@ -46,7 +46,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.navigation:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.navigation:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.navigation.jar!/" />
         </CLASSES>
@@ -55,7 +55,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.networkanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.networkanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.networkanalyst.jar!/" />
         </CLASSES>
@@ -64,7 +64,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.spatialanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.spatialanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.spatialanalyst.jar!/" />
         </CLASSES>
@@ -73,7 +73,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.spatialstatistics:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.spatialstatistics:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.spatialstatistics.jar!/" />
         </CLASSES>
@@ -82,7 +82,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.terrainanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.terrainanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.terrainanalyst.jar!/" />
         </CLASSES>
@@ -91,7 +91,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.analyst.trafficanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.analyst.trafficanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.analyst.trafficanalyst.jar!/" />
         </CLASSES>
@@ -100,7 +100,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.data.conversion:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.data.conversion:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.data.conversion.jar!/" />
         </CLASSES>
@@ -109,7 +109,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.data:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.data:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.data.jar!/" />
         </CLASSES>
@@ -118,7 +118,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.data.processing:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.data.processing:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.data.processing.jar!/" />
         </CLASSES>
@@ -127,7 +127,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.data.topology:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.data.topology:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.data.topology.jar!/" />
         </CLASSES>
@@ -136,7 +136,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.layout:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.layout:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.layout.jar!/" />
         </CLASSES>
@@ -145,7 +145,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.license:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.license:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.license.jar!/" />
         </CLASSES>
@@ -154,7 +154,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.mapping:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.mapping:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.mapping.jar!/" />
         </CLASSES>
@@ -163,7 +163,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.realspace:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.realspace:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.realspace.jar!/" />
         </CLASSES>
@@ -172,7 +172,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.realspace.networkanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.realspace.networkanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.realspace.networkanalyst.jar!/" />
         </CLASSES>
@@ -181,7 +181,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.realspace.spatialanalyst:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.realspace.spatialanalyst:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.realspace.spatialanalyst.jar!/" />
         </CLASSES>
@@ -190,7 +190,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.tilestorage:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.tilestorage:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.tilestorage.jar!/" />
         </CLASSES>
@@ -199,7 +199,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Maven: com.supermap:com.supermap.ui.controls:9.0.0">
+      <library name="Maven: com.supermap:com.supermap.ui.controls:9.0.1">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../bin/com.supermap.ui.controls.jar!/" />
         </CLASSES>
@@ -209,6 +209,11 @@
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mongodb:mongo-java-driver:3.0.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mongodb:bson:3.0.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.poi:poi-ooxml:3.11" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.poi:poi:3.11" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.poi:poi-ooxml-schemas:3.11" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.belerweb:pinyin4j:2.5.1" level="project" />
     <orderEntry type="module" module-name="Controls" scope="PROVIDED" />
     <orderEntry type="library" name="Maven: org.apache.activemq:activemq-core:5.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.activemq:kahadb:5.7.0" level="project" />

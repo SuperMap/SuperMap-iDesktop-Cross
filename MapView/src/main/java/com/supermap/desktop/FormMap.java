@@ -1182,7 +1182,8 @@ public class FormMap extends FormBaseChild implements IFormMap {
 				|| nodeDataType == NodeDataType.THEME_LABEL_ITEM || nodeDataType == NodeDataType.THEME_UNIQUE_ITEM
 				|| nodeDataType == NodeDataType.THEME_RANGE_ITEM || nodeDataType == NodeDataType.LAYER_GROUP
 				|| nodeDataType == NodeDataType.DATASET_IMAGE_COLLECTION || nodeDataType == NodeDataType.DATASET_GRID_COLLECTION
-				|| nodeDataType == NodeDataType.THEME_CUSTOM || nodeDataType==NodeDataType.HEAT_MAP || nodeDataType==NodeDataType.GRID_AGGREGATION;
+				|| nodeDataType == NodeDataType.THEME_CUSTOM || nodeDataType==NodeDataType.HEAT_MAP || nodeDataType==NodeDataType.GRID_AGGREGATION
+				|| nodeDataType == NodeDataType.LAYER_SNAPSHOT;
 	}
 
 	private void showPopupMenu(MouseEvent e) {
