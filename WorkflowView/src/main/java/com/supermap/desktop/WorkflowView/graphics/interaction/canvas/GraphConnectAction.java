@@ -128,7 +128,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		fromData.addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
 			@Override
 			public void updateDataValue(OutputDataValueChangedEvent e) {
-				if (parameters.get(selectedItemIndex) instanceof ISelectionParameter) {
+				if (parameters.get(selectedItemIndex) instanceof ISelectionParameter && parameters.get(selectedItemIndex).isEnabled()) {
 					((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(e.getNewValue());
 				}
 			}

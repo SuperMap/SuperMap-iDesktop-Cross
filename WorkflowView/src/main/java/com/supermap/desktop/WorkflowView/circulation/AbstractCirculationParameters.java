@@ -16,8 +16,5 @@ public class AbstractCirculationParameters extends DefaultParameters {
 		this(null);
 	}
 
-	protected void reset(){
-
-	}
 
 }

@@ -378,7 +378,8 @@ public class ThemeMainContainer extends JPanel {
                     updateLayerProperty(e.getOldLeadSelectionPath());
                 }
                 newLayer = getLayerByPath(e.getNewLeadSelectionPath());
-                if (null != newLayer && null != newLayer.getTheme()) {
+                // fix by lixiaoyao 2017/11/01  When newLayer is not null, but the newLayer disposed has not been considered, now add
+                if (null != newLayer && !newLayer.isDisposed() && null != newLayer.getTheme()) {
                     textFieldThemeLayer.setText(newLayer.getCaption());
                     ThemeGuideFactory.modifyTheme(newLayer);
                 } else {

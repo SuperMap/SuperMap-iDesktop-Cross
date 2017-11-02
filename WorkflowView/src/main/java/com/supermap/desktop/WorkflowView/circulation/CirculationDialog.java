@@ -18,13 +18,13 @@ public class CirculationDialog extends SmDialog {
 	private JButton buttonOK;
 	private JButton buttonClose;
 	private JPanel contentPanel;
-	private Iterator iterator;
+	private CirculationIterator iterator;
 	private AbstractCirculationParameters parameters;
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource().equals(buttonOK)) {
-				parameters.reset();
+				iterator.reset();
 			}
 			CirculationDialog.this.dispose();
 		}
@@ -35,8 +35,8 @@ public class CirculationDialog extends SmDialog {
 		if (isOutput) {
 			parameters = CirculationParametersFactory.getCirculationOutParameters(type, outputData);
 		} else {
-			parameters = CirculationParametersFactory.getCirculationParameters(type,outputData);
-			iterator = (Iterator) parameters;
+			parameters = CirculationParametersFactory.getCirculationParameters(type, outputData);
+			iterator = (CirculationIterator) parameters;
 		}
 
 		this.contentPanel = (JPanel) parameters.getPanel().getPanel();
@@ -65,7 +65,7 @@ public class CirculationDialog extends SmDialog {
 		this.buttonClose.addActionListener(this.actionListener);
 	}
 
-	public Iterator iterator() {
+	public CirculationIterator iterator() {
 		return iterator;
 	}
 }
