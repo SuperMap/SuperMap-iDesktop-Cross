@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
@@ -43,6 +44,7 @@ public class ParameterFieldGroupPanel extends SwingPanel {
 		label.setText(parameterFieldGroup.getDescribe());
 		label.setToolTipText(parameterFieldGroup.getDescribe());
 		tableFieldNameCaptionType.setDataset(parameterFieldGroup.getDataset());
+		ComponentUIUtilities.setName(this.tableFieldNameCaptionType, parameter.getDescribe());
 	}
 
 	private void initListener() {

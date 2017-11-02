@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
@@ -28,6 +29,7 @@ public class ParameterButtonPanel extends SwingPanel implements IParameterPanel 
 		this.parameterButton = (ParameterButton) parameterButton;
 		jButton.setText(this.parameterButton.getDescribe());
 		jButton.setEnabled(((ParameterButton) parameterButton).isEnabled());
+		ComponentUIUtilities.setName(this.jButton, parameter.getDescribe());
 		initLayout();
 		initListeners();
 	}

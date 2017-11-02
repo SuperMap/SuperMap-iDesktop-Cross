@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
@@ -33,6 +34,7 @@ public class ParameterCheckBoxPanel extends SwingPanel implements IParameterPane
 		super(parameterCheckBox);
 		this.parameterCheckBox = (ParameterCheckBox) parameterCheckBox;
 		checkBox.setText(getDescribe());
+		ComponentUIUtilities.setName(this.checkBox, parameter.getDescribe());
 		checkBox.setSelected(Boolean.valueOf(String.valueOf(this.parameterCheckBox.getSelectedItem())));
 		initLayout();
 		initListeners();

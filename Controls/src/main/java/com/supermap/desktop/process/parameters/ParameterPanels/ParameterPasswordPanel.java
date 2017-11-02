@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
@@ -37,6 +38,7 @@ public class ParameterPasswordPanel extends SwingPanel implements IParameterPane
 		label.setText(getDescribe());
 		label.setToolTipText(parameterPassword.getDescribe());
 		passwordField.setText(String.valueOf(parameterPassword.getSelectedItem()));
+		ComponentUIUtilities.setName(this.passwordField, parameter.getDescribe());
 		initLayout();
 		initListeners();
 	}
