@@ -26,7 +26,8 @@ public class CtrlActionCreateRootLayerGroup extends CtrlAction {
 			formMap.getMapControl().getMap().getLayers().addGroup(layerGroupName);
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			int selectRow=layersTree.getRowCount()-1;
-			layersTree.setSelectionRow(selectRow);
+//			layersTree.setSelectionRow(selectRow);
+			layersTree.clearSelection();
 			layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 		}
 //		Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_CurrentFunctionDeveloping"));

@@ -1,17 +1,16 @@
 package com.supermap.desktop.WorkflowView;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
 import com.supermap.desktop.WorkflowView.graphics.connection.ConnectionLineGraph;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingEvent;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingListener;
+import com.supermap.desktop.WorkflowView.graphics.graphs.CirculationGraph;
 import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
 import com.supermap.desktop.WorkflowView.graphics.graphs.OutputGraph;
 import com.supermap.desktop.WorkflowView.graphics.graphs.ProcessGraph;
-import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.GraphConnectAction;
-import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.GraphDragAction;
-import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.PopupMenuAction;
-import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.Selection;
+import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.*;
 import com.supermap.desktop.process.ProcessManager;
 import com.supermap.desktop.process.core.DataMatch;
 import com.supermap.desktop.process.core.IProcess;
@@ -33,6 +32,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,14 +44,17 @@ public class WorkflowCanvas extends GraphCanvas
 		implements GraphRemovingListener,
 		RelationAddedListener<IProcess>, RelationRemovingListener<IProcess> {
 	private Workflow workflow;
-
 	private Map<IProcess, ProcessGraph> processMap = new ConcurrentHashMap<>();
-	private Map<OutputData, OutputGraph> outputMap = new ConcurrentHashMap<>();
+	private Map<OutputData, IGraph> outputMap = new ConcurrentHashMap<>();
 	private Map<IRelation<IProcess>, ConnectionLineGraph> relationMap = new ConcurrentHashMap<>();
 	private Map<OutputData, ConnectionLineGraph> outputLinesMap = new ConcurrentHashMap<>();
 
 	private GraphConnectAction connector = new GraphConnectAction(this);
+	private GraphArithmeticAction arithmeticAction = new GraphArithmeticAction(this);
+	private CirculationAction circulationAction = new CirculationAction(this);
 	private ParametersSettingAction parametersSetting = new ParametersSettingAction(this);
+	private CirculationIterator iterator;
+	private CirculationGraph circulationGraph;
 
 	public WorkflowCanvas(Workflow workflow) {
 		loadWorkflow(workflow);
@@ -60,6 +63,8 @@ public class WorkflowCanvas extends GraphCanvas
 		this.workflow.addRelationRemovingListener(this);
 		new DropTarget(this, new ProcessDropTargetHandler());
 
+		installCanvasAction(GraphArithmeticAction.class, this.arithmeticAction);
+		installCanvasAction(CirculationAction.class, this.circulationAction);
 		installCanvasAction(GraphConnectAction.class, this.connector);
 		installCanvasAction(ParametersSettingAction.class, this.parametersSetting);
 
@@ -73,6 +78,14 @@ public class WorkflowCanvas extends GraphCanvas
 
 	public GraphConnectAction getConnector() {
 		return this.connector;
+	}
+
+	public GraphArithmeticAction getArithmeticAction() {
+		return arithmeticAction;
+	}
+
+	public CirculationAction getCirculationAction() {
+		return circulationAction;
 	}
 
 	private void loadWorkflow(Workflow workflow) {
@@ -288,7 +301,7 @@ public class WorkflowCanvas extends GraphCanvas
 				for (int i = 0; i < outputs.length; i++) {
 
 					// 删除图上输出节点
-					OutputGraph outputGraph = this.outputMap.get(outputs[i]);
+					IGraph outputGraph = this.outputMap.get(outputs[i]);
 					removeGraph(outputGraph);
 
 					// 删除 process 和 output 之间的连线，并从 map 中移除
@@ -411,5 +424,29 @@ public class WorkflowCanvas extends GraphCanvas
 				}
 			}
 		}
+	}
+
+	public Map<OutputData, ConnectionLineGraph> getOutputLinesMap() {
+		return outputLinesMap;
+	}
+
+	public Map<OutputData, IGraph> getOutputMap() {
+		return outputMap;
+	}
+
+	public CirculationIterator getIterator() {
+		return iterator;
+	}
+
+	public void setIterator(CirculationIterator iterator) {
+		this.iterator = iterator;
+	}
+
+	public CirculationGraph getCirculationGraph() {
+		return circulationGraph;
+	}
+
+	public void setCirculationGraph(CirculationGraph circulationGraph) {
+		this.circulationGraph = circulationGraph;
 	}
 }

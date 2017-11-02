@@ -2,19 +2,26 @@ package com.supermap.desktop.WorkflowView.graphics.interaction.canvas;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.WorkflowCanvas;
-import com.supermap.desktop.process.core.DataMatch;
-import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.WorkflowView.graphics.CanvasCursor;
 import com.supermap.desktop.WorkflowView.graphics.GraphicsUtil;
-import com.supermap.desktop.WorkflowView.graphics.connection.*;
-import com.supermap.desktop.WorkflowView.graphics.graphs.AbstractGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.OutputGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.ProcessGraph;
+import com.supermap.desktop.WorkflowView.graphics.connection.ConnectionLineGraph;
+import com.supermap.desktop.WorkflowView.graphics.connection.IConnectable;
+import com.supermap.desktop.WorkflowView.graphics.connection.LineGraph;
+import com.supermap.desktop.WorkflowView.graphics.graphs.*;
 import com.supermap.desktop.WorkflowView.graphics.graphs.decorators.LineErrorDecorator;
+import com.supermap.desktop.process.core.DataMatch;
+import com.supermap.desktop.process.core.IProcess;
+import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
+import com.supermap.desktop.process.parameter.events.OutputDataValueChangedListener;
+import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
+import com.supermap.desktop.process.parameter.interfaces.IParameter;
+import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
+import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
+import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
@@ -24,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 /**
  * Created by highsad on 2017/3/22.
@@ -33,12 +41,13 @@ public class GraphConnectAction extends CanvasActionAdapter {
 	private static String DECORATOR_KEY_LINE_ERROR = "DecoratorLineErrorKey";
 
 	private WorkflowCanvas canvas;
-	private OutputGraph startGraph = null;
+	private IGraph startGraph = null;
 	private ProcessGraph endGraph = null;
 	private JPopupMenu inputsMenu = new JPopupMenu();
 	private LineGraph preview;
 	private LineErrorDecorator errorDecorator;
 	private boolean isConnecting = false;
+	private int selectedItemIndex;
 
 	public GraphConnectAction(WorkflowCanvas canvas) {
 		this.canvas = canvas;
@@ -76,45 +85,24 @@ public class GraphConnectAction extends CanvasActionAdapter {
 			IGraph hit = this.canvas.findGraph(e.getPoint());
 
 			if (isStartValid(hit)) {
-				this.startGraph = (OutputGraph) hit;
+				this.startGraph = hit;
 			} else {
 				this.startGraph = null;
 			}
 		}
 	}
 
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		try {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				if (this.startGraph != null && this.endGraph != null) {
-					final OutputGraph startGraph = this.startGraph;
-					final ProcessGraph endGraph = this.endGraph;
-
-					Type type = startGraph.getProcessData().getType();
-					final Inputs inputs = endGraph.getProcess().getInputs();
-					final InputData[] datas = inputs.getDatas(type);
-
-					for (int i = 0; i < datas.length; i++) {
-						final JMenuItem item = new JMenuItem(datas[i].getName());
-						this.inputsMenu.add(item);
-						item.setEnabled(!datas[i].isBinded());
-
-						item.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								try {
-									DataMatch relation = new DataMatch(startGraph.getProcessGraph().getProcess(), endGraph.getProcess(), startGraph.getName(), item.getText());
-									canvas.getWorkflow().addRelation(relation);
-									inputsMenu.setVisible(false);
-								} catch (Exception e1) {
-									Application.getActiveApplication().getOutput().output(e1);
-								}
-							}
-						});
+					if (this.startGraph instanceof OutputGraph) {
+						bind(e);
+					} else {
+						circulationBind(e);
 					}
-
-					this.inputsMenu.show(this.canvas, e.getX(), e.getY());
 				}
 			}
 		} catch (Exception ex) {
@@ -126,6 +114,82 @@ public class GraphConnectAction extends CanvasActionAdapter {
 			this.startGraph = null;
 			this.endGraph = null;
 		}
+	}
+
+	private void circulationBind(MouseEvent e) {
+		final ProcessGraph endGraph = this.endGraph;
+
+		JMenuItem item;
+		final ArrayList<AbstractParameter> parameters = getSameTypeParameters(endGraph.getProcess());
+		final IGraph fromGraph = startGraph;
+		final IGraph toGraph = endGraph;
+		final OutputData fromData = ((CirculationOutputGraph) startGraph).getOutputData();
+		final Object selectValue = fromData.getValue();
+		fromData.addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
+			@Override
+			public void updateDataValue(OutputDataValueChangedEvent e) {
+				if (parameters.get(selectedItemIndex) instanceof ISelectionParameter && parameters.get(selectedItemIndex).isEnabled()) {
+					((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(e.getNewValue());
+				}
+			}
+		});
+		for (int i = 0; i < parameters.size(); i++) {
+			item = new JMenuItem(parameters.get(i).getDescribe());
+			this.inputsMenu.add(item);
+			item.setEnabled((parameters.get(i)).isEnabled());
+			final JMenuItem finalItem = item;
+			final int finalI = i;
+			item.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						selectedItemIndex = finalI;
+						if (parameters.get(selectedItemIndex) instanceof ISelectionParameter && finalItem.isEnabled()) {
+							//没有想好怎样修改链接关系，此处直接添加链接线,后面再做修改
+							((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(selectValue);
+							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, toGraph);
+							canvas.addGraph(connectionLineGraph);
+							canvas.repaint();
+							inputsMenu.setVisible(false);
+						}
+					} catch (Exception e1) {
+						Application.getActiveApplication().getOutput().output(e1);
+					}
+				}
+			});
+		}
+
+		this.inputsMenu.show(this.canvas, e.getX(), e.getY());
+	}
+
+	private void bind(MouseEvent e) {
+		final OutputGraph startGraph = (OutputGraph) this.startGraph;
+		final ProcessGraph endGraph = this.endGraph;
+
+		Type type = startGraph.getProcessData().getType();
+		final Inputs inputs = endGraph.getProcess().getInputs();
+		final InputData[] datas = inputs.getDatas(type);
+
+		for (int i = 0; i < datas.length; i++) {
+			final JMenuItem item = new JMenuItem(datas[i].getName());
+			this.inputsMenu.add(item);
+			item.setEnabled(!datas[i].isBinded());
+
+			item.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						DataMatch relation = new DataMatch(startGraph.getProcessGraph().getProcess(), endGraph.getProcess(), startGraph.getName(), item.getText());
+						canvas.getWorkflow().addRelation(relation);
+						inputsMenu.setVisible(false);
+					} catch (Exception e1) {
+						Application.getActiveApplication().getOutput().output(e1);
+					}
+				}
+			});
+		}
+
+		this.inputsMenu.show(this.canvas, e.getX(), e.getY());
 	}
 
 
@@ -203,7 +267,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 	}
 
 	private boolean isStartValid(IGraph graph) {
-		return graph instanceof IConnectable && graph instanceof OutputGraph;
+		return graph instanceof IConnectable && (graph instanceof OutputGraph || graph instanceof CirculationOutputGraph);
 	}
 
 	private boolean isEndValid(IGraph graph) {
@@ -224,7 +288,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		// If the specified graph  has already been connected to this startGraph, return false.
 //		if (this.canvas.getConnection().isConnected(this.startGraph, graph)) {
 //			return false;
-//		}
+//		}2
 
 		if (!(graph instanceof ProcessGraph)) {
 			return false;
@@ -237,10 +301,45 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		}
 
 		Inputs inputs = process.getInputs();
-		if (inputs.getDatas(this.startGraph.getProcessData().getType()).length > 0) {
+		if (this.startGraph instanceof OutputGraph && inputs.getDatas(((OutputGraph) this.startGraph).getProcessData().getType()).length > 0) {
+//			OutputData outputData = this.startGraph instanceof OutputGraph ? ((OutputGraph) this.startGraph).getProcessData() : ((CirculationOutputGraph) this.startGraph).getOutputData();
+//			if (inputs.getDatas(outputData.getType()).length > 0) {
 			ret = true;
+//			}
+		} else if (this.startGraph instanceof CirculationOutputGraph) {
+			ret = getSameTypeParameters(process).size() == 0 ? false : true;
 		}
 		return ret;
+	}
+
+	private ArrayList<AbstractParameter> getSameTypeParameters(IProcess process) {
+		ArrayList<AbstractParameter> types = new ArrayList<>();
+		Type startGraphType = ((CirculationOutputGraph) this.startGraph).getOutputData().getType();
+		ArrayList<IParameter> parameters = process.getParameters().getParameters();
+		for (int i = 0, size = parameters.size(); i < size; i++) {
+			getSameTypeParameter(types, parameters.get(i), startGraphType);
+		}
+		return types;
+	}
+
+	private void getSameTypeParameter(ArrayList<AbstractParameter> valueTypes, IParameter parameter, Type startGraphType) {
+		if (parameter instanceof ParameterCombine) {
+			ArrayList<IParameter> parameterList = ((ParameterCombine) parameter).getParameterList();
+			for (int j = 0; j < parameterList.size(); j++) {
+				if (null != ((AbstractParameter) parameterList.get(j)).getValueType()
+						&& ((AbstractParameter) parameterList.get(j)).getValueType().equals(startGraphType)) {
+					valueTypes.add((AbstractParameter) parameterList.get(j));
+				}
+			}
+		} else if (parameter instanceof ParameterSwitch) {
+			int count = ((ParameterSwitch) parameter).getCount();
+			for (int i = 0; i < count; i++) {
+				getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
+			}
+		} else if (null != ((AbstractParameter) parameter).getValueType()
+				&& ((AbstractParameter) parameter).getValueType().equals(startGraphType)) {
+			valueTypes.add((AbstractParameter) parameter);
+		}
 	}
 
 	private boolean isConnected(IGraph from, IGraph to) {

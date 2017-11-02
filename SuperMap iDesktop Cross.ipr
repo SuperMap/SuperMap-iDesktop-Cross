@@ -500,11 +500,9 @@
       <module fileurl="file://$PROJECT_DIR$/SpatialAnalyst/SpatialAnalyst.iml" filepath="$PROJECT_DIR$/SpatialAnalyst/SpatialAnalyst.iml" />
       <module fileurl="file://$PROJECT_DIR$/SuperMap iDesktop Cross.iml" filepath="$PROJECT_DIR$/SuperMap iDesktop Cross.iml" />
       <module fileurl="file://$PROJECT_DIR$/TabularView/TabularView.iml" filepath="$PROJECT_DIR$/TabularView/TabularView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UserConferenceDemo/UserConferenceDemo.iml" filepath="$PROJECT_DIR$/UserConferenceDemo/UserConferenceDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/UserExperience/UserExperience.iml" filepath="$PROJECT_DIR$/UserExperience/UserExperience.iml" />
       <module fileurl="file://$PROJECT_DIR$/WorkflowView/WorkflowView.iml" filepath="$PROJECT_DIR$/WorkflowView/WorkflowView.iml" />
       <module fileurl="file://$PROJECT_DIR$/iDesktop/iDesktop.iml" filepath="$PROJECT_DIR$/iDesktop/iDesktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/idesktop.cross.iml" filepath="$PROJECT_DIR$/idesktop.cross.iml" />
     </modules>
   </component>
   <component name="ProjectPlainTextFileTypeManager">

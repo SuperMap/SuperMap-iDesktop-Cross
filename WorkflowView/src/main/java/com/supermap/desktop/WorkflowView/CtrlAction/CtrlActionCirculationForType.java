@@ -20,16 +20,17 @@ public class CtrlActionCirculationForType extends CtrlAction {
 		IForm form = Application.getActiveApplication().getMainFrame().getFormManager().getActiveForm();
 		if (form instanceof FormWorkflow) {
 			((FormWorkflow) form).getCanvas().getCirculationAction().addCirculationGraph(CirculationType.forType);
+
 		}
 	}
 
 	@Override
 	public boolean enable() {
-		boolean result = false;
-		if (Application.getActiveApplication().getActiveForm() instanceof FormWorkflow
-				&& null == ((FormWorkflow) Application.getActiveApplication().getActiveForm()).iterator()) {
-			result = true;
-		}
-		return result;
+//		boolean result = false;
+//		if (Application.getActiveApplication().getActiveForm() instanceof FormWorkflow
+//				&& null == ((FormWorkflow) Application.getActiveApplication().getActiveForm()).iterator()) {
+//			result = true;
+//		}
+		return Application.getActiveApplication().getActiveForm() instanceof FormWorkflow;
 	}
 }
