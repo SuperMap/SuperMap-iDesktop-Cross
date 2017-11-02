@@ -88,19 +88,19 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	// 平面坐标系定义集合
 	private transient CoordSysDefine noneEarth = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, null,
-			ControlsProperties.getString("String_NoneEarth"));
+			ControlsProperties.getString("String_NoneEarth")).setFolderNode(true);
 	// 投影坐标系统定义集合
 	private transient CoordSysDefine projectionSystem = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM, null,
-			ControlsProperties.getString("String_PrjCoorSys"));
+			ControlsProperties.getString("String_PrjCoorSys")).setFolderNode(true);
 	// 地理坐标系定义集合
 	private transient CoordSysDefine geographyCoordinate = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE, null,
-			ControlsProperties.getString("String_GeoCoordSys"));
+			ControlsProperties.getString("String_GeoCoordSys")).setFolderNode(true);
 	// 自定义坐标系集合
 	private transient CoordSysDefine customCoordinate = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, null,
-			ControlsProperties.getString("String_Customize"));
+			ControlsProperties.getString("String_Customize")).setFolderNode(true);
 	// 收藏夹坐标系集合
 	private transient CoordSysDefine favoriteCoordinate = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, null,
-			ControlsProperties.getString("String_MyFavorite"));
+			ControlsProperties.getString("String_MyFavorite")).setFolderNode(true);
 
 	// 当前选中的坐标系
 	private transient CoordSysDefine currentPrjDefine = null;
@@ -675,7 +675,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 		for (int i = 0; i < units.length; i++) {
 			Unit unit = (Unit) units[i];
-			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, this.noneEarth, unit.toString());
+			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, this.noneEarth, unit.toString()).setFolderNode(false);
 			coordSysDefine.setCoordSysCode(unit.value());
 		}
 	}
@@ -701,7 +701,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private CoordSysDefine createPrjCoordSysDefine(Node prjCoordSysNode, CoordSysDefine coordSysDefine, Document doc) {
-		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM).setFolderNode(false);
 
 		NodeList nodes = prjCoordSysNode.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -712,7 +712,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					String groupCaption = node.getTextContent();
 					CoordSysDefine parent = coordSysDefine.getChildByCaption(groupCaption);
 					if (parent == null) {
-						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption);
+						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption).setFolderNode(true);
 					}
 					parent.add(result);
 				} else if (node.getNodeName().equalsIgnoreCase(XMLProjectionTag.PRJCOORDSYS_CAPTION)) {
@@ -760,7 +760,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private CoordSysDefine createGeoCoordSysDefine(Node geoCoordSysNode, CoordSysDefine coordSysDefine, Document doc) {
-		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+		CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE).setFolderNode(false);
 
 		NodeList nodes = geoCoordSysNode.getChildNodes();
 		for (int i = 0; i < nodes.getLength(); i++) {
@@ -770,7 +770,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					String groupCaption = node.getTextContent();
 					CoordSysDefine parent = coordSysDefine.getChildByCaption(groupCaption);
 					if (parent == null) {
-						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption);
+						parent = new CoordSysDefine(coordSysDefine.getCoordSysType(), coordSysDefine, groupCaption).setFolderNode(true);
 					}
 					parent.add(result);
 				} else if (node.getNodeName().equalsIgnoreCase(GEOCOORDSYS_CAPTION)) {
@@ -1238,11 +1238,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * @return
 	 */
 	private boolean isDeleteEnable() {
-		return currentPrjDefine != null && currentPrjDefine.getParent() != null
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE
-				&& currentPrjDefine.getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE
+		return this.currentPrjDefine != null && !this.currentPrjDefine.getIsFolderNode()
 				&& (currentPrjDefine.getParent().getCoordSysType() == CoordSysDefine.CUSTOM_COORDINATE ||
 				currentPrjDefine.getParent().getCoordSysType() == CoordSysDefine.FAVORITE_COORDINATE);
+
 	}
 
 	private boolean isNewGroupEnable() {
@@ -1251,14 +1250,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private boolean isNewGeoCoordsysEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE;
 
 	}
 
 	private boolean isNewPrjCoordsysEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM;
 
 	}
@@ -1272,15 +1271,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	private boolean isExportEnable() {
-		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.NONE_ERRTH;
+		return this.currentPrjDefine != null && this.currentPrjDefine.getCoordSysType() != CoordSysDefine.NONE_ERRTH &&
+				(!this.currentPrjDefine.getIsFolderNode() || this.currentPrjDefine.size() > 0);
 	}
 
 	private boolean isAddFavoritesEnable() {
 		return this.currentPrjDefine != null &&
-				this.currentPrjDefine.size() == 0 &&
-				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE &&
-				this.currentPrjDefine.getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE &&
+				!this.currentPrjDefine.getIsFolderNode() &&
 				this.currentPrjDefine.getParent().getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE &&
 				!this.currentPrjDefine.getCoordSysTypeDescription().equals(ControlsProperties.getString("String_NoneEarth"));
 	}
@@ -1303,7 +1300,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCoordSysCode(this.currentPrjDefine.getCoordSysCode());
 				result.setGeoCoordSys(this.currentPrjDefine.getGeoCoordSys());
 				result.setCaption(this.currentPrjDefine.getCaption());
-				CoordSysDefine userDefine = this.favoriteCoordinate.getChildByCaption(DEFAULT_GROUPCAPTION);
+				CoordSysDefine userDefine = this.favoriteCoordinate.getChildByCaption(DEFAULT_GROUPCAPTION).setFolderNode(true);
 				if (userDefine == null) {
 					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION);
 				}
@@ -1321,7 +1318,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCaption(this.currentPrjDefine.getCaption());
 				CoordSysDefine userDefine = this.favoriteCoordinate.getChildByCaption(DEFAULT_GROUPCAPTION);
 				if (userDefine == null) {
-					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION);
+					userDefine = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, this.favoriteCoordinate, DEFAULT_GROUPCAPTION).setFolderNode(true);
 				}
 				if (userDefine.add(result)) {
 					addToTree(result, DEFAULT_GROUPCAPTION, userDefine, grantParentName);
@@ -1340,12 +1337,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		if (geography.showDialog() == DialogResult.OK) {
 			GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
+			result.setCoordSysCode(-1);
 			result.setGeoCoordSys(geoCoordSys);
 			result.setCaption(geoCoordSys.getName());
 			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefineGeoParentName);
 			if (userDefine == null) {
-				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName);
+				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
 				String grantParentName = ControlsProperties.getString("String_Customize");
@@ -1372,7 +1369,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			result.setCaption(prjCoordSys.getName());
 			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefinePrjParentName);
 			if (userDefine == null) {
-				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName);
+				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
 				String grantParentName = ControlsProperties.getString("String_Customize");
@@ -1412,7 +1409,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void importCoordsys(PrjCoordSys prjCoordSys) {
 		if (prjCoordSys != null && !prjCoordSys.getType().equals(PrjCoordSysType.PCS_NON_EARTH)) {
-			CoordSysDefine result = null;
+			CoordSysDefine result;
 			if (prjCoordSys.getType().equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE)) {
 				result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
 				result.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
@@ -1422,7 +1419,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
 			result.setCaption(prjCoordSys.getName());
-			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
+			CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName).setFolderNode(true);
 			if (userDefine == null) {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName);
 			}
@@ -1459,27 +1456,35 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		}
 		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
 			// 开始进行投影导出
-			if (this.currentPrjDefine.size() > 1) {
+			if (this.currentPrjDefine.getIsFolderNode()) {
+				CoordSysDefine[] allCoordSysDefine = this.currentPrjDefine.getAllLeaves().clone();
 				String folderName = prjFileExportFileChoose.getFilePath().replace(".noExist", "");
 				if (!FileUtilities.exists(folderName)) {
 					File file = new File(folderName);
 					file.mkdir();
 				}
-				for (int i = 0; i < this.currentPrjDefine.size(); i++) {
-					PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
-					if (this.currentPrjDefine.get(i).getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentPrjDefine.get(i)).clone();
-						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
-						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-						exportPrjCoordSys.setName(exportGeoCoordSys.getName());
-					} else if (this.currentPrjDefine.get(i).getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-						exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentPrjDefine.get(i)).clone();
-					}
-					if (exportPrjCoordSys.toFile(folderName + "//" + exportPrjCoordSys.getName() + ".xml", PrjFileVersion.UGC60)) {
-						successedNum++;
+				for (int i = 0; i < allCoordSysDefine.length; i++) {
+					if (!allCoordSysDefine[i].getIsFolderNode()) {
+						PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
+						if (allCoordSysDefine[i].getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+							GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(allCoordSysDefine[i]).clone();
+							exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+							exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+							exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+						} else if (allCoordSysDefine[i].getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+							try {
+								exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(allCoordSysDefine[i]).clone();
+							} catch (Exception ex) {
+								continue;
+							}
+						}
+						if (export(exportPrjCoordSys, folderName + "//" + exportPrjCoordSys.getName() + ".xml")) {
+							successedNum++;
+						}
 					}
 				}
 			} else {
+				// 选中非文件夹节点，直接导出即可
 				PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
 				if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 					GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentPrjDefine).clone();
@@ -1489,7 +1494,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				} else if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 					exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentPrjDefine).clone();
 				}
-				if (exportPrjCoordSys.toFile(prjFileExportFileChoose.getFilePath().replace("noExist", "xml"), PrjFileVersion.UGC60)) {
+				if (export(exportPrjCoordSys, prjFileExportFileChoose.getFilePath().replace("noExist", "xml"))) {
 					successedNum++;
 				}
 			}
@@ -1500,6 +1505,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
 			}
 		}
+	}
+
+	/**
+	 * 导出通用方法
+	 */
+	public Boolean export(PrjCoordSys prjCoordSys, String path) {
+		Boolean isSuccess = false;
+		isSuccess = prjCoordSys.toFile(path, PrjFileVersion.UGC60);
+		return isSuccess;
 	}
 
 	private void addGeoCoorSysToDocument(CoordSysDefine result, Document targetDocument, String path) {
