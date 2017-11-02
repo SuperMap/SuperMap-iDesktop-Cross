@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.PanelPropertyChangedListener;
 import com.supermap.desktop.process.parameter.events.ParameterCombineBuildPanelListener;
@@ -61,7 +62,7 @@ public class ParameterCombinePanel extends SwingPanel implements ParameterCombin
 				x++;
 			}
 		}
-
+		ComponentUIUtilities.setName(panel, parameter.getDescribe());
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.data.DatasetVector;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListener;
@@ -40,6 +41,8 @@ public class ParameterMultiFieldSetPanel extends SwingPanel {
 	private void init() {
 		scrollPane = new JScrollPane();
 		multiFieldsChooseTable = new SmMultiFieldsChooseTable(this.multiFieldSet.getDatasetVector());
+		ComponentUIUtilities.setName(this.scrollPane, "ParameterMultiFieldSetPanel" + "_scrollPane");
+		ComponentUIUtilities.setName(this.multiFieldsChooseTable, "ParameterMultiFieldSetPanel" + "_multiFieldsChooseTable");
 		initLayout();
 		registEvents();
 	}

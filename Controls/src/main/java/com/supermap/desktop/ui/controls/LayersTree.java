@@ -6,6 +6,7 @@ import com.supermap.data.GeoStyle;
 import com.supermap.data.SymbolType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
+import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.SortUIUtilities;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
@@ -17,6 +18,8 @@ import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.mapping.*;
 
 import javax.swing.*;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -819,6 +822,7 @@ public class LayersTree extends JTree {
 	private class TreeLayerGroupRemovedListener implements LayerGroupRemovedListener {
 		@Override
 		public void layerGroupRemoved(LayerGroupRemovedEvent event) {
+			LayersTree.this.reload();
 			LayerGroup layerGroup = event.getRemovedGroup();
 			LayerGroup parentGroup = event.getParentGroup();
 
@@ -2065,6 +2069,20 @@ public class LayersTree extends JTree {
 			dropTargetNode = null;
 			draggedNode = null;
 			LayersTree.this.repaint();
+		}
+	}
+
+	private class MyTreeExpansionListener implements TreeExpansionListener{
+
+		@Override
+		public void treeExpanded(TreeExpansionEvent event){
+			IFormMap formMap=(IFormMap) Application.getActiveApplication().getActiveForm();
+			formMap.getMapControl().getMap().getLayers();
+		}
+
+		@Override
+		public void treeCollapsed(TreeExpansionEvent event){
+
 		}
 	}
 }

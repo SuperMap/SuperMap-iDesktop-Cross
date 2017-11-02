@@ -5,6 +5,7 @@ import com.supermap.data.FieldInfo;
 import com.supermap.data.FieldInfos;
 import com.supermap.data.FieldType;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
@@ -40,7 +41,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 	public ParameterFieldComboBoxPanel(IParameter parameter) {
 		super(parameter);
 		this.parameterFieldComboBox = (ParameterFieldComboBox) parameter;
-		comboBox.setName("ParameterFieldComboBoxPanel_" + parameter.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
 		parameterFieldComboBox.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {

@@ -3,6 +3,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
@@ -52,6 +53,8 @@ public class ParameterSaveDatasetTablePanel extends SwingPanel implements IParam
 	private void initComponent() {
 		labelDatasource =new JLabel(ControlsProperties.getString("String_Label_Datasource"));
 		datasourceComboBox = new DatasourceComboBox();
+		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescribe() + "_comboBox");
+		ComponentUIUtilities.setName(this.table, parameter.getDescribe() + "_table");
 		initTable();
 		initParameterSaveDatasetTable();
 	}

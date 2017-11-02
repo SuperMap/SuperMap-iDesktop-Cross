@@ -3,6 +3,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
@@ -46,6 +47,7 @@ public class ParameterDatasourcePanel extends SwingPanel {
 		panel.setLayout(new GridBagLayout());
 		panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setFill(GridBagConstraints.NONE));
 		panel.add(datasourceComboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 5, 0, 0));
+		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescribe());
 	}
 
 	private void initListener() {

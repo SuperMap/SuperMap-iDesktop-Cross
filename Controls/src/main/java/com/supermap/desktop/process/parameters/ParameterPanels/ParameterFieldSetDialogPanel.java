@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
@@ -33,6 +34,7 @@ public class ParameterFieldSetDialogPanel extends SwingPanel {
 	private void initComponents() {
 		String describe = parameterFieldSetDialog.getDescribe() == null ? CommonProperties.getString("String_FieldsSetting") : parameterFieldSetDialog.getDescribe();
 		button.setText(describe);
+		ComponentUIUtilities.setName(this.button, parameter.getDescribe());
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
