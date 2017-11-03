@@ -1,4 +1,4 @@
-package com.supermap.desktop.mapview.MapCache;
+package com.supermap.desktop.mapview.mapCache;
 
 import com.supermap.data.SteppedEvent;
 import com.supermap.data.SteppedListener;
