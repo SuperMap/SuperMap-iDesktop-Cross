@@ -34,7 +34,6 @@ import org.w3c.dom.Element;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by highsad on 2017/1/6.
@@ -408,7 +407,7 @@ public class FormWorkflow extends FormBaseChild implements IFormWorkflow {
 	}
 
 	public void stop() {
-		if (tasksManager.isExecuting()) {
+		if (tasksManager.isRunning()) {
 			tasksManager.cancel();
 		}
 	}

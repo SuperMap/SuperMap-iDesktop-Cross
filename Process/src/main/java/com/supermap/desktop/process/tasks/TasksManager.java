@@ -82,7 +82,7 @@ public class TasksManager {
 		return status;
 	}
 
-	public void setStatus(int status){
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -159,7 +159,7 @@ public class TasksManager {
 		return true;
 	}
 
-	public boolean isExecuting() {
+	public boolean isRunning() {
 		return this.status == WORKFLOW_STATE_RUNNING;
 	}
 

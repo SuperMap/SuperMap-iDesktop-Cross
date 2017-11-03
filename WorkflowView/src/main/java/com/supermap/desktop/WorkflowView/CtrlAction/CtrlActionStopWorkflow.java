@@ -21,4 +21,14 @@ public class CtrlActionStopWorkflow extends CtrlAction {
 			((FormWorkflow) activeForm).stop();
 		}
 	}
+
+	@Override
+	public boolean enable() {
+		IForm activeForm = Application.getActiveApplication().getActiveForm();
+		if (activeForm instanceof FormWorkflow) {
+			return ((FormWorkflow) activeForm).getTasksManager().isRunning();
+		}
+
+		return false;
+	}
 }
