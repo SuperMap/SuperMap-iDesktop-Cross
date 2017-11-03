@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 
 /**
  * Created by xie on 2017/10/27.
@@ -20,10 +19,11 @@ public class CirculationDialog extends SmDialog {
 	private JPanel contentPanel;
 	private CirculationIterator iterator;
 	private AbstractCirculationParameters parameters;
+	private boolean isOutput;
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource().equals(buttonOK)) {
+			if (e.getSource().equals(buttonOK) && !isOutput) {
 				iterator.reset();
 			}
 			CirculationDialog.this.dispose();
@@ -32,6 +32,7 @@ public class CirculationDialog extends SmDialog {
 
 	public CirculationDialog(CirculationType type, boolean isOutput, OutputData outputData) {
 		super();
+		this.isOutput = isOutput;
 		if (isOutput) {
 			parameters = CirculationParametersFactory.getCirculationOutParameters(type, outputData);
 		} else {
@@ -42,7 +43,7 @@ public class CirculationDialog extends SmDialog {
 		this.contentPanel = (JPanel) parameters.getPanel().getPanel();
 		this.setTitle(type.getName());
 		init();
-		int size = 0;
+		int size;
 		if (parameters.getParameters().size() == 1) {
 			size = 120;
 		} else {
