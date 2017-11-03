@@ -435,9 +435,10 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             fieldInfo.setMaxLength(fieldData.maxLength);
             fieldInfo.setType(fieldData.type);
             fieldInfo.setRequired(fieldData.isRequired);
-            Application.getActiveApplication().getOutput().output(MessageFormat.format(fieldInfos.modify(fieldData.name, fieldInfo) ?
-                    ControlsProperties.getString("String_ChangeFieldSuccessful") :
-                    ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name));
+            Application.getActiveApplication().getOutput().output(fieldInfos.modify(fieldData.name, fieldInfo) ?
+                    MessageFormat.format(ControlsProperties.getString("String_ChangeFieldSuccessful"), fieldData.name) :
+                    MessageFormat.format(ControlsProperties.getString("String_ChangeFieldFailed"), fieldData.name)
+                            + infoChangeFieldFailed(fieldData.type, datasetVector.getDatasource().getEngineType()));
         }
     }
 
@@ -455,6 +456,22 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
         if (!e.getValueIsAdjusting()) {
             setComponentsEnabled();
         }
+    }
+
+    private String infoChangeFieldFailed(FieldType fieldType, EngineType engineType) {
+        String info = null;
+        if (fieldType == FieldType.LONGBINARY) {
+            if (engineType.equals(EngineType.ORACLEPLUS)) {
+                info = ControlsProperties.getString("String_FailInfo_FieldValueIsNull");
+            } else if (engineType.equals(EngineType.KINGBASE)) {
+                info = ControlsProperties.getString("String_FailInfo_FieldValueIsNotNull");
+            }
+            info += ControlsProperties.getString("String_FailInfo_Oracle_LongBinary");
+        } else if (engineType.equals(EngineType.POSTGRESQL) && (fieldType == FieldType.TEXT || fieldType == FieldType.CHAR)) {
+            info = ControlsProperties.getString("String_FailInfo_Oracle_TEXTorCHAR");
+        }
+
+        return info;
     }
 
     private boolean canRemove() {
