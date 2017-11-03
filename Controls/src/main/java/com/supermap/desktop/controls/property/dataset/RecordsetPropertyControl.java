@@ -78,18 +78,6 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
         }
     };
 
-    /*private transient TableModelListener tableModelListener = new TableModelListener() {
-        @Override
-        public void tableChanged(TableModelEvent e) {
-            if (e.getType() == TableModelEvent.UPDATE && tableRecordset.getEditingColumn() == 3) {
-                int editingRow = tableRecordset.getEditingRow();
-                FieldType fieldType = ((RecordsetPropertyTableModel) tableRecordset.getModel()).getRowData(editingRow).type;
-                FieldType result = FieldTypeConvertedUtilities.getConvertedFieldType(fieldInfos.get(editingRow).getType(), fieldType);
-                tableRecordset.setValueAt(FieldTypeUtilities.getFieldTypeName(result), editingRow, 3);
-            }
-        }
-    };*/
-
     private transient ItemListener itemListener = new ItemListener() {
 
         @Override
@@ -311,6 +299,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
         this.checkBoxShowWarning.setSelected(this.showWarning);
         ((RecordsetPropertyTableModel) this.tableRecordset.getModel()).removeAllRows();
         ((RecordsetPropertyTableModel) this.tableRecordset.getModel()).initializeRows(this.fieldInfos);
+        tableRecordset.editingStopped(null);
     }
 
     private void buttonRemoveClicked() {
@@ -443,6 +432,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             fieldInfo.setName(fieldData.name);
             fieldInfo.setCaption(fieldData.caption);
             fieldInfo.setDefaultValue(fieldData.defaultValue);
+            fieldInfo.setMaxLength(fieldData.maxLength);
             fieldInfo.setType(fieldData.type);
             fieldInfo.setRequired(fieldData.isRequired);
             Application.getActiveApplication().getOutput().output(MessageFormat.format(fieldInfos.modify(fieldData.name, fieldInfo) ?
@@ -452,10 +442,8 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
     }
 
     private boolean isFieldChangeLegal(FieldData fieldData) {
-        FieldType origin = fieldData.fieldInfo.getType();
-        FieldType change = fieldData.type;
         if (!fieldData.isNew) {
-            if (origin != change || fieldData.fieldInfo.getMaxLength() != fieldData.maxLength ||
+            if (fieldData.fieldInfo.getType() != fieldData.type || fieldData.fieldInfo.getMaxLength() != fieldData.maxLength ||
                     fieldData.fieldInfo.isRequired() != fieldData.isRequired || !fieldData.fieldInfo.getCaption().equals(fieldData.caption)) {
                 return true;
             }
@@ -609,8 +597,6 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
          */
         @Override
         public boolean isCellEditable(int row, int column) {
-            boolean isEditable = false;
-
             if (datasetVector.isReadOnly() || datasetVector.getType() == DatasetType.VECTORCOLLECTION) {
                 return false;
             }
@@ -631,7 +617,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                 if (column == FIELD_TYPE || column == IS_REQUIRED) {
                     return isEngineSupport;
                 } else if (column == MAX_LENGTH) {
-                    return isEngineSupport && (type == FieldType.TEXT || type == FieldType.WTEXT);
+                    return isEngineSupport && type == FieldType.TEXT;
                 }
                 return false;
             }
