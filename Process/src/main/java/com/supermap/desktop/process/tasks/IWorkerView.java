@@ -6,5 +6,11 @@ package com.supermap.desktop.process.tasks;
 public interface IWorkerView<V> {
 	void update(V chunk);
 
+	void running();
+
+	void cancelling();
+
+	void cancelled();
+
 	void done();
 }
