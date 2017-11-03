@@ -40,8 +40,6 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 	private Runnable cancel = new Runnable() {
 		@Override
 		public void run() {
-			labelMessage.setText(ControlsProperties.getString("String_Canceling"));
-			labelRemainTime.setText("");
 			SingleProgressPanel.this.worker.cancel();
 		}
 	};
@@ -144,27 +142,28 @@ public class SingleProgressPanel extends JPanel implements IWorkerView<SinglePro
 
 	@Override
 	public void running() {
-
+		this.buttonRun.setProcedure(ButtonExecutor.RUNNING);
 	}
 
 	@Override
 	public void cancelling() {
-
+		this.labelMessage.setText(ControlsProperties.getString("String_Canceling"));
+		this.labelRemainTime.setText("");
+		this.labelRemainTime.setVisible(false);
+		this.buttonRun.setProcedure(ButtonExecutor.CANCELLING);
 	}
 
 	@Override
 	public void cancelled() {
-
+		this.labelMessage.setText(ProcessProperties.getString("String_Cancelled"));
+		this.progressBar.setProgress(0);
+		this.buttonRun.setProcedure(ButtonExecutor.COMPLETED);
 	}
 
 	@Override
 	public void done() {
+		this.labelRemainTime.setText("");
 		this.labelRemainTime.setVisible(false);
 		this.buttonRun.setProcedure(ButtonExecutor.READY);
-
-		if (this.worker.isCancelled()) {
-			this.labelMessage.setText(ProcessProperties.getString("String_Cancelled"));
-			this.progressBar.setProgress(0);
-		}
 	}
 }
