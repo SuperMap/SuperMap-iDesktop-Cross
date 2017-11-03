@@ -1738,12 +1738,12 @@ public class SubstanceCoreUtilities {
 	 * @throws UiThreadingViolationException If the component is created off Event Dispatch Thread.
 	 */
 	public static void testComponentCreationThreadingViolation(Component comp) {
-		if (!SwingUtilities.isEventDispatchThread()) {
-			UiThreadingViolationException uiThreadingViolationError = new UiThreadingViolationException(
-					"Component creation must be done on Event Dispatch Thread");
-			uiThreadingViolationError.printStackTrace(System.err);
-			throw uiThreadingViolationError;
-		}
+//		if (!SwingUtilities.isEventDispatchThread()) {
+//			UiThreadingViolationException uiThreadingViolationError = new UiThreadingViolationException(
+//					"Component creation must be done on Event Dispatch Thread");
+//			uiThreadingViolationError.printStackTrace(System.err);
+//			throw uiThreadingViolationError;
+//		}
 	}
 
 	/**

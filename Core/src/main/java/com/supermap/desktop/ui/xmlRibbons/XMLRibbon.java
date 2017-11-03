@@ -42,7 +42,6 @@ public class XMLRibbon extends XMLCommand {
 				}
 			}
 		}
-
 	}
 
 	public XMLCommand getCommandAtIndex(int i) {

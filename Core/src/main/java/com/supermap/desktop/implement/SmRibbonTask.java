@@ -2,7 +2,13 @@ package com.supermap.desktop.implement;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.ui.XMLCommand;
-import com.supermap.desktop.ui.xmlRibbons.*;
+import com.supermap.desktop.ui.xmlRibbons.SmXMLRibbonBand;
+import com.supermap.desktop.ui.xmlRibbons.SmXmlGallery;
+import com.supermap.desktop.ui.xmlRibbons.SmXmlRibbonButton;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbon;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbonBand;
+import com.supermap.desktop.ui.xmlRibbons.XmlGallery;
+import com.supermap.desktop.ui.xmlRibbons.XmlRibbonButton;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 
@@ -41,17 +47,22 @@ public class SmRibbonTask extends RibbonTask {
 		try {
 			if (group.getVisible() && group.getLength() > 0 && !"RecentFile".equals(group.getID())) {
 				SmXMLRibbonBand smXMLRibbonBand = new SmXMLRibbonBand(group);
+				int count = 0;
 				for (int i = 0; i < group.getLength(); i++) {
 					XMLCommand commandAtIndex = group.getCommandAtIndex(i);
 					if (commandAtIndex instanceof XmlRibbonButton) {
+						count++;
 						SmXmlRibbonButton commandButton = new SmXmlRibbonButton((XmlRibbonButton) commandAtIndex);
 						commandButton.putInBand(smXMLRibbonBand);
 					} else if (commandAtIndex instanceof XmlGallery) {
+						count++;
 						SmXmlGallery smXmlGallery = new SmXmlGallery((XmlGallery) commandAtIndex);
 						smXmlGallery.putInBand(smXMLRibbonBand);
 					}
 				}
-				parent.addBands(smXMLRibbonBand);
+				if (count > 0) {
+					parent.addBands(smXMLRibbonBand);
+				}
 
 
 //					ArrayList<JCommandToggleButton> jCommandToggleButtons = new ArrayList<>();

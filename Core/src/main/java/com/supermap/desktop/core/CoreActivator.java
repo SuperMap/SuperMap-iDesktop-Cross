@@ -42,6 +42,7 @@ public class CoreActivator implements BundleActivator {
 	 */
 	@Override
 	public void start(final BundleContext context) throws Exception {
+
 		//本机许可是否满足java版本需求
 		if (LicenseManager.valiteLicense()) {
 			//yes
@@ -125,6 +126,7 @@ public class CoreActivator implements BundleActivator {
 	}
 
 	private void startUp(final BundleContext context) {
+
 		// 设置没有被捕捉的异常的处理方法
 		Thread.setDefaultUncaughtExceptionHandler(new SmUncaughtExceptionHandler());
 		LogUtilities.outPut(LogUtilities.getSeparator());

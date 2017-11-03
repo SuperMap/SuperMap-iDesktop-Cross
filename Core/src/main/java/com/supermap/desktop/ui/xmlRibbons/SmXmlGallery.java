@@ -6,9 +6,10 @@ public class SmXmlGallery {
 
 	public SmXmlGallery(XmlGallery xmlGallery) {
 		this.xmlGallery = xmlGallery;
+
 	}
 
 	public void putInBand(SmXMLRibbonBand smXMLRibbonBand) {
-
+//		smXMLRibbonBand.addRibbonGallery(xmlGallery.getLabel(),);
 	}
 }
