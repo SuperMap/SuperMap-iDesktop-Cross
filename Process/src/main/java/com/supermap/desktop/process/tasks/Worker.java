@@ -1,5 +1,7 @@
 package com.supermap.desktop.process.tasks;
 
+import com.supermap.desktop.Application;
+
 import javax.swing.*;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -8,9 +10,23 @@ import java.util.concurrent.ExecutionException;
  * Created by highsad on 2017/9/20.
  */
 public abstract class Worker<V extends Object> {
+	private final static int NORMAL = 1;
+	private final static int CANCELLING = 2;
+	private final static int CANCELLED = 3;
+	private final static int RUNNING = 4;
+	private final static int DONE = 5;
+
 	private IWorkerView<V> view;
-	private volatile boolean isCancelled = false;
-	private volatile boolean isRunning = false;
+	private volatile int state = NORMAL;
+	//	private volatile boolean isCancelled = false;
+//	private volatile boolean isRunning = false;
+
+	/**
+	 * 是否是在进行重置。因为内置的 SwingWorker 每次执行都会构造新的实例，
+	 * 所以我们在执行之前就要检查，如果已有 SwingWorker 正在工作就要中断当前工作，
+	 * 但是这个过程需要悄悄的做，不能影响到当前 Worker 的状态。
+	 */
+	private volatile boolean isResetting = false;
 	private String title;
 	private SwingWorkerSub workerSub;
 
@@ -38,37 +54,100 @@ public abstract class Worker<V extends Object> {
 		return this.workerSub.get() == null ? false : this.workerSub.get();
 	}
 
+	/**
+	 * override 该方法需要调用 super.cancel() 以设置正确的状态。
+	 */
 	public void cancel() {
-		this.isCancelled = true;
+		this.state = CANCELLING;
+		invokeUpdateView(this.state);
 	}
 
+	/**
+	 * 是否正在取消，取消操作可能会进行一些耗时的回滚，只有回滚完成才算是已经取消。
+	 *
+	 * @return
+	 */
+	public boolean isCancelling() {
+		return this.state == CANCELLING;
+	}
+
+	/**
+	 * 是否已经取消，取消操作可能会进行一些耗时的回滚，只有回滚完成才算是已经取消。
+	 *
+	 * @return
+	 */
 	public boolean isCancelled() {
-		return this.isCancelled;
+		return this.state == CANCELLED;
+	}
+
+	private void invokeUpdateView(final int state) {
+		try {
+			if (SwingUtilities.isEventDispatchThread()) {
+				updateView(state);
+			} else {
+				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
+					public void run() {
+						Worker.this.updateView(state);
+					}
+				});
+			}
+		} catch (Exception e) {
+			Application.getActiveApplication().getOutput().output(e);
+		}
+	}
+
+	private void updateView(int state) {
+		if (this.view == null) {
+			return;
+		}
+
+		if (state == RUNNING) {
+			this.view.running();
+		} else if (state == CANCELLING) {
+			if (!this.isResetting) {
+				this.view.cancelling();
+			}
+		} else if (state == CANCELLED) {
+			if (!this.isResetting) {
+				this.view.cancelled();
+			}
+		} else if (state == DONE) {
+			this.view.done();
+		}
 	}
 
 	public boolean isRunning() {
-		return this.isRunning;
+		return this.state == RUNNING;
 	}
 
 	public final void execute() {
 		if (this.workerSub != null && !this.workerSub.isDone()) {
-			cancel();
 			try {
+				this.isResetting = true;
+				cancel();
 
 				// 等待取消完成
 				this.workerSub.get();
-				this.isCancelled = false;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				e.printStackTrace();
+			} finally {
+				this.isResetting = false;
+				this.state = Worker.NORMAL;
 			}
 		}
 
-		// 由于 SwingWorker 不支持重新执行，因此如果需要重复执行请构造一个新的 SwingWOrker
-		this.isRunning = true;
-		this.workerSub = new SwingWorkerSub();
-		this.workerSub.execute();
+		// 由于 SwingWorker 不支持重新执行，因此如果需要重复执行请构造一个新的 SwingWorker
+		try {
+			this.state = Worker.RUNNING;
+			invokeUpdateView(this.state);
+			this.workerSub = new SwingWorkerSub();
+			this.workerSub.execute();
+		} catch (Exception e) {
+			Application.getActiveApplication().getOutput().output(e);
+		}
 	}
 
 	protected abstract boolean doWork();
@@ -95,7 +174,7 @@ public abstract class Worker<V extends Object> {
 				// 然后再调用 SwingWorker 的原生 cancel 操作，设置 SwingWorker 的状态
 				// 最后才会调用 done 方法，此时无论自定义的 cancel 状态还是 SwingWorker 的
 				// cancel 状态都是正确的
-				if (isCancelled()) {
+				if (Worker.this.state == Worker.CANCELLING) {
 					cancel(false);
 				}
 			}
@@ -118,8 +197,13 @@ public abstract class Worker<V extends Object> {
 
 		@Override
 		protected void done() {
-			view.done();
-			isRunning = false;
+			if (Worker.this.state == Worker.CANCELLING) {
+				Worker.this.state = Worker.CANCELLED;
+				invokeUpdateView(Worker.this.state);
+			} else if (Worker.this.state == Worker.RUNNING) {
+				Worker.this.state = Worker.DONE;
+				invokeUpdateView(Worker.this.state);
+			}
 		}
 	}
 }

@@ -37,6 +37,7 @@ public class ProcessWorker extends Worker<SingleProgress> {
 
 	@Override
 	public void cancel() {
+		super.cancel();
 		this.process.cancel();
 	}
 
@@ -44,7 +45,7 @@ public class ProcessWorker extends Worker<SingleProgress> {
 	public boolean isCancelled() {
 
 		// 保证任何时候 process 的取消状态都与 worker 相同
-		return this.process.isCancelled();
+		return super.isCancelled() && this.process.isCancelled();
 	}
 
 	private class RunningHandler implements RunningListener {
