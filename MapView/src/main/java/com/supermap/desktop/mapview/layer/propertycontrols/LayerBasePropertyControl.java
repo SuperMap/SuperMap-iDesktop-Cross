@@ -12,6 +12,7 @@ import com.supermap.desktop.ui.SMSpinner;
 import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
+import com.supermap.desktop.ui.controls.ProviderLabel.WarningOrHelpProvider;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -48,7 +49,9 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 	private JTextField textFieldLayerCaption;
 	private SMSpinner spinnerTransparence;
 	private JComboBox<Object> comboBoxMinVisibleScale;
+	private WarningOrHelpProvider minScaleError;
 	private JComboBox<Object> comboBoxMaxVisibleScale;
+	private WarningOrHelpProvider maxScaleError;
 	private transient StateChangeListener checkBoxListener = new CheckBoxStateChangeListener();
 	private transient TextFieldLayerCaptionDocumentListener textFieldLayerCaptionListener = new TextFieldLayerCaptionDocumentListener();
 	private transient SpinnerTransparenceChangeListener spinnerTransparenceChangedListener = new SpinnerTransparenceChangeListener();
@@ -101,7 +104,11 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		this.textFieldLayerCaption = new JTextField();
 		this.spinnerTransparence = new SMSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 		this.comboBoxMinVisibleScale = new JComboBox<>();
+		this.minScaleError=new WarningOrHelpProvider(MapViewProperties.getString("String_MinScaleErroe"),true);
+		this.minScaleError.hideWarning();
 		this.comboBoxMaxVisibleScale = new JComboBox<>();
+		this.maxScaleError=new WarningOrHelpProvider(MapViewProperties.getString("String_MaxScaleError"),true);
+		this.maxScaleError.hideWarning();
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
@@ -110,14 +117,19 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 
 		// @formatter:off
 		groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsVisible)
 						.addComponent(checkBoxIsSelectable)
-						.addComponent(labelLayerName, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_LABEL_WIDTH, Short.MAX_VALUE)
-						.addComponent(labelCaption, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_LABEL_WIDTH, Short.MAX_VALUE)
-						.addComponent(labelTransparence, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_LABEL_WIDTH, Short.MAX_VALUE)
-						.addComponent(labelMinVisibleScale, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_LABEL_WIDTH, Short.MAX_VALUE)
-						.addComponent(labelMaxVisibleScale, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_LABEL_WIDTH, Short.MAX_VALUE))
+						.addComponent(labelLayerName)
+						.addComponent(labelCaption)
+						.addComponent(labelTransparence)
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(labelMinVisibleScale)
+								.addComponent(this.minScaleError,23,23,23))
+						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(labelMaxVisibleScale)
+								.addComponent(this.maxScaleError,23,23,23))
+						)
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsEditable)
 						.addComponent(checkBoxIsSnapable)
@@ -128,26 +140,28 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 						.addComponent(comboBoxMaxVisibleScale, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)));
 		
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsVisible)
 						.addComponent(checkBoxIsEditable))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsSelectable)
 						.addComponent(checkBoxIsSnapable))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelLayerName)
 						.addComponent(textFieldLayerName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelCaption)
 						.addComponent(textFieldLayerCaption, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelTransparence)
 						.addComponent(spinnerTransparence, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelMinVisibleScale)
+						.addComponent(this.minScaleError)
 						.addComponent(comboBoxMinVisibleScale, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(labelMaxVisibleScale)
+						.addComponent(this.maxScaleError)
 						.addComponent(comboBoxMaxVisibleScale, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
 		// @formatter:on
 		setComponentName();
@@ -201,6 +215,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 				if (null != getLayerPropertyModel().getMaxVisibleScale()) {
 					comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(getLayerPropertyModel().getMaxVisibleScale()));
 				}
+				isShowWarning();
 			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
@@ -233,6 +248,16 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		this.spinnerTransparence.removeChangeListener(this.spinnerTransparenceChangedListener);
 		this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 		this.comboBoxMaxVisibleScale.removeItemListener(comboBoxItemListener);
+	}
+
+	//
+	private void isShowWarning(){
+		this.minScaleError.hideWarning();
+		this.maxScaleError.hideWarning();
+		if (Double.compare(getLayerPropertyModel().getMinVisibleScale(),getLayerPropertyModel().getMaxVisibleScale())>=0 &&
+				Double.compare(getLayerPropertyModel().getMinVisibleScale(),0)!=0 &&Double.compare(getLayerPropertyModel().getMaxVisibleScale(),0)!=0){
+			this.minScaleError.showWarning();
+		}
 	}
 
 	private void initializeComboBoxScale(JComboBox<Object> comboBox) {
@@ -309,15 +334,19 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 				if (Double.compare(selectedScale, ScaleModel.INVALID_SCALE) == 0) {
 					this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMinVisibleScale()));
 				} else {
-					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) >= 0
+					getModifiedLayerPropertyModel().setMinVisibleScale(selectedScale);
+					this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
+					isChanged = true;
+					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
 							|| Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
-						getModifiedLayerPropertyModel().setMinVisibleScale(selectedScale);
-						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
-						isChanged = true;
+						this.minScaleError.hideWarning();
 					} else {
-						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMinVisibleScale()));
+						this.minScaleError.showWarning();
+//						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMinVisibleScale()));
 					}
-
+					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0 || Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
+						this.maxScaleError.hideWarning();
+					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
 					if (isChanged
 							&& this.comboBoxMinVisibleScale.getSelectedItem().toString()
@@ -348,12 +377,17 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 				if (Double.compare(selectedScale, ScaleModel.INVALID_SCALE) == 0) {
 					this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMaxVisibleScale()));
 				} else {
-					if (Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) >= 0 || Double.compare(selectedScale, 0) == 0) {
-						getModifiedLayerPropertyModel().setMaxVisibleScale(selectedScale);
-						this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
-						isChanged = true;
+					getModifiedLayerPropertyModel().setMaxVisibleScale(selectedScale);
+					this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
+					isChanged = true;
+					if (Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
+						this.maxScaleError.hideWarning();
 					} else {
-						this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMaxVisibleScale()));
+						this.maxScaleError.showWarning();
+//						this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMaxVisibleScale()));
+					}
+					if (Double.compare(selectedScale,getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
+						this.minScaleError.hideWarning();
 					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
 					if (isChanged
