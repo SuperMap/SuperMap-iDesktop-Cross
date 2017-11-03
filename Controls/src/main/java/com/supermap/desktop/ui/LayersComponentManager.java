@@ -125,8 +125,8 @@ public class LayersComponentManager extends JComponent {
 	}
 
 	private void initializeToolBar() {
-		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
-		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_CreateLayerGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
+		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
+		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
 		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/controlsImage/Image_Layer_LayerSnapshot.png"));
 		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
 		JPopupMenu popupMenuLayerGroup = new JPopupMenu();
@@ -134,7 +134,7 @@ public class LayersComponentManager extends JComponent {
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerGroup);
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerSnapshot);
 		this.addLayerGroup.setPopupMenu(popupMenuLayerGroup);
-		this.addLayerGroup.setToolTip(ControlsProperties.getString("String_CreateLayerRootGroup"));
+		this.addLayerGroup.setToolTip(ControlsProperties.getString("String_Button_NewRootGroup"));
 		this.addLayerGroup.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.toolBar.add(this.addLayerGroup);
 		this.toolBar.setFloatable(false);
