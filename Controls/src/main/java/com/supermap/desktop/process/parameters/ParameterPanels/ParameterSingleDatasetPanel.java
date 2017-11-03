@@ -2,7 +2,6 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListener;
@@ -41,13 +40,13 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 	private DatasetCreatedListener datasetCreatedListener = new DatasetCreatedListener() {
 		@Override
 		public void datasetCreated(DatasetCreatedEvent datasetCreatedEvent) {
-			int oldDatasetComboBoxItemCount=datasetComboBox.getItemCount();
+			int oldDatasetComboBoxItemCount = datasetComboBox.getItemCount();
 			isSelectingItem = true;
 			datasetComboBox.addDataset(ParameterSingleDatasetPanel.this.datasource.getDatasets().get(datasetCreatedEvent.getDatasetName()));
 			isSelectingItem = false;
 			// fix by lixiaoyao 2017/10/13  当数据源中数据集为空的时候，复制进来数据集，通知parameterSingleDataset改变，
 			// 有了新的数据集
-			if(oldDatasetComboBoxItemCount-1==0 && datasetComboBox.getItemCount()>=1){
+			if (oldDatasetComboBoxItemCount - 1 == 0 && datasetComboBox.getItemCount() >= 1) {
 				parameterSingleDataset.setSelectedItem(datasetComboBox.getSelectedDataset());
 			}
 		}
@@ -114,7 +113,7 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 			this.datasource = DatasourceUtilities.getDefaultResultDatasource();
 			parameterSingleDataset.setDatasource(this.datasource);
 		}
-		if (this.datasource!=null) {
+		if (this.datasource != null) {
 			this.datasetComboBox = new DatasetComboBox(this.datasource.getDatasets());
 		} else {
 			this.datasetComboBox = new DatasetComboBox();
@@ -131,7 +130,6 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 				this.datasetComboBox.setSelectedDataset(selectedItem);
 			}
 		}
-		ComponentUIUtilities.setName(this.datasetComboBox, parameter.getDescribe());
 	}
 
 	private void setSelectedDatasource(Datasource datasource) {
@@ -278,7 +276,8 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 							break;
 						}
 					}
-				}
+				} else if (event.getFieldName().equals(ParameterSingleDataset.DATASETTYPES_FIELD_NAME))
+					datasetComboBox.setSupportedDatasetTypes((DatasetType[]) parameterSingleDataset.isValueSelected(ParameterSingleDataset.DATASETTYPES_FIELD_NAME, null));
 			}
 		});
 		addDatasourceListener(this.datasource);

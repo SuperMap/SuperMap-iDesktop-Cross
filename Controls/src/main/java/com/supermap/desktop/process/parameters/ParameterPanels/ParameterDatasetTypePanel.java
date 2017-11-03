@@ -32,7 +32,9 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 		super(parameterDatasetType);
 		this.parameterDatasetType = ((ParameterDatasetType) parameterDatasetType);
 		this.label.setText(getDescribe());
-		this.datasetTypeComboBox = new DatasetTypeComboBox(((ParameterDatasetType) parameterDatasetType).getSupportedDatasetTypes());
+		if (null != ((ParameterDatasetType) parameterDatasetType).getSupportedDatasetTypes()) {
+			this.datasetTypeComboBox = new DatasetTypeComboBox(((ParameterDatasetType) parameterDatasetType).getSupportedDatasetTypes());
+		}
 		if (((ParameterDatasetType) parameterDatasetType).isSimpleDatasetShown()) {
 			this.datasetTypeComboBox.setSimpleDatasetShown(true);
 		}
@@ -62,7 +64,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 			public void itemStateChanged(ItemEvent e) {
 				if (!isSelectingItem && e.getStateChange() == ItemEvent.SELECTED) {
 					isSelectingItem = true;
-					parameterDatasetType.setSelectedItem(datasetTypeComboBox.getSelectedItem());
+					parameterDatasetType.setSelectedItem(datasetTypeComboBox.getSelectedDatasetTypes());
 					isSelectingItem = false;
 				}
 			}
@@ -78,6 +80,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 			}
 		});
 	}
+
 	protected String getDescribe() {
 		String describe = parameterDatasetType.getDescribe();
 		if (parameterDatasetType.isRequisite()) {

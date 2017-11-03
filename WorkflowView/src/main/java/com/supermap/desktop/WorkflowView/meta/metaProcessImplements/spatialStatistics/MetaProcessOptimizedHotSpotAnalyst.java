@@ -234,10 +234,10 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 			DatasetVector result = ClusteringDistributions.optimizedHotSpotAnalyst(datasetVector, parameterSaveDataset.getResultDatasource(),
 					parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName()), optimizedParameter);
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
-			isSuccessful = result != null;
+			isSuccessful = (result != null);
 		} catch (Exception e) {
-			Application.getActiveApplication().getOutput().output(e.getMessage());
-			e.printStackTrace();
+			Application.getActiveApplication().getOutput().output(e);
+			//e.printStackTrace();
 		} finally {
 			ClusteringDistributions.removeSteppedListener(steppedListener);
 		}

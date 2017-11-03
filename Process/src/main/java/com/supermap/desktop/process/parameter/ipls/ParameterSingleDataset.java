@@ -15,7 +15,7 @@ import java.beans.PropertyChangeEvent;
 public class ParameterSingleDataset extends AbstractParameter implements ISelectionParameter {
 
 	public static final String DATASET_FIELD_NAME = "value";
-	//	public static final String DATASET_TYPES_FIELD_NAME = "datasetTypes";
+	public static final String DATASETTYPES_FIELD_NAME = "datasetTypes";
 	public static final String DATASOURCE_FIELD_NAME = "datasource";
 
 	@ParameterField(name = DATASET_FIELD_NAME)

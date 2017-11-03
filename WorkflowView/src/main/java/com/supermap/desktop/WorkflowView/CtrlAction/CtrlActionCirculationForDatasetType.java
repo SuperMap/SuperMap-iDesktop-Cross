@@ -8,10 +8,10 @@ import com.supermap.desktop.WorkflowView.circulation.CirculationType;
 import com.supermap.desktop.implement.CtrlAction;
 
 /**
- * Created by xie on 2017/10/25.
+ * Created by xie on 2017/11/3.
  */
-public class CtrlActionCirculationForType extends CtrlAction {
-	public CtrlActionCirculationForType(IBaseItem caller, IForm formClass) {
+public class CtrlActionCirculationForDatasetType extends CtrlAction {
+	public CtrlActionCirculationForDatasetType(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
 	}
 
@@ -19,18 +19,12 @@ public class CtrlActionCirculationForType extends CtrlAction {
 	protected void run() {
 		IForm form = Application.getActiveApplication().getMainFrame().getFormManager().getActiveForm();
 		if (null != form && form instanceof FormWorkflow) {
-			((FormWorkflow) form).getCanvas().getCirculationAction().addCirculationGraph(CirculationType.forType);
-
+			((FormWorkflow) form).getCanvas().getCirculationAction().addCirculationGraph(CirculationType.forDatasetType);
 		}
 	}
 
 	@Override
 	public boolean enable() {
-//		boolean result = false;
-//		if (Application.getActiveApplication().getActiveForm() instanceof FormWorkflow
-//				&& null == ((FormWorkflow) Application.getActiveApplication().getActiveForm()).iterator()) {
-//			result = true;
-//		}
 		return Application.getActiveApplication().getActiveForm() instanceof FormWorkflow;
 	}
 }
