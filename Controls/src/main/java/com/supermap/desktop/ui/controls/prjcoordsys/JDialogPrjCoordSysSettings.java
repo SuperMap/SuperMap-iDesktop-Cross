@@ -60,8 +60,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private static final String DEFAULT_PROJECTION_CONFIG_PATH = "/controlsresources/Projection.xml";
 	private static final String DEFAULT_GROUPCAPTION = "Default";
 
-	private JLabel labelPath;
-	private JTextField textFieldPath;
+	//private JLabel labelPath;
+	//private JTextField textFieldPath;
 	private TextFieldSearch textFieldSearch;
 
 	private JButton buttonImport;
@@ -396,18 +396,18 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);
 		this.getContentPane().setLayout(groupLayout);
-		JToolBar toolBarTemp = createToolBar();
+		//JToolBar toolBarTemp = createToolBar();
 		JToolBar toolBarButton = createToolBarButton();
 		JPanel centerPanel = createCenterPanel();
 
 		// @formatter:off
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.CENTER)
-				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(centerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addComponent(centerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
@@ -417,8 +417,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	private void initializeResources() {
-		this.setTitle(ControlsProperties.getString("String_SetProjection_Caption"));
-		this.labelPath.setText(ControlsProperties.getString("String_CoordSys_PathName"));
+		this.setTitle(ControlsProperties.getString("String_SetCoordsys"));
+		//this.labelPath.setText(ControlsProperties.getString("String_CoordSys_PathName"));
 		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
 		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
 	}
@@ -472,26 +472,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.textFieldSearch.getDocument().removeDocumentListener(this.documentListener);
 	}
 
-	/**
-	 * 创建工具条
-	 *
-	 * @return
-	 */
-	private JToolBar createToolBar() {
-		JToolBar toolBar = new JToolBar();
-		toolBar.setFloatable(false);
-		this.labelPath = new JLabel("ProjectionPath:");
-		this.textFieldPath = new JTextField();
-		this.textFieldPath.setEditable(false);
-		this.textFieldSearch = new TextFieldSearch();
-		textFieldSearch.setPreferredSize(new Dimension(150, 30));
-		toolBar.add(this.labelPath);
-		toolBar.addSeparator(new Dimension(5, 5));
-		toolBar.add(this.textFieldPath);
-		toolBar.addSeparator(new Dimension(5, 5));
-		toolBar.add(this.textFieldSearch);
-		return toolBar;
-	}
 
 	/**
 	 * 创建按钮工具条
@@ -509,6 +489,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonNewCoordSys = new JButton(ControlsProperties.getString("String_NewCoorSys"), CoreResources.getIcon("/coreresources/ToolBar/Image_NewCoordsys.png"));
 		this.buttonNewGroup = new JButton(ControlsProperties.getString("String_NewGroup"), ControlsResources.getIcon("/controlsresources/SortType/Image_NewGroup.png"));
 		this.buttonDelete = new JButton(CommonProperties.getString(CommonProperties.Delete), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
+		this.textFieldSearch = new TextFieldSearch();
+		this.textFieldSearch.setPreferredSize(new Dimension(150, 30));
 
 		this.popupMenuNewCoordSys = new JPopupMenu();
 		this.menuItemNewPrjCoordSysClone = new JMenuItem(ControlsProperties.getString("String_PrjCoorSys"));
@@ -527,6 +509,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		toolBarButton.add(this.buttonNewGroup);
 		toolBarButton.addSeparator();
 		toolBarButton.add(this.buttonDelete);
+		toolBarButton.addSeparator();
+		toolBarButton.add(this.textFieldSearch);
 
 		return toolBarButton;
 	}
@@ -1085,7 +1069,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void refreshStates() {
 		refreshTextAreaDetails();
-		refreshPath();
+		//refreshPath();
 	}
 
 	/**
@@ -1095,12 +1079,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.textAreaDetail.setText(PrjCoordSysSettingsUtilties.getDescription(this.currentPrjDefine));
 	}
 
-	private void refreshPath() {
-		TreePath path = this.treePrjCoordSys.getSelectionPath();
-		if (path != null) {
-			this.textFieldPath.setText(path.toString());
-		}
-	}
+	//private void refreshPath() {
+	//	TreePath path = this.treePrjCoordSys.getSelectionPath();
+	//	if (path != null) {
+	//		this.textFieldPath.setText(path.toString());
+	//	}
+	//}
 
 	private void setControlsEnabled() {
 		this.buttonImport.setEnabled(isImportEnable());
