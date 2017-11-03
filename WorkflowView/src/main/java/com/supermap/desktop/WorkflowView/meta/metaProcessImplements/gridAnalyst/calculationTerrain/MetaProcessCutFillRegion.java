@@ -82,15 +82,19 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
         datasetParameter.addPropertyListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                comboBoxType.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
-                numberRadius.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetVector) {
+                    comboBoxType.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                    numberRadius.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                }
             }
         });
         sourceDataset.addPropertyListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
-                numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
+                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetGrid) {
+                    Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
+                    numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
+                }
             }
         });
     }
@@ -107,41 +111,46 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 datasetVectorParameter = (DatasetVector) datasetParameter.getSelectedDataset();
             }
             CutFillResult result;
+            String resultName = parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName());
             recordset = datasetVectorParameter.getRecordset(false, CursorType.DYNAMIC);
-            if (datasetVectorParameter.getType().equals(DatasetType.REGION)) {
-                GeoRegion geometry = (GeoRegion) recordset.getGeometry();
-                double height = Double.parseDouble(numberHeight.getSelectedItem());
-                result = CalculationTerrain.cutFill(datasetGrid, geometry, height, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getDatasetName());
-                geometry.dispose();
-            } else {
-                GeoLine3D geoLine3D = new GeoLine3D();
-                if (datasetVectorParameter.getType().equals(DatasetType.LINE3D)) {
-                    geoLine3D = (GeoLine3D) recordset.getGeometry();
+            while (!recordset.isEOF()) {
+                if (datasetVectorParameter.getType().equals(DatasetType.REGION)) {
+                    GeoRegion geometry = (GeoRegion) recordset.getGeometry();
+                    double height = Double.parseDouble(numberHeight.getSelectedItem());
+                    result = CalculationTerrain.cutFill(datasetGrid, geometry, height, parameterSaveDataset.getResultDatasource(), resultName);
+                    geometry.dispose();
                 } else {
-                    GeoLine geoLine = (GeoLine) recordset.getGeometry();
-                    Point3Ds[] point3Ds = new Point3Ds[geoLine.getPartCount()];
-                    for (int i = 0; i < geoLine.getPartCount(); i++) {
-                        Point2Ds point2Ds = geoLine.getPart(i);
-                        point3Ds[i] = new Point3Ds();
-                        for (int j = 0; j < point2Ds.getCount(); j++) {
-                            point3Ds[i].add(new Point3D(point2Ds.getItem(j).getX(), point2Ds.getItem(j).getY(), 0));
+                    GeoLine3D geoLine3D = new GeoLine3D();
+                    if (datasetVectorParameter.getType().equals(DatasetType.LINE3D)) {
+                        geoLine3D = (GeoLine3D) recordset.getGeometry();
+                    } else {
+                        GeoLine geoLine = (GeoLine) recordset.getGeometry();
+                        Point3Ds[] point3Ds = new Point3Ds[geoLine.getPartCount()];
+                        for (int i = 0; i < geoLine.getPartCount(); i++) {
+                            Point2Ds point2Ds = geoLine.getPart(i);
+                            point3Ds[i] = new Point3Ds();
+                            for (int j = 0; j < point2Ds.getCount(); j++) {
+                                point3Ds[i].add(new Point3D(point2Ds.getItem(j).getX(), point2Ds.getItem(j).getY(), 0));
+                            }
+                            geoLine3D.addPart(point3Ds[i]);
                         }
-                        geoLine3D.addPart(point3Ds[i]);
                     }
+                    double radius = Double.parseDouble(numberRadius.getSelectedItem());
+                    boolean isRoundHead = (boolean) comboBoxType.getSelectedData();
+                    result = CalculationTerrain.cutFill(datasetGrid, geoLine3D, radius, isRoundHead, parameterSaveDataset.getResultDatasource(), resultName);
+                    geoLine3D.dispose();
                 }
-                double radius = Double.parseDouble(numberRadius.getSelectedItem());
-                boolean isRoundHead = (boolean) comboBoxType.getSelectedData();
-                result = CalculationTerrain.cutFill(datasetGrid, geoLine3D, radius, isRoundHead, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getDatasetName());
-                geoLine3D.dispose();
-            }
-            isSuccessful = result != null;
-            if (isSuccessful) {
-                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + result.getFillVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
-                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + result.getCutVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
-                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + result.getFillArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + result.getCutArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + result.getRemainderArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result.getCutFillGridResult());
+                isSuccessful = result != null;
+                if (isSuccessful) {
+                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + result.getFillVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
+                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + result.getCutVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
+                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + result.getFillArea() + CommonProperties.getString("String_AreaUnit_Meter"));
+                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + result.getCutArea() + CommonProperties.getString("String_AreaUnit_Meter"));
+                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + result.getRemainderArea() + CommonProperties.getString("String_AreaUnit_Meter"));
+                    this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result.getCutFillGridResult());
+                } else {
+                    recordset.moveNext();
+                }
             }
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);

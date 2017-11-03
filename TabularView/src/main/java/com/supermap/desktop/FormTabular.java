@@ -1,16 +1,7 @@
 package com.supermap.desktop;
 
-import com.supermap.data.DatasetVector;
-import com.supermap.data.FieldType;
-import com.supermap.data.Geometry;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
-import com.supermap.data.StatisticMode;
-import com.supermap.desktop.Interface.IContextMenuManager;
-import com.supermap.desktop.Interface.IFormTabular;
-import com.supermap.desktop.Interface.IProperty;
-import com.supermap.desktop.Interface.IPropertyManager;
-import com.supermap.desktop.Interface.ITabularEditHistoryManager;
+import com.supermap.data.*;
+import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.controls.property.WorkspaceTreeDataPropertyFactory;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.editHistory.TabularEditHistoryManager;
@@ -33,24 +24,13 @@ import com.supermap.desktop.utilties.TabularTableModel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.event.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.Time;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -212,7 +192,8 @@ public class FormTabular extends FormBaseChild implements IFormTabular {
 		jTableTabular.setDefaultRenderer(Integer.class, numberRenderer);
 		jTableTabular.setDefaultRenderer(Float.class, numberRenderer);
 		jTableTabular.setDefaultRenderer(Long.class, numberRenderer);
-		// 输入时直接开始编辑
+        jTableTabular.setDefaultRenderer(Short.class, numberRenderer);
+        // 输入时直接开始编辑
 		jTableTabular.setSurrendersFocusOnKeystroke(true);
 		// 设置行高
 		this.jTableTabular.setRowHeight(FormTabular.PREFER_ROW_HEIGHT);
@@ -720,6 +701,7 @@ public class FormTabular extends FormBaseChild implements IFormTabular {
 		this.jTableTabular.setDefaultEditor(Float.class, editor);
 		this.jTableTabular.setDefaultEditor(Integer.class, editor);
 		this.jTableTabular.setDefaultEditor(Long.class, editor);
+        this.jTableTabular.setDefaultEditor(Short.class, editor);
 
 		// 设置列宽
 		setColumnsWidth();
