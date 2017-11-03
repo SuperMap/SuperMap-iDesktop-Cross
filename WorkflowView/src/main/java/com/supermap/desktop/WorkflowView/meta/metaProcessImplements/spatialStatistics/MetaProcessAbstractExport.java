@@ -18,9 +18,9 @@ import com.supermap.desktop.process.core.ReadyEvent;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -115,6 +115,7 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		this.sourceInfo.setDescribe(ControlsProperties.getString("String_GroupBox_SourceDataset"));
 		this.dataset = new ParameterSingleDataset();
 		this.dataset.setDatasource(DatasourceUtilities.getDefaultResultDatasource());
+		this.dataset.setValueType(CommonTypes.DATASET);
 		this.sourceInfo.addParameters(datasource, dataset);
 		EqualDatasourceConstraint constraint = new EqualDatasourceConstraint();
 		constraint.constrained(datasource, ParameterDatasource.DATASOURCE_FIELD_NAME);
