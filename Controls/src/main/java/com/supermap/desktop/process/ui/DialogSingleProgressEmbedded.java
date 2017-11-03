@@ -148,7 +148,19 @@ public class DialogSingleProgressEmbedded extends SmDialog implements IWorkerVie
 
 	@Override
 	public void cancelled() {
-		// do nothing
+		if (isCancelledWhenClosing) {
+
+			// 因关闭窗口导致取消而执行失败则关闭窗口，并重置
+			setVisible(false);
+			reset();
+		} else {
+			this.labelMessage.setText(ProcessProperties.getString("String_Cancelled"));
+		}
+
+		this.progressBar.setProgress(0);
+		this.labelRemainTime.setText("");
+		this.buttonRun.setProcedure(ButtonExecutor.READY);
+		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 	}
 
 	@Override
@@ -169,17 +181,6 @@ public class DialogSingleProgressEmbedded extends SmDialog implements IWorkerVie
 					this.isCancelledWhenClosing = false;
 					setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 				}
-			} else {
-				if (this.worker.isCancelled() && isCancelledWhenClosing) {
-					// 或者因关闭窗口导致取消而执行失败则关闭窗口，并重置
-					setVisible(false);
-					reset();
-				} else if (this.worker.isCancelled()) {
-					this.labelMessage.setText(ProcessProperties.getString("String_Cancelled"));
-				}
-
-				this.progressBar.setProgress(0);
-				setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
