@@ -272,11 +272,11 @@ public class BasicCommandButtonPanelUI extends CommandButtonPanelUI {
 			c = UIManager.getColor("Panel.background");
 			if (c == null)
 				c = new Color(190, 190, 190);
-			if (groupIndex % 2 == 1) {
-				double coef = 0.95;
-				c = new Color((int) (c.getRed() * coef), (int) (c.getGreen() * coef),
-						(int) (c.getBlue() * coef));
-			}
+//			if (groupIndex % 2 == 1) {
+//				double coef = 0.95;
+//				c = new Color((int) (c.getRed() * coef), (int) (c.getGreen() * coef),
+//						(int) (c.getBlue() * coef));
+//			}
 		}
 		g.setColor(c);
 		g.fillRect(x, y, width, height);

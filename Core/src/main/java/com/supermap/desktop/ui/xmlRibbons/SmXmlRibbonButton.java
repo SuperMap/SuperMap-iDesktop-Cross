@@ -23,7 +23,7 @@ import java.util.List;
 public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 
 	private XmlRibbonButton xmlRibbonButton;
-	private ICtrlAction ctrlAction;
+	private ICtrlAction ctrlAction = null;
 	private JCommandPopupMenu menu;
 
 	public SmXmlRibbonButton(XmlRibbonButton ribbonButton) {

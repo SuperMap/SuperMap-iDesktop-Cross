@@ -140,9 +140,16 @@ public class CommandToggleButtonGroup implements Serializable {
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
+				if (!b.getActionModel().isArmed()) {
+					return;
+				}
 				boolean isSelected = b.getActionModel().isSelected();
-				if (wasSelected != isSelected)
+				if (wasSelected != isSelected) {
 					setSelected(b, isSelected);
+				} else {
+					setButtonFocus(b);
+				}
+
 				wasSelected = isSelected;
 			}
 		};
@@ -175,6 +182,17 @@ public class CommandToggleButtonGroup implements Serializable {
 
 		if (wasSelected) {
 			this.firePropertyChange(SELECTED_PROPERTY, b, null);
+		}
+	}
+
+	public void setButtonFocus(JCommandToggleButton button) {
+		if (button != null) {
+			JCommandToggleButton oldSelection = this.selection;
+			if (button != oldSelection && oldSelection != null) {
+				oldSelection.getActionModel().setSelected(false);
+			}
+			this.selection = button;
+			this.firePropertyChange(SELECTED_PROPERTY, oldSelection, button);
 		}
 	}
 
@@ -267,7 +285,7 @@ public class CommandToggleButtonGroup implements Serializable {
 	protected void firePropertyChange(String propertyName, Object oldValue,
 	                                  Object newValue) {
 		PropertyChangeSupport changeSupport = this.changeSupport;
-		if (changeSupport == null || oldValue == newValue) {
+		if (changeSupport == null) {
 			return;
 		}
 		changeSupport.firePropertyChange(propertyName, oldValue, newValue);

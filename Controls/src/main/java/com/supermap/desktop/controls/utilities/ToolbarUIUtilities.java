@@ -7,13 +7,10 @@ import com.supermap.desktop.Interface.IToolbar;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmToolbar;
 import com.supermap.desktop.ui.ToolbarManager;
-import org.pushingpixels.flamingo.api.ribbon.AbstractRibbonBand;
-import org.pushingpixels.flamingo.api.ribbon.JRibbon;
-import org.pushingpixels.flamingo.api.ribbon.JRibbonBand;
-import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
-import org.pushingpixels.flamingo.api.ribbon.RibbonContextualTaskGroup;
-import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
+import org.pushingpixels.flamingo.api.common.JCommandToggleButton;
+import org.pushingpixels.flamingo.api.ribbon.*;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import org.pushingpixels.flamingo.internal.ui.ribbon.JRibbonGallery;
 
 import javax.swing.*;
 import java.awt.*;
@@ -106,11 +103,28 @@ public class ToolbarUIUtilities {
 			if (controlPanel != null) {
 
 				for (int i = 0; i < controlPanel.getComponentCount(); i++) {
-					if (controlPanel.getComponent(i) instanceof IBaseItem && ((IBaseItem) controlPanel.getComponent(i)).getCtrlAction() != null) {
-						try {
-							controlPanel.getComponent(i).setEnabled(((IBaseItem) controlPanel.getComponent(i)).getCtrlAction().enable());
-						} catch (Exception e) {
-							// 谁写的enable出问题了啊，丫的！
+					Component component = controlPanel.getComponent(i);
+					if (component instanceof IBaseItem) {
+						if (((IBaseItem) component).getCtrlAction() != null) {
+							try {
+								component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					} else if (component instanceof JRibbonGallery) {
+						JRibbonGallery ribbonGallery = (JRibbonGallery) component;
+						for (int j = 0; j < ribbonGallery.getButtonCount(); j++) {
+							JCommandToggleButton button = ribbonGallery.getButtonAt(j);
+							if (button instanceof IBaseItem) {
+								if (((IBaseItem) button).getCtrlAction() != null) {
+									try {
+										button.setEnabled(((IBaseItem) button).getCtrlAction().enable());
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
 						}
 					}
 				}

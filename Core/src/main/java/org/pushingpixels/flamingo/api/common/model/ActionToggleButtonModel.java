@@ -79,16 +79,16 @@ public class ActionToggleButtonModel extends ToggleButtonModel implements
 		}
 
 		if (isArmed()) {
-			// change selection prior to firing the action event
-			if (!this.isFireActionOnPress()) {
-				if (!b) {
-					setSelected(!this.isSelected());
-				}
-			} else {
-				if (b) {
-					setSelected(!this.isSelected());
-				}
-			}
+//			 change selection prior to firing the action event
+//			if (!this.isFireActionOnPress()) {
+//				if (!b) {
+//					setSelected(!this.isSelected());
+//				}
+//			} else {
+//				if (b) {
+//					setSelected(!this.isSelected());
+//				}
+//			}
 		}
 
 		if (b) {

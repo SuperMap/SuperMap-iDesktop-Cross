@@ -2,13 +2,7 @@ package com.supermap.desktop.implement;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.ui.XMLCommand;
-import com.supermap.desktop.ui.xmlRibbons.SmXMLRibbonBand;
-import com.supermap.desktop.ui.xmlRibbons.SmXmlGallery;
-import com.supermap.desktop.ui.xmlRibbons.SmXmlRibbonButton;
-import com.supermap.desktop.ui.xmlRibbons.XMLRibbon;
-import com.supermap.desktop.ui.xmlRibbons.XMLRibbonBand;
-import com.supermap.desktop.ui.xmlRibbons.XmlGallery;
-import com.supermap.desktop.ui.xmlRibbons.XmlRibbonButton;
+import com.supermap.desktop.ui.xmlRibbons.*;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 
@@ -54,9 +48,9 @@ public class SmRibbonTask extends RibbonTask {
 						count++;
 						SmXmlRibbonButton commandButton = new SmXmlRibbonButton((XmlRibbonButton) commandAtIndex);
 						commandButton.putInBand(smXMLRibbonBand);
-					} else if (commandAtIndex instanceof XmlGallery) {
+					} else if (commandAtIndex instanceof XMLGallery) {
 						count++;
-						SmXmlGallery smXmlGallery = new SmXmlGallery((XmlGallery) commandAtIndex);
+						SmXMLGallery smXmlGallery = new SmXMLGallery((XMLGallery) commandAtIndex);
 						smXmlGallery.putInBand(smXMLRibbonBand);
 					}
 				}

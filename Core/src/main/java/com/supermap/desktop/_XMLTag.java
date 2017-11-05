@@ -31,6 +31,7 @@ public class _XMLTag {
 	public static final String g_NodeRibbonPopupMenuSeparator = "ribbonPopupMenuSeparator";
 	public static final String g_NodeRibbonGallery = "gallery";
 	public static final String g_NodeRibbonGalleryButton = "galleryButton";
+	public static final String g_NodeRibbonGalleryGroup = "galleryGroup";
 
 	public static final String g_NodeSubItems = "subItems";
 	public static final String g_NodeGalleryItems = "galleryItems";
