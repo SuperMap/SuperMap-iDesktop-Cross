@@ -173,7 +173,7 @@ public class DialogCacheCheck extends JFrame {
 		this.checkBoxCacheBuild.setSelected(true);
 		this.buttonOK = ComponentFactory.createButtonOK();
 		this.buttonCancel = ComponentFactory.createButtonCancel();
-		this.setSize(520, 210);
+		this.setSize(600, 250);
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
