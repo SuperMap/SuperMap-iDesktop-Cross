@@ -60,21 +60,29 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private static final String DEFAULT_PROJECTION_CONFIG_PATH = "/controlsresources/Projection.xml";
 	private static final String DEFAULT_GROUPCAPTION = "Default";
 
-	//private JLabel labelPath;
-	//private JTextField textFieldPath;
-	private TextFieldSearch textFieldSearch;
-
 	private JButton buttonImport;
 	private JButton buttonExport;
 	private JButton buttonFavorites;
 	private JButton buttonNewCoordSys;
+	private JButton buttonNewGroup;
+	private JButton buttonDelete;
 	private JPopupMenu popupMenuNewCoordSys;
 	private JMenuItem menuItemNewPrjCoordSysClone;
 	private JMenuItem menuItemNewGeoCoordSysClone;
 	private JMenuItem menuItemNewFormEPSGClone;
+	private TextFieldSearch textFieldSearch;
 
-	private JButton buttonNewGroup;
-	private JButton buttonDelete;
+	// table和tree的右键菜单
+	private JPopupMenu popupmenu;
+	private JMenu menuNewCoordsys;
+	private JMenuItem menuItemNewPrjCoordSys;
+	private JMenuItem menuItemNewGeoCoordSys;
+	private JMenuItem menuItemNewFormEPSG;
+	private JMenuItem menuItemNewGroup;
+	private JMenuItem menuItemImportCoordSys;
+	private JMenuItem menuItemExportCoordSys;
+	private JMenuItem menuItemAddFavorites;
+	private JMenuItem menuItemDelete;
 
 	private JSplitPane splitPaneMain; // 整个投影选择区域的主面板
 	private JTree treePrjCoordSys; // 读取加载投影信息的树，主面板左边区域
@@ -114,18 +122,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private PrjCoordSysTableModel prjModel = new PrjCoordSysTableModel();
 
-	// table和tree的右键菜单
-	private JPopupMenu popupmenu;
-	private JMenu menuNewCoordsys;
-	private JMenuItem menuItemNewPrjCoordSys;
-	private JMenuItem menuItemNewGeoCoordSys;
-	private JMenuItem menuItemNewFormEPSG;
-	private JMenuItem menuItemNewGroup;
-	private JMenuItem menuItemImportCoordSys;
-	private JMenuItem menuItemExportCoordSys;
-	private JMenuItem menuItemAddFavorites;
-	private JMenuItem menuItemDelete;
-
 	// 这个意义何在？
 	//private CoordSysDefine currentRowData;
 	private CoordSysDefine rootDefine;
@@ -143,6 +139,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 		}
 	};
+
 	private transient ListSelectionListener listSelectionListener = new ListSelectionListener() {
 
 		@Override
@@ -152,6 +149,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 		}
 	};
+
 	private transient MouseAdapter mouseAdapter = new MouseAdapter() {
 
 		@Override
@@ -302,7 +300,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void bulidRootDefine() {
 		rootDefine = new CoordSysDefine(CoordSysDefine.USER_DEFINED);
-		rootDefine.setCaption(ControlsProperties.getString("String_CoordSystem"));
+		//rootDefine.setCaption(ControlsProperties.getString("String_CoordSystem"));
 		rootDefine.add(noneEarth);
 		rootDefine.add(projectionSystem);
 		rootDefine.add(geographyCoordinate);
@@ -396,18 +394,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);
 		this.getContentPane().setLayout(groupLayout);
-		//JToolBar toolBarTemp = createToolBar();
 		JToolBar toolBarButton = createToolBarButton();
 		JPanel centerPanel = createCenterPanel();
 
 		// @formatter:off
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.CENTER)
-				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(centerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addComponent(centerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
@@ -418,7 +413,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private void initializeResources() {
 		this.setTitle(ControlsProperties.getString("String_SetCoordsys"));
-		//this.labelPath.setText(ControlsProperties.getString("String_CoordSys_PathName"));
 		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
 		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
 	}
@@ -561,6 +555,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		this.treePrjCoordSys = new JTree(new DefaultTreeModel(new DefaultMutableTreeNode(ControlsProperties.getString("String_CoordSystem"))));
 		this.treePrjCoordSys.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		// 设置不显示根节点
+		this.treePrjCoordSys.setRootVisible(false);
 		scrollPane.setViewportView(this.treePrjCoordSys);
 		this.splitPaneMain.setLeftComponent(scrollPane);
 		this.splitPaneMain.setRightComponent(createSplitPaneDetails());
@@ -886,10 +882,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			if (this.treePrjCoordSys.getSelectionPath() != null) {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.treePrjCoordSys.getSelectionPath().getLastPathComponent();
 
-				if (selectedNode == treePrjCoordSys.getModel().getRoot()) {
-					this.prjModel.setDefine(rootDefine);
-					this.currentPrjDefine = null;
-				} else if (selectedNode.getUserObject() instanceof CoordSysDefine) {
+				// 去除根节点的显示
+				//if (selectedNode == treePrjCoordSys.getModel().getRoot()) {
+				//	this.prjModel.setDefine(rootDefine);
+				//	this.currentPrjDefine = null;
+				//} else
+				if (selectedNode.getUserObject() instanceof CoordSysDefine) {
 					this.prjModel.setDefine((CoordSysDefine) selectedNode.getUserObject());
 					this.currentPrjDefine = (CoordSysDefine) selectedNode.getUserObject();
 				} else {

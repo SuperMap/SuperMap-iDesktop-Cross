@@ -111,11 +111,20 @@ public class PanelTargetCoordSys extends JPanel {
 					datasetComboBox.removeItemListener(itemListener);
 					resetDatasetComboBox(datasource.getSelectedDatasource(), null);
 					datasetComboBox.addItemListener(itemListener);
-					targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					if (radioButtonFromDatasource.isSelected()) {
+						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					} else {
+						if (datasetComboBox.getSelectedDataset() != null) {
+							targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
+						} else {
+							targetPrjCoordSys = null;
+						}
+					}
 				} else {
 					targetPrjCoordSys = null;
 				}
 			} else if (e.getSource() == datasetComboBox) {
+
 				if (datasetComboBox.getSelectedDataset() != null) {
 					targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 				} else {

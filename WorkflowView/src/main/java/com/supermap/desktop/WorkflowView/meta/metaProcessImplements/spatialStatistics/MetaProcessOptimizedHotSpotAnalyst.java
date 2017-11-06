@@ -39,12 +39,12 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 
 	// 线面数据集所需要的面板:
 	private ParameterFieldComboBox parameterFieldComboBoxNotPoint;
+	//private ParameterComboBox parameterComboBoxNotPointMethod;
 	// 点数据需要的面板:
 	private ParameterComboBox parameterComboBoxAggregationMethod;
 	private ParameterDatasource parameterDatasourceAggregating;
 	private ParameterSingleDataset parameterSingleDatasetAggregating;
-	private
-	ParameterDatasource parameterDatasourceBounding;
+	private ParameterDatasource parameterDatasourceBounding;
 	// 网络聚合方式范围数据集可以为空
 	private ParameterSingleDataset parameterSingleDatasetBounding;
 
@@ -94,6 +94,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_NETWORK"), AggregationMethod.NETWORKPOLYGONS));
+		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_SNA PNEARBYPOINTS"), AggregationMethod.SNAPNEARBYPOINTS));
 
 		parameterDatasourceAggregating = new ParameterDatasource();
 		parameterSingleDatasetAggregating = new ParameterSingleDataset(DatasetType.REGION);
