@@ -32,7 +32,7 @@ public class MetaProcessCutFillInverse extends MetaProcessCalTerrain {
     protected void initHook() {
         comboBoxType = new ParameterComboBox(ProcessProperties.getString("String_CutFill_Type"));
         numberVolume = new ParameterNumber(ProcessProperties.getString("String_CutFillVolum"));
-        textFieldResult = new ParameterNumber(ProcessOutputResultProperties.getString("String_Result_Height"));
+        textFieldResult = new ParameterNumber(ProcessProperties.getString("String_Label_Altitude"));
 
         comboBoxType.setItems(new ParameterDataNode(ProcessProperties.getString("String_Fill"), true),
                 new ParameterDataNode(ProcessProperties.getString("String_Cut"), false));
