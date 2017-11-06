@@ -38,7 +38,7 @@ public class CirculationAction extends CanvasActionAdapter {
 			this.circulationGraph.setLocation(canvasLocation);
 			this.workflowCanvas.addGraph(this.circulationGraph);
 			int locationX = circulationGraph.getLocation().x + circulationGraph.getWidth() * 3 / 2;
-			int locationY = circulationGraph.getLocation().y + circulationGraph.getHeight() / 2 - 20;
+			int locationY = circulationGraph.getLocation().y + circulationGraph.getHeight() / 2 - 26;
 
 			Point point = new Point(locationX, locationY);
 			OutputData outputData = circulationGraph.getOutputData();
