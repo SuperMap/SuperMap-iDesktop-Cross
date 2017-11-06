@@ -173,12 +173,12 @@ public class LayerBasePropertyModel extends LayerPropertyModel {
         }
 
         if (this.propertyEnabled.get(MIN_VISIBLE_SCALE) && this.minVisibleScale != null
-                && (Double.compare(layer.getMaxVisibleScale(), this.minVisibleScale) >= 0 || Double.compare(layer.getMaxVisibleScale(), 0) == 0)) {
+                ) {
             layer.setMinVisibleScale(this.minVisibleScale);
         }
 
         if (this.propertyEnabled.get(MAX_VISIBLE_SCALE) && this.maxVisibleScale != null
-                && (Double.compare(this.maxVisibleScale, layer.getMinVisibleScale()) >= 0 || Double.compare(this.maxVisibleScale, 0) == 0)) {
+                ) {
             layer.setMaxVisibleScale(this.maxVisibleScale);
         }
     }
