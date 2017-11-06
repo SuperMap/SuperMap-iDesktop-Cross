@@ -82,15 +82,19 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
         datasetParameter.addPropertyListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                comboBoxType.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
-                numberRadius.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetVector) {
+                    comboBoxType.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                    numberRadius.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
+                }
             }
         });
         sourceDataset.addPropertyListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
-                numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
+                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetGrid) {
+                    Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
+                    numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
+                }
             }
         });
     }
@@ -107,12 +111,13 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 datasetVectorParameter = (DatasetVector) datasetParameter.getSelectedDataset();
             }
             CutFillResult result;
+            String resultName = parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName());
             recordset = datasetVectorParameter.getRecordset(false, CursorType.DYNAMIC);
             while (!recordset.isEOF()) {
                 if (datasetVectorParameter.getType().equals(DatasetType.REGION)) {
                     GeoRegion geometry = (GeoRegion) recordset.getGeometry();
                     double height = Double.parseDouble(numberHeight.getSelectedItem());
-                    result = CalculationTerrain.cutFill(datasetGrid, geometry, height, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getDatasetName());
+                    result = CalculationTerrain.cutFill(datasetGrid, geometry, height, parameterSaveDataset.getResultDatasource(), resultName);
                     geometry.dispose();
                 } else {
                     GeoLine3D geoLine3D = new GeoLine3D();
@@ -132,7 +137,7 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                     }
                     double radius = Double.parseDouble(numberRadius.getSelectedItem());
                     boolean isRoundHead = (boolean) comboBoxType.getSelectedData();
-                    result = CalculationTerrain.cutFill(datasetGrid, geoLine3D, radius, isRoundHead, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getDatasetName());
+                    result = CalculationTerrain.cutFill(datasetGrid, geoLine3D, radius, isRoundHead, parameterSaveDataset.getResultDatasource(), resultName);
                     geoLine3D.dispose();
                 }
                 isSuccessful = result != null;

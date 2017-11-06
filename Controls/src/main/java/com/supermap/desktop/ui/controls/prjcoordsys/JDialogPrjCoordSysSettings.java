@@ -60,8 +60,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private static final String DEFAULT_PROJECTION_CONFIG_PATH = "/controlsresources/Projection.xml";
 	private static final String DEFAULT_GROUPCAPTION = "Default";
 
-	private JLabel labelPath;
-	private JTextField textFieldPath;
+	//private JLabel labelPath;
+	//private JTextField textFieldPath;
 	private TextFieldSearch textFieldSearch;
 
 	private JButton buttonImport;
@@ -69,9 +69,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private JButton buttonFavorites;
 	private JButton buttonNewCoordSys;
 	private JPopupMenu popupMenuNewCoordSys;
-	private JMenuItem menuItemNewPrjCoordSys;
-	private JMenuItem menuItemNewGeoCoordSys;
-	private JMenuItem menuItemNewFormEPSG;
+	private JMenuItem menuItemNewPrjCoordSysClone;
+	private JMenuItem menuItemNewGeoCoordSysClone;
+	private JMenuItem menuItemNewFormEPSGClone;
+
 	private JButton buttonNewGroup;
 	private JButton buttonDelete;
 
@@ -116,6 +117,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	// table和tree的右键菜单
 	private JPopupMenu popupmenu;
 	private JMenu menuNewCoordsys;
+	private JMenuItem menuItemNewPrjCoordSys;
+	private JMenuItem menuItemNewGeoCoordSys;
+	private JMenuItem menuItemNewFormEPSG;
 	private JMenuItem menuItemNewGroup;
 	private JMenuItem menuItemImportCoordSys;
 	private JMenuItem menuItemExportCoordSys;
@@ -197,8 +201,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					exportCoordsys();
 				}
 			} else if (e.getSource().equals(buttonNewCoordSys)) {
-				// todo 为什么有时候无法show出来？
-				popupMenuNewCoordSys.show(buttonNewCoordSys, 0, buttonNewCoordSys.getHeight());
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						popupMenuNewCoordSys.show(buttonNewCoordSys, 0, buttonNewCoordSys.getHeight());
+					}
+				});
+
 			} else if (e.getSource().equals(buttonFavorites) || e.getSource().equals(menuItemAddFavorites)) {
 				// 将选中的投影添加到收藏夹当中
 				addCoordsysToFavorites();
@@ -217,11 +226,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				buttonApplyClicked();
 			} else if (e.getSource().equals(buttonClose)) {
 				buttonCloseClicked();
-			} else if (e.getSource().equals(menuItemNewPrjCoordSys)) {
+			} else if (e.getSource().equals(menuItemNewPrjCoordSys) || e.getSource().equals(menuItemNewPrjCoordSysClone)) {
 				newPrjCoordsys();
-			} else if (e.getSource().equals(menuItemNewGeoCoordSys)) {
+			} else if (e.getSource().equals(menuItemNewGeoCoordSys) || e.getSource().equals(menuItemNewGeoCoordSysClone)) {
 				newGeoCoordsys();
-			} else if (e.getSource().equals(menuItemNewFormEPSG)) {
+			} else if (e.getSource().equals(menuItemNewFormEPSG) || e.getSource().equals(menuItemNewFormEPSGClone)) {
 				newCoordsysFromEPSG();
 			} else if (e.getSource().equals(textFieldSearch)) {
 				textFieldSearchAction();
@@ -387,27 +396,29 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);
 		this.getContentPane().setLayout(groupLayout);
-		JToolBar toolBarTemp = createToolBar();
+		//JToolBar toolBarTemp = createToolBar();
 		JToolBar toolBarButton = createToolBarButton();
 		JPanel centerPanel = createCenterPanel();
 
 		// @formatter:off
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.CENTER)
-				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(centerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				//.addComponent(toolBarTemp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addComponent(toolBarButton, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addComponent(centerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 		// @formatter:on
+
+		getPopupmenu();
 	}
 
 	private void initializeResources() {
-		this.setTitle(ControlsProperties.getString("String_SetProjection_Caption"));
-		this.labelPath.setText(ControlsProperties.getString("String_CoordSys_PathName"));
+		this.setTitle(ControlsProperties.getString("String_SetCoordsys"));
+		//this.labelPath.setText(ControlsProperties.getString("String_CoordSys_PathName"));
 		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
 		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
 	}
@@ -424,8 +435,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonFavorites.addMouseListener(this.buttonMouseAdapter);
 		this.buttonNewCoordSys.addMouseListener(this.buttonMouseAdapter);
 		this.menuItemNewPrjCoordSys.addActionListener(this.actionListener);
+		this.menuItemNewPrjCoordSysClone.addActionListener(this.actionListener);
 		this.menuItemNewGeoCoordSys.addActionListener(this.actionListener);
+		this.menuItemNewGeoCoordSysClone.addActionListener(this.actionListener);
 		this.menuItemNewFormEPSG.addActionListener(this.actionListener);
+		this.menuItemNewFormEPSGClone.addActionListener(this.actionListener);
 		this.buttonNewGroup.addMouseListener(this.buttonMouseAdapter);
 		this.buttonDelete.addMouseListener(this.buttonMouseAdapter);
 		this.buttonApply.addActionListener(this.actionListener);
@@ -445,8 +459,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonFavorites.removeMouseListener(this.buttonMouseAdapter);
 		this.buttonNewCoordSys.removeMouseListener(this.buttonMouseAdapter);
 		this.menuItemNewPrjCoordSys.removeActionListener(this.actionListener);
+		this.menuItemNewPrjCoordSysClone.removeActionListener(this.actionListener);
 		this.menuItemNewGeoCoordSys.removeActionListener(this.actionListener);
+		this.menuItemNewGeoCoordSysClone.removeActionListener(this.actionListener);
 		this.menuItemNewFormEPSG.removeActionListener(this.actionListener);
+		this.menuItemNewFormEPSGClone.removeActionListener(this.actionListener);
 		this.buttonNewGroup.removeMouseListener(this.buttonMouseAdapter);
 		this.buttonDelete.removeMouseListener(this.buttonMouseAdapter);
 		this.buttonApply.removeActionListener(this.actionListener);
@@ -455,26 +472,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.textFieldSearch.getDocument().removeDocumentListener(this.documentListener);
 	}
 
-	/**
-	 * 创建工具条
-	 *
-	 * @return
-	 */
-	private JToolBar createToolBar() {
-		JToolBar toolBar = new JToolBar();
-		toolBar.setFloatable(false);
-		this.labelPath = new JLabel("ProjectionPath:");
-		this.textFieldPath = new JTextField();
-		this.textFieldPath.setEditable(false);
-		this.textFieldSearch = new TextFieldSearch();
-		textFieldSearch.setPreferredSize(new Dimension(150, 30));
-		toolBar.add(this.labelPath);
-		toolBar.addSeparator(new Dimension(5, 5));
-		toolBar.add(this.textFieldPath);
-		toolBar.addSeparator(new Dimension(5, 5));
-		toolBar.add(this.textFieldSearch);
-		return toolBar;
-	}
 
 	/**
 	 * 创建按钮工具条
@@ -492,14 +489,17 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonNewCoordSys = new JButton(ControlsProperties.getString("String_NewCoorSys"), CoreResources.getIcon("/coreresources/ToolBar/Image_NewCoordsys.png"));
 		this.buttonNewGroup = new JButton(ControlsProperties.getString("String_NewGroup"), ControlsResources.getIcon("/controlsresources/SortType/Image_NewGroup.png"));
 		this.buttonDelete = new JButton(CommonProperties.getString(CommonProperties.Delete), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
+		this.textFieldSearch = new TextFieldSearch();
+		this.textFieldSearch.setPreferredSize(new Dimension(150, 30));
 
 		this.popupMenuNewCoordSys = new JPopupMenu();
-		this.menuItemNewPrjCoordSys = new JMenuItem(ControlsProperties.getString("String_PrjCoorSys"));
-		this.menuItemNewGeoCoordSys = new JMenuItem(ControlsProperties.getString("String_GeoCoordSys"));
-		this.menuItemNewFormEPSG = new JMenuItem(ControlsProperties.getString("String_Button_NewCoordSysFormEPSG"));
-		this.popupMenuNewCoordSys.add(this.menuItemNewPrjCoordSys);
-		this.popupMenuNewCoordSys.add(this.menuItemNewGeoCoordSys);
-		this.popupMenuNewCoordSys.add(this.menuItemNewFormEPSG);
+		this.menuItemNewPrjCoordSysClone = new JMenuItem(ControlsProperties.getString("String_PrjCoorSys"));
+		this.menuItemNewGeoCoordSysClone = new JMenuItem(ControlsProperties.getString("String_GeoCoordSys"));
+		this.menuItemNewFormEPSGClone = new JMenuItem(ControlsProperties.getString("String_Button_NewCoordSysFormEPSG"));
+
+		this.popupMenuNewCoordSys.add(this.menuItemNewPrjCoordSysClone);
+		this.popupMenuNewCoordSys.add(this.menuItemNewGeoCoordSysClone);
+		this.popupMenuNewCoordSys.add(this.menuItemNewFormEPSGClone);
 
 		toolBarButton.add(this.buttonImport);
 		toolBarButton.add(this.buttonExport);
@@ -509,6 +509,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		toolBarButton.add(this.buttonNewGroup);
 		toolBarButton.addSeparator();
 		toolBarButton.add(this.buttonDelete);
+		toolBarButton.addSeparator();
+		toolBarButton.add(this.textFieldSearch);
 
 		return toolBarButton;
 	}
@@ -1067,7 +1069,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void refreshStates() {
 		refreshTextAreaDetails();
-		refreshPath();
+		//refreshPath();
 	}
 
 	/**
@@ -1077,21 +1079,21 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.textAreaDetail.setText(PrjCoordSysSettingsUtilties.getDescription(this.currentPrjDefine));
 	}
 
-	private void refreshPath() {
-		TreePath path = this.treePrjCoordSys.getSelectionPath();
-		if (path != null) {
-			this.textFieldPath.setText(path.toString());
-		}
-	}
+	//private void refreshPath() {
+	//	TreePath path = this.treePrjCoordSys.getSelectionPath();
+	//	if (path != null) {
+	//		this.textFieldPath.setText(path.toString());
+	//	}
+	//}
 
 	private void setControlsEnabled() {
 		this.buttonImport.setEnabled(isImportEnable());
 		this.buttonExport.setEnabled(isExportEnable());
 		this.buttonFavorites.setEnabled(isAddFavoritesEnable());
 		this.buttonNewGroup.setEnabled(isNewGroupEnable());
-		this.menuItemNewGeoCoordSys.setEnabled(isNewGeoCoordsysEnable());
-		this.menuItemNewPrjCoordSys.setEnabled(isNewPrjCoordsysEnable());
-		this.menuItemNewFormEPSG.setEnabled(isNewCoordsysFromEPSGEnable());
+		this.menuItemNewGeoCoordSysClone.setEnabled(isNewGeoCoordsysEnable());
+		this.menuItemNewPrjCoordSysClone.setEnabled(isNewPrjCoordsysEnable());
+		this.menuItemNewFormEPSGClone.setEnabled(isNewCoordsysFromEPSGEnable());
 		this.buttonDelete.setEnabled(isDeleteEnable());
 		this.buttonApply.setEnabled(isButtonApplyEnable());
 	}
@@ -1138,15 +1140,20 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	public JPopupMenu getPopupmenu() {
 		if (popupmenu == null) {
 			this.popupmenu = new JPopupMenu();
-			this.menuNewCoordsys = new JMenu(ControlsProperties.getString("String_NewCoorSys"));
-			this.menuNewCoordsys.add(this.menuItemNewGeoCoordSys);
-			this.menuNewCoordsys.add(this.menuItemNewPrjCoordSys);
-			this.menuNewCoordsys.add(this.menuItemNewFormEPSG);
+
 			this.menuItemNewGroup = new JMenuItem(ControlsProperties.getString("String_NewGroup"));
 			this.menuItemImportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ImportCoordsys"));
 			this.menuItemExportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ExportCoordsys"));
 			this.menuItemAddFavorites = new JMenuItem(CoreProperties.getString("String_Favorite"));
 			this.menuItemDelete = new JMenuItem(CommonProperties.getString(CommonProperties.Delete));
+
+			this.menuNewCoordsys = new JMenu(ControlsProperties.getString("String_NewCoorSys"));
+			this.menuItemNewPrjCoordSys = new JMenuItem(ControlsProperties.getString("String_PrjCoorSys"));
+			this.menuItemNewGeoCoordSys = new JMenuItem(ControlsProperties.getString("String_GeoCoordSys"));
+			this.menuItemNewFormEPSG = new JMenuItem(ControlsProperties.getString("String_Button_NewCoordSysFormEPSG"));
+			this.menuNewCoordsys.add(this.menuItemNewGeoCoordSys);
+			this.menuNewCoordsys.add(this.menuItemNewPrjCoordSys);
+			this.menuNewCoordsys.add(this.menuItemNewFormEPSG);
 
 			this.popupmenu.add(this.menuItemNewGroup);
 			this.popupmenu.add(menuNewCoordsys);

@@ -69,7 +69,7 @@ public class PrjCoordSysPropertyControl extends AbstractPropertyControl {
 	 * @param covertFlag 设置是否可以使用投影相关的功。只读数据源不能更改投影。
 	 */
 	public PrjCoordSysPropertyControl(PrjCoordSysHandle prjHandle, boolean covertFlag) {
-		super(ControlsProperties.getString("String_ProjectionInfo"));
+		super(ControlsProperties.getString("String_CoordSystem"));
 		initializeComponents();
 		initializeResources();
 		setComponentName();
