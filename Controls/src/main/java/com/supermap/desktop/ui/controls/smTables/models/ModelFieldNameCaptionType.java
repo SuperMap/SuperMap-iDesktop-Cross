@@ -20,7 +20,7 @@ public class ModelFieldNameCaptionType extends DefaultTableModel implements IMod
 			"",
 			ControlsProperties.getString("String_ColumnRampName"),
 			CoreProperties.getString("String_Field_Caption"),
-			ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")
+			ControlsProperties.getString("String_Type")
 	};
 	private ArrayList<TableData> tableDatas = new ArrayList<>();
 

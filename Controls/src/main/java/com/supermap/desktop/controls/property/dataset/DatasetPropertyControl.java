@@ -230,7 +230,7 @@ public class DatasetPropertyControl extends AbstractPropertyControl {
 	private void initializeResources() {
 		this.labelName.setText(ControlsProperties.getString("String_LabelDatasetName"));
 		this.labelName.setToolTipText(this.labelName.getText());
-		this.labelDatasetType.setText(ControlsProperties.getString("String_LabelDatasetType"));
+		this.labelDatasetType.setText(ControlsProperties.getString("String_Label_Type"));
 		this.labelDatasetType.setToolTipText(this.labelDatasetType.getText());
 		this.labelRecordsetName.setText(ControlsProperties.getString("String_LabelTableName"));
 		this.labelRecordsetName.setToolTipText(this.labelRecordsetName.getText());

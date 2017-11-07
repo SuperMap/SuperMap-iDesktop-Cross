@@ -58,7 +58,7 @@ public class CoreProperties extends Properties {
 	public static final String NoValue = "String_Label_NoValue";
 	public static final String FieldName = "String_FieldName";
 	public static final String Caption = "String_Field_Caption";
-	public static final String FieldType = "String_FieldType";
+	public static final String FieldType = "String_Type";
 	public static final String FieldValue = "String_FieldValue";
 	public static final String Length = "String_Length";
 	public static final String Add = "String_Add";
