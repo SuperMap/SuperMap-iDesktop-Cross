@@ -81,7 +81,7 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 		}
 		String module = "ExportVector_OutPutDirectories";
 		if (!SmFileChoose.isModuleExist(module)) {
-			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_Export"),
+			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_DataExport"),
 					module, "GetDirectories");
 		}
 		exportPath.setModuleName(module);

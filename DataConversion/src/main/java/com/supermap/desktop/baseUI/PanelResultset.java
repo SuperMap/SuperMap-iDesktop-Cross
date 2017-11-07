@@ -6,6 +6,7 @@ import com.supermap.data.EncodeType;
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IImportSettingResultset;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
@@ -969,8 +970,8 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 
 	private void initResources() {
 		this.labelImportMode.setText(DataConversionProperties.getString("string_label_lblImportType"));
-		this.labelDatasource.setText(DataConversionProperties.getString("string_label_lblDatasource"));
-		this.labelDatasetName.setText(DataConversionProperties.getString("string_label_targetDataset"));
+		this.labelDatasource.setText(ControlsProperties.getString("String_Label_TargetDatasource"));
+		this.labelDatasetName.setText(ControlsProperties.getString("String_Label_TargetDataset"));
 		this.labelEncodeType.setText(DataConversionProperties.getString("string_label_lblCodingtype"));
 		this.labelDatasetType.setText(DataConversionProperties.getString("string_label_lblDatasetType"));
 		this.checkBoxFieldIndex.setText(DataConversionProperties.getString("string_checkbox_chckbxFieldIndex"));

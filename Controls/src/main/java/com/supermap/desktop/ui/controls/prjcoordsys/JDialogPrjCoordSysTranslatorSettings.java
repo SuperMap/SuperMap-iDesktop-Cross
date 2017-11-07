@@ -240,8 +240,8 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		// @formatter:on
 
 		// 主界面
-		this.buttonImport = new SmButton(ControlsProperties.getString("String_Button_Import"));
-		this.buttonExport = new SmButton(ControlsProperties.getString("String_Button_Export"));
+		this.buttonImport = new SmButton(ControlsProperties.getString("String_Import"));
+		this.buttonExport = new SmButton(ControlsProperties.getString("String_Export"));
 		this.buttonOk = new SmButton("OK");
 		this.buttonCancel = new SmButton("Cancel");
 		this.getRootPane().setDefaultButton(this.buttonOk);
@@ -282,8 +282,8 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		this.labelMethod.setText(ControlsProperties.getString("String_TransMethod"));
 		this.labelScaleDifference.setText(ControlsProperties.getString("String_ScaleDifference"));
 		//this.buttonSetPrj.setText(ControlsProperties.getString("String_SetDesPrjCoordSys"));
-		this.buttonImport.setText(ControlsProperties.getString("String_Button_Import"));
-		this.buttonExport.setText(ControlsProperties.getString("String_Button_Export"));
+		this.buttonImport.setText(ControlsProperties.getString("String_Import"));
+		this.buttonExport.setText(ControlsProperties.getString("String_Export"));
 		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
 		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}

@@ -312,7 +312,7 @@ public abstract class SymbolDialog extends SmDialog {
 		this.menuBar.setLayout(new GridBagLayout());
 
 //		this.menuFile.add(this.menuItemProperty);
-		JMenu menu = new JMenu(ControlsProperties.getString("String_Button_Import"));
+		JMenu menu = new JMenu(ControlsProperties.getString("String_Import"));
 		menu.add(item);
 		this.menuFile.add(menu);
 

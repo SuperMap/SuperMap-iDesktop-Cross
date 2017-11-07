@@ -99,8 +99,8 @@ public class CoreProperties extends Properties {
 	public static final String UnSupport = "String_UnSupport";
 	public static final String selectAll = "String_ToolBar_SelectAll";
 	public static final String selectInverse = "String_ToolBar_SelectInverse";
-	public static final String IMPORT = "String_ToolBar_Import";
-	public static final String EXPORT = "String_ToolBar_Export";
+	public static final String IMPORT = "String_Import";
+	public static final String EXPORT = "String_Export";
 	public static final String open = "String_Button_Open";
 	public static final String SourceDataset = "String_ColumnHeader_SourceDataset";
 	public static final String TargetDataset = "String_ColumnHeader_TargetDataset";

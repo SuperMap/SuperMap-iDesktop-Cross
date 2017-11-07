@@ -731,8 +731,8 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(DataConversionProperties.getString("string_button_selectAll"));
 		this.buttonInvertSelect.setToolTipText(DataConversionProperties.getString("string_button_invertSelect"));
-		this.buttonExport.setText(CoreProperties.getString("String_Button_Export"));
-		this.buttonExport.setToolTipText(CoreProperties.getString("String_Button_Export"));
+		this.buttonExport.setText(CoreProperties.getString("String_Export"));
+		this.buttonExport.setToolTipText(CoreProperties.getString("String_Export"));
 		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));
 		this.buttonClose.setToolTipText(CoreProperties.getString("String_Button_Close"));
 		this.checkBoxAutoClose.setText(DataConversionProperties.getString("String_CloseAfterExportEnd"));

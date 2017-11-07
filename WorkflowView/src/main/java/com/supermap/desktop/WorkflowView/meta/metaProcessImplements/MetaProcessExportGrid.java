@@ -58,7 +58,7 @@ public class MetaProcessExportGrid extends MetaProcessAbstractExport {
 		}
 		String module = "ExportGrid_OutPutDirectories";
 		if (!SmFileChoose.isModuleExist(module)) {
-			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_Export"),
+			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_DataExport"),
 					module, "GetDirectories");
 		}
 		exportPath.setModuleName(module);
@@ -72,7 +72,7 @@ public class MetaProcessExportGrid extends MetaProcessAbstractExport {
 		if (!SmFileChoose.isModuleExist(moduleForTFW)) {
 			String fileFilters = SmFileChoose.createFileFilter(ProcessProperties.getString("string_filetype_tfw"), "tfw");
 			SmFileChoose.addNewNode(fileFilters, System.getProperty("user.dir"),
-					ProcessProperties.getString("String_Export"), moduleForTFW, "SaveOne");
+					ProcessProperties.getString("String_DataExport"), moduleForTFW, "SaveOne");
 		}
 		prjFile.setModuleName(moduleForTFW);
 

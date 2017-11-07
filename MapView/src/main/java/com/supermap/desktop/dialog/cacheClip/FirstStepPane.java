@@ -293,7 +293,7 @@ public class FirstStepPane extends JPanel implements IState {
 		}
 	};
 
-	private ActionListener serverGettingListener=new ActionListener() {
+	private ActionListener serverGettingListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			mongoDBConnectSate = isDBValidate();
@@ -1006,7 +1006,7 @@ public class FirstStepPane extends JPanel implements IState {
 		popupMenuImport.add(jMenuItemImportCacheConfigs);
 		popupMenuImport.add(jMenuItemImportScale);
 		this.importDropDown.setPopupMenu(popupMenuImport);
-		this.importDropDown.setToolTip(MapViewProperties.getString("MapCache_Import"));
+		this.importDropDown.setToolTip(ControlsProperties.getString("String_Import"));
 		this.importDropDown.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Import.png"));
 
 		this.exportDropDown = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
@@ -1014,7 +1014,7 @@ public class FirstStepPane extends JPanel implements IState {
 		popupMenuExport.add(jMenuItemExportCacheConfigs);
 		popupMenuExport.add(jMenuItemExportScale);
 		this.exportDropDown.setPopupMenu(popupMenuExport);
-		this.exportDropDown.setToolTip(MapViewProperties.getString("MapCache_Export"));
+		this.exportDropDown.setToolTip(ControlsProperties.getString("String_Export"));
 		this.exportDropDown.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Export.png"));
 
 		this.buttonSelectAll = new JButton();
@@ -1149,7 +1149,7 @@ public class FirstStepPane extends JPanel implements IState {
 		if (this.localSplitTable.getRowCount() == 1) {
 			if (this.originMapCacheScale.length > 0) {
 				this.currentMapCacheScale.add(this.originMapCacheScale[0]);
-			} else if (null != Application.getActiveApplication().getActiveForm()&&Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
+			} else if (null != Application.getActiveApplication().getActiveForm() && Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
 				this.currentMapCacheScale.add(((IFormMap) Application.getActiveApplication().getActiveForm()).getMapControl().getMap().getScale());
 			} else if (null != CacheUtilities.getWorkspaceSelectedMap()) {
 				this.currentMapCacheScale.add(CacheUtilities.getWorkspaceSelectedMap().getScale());
@@ -1224,7 +1224,7 @@ public class FirstStepPane extends JPanel implements IState {
 	//Create a new FileChooser for import scales
 	private String getFilePathForImport() {
 		String filePath = "";
-		String title = CoreProperties.getString("String_ToolBar_Import");
+		String title = CoreProperties.getString("String_Import");
 		if (!SmFileChoose.isModuleExist("ImportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
 			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), title, "ImportScale", "OpenOne");
@@ -1306,7 +1306,7 @@ public class FirstStepPane extends JPanel implements IState {
 		String filePath = "";
 		if (!SmFileChoose.isModuleExist("ExportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
-			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_ToolBar_Export"),
+			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_Export"),
 					"ExportScale", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("ExportScale");

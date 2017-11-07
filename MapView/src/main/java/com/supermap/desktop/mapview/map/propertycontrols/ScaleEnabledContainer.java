@@ -317,7 +317,7 @@ public class ScaleEnabledContainer extends SmDialog {
 
 	private String getFilePathForImport() {
 		String filePath = "";
-		String title = CoreProperties.getString("String_ToolBar_Import");
+		String title = CoreProperties.getString("String_Import");
 		if (!SmFileChoose.isModuleExist("ImportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
 			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), title, "ImportScale", "OpenOne");
@@ -334,7 +334,7 @@ public class ScaleEnabledContainer extends SmDialog {
 		String filePath = "";
 		if (!SmFileChoose.isModuleExist("ExportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
-			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_ToolBar_Export"),
+			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_Export"),
 					"ExportScale", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("ExportScale");
@@ -460,8 +460,8 @@ public class ScaleEnabledContainer extends SmDialog {
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
-		this.buttonImport.setToolTipText(CoreProperties.getString("String_ToolBar_Import"));
-		this.buttonExport.setToolTipText(CoreProperties.getString("String_ToolBar_Export"));
+		this.buttonImport.setToolTipText(CoreProperties.getString("String_Import"));
+		this.buttonExport.setToolTipText(CoreProperties.getString("String_Export"));
 		this.addScale.setToolTip(MapViewProperties.getString("MapCache_AddScale"));
 	}
 

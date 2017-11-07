@@ -3,9 +3,9 @@ package com.supermap.desktop.baseUI;
 import com.supermap.data.Charset;
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.Interface.IImportSettingSourceInfo;
-import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
+import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
 import com.supermap.desktop.importUI.ImportFilePropertiesDialog;
 import com.supermap.desktop.importUI.PanelImport;
 import com.supermap.desktop.ui.controls.CharsetComboBox;
@@ -95,7 +95,7 @@ public class PanelSourceInfo extends JPanel implements IImportSettingSourceInfo 
         this.comboBoxCharset.setPreferredSize(PackageInfo.defaultSize);
         this.comboBoxCharset.setEditable(true);
         ((JTextField) this.comboBoxCharset.getEditor().getEditorComponent()).setEditable(false);
-        this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelDatapath")));
+	    this.setBorder(new TitledBorder(DataConversionProperties.getString("String_sourceFileInfo")));
     }
 
 
@@ -200,7 +200,7 @@ public class PanelSourceInfo extends JPanel implements IImportSettingSourceInfo 
         this.labelCharset.setVisible(visible);
         this.comboBoxCharset.setVisible(visible);
         if (visible) {
-            this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelDatapath")));
+	        this.setBorder(new TitledBorder(DataConversionProperties.getString("String_sourceFileInfo")));
         }
     }
 

@@ -246,7 +246,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		popupMenuImport.add(jMenuItemImportCacheConfigs);
 		popupMenuImport.add(jMenuItemImportScale);
 		this.importDropDown.setPopupMenu(popupMenuImport);
-		this.importDropDown.setToolTip(MapViewProperties.getString("MapCache_Import"));
+		this.importDropDown.setToolTip(ControlsProperties.getString("String_Import"));
 		this.importDropDown.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Import.png"));
 
 		this.exportDropDown = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
@@ -254,7 +254,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		popupMenuExport.add(jMenuItemExportCacheConfigs);
 		popupMenuExport.add(jMenuItemExportScale);
 		this.exportDropDown.setPopupMenu(popupMenuExport);
-		this.exportDropDown.setToolTip(MapViewProperties.getString("MapCache_Export"));
+		this.exportDropDown.setToolTip(ControlsProperties.getString("String_Export"));
 		this.exportDropDown.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Export.png"));
 
 		this.buttonSelectAll = new JButton();
@@ -1409,7 +1409,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		String filePath = "";
 		if (!SmFileChoose.isModuleExist("ExportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
-			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_ToolBar_Export"),
+			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_Export"),
 					"ExportScale", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("ExportScale");
@@ -1423,7 +1423,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 
 	private String getFilePathForImport() {
 		String filePath = "";
-		String title = CoreProperties.getString("String_ToolBar_Import");
+		String title = CoreProperties.getString("String_Import");
 		if (!SmFileChoose.isModuleExist("ImportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
 			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), title, "ImportScale", "OpenOne");

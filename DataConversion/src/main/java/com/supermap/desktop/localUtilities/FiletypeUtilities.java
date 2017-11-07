@@ -45,7 +45,7 @@ public class FiletypeUtilities {
 		if (fileType.equalsIgnoreCase(FileTypeLocale.DBF_STRING)) {
 			fileType = DataConversionProperties.getString("String_FormImport_DBF");
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.VCT_STRING)) {
-			fileType = DataConversionProperties.getString("String_FormImport_VCT");
+			fileType = DataConversionProperties.getString("String_FileTypeVCT");
 			// vct文件
 		} else if ((fileType.equalsIgnoreCase(FileTypeLocale.DXF_STRING) && !fileFilter.equals(DataConversionProperties.getString("string_filetype_3ds"))) || fileType.equalsIgnoreCase(FileTypeLocale.DWG_STRING)) {
 			fileType = DataConversionProperties.getString("String_FormImport_CAD");
@@ -88,12 +88,12 @@ public class FiletypeUtilities {
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.BIL_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.RAW_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.BSQ_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.BIP_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.B_STRING)) {
-			fileType = DataConversionProperties.getString("String_FormImport_GRID");
+			fileType = DataConversionProperties.getString("String_FileTypeTEMSClutter");
 			// 栅格文件(*.bil,*.raw,*.bsq,*.bip,*.sid,*.b)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.SID_STRING)) {
 			fileType = DataConversionProperties.getString("String_FileTypeSID");
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.VCT_STRING)) {
-			fileType = DataConversionProperties.getString("String_FormImport_VCT");
+			fileType = DataConversionProperties.getString("String_FileTypeVCT");
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.DGN_STRING)) {
 			fileType = DataConversionProperties.getString("String_FileTypeDGN");
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.ECW_STRING)) {
