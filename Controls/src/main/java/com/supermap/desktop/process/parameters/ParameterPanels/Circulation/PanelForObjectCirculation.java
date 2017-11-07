@@ -2,7 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels.Circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.ui.controls.TableTooltipCellRenderer;
@@ -17,6 +17,7 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -82,8 +83,8 @@ public class PanelForObjectCirculation extends JPanel {
 		this.exchangeTableModel = new ExchangeTableModel();
 		this.exchangeTableModel.setEditable(new boolean[]{false, false});
 		this.exchangeTableModel.setInfo(this.pathList);
-		this.exchangeTableModel.setTitle(new String[]{CommonProperties.getString("String_ColumnHeader_Index"),
-				CommonProperties.getString("String_Content")});
+		this.exchangeTableModel.setTitle(new String[]{CoreProperties.getString("String_ColumnHeader_Index"),
+				CoreProperties.getString("String_Content")});
 		this.tableForObjectCirculation.setModel(this.exchangeTableModel);
 		// 设置列不可移动
 		this.tableForObjectCirculation.getTableHeader().setReorderingAllowed(false);
@@ -121,7 +122,7 @@ public class PanelForObjectCirculation extends JPanel {
 		this.buttonAddObject.setToolTipText(ControlsProperties.getString("String_Add"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonMoveTop.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
 		this.buttonMoveUp.setToolTipText(ControlsProperties.getString("String_MoveUp"));
 		this.buttonMoveDown.setToolTipText(ControlsProperties.getString("String_MoveDown"));
@@ -134,16 +135,16 @@ public class PanelForObjectCirculation extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String modelName = "CirculationForObjectModel";
 				if (!SmFileChoose.isModuleExist(modelName)) {
-					SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), CommonProperties.getString("String_SelectFile"),
+					SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
 							modelName, "OpenMany");
 				}
 				SmFileChoose smFileChoose = new SmFileChoose(modelName);
 				smFileChoose.setAcceptAllFileFilterUsed(true);
 				int state = smFileChoose.showDefaultDialog();
 				if (state == JFileChooser.APPROVE_OPTION) {
-					String[] names = smFileChoose.getSelectFileNames();
-					for (int i = 0, length = names.length; i < length; i++) {
-						exchangeTableModel.addRow(names[i]);
+					File[] files = smFileChoose.getSelectFiles();
+					for (int i = 0, length = files.length; i < length; i++) {
+						exchangeTableModel.addRow(files[i].getAbsolutePath());
 					}
 					tableForObjectCirculation.setRowSelectionInterval(tableForObjectCirculation.getRowCount() - 1, tableForObjectCirculation.getRowCount() - 1);
 				}
