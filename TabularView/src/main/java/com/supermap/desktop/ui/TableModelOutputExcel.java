@@ -14,7 +14,7 @@ public class TableModelOutputExcel extends DefaultTableModel {
 	private static String[] column = new String[]{
 			CoreProperties.getString("String_Name"),
 			CoreProperties.getString("String_Field_Caption"),
-			CoreProperties.getString("String_FieldType")
+			CoreProperties.getString("String_Type")
 	};
 
 	public TableModelOutputExcel(IFormTabular tabular) {

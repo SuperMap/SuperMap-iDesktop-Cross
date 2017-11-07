@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1509603211458
+Bnd-LastModified: 1510025927665
 Build-Jdk: 1.7.0_80
-Built-By: Administrator
+Built-By: highsad
 Bundle-Activator: com.supermap.desktop.core.CoreActivator
 Bundle-ClassPath: .,lib/fastjson-1.2.15.jar,lib/httpclient-4.5.2.jar,lib
  /commons-codec-1.9.jar,lib/httpcore-4.4.5.jar,lib/httpmime-4.5.2.jar,li
@@ -128,7 +128,7 @@ Export-Package: com.supermap.desktop;version="1.0.0";uses:="com.supermap
  ent,com.supermap.desktop.geometry.Abstract,com.supermap.desktop.impleme
  nt,com.supermap.desktop.implement.UserDefineType,com.supermap.desktop.u
  i,com.supermap.mapping,com.supermap.ui",com.supermap.desktop.utilities.
- fieldTypeConverted;uses:="com.supermap.data";version="1.0.0",Aladdin;ve
+ fieldTypeConverted;version="1.0.0";uses:="com.supermap.data",Aladdin;ve
  rsion="1.0.0",com.alibaba.fastjson;version="1.0.0";uses:="com.alibaba.f
  astjson.parser,com.alibaba.fastjson.parser.deserializer,com.alibaba.fas
  tjson.serializer",com.alibaba.fastjson.annotation;version="1.0.0";uses:

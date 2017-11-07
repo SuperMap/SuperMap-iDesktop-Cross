@@ -233,7 +233,7 @@ public class DialogSaveChildForms extends SmDialog {
 			this.buttonUnSave.setToolTipText(CoreProperties.getString("String_FormSaveWindow_ButtonNotSave"));
 
 			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.NAME).setHeaderValue(CoreProperties.getString("String_Name"));
-			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.TYPE).setHeaderValue(CoreProperties.getString("String_DataType"));
+			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.TYPE).setHeaderValue(CoreProperties.getString("String_Type"));
 
 			this.buttonActive.setText(CoreProperties.getString("String_FormSaveWindow_ToolStripButtonActive"));
 			this.buttonRename.setText(ControlsProperties.getString("String_Rename"));
