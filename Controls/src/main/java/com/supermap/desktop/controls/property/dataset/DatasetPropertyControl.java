@@ -5,7 +5,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -242,8 +242,8 @@ public class DatasetPropertyControl extends AbstractPropertyControl {
 		this.labelBottom.setText(ControlsProperties.getString(ControlsProperties.Label_Bottom));
 		this.labelDescription.setText(ControlsProperties.getString("String_LabelDescription"));
 		this.labelDescription.setToolTipText(this.labelDescription.getText());
-		this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 	}
 
 	private void registerEvents() {

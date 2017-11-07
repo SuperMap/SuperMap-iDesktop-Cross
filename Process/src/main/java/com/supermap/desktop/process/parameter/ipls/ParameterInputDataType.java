@@ -12,7 +12,6 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.ProcessResources;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IConGetter;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -34,26 +33,26 @@ public class ParameterInputDataType extends ParameterCombine {
 
 	private ParameterTextField parameterDataSourceType = new ParameterTextField(ProcessProperties.getString("String_DataSourceType"));
 	private ParameterFile parameterDataSourcePath = new ParameterFile(ProcessProperties.getString("String_DataSourcePath"));
-	private ParameterComboBox parameterDatasetName = new ParameterComboBox(CommonProperties.getString("String_Label_Dataset"));
+	private ParameterComboBox parameterDatasetName = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
 	private ParameterTextField parameterDatasetName1 = new ParameterTextField(ProcessProperties.getString("String_DatasetName"));
 	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("String_DatasetType"));
 	private ParameterDefaultValueTextField parameterSpark = new ParameterDefaultValueTextField(ProcessProperties.getString("String_numSlices"));
 	private ParameterSwitch parameterSwitchUDB = new ParameterSwitch();
 	private ParameterCombine parameterCombineDatasetInfo = new ParameterCombine();
 
-	public ParameterComboBox parameterSourceDataset = new ParameterComboBox(CommonProperties.getString("String_Label_Dataset"));
+	public ParameterComboBox parameterSourceDataset = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
 	private ParameterTextField parameterEngineType = new ParameterTextField(ProcessProperties.getString("String_EngineType"));
 	private ParameterDefaultValueTextField parameterDataBaseName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_DataBaseName"));
 	private ParameterDefaultValueTextField parameterTextFieldAddress = new ParameterDefaultValueTextField(CoreProperties.getString("String_Server"));
 	private ParameterDefaultValueTextField parameterTextFieldUserName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_UserName"));
 	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_PassWord"));
-	private ParameterButton parameterButton = new ParameterButton(CommonProperties.getString("String_Button_Open"));
+	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Button_Open"));
 	private static final int OVERLAY_ANALYST_GEO = 0;
 	private static final int SINGLE_QUERY = 1;
 	private static final int POLYGON_AGGREGATION = 2;
 	private static final int SUMMARY_REGION = 3;
 
-	public ParameterComboBox bigDataStoreName = new ParameterComboBox(CommonProperties.getString("String_Label_Dataset"));
+	public ParameterComboBox bigDataStoreName = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
 	public ParameterSwitch parameterSwitch = new ParameterSwitch();
 	public DatasetType[] supportDatasetType;
 	private Boolean bool = false;

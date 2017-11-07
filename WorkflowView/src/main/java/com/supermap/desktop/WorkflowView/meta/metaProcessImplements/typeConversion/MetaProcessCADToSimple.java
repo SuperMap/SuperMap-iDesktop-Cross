@@ -11,7 +11,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
 
@@ -47,10 +47,10 @@ public class MetaProcessCADToSimple extends MetaProcessTypeConversion {
 		}
 
 		ParameterCombine inputCombine = new ParameterCombine();
-		inputCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		inputCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		inputCombine.addParameters(inputDatasource, inputDataset);
 		ParameterCombine outputCombine = new ParameterCombine();
-		outputCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		outputCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		outputCombine.addParameters(saveDatasetTable);
 
 		parameters.setParameters(inputCombine, outputCombine);

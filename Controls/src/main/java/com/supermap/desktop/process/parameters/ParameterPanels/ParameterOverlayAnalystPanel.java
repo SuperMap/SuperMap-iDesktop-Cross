@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterOverlayAnalyst;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.FieldsSetDialog;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.DatasetComboBox;
@@ -336,18 +336,18 @@ public class ParameterOverlayAnalystPanel extends SwingPanel implements IParamet
 	}
 
 	private void initResources() {
-		this.labelSourceDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		this.labelSourceDataset.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
-		this.labelOverlayAnalystDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		this.labelOverlayAnalystDataset.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
-		this.labelTargetDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		this.labelTargetDataset.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
-		this.buttonFieldsSet.setText(CommonProperties.getString("String_FieldsSetting"));
-		this.labelTolerance.setText(CommonProperties.getString("String_Label_Tolerance"));
-		this.checkboxResultAnalyst.setText(CommonProperties.getString("String_CheckBox_ResultComparison"));
+		this.labelSourceDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		this.labelSourceDataset.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
+		this.labelOverlayAnalystDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		this.labelOverlayAnalystDataset.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
+		this.labelTargetDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		this.labelTargetDataset.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
+		this.buttonFieldsSet.setText(CoreProperties.getString("String_FieldsSetting"));
+		this.labelTolerance.setText(CoreProperties.getString("String_Label_Tolerance"));
+		this.checkboxResultAnalyst.setText(CoreProperties.getString("String_CheckBox_ResultComparison"));
 		this.panelSource.setBorder(new TitledBorder(ControlsProperties.getString("String_GroupBox_SourceDataset")));
-		this.panelOverlayAnalyst.setBorder(new TitledBorder(CommonProperties.getString("String_GroupBox_OverlayDataset")));
-		this.panelTarget.setBorder(new TitledBorder(CommonProperties.getString("String_ResultSet")));
+		this.panelOverlayAnalyst.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_OverlayDataset")));
+		this.panelTarget.setBorder(new TitledBorder(CoreProperties.getString("String_ResultSet")));
 	}
 
 	private void initLayout() {

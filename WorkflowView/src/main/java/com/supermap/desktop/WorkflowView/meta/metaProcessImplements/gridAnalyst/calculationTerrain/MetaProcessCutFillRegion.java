@@ -11,7 +11,6 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -144,10 +143,10 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 if (isSuccessful) {
                     Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + result.getFillVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
                     Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + result.getCutVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
-                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + result.getFillArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + result.getCutArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                    Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + result.getRemainderArea() + CommonProperties.getString("String_AreaUnit_Meter"));
-                    this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result.getCutFillGridResult());
+	                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + result.getFillArea() + CoreProperties.getString("String_AreaUnit_Meter"));
+	                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + result.getCutArea() + CoreProperties.getString("String_AreaUnit_Meter"));
+	                Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + result.getRemainderArea() + CoreProperties.getString("String_AreaUnit_Meter"));
+	                this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result.getCutFillGridResult());
                 } else {
                     recordset.moveNext();
                 }

@@ -6,7 +6,6 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.JDialogConfirm;
 import com.supermap.desktop.dialog.JDialogGetPassword;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -75,7 +74,7 @@ public class DatasourceOpenFileUtilties {
 					getTypedSupportFileExtensions(EngineType.VECTORFILE));
 
 			String fileFiltersString = SmFileChoose.buildFileFilters(fileFilterAll, fileFilterUdb, fileFilterImagePlugin, fileFilterVector);
-			SmFileChoose.addNewNode(fileFiltersString, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFiltersString, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_Title_DatasoursesOpenFile"), "DatasourceOpenFile", "OpenMany");
 		}
 

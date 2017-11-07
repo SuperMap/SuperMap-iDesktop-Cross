@@ -12,7 +12,7 @@ import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -27,8 +27,8 @@ import java.util.ArrayList;
  * Created by xie on 2017/8/8.
  */
 public class MetaProcessAppendRow extends MetaProcess {
-	private final String INPUT_DATA = CommonProperties.getString("String_ColumnHeader_SourceData");
-	private final String OUTPUT_DATA = CommonProperties.getString("String_ColumnHeader_TargetData");
+	private final String INPUT_DATA = CoreProperties.getString("String_ColumnHeader_SourceData");
+	private final String OUTPUT_DATA = CoreProperties.getString("String_ColumnHeader_TargetData");
 	private ParameterDatasource datasource;
 	private ParameterSingleDataset dataset;
 	private ParameterCombine targetData;
@@ -57,7 +57,7 @@ public class MetaProcessAppendRow extends MetaProcess {
 			this.dataset.setSelectedItem(dataset);
 			this.chooseTable.setDataset(dataset);
 		}
-		this.checkBox = new ParameterCheckBox(CommonProperties.getString("String_SaveNewFields"));
+		this.checkBox = new ParameterCheckBox(CoreProperties.getString("String_SaveNewFields"));
 		this.steppedListener = new SteppedListener() {
 			@Override
 			public void stepped(SteppedEvent steppedEvent) {

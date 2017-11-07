@@ -11,7 +11,6 @@ import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationAd
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.controls.DataCell;
@@ -411,8 +410,8 @@ public class JPanelChooseOriginal extends JPanelNewTransformationBase {
 					dispose();
 				}
 			});
-			buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-			buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+			buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+			buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 			checkBox.setText(DataEditorProperties.getString("String_Transformation_CheckBoxResaveDataset"));
 
 			JPanel panelButton = new JPanel();

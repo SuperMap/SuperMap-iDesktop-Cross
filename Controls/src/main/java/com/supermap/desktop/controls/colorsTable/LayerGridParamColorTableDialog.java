@@ -12,7 +12,7 @@ import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dialog.BatchAddDailog;
 import com.supermap.desktop.event.ColorTableChangeEvent;
 import com.supermap.desktop.event.ColorTableChangeListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CoreResources;
@@ -433,8 +433,8 @@ public class LayerGridParamColorTableDialog extends SmDialog {
 		buttonMoveDown.setToolTipText(ControlsProperties.getString("String_DownColor"));
 		buttonMoveBottom.setToolTipText(ControlsProperties.getString("String_LastColor"));
 
-		buttonApply.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonApply.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initLayout() {
@@ -755,7 +755,7 @@ public class LayerGridParamColorTableDialog extends SmDialog {
 		String moduleName = "ExportColorsTable";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_DialogColorTable"), "sctu");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_SaveAsFile"), moduleName, "SaveOne");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
@@ -792,7 +792,7 @@ public class LayerGridParamColorTableDialog extends SmDialog {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(ControlsProperties.getString("String_DialogColorTable"), "sctu"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_DialogColorTableSct"), "sct"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_OpenColorTable"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

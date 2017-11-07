@@ -11,14 +11,14 @@ import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetType
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
  * @author XiaJT
  */
 public abstract class MetaProcessAnalyzingPatterns extends MetaProcess {
-	private static final String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	protected static final String INPUT_SPATIALWEIGHTMATRIXFILE = ProcessOutputResultProperties.getString("String_SpatialWeightMatrixFile");
 	protected ParameterDatasource datasource = new ParameterDatasource();
 	protected ParameterSingleDataset dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
@@ -40,7 +40,7 @@ public abstract class MetaProcessAnalyzingPatterns extends MetaProcess {
 		ParameterCombine parameterCombine = new ParameterCombine();
 		parameterCombine.addParameters(datasource, dataset);
 		parameters.setParameters(parameterCombine, parameterPatternsParameter);
-		parameterCombine.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombine.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
 		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.VECTOR, parameterCombine);
 	}
 

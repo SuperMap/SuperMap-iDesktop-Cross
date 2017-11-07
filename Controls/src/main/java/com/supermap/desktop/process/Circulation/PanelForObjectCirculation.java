@@ -2,9 +2,8 @@ package com.supermap.desktop.process.Circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.process.Circulation.ExchangeTableModel;
 import com.supermap.desktop.process.parameters.ParameterPanels.MultiBufferRadioList.MultiBufferRadioListTableModel;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CoreResources;
@@ -80,8 +79,8 @@ public class PanelForObjectCirculation extends JPanel {
 		this.exchangeTableModel = new ExchangeTableModel();
 		this.exchangeTableModel.setEditable(new boolean[]{false, true});
 		this.exchangeTableModel.setInfo(this.pathList);
-		this.exchangeTableModel.setTitle(new String[]{CommonProperties.getString("String_ColumnHeader_Index"),
-				CommonProperties.getString("String_Content")});
+		this.exchangeTableModel.setTitle(new String[]{CoreProperties.getString("String_ColumnHeader_Index"),
+				CoreProperties.getString("String_Content")});
 		this.tableForObjectCirculation.setModel(this.exchangeTableModel);
 		// 设置列不可移动
 		this.tableForObjectCirculation.getTableHeader().setReorderingAllowed(false);
@@ -116,7 +115,7 @@ public class PanelForObjectCirculation extends JPanel {
 		this.buttonInsert.setToolTipText(ControlsProperties.getString("String_InsertDefaultValue"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonMoveTop.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
 		this.buttonMoveUp.setToolTipText(ControlsProperties.getString("String_MoveUp"));
 		this.buttonMoveDown.setToolTipText(ControlsProperties.getString("String_MoveDown"));

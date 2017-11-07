@@ -10,7 +10,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterDefaultValueTextField;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.ProviderLabel.NewHelpProvider;
 import com.supermap.desktop.ui.controls.TextFields.DefaultValueTextField;
@@ -137,7 +137,7 @@ public class ParameterDefaultValueTextFieldPanel extends SwingPanel implements I
 	private String getDescribe() {
 		String describe = parameterDefaultValueTextField.getDescribe();
 		if (parameterDefaultValueTextField.isRequisite()) {
-			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
+			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
 		}

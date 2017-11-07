@@ -9,7 +9,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolSpinnerUtilties;
 import com.supermap.desktop.enums.TextStyleType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.FontComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -529,8 +529,8 @@ public class TextBasicPanel extends JPanel implements ITextStyle {
             jPanel.setLayout(new GridBagLayout());
             jPanel.add(this.checkBoxOutline, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setWeight(20, 1).setInsets(0, 0, 0, 0));
             jPanel.add(this.spinnerOutLineWidth, new GridBagConstraintsHelper(1, 0, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setWeight(78, 1).setAnchor(GridBagConstraints.CENTER).setInsets(2, 10, 0, 0));
-            jPanel.add(new JLabel(CommonProperties.getString("String_Label_Pixel")), new GridBagConstraintsHelper(2, 0, 1, 1).setFill(GridBagConstraints.NONE).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setInsets(2, 10, 0, 0));
-            this.panelEffect.add(jPanel, new GridBagConstraintsHelper(0, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 1).setInsets(0, 10, 2, 10).setFill(GridBagConstraints.HORIZONTAL));
+	        jPanel.add(new JLabel(CoreProperties.getString("String_Label_Pixel")), new GridBagConstraintsHelper(2, 0, 1, 1).setFill(GridBagConstraints.NONE).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setInsets(2, 10, 0, 0));
+	        this.panelEffect.add(jPanel, new GridBagConstraintsHelper(0, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 1).setInsets(0, 10, 2, 10).setFill(GridBagConstraints.HORIZONTAL));
         } else {
             this.panelEffect.add(this.checkBoxOutline, new GridBagConstraintsHelper(1, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 1).setInsets(2, 10, 0, 10));
         }

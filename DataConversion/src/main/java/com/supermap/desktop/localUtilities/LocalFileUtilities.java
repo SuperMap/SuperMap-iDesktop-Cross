@@ -2,7 +2,7 @@ package com.supermap.desktop.localUtilities;
 
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.FileTypeLocale;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
@@ -24,7 +24,7 @@ public class LocalFileUtilities {
 
 	public static SmFileChoose createExportFileChooser(String filePath) {
 		if (!SmFileChoose.isModuleExist("DataExportFrame_OutPutDirectories")) {
-			SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), DataConversionProperties.getString("String_Export"),
+			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), DataConversionProperties.getString("String_Export"),
 					"DataExportFrame_OutPutDirectories", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("DataExportFrame_OutPutDirectories");
@@ -61,7 +61,7 @@ public class LocalFileUtilities {
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnew()[13], "json"),
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnew()[14], "gpx")
 				);
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataConversionProperties.getString("String_FileType"), "CommonFunction", "OpenMany");
 			} else {
 				String fileFilters = SmFileChoose.buildFileFilters(
@@ -78,7 +78,7 @@ public class LocalFileUtilities {
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnew()[10], "json"),
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnewforlinux()[11], "gpx")
 				);
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataConversionProperties.getString("String_FileType"), "CommonFunction", "OpenMany");
 			}
 

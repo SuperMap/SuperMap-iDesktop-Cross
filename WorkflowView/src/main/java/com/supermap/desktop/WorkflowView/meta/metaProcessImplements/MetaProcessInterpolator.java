@@ -18,7 +18,7 @@ import com.supermap.desktop.process.parameter.ParameterSearchModeInfo;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.properties.PixelFormatProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
@@ -31,7 +31,7 @@ import java.text.MessageFormat;
  * Created by xie on 2017/2/16.
  */
 public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "InterpolateResult";
 
 	private ParameterDatasourceConstrained parameterDatasource;
@@ -116,15 +116,15 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		parameterDatasource = new ParameterDatasourceConstrained();
-		parameterDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		parameterDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		parameterDataset = new ParameterSingleDataset(DatasetType.POINT);
 		parameterInterpolatorFields = new ParameterFieldComboBox();
 		parameterInterpolatorFields.setDescribe(ProcessProperties.getString("String_InterpolatorFields"));
-		parameterScaling = new ParameterNumber(CommonProperties.getString("String_Scaling"));
+		parameterScaling = new ParameterNumber(CoreProperties.getString("String_Scaling"));
 		parameterScaling.setSelectedItem(1);
 		parameterScaling.setMinValue(0);
 		ParameterCombine sourceCombine = new ParameterCombine();
-		sourceCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(parameterDatasource, parameterDataset);
 
 		ParameterCombine parameterField = new ParameterCombine();
@@ -133,9 +133,9 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 
 		parameterResultDatasetName = new ParameterSaveDataset();
 		parameterResultDatasetName.setDefaultDatasetName("result_interpolator");
-		parameterResolution = new ParameterNumber(CommonProperties.getString("String_Resolution"));
+		parameterResolution = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		parameterResolution.setMinValue(0);
-		parameterPixelType = new ParameterComboBox().setDescribe(CommonProperties.getString("String_PixelType"));
+		parameterPixelType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_PixelType"));
 		ParameterDataNode selectedItem = new ParameterDataNode(PixelFormatProperties.getString("String_Bit32"), PixelFormat.BIT32);
 		parameterPixelType.setItems(
 				new ParameterDataNode(PixelFormatProperties.getString("String_UBit1"), PixelFormat.UBIT1),
@@ -144,12 +144,12 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 				new ParameterDataNode(ProcessProperties.getString("String_PixelSingle"), PixelFormat.SINGLE),
 				new ParameterDataNode(ProcessProperties.getString("String_PixelDouble"), PixelFormat.DOUBLE));
 		parameterPixelType.setSelectedItem(selectedItem);
-		parameterColumn = new ParameterNumber(CommonProperties.getString("String_Column"));
-		parameterRow = new ParameterNumber(CommonProperties.getString("String_Row"));
+		parameterColumn = new ParameterNumber(CoreProperties.getString("String_Column"));
+		parameterRow = new ParameterNumber(CoreProperties.getString("String_Row"));
 		parameterColumn.setEnabled(false);
 		parameterRow.setEnabled(false);
 		ParameterCombine targetCombine = new ParameterCombine();
-		targetCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetCombine.addParameters(parameterResultDatasetName, parameterResolution, parameterPixelType, parameterRow, parameterColumn);
 
 		searchMode = new ParameterSearchMode();
@@ -163,37 +163,37 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 		modeSetCombine.setDescribe(ProcessProperties.getString("String_InterpolationAnalyst_SearchModeSetting"));
 		modeSetCombine.addParameters(searchMode);
 
-		parameterPower = new ParameterNumber(CommonProperties.getString("String_Power"));
+		parameterPower = new ParameterNumber(CoreProperties.getString("String_Power"));
 		parameterPower.setSelectedItem(2);
 		parameterPower.setMinValue(1);
 		parameterPower.setMaxValue(100);
-		parameterTension = new ParameterNumber(CommonProperties.getString("String_Tension"));
+		parameterTension = new ParameterNumber(CoreProperties.getString("String_Tension"));
 		parameterTension.setSelectedItem(40);
 		parameterTension.setMinValue(0);
-		parameterSmooth = new ParameterNumber(CommonProperties.getString("String_Smooth"));
+		parameterSmooth = new ParameterNumber(CoreProperties.getString("String_Smooth"));
 		parameterSmooth.setSelectedItem(0.1);
 		parameterSmooth.setMinValue(0);
 		parameterSmooth.setMaxValue(1);
-		ParameterDataNode spherical = new ParameterDataNode(CommonProperties.getString("String_VariogramMode_Spherical"), VariogramMode.SPHERICAL);
-		parameterVariogramMode = new ParameterComboBox().setDescribe(CommonProperties.getString("String_VariogramMode"));
-		parameterVariogramMode.setItems(new ParameterDataNode(CommonProperties.getString("String_VariogramMode_Exponential"), VariogramMode.EXPONENTIAL),
-				new ParameterDataNode(CommonProperties.getString("String_VariogramMode_Gaussian"), VariogramMode.GAUSSIAN),
+		ParameterDataNode spherical = new ParameterDataNode(CoreProperties.getString("String_VariogramMode_Spherical"), VariogramMode.SPHERICAL);
+		parameterVariogramMode = new ParameterComboBox().setDescribe(CoreProperties.getString("String_VariogramMode"));
+		parameterVariogramMode.setItems(new ParameterDataNode(CoreProperties.getString("String_VariogramMode_Exponential"), VariogramMode.EXPONENTIAL),
+				new ParameterDataNode(CoreProperties.getString("String_VariogramMode_Gaussian"), VariogramMode.GAUSSIAN),
 				spherical);
 		parameterVariogramMode.setSelectedItem(spherical);
-		parameterStill = new ParameterNumber(CommonProperties.getString("String_Still"));
+		parameterStill = new ParameterNumber(CoreProperties.getString("String_Still"));
 		parameterStill.setSelectedItem(0);
-		parameterAngle = new ParameterNumber(CommonProperties.getString("String_Angle"));
+		parameterAngle = new ParameterNumber(CoreProperties.getString("String_Angle"));
 		parameterAngle.setSelectedItem(0);
 		parameterAngle.setMinValue(0);
 		parameterAngle.setMaxValue(360);
-		parameterRange = new ParameterNumber(CommonProperties.getString("String_Range"));
+		parameterRange = new ParameterNumber(CoreProperties.getString("String_Range"));
 		parameterRange.setSelectedItem(0);
 		parameterRange.setMinValue(0);
-		parameterMean = new ParameterNumber(CommonProperties.getString("String_Mean"));
+		parameterMean = new ParameterNumber(CoreProperties.getString("String_Mean"));
 		parameterMean.setSelectedItem(0);
-		parameterExponent = new ParameterComboBox().setDescribe(CommonProperties.getString("String_Steps"));
+		parameterExponent = new ParameterComboBox().setDescribe(CoreProperties.getString("String_Steps"));
 		parameterExponent.setItems(new ParameterDataNode("1", Exponent.exp1), new ParameterDataNode("2", Exponent.exp2));
-		parameterNugget = new ParameterNumber(CommonProperties.getString("String_Nugget"));
+		parameterNugget = new ParameterNumber(CoreProperties.getString("String_Nugget"));
 		parameterNugget.setSelectedItem(0);
 		ParameterCombine otherParamCombine = new ParameterCombine();
 		otherParamCombine.setDescribe(ProcessProperties.getString("String_InterpolationAnalyst_OtherParameters"));

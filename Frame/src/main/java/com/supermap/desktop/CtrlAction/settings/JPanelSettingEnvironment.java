@@ -7,7 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolSpinnerUtilties;
 import com.supermap.desktop.frame.FrameProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.FileChooserControl;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -269,7 +269,7 @@ public class JPanelSettingEnvironment extends BaseSettingPanel {
 			public void actionPerformed(ActionEvent e) {
 				String moduleName = "FileCacheDirectories";
 				if (!SmFileChoose.isModuleExist(moduleName)) {
-					SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), GlobalParameters.getDesktopTitle(),
+					SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), GlobalParameters.getDesktopTitle(),
 							moduleName, "GetDirectories");
 				}
 				SmFileChoose fileChoose = new SmFileChoose(moduleName);

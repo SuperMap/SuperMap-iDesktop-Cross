@@ -7,7 +7,7 @@ import com.supermap.desktop.lbs.params.IServerLoginInfo;
 import com.supermap.desktop.lbs.params.IServerResponse;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.lbs.params.Token;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import org.apache.commons.compress.utils.Charsets;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.http.HttpEntity;
@@ -64,7 +64,7 @@ public class IServerServiceImpl implements IServerService {
 					result = client;
 			}
 		} catch (Exception e) {
-			Application.getActiveApplication().getOutput().output(CommonProperties.getString("Strng_ConnectionException"));
+			Application.getActiveApplication().getOutput().output(CoreProperties.getString("Strng_ConnectionException"));
 			IServerLoginInfo.error = true;
 		}
 		return result;
@@ -104,7 +104,7 @@ public class IServerServiceImpl implements IServerService {
 					result = tempResponse;
 				}
 			} else {
-				Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_HaveNoResponse"));
+				Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_HaveNoResponse"));
 				IOUtils.closeQuietly(IServerLoginInfo.client);
 				IServerLoginInfo.client = HttpClients.createDefault();
 			}

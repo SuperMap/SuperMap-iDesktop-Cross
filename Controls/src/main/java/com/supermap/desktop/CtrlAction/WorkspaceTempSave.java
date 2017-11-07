@@ -3,7 +3,7 @@ package com.supermap.desktop.CtrlAction;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -105,9 +105,9 @@ public class WorkspaceTempSave {
 					return;
 				}
 				if (saveSuccess) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_WorkspaceSaveSuccess"), workspace.getCaption()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_WorkspaceSaveSuccess"), workspace.getCaption()));
 				} else {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_WorkspaceSaveFailed"), workspace.getCaption()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_WorkspaceSaveFailed"), workspace.getCaption()));
 				}
 			}
 		};

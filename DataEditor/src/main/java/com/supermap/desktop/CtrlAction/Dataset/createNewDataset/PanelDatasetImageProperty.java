@@ -4,7 +4,7 @@ import com.supermap.data.BlockSizeOption;
 import com.supermap.data.PixelFormat;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
 import com.supermap.desktop.utilities.BlockSizeOptionUtilities;
 import com.supermap.desktop.utilities.PixelFormatUtilities;
@@ -56,7 +56,7 @@ public class PanelDatasetImageProperty extends JPanel {
 
 	private void initComponents() {
 		this.blockSizeOptionLabel = new JLabel(DataEditorProperties.getString("String_NewDatasetBlockSizeOption"));
-		this.pixelFormatLabel = new JLabel(CommonProperties.getString("String_PixelType"));
+		this.pixelFormatLabel = new JLabel(CoreProperties.getString("String_PixelType"));
 		this.bandCountLabel = new JLabel(ControlsProperties.getString("String_LabelBandsSize"));
 
 		this.comboboxBlockSizeOption = new JComboBox<>();

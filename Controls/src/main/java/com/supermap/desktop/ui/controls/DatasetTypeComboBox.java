@@ -7,7 +7,7 @@ import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.implement.DefaultComboBoxUI;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import java.net.URL;
@@ -127,7 +127,7 @@ public class DatasetTypeComboBox extends JComboBox<DataCell> {
 		} else {
 			List<DataCell> datasetTypeModel = new LinkedList<>();
 			if (isAllShown) {
-				datasetTypeModel.add(new DataCell(CommonProperties.getString("String_DatasetType_All")));
+				datasetTypeModel.add(new DataCell(CoreProperties.getString("String_DatasetType_All")));
 			}
 			for (DatasetType datasetType : supportedDatasetTypes) {
 				datasetTypeModel.add(new DataCell(datasetType, CommonToolkit.DatasetTypeWrap.findName(datasetType)));
@@ -209,7 +209,7 @@ public class DatasetTypeComboBox extends JComboBox<DataCell> {
 		String selectedItem = ((DataCell) this.getSelectedItem()).getDataName();
 		if (selectedItem == null) {
 			return null;
-		} else if (selectedItem.equals(CommonProperties.getString("String_DatasetType_All"))) {
+		} else if (selectedItem.equals(CoreProperties.getString("String_DatasetType_All"))) {
 			return supportedDatasetTypes;
 		} else {
 			return new DatasetType[]{CommonToolkit.DatasetTypeWrap.findType(selectedItem)};

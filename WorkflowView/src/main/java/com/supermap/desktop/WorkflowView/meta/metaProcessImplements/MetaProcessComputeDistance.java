@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.awt.*;
@@ -26,8 +26,8 @@ import java.beans.PropertyChangeListener;
  * Created by Chen on 2017/7/3 0003.
  */
 public class MetaProcessComputeDistance extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private final static String PROXIMITY_DATA = CommonProperties.getString("String_GroupBox_ProximityData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final static String PROXIMITY_DATA = CoreProperties.getString("String_GroupBox_ProximityData");
 	private final static String OUTPUT_DATA = "ComputeDistanceResult";
 
 	private final static String MIN_DISTANCE = "MinDistance";
@@ -60,7 +60,7 @@ public class MetaProcessComputeDistance extends MetaProcess {
 		sourceDatasource = new ParameterDatasourceConstrained();
 		sourceDataset = new ParameterSingleDataset(DatasetType.POINT);
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasource, sourceDataset);
 
 		textAreaSourceSQL = new ParameterTextArea(ProcessProperties.getString("String_ExpressionForTextAreaSource"));
@@ -72,11 +72,11 @@ public class MetaProcessComputeDistance extends MetaProcess {
 		sourceSQL.addParameters(textAreaSourceSQL, emptyCombine);
 
 		proximityDatasource = new ParameterDatasourceConstrained();
-		proximityDatasource.setDescribe(CommonProperties.getString("String_Label_Datasource"));
+		proximityDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		proximityDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.NETWORK);
-		proximityDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		proximityDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		ParameterCombine proximityData = new ParameterCombine();
-		proximityData.setDescribe(CommonProperties.getString("String_GroupBox_ProximityData"));
+		proximityData.setDescribe(CoreProperties.getString("String_GroupBox_ProximityData"));
 		proximityData.addParameters(proximityDatasource, proximityDataset);
 
 		textAreaProximitySQL = new ParameterTextArea(ProcessProperties.getString("String_ExpressionForTextAreaProximity"));
@@ -93,11 +93,11 @@ public class MetaProcessComputeDistance extends MetaProcess {
 		textNumMax = new ParameterNumber(ProcessProperties.getString("String_Label_MaxDistance"));
 		textNumMin = new ParameterNumber(ProcessProperties.getString("String_Label_MinDistance"));
 		ParameterCombine setting = new ParameterCombine();
-		setting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		setting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		setting.addParameters(comboBoxComputeMethod, new ParameterCombine(ParameterCombine.HORIZONTAL).addParameters(checkBoxMin, checkBoxMax), textNumMax, textNumMin);
 		resultDataset = new ParameterSaveDataset();
 		ParameterCombine resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(resultDataset);
 
 		parameters.setParameters(sourceData, sourceSQL, proximityData, proximitySQL, setting, resultData);

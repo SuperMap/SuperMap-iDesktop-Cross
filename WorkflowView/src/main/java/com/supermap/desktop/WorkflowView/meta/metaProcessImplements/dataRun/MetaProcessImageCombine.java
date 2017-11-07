@@ -13,16 +13,16 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
  * Created by lixiaoyao on 2017/8/15.
  */
 public class MetaProcessImageCombine extends MetaProcess {
-	private final static String INPUT_RED_DATA = CommonProperties.getString("String_RedBand");
-	private final static String INPUT_GREEN_DATA = CommonProperties.getString("String_GreenBand");
-	private final static String INPUT_BLUE_DATA = CommonProperties.getString("String_BlueBand");
+	private final static String INPUT_RED_DATA = CoreProperties.getString("String_RedBand");
+	private final static String INPUT_GREEN_DATA = CoreProperties.getString("String_GreenBand");
+	private final static String INPUT_BLUE_DATA = CoreProperties.getString("String_BlueBand");
 	private final static String OUTPUT_DATA = "ImageCombineResult";
 
 	private ParameterDatasourceConstrained redDatasource;
@@ -42,17 +42,17 @@ public class MetaProcessImageCombine extends MetaProcess {
 
 	private void initParameters() {
 		this.redDatasource = new ParameterDatasourceConstrained();
-		this.redDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.redDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.redDataset = new ParameterSingleDataset(DatasetType.IMAGE);
-		this.redDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.redDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.greenDatasource = new ParameterDatasourceConstrained();
-		this.greenDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.greenDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.greenDataset = new ParameterSingleDataset(DatasetType.IMAGE);
-		this.greenDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.greenDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.blueDatasource = new ParameterDatasourceConstrained();
-		this.blueDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.blueDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.blueDataset = new ParameterSingleDataset(DatasetType.IMAGE);
-		this.blueDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.blueDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine redData = new ParameterCombine();
@@ -65,7 +65,7 @@ public class MetaProcessImageCombine extends MetaProcess {
 		blueData.setDescribe(INPUT_BLUE_DATA);
 		blueData.addParameters(this.blueDatasource, this.blueDataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(redData, greenData, blueData, targetData);

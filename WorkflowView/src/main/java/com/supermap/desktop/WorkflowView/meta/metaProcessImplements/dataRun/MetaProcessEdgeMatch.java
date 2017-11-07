@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -29,7 +29,7 @@ import java.beans.PropertyChangeListener;
  */
 public class MetaProcessEdgeMatch extends MetaProcess {
 
-	private final static String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "EdgeMatchResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -100,11 +100,11 @@ public class MetaProcessEdgeMatch extends MetaProcess {
 		parameterCombine.addParameters(union, isLinkDataset);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
-		parameterCombineParameter.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineParameter.addParameters(edgeMatchMode, edgeTolerance, parameterCombine);
 		//接边关联数据
 		ParameterCombine parameterCombineLinkData = new ParameterCombine();
-		parameterCombineLinkData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		parameterCombineLinkData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		parameterCombineLinkData.addParameters(linkDatasource, linkDatasetName);
 
 		parameters.setParameters(parameterCombineSourceData, parameterCombineTargetData, parameterCombineParameter, parameterCombineLinkData);

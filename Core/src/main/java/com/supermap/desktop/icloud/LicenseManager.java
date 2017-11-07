@@ -5,21 +5,8 @@ import com.supermap.data.License;
 import com.supermap.data.Toolkit;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.icloud.api.LicenseService;
-import com.supermap.desktop.icloud.commontypes.ApplyFormalLicenseRequest;
-import com.supermap.desktop.icloud.commontypes.ApplyFormalLicenseResponse;
-import com.supermap.desktop.icloud.commontypes.ApplyTrialLicenseRequest;
-import com.supermap.desktop.icloud.commontypes.ApplyTrialLicenseResponse;
-import com.supermap.desktop.icloud.commontypes.LicenseId;
-import com.supermap.desktop.icloud.commontypes.LicenseInfo;
-import com.supermap.desktop.icloud.commontypes.ProductType;
-import com.supermap.desktop.icloud.commontypes.QueryFormalLicenseRequest;
-import com.supermap.desktop.icloud.commontypes.QueryFormalLicenseResponse;
-import com.supermap.desktop.icloud.commontypes.QueryTrialLicenseRequest;
-import com.supermap.desktop.icloud.commontypes.QueryTrialLicenseResponse;
-import com.supermap.desktop.icloud.commontypes.ReturnLicenseRequest;
-import com.supermap.desktop.icloud.commontypes.ServiceResponse;
-import com.supermap.desktop.icloud.commontypes.Version;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.icloud.commontypes.*;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.ComputerUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
 
@@ -223,10 +210,10 @@ public class LicenseManager {
                 }
 
             } else if (queryTrialResult.code == ServiceResponse.Code.LOGININ_OTHERPLAINT) {
-                JOptionPaneUtilities.showMessageDialog(CommonProperties.getString("String_LoginOnOtherPath"));
+	            JOptionPaneUtilities.showMessageDialog(CoreProperties.getString("String_LoginOnOtherPath"));
             }
         } catch (IOException e) {
-            JOptionPaneUtilities.showMessageDialog(CommonProperties.getString("String_ApplyTrialLicenseFalure"));
+	        JOptionPaneUtilities.showMessageDialog(CoreProperties.getString("String_ApplyTrialLicenseFalure"));
         }
 	    return result;
     }
@@ -252,7 +239,7 @@ public class LicenseManager {
             System.out.println(response.data.returnId);
             System.out.println(response.data.license);
         } catch (IOException e) {
-            JOptionPaneUtilities.showConfirmDialog(CommonProperties.getString("String_ApplyFormalLicenseFalure"));
+	        JOptionPaneUtilities.showConfirmDialog(CoreProperties.getString("String_ApplyFormalLicenseFalure"));
         }
         return response.data;
     }
@@ -358,15 +345,15 @@ public class LicenseManager {
                         System.out.println(licenseInfo.snId);
                     }
                     if (falseDays == licenseCount) {
-                        JOptionPaneUtilities.showMessageDialog(CommonProperties.getString("String_FormLicenseOverdue"));
-                        hasFormalLicense = false;
+	                    JOptionPaneUtilities.showMessageDialog(CoreProperties.getString("String_FormLicenseOverdue"));
+	                    hasFormalLicense = false;
                     } else {
                         hasFormalLicense = true;
                     }
                 }
             }
         } catch (IOException e) {
-            JOptionPaneUtilities.showMessageDialog(CommonProperties.getString("String_PermissionCheckFailed"));
+	        JOptionPaneUtilities.showMessageDialog(CoreProperties.getString("String_PermissionCheckFailed"));
         }
         if (hasFormalLicense == true) {
             licenseId = queryFormalResult.data.licenses[0].id;

@@ -14,7 +14,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.RasterAlgebraExpressionXml;
 import com.supermap.desktop.ui.RasterAlgebraOperationDialog;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -66,7 +66,7 @@ public class MetaProcessAlgebraOperation extends MetaProcessGridAnalyst {
 
 	private void initParameters() {
 		initEnvironment();
-		this.comboBoxPixelFormat = new ParameterComboBox(CommonProperties.getString("String_PixelFormat"));
+		this.comboBoxPixelFormat = new ParameterComboBox(CoreProperties.getString("String_PixelFormat"));
 		this.checkBoxCompress = new ParameterCheckBox(ControlsProperties.getString("String_DatasetCompress"));
 		this.checkBoxIgnoreNoValueCell = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValueRasterCell"));
 		this.textAreaExpression = new ParameterTextArea(ProcessProperties.getString("String_AlgebraOperationExpression"));
@@ -79,11 +79,11 @@ public class MetaProcessAlgebraOperation extends MetaProcessGridAnalyst {
 		parameterCombine.setWeightIndex(3);
 
 		ParameterCombine setting = new ParameterCombine();
-		setting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		setting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		setting.addParameters(this.comboBoxPixelFormat, this.checkBoxCompress, this.checkBoxIgnoreNoValueCell, this.textAreaExpression, parameterCombine);
 		this.resultDataset = new ParameterSaveDataset();
 		ParameterCombine resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(resultDataset);
 
 		this.parameters.setParameters(setting, resultData);
@@ -144,7 +144,7 @@ public class MetaProcessAlgebraOperation extends MetaProcessGridAnalyst {
 		String moduleName = "ExportRasterAlgebraExpression";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_RasterAlgebraExpression"), "xml");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_SaveAsFile"), moduleName, "SaveOne");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
@@ -173,7 +173,7 @@ public class MetaProcessAlgebraOperation extends MetaProcessGridAnalyst {
 		String moduleName = "InputRasterAlgebraExpression";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_RasterAlgebraExpression"), "xml");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

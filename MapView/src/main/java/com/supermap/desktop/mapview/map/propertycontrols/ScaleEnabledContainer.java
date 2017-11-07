@@ -5,7 +5,7 @@ import com.supermap.desktop.ScaleModel;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.exception.InvalidScaleException;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CoreResources;
@@ -317,7 +317,7 @@ public class ScaleEnabledContainer extends SmDialog {
 
 	private String getFilePathForImport() {
 		String filePath = "";
-		String title = CommonProperties.getString("String_ToolBar_Import");
+		String title = CoreProperties.getString("String_ToolBar_Import");
 		if (!SmFileChoose.isModuleExist("ImportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
 			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), title, "ImportScale", "OpenOne");
@@ -334,7 +334,7 @@ public class ScaleEnabledContainer extends SmDialog {
 		String filePath = "";
 		if (!SmFileChoose.isModuleExist("ExportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
-			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CommonProperties.getString("String_ToolBar_Export"),
+			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_ToolBar_Export"),
 					"ExportScale", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("ExportScale");
@@ -455,13 +455,13 @@ public class ScaleEnabledContainer extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_SetScaleFixed"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
-		this.buttonImport.setToolTipText(CommonProperties.getString("String_ToolBar_Import"));
-		this.buttonExport.setToolTipText(CommonProperties.getString("String_ToolBar_Export"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
+		this.buttonImport.setToolTipText(CoreProperties.getString("String_ToolBar_Import"));
+		this.buttonExport.setToolTipText(CoreProperties.getString("String_ToolBar_Export"));
 		this.addScale.setToolTip(MapViewProperties.getString("MapCache_AddScale"));
 	}
 

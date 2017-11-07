@@ -8,7 +8,7 @@ import com.supermap.desktop.event.ColorTableChangeEvent;
 import com.supermap.desktop.event.ColorTableChangeListener;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerGridParamPropertyModel;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.*;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -216,7 +216,7 @@ public class LayerGridParamPropertyControl extends AbstractLayerPropertyControl 
 		this.labelSpecialValue.setText(MapViewProperties.getString("String_LayerControl_Grid_SpacialValue"));
 		this.labelSpecialValueColor.setText(MapViewProperties.getString("String_LayerControl_Grid_SetSpecialRasterColor"));
 		this.checkBoxIsSpecialValueTransparent.setText(MapViewProperties.getString("String_LayerControl_Grid_SpecialValueTransparency"));
-		this.buttonTable.setText(CommonProperties.getString("String_Button_Setting"));
+		this.buttonTable.setText(CoreProperties.getString("String_Button_Setting"));
 	}
 
 	@Override

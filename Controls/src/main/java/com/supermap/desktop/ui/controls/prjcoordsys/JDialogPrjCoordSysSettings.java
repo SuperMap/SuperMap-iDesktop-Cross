@@ -6,7 +6,6 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.JTreeUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -185,7 +184,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 								SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFiles"), "prj", "xml"),
 								SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileShape"), "prj"),
 								SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "xml"));
-						SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+						SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 								ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 					}
 					SmFileChoose prjFileImportFileChoose = new SmFileChoose(moduleName);
@@ -413,8 +412,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private void initializeResources() {
 		this.setTitle(ControlsProperties.getString("String_SetCoordsys"));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
-		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
+		this.buttonClose.setText(CoreProperties.getString(CoreProperties.Close));
 	}
 
 	private void registerEvents() {
@@ -482,7 +481,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonFavorites = new JButton(CoreProperties.getString("String_Favorite"), CoreResources.getIcon("/coreresources/ToolBar/Image_Favorite.png"));
 		this.buttonNewCoordSys = new JButton(ControlsProperties.getString("String_NewCoorSys"), CoreResources.getIcon("/coreresources/ToolBar/Image_NewCoordsys.png"));
 		this.buttonNewGroup = new JButton(ControlsProperties.getString("String_NewGroup"), ControlsResources.getIcon("/controlsresources/SortType/Image_NewGroup.png"));
-		this.buttonDelete = new JButton(CommonProperties.getString(CommonProperties.Delete), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
+		this.buttonDelete = new JButton(CoreProperties.getString(CoreProperties.Delete), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.textFieldSearch = new TextFieldSearch();
 		this.textFieldSearch.setPreferredSize(new Dimension(150, 30));
 
@@ -1143,7 +1142,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			this.menuItemImportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ImportCoordsys"));
 			this.menuItemExportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ExportCoordsys"));
 			this.menuItemAddFavorites = new JMenuItem(CoreProperties.getString("String_Favorite"));
-			this.menuItemDelete = new JMenuItem(CommonProperties.getString(CommonProperties.Delete));
+			this.menuItemDelete = new JMenuItem(CoreProperties.getString(CoreProperties.Delete));
 
 			this.menuNewCoordsys = new JMenu(ControlsProperties.getString("String_NewCoorSys"));
 			this.menuItemNewPrjCoordSys = new JMenuItem(ControlsProperties.getString("String_PrjCoorSys"));
@@ -1457,7 +1456,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "NOEXIST");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
 		}
 		SmFileChoose prjFileExportFileChoose = new SmFileChoose(moduleName);

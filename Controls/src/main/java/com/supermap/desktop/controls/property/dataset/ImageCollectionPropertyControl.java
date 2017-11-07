@@ -3,15 +3,14 @@ package com.supermap.desktop.controls.property.dataset;
 import com.supermap.data.DatasetImageCollection;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.DoubleUtilities;
@@ -83,7 +82,7 @@ public class ImageCollectionPropertyControl extends AbstractPropertyControl {
 
 
 	public ImageCollectionPropertyControl(DatasetImageCollection datasetImageCollection) {
-		super(CommonProperties.getString("String_DatasetType_ImageCollection"));
+		super(CoreProperties.getString("String_DatasetType_ImageCollection"));
 		initializeComponents();
 		initLayout();
 		initializeResources();
@@ -163,13 +162,13 @@ public class ImageCollectionPropertyControl extends AbstractPropertyControl {
 		this.labelNoValue.setText(ControlsProperties.getString("String_LabelNoValue"));
 		this.labelHasPyramid.setText(ControlsProperties.getString("String_LabelPyramid"));
 		this.labelDatasetCount.setText(ControlsProperties.getString("String_SubDatasetCount"));
-		this.smButtonSetDatasets.setText(CommonProperties.getString(CommonProperties.Button_Setting));
+		this.smButtonSetDatasets.setText(CoreProperties.getString(CoreProperties.Button_Setting));
 		this.labelPixelType.setText(ControlsProperties.getString("String_LabelPixelFormat"));
 		this.labelShowBounds.setText(ControlsProperties.getString("String_LabelClipRegion"));
-		this.smButtonSetShowBounds.setText(CommonProperties.getString(CommonProperties.Button_Setting));
+		this.smButtonSetShowBounds.setText(CoreProperties.getString(CoreProperties.Button_Setting));
 		this.smButtonClear.setText(CoreProperties.getString(CoreProperties.Clear));
-		this.smButtonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-		this.smButtonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.smButtonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+		this.smButtonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 	}
 	private void setComponentName() {
 		ComponentUIUtilities.setName(this.labelBandCount, "ImageCollectionPropertyControl_labelBandCount");
@@ -215,7 +214,7 @@ public class ImageCollectionPropertyControl extends AbstractPropertyControl {
 	private void fillComponents() {
 		this.smTextFieldBandCount.setText(Integer.toString(this.datasetImageCollection.getBandCount()));
 		this.smTextFieldNoValue.setText(DoubleUtilities.toString(noValue, 6));
-		this.smTextFieldHasPyramid.setText(CommonProperties.getString(this.datasetImageCollection.getHasPyramid() ? CommonProperties.True : CommonProperties.False));
+		this.smTextFieldHasPyramid.setText(CoreProperties.getString(this.datasetImageCollection.getHasPyramid() ? CoreProperties.True : CoreProperties.False));
 		this.smTextFieldDatasetCount.setText(String.valueOf(datasetImageCollection.getCount()));
 		this.smTextFieldPixelType.setText(PixelFormatUtilities.toString(datasetImageCollection.getPixelFormat()));
 

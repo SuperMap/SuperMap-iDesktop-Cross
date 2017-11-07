@@ -11,7 +11,7 @@ import com.supermap.desktop.dialog.symbolDialogs.JpanelSymbols.SymbolPanelPoint;
 import com.supermap.desktop.dialog.symbolDialogs.symbolTrees.SymbolFactory;
 import com.supermap.desktop.dialog.symbolDialogs.symbolTrees.SymbolGroupTree;
 import com.supermap.desktop.dialog.symbolDialogs.symbolTrees.SymbolGroupTreeNode;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -418,10 +418,10 @@ public abstract class SymbolDialog extends SmDialog {
 	private SmFileChoose createFileChoose() {
 		if (!SmFileChoose.isModuleExist("ImportImageFile")) {
 			String fileFilters = SmFileChoose.buildFileFilters(
-					SmFileChoose.createFileFilter(CommonProperties.getString("String_AllFilter"), "png", "jpg", "jpeg", "bmp", "ico"),
-					SmFileChoose.createFileFilter(CommonProperties.getString("String_ImageFilter"), "png", "jpg", "jpeg", "bmp"),
-					SmFileChoose.createFileFilter(CommonProperties.getString("String_IconFilter"), "ico"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+					SmFileChoose.createFileFilter(CoreProperties.getString("String_AllFilter"), "png", "jpg", "jpeg", "bmp", "ico"),
+					SmFileChoose.createFileFilter(CoreProperties.getString("String_ImageFilter"), "png", "jpg", "jpeg", "bmp"),
+					SmFileChoose.createFileFilter(CoreProperties.getString("String_IconFilter"), "ico"));
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ImportGridSymbol"), "ImportImageFile", "OpenMany");
 		}
 		SmFileChoose fileChooser = new SmFileChoose("ImportImageFile");
@@ -472,11 +472,11 @@ public abstract class SymbolDialog extends SmDialog {
 		int width = image.getWidth();
 		if (height > 512 || width > 512) {
 			SmOptionPane optionPane = new SmOptionPane();
-			optionPane.showConfirmDialog(MessageFormat.format(CommonProperties.getString("String_IconWrongInfo"), file.getAbsoluteFile()));
+			optionPane.showConfirmDialog(MessageFormat.format(CoreProperties.getString("String_IconWrongInfo"), file.getAbsoluteFile()));
 			return;
 		} else if (height != width) {
 			SmOptionPane optionPane = new SmOptionPane();
-			if (optionPane.showConfirmDialogYesNo(MessageFormat.format(CommonProperties.getString("String_SaveHandWScal"), file.getAbsoluteFile())) == JOptionPane.OK_OPTION) {
+			if (optionPane.showConfirmDialogYesNo(MessageFormat.format(CoreProperties.getString("String_SaveHandWScal"), file.getAbsoluteFile())) == JOptionPane.OK_OPTION) {
 				saveIcon(image, fileName, height, width);
 			} else {
 				int newWidth = height > width ? width : height;
@@ -514,14 +514,14 @@ public abstract class SymbolDialog extends SmDialog {
 
 	private void initResources() {
 		labelSearch.setText(ControlsProperties.getString("String_Label_SymbolSearch"));
-		this.buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 
-		this.menuFile.setText(CommonProperties.getString(CommonProperties.File));
-		this.menuEdit.setText(CommonProperties.getString(CommonProperties.Edit));
+		this.menuFile.setText(CoreProperties.getString(CoreProperties.File));
+		this.menuEdit.setText(CoreProperties.getString(CoreProperties.Edit));
 
-		this.menuItemProperty.setText(CommonProperties.getString(CommonProperties.Property));
+		this.menuItemProperty.setText(CoreProperties.getString(CoreProperties.Property));
 
 	}
 

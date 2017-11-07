@@ -18,7 +18,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -30,7 +30,7 @@ import java.text.DecimalFormat;
  */
 public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 	// TODO: 2017/4/27
-	private final static String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private ParameterDatasourceConstrained datasource = new ParameterDatasourceConstrained();
 	private ParameterSingleDataset dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 	private ParameterFieldComboBox parameterFieldComboBox = new ParameterFieldComboBox();
@@ -70,7 +70,7 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 		ParameterCombine parameterCombineSetting = new ParameterCombine();
 		parameterCombineSetting.addParameters(parameterFieldComboBox, parameterTextFieldBeginDistance, parameterTextFieldIncrementalDistance,
 				parameterTextFieldIncrementalNumber, parameterDistanceMethod, parameterCheckBox);
-		parameterCombineSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		// 结果展示
 //		ParameterCombine parameterCombineResult = new ParameterCombine();
 //		parameterCombineResult.addParameters(parameterResult);

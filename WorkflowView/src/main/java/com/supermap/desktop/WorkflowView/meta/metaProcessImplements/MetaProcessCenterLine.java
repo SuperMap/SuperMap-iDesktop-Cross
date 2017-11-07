@@ -12,7 +12,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -20,7 +20,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  */
 public abstract class MetaProcessCenterLine extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "CenterLineResult";
 
 	public abstract DatasetType getSonDatasetType();
@@ -44,19 +44,19 @@ public abstract class MetaProcessCenterLine extends MetaProcess {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(getSonDatasetType());
 		this.saveDataset = new ParameterSaveDataset();
-		this.parameterNumberMaxWidth = new ParameterNumber(CommonProperties.getString("String_MaxWidth"));
-		this.parameterNumberMinWidth = new ParameterNumber(CommonProperties.getString("String_MinWidth"));
+		this.parameterNumberMaxWidth = new ParameterNumber(CoreProperties.getString("String_MaxWidth"));
+		this.parameterNumberMinWidth = new ParameterNumber(CoreProperties.getString("String_MinWidth"));
 
 		this.parameterNumberMaxWidth.setRequisite(true);
 		this.parameterNumberMinWidth.setRequisite(true);
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.dataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
 		paramSet.addParameters(this.parameterNumberMaxWidth);
 		paramSet.addParameters(this.parameterNumberMinWidth);
 
@@ -87,7 +87,7 @@ public abstract class MetaProcessCenterLine extends MetaProcess {
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 		}
 		this.saveDataset.setDefaultDatasetName(getResultDatasetName());
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.parameterNumberMaxWidth.setSelectedItem("30");
 		this.parameterNumberMaxWidth.setMinValue(0);
 		this.parameterNumberMaxWidth.setIsIncludeMin(false);

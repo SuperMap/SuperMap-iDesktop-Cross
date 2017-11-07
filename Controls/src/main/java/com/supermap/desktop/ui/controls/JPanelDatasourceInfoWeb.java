@@ -4,7 +4,6 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.TextFields.DefaultValueTextField;
@@ -362,8 +361,8 @@ public class JPanelDatasourceInfoWeb extends JPanel {
 	}
 
 	private void initResources() {
-		this.jLabelServerAddress.setText(CommonProperties.getString("String_Label_DataSource_ServiceAddress"));
-		this.jLabelServerType.setText(CommonProperties.getString("String_Label_DataSource_ServerType"));
+		this.jLabelServerAddress.setText(CoreProperties.getString("String_Label_DataSource_ServiceAddress"));
+		this.jLabelServerType.setText(CoreProperties.getString("String_Label_DataSource_ServerType"));
 		this.jLabelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
 		this.jLabelDatasourceAlias.setText(ControlsProperties.getString("String_Label_DatasourseAlias"));
 		this.jLabelOpenType.setText(ControlsProperties.getString("String_Label_OpenType"));

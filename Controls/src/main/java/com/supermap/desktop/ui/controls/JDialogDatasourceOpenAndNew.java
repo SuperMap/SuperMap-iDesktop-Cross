@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceImageUtilties;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 
@@ -72,13 +72,13 @@ public class JDialogDatasourceOpenAndNew extends SmDialog {
 		this.buttonOk.setPreferredSize(new Dimension(75, 23));
 		if (DatasourceOperatorType.OPENDATABASE == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_OpenDatabaseDataSourse"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_Open"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_Open"));
 		} else if (DatasourceOperatorType.NEWDATABASE == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_NewDatabaseDataSourse"));
 			this.buttonOk.setText(ControlsProperties.getString("String_Button_Creat"));
 		} else if (DatasourceOperatorType.OPENWEB == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_OpenWebDataSourse"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_Open"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_Open"));
 		}
 		this.initializeDatasourceType(type);
 		this.datasourceOperatorType = type;
@@ -103,7 +103,7 @@ public class JDialogDatasourceOpenAndNew extends SmDialog {
 		buttonPane.add(buttonOk);
 
 		this.buttonCancel = new JButton();
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.buttonCancel.setPreferredSize(new Dimension(75, 23));
 		buttonPane.add(buttonCancel);
 

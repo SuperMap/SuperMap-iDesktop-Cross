@@ -8,7 +8,7 @@ import com.supermap.desktop.CtrlAction.Dataset.AddToWindowMode;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.mapping.Map;
@@ -25,8 +25,8 @@ import java.util.List;
 public class NewDatasetTableModel extends DefaultTableModel {
 
 	private final String[] columnNames = new String[]{
-			CommonProperties.getString("String_ColumnHeader_Index"),
-			CommonProperties.getString("String_ColumnHeader_TargetDatasource"),
+			CoreProperties.getString("String_ColumnHeader_Index"),
+			CoreProperties.getString("String_ColumnHeader_TargetDatasource"),
 			DataEditorProperties.getString("String_CreateType"),
 			DataEditorProperties.getString("String_ColumnTitle_DtName"),
 //			CommonProperties.getString("String_ColumnHeader_EncodeType"),

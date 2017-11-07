@@ -1,15 +1,10 @@
 package com.supermap.desktop.CtrlAction.Dataset.SpatialIndex;
 
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetType;
-import com.supermap.data.Datasource;
-import com.supermap.data.SpatialIndexInfo;
-import com.supermap.data.SpatialIndexType;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -18,11 +13,7 @@ import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.SortTable.SortTable;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
-import com.supermap.desktop.utilities.CoreResources;
-import com.supermap.desktop.utilities.SpatialIndexInfoUtilities;
-import com.supermap.desktop.utilities.SpatialIndexTypeUtilities;
-import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.TableUtilities;
+import com.supermap.desktop.utilities.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -30,13 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -589,9 +574,9 @@ public class JDialogBulidSpatialIndex extends SmDialog {
 		this.textAreaQuadTree.setText("    " + CoreProperties.getString("String_QtreeDescription"));
 		this.textAreaPGISTTree.setText("    " + CoreProperties.getString("String_PGISTtreeDescription"));
 		this.labelIndexType.setText(ControlsProperties.getString("String_LabelSpatialIndexType"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
-		this.checkBoxAutoClose.setText(CommonProperties.getString("String_CheckBox_CloseDialog"));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
+		this.checkBoxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.controls;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.table.SmTable;
 
@@ -222,8 +222,8 @@ public class SQLExpressionDialog extends SmDialog {
 	 * 初始化常用运算符的ComboBox
 	 */
 	private void initResources() {
-		this.jButtonOK.setText(CommonProperties.getString("String_Button_OK"));
-		this.jButtonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.jButtonOK.setText(CoreProperties.getString("String_Button_OK"));
+		this.jButtonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.jButtonClear.setText(ControlsProperties.getString("String_GeometryPropertyStyle3DControl_buttonClearMarkerIconFile"));
 		this.jComboBoxMathsOperation
 				.setModel(new DefaultComboBoxModel<String>(new String[]{"", "Abs()", "Acos()", "Asin()", "Atan()", "Atn2()", "Ceiling()", "Cos()", "Cot()",

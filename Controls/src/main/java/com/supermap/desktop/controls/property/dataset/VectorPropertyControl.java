@@ -6,15 +6,12 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.CharsetComboBox;
-import com.supermap.desktop.ui.controls.CollectionDataset.JDialogCreateCollectionDataset;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CharsetUtilities;
-import com.supermap.desktop.utilities.DatasourceUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.SpatialIndexTypeUtilities;
 
@@ -28,7 +25,6 @@ import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 
 public class VectorPropertyControl extends AbstractPropertyControl {
 
@@ -177,7 +173,7 @@ public class VectorPropertyControl extends AbstractPropertyControl {
 		this.buttonClearCache.setVisible(false); // 暂未实现的功能，暂时关闭之
 
 		JPanel panelVectorParam = new JPanel();
-		panelVectorParam.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString(CommonProperties.DatasetVector)));
+		panelVectorParam.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString(CoreProperties.DatasetVector)));
 		panelVectorParam.setLayout(new GridBagLayout());
 		panelVectorParam.add(labelRecordCount, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setFill(GridBagConstraints.NONE).setInsets(10, 10, 0, 0).setAnchor(GridBagConstraints.WEST));
 		panelVectorParam.add(textFieldRecordCount, new GridBagConstraintsHelper(1, 0, 2, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 5, 0, 10));
@@ -288,8 +284,8 @@ public class VectorPropertyControl extends AbstractPropertyControl {
 		this.labelSmallPolygon.setText(ControlsProperties.getString("String_LabelToleranceSmallPolygon"));
 		this.buttonDefaultTolerance.setText(CoreProperties.getString(CoreProperties.Default));
 		this.buttonClearTolerance.setText(CoreProperties.getString(CoreProperties.Clear));
-		this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 	}
 
 	private void reset() {

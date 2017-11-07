@@ -15,7 +15,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
 
@@ -84,16 +84,16 @@ public class MetaProcessKernelDensityOffline extends MetaProcess {
 		numberBottom = new ParameterNumber(ControlsProperties.getString("String_LabelBottom"));
 		numberRight = new ParameterNumber(ControlsProperties.getString("String_LabelRight"));
 		numberLeft = new ParameterNumber(ControlsProperties.getString("String_LabelLeft"));
-		numberRadius = new ParameterNumber(CommonProperties.getString("String_SearchRadius"));
+		numberRadius = new ParameterNumber(CoreProperties.getString("String_SearchRadius"));
 
 		ParameterCombine sourceCombine = new ParameterCombine();
-		sourceCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasource, sourceDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
 		settingCombine.setDescribe(ProcessProperties.getString("String_setParameter"));
 		settingCombine.addParameters(comboBoxField, numberRadius, numberLeft, numberBottom, numberRight, numberTop, numberCellSize);
 		ParameterCombine resultCombine = new ParameterCombine();
-		resultCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultCombine.addParameters(resultDataset);
 
 		parameters.setParameters(sourceCombine, settingCombine, resultCombine);

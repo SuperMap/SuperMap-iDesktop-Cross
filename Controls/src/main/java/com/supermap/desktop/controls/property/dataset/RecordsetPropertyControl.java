@@ -9,7 +9,7 @@ import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
 import com.supermap.desktop.event.TableCellValueChangeEvent;
 import com.supermap.desktop.event.TableCellValueChangeListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -190,11 +190,11 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
     }
 
     private void initializeResources() {
-        this.buttonAdd.setText(CommonProperties.getString(CommonProperties.Add));
-        this.buttonDelete.setText(CommonProperties.getString(CommonProperties.Delete));
-        this.checkBoxShowWarning.setText(ControlsProperties.getString("String_Property_IsShowDeleteWarning"));
-        this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-        this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+	    this.buttonAdd.setText(CoreProperties.getString(CoreProperties.Add));
+	    this.buttonDelete.setText(CoreProperties.getString(CoreProperties.Delete));
+	    this.checkBoxShowWarning.setText(ControlsProperties.getString("String_Property_IsShowDeleteWarning"));
+	    this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+	    this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
     }
 
     private void setComponentName() {
@@ -676,7 +676,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                 return String.valueOf(fieldInfo.getMaxLength());
             } else if (columnIndex == DEFAULT_VALUE) {
                 if (fieldInfo.getDefaultValue() == null) {
-                    return CommonProperties.getString(CommonProperties.NULL);
+	                return CoreProperties.getString(CoreProperties.NULL);
                 } else {
                     return fieldInfo.getDefaultValue();
                 }
@@ -757,7 +757,7 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
                         } else {
                             fieldInfo.setDefaultValue(null);
                         }
-                    } else if (aValue.toString().equalsIgnoreCase(CommonProperties.getString(CommonProperties.NULL))) {
+                    } else if (aValue.toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.NULL))) {
                         fieldInfo.setDefaultValue(null);
                     } else {
                         fieldInfo.setDefaultValue(aValue.toString());
@@ -787,17 +787,17 @@ public class RecordsetPropertyControl extends AbstractPropertyControl {
             if (column == INDEX) {
                 return "";
             } else if (column == FIELD_NAME) {
-                return CommonProperties.getString(CommonProperties.FieldName);
+	            return CoreProperties.getString(CoreProperties.FieldName);
             } else if (column == FIELD_CAPTION) {
-                return CommonProperties.getString(CommonProperties.Caption);
+	            return CoreProperties.getString(CoreProperties.Caption);
             } else if (column == FIELD_TYPE) {
-                return CommonProperties.getString(CommonProperties.FieldType);
+	            return CoreProperties.getString(CoreProperties.FieldType);
             } else if (column == MAX_LENGTH) {
-                return CommonProperties.getString(CommonProperties.Length);
+	            return CoreProperties.getString(CoreProperties.Length);
             } else if (column == DEFAULT_VALUE) {
-                return CommonProperties.getString(CommonProperties.DefaultValue);
+	            return CoreProperties.getString(CoreProperties.DefaultValue);
             } else if (column == IS_REQUIRED) {
-                return CommonProperties.getString(CommonProperties.IsRequired);
+	            return CoreProperties.getString(CoreProperties.IsRequired);
             } else {
                 return null;
             }

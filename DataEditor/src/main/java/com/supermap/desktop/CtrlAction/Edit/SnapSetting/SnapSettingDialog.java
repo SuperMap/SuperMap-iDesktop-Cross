@@ -8,7 +8,7 @@ import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.WindowType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -64,7 +64,7 @@ public class SnapSettingDialog extends SmDialog {
 	private JPanel panelTolarenceView;
 	private JLabel labelImageCicle;
 	private JLabel labelImageArraw;
-	private String[] tableTitle = {"", CommonProperties.getString("String_Type"),
+	private String[] tableTitle = {"", CoreProperties.getString("String_Type"),
 			ControlsProperties.getString("String_Description")};
 	private static final int TABLE_COLUMN_CHECKABLE = 0;
 	private static final int TABLE_COLUMN_TYPE = 1;
@@ -396,10 +396,10 @@ public class SnapSettingDialog extends SmDialog {
 		this.buttonMoveToFrist.setIcon(ControlsResources.getIcon("/controlsresources/SnapSetting/Image_MoveFrist.png"));
 		this.buttonMoveToLast.setIcon(ControlsResources.getIcon("/controlsresources/SnapSetting/Image_MoveLast.png"));
 		this.buttonMoveToNext.setIcon(ControlsResources.getIcon("/controlsresources/SnapSetting/Image_MoveNext.png"));
-		this.buttonMoveToForward.setToolTipText(CommonProperties.getString(CommonProperties.moveToForward));
-		this.buttonMoveToFrist.setToolTipText(CommonProperties.getString(CommonProperties.moveToFrist));
-		this.buttonMoveToNext.setToolTipText(CommonProperties.getString(CommonProperties.moveToNext));
-		this.buttonMoveToLast.setToolTipText(CommonProperties.getString(CommonProperties.moveToLast));
+		this.buttonMoveToForward.setToolTipText(CoreProperties.getString(CoreProperties.moveToForward));
+		this.buttonMoveToFrist.setToolTipText(CoreProperties.getString(CoreProperties.moveToFrist));
+		this.buttonMoveToNext.setToolTipText(CoreProperties.getString(CoreProperties.moveToNext));
+		this.buttonMoveToLast.setToolTipText(CoreProperties.getString(CoreProperties.moveToLast));
 	}
 
 	private void initLayout() {

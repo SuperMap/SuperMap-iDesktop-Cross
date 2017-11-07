@@ -8,7 +8,7 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 /**
  * 提取等值线
@@ -21,7 +21,7 @@ public class MetaProcessISOLine extends MetaProcessISO {
 	}
 
 	public MetaProcessISOLine() {
-		setTitle(CommonProperties.getString("String_SurfaceISOLine"));
+		setTitle(CoreProperties.getString("String_SurfaceISOLine"));
 		OUTPUT_DATA_TYPE = ProcessOutputResultProperties.getString("String_SurfaceAnalyst_ISOLineResult");
 		super.initParameters();
 		super.initParameterConstraint();

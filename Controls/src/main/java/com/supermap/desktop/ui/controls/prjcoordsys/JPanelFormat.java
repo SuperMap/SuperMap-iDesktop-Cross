@@ -1,10 +1,10 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -69,26 +69,26 @@ public class JPanelFormat extends JPanel {
 		smTextFieldS.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, borderColor));
 		smTextFieldS.setPreferredSize(textFieldSize);
 
-		labelA.setText(CommonProperties.getString("String_AngleSign_Degree"));
+		labelA.setText(CoreProperties.getString("String_AngleSign_Degree"));
 		labelA.setOpaque(true);
 		Color background = smTextFieldA.getBackground();
 		labelA.setBackground(background);
 		MatteBorder matteBorder = BorderFactory.createMatteBorder(1, 0, 1, 0, borderColor);
 		labelA.setBorder(matteBorder);
 
-		labelM.setText(CommonProperties.getString("String_AngleSign_Minute"));
+		labelM.setText(CoreProperties.getString("String_AngleSign_Minute"));
 		labelM.setOpaque(true);
 		labelM.setBorder(matteBorder);
 		labelM.setBackground(background);
 
-		labelS.setText(CommonProperties.getString("String_AngleSign_Second"));
+		labelS.setText(CoreProperties.getString("String_AngleSign_Second"));
 		labelS.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, borderColor));
 		labelS.setOpaque(true);
 		labelS.setBackground(background);
 
 		labelAngle.setOpaque(true);
 		labelAngle.setBackground(background);
-		labelAngle.setText(CommonProperties.getString("String_AngleSign_Degree"));
+		labelAngle.setText(CoreProperties.getString("String_AngleSign_Degree"));
 		labelAngle.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, borderColor));
 		smTextFieldAngle.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 0, borderColor));
 

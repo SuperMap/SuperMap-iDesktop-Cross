@@ -1,14 +1,11 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.PrjCoordSys;
-import com.supermap.data.PrjCoordSysType;
-import com.supermap.data.ProjectionType;
-import com.supermap.data.Unit;
+import com.supermap.data.*;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.enums.LengthUnit;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -472,8 +469,8 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		labelSecondPointLongitude.setText(ControlsProperties.getString("String_SecondPointLongitude"));
 		labelAzimuth.setText(ControlsProperties.getString("String_Label_Azimuth"));
 
-		buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void addListeners() {

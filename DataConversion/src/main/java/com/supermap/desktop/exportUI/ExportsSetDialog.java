@@ -12,7 +12,7 @@ import com.supermap.desktop.iml.ExportSettingFactory;
 import com.supermap.desktop.localUtilities.CommonUtilities;
 import com.supermap.desktop.localUtilities.FiletypeUtilities;
 import com.supermap.desktop.localUtilities.LocalFileUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.utilities.FileUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -294,11 +294,11 @@ public class ExportsSetDialog extends SmDialog implements IPanelModel {
 	}
 
 	private void initResources() {
-		this.setTitle(CommonProperties.getString("String_ToolBar_SetBatch"));
+		this.setTitle(CoreProperties.getString("String_ToolBar_SetBatch"));
 		this.checkBoxFileType.setText(DataConversionProperties.getString("String_ExportType"));
 		this.checkBoxOverwirte.setText(DataConversionProperties.getString("String_OverWrite"));
-		this.radioButtonOK.setText(CommonProperties.getString(CommonProperties.yes));
-		this.radioButtonNO.setText(CommonProperties.getString(CommonProperties.no));
+		this.radioButtonOK.setText(CoreProperties.getString(CoreProperties.yes));
+		this.radioButtonNO.setText(CoreProperties.getString(CoreProperties.no));
 		this.checkBoxExportPath.setText(DataConversionProperties.getString("String_ExportPath"));
 	}
 

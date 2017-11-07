@@ -5,7 +5,7 @@ import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterFieldSetDialog;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.FieldsSetDialog;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -32,7 +32,7 @@ public class ParameterFieldSetDialogPanel extends SwingPanel {
 	}
 
 	private void initComponents() {
-		String describe = parameterFieldSetDialog.getDescribe() == null ? CommonProperties.getString("String_FieldsSetting") : parameterFieldSetDialog.getDescribe();
+		String describe = parameterFieldSetDialog.getDescribe() == null ? CoreProperties.getString("String_FieldsSetting") : parameterFieldSetDialog.getDescribe();
 		button.setText(describe);
 		ComponentUIUtilities.setName(this.button, parameter.getDescribe());
 		button.addActionListener(new ActionListener() {

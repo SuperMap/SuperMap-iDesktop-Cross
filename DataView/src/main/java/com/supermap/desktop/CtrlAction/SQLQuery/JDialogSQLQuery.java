@@ -11,7 +11,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.enums.WindowType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -937,7 +937,7 @@ public class JDialogSQLQuery extends SmDialog {
 				String modelName = "SqlQueryImport";
 				if (!SmFileChoose.isModuleExist(modelName)) {
 					String fileFilters = SmFileChoose.createFileFilter(DataViewProperties.getString("String_SQLFilter"), "xml");
-					SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+					SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 							DataViewProperties.getString("String_openDialogTitle"), modelName, "OpenOne");
 				}
 				SmFileChoose smFileChoose = new SmFileChoose(modelName);

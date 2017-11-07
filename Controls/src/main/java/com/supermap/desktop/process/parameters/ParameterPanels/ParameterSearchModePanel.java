@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterSearchMode;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.TextFields.NumTextFieldLegit;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -223,8 +223,8 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
         this.textFieldMaxRadius = new NumTextFieldLegit();
         this.textFieldSearchCount = new NumTextFieldLegit();
         this.textFieldMaxPointCount = new NumTextFieldLegit();
-        labelMaxPointCount.setText(CommonProperties.getString("String_InterpolationAnalyst_QuadTree_Max_IntePolate_Point"));
-        buttonGroup.add(this.radioSearchModelCount);
+	    labelMaxPointCount.setText(CoreProperties.getString("String_InterpolationAnalyst_QuadTree_Max_IntePolate_Point"));
+	    buttonGroup.add(this.radioSearchModelCount);
         buttonGroup.add(this.radioSearchModelRadius);
         buttonGroup.add(this.radioSearchModelQuadTree);
         if (null != info) {
@@ -267,9 +267,9 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
     private void radioChange(SearchMode mode) {
         if (mode == SearchMode.KDTREE_FIXED_COUNT) {
             radioSearchModelCount.setSelected(true);
-            labelMaxRadius.setText(CommonProperties.getString("String_MaxRadius"));
-            labelSearchCount.setText(CommonProperties.getString("String_SearchCount"));
-            labelMaxRadius.setVisible(true);
+	        labelMaxRadius.setText(CoreProperties.getString("String_MaxRadius"));
+	        labelSearchCount.setText(CoreProperties.getString("String_SearchCount"));
+	        labelMaxRadius.setVisible(true);
             labelMaxPointCount.setVisible(false);
             textFieldMaxRadius.setVisible(true);
             textFieldMaxPointCount.setVisible(false);
@@ -278,9 +278,9 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
             textFieldSearchCount.setMinValue(1);
         } else if (mode == SearchMode.KDTREE_FIXED_RADIUS) {
             radioSearchModelRadius.setSelected(true);
-            labelMaxRadius.setText(CommonProperties.getString("String_SearchRadius"));
-            labelSearchCount.setText(CommonProperties.getString("String_MinCount"));
-            labelMaxRadius.setVisible(true);
+	        labelMaxRadius.setText(CoreProperties.getString("String_SearchRadius"));
+	        labelSearchCount.setText(CoreProperties.getString("String_MinCount"));
+	        labelMaxRadius.setVisible(true);
             labelMaxPointCount.setVisible(false);
             textFieldMaxRadius.setVisible(true);
             textFieldMaxPointCount.setVisible(false);
@@ -294,8 +294,8 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
             textFieldSearchCount.setMaxValue(12);
         } else if (mode == SearchMode.QUADTREE) {
             radioSearchModelQuadTree.setSelected(true);
-            labelSearchCount.setText(CommonProperties.getString("String_InterpolationAnalyst_QuadTree_MaxPoint_InBlock"));
-            labelMaxRadius.setVisible(false);
+	        labelSearchCount.setText(CoreProperties.getString("String_InterpolationAnalyst_QuadTree_MaxPoint_InBlock"));
+	        labelMaxRadius.setVisible(false);
             labelMaxPointCount.setVisible(true);
             textFieldMaxRadius.setVisible(false);
             textFieldMaxPointCount.setVisible(true);

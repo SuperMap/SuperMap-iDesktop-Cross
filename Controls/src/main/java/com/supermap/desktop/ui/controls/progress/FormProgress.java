@@ -5,7 +5,7 @@ import com.supermap.desktop.Interface.IAfterWork;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.progress.Interface.IUpdateProgress;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
@@ -47,7 +47,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 		progressBar.setStringPainted(true);
 		labelMessage = new JLabel("...");
 		labelRemaintime = new JLabel("...");
-		buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+		buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 		this.getRootPane().setDefaultButton(this.buttonCancel);
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);
@@ -131,7 +131,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+							buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 							buttonCancel.setEnabled(true);
 							setVisible(false);
 						}
@@ -183,7 +183,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+							buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 							buttonCancel.setEnabled(true);
 							setVisible(false);
 						}
@@ -255,7 +255,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CommonProperties.getString(CommonProperties.BeingCanceled));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.BeingCanceled));
 					buttonCancel.setEnabled(false);
 				}
 			});
@@ -263,7 +263,7 @@ public class FormProgress extends SmDialog implements IUpdateProgress {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 					buttonCancel.setEnabled(true);
 				}
 			});

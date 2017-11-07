@@ -1,10 +1,10 @@
 package com.supermap.desktop.dialog;
 
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -23,8 +23,8 @@ public class SmDialogFormSaveAs extends SmDialog {
 	private JLabel labelFormName = new JLabel();
 	private SmTextFieldLegit textFieldFormName = new SmTextFieldLegit();
 
-	private SmButton buttonOk = new SmButton(CommonProperties.getString(CommonProperties.OK));
-	private SmButton buttonCancle = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+	private SmButton buttonOk = new SmButton(CoreProperties.getString(CoreProperties.OK));
+	private SmButton buttonCancle = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 	private ArrayList<String> existNames = new ArrayList<>();
 
 	public SmDialogFormSaveAs() {

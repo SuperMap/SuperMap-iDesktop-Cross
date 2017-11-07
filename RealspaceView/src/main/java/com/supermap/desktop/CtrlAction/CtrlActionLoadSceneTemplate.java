@@ -7,7 +7,7 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormScene;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.realspaceview.RealspaceViewProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -37,7 +37,7 @@ public class CtrlActionLoadSceneTemplate extends CtrlAction {
 			String filePath = "";
 			if (!SmFileChoose.isModuleExist("LoadSceneTemplate")) {
 				String fileFilters = SmFileChoose.createFileFilter(RealspaceViewProperties.getString("String_SceneTemplateFilter"), "xml");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						RealspaceViewProperties.getString("String_LoadSceneTemplateFile"), "LoadSceneTemplate", "OpenOne");
 			}
 			SmFileChoose fileChooser = new SmFileChoose("LoadSceneTemplate");

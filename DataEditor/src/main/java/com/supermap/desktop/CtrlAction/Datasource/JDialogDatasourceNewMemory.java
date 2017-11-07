@@ -5,12 +5,12 @@ import com.supermap.data.DatasourceConnectionInfo;
 import com.supermap.data.EngineType;
 import com.supermap.data.Workspace;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -128,9 +128,9 @@ public class JDialogDatasourceNewMemory extends SmDialog {
 	private void initializeResources() {
 		try {
 			this.setTitle(DataEditorProperties.getString("String_Title_NewDatasourceMemory"));
-			this.jLabelAlias.setText(CommonProperties.getString("String_Label_Datasource"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+			this.jLabelAlias.setText(CoreProperties.getString("String_Label_Datasource"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

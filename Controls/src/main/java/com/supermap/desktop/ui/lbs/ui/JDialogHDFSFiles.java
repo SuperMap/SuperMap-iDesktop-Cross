@@ -5,7 +5,7 @@ import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.lbs.HDFSDefine;
 import com.supermap.desktop.lbs.WebHDFS;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -114,7 +114,7 @@ public class JDialogHDFSFiles extends SmDialog {
 		initializeComponents();
 		initializeLayout();
 		registEvents();
-		this.setTitle(CommonProperties.getString("String_SelectFile"));
+		this.setTitle(CoreProperties.getString("String_SelectFile"));
 		setLocationRelativeTo(null);
 	}
 

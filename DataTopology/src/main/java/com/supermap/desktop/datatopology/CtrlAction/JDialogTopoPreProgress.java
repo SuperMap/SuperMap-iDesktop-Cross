@@ -8,7 +8,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CommonListCellRenderer;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.DatasetComboBox;
@@ -119,11 +119,11 @@ public class JDialogTopoPreProgress extends SmDialog {
 		buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		labelTolerance.setText(CommonProperties.getString("String_Label_Tolerance"));
+		labelTolerance.setText(CoreProperties.getString("String_Label_Tolerance"));
 		labelConsultDataset.setText(DataTopologyProperties.getString("String_Label_ConsultDataset"));
-		table.getColumnModel().getColumn(COLUMN_INDEX_COUNT).setHeaderValue(CommonProperties.getString("String_ColumnHeader_Index"));
-		table.getColumnModel().getColumn(COLUMN_INDEX_DATASET).setHeaderValue(CommonProperties.getString("String_ColumnHeader_SourceDataset"));
-		table.getColumnModel().getColumn(COLUMN_INDEX_DATASOURCE).setHeaderValue(CommonProperties.getString("String_ColumnHeader_SourceDatasource"));
+		table.getColumnModel().getColumn(COLUMN_INDEX_COUNT).setHeaderValue(CoreProperties.getString("String_ColumnHeader_Index"));
+		table.getColumnModel().getColumn(COLUMN_INDEX_DATASET).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDataset"));
+		table.getColumnModel().getColumn(COLUMN_INDEX_DATASOURCE).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDatasource"));
 		checkBoxVertexArcInserted.setEnabled(false);
 		checkBoxVertexArcInserted.setText(DataTopologyProperties.getString("String_CheckBox_VertexArcInserted"));
 		checkBoxVertexesSnapped.setEnabled(false);
@@ -133,9 +133,9 @@ public class JDialogTopoPreProgress extends SmDialog {
 		checkBoxPolygonsChecked.setEnabled(false);
 		checkBoxPolygonsChecked.setText(DataTopologyProperties.getString("String_CheckBox_PolygonsChecked"));
 		buttonSure.setEnabled(false);
-		buttonSure.setText(CommonProperties.getString("String_Button_OK"));
-		buttonQuite.setText(CommonProperties.getString("String_Button_Cancel"));
-		panel.setBorder(new TitledBorder(null, CommonProperties.getString("String_FormEdgeCount_Text"), TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		buttonSure.setText(CoreProperties.getString("String_Button_OK"));
+		buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
+		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_FormEdgeCount_Text"), TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 	}
 
@@ -455,10 +455,10 @@ public class JDialogTopoPreProgress extends SmDialog {
 		}
 		DatasetType[] datasetTypes = new DatasetType[]{DatasetType.POINT, DatasetType.LINE, DatasetType.REGION};
 		String[] datasetType = new String[4];
-		datasetType[DatasetType_All] = CommonProperties.getString("String_DatasetType_All");
-		datasetType[DatasetType_Point] = CommonProperties.getString("String_DatasetType_Point");
-		datasetType[DatasetType_Line] = CommonProperties.getString("String_DatasetType_Line");
-		datasetType[DatasetType_Region] = CommonProperties.getString("String_DatasetType_Region");
+		datasetType[DatasetType_All] = CoreProperties.getString("String_DatasetType_All");
+		datasetType[DatasetType_Point] = CoreProperties.getString("String_DatasetType_Point");
+		datasetType[DatasetType_Line] = CoreProperties.getString("String_DatasetType_Line");
+		datasetType[DatasetType_Region] = CoreProperties.getString("String_DatasetType_Region");
 		DatasetChooserDataTopo chooser = new DatasetChooserDataTopo(this, true, datasource, table, datasetTypes);
 		chooser = null;
 		// chooser.setVisible(true);

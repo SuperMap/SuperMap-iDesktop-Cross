@@ -7,7 +7,6 @@ import com.supermap.desktop.dialog.symbolDialogs.SymbolMarkerSizeController;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolSpinnerUtilties;
 import com.supermap.desktop.enums.SymbolMarkerType;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -1143,8 +1142,8 @@ public class CADStyleContainer extends JPanel {
 
     private void initResources() {
         this.labelPointRotation.setText(ControlsProperties.getString("String_RotationAngle") + ":");
-        this.labelPointRotationUnity.setText(CommonProperties.getString("String_AngleUnit_Degree"));
-        this.labelPointOpaque.setText(ControlsProperties.getString("String_Label_Transparence"));
+	    this.labelPointRotationUnity.setText(CoreProperties.getString("String_AngleUnit_Degree"));
+	    this.labelPointOpaque.setText(ControlsProperties.getString("String_Label_Transparence"));
         this.labelPointOpaqueUnity.setText("%");
         this.labelPointWidth.setText(ControlsProperties.getString("String_ShowWidth"));
         this.labelPointWidthUnity.setText("mm");
@@ -1339,7 +1338,7 @@ public class CADStyleContainer extends JPanel {
     public void setSpinnerFillOpaqueEnable(boolean enable) {
         this.spinnerFillOpaque.setEnabled(enable);
         if (false == enable) {
-            this.spinnerFillOpaque.setToolTipText(CommonProperties.getString(CommonProperties.UnSupport));
+	        this.spinnerFillOpaque.setToolTipText(CoreProperties.getString(CoreProperties.UnSupport));
         } else {
             this.spinnerFillOpaque.setToolTipText("");
         }

@@ -3,7 +3,7 @@ package com.supermap.desktop.dialog;
 import com.supermap.data.Layouts;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.layoutview.LayoutViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -138,8 +138,8 @@ public class DialogSaveAsLayout extends SmDialog {
 		try {
 			this.setTitle(LayoutViewProperties.getString("String_Form_SaveAsLayout"));
 			this.lblNewLabelLayoutName.setText(LayoutViewProperties.getString("String_FormSaveAsLayout_LabelLayoutName"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

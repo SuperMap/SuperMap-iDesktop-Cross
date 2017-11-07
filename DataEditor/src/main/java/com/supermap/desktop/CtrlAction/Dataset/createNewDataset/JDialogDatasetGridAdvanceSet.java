@@ -2,7 +2,7 @@ package com.supermap.desktop.CtrlAction.Dataset.createNewDataset;
 
 import com.supermap.data.*;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -131,8 +131,8 @@ public class JDialogDatasetGridAdvanceSet extends SmDialog {
 		panelDatasetBounds = new PanelDatasetBounds();
 
 		// 按钮
-		buttonOk = new SmButton(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOk = new SmButton(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 		this.getRootPane().setDefaultButton(this.buttonOk);
 	}
 

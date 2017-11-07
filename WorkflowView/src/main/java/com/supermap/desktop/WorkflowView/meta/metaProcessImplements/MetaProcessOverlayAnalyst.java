@@ -20,7 +20,7 @@ import com.supermap.desktop.process.parameter.ParameterOverlayAnalystInfo;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.*;
 
 import java.beans.PropertyChangeEvent;
@@ -32,8 +32,8 @@ import java.text.MessageFormat;
  * 叠加分析
  */
 public class MetaProcessOverlayAnalyst extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private final static String OVERLAY_DATA = CommonProperties.getString("String_GroupBox_OverlayDataset");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final static String OVERLAY_DATA = CoreProperties.getString("String_GroupBox_OverlayDataset");
 	private final static String OUTPUT_DATA = "OverlayResult";
 
 	private OverlayAnalystType analystType;
@@ -86,12 +86,12 @@ public class MetaProcessOverlayAnalyst extends MetaProcess {
 
 	private void initParameters() {
 
-		parameterSourceDatasource.setDescribe(CommonProperties.getString(CommonProperties.Label_Datasource));
-		parameterOverlayDatasource.setDescribe(CommonProperties.getString(CommonProperties.Label_Datasource));
-		parameterResultDatasource.setDescribe(CommonProperties.getString(CommonProperties.Label_Datasource));
+		parameterSourceDatasource.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
+		parameterOverlayDatasource.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
+		parameterResultDatasource.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
 		parameterResultDatasource.setReadOnlyNeeded(false);
-		parameterSaveDataset.setDescribe(CommonProperties.getString(CommonProperties.Label_Dataset));
-		parameterTolerance.setDescribe(CommonProperties.getString("String_Label_Tolerance"));
+		parameterSaveDataset.setDescribe(CoreProperties.getString(CoreProperties.Label_Dataset));
+		parameterTolerance.setDescribe(CoreProperties.getString("String_Label_Tolerance"));
 
 //		parameterCheckBoxIsCompareResult.setDescribe(CommonProperties.getString("String_CheckBox_ResultComparison"));
 	}
@@ -102,11 +102,11 @@ public class MetaProcessOverlayAnalyst extends MetaProcess {
 		parameterCombineSource.addParameters(parameterSourceDatasource, parameterSourceDataset);
 
 		ParameterCombine parameterCombineResult = new ParameterCombine();
-		parameterCombineResult.setDescribe(CommonProperties.getString("String_GroupBox_OverlayDataset"));
+		parameterCombineResult.setDescribe(CoreProperties.getString("String_GroupBox_OverlayDataset"));
 		parameterCombineResult.addParameters(parameterOverlayDatasource, parameterOverlayDataset);
 
 		ParameterCombine parameterCombineResultSet = new ParameterCombine();
-		parameterCombineResultSet.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombineResultSet.setDescribe(CoreProperties.getString("String_ResultSet"));
 		ParameterCombine parameterCombineParent = new ParameterCombine(ParameterCombine.HORIZONTAL);
 		parameterCombineParent.addParameters(
 				new ParameterCombine().addParameters(parameterSaveDataset, parameterTolerance),

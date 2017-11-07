@@ -4,7 +4,6 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DatasetComboBox;
@@ -413,8 +412,8 @@ public class JDialogJoinItems extends SmDialog {
 //		this.buttonDel.setText(CommonProperties.getString(CommonProperties.Delete));
 //		this.buttonSelectAll.setText(ControlsProperties.getString("String_SelectAll"));
 //		this.buttonReverse.setText(ControlsProperties.getString("String_SelectReverse"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 
 		this.buttonAdd.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
@@ -504,7 +503,7 @@ public class JDialogJoinItems extends SmDialog {
 
 	class JoinItemsTableModel extends DefaultTableModel {
 		private boolean[] editable = {false, true, true, true, true, false, true};
-		private String[] headers = new String[]{CommonProperties.getString("String_ColumnHeader_Index"), CoreProperties.getString("String_Name"),
+		private String[] headers = new String[]{CoreProperties.getString("String_ColumnHeader_Index"), CoreProperties.getString("String_Name"),
 				CoreProperties.getString("String_JoinItem_ForeignTable"), CoreProperties.getString("String_JoinItem_Field"),
 				CoreProperties.getString("String_JoinItem_ForeignField"), CoreProperties.getString("String_JoinItem_Filter"),
 				CoreProperties.getString("String_JoinItem_JoinType")};

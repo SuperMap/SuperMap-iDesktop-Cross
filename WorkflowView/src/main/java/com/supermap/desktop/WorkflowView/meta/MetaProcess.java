@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.events.ParameterPropertyChangedLis
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.ipls.DefaultParameters;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 
@@ -22,9 +22,9 @@ import javax.swing.*;
  */
 public abstract class MetaProcess extends AbstractProcess {
 
-	protected static final String SOURCE_PANEL_DESCRIPTION = CommonProperties.getString("String_GroupBox_SourceData");
-	protected static final String SETTING_PANEL_DESCRIPTION = CommonProperties.getString("String_FormEdgeCount_Text");
-	protected static final String RESULT_PANEL_DESCRIPTION = CommonProperties.getString("String_GroupBox_ResultData");
+	protected static final String SOURCE_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_SourceData");
+	protected static final String SETTING_PANEL_DESCRIPTION = CoreProperties.getString("String_FormEdgeCount_Text");
+	protected static final String RESULT_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_ResultData");
 
 	protected static FieldType[] fieldType = {FieldType.INT16, FieldType.INT32, FieldType.INT64, FieldType.SINGLE, FieldType.DOUBLE};
 	private final ParameterPropertyChangedListener parameterPropertyChangedListener;

@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -27,8 +27,8 @@ import java.util.ArrayList;
  * 追加列
  */
 public class MetaProcessAppendFields extends MetaProcess {
-	private final String INPUT_DATA = CommonProperties.getString("String_ColumnHeader_SourceData");
-	private final String OUTPUT_DATA = CommonProperties.getString("String_ColumnHeader_TargetData");
+	private final String INPUT_DATA = CoreProperties.getString("String_ColumnHeader_SourceData");
+	private final String OUTPUT_DATA = CoreProperties.getString("String_ColumnHeader_TargetData");
 	private ParameterCombine sourceDataCombine;
 	private ParameterDatasource sourceDatasource;
 	private ParameterSingleDataset sourceDataset;

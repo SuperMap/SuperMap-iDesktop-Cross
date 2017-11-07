@@ -11,7 +11,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -48,7 +48,7 @@ public class MetaProcessTextToField extends MetaProcessTypeConversion {
 		//参数设置
 		ParameterCombine parameterCombineSet = new ParameterCombine();
 		parameterCombineSet.addParameters(parameterFieldComboBox);
-		parameterCombineSet.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 
 
 		parameters.setParameters(parameterCombineSourceData, parameterCombineSet);

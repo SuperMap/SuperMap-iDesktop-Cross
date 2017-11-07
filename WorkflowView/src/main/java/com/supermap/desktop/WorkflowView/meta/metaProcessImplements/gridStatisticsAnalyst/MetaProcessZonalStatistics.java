@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.GridStatisticsModeUtilities;
 
@@ -76,7 +76,7 @@ public class MetaProcessZonalStatistics extends MetaProcess {
 		settingCombine.setDescribe(ProcessProperties.getString("String_setParameter"));
 		settingCombine.addParameters(comboBoxZonalField, comboBoxStatisticMode, checkBoxIgnore);
 		ParameterCombine resultCombine = new ParameterCombine();
-		resultCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultCombine.addParameters(resultDatasource, resultDatasetGrid, resultTable);
 		parameters.setParameters(valueCombine, zonalCombine, settingCombine, resultCombine);
 		this.parameters.addInputParameters(VALUE_DATA, DatasetTypes.GRID, valueCombine);

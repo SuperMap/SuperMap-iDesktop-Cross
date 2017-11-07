@@ -9,7 +9,7 @@ import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.map.propertycontrols.PanelGroupBoxViewBounds;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
 import com.supermap.desktop.ui.controls.borderPanel.PanelButton;
@@ -268,7 +268,7 @@ public class DialogMapOutputPicture extends SmDialog {
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_OutputPicture"));
 		this.fileNameLabel.setText(MapViewProperties.getString("String_FileName"));
-		this.resolutionLabel.setText(CommonProperties.getString("String_Resolution"));
+		this.resolutionLabel.setText(CoreProperties.getString("String_Resolution"));
 		this.DPILabel.setText("DPI");
 		this.widthLabel.setText(MapViewProperties.getString("String_FormSavePicture_Width"));
 		this.heightLabel.setText(MapViewProperties.getString("String_FormSavePicture_Height"));

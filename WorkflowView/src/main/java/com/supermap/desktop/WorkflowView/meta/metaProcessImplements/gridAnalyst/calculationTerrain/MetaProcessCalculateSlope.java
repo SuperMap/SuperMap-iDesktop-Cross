@@ -12,7 +12,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetType
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterComboBox;
 import com.supermap.desktop.process.parameter.ipls.ParameterNumber;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 /**
@@ -49,7 +49,7 @@ public class MetaProcessCalculateSlope extends MetaProcessCalTerrain {
 		parameterZFactor.setSelectedItem(1);
 
 		ParameterCombine parameterCombineSet = new ParameterCombine();
-		parameterCombineSet.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineSet.addParameters(parameterComboBoxSlopeType, parameterZFactor);
 
 		// 结果设置

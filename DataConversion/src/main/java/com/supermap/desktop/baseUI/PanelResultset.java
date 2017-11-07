@@ -13,7 +13,7 @@ import com.supermap.desktop.iml.ImportInfo;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
 import com.supermap.desktop.importUI.PanelImport;
 import com.supermap.desktop.importUI.PanelTransformForImage;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
@@ -146,7 +146,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 				}
 				if (null != panelImports) {
 					for (PanelImport tempPanelImport : panelImports) {
-						if (datasetType.equalsIgnoreCase(CommonProperties.getString("String_DatasetType_CAD"))) {
+						if (datasetType.equalsIgnoreCase(CoreProperties.getString("String_DatasetType_CAD"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(0);
 						} else if (datasetType.equalsIgnoreCase(DataConversionProperties.getString("string_comboboxitem_sample"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(1);
@@ -161,7 +161,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 						}
 					}
 				} else {
-					if (datasetType.equals(CommonProperties.getString("String_DatasetType_CAD"))) {
+					if (datasetType.equals(CoreProperties.getString("String_DatasetType_CAD"))) {
 						if (importSetting instanceof ImportSettingTAB) {
 							((ImportSettingTAB) importSetting).setImportingAsCAD(true);
 						} else if (importSetting instanceof ImportSettingMIF) {
@@ -696,7 +696,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 				|| importSetting instanceof ImportSettingModelFBX || importSetting instanceof ImportSettingModelOSG
 				|| importSetting instanceof ImportSettingModelX) {
 			this.removeAll();
-			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CommonProperties.getString("String_DatasetType_Model")});
+			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Model")});
 			this.add(this.labelDatasource, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 			this.add(this.comboBoxDatasource, new GridBagConstraintsHelper(2, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 20).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 			this.add(this.labelDatasetName, new GridBagConstraintsHelper(4, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 10).setFill(GridBagConstraints.NONE).setWeight(0, 0));
@@ -717,7 +717,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			initComboboxEncodeType(false);
 			setDefaultImportSettingEncode();
 
-			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CommonProperties.getString("String_DatasetType_CAD")});
+			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_CAD")});
 			// 增加一个item为“简单数据集”--yuanR 17.2.14
 			String fileParentPath = "/controlsresources/WorkspaceManager/Dataset/Image_SimpleDataset_Normal.png";
 			URL url = ControlsResources.getResourceURL(fileParentPath);

@@ -22,7 +22,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.SpatialIndexTypeUtilities;
 
@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * @author XiaJT
  */
 public class MetaProcessSpatialIndex extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "SpatialIndexResult";
 	private ParameterDatasourceConstrained datasource;
 	private ParameterSingleDataset dataset;
@@ -66,7 +66,7 @@ public class MetaProcessSpatialIndex extends MetaProcess {
 			dataset.setSelectedItem(datasetVector);
 		}
 
-		datasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		parameterComboBox = new ParameterComboBox(ControlsProperties.getString("String_LabelSpatialIndexType"));
 
 		ParameterCombine parameterCombine = new ParameterCombine();

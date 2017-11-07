@@ -17,7 +17,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
@@ -854,11 +853,11 @@ public class FirstStepPane extends JPanel implements IState {
 	private void initResources() {
 
 		this.buttonSelectAll.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectAll.png"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonSelectInverse.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectInverse.png"));
-		this.buttonSelectInverse.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonSelectInverse.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonGetServer.setText(CoreProperties.getString("String_Label_VersionCheck"));
 
 		this.labelVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
@@ -1225,7 +1224,7 @@ public class FirstStepPane extends JPanel implements IState {
 	//Create a new FileChooser for import scales
 	private String getFilePathForImport() {
 		String filePath = "";
-		String title = CommonProperties.getString("String_ToolBar_Import");
+		String title = CoreProperties.getString("String_ToolBar_Import");
 		if (!SmFileChoose.isModuleExist("ImportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
 			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), title, "ImportScale", "OpenOne");
@@ -1307,7 +1306,7 @@ public class FirstStepPane extends JPanel implements IState {
 		String filePath = "";
 		if (!SmFileChoose.isModuleExist("ExportScale")) {
 			String fileFilter = SmFileChoose.createFileFilter(MapViewProperties.getString("String_ScaleFile"), "xml");
-			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CommonProperties.getString("String_ToolBar_Export"),
+			SmFileChoose.addNewNode(fileFilter, MapViewProperties.getString("String_ScaleFile"), CoreProperties.getString("String_ToolBar_Export"),
 					"ExportScale", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("ExportScale");
@@ -1324,7 +1323,7 @@ public class FirstStepPane extends JPanel implements IState {
 			String moduleName = "ExportCacheConfigFile";
 			if (!SmFileChoose.isModuleExist(moduleName)) {
 				String fileFilters = SmFileChoose.createFileFilter(MapViewProperties.getString("MapCache_CacheConfigFile"), "sci");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						ControlsProperties.getString("String_SaveAsFile"), moduleName, "SaveOne");
 			}
 			SmFileChoose smFileChoose = new SmFileChoose(moduleName);
@@ -1358,7 +1357,7 @@ public class FirstStepPane extends JPanel implements IState {
 		String moduleName = "InputCacheConfigFile";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(MapViewProperties.getString("MapCache_CacheConfigFile"), "sci"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_OpenColorTable"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
