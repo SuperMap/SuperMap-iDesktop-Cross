@@ -78,7 +78,7 @@ public class MetaProcessRasterReclass extends MetaProcess {
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 			this.parameterRasterReclass.setDataset((DatasetGrid) defaultDataset);
 		}
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.parameterRasterReclass.setComplexParameter(true);
 	}
 

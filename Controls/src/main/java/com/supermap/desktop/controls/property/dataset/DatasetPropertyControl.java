@@ -86,7 +86,7 @@ public class DatasetPropertyControl extends AbstractPropertyControl {
 	};
 
 	public DatasetPropertyControl(Dataset dataset) {
-		super(ControlsProperties.getString("String_DatasetProperty"));
+		super(ControlsProperties.getString("String_Dataset"));
 		initializeComponents();
 		initializeResources();
 		setDataset(dataset);

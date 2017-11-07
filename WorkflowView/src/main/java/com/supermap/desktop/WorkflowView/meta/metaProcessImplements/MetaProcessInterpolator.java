@@ -116,7 +116,7 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		parameterDatasource = new ParameterDatasourceConstrained();
-		parameterDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		parameterDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		parameterDataset = new ParameterSingleDataset(DatasetType.POINT);
 		parameterInterpolatorFields = new ParameterFieldComboBox();
 		parameterInterpolatorFields.setDescribe(ProcessProperties.getString("String_InterpolatorFields"));

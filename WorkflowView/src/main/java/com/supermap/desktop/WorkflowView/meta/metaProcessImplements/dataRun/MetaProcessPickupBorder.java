@@ -81,7 +81,7 @@ public class MetaProcessPickupBorder extends MetaProcess {
 			}
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 		}
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 	}
 

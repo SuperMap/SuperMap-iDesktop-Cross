@@ -70,12 +70,12 @@ public class MetaProcessVectorToRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		this.boundaryDatasource = new ParameterDatasourceConstrained();
-		this.boundaryDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.boundaryDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.boundaryDataset = new ParameterSingleDataset(DatasetType.REGION).setShowNullValue(true);
 		this.boundaryDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 

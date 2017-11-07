@@ -72,7 +72,7 @@ public class MetaProcessComputeDistance extends MetaProcess {
 		sourceSQL.addParameters(textAreaSourceSQL, emptyCombine);
 
 		proximityDatasource = new ParameterDatasourceConstrained();
-		proximityDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
+		proximityDatasource.setDescribe(CoreProperties.getString("String_Datasource"));
 		proximityDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.NETWORK);
 		proximityDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		ParameterCombine proximityData = new ParameterCombine();

@@ -104,9 +104,6 @@ public class CoreProperties extends Properties {
 	public static final String open = "String_Button_Open";
 	public static final String SourceDataset = "String_ColumnHeader_SourceDataset";
 	public static final String TargetDataset = "String_ColumnHeader_TargetDataset";
-	public static final String SourceDatasource = "String_ColumnHeader_SourceDatasource";
-	public static final String ResultDataset = "String_Label_Dataset";
-	public static final String ResultDatasource = "String_Label_Datasource";
 	public static final String keepThisChose = "String_KeepThisChose";
 	public static final String moveToFrist = "String_MoveToFrist";
 	public static final String moveToNext = "String_MoveToNext";

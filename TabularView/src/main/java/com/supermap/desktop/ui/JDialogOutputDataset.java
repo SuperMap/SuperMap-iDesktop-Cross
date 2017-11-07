@@ -228,7 +228,7 @@ public class JDialogOutputDataset extends SmDialog {
 		this.buttonSelectAllSystemField.setToolTipText(CoreProperties.getString("String_SelectAllSystemField"));
 		this.buttonSelectAllNonSystemField.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectNonSystemField.png"));
 		this.buttonSelectAllNonSystemField.setToolTipText(CoreProperties.getString("String_SelectAllNonSystemField"));
-		this.labelDatasource.setText(CoreProperties.getString("String_SourceDatasource"));
+		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.labelResultType.setText(CoreProperties.getString("String_ResultDatasetType"));
 		this.labelCodeType.setText(CoreProperties.getString("String_CodeType"));

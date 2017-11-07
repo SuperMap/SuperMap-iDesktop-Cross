@@ -80,7 +80,7 @@ public class MetaProcessISOPoint extends MetaProcess {
 	}
 
 	private void initParametersState() {
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.targetDataset.setDefaultDatasetName("result_ISOPoint");
 		Dataset datasetVector = DatasetUtilities.getDefaultDataset(DatasetType.POINT, DatasetType.POINT3D);
 		if (datasetVector != null) {

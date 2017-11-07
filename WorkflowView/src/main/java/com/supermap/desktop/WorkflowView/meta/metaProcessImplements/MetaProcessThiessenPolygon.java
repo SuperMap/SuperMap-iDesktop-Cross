@@ -39,7 +39,7 @@ public class MetaProcessThiessenPolygon extends MetaProcess {
 
 	private void initParameters() {
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetType.POINT);
 		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		ParameterCombine sourceData = new ParameterCombine();

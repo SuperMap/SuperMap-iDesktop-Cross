@@ -45,7 +45,7 @@ public class MetaProcessSqlQuery extends MetaProcess {
 	private void initMetaInfo() {
 
 		datasource = new ParameterDatasourceConstrained();
-		this.datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.dataset = new ParameterSingleDataset(datasetTypes);
 		DatasetVector datasetVector = DatasetUtilities.getDefaultDatasetVector();
 		if (datasetVector != null) {

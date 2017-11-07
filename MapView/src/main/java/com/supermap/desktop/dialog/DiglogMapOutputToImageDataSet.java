@@ -6,6 +6,7 @@ import com.supermap.data.EncodeType;
 import com.supermap.data.Rectangle2D;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.map.propertycontrols.PanelGroupBoxViewBounds;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
@@ -197,8 +198,8 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 	}
 
 	private void initResources() {
-		this.labelDataSource.setText(MapViewProperties.getString("String_OutputImageDataset_Datasource"));
-		this.labelDataSet.setText(MapViewProperties.getString("String_OutputImageDataset_Dataset"));
+		this.labelDataSource.setText(ControlsProperties.getString("String_Label_Datasource"));
+		this.labelDataSet.setText(ControlsProperties.getString("String_Label_Dataset"));
 		this.labelResolution.setText(MapViewProperties.getString("String_OutputImageDataset_Resolution"));
 		this.labelRowCount.setText(MapViewProperties.getString("String_OutputImageDataset_RowCount"));
 		this.labelColumnCount.setText(MapViewProperties.getString("String_OutputImageDataset_ColumnCount"));

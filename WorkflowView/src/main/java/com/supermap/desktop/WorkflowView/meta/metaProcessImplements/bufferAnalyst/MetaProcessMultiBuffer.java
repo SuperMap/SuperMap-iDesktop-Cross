@@ -66,7 +66,7 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 		// 源数据
 		this.datasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
-		this.datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 		ParameterCombine parameterCombineSourceData = new ParameterCombine();
 		parameterCombineSourceData.addParameters(this.datasource, this.dataset);

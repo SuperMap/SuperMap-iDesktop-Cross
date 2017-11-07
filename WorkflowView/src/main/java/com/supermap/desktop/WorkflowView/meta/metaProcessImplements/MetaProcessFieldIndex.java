@@ -50,7 +50,7 @@ public class MetaProcessFieldIndex extends MetaProcess {
 
 	private void initParameters() {
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetTypeUtilities.getDatasetTypeVector());
 		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		sourceData = new ParameterCombine();

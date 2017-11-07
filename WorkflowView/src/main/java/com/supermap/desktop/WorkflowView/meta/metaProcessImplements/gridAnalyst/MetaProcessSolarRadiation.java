@@ -55,7 +55,7 @@ public class MetaProcessSolarRadiation extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.solarRadiationAnalysisType = new ParameterSolarRadiationAnalysisType(ProcessProperties.getString("String_AnalysisType"));
@@ -63,7 +63,7 @@ public class MetaProcessSolarRadiation extends MetaProcess {
 		this.parameterNumberTransmittance = new ParameterNumber(ProcessProperties.getString("String_Transmittance"));
 		this.parameterNumberZFactor = new ParameterNumber(ProcessProperties.getString("String_ZFactor"));
 		this.resultDatasource = new ParameterDatasource();
-		this.resultDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.resultDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.textFieldTotal = new ParameterTextField(ProcessProperties.getString("String_SolarRadiationTotal"));
 		this.checkboBoxAndTextFieldDirection = new ParameterCheckboBoxAndTextField(ProcessProperties.getString("String_SolarRadiationDirection"));
 		this.checkboBoxAndTextFieldDiffuse = new ParameterCheckboBoxAndTextField(ProcessProperties.getString("String_SolarRadiationDiffuse"));

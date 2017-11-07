@@ -103,7 +103,7 @@ public class MetaProcessRarefyPoints extends MetaProcess {
 			this.statisticsFieldGroupForRarefyPoints.setDataset((DatasetVector) defaultDataset);
 			updateTextRadius(defaultDataset.getPrjCoordSys());
 		}
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.parameterNumberRadius.setMinValue(0);
 		this.parameterNumberRadius.setIsIncludeMin(false);
 		this.checkBoxRandomSaveRerefyPoints.setSelectedItem(true);

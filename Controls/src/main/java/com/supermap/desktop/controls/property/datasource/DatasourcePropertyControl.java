@@ -88,7 +88,7 @@ public class DatasourcePropertyControl extends AbstractPropertyControl {
 	 * Create the panel.
 	 */
 	public DatasourcePropertyControl(Datasource datasource) {
-		super(ControlsProperties.getString("String_DatasourceProperty"));
+		super(ControlsProperties.getString("String_Datasource"));
 		initializeComponents();
 		initializeResources();
 		setComponentName();

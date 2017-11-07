@@ -23,7 +23,7 @@ public class ControlsProperties extends Properties {
 
 	// ----------------------------------------------------------------------------------------
 	public static final String BundleName = "ui_resources";
-	public static final String DatasourcesNodeName = "DatasourcesNodeName";
+	public static final String DatasourcesNodeName = "String_Datasource";
 	public static final String MapsNodeName = "MapsNodeName";
 	public static final String ScenesNodeName = "ScenesNodeName";
 	public static final String LayoutsNodeName = "LayoutsNodeName";

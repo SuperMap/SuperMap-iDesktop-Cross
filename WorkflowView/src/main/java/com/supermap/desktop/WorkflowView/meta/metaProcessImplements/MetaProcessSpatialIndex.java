@@ -66,7 +66,7 @@ public class MetaProcessSpatialIndex extends MetaProcess {
 			dataset.setSelectedItem(datasetVector);
 		}
 
-		datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		parameterComboBox = new ParameterComboBox(ControlsProperties.getString("String_LabelSpatialIndexType"));
 
 		ParameterCombine parameterCombine = new ParameterCombine();

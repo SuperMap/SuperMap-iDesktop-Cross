@@ -72,7 +72,7 @@ public class MetaProcessSetProjection extends MetaProcess {
 			this.parameterSingleDataset.setSelectedItem(defaultDataset);
 			this.datasource.setSelectedItem(defaultDataset.getDatasource());
 		}
-		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_Datasource"));
 		this.parameterCombineSourceData = new ParameterCombine();
 		this.parameterCombineSourceData.addParameters(this.datasource, this.parameterSingleDataset);
 		this.parameterCombineSourceData.setDescribe(ControlsProperties.getString("String_GroupBox_SourceDataset"));

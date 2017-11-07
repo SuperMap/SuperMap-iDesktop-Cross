@@ -67,7 +67,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 			dataset.setSelectedItem(defaultDatasetGrid);
 			saveDataset.setResultDatasource(defaultDatasetGrid.getDatasource());
 		}
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 		if (null != dataset.getSelectedItem() && dataset.getSelectedItem() instanceof DatasetGrid) {
 			maxGrid.setSelectedItem(((DatasetGrid) dataset.getSelectedItem()).getMaxValue());

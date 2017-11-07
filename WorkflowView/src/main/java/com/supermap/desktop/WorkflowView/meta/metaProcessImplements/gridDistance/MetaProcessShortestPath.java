@@ -53,15 +53,15 @@ public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.distanceDatasource = new ParameterDatasourceConstrained();
-		this.distanceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.distanceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.distanceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.distanceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.directionDatasource = new ParameterDatasourceConstrained();
-		this.directionDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.directionDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.directionDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.directionDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.parameterRadioButton = new ParameterRadioButton();

@@ -42,7 +42,7 @@ public class MetaProcessGridSlice extends MetaProcess{
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.sourceDataset.setRequisite(true);

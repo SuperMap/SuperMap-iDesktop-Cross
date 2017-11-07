@@ -6,6 +6,7 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CtrlAction.Dataset.AddToWindowMode;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -28,7 +29,7 @@ public class NewDatasetTableModel extends DefaultTableModel {
 			CoreProperties.getString("String_ColumnHeader_Index"),
 			CoreProperties.getString("String_ColumnHeader_TargetDatasource"),
 			DataEditorProperties.getString("String_CreateType"),
-			DataEditorProperties.getString("String_ColumnTitle_DtName"),
+			ControlsProperties.getString("String_DatasetName"),
 //			CommonProperties.getString("String_ColumnHeader_EncodeType"),
 //			DataEditorProperties.getString("String_Charset"),
 			DataEditorProperties.getString("String_DataGridViewComboBoxColumn_Name")

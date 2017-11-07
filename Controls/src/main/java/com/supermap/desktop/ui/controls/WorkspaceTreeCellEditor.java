@@ -409,7 +409,7 @@ class WorkspaceTreeCellEditor extends DefaultTreeCellEditor {
 		 * InternalImageIconFactory.WORKSPACE; if ("UntitledWorkspace".equals(currentWorkspace.getCaption())) { stringTextField =
 		 * ControlsProperties.getString(ControlsProperties.WorkspaceNodeDefaultName); } else { stringTextField = currentWorkspace.getCaption(); } } else if
 		 * (data instanceof Datasources) { // editingIcon = InternalImageIconFactory.DATASOURCES; stringTextField =
-		 * ControlsProperties.getString(ControlsProperties.DatasourcesNodeName); } else if (data instanceof Datasource) { Datasource tempDatasource =
+		 * ControlsProperties.getString(ControlsProperties.String_Datasource); } else if (data instanceof Datasource) { Datasource tempDatasource =
 		 * (Datasource) tempNodeData.getData(); EngineType engineType = tempDatasource.getEngineType(); if (engineType.equals(EngineType.SQLPLUS)) { //
 		 * editingIcon = InternalImageIconFactory.DATASOURCE_SQL; } else if (engineType.equals(EngineType.IMAGEPLUGINS)) { // editingIcon =
 		 * InternalImageIconFactory.DATASOURCE_IMAGEPLUGINS; } else if (engineType.equals(EngineType.OGC)) { // editingIcon =

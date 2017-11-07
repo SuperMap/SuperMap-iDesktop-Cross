@@ -42,15 +42,15 @@ public class MetaProcessImageCombine extends MetaProcess {
 
 	private void initParameters() {
 		this.redDatasource = new ParameterDatasourceConstrained();
-		this.redDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.redDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.redDataset = new ParameterSingleDataset(DatasetType.IMAGE);
 		this.redDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.greenDatasource = new ParameterDatasourceConstrained();
-		this.greenDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.greenDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.greenDataset = new ParameterSingleDataset(DatasetType.IMAGE);
 		this.greenDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.blueDatasource = new ParameterDatasourceConstrained();
-		this.blueDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.blueDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.blueDataset = new ParameterSingleDataset(DatasetType.IMAGE);
 		this.blueDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.resultDataset = new ParameterSaveDataset();

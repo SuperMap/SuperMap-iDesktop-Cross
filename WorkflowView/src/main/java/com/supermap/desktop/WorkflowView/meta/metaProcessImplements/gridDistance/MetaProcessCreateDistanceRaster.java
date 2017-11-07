@@ -54,18 +54,18 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.costDatasource = new ParameterDatasourceConstrained();
-		this.costDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.costDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.costDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.costDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.parameterNumberMaxDistance = new ParameterNumber(ProcessProperties.getString("String_MaxDistance"));
 		this.parameterNumberResolvingPower = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
 		this.resultDatasource = new ParameterDatasource();
 		this.resultDatasource.setReadOnlyNeeded(false);
-		this.resultDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.resultDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.resultDistanceDataset = new ParameterTextField(ProcessProperties.getString("String_Distance_Dataset"));
 		this.resultDirectionDataset = new ParameterTextField(ProcessProperties.getString("String_Direction_Dataset"));
 		this.resultAllocationDataset = new ParameterTextField(ProcessProperties.getString("String_Allocation_Dataset"));

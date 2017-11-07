@@ -39,7 +39,7 @@ public class MetaProcessCollectEvents extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.sourceDataset.setRequisite(true);

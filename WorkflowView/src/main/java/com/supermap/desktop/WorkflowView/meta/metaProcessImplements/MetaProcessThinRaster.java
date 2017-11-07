@@ -50,7 +50,7 @@ public class MetaProcessThinRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.IMAGE);
 		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 

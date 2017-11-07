@@ -39,11 +39,11 @@ public class MetaProcessAltitudeStatistics extends MetaProcess {
 
 	private void initParameters() {
 		this.pointDatasource = new ParameterDatasourceConstrained();
-		this.pointDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.pointDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.pointDataset = new ParameterSingleDataset(DatasetType.POINT);
 		this.pointDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.gridDatasource = new ParameterDatasourceConstrained();
-		this.gridDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.gridDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.gridDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.gridDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.resultDataset = new ParameterSaveDataset();

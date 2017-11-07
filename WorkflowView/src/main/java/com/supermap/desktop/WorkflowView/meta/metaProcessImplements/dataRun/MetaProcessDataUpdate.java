@@ -44,7 +44,7 @@ public class MetaProcessDataUpdate extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDatasource.setReadOnlyNeeded(false);
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.IMAGE);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));

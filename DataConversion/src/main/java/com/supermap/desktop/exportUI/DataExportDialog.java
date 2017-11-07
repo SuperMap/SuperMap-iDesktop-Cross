@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IExportPanelFactory;
 import com.supermap.desktop.Interface.IPanelModel;
 import com.supermap.desktop.baseUI.PanelExportTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.*;
@@ -71,7 +72,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 	private PanelExportTransform panelExportsTemp;
 	private JPanel panelEmpty;
 
-	private String[] title = {DataConversionProperties.getString("String_Dataset"),
+	private String[] title = {ControlsProperties.getString("String_Dataset"),
 			DataConversionProperties.getString("string_outputtype"),
 			DataConversionProperties.getString("string_tabletitle_filename"),
 			DataConversionProperties.getString("string_directory"),

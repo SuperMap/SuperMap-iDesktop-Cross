@@ -87,7 +87,7 @@ public abstract class MetaProcessCenterLine extends MetaProcess {
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 		}
 		this.saveDataset.setDefaultDatasetName(getResultDatasetName());
-		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.parameterNumberMaxWidth.setSelectedItem("30");
 		this.parameterNumberMaxWidth.setMinValue(0);
 		this.parameterNumberMaxWidth.setIsIncludeMin(false);

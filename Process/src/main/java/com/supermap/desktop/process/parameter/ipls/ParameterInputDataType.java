@@ -34,7 +34,7 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterTextField parameterDataSourceType = new ParameterTextField(ProcessProperties.getString("String_DataSourceType"));
 	private ParameterFile parameterDataSourcePath = new ParameterFile(ProcessProperties.getString("String_DataSourcePath"));
 	private ParameterComboBox parameterDatasetName = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
-	private ParameterTextField parameterDatasetName1 = new ParameterTextField(ProcessProperties.getString("String_DatasetName"));
+	private ParameterTextField parameterDatasetName1 = new ParameterTextField(ProcessProperties.getString("String_Label_DatasetName"));
 	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("String_DatasetType"));
 	private ParameterDefaultValueTextField parameterSpark = new ParameterDefaultValueTextField(ProcessProperties.getString("String_numSlices"));
 	private ParameterSwitch parameterSwitchUDB = new ParameterSwitch();
@@ -270,7 +270,7 @@ public class ParameterInputDataType extends ParameterCombine {
 
 		//pg数据库
 		parameterSourceDataset.setRequisite(true);
-		parameterSourceDataset.setDescribe(ProcessProperties.getString("String_DatasetName"));
+		parameterSourceDataset.setDescribe(ProcessProperties.getString("String_Label_DatasetName"));
 		ParameterCombine parameterOpenPG = new ParameterCombine(ParameterCombine.HORIZONTAL);
 		parameterOpenPG.addParameters(parameterSourceDataset, parameterButton);
 		parameterEngineType.setSelectedItem("POSTGRESQL");

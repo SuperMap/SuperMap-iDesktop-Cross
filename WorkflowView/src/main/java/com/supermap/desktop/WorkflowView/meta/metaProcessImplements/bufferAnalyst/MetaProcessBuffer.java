@@ -99,7 +99,7 @@ public class MetaProcessBuffer extends MetaProcess {
 
 		this.datasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.NETWORK);
-		this.datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 		this.radioButtonFlatOrRound = new ParameterRadioButton();
 		ParameterDataNode gound = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferRound"), BUFFER_ROUND);

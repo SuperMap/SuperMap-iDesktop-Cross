@@ -7,6 +7,7 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IFormTabular;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
@@ -1227,8 +1228,8 @@ public class JDialogSpatialQuery extends SmDialog {
 		labelSearchLayer.setText(DataViewProperties.getString("String__LabelSearchingLayer"));
 		labelSelectedCount.setText(MessageFormat.format(DataViewProperties.getString("String_CountofFeaturesSelecte"), 0));
 		checkBoxSaveResult.setText(DataViewProperties.getString("String_SaveResult"));
-		labelDatasource.setText(DataViewProperties.getString("String_SQLQueryLabelDatasource"));
-		labelDataset.setText(DataViewProperties.getString("String_SQLQueryLabelDataset"));
+		labelDatasource.setText(ControlsProperties.getString("String_Label_Datasource"));
+		labelDataset.setText(ControlsProperties.getString("String_Label_Dataset"));
 		checkBoxOnlySaveSpatial.setText(DataViewProperties.getString("String_OnlySaveSpatialInfo"));
 		checkBoxShowInTabular.setText(DataViewProperties.getString("String_ShowResultInTabular"));
 		checkBoxShowInMap.setText(DataViewProperties.getString("String_ShowResultInMap"));
