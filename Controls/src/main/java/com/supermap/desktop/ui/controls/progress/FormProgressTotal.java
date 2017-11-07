@@ -146,7 +146,14 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 				}
 			}
 		};
-		worker.execute();
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				worker.execute();
+			}
+		});
+
 		if (null != this) {
 			this.setVisible(true);
 		}
@@ -197,7 +204,13 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 			}
 		};
 
-		worker.execute();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				worker.execute();
+			}
+		});
+
 		if (null != this) {
 			this.setVisible(true);
 		}
@@ -291,7 +304,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CoreProperties.getString(CoreProperties.BeingCanceled));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancelling));
 					buttonCancel.setEnabled(false);
 				}
 			});

@@ -48,7 +48,7 @@ public class CoreProperties extends Properties {
 	public static java.lang.String down = "String_Button_down";
 	public static java.lang.String up = "String_Button_up";
 	public static final String Cancel = "String_Button_Cancel";
-	public static final String BeingCanceled = "String_Button_BeingCanceled";
+	public static final String Cancelling = "String_Button_Cancelling";
 	public static final String Close = "String_Button_Close";
 	public static final String OK = "String_Button_OK";
 	public static final String Index = "String_Index";

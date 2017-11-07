@@ -11,6 +11,7 @@ import com.supermap.desktop.process.events.StatusChangeListener;
 import com.supermap.desktop.process.tasks.TasksManager;
 import com.supermap.desktop.process.tasks.events.WorkerStateChangedEvent;
 import com.supermap.desktop.process.tasks.events.WorkerStateChangedListener;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.event.EventListenerList;
 import java.util.Vector;
@@ -27,7 +28,7 @@ public class TaskStateManager {
 	private TaskState waiting = new TaskState(TasksManager.WORKER_STATE_WAITING, ProcessProperties.getString("String_Waiting"));
 	private TaskState ready = new TaskState(TasksManager.WORKER_STATE_READY, ProcessProperties.getString("String_Ready"));
 	private TaskState running = new TaskState(TasksManager.WORKER_STATE_RUNNING, ProcessProperties.getString("String_Running"));
-	private TaskState completed = new TaskState(TasksManager.WORKER_STATE_COMPLETED, ProcessProperties.getString("String_Completed"));
+	private TaskState completed = new TaskState(TasksManager.WORKER_STATE_COMPLETED, CoreProperties.getString("String_Completed"));
 	private TaskState cancelled = new TaskState(TasksManager.WORKER_STATE_CANCELLED, ProcessProperties.getString("String_Cancelled"));
 	private TaskState exception = new TaskState(TasksManager.WORKER_STATE_EXCEPTION, ProcessProperties.getString("String_Failed"));
 	private TaskState warning = new TaskState(TasksManager.WORKER_STATE_WARNING, ProcessProperties.getString("String_warning"));
