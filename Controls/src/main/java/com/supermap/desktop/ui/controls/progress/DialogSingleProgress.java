@@ -1,5 +1,7 @@
 package com.supermap.desktop.ui.controls.progress;
 
+import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.tasks.IWorkerView;
 import com.supermap.desktop.process.tasks.SingleProgress;
 import com.supermap.desktop.properties.CoreProperties;
@@ -26,7 +28,7 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 
 	private JProgressBar progressBar = null;
 	private JLabel labelMessage = null;
-	private JLabel labelRemaintime = null;
+	private JLabel labelRemainTime = null;
 	private SmButton buttonCancel = null;
 
 	@Override
@@ -39,7 +41,7 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 		progressBar = new JProgressBar();
 		progressBar.setStringPainted(true);
 		labelMessage = new JLabel("...");
-		labelRemaintime = new JLabel("...");
+		labelRemainTime = new JLabel("...");
 		buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 		this.getRootPane().setDefaultButton(this.buttonCancel);
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
@@ -51,7 +53,7 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addComponent(this.labelMessage, 420, 420, 420)
 				.addComponent(this.progressBar, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, 420)
-				.addComponent(this.labelRemaintime, 420, 420, 420)
+				.addComponent(this.labelRemainTime, 420, 420, 420)
 				.addGroup(groupLayout.createSequentialGroup()
 						.addContainerGap(10, Short.MAX_VALUE)
 						.addComponent(this.buttonCancel)));
@@ -59,7 +61,7 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addComponent(this.labelMessage)
 				.addComponent(this.progressBar, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT)
-				.addComponent(this.labelRemaintime)
+				.addComponent(this.labelRemainTime)
 				.addComponent(this.buttonCancel, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT, DEFUALT_PROGRESSBAR_HEIGHT));
 		// @formatter:on
 
@@ -94,7 +96,7 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CoreProperties.getString(CoreProperties.BeingCanceled));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancelling));
 					buttonCancel.setEnabled(false);
 				}
 			});
@@ -121,17 +123,25 @@ public class DialogSingleProgress extends JDialog implements IWorkerView<SingleP
 
 	@Override
 	public void cancelling() {
-
+		this.labelMessage.setText(ControlsProperties.getString("String_Canceling"));
+		this.labelRemainTime.setText("");
+		this.labelRemainTime.setVisible(false);
+		this.buttonCancel.setText(CoreProperties.Cancelling);
+		this.buttonCancel.setEnabled(false);
 	}
 
 	@Override
 	public void cancelled() {
-
+		this.labelMessage.setText(ProcessProperties.getString("String_Cancelled"));
+		this.progressBar.setValue(0);
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
+		this.buttonCancel.setEnabled(true);
 	}
 
 	@Override
 	public void done() {
-
+		this.labelMessage.setText(CoreProperties.getString("String_Completed"));
+		setVisible(false);
 	}
 
 	public static void main(String[] args) {

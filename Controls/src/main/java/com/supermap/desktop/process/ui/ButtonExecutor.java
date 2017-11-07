@@ -32,7 +32,7 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 
 	private final static String TIP_READY = CoreProperties.getString(CoreProperties.Run);
 	private final static String TIP_RUNNING = CoreProperties.getString(CoreProperties.Cancel);
-	private final static String TIP_CANCELLING = CoreProperties.getString(CoreProperties.BeingCanceled);
+	private final static String TIP_CANCELLING = CoreProperties.getString(CoreProperties.Cancelling);
 	private final static String TIP_COMPLETED = CoreProperties.getString(CoreProperties.ReRun);
 
 	public final static int NORMAL = 1;

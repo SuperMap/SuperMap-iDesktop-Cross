@@ -19,6 +19,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.Outputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.event.EventListenerList;
@@ -39,7 +40,7 @@ public abstract class AbstractProcess implements IProcess {
 	private int serialID = 0;
 	private String title;
 	private String RUNNING_MESSAGE = ProcessProperties.getString("String_Running");
-	private String COMPLETED_MESSAGE = ProcessProperties.getString("String_Completed");
+	private String COMPLETED_MESSAGE = CoreProperties.getString("String_Completed");
 	private String FAILED_MESSAGE = ProcessProperties.getString("String_Failed");
 
 	protected String getRUNNING_MESSAGE() {
