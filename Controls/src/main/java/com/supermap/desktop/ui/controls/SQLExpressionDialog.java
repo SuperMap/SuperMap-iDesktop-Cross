@@ -63,7 +63,7 @@ public class SQLExpressionDialog extends SmDialog {
 	private DefaultTableModel defaultTableModel;
 	private static String[] NAMES = {ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldCaption"),
 			ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldName"),
-			ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")};
+			ControlsProperties.getString("String_Type")};
 	private transient QueryParameter filedQueryParameter;
 	private transient DialogResult dialogResult = DialogResult.CANCEL;
 	private MouseAdapter mouseAdapter = new LocalMouseAdapter();
@@ -592,7 +592,7 @@ public class SQLExpressionDialog extends SmDialog {
 ////				80);
 ////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldName"))
 ////				.setPreferredWidth(100);
-////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")).setPreferredWidth(80);
+////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_Type")).setPreferredWidth(80);
 //	}
 
 	/**

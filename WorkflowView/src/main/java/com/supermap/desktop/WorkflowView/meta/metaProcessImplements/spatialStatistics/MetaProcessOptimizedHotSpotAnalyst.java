@@ -94,7 +94,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_NETWORK"), AggregationMethod.NETWORKPOLYGONS));
-		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_SNA PNEARBYPOINTS"), AggregationMethod.SNAPNEARBYPOINTS));
+		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_SNAPNEARBYPOINTS"), AggregationMethod.SNAPNEARBYPOINTS));
 
 		parameterDatasourceAggregating = new ParameterDatasource();
 		parameterSingleDatasetAggregating = new ParameterSingleDataset(DatasetType.REGION);
