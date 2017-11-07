@@ -4,10 +4,9 @@ import com.supermap.data.*;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.symbolDialogs.JpanelSymbols.JPanelSymbolsFill;
 import com.supermap.desktop.dialog.symbolDialogs.JpanelSymbols.SymbolSelectedChangedListener;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
-import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
+import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.InternalToolkitControl;
@@ -221,8 +220,8 @@ public class SymbolDialogFill extends SymbolDialog {
             @Override
             public void SymbolSelectedChangedEvent(Symbol symbol) {
                 if (symbol != null) {
-                    spinnerOpaque.setToolTipText(CommonProperties.getString(CommonProperties.UnSupport));
-                    spinnerOpaque.setEnabled(false);
+	                spinnerOpaque.setToolTipText(CoreProperties.getString(CoreProperties.UnSupport));
+	                spinnerOpaque.setEnabled(false);
                 } else {
                     spinnerOpaque.setToolTipText(null);
                     spinnerOpaque.setEnabled(true);

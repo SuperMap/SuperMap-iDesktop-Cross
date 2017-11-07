@@ -6,7 +6,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dialog.SmOptionPane;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
@@ -333,12 +333,12 @@ public class JDialogCreateCollectionDataset extends SmDialog {
 
 			if (null != datasetVector) {
 				if (datasetVector.getDatasource().isReadOnly()) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_VectorCollectionDatasourceReadOnly"), datasetVector.getName()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_VectorCollectionDatasourceReadOnly"), datasetVector.getName()));
 					return;
 				}
 				ArrayList<CollectionDatasetInfo> collectionInfos = this.datasetVector.getCollectionDatasetInfos();
 				if (selectRows.length > 1) {
-					if (new SmOptionPane().showConfirmDialog(MessageFormat.format(CommonProperties.getString("String_RemoveDatasetsFromVectorColleciton"), datasetVector.getName(), selectRows.length)) == JOptionPane.OK_OPTION) {
+					if (new SmOptionPane().showConfirmDialog(MessageFormat.format(CoreProperties.getString("String_RemoveDatasetsFromVectorColleciton"), datasetVector.getName(), selectRows.length)) == JOptionPane.OK_OPTION) {
 						for (int i = 0, size = collectionInfos.size(); i < size; i++) {
 							for (int j = 0, length = selectRows.length; j < length; j++) {
 								String datasetName = tableModel.getTagValueAt(selectRows[j]).getName();
@@ -353,7 +353,7 @@ public class JDialogCreateCollectionDataset extends SmDialog {
 				} else {
 					DatasetInfo datasetInfo = tableModel.getTagValueAt(selectRows[0]);
 					if (hasDataset(datasetVector, datasetInfo.getDataBase(), datasetInfo.getAlias(), datasetInfo.getName())) {
-						if (new SmOptionPane().showConfirmDialog(MessageFormat.format(CommonProperties.getString("String_RemoveDatasetFromVectorCollection"), datasetVector.getName(), datasetInfo.getName())) == JOptionPane.OK_OPTION) {
+						if (new SmOptionPane().showConfirmDialog(MessageFormat.format(CoreProperties.getString("String_RemoveDatasetFromVectorCollection"), datasetVector.getName(), datasetInfo.getName())) == JOptionPane.OK_OPTION) {
 							delete(collectionInfos, selectRows[0], datasetInfo.getName());
 						} else {
 							return;
@@ -387,9 +387,9 @@ public class JDialogCreateCollectionDataset extends SmDialog {
 	private void delete(ArrayList<CollectionDatasetInfo> collectionInfos, int i, String datasetName) {
 		boolean result = datasetVector.DeleteDatasetFromCollection(collectionInfos.get(i).getDatasourceConnectInfo(), datasetName);
 		if (result) {
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_RemoveDatasetFromVectorCollectionSuccess"), datasetVector.getName(), datasetName));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_RemoveDatasetFromVectorCollectionSuccess"), datasetVector.getName(), datasetName));
 		} else {
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_RemoveDatasetFromVectorCollectionFailed"), datasetVector.getName(), datasetName));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_RemoveDatasetFromVectorCollectionFailed"), datasetVector.getName(), datasetName));
 		}
 	}
 
@@ -631,8 +631,8 @@ public class JDialogCreateCollectionDataset extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(ControlsProperties.getString("String_CreateCollectionDataset"));
-		this.labelDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		this.labelDatasetName.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
+		this.labelDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		this.labelDatasetName.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
 //		this.labelCharset.setText(ControlsProperties.getString("String_LabelCharset"));
 		this.buttonAddDataset.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
@@ -644,15 +644,15 @@ public class JDialogCreateCollectionDataset extends SmDialog {
 		this.buttonMoveLast.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveLast.png"));
 		this.buttonRefresh.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Refresh.png"));
 		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_AddColor"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_ToolBar_Remove"));
-		this.buttonMoveFirst.setToolTipText(CommonProperties.getString("String_ToolBar_MoveFirst"));
-		this.buttonMoveUp.setToolTipText(CommonProperties.getString("String_ToolBar_MoveUp"));
-		this.buttonMoveDown.setToolTipText(CommonProperties.getString("String_ToolBar_MoveDown"));
-		this.buttonMoveLast.setToolTipText(CommonProperties.getString("String_ToolBar_MoveLast"));
-		this.buttonRefresh.setToolTipText(CommonProperties.getString("String_Tooltip_RefreshStatus"));
-		this.checkBoxCloseDialog.setText(CommonProperties.getString("String_AutoCloseForm"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_ToolBar_Remove"));
+		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_ToolBar_MoveFirst"));
+		this.buttonMoveUp.setToolTipText(CoreProperties.getString("String_ToolBar_MoveUp"));
+		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_ToolBar_MoveDown"));
+		this.buttonMoveLast.setToolTipText(CoreProperties.getString("String_ToolBar_MoveLast"));
+		this.buttonRefresh.setToolTipText(CoreProperties.getString("String_Tooltip_RefreshStatus"));
+		this.checkBoxCloseDialog.setText(CoreProperties.getString("String_AutoCloseForm"));
 	}
 
 	private void initLayout() {

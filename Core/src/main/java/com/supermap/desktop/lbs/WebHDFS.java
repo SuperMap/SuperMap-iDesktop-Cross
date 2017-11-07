@@ -1,7 +1,7 @@
 package com.supermap.desktop.lbs;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -107,8 +107,8 @@ public class WebHDFS {
                 }
             }
         } catch (Exception e) {
-            Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_ConnectException"));
-            e.printStackTrace();
+	        Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ConnectException"));
+	        e.printStackTrace();
         }
         // 使用finally块来关闭输入流
         finally {

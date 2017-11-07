@@ -1,20 +1,12 @@
 package com.supermap.desktop.process.parameter.ipls;
 
-import com.alibaba.fastjson.JSON;
-import com.supermap.data.DatasetType;
 import com.supermap.desktop.lbs.IServerServiceImpl;
 import com.supermap.desktop.lbs.Interface.IServerService;
 import com.supermap.desktop.lbs.params.IServerLoginInfo;
-import com.supermap.desktop.lbs.params.QueryDatasetNamesResult;
-import com.supermap.desktop.lbs.params.QueryDatasetTypeResult;
 import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 import org.apache.http.impl.client.CloseableHttpClient;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * @author XiaJT

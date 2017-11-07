@@ -4,7 +4,7 @@ import com.supermap.data.PrjCoordSys;
 import com.supermap.data.PrjCoordSysType;
 import com.supermap.data.Unit;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 public enum LengthUnit {
 	// @formatter:off
@@ -56,57 +56,57 @@ public enum LengthUnit {
 	@Override
 	public String toString() {
 		if (this == METER) {
-			return CommonProperties.getString("String_DistanceUnit_Meter");
+			return CoreProperties.getString("String_DistanceUnit_Meter");
 		} else if (this == KILOMETER) {
-			return CommonProperties.getString("String_DistanceUnit_Kilometer");
+			return CoreProperties.getString("String_DistanceUnit_Kilometer");
 		} else if (this == CENTIMETER) {
-			return CommonProperties.getString("String_DistanceUnit_Centimeter");
+			return CoreProperties.getString("String_DistanceUnit_Centimeter");
 		} else if (this == DECIMETER) {
-			return CommonProperties.getString("String_DistanceUnit_Decimeter");
+			return CoreProperties.getString("String_DistanceUnit_Decimeter");
 		} else if (this == MILE) {
-			return CommonProperties.getString("String_DistanceUnit_Mile");
+			return CoreProperties.getString("String_DistanceUnit_Mile");
 		} else if (this == INCH) {
-			return CommonProperties.getString("String_DistanceUnit_Inch");
+			return CoreProperties.getString("String_DistanceUnit_Inch");
 		} else if (this == YARD) {
-			return CommonProperties.getString("String_DistanceUnit_Yard");
+			return CoreProperties.getString("String_DistanceUnit_Yard");
 		} else if (this == SECOND) {
-			return CommonProperties.getString("String_AngleUnit_Second");
+			return CoreProperties.getString("String_AngleUnit_Second");
 		} else if (this == MINUTE) {
-			return CommonProperties.getString("String_AngleUnit_Minute");
+			return CoreProperties.getString("String_AngleUnit_Minute");
 		} else if (this == DEGREE) {
-			return CommonProperties.getString("String_AngleUnit_Degree");
+			return CoreProperties.getString("String_AngleUnit_Degree");
 		} else if (this == FOOT) {
-			return CommonProperties.getString("String_DistanceUnit_Foot");
+			return CoreProperties.getString("String_DistanceUnit_Foot");
 		} else if (this == MILLIMETER) {
-			return CommonProperties.getString("String_DistanceUnit_Millimeter");
+			return CoreProperties.getString("String_DistanceUnit_Millimeter");
 		}
 		return this.unit.toString();
 	}
 
 	public static LengthUnit getValueOf(String name) {
-		if (name.equals(CommonProperties.getString("String_DistanceUnit_Meter"))) {
+		if (name.equals(CoreProperties.getString("String_DistanceUnit_Meter"))) {
 			return METER;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Kilometer"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Kilometer"))) {
 			return KILOMETER;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Centimeter"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Centimeter"))) {
 			return CENTIMETER;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Decimeter"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Decimeter"))) {
 			return DECIMETER;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Mile"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Mile"))) {
 			return MILE;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Inch"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Inch"))) {
 			return INCH;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Yard"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Yard"))) {
 			return YARD;
-		} else if (name.equals(CommonProperties.getString("String_AngleUnit_Second"))) {
+		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Second"))) {
 			return SECOND;
-		} else if (name.equals(CommonProperties.getString("String_AngleUnit_Minute"))) {
+		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Minute"))) {
 			return MINUTE;
-		} else if (name.equals(CommonProperties.getString("String_AngleUnit_Degree"))) {
+		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Degree"))) {
 			return DEGREE;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Foot"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Foot"))) {
 			return FOOT;
-		} else if (name.equals(CommonProperties.getString("String_DistanceUnit_Millimeter"))) {
+		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Millimeter"))) {
 			return MILLIMETER;
 		}
 		return RADIAN;

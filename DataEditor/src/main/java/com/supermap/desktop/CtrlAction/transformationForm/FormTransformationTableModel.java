@@ -4,7 +4,7 @@ import com.supermap.data.Point2D;
 import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationTableDataBean;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.FormTransformationSubFormType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.ui.MapControl;
 
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +20,7 @@ public class FormTransformationTableModel extends DefaultTableModel {
 
 	private static final String[] columnNames = new String[]{
 			"",
-			CommonProperties.getString(CommonProperties.Index),
+			CoreProperties.getString(CoreProperties.Index),
 			DataEditorProperties.getString("String_PointIndex"),
 			DataEditorProperties.getString("String_TransformItem_OriginalX"),
 			DataEditorProperties.getString("String_TransformItem_OriginalY"),

@@ -4,7 +4,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -31,9 +31,9 @@ public class TableModelDataset extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		if (column == COLUMN_NAME) {
-			return CommonProperties.getString("String_Name");
+			return CoreProperties.getString("String_Name");
 		} else if (column == COLUMN_TYPE) {
-			return CommonProperties.getString("String_Type");
+			return CoreProperties.getString("String_Type");
 		} else if (column == COLUMN_NUMBER) {
 			return DataViewProperties.getString("String_ObjectCount");
 		} else if (column == COLUMN_PRJCOORDSYS) {

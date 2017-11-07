@@ -8,7 +8,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.RecentFileUtilties;
@@ -35,7 +35,7 @@ public class CtrlActionDatasourceNewFile extends CtrlAction {
 			if (!SmFileChoose.isModuleExist("DatasourceNewFile")) {
 				String fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(DataEditorProperties.getString("String_UDBFileFilterName"),
 						DataEditorProperties.getString("String_UDBFileFilters")));
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataEditorProperties.getString("String_NewDatasourceFile"), "DatasourceNewFile", "SaveOne");
 			}
 			SmFileChoose smFileChoose = new SmFileChoose("DatasourceNewFile");

@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
@@ -436,7 +436,7 @@ public class JDialogDatasetCopy extends SmDialog {
 
 				this.table.addRow(datas);
 				if (dataset.getType() == DatasetType.POINT) {
-					table.getModel().setValueAt(CommonProperties.getString("String_EncodeType_None"), i, COLUMN_INDEX_EncodeType);
+					table.getModel().setValueAt(CoreProperties.getString("String_EncodeType_None"), i, COLUMN_INDEX_EncodeType);
 				}
 			}
 			if (0 < table.getRowCount()) {
@@ -454,22 +454,22 @@ public class JDialogDatasetCopy extends SmDialog {
 	private void initResources() {
 		try {
 			this.setTitle(DataEditorProperties.getString("String_CopyDataset"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 			this.buttonOk.setText(DataEditorProperties.getString("String_Copy"));
 
-			table.getColumnModel().getColumn(COLUMN_INDEX_Dataset).setHeaderValue(CommonProperties.getString("String_ColumnHeader_SourceDataset"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_CurrentDatasource).setHeaderValue(CommonProperties.getString("String_ColumnHeader_SourceDatasource"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDatasource).setHeaderValue(CommonProperties.getString("String_ColumnHeader_TargetDatasource"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDataset).setHeaderValue(CommonProperties.getString("String_ColumnHeader_TargetDataset"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_EncodeType).setHeaderValue(CommonProperties.getString("String_ColumnHeader_EncodeType"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_Dataset).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDataset"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_CurrentDatasource).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDatasource"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDatasource).setHeaderValue(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDataset).setHeaderValue(CoreProperties.getString("String_ColumnHeader_TargetDataset"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_EncodeType).setHeaderValue(CoreProperties.getString("String_ColumnHeader_EncodeType"));
 			table.getColumnModel().getColumn(COLUMN_INDEX_Charset).setHeaderValue(DataEditorProperties.getString("String_Charset"));
 
-			buttonAdd.setToolTipText(CommonProperties.getString("String_Add"));
-			buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-			buttonSelectInvert.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-			buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
-			buttonSetting.setToolTipText(CommonProperties.getString("String_ToolBar_Advanced"));
-			this.checkBoxAutoClose.setText(CommonProperties.getString("String_CheckBox_CloseDialog1"));
+			buttonAdd.setToolTipText(CoreProperties.getString("String_Add"));
+			buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+			buttonSelectInvert.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+			buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
+			buttonSetting.setToolTipText(CoreProperties.getString("String_ToolBar_Advanced"));
+			this.checkBoxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog1"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

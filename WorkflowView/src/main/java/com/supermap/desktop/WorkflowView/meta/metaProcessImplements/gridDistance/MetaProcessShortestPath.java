@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -25,9 +25,9 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  * Created by lixiaoyao on 2017/8/7.
  */
 public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private final static String DISTANCE_DATA = CommonProperties.getString("String_GroupBox_DistanceData");
-	private final static String DIRECTION_DATA = CommonProperties.getString("String_GroupBox_DirectionData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final static String DISTANCE_DATA = CoreProperties.getString("String_GroupBox_DistanceData");
+	private final static String DIRECTION_DATA = CoreProperties.getString("String_GroupBox_DirectionData");
 	private final static String OUTPUT_DATA = "ShortestPathResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -53,17 +53,17 @@ public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.distanceDatasource = new ParameterDatasourceConstrained();
-		this.distanceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.distanceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.distanceDataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.distanceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.distanceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.directionDatasource = new ParameterDatasourceConstrained();
-		this.directionDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.directionDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.directionDataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.directionDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.directionDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.parameterRadioButton = new ParameterRadioButton();
 		this.parameterDataNodeCell = new ParameterDataNode(ProcessProperties.getString("String_ComputeType_Cell"), null);
 		this.parameterDataNodeAll = new ParameterDataNode(ProcessProperties.getString("String_ComputeType_All"), null);
@@ -72,7 +72,7 @@ public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_TargetData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_TargetData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 		ParameterCombine distanceData = new ParameterCombine();
 		distanceData.setDescribe(ProcessProperties.getString("String_GroupBox_DistanceData"));
@@ -84,7 +84,7 @@ public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
 		computeType.setDescribe(ProcessProperties.getString("String_ComputeType"));
 		computeType.addParameters(this.parameterRadioButton);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(sourceData, distanceData, directionData, computeType, targetData);

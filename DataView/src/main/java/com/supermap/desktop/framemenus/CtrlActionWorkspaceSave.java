@@ -11,7 +11,7 @@ import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.event.SaveWorkspaceEvent;
 import com.supermap.desktop.event.SaveWorkspaceListener;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.WorkspaceUtilities;
@@ -107,9 +107,9 @@ public class CtrlActionWorkspaceSave extends CtrlAction {
 					Workspace currentWorkspace = Application.getActiveApplication().getWorkspace();
 					boolean saveResult = currentWorkspace.save();
 					if (saveResult) {
-						Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_WorkspaceSaveSuccess"),currentWorkspace.getCaption()));
+						Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_WorkspaceSaveSuccess"), currentWorkspace.getCaption()));
 					} else {
-						Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_WorkspaceSaveFailed"),currentWorkspace.getCaption()));
+						Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_WorkspaceSaveFailed"), currentWorkspace.getCaption()));
 					}
 				}
 			}

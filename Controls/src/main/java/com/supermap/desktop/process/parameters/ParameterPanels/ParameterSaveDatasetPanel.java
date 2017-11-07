@@ -14,7 +14,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
@@ -68,8 +68,8 @@ public class ParameterSaveDatasetPanel extends SwingPanel implements IParameterP
 	public ParameterSaveDatasetPanel(IParameter parameterSaveDataset) {
 		super(parameterSaveDataset);
 		this.parameterSaveDataset = (ParameterSaveDataset) parameterSaveDataset;
-		labelDatasource = new JLabel(CommonProperties.getString("String_SourceDatasource"));
-		labelDataset = new JLabel(CommonProperties.getString("String_Label_Dataset"));
+		labelDatasource = new JLabel(CoreProperties.getString("String_SourceDatasource"));
+		labelDataset = new JLabel(CoreProperties.getString("String_Label_Dataset"));
 		datasourceComboBox = new DatasourceComboBox();
 		textFieldDataset = new SmTextFieldLegit();
 		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescribe() + "_comboBox");

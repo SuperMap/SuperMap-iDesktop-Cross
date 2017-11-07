@@ -4,7 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.dialog.BatchAddDailog;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -111,7 +111,7 @@ public class PanelMultiBufferRadioList extends JPanel {
 		this.buttonInsert.setToolTipText(ControlsProperties.getString("String_InsertDefaultValue"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonMoveUp.setToolTipText(ControlsProperties.getString("String_MoveUp"));
 		this.buttonMoveDown.setToolTipText(ControlsProperties.getString("String_MoveDown"));
 	}

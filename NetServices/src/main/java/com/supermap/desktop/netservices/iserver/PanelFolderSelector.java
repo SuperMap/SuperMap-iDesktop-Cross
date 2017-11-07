@@ -6,7 +6,7 @@ import com.supermap.desktop.core.FileSizeType;
 import com.supermap.desktop.event.TableCellValueChangeEvent;
 import com.supermap.desktop.event.TableCellValueChangeListener;
 import com.supermap.desktop.netservices.NetServicesProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.utilities.FileUtilities;
 
@@ -251,8 +251,8 @@ public class PanelFolderSelector extends JPanel {
 					} else if (columnIndex == NAME) {
 						result = file.getName();
 					} else if (columnIndex == TYPE) {
-						result = file.isDirectory() ? CommonProperties.getString(CommonProperties.Directory) : CommonProperties
-								.getString(CommonProperties.File);
+						result = file.isDirectory() ? CoreProperties.getString(CoreProperties.Directory) : CoreProperties
+								.getString(CoreProperties.File);
 					} else if (columnIndex == SIZE) {
 						FileSize fileSize = new FileSize(FileUtilities.getFileSize(file), FileSizeType.BYTE);
 						result = fileSize.ToStringClever();
@@ -261,9 +261,9 @@ public class PanelFolderSelector extends JPanel {
 						new Date(file.lastModified());
 					} else if (columnIndex == HIDEN && this.isShowHidden) {
 						if (file.isHidden()) {
-							result = CommonProperties.getString(CommonProperties.True);
+							result = CoreProperties.getString(CoreProperties.True);
 						} else {
-							result = CommonProperties.getString(CommonProperties.False);
+							result = CoreProperties.getString(CoreProperties.False);
 						}
 					}
 				}
@@ -309,11 +309,11 @@ public class PanelFolderSelector extends JPanel {
 		@Override
 		public String getColumnName(int column) {
 			if (column == NAME) {
-				return CommonProperties.getString(CommonProperties.Name);
+				return CoreProperties.getString(CoreProperties.Name);
 			} else if (column == TYPE) {
-				return CommonProperties.getString(CommonProperties.Type);
+				return CoreProperties.getString(CoreProperties.Type);
 			} else if (column == SIZE) {
-				return CommonProperties.getString(CommonProperties.Size);
+				return CoreProperties.getString(CoreProperties.Size);
 			} else if (column == LASTMODIFIED) {
 				return NetServicesProperties.getString("String_LastModified");
 			} else if (column == HIDEN) {

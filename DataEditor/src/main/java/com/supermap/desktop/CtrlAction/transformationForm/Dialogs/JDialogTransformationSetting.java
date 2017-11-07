@@ -6,8 +6,11 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormTransformation;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.controls.ComponentDropDown;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.TransformationModeUtilities;
 
@@ -110,8 +113,8 @@ public class JDialogTransformationSetting extends SmDialog {
 		labelUnSelectedColor.setText(DataEditorProperties.getString("String_UnSelectedColor"));
 		labelUnUseColor.setText(DataEditorProperties.getString("String_UnUseColor"));
 		labelTransformationMode.setText(DataEditorProperties.getString("String_TransformationMode"));
-		buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initLayout() {

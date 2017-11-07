@@ -3,7 +3,7 @@ package com.supermap.desktop.http.upload;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.lbs.CreateFile;
 import com.supermap.desktop.lbs.WebHDFS;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CommonUtilities;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPut;
@@ -29,7 +29,7 @@ public class LocalCreateFile extends CreateFile {
 			HttpPut requestPut = new HttpPut(webFile);
 			HttpResponse response = new DefaultHttpClient().execute(requestPut);
 			if (response != null && response.getStatusLine().getStatusCode() == 200) {
-				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_MakeDirectorySuccess"), name));
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_MakeDirectorySuccess"), name));
 				CommonUtilities.getActiveLBSControl().refresh();
 			}
 		} catch (MalformedURLException e) {
@@ -62,12 +62,12 @@ public class LocalCreateFile extends CreateFile {
 			if (response != null && response.getStatusLine().getStatusCode() == 200) {
 				if (isDir) {
 					Application.getActiveApplication().getOutput()
-							.output(MessageFormat.format(CommonProperties.getString("String_RenameDirSuccess"), tempName, newName));
+							.output(MessageFormat.format(CoreProperties.getString("String_RenameDirSuccess"), tempName, newName));
 				} else {
 					Application.getActiveApplication().getOutput()
 
 
-							.output(MessageFormat.format(CommonProperties.getString("String_RenameFileSuccess"), tempName, newName));
+							.output(MessageFormat.format(CoreProperties.getString("String_RenameFileSuccess"), tempName, newName));
 				}
 				CommonUtilities.getActiveLBSControl().refresh();
 			}

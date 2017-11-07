@@ -4,7 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
@@ -72,9 +72,9 @@ public class DatasetChooserDataset implements IDatasetChoose {
 		public static final int COLUMN_DATASET_TYPE = 2;
 
 		private final String[] columnNames = {
-				CommonProperties.getString(CommonProperties.stringDataset),
-				CommonProperties.getString(CommonProperties.stringDatasource),
-				CommonProperties.getString(CommonProperties.STRING_DATASET_TYPE)
+				CoreProperties.getString(CoreProperties.stringDataset),
+				CoreProperties.getString(CoreProperties.stringDatasource),
+				CoreProperties.getString(CoreProperties.STRING_DATASET_TYPE)
 		};
 
 		@Override

@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.Interface.IFormTabular;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tabularview.TabularViewProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -107,10 +107,10 @@ public class JDialogOutputDataset extends SmDialog {
 		this.scrollPane.setViewportView(this.tableFieldNameCaptionType);
 		this.checkBoxIsSaveRows.setSelected(true);
 		this.smTextFieldLegit.setText(this.datasourceComboBox.getSelectedDatasource().getDatasets().getAvailableDatasetName("NewDataset"));
-		this.comboBoxResultType.addItem(CommonProperties.getString("String_AttrsTable"));
+		this.comboBoxResultType.addItem(CoreProperties.getString("String_AttrsTable"));
 		String datasetTypeName = CommonToolkit.DatasetTypeWrap.findName(this.tabular.getDataset().getType());
-		if (!datasetTypeName.replace(CommonProperties.getString("String_JustDataset"), "").equals(CommonProperties.getString("String_AttrsTable"))) {
-			this.comboBoxResultType.addItem(datasetTypeName.replace(CommonProperties.getString("String_JustDataset"), ""));
+		if (!datasetTypeName.replace(CoreProperties.getString("String_JustDataset"), "").equals(CoreProperties.getString("String_AttrsTable"))) {
+			this.comboBoxResultType.addItem(datasetTypeName.replace(CoreProperties.getString("String_JustDataset"), ""));
 		}
 		changCodeType();
 		hideSystemField();
@@ -182,7 +182,7 @@ public class JDialogOutputDataset extends SmDialog {
 
 	private void initPanelSettingLayout() {
 		GroupLayout groupLayout = new GroupLayout(this.panelSetting);
-		this.panelSetting.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString("String_ResultDatasetInfo")));
+		this.panelSetting.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_ResultDatasetInfo")));
 		groupLayout.setAutoCreateGaps(true);
 		groupLayout.setAutoCreateContainerGaps(true);
 
@@ -219,22 +219,22 @@ public class JDialogOutputDataset extends SmDialog {
 
 	private void initResources() {
 		this.buttonSelectAll.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectAll.png"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonSelectInverse.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectInverse.png"));
-		this.buttonSelectInverse.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonSelectInverse.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		//this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
 		//this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
 		this.buttonSelectAllSystemField.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectSystemField.png"));
-		this.buttonSelectAllSystemField.setToolTipText(CommonProperties.getString("String_SelectAllSystemField"));
+		this.buttonSelectAllSystemField.setToolTipText(CoreProperties.getString("String_SelectAllSystemField"));
 		this.buttonSelectAllNonSystemField.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectNonSystemField.png"));
-		this.buttonSelectAllNonSystemField.setToolTipText(CommonProperties.getString("String_SelectAllNonSystemField"));
-		this.labelDatasource.setText(CommonProperties.getString("String_SourceDatasource"));
-		this.labelDataset.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.labelResultType.setText(CommonProperties.getString("String_ResultDatasetType"));
-		this.labelCodeType.setText(CommonProperties.getString("String_CodeType"));
-		this.checkBoxIsSaveRows.setText(CommonProperties.getString("String_OnlySaveSelectedRows"));
-		this.buttonOK.setText(CommonProperties.getString("String_FormEdgeCount_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonSelectAllNonSystemField.setToolTipText(CoreProperties.getString("String_SelectAllNonSystemField"));
+		this.labelDatasource.setText(CoreProperties.getString("String_SourceDatasource"));
+		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.labelResultType.setText(CoreProperties.getString("String_ResultDatasetType"));
+		this.labelCodeType.setText(CoreProperties.getString("String_CodeType"));
+		this.checkBoxIsSaveRows.setText(CoreProperties.getString("String_OnlySaveSelectedRows"));
+		this.buttonOK.setText(CoreProperties.getString("String_FormEdgeCount_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 	}
 
 	private void registerEvents() {
@@ -262,7 +262,7 @@ public class JDialogOutputDataset extends SmDialog {
 
 	private void changCodeType() {
 		this.comboBoxCodeType.removeAllItems();
-		if (this.comboBoxResultType.getSelectedItem().equals(CommonProperties.getString("String_AttrsTable"))
+		if (this.comboBoxResultType.getSelectedItem().equals(CoreProperties.getString("String_AttrsTable"))
 				|| (this.tabular.getDataset().getType() != DatasetType.LINE && this.tabular.getDataset().getType() != DatasetType.REGION)) {
 			this.comboBoxCodeType.addItem(EncodeTypeUtilities.toString(EncodeType.NONE));
 		} else {
@@ -276,7 +276,7 @@ public class JDialogOutputDataset extends SmDialog {
 	}
 
 	private void changeJtoolbar() {
-		if (this.comboBoxResultType.getSelectedItem().equals(CommonProperties.getString("String_AttrsTable"))) {
+		if (this.comboBoxResultType.getSelectedItem().equals(CoreProperties.getString("String_AttrsTable"))) {
 			this.buttonSelectAllSystemField.setVisible(true);
 			this.buttonSelectAllNonSystemField.setVisible(true);
 		} else {
@@ -286,7 +286,7 @@ public class JDialogOutputDataset extends SmDialog {
 	}
 
 	private void hideSystemField() {
-		if (this.comboBoxResultType.getSelectedItem().equals(CommonProperties.getString("String_AttrsTable"))) {
+		if (this.comboBoxResultType.getSelectedItem().equals(CoreProperties.getString("String_AttrsTable"))) {
 			this.tableFieldNameCaptionType.setShowSystemField(true);
 		} else {
 			this.tableFieldNameCaptionType.setShowSystemField(false);
@@ -309,7 +309,7 @@ public class JDialogOutputDataset extends SmDialog {
 		try {
 			this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			DatasetVectorInfo datasetVectorInfo = new DatasetVectorInfo();
-			if (this.comboBoxResultType.getSelectedItem().equals(CommonProperties.getString("String_AttrsTable"))) {
+			if (this.comboBoxResultType.getSelectedItem().equals(CoreProperties.getString("String_AttrsTable"))) {
 				datasetVectorInfo.setType(DatasetType.TABULAR);
 			} else {
 				datasetVectorInfo.setType(this.tabular.getDataset().getType());
@@ -320,7 +320,7 @@ public class JDialogOutputDataset extends SmDialog {
 			DatasetVector result = this.datasourceComboBox.getSelectedDatasource().getDatasets().create(datasetVectorInfo);
 			isSuccessful = (result != null);
 
-			if (!this.comboBoxResultType.getSelectedItem().equals(CommonProperties.getString("String_AttrsTable"))
+			if (!this.comboBoxResultType.getSelectedItem().equals(CoreProperties.getString("String_AttrsTable"))
 					&& this.tabular.getDataset().getPrjCoordSys()!=null){
 				result.setPrjCoordSys(this.tabular.getDataset().getPrjCoordSys().clone());
 			}
@@ -387,10 +387,10 @@ public class JDialogOutputDataset extends SmDialog {
 			this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			String outputMessage = "";
 			if (isSuccessful) {
-				outputMessage = MessageFormat.format(CommonProperties.getString("String_SaveAsDataset_Success"), this.datasourceComboBox.getSelectedDatasource().getAlias(),
+				outputMessage = MessageFormat.format(CoreProperties.getString("String_SaveAsDataset_Success"), this.datasourceComboBox.getSelectedDatasource().getAlias(),
 						resultName);
 			} else {
-				outputMessage = MessageFormat.format(CommonProperties.getString("String_SaveAsDataset_Failed"), this.datasourceComboBox.getSelectedDatasource().getAlias(),
+				outputMessage = MessageFormat.format(CoreProperties.getString("String_SaveAsDataset_Failed"), this.datasourceComboBox.getSelectedDatasource().getAlias(),
 						resultName);
 			}
 			Application.getActiveApplication().getOutput().output(outputMessage);

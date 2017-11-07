@@ -11,7 +11,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
 
@@ -54,10 +54,10 @@ public abstract class MetaProcess3DTo2D extends MetaProcessTypeConversion {
 		}
 
 		ParameterCombine inputCombine = new ParameterCombine();
-		inputCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		inputCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		inputCombine.addParameters(inputDatasource, inputDataset);
 		ParameterCombine outputCombine = new ParameterCombine();
-		outputCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		outputCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		outputCombine.addParameters(outputData);
 
 		parameters.setParameters(inputCombine, outputCombine);

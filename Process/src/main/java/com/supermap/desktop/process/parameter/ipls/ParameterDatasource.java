@@ -8,7 +8,7 @@ import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener
 import com.supermap.desktop.process.parameter.events.ParameterValueSelectedEvent;
 import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import java.beans.PropertyChangeEvent;
 
@@ -23,7 +23,7 @@ public class ParameterDatasource extends AbstractParameter implements ISelection
 
 	@ParameterField(name = DATASOURCE_FIELD_NAME)
 	private Datasource datasource;
-	private String describe = CommonProperties.getString(CommonProperties.Label_Datasource);
+	private String describe = CoreProperties.getString(CoreProperties.Label_Datasource);
 	// 默认需要只读数据-yuanR2017.9.12
 	private boolean isReadOnlyNeeded = true;
 //	private boolean isDatasourceRequisite = true;

@@ -5,7 +5,7 @@ import com.supermap.desktop.baseUI.PanelTransform;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.localUtilities.CommonUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
@@ -228,7 +228,7 @@ public class PanelTransformForImage extends PanelTransform {
 		this.chooserControlPrjFile = new JFileChooserControl();
 		if (!SmFileChoose.isModuleExist("ImportPI")) {
 			String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_tfw"), "tfw");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					DataConversionProperties.getString("String_Import"), "ImportPI", "OpenOne");
 		}
 		SmFileChoose fileChooser = new SmFileChoose("ImportPI");

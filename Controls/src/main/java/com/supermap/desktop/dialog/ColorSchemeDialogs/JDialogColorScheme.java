@@ -1,6 +1,7 @@
 package com.supermap.desktop.dialog.ColorSchemeDialogs;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorScheme;
 import com.supermap.desktop.controls.colorScheme.ColorSchemeEditorDialog;
@@ -8,14 +9,12 @@ import com.supermap.desktop.controls.colorScheme.ColorSchemeManager;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.JTreeUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.SmFileChoose;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.*;
@@ -50,7 +49,7 @@ public class JDialogColorScheme extends SmDialog {
 	private SmButton buttonCancel;
 	//存放删除的颜色方案，确定时删除
 	private java.util.List<ColorScheme> deletedList;
-	private JMenuItem menuItemExport = new JMenuItem(CommonProperties.getString(CommonProperties.EXPORT));
+	private JMenuItem menuItemExport = new JMenuItem(CoreProperties.getString(CoreProperties.EXPORT));
 	private JMenuItem menuItemFavorite = new JMenuItem(CoreProperties.getString("String_Favorite"));
 
 	private JScrollPane scrollPane = new JScrollPane();
@@ -468,7 +467,7 @@ public class JDialogColorScheme extends SmDialog {
 	private void buttonImportClicked() {
 		if (!SmFileChoose.isModuleExist("ColorSchemeImport")) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ColorSchemeSaveFileFilter"), "scs", "SCS");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ImportColorScheme"), "ColorSchemeImport", "OpenMany");
 		}
 		SmFileChoose fileChooser = new SmFileChoose("ColorSchemeImport");
@@ -497,7 +496,7 @@ public class JDialogColorScheme extends SmDialog {
 	private void buttonExportClicked() {
 		if (!SmFileChoose.isModuleExist("ColorSchemeExport")) {
 
-			SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ExportColorScheme"), "ColorSchemeExport", "GetDirectories");
 		}
 		SmFileChoose fileChooser = new SmFileChoose("ColorSchemeExport");
@@ -533,17 +532,17 @@ public class JDialogColorScheme extends SmDialog {
 		this.buttonDel.setToolTipText(ControlsProperties.getString("String_RemoveColorScheme"));
 
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString(CommonProperties.selectAll));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString(CoreProperties.selectAll));
 		this.buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-		this.buttonSelectInvert.setToolTipText(CommonProperties.getString(CommonProperties.selectInverse));
+		this.buttonSelectInvert.setToolTipText(CoreProperties.getString(CoreProperties.selectInverse));
 
 		this.buttonImport.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Import.png"));
-		this.buttonImport.setToolTipText(CommonProperties.getString(CommonProperties.IMPORT));
+		this.buttonImport.setToolTipText(CoreProperties.getString(CoreProperties.IMPORT));
 		this.buttonExport.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Export.png"));
-		this.buttonExport.setToolTipText(CommonProperties.getString(CommonProperties.EXPORT));
+		this.buttonExport.setToolTipText(CoreProperties.getString(CoreProperties.EXPORT));
 
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 
 		this.setTitle(ControlsProperties.getString("String_ColorSchemeManageForm"));
 	}
@@ -654,8 +653,8 @@ public class JDialogColorScheme extends SmDialog {
 				}
 			});
 
-			buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-			buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+			buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+			buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 			componentList.add(buttonOk);
 			componentList.add(buttonCancle);
 

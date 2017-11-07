@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
 
@@ -27,7 +27,7 @@ import java.beans.PropertyChangeListener;
  */
 public abstract class MetaProcessISO extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	protected static String OUTPUT_DATA = "ExtractResult";
 	protected static String OUTPUT_DATA_TYPE = "";
 
@@ -48,7 +48,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 
 
 	public MetaProcessISO() {
-		setTitle(CommonProperties.getString("String_SurfaceISOLine"));
+		setTitle(CoreProperties.getString("String_SurfaceISOLine"));
 	}
 
 	protected void initParameterConstraint() {
@@ -67,16 +67,16 @@ public abstract class MetaProcessISO extends MetaProcess {
 			dataset.setSelectedItem(defaultDatasetGrid);
 			saveDataset.setResultDatasource(defaultDatasetGrid.getDatasource());
 		}
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 
 		if (null != dataset.getSelectedItem() && dataset.getSelectedItem() instanceof DatasetGrid) {
 			maxGrid.setSelectedItem(((DatasetGrid) dataset.getSelectedItem()).getMaxValue());
 			minGrid.setSelectedItem(((DatasetGrid) dataset.getSelectedItem()).getMinValue());
 		}
-		ParameterDataNode selectedNode = new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE);
+		ParameterDataNode selectedNode = new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE);
 		this.smoothMethod.setItems(selectedNode,
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		this.smoothMethod.setSelectedItem(selectedNode);
 		this.smoothness.setEnabled(false);
 		reloadValue();
@@ -89,27 +89,27 @@ public abstract class MetaProcessISO extends MetaProcess {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.saveDataset = new ParameterSaveDataset();
-		this.maxGrid = new ParameterTextField(CommonProperties.getString("String_MAXGrid"));
-		this.minGrid = new ParameterTextField(CommonProperties.getString("String_MINGrid"));
-		this.maxISOLine = new ParameterTextField(CommonProperties.getString("String_MAXISOLine"));
-		this.minISOLine = new ParameterTextField(CommonProperties.getString("String_MINISOLine"));
-		this.isoLine = new ParameterTextField(CommonProperties.getString("String_ISOData"));
-		this.datumValue = new ParameterNumber(CommonProperties.getString("String_DatumValue"));
+		this.maxGrid = new ParameterTextField(CoreProperties.getString("String_MAXGrid"));
+		this.minGrid = new ParameterTextField(CoreProperties.getString("String_MINGrid"));
+		this.maxISOLine = new ParameterTextField(CoreProperties.getString("String_MAXISOLine"));
+		this.minISOLine = new ParameterTextField(CoreProperties.getString("String_MINISOLine"));
+		this.isoLine = new ParameterTextField(CoreProperties.getString("String_ISOData"));
+		this.datumValue = new ParameterNumber(CoreProperties.getString("String_DatumValue"));
 		this.datumValue.setValueType(BasicTypes.NUMBER);
 		datumValue.setSelectedItem("0");
-		this.interval = new ParameterNumber(CommonProperties.getString("String_Interval"));
+		this.interval = new ParameterNumber(CoreProperties.getString("String_Interval"));
 		this.interval.setValueType(BasicTypes.NUMBER);
 		interval.setMinValue(0);
 		interval.setIsIncludeMin(false);
 		interval.setSelectedItem("100");
 
-		this.resampleTolerance = new ParameterNumber(CommonProperties.getString("String_ResampleTolerance"));
+		this.resampleTolerance = new ParameterNumber(CoreProperties.getString("String_ResampleTolerance"));
 		this.resampleTolerance.setValueType(BasicTypes.NUMBER);
 		resampleTolerance.setMinValue(0);
 		resampleTolerance.setSelectedItem(0);
 		resampleTolerance.setIsIncludeMin(true);
-		this.smoothMethod = new ParameterComboBox().setDescribe(CommonProperties.getString("String_SmoothMethod"));
-		this.smoothness = new ParameterNumber(CommonProperties.getString("String_SmoothNess"));
+		this.smoothMethod = new ParameterComboBox().setDescribe(CoreProperties.getString("String_SmoothMethod"));
+		this.smoothness = new ParameterNumber(CoreProperties.getString("String_SmoothNess"));
 		this.smoothness.setValueType(BasicTypes.NUMBER);
 		smoothness.setMinValue(2);
 		smoothness.setMaxValue(5);
@@ -117,18 +117,18 @@ public abstract class MetaProcessISO extends MetaProcess {
 		this.smoothness.setSelectedItem("2");
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasource, dataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_TargetData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_TargetData"));
 		targetData.addParameters(saveDataset);
 		ParameterCombine resultInfo = new ParameterCombine();
-		resultInfo.setDescribe(CommonProperties.getString("String_ResultInfo"));
+		resultInfo.setDescribe(CoreProperties.getString("String_ResultInfo"));
 		resultInfo.addParameters(maxGrid, minGrid, maxISOLine, minISOLine, isoLine);
 		resultInfo.setEnabled(false);
 
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
 		paramSet.addParameters(datumValue, interval, resampleTolerance, smoothMethod, smoothness);
 		this.parameters.setParameters(sourceData, paramSet, resultInfo, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.GRID, sourceData);

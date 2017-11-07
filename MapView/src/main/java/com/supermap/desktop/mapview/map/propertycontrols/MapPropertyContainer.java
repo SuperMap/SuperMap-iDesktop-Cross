@@ -8,7 +8,7 @@ import com.supermap.desktop.event.ActiveFormChangedEvent;
 import com.supermap.desktop.event.ActiveFormChangedListener;
 import com.supermap.desktop.mapview.layer.propertycontrols.ChangedEvent;
 import com.supermap.desktop.mapview.layer.propertycontrols.ChangedListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.mapping.Map;
@@ -191,7 +191,7 @@ public class MapPropertyContainer extends JPanel {
 
 	private void initializeResources() {
 		this.checkBoxAutoApply.setText(ControlsProperties.getString("String_AutoApply"));
-		this.buttonApply.setText(CommonProperties.getString("String_Button_Apply"));
+		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
 	}
 
 	private void checkBoxAutoApply() {

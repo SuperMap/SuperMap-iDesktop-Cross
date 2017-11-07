@@ -18,7 +18,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -30,7 +30,7 @@ import java.beans.PropertyChangeListener;
  *         重构界面-yuanR20174.9.6
  */
 public class MetaProcessBuffer extends MetaProcess {
-	private final static String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATASET = "BufferResult";
 
 	private ParameterDatasourceConstrained datasource;
@@ -87,19 +87,19 @@ public class MetaProcessBuffer extends MetaProcess {
 
 	private void initParameters() {
 		this.parameterBufferRange = new ParameterComboBox(ProcessProperties.getString("Label_BufferRadius"));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Kilometer"), BufferRadiusUnit.KiloMeter));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Meter"), BufferRadiusUnit.Meter));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Decimeter"), BufferRadiusUnit.DeciMeter));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Centimeter"), BufferRadiusUnit.CentiMeter));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Millimeter"), BufferRadiusUnit.MiliMeter));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Foot"), BufferRadiusUnit.Foot));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Inch"), BufferRadiusUnit.Inch));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Mile"), BufferRadiusUnit.Mile));
-		this.parameterBufferRange.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Yard"), BufferRadiusUnit.Yard));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), BufferRadiusUnit.KiloMeter));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), BufferRadiusUnit.Meter));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Decimeter"), BufferRadiusUnit.DeciMeter));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Centimeter"), BufferRadiusUnit.CentiMeter));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Millimeter"), BufferRadiusUnit.MiliMeter));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), BufferRadiusUnit.Foot));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Inch"), BufferRadiusUnit.Inch));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), BufferRadiusUnit.Mile));
+		this.parameterBufferRange.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Yard"), BufferRadiusUnit.Yard));
 
 		this.datasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.NETWORK);
-		this.datasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 
 		this.radioButtonFlatOrRound = new ParameterRadioButton();
 		ParameterDataNode gound = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferRound"), BUFFER_ROUND);
@@ -147,13 +147,13 @@ public class MetaProcessBuffer extends MetaProcess {
 		parameterCombineBufferRadio.setDescribe(ControlsProperties.getString("String_BufferRadius"));
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
-		parameterCombineParameter.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineParameter.addParameters(new ParameterCombine(ParameterCombine.HORIZONTAL).addParameters(this.parameterUnionBuffer, this.parameterRetainAttribute),
 				this.parameterTextFieldSemicircleLineSegment);
 
 		ParameterCombine parameterCombineResult = new ParameterCombine();
 		parameterCombineResult.addParameters(this.parameterSaveDataset);
-		parameterCombineResult.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		parameterCombineResult.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 
 		parameters.setParameters(
 				parameterCombineSourceData,

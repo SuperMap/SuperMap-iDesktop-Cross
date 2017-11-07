@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys;
 import com.supermap.data.CoordSysTransMethod;
 import com.supermap.data.CoordSysTransParameter;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmComboBox;
@@ -284,8 +284,8 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		//this.buttonSetPrj.setText(ControlsProperties.getString("String_SetDesPrjCoordSys"));
 		this.buttonImport.setText(ControlsProperties.getString("String_Button_Import"));
 		this.buttonExport.setText(ControlsProperties.getString("String_Button_Export"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void registerEvents() {
@@ -365,7 +365,7 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		String moduleName = "ImportPrjCoordSysTranslatorFile";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			SmFileChoose.addNewNode(SmFileChoose.createFileFilter(ControlsProperties.getString("String_TransParamFile"), "ctp"),
-					CommonProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"),
+					CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"),
 					moduleName, "OpenOne");
 		}
 		SmFileChoose fileChooseImport = new SmFileChoose(moduleName);
@@ -392,7 +392,7 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		String moduleName = "ExportPrjCoordSysTranslatorFile";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			SmFileChoose.addNewNode(SmFileChoose.createFileFilter(ControlsProperties.getString("String_TransParamFile"), "ctp"),
-					CommonProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_SaveAsFile"),
+					CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_SaveAsFile"),
 					moduleName, "SaveOne");
 		}
 		SmFileChoose fileChooseExport = new SmFileChoose(moduleName);

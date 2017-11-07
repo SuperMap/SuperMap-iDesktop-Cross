@@ -10,7 +10,6 @@ import com.supermap.desktop.geometry.Implements.DGeometryFactory;
 import com.supermap.desktop.mapview.geometry.property.geometryNode.GeometryNodeFactory;
 import com.supermap.desktop.mapview.geometry.property.geometryNode.IGeometryNode;
 import com.supermap.desktop.mapview.geometry.property.geometryNode.ModifiedChangedListener;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -142,8 +141,8 @@ public class GeometryNodePropertyControl extends AbstractPropertyControl {
     }
 
     private void initResources() {
-        buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
-        buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
+	    buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
+	    buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
     }
 
     private void initComponent() {

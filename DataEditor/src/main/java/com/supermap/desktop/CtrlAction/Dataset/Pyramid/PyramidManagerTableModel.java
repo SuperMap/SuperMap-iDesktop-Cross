@@ -6,7 +6,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.progress.callable.CreateImagePyramidCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.SortTable.SortableTableModel;
 import com.supermap.desktop.ui.controls.progress.FormProgressTotal;
@@ -21,8 +21,8 @@ public class PyramidManagerTableModel extends SortableTableModel {
 
 	private List<Dataset> currentDatasets = new ArrayList<>();
 	private String[] columnNames = new String[]{
-			CommonProperties.getString("String_ColumnHeader_Dataset"),
-			CommonProperties.getString("String_ColumnHeader_Datasource"),
+			CoreProperties.getString("String_ColumnHeader_Dataset"),
+			CoreProperties.getString("String_ColumnHeader_Datasource"),
 			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnHasPyramid"),
 			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnWidth"),
 			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnHeight"),
@@ -60,7 +60,7 @@ public class PyramidManagerTableModel extends SortableTableModel {
 			case 1:
 				return dataset.getDatasource();
 			case 2:
-				return isDatasetHasPyramid(dataset) ? CommonProperties.getString(CommonProperties.True) : CommonProperties.getString(CommonProperties.False);
+				return isDatasetHasPyramid(dataset) ? CoreProperties.getString(CoreProperties.True) : CoreProperties.getString(CoreProperties.False);
 			case 3:
 				return getDatasetWidth(dataset);
 			case 4:

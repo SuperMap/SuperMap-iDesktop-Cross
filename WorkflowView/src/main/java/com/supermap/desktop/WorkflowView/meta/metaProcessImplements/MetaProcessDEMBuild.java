@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.*;
 
 import java.beans.PropertyChangeEvent;
@@ -62,8 +62,8 @@ public class MetaProcessDEMBuild extends MetaProcess {
 	private ParameterSingleDataset eraseDataset;
 	//endregion
 
-	private static final String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private static final String LAKE_DATA = CommonProperties.getString("String_GroupBox_LakeData");
+	private static final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private static final String LAKE_DATA = CoreProperties.getString("String_GroupBox_LakeData");
 	private static final String CLIP_DATA = ProcessProperties.getString("String_GroupBox_ClipData");
 	private static final String ERASE_DATA = ProcessProperties.getString("String_GroupBox_EraseData");
 	private static final String OUTPUT_DATA = "DEMBuildResult";
@@ -84,13 +84,13 @@ public class MetaProcessDEMBuild extends MetaProcess {
 		sourceDatasources = new ParameterDatasourceConstrained();
 		sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE);
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasources, sourceDataset);
 
 		lakeDatasource = new ParameterDatasourceConstrained();
 		lakeDataset = new ParameterSingleDataset(DatasetType.REGION).setShowNullValue(true);
 		ParameterCombine lakeData = new ParameterCombine();
-		lakeData.setDescribe(CommonProperties.getString("String_GroupBox_LakeData"));
+		lakeData.setDescribe(CoreProperties.getString("String_GroupBox_LakeData"));
 		lakeData.addParameters(lakeDatasource, lakeDataset);
 
 		clipDatasource = new ParameterDatasourceConstrained();
@@ -107,8 +107,8 @@ public class MetaProcessDEMBuild extends MetaProcess {
 
 		comboBoxSourceField = new ParameterFieldComboBox(ProcessProperties.getString("String_Label_HeightField"));
 		comboBoxLakeField = new ParameterFieldComboBox(ProcessProperties.getString("String_Label_LakeHeightField"));
-		comboBoxInterpolateType = new ParameterComboBox().setDescribe(CommonProperties.getString("String_InterpolateType"));
-		comboBoxTerrainStatisticType = new ParameterComboBox().setDescribe(CommonProperties.getString("String_Label_TerrainStatisticType"));
+		comboBoxInterpolateType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_InterpolateType"));
+		comboBoxTerrainStatisticType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_Label_TerrainStatisticType"));
 		textNumResampleTolerance = new ParameterNumber(ProcessProperties.getString("String_Resample_Tolerance"));
 		textNumZFactor = new ParameterNumber(ProcessProperties.getString("String_Label_ZFactor"));
 		checkBox = new ParameterCheckBox(ProcessProperties.getString("String_ProcessFlatArea"));
@@ -117,18 +117,18 @@ public class MetaProcessDEMBuild extends MetaProcess {
 		baseSetting.addParameters(comboBoxSourceField, comboBoxInterpolateType, comboBoxTerrainStatisticType, textNumResampleTolerance, textNumZFactor, checkBox, comboBoxLakeField);
 
 		comboBoxEncodeType = new ParameterComboBox().setDescribe(ProcessProperties.getString("label_encodingType"));
-		comboBoxPixelFormat = new ParameterComboBox().setDescribe(CommonProperties.getString("String_PixelType"));
+		comboBoxPixelFormat = new ParameterComboBox().setDescribe(CoreProperties.getString("String_PixelType"));
 		textFieldCellSize = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
-		textFieldRowCount = new ParameterTextField(CommonProperties.getString("String_Row"));
-		textFieldColumnCount = new ParameterTextField(CommonProperties.getString("String_Column"));
+		textFieldRowCount = new ParameterTextField(CoreProperties.getString("String_Row"));
+		textFieldColumnCount = new ParameterTextField(CoreProperties.getString("String_Column"));
 		textFieldSizeOf = new ParameterTextField(ProcessProperties.getString("String_Label_SizeOf"));
 		ParameterCombine resultSetting = new ParameterCombine();
-		resultSetting.setDescribe(CommonProperties.getString("String_GroupBox_ResultSetting"));
+		resultSetting.setDescribe(CoreProperties.getString("String_GroupBox_ResultSetting"));
 		resultSetting.addParameters(comboBoxEncodeType, comboBoxPixelFormat, textFieldCellSize, textFieldRowCount, textFieldColumnCount, textFieldSizeOf);
 
 		resultDataset = new ParameterSaveDataset();
 		ParameterCombine resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(resultDataset);
 
 		this.parameters.setParameters(sourceData, lakeData, clipData, eraseData, baseSetting, resultSetting, resultData);

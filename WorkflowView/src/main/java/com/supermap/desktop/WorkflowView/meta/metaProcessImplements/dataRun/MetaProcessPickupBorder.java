@@ -14,7 +14,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 
@@ -23,7 +23,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  */
 public class MetaProcessPickupBorder extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "PickupResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -34,7 +34,7 @@ public class MetaProcessPickupBorder extends MetaProcess {
 
 
 	public MetaProcessPickupBorder() {
-		setTitle(CommonProperties.getString("String_PickupBorder"));
+		setTitle(CoreProperties.getString("String_PickupBorder"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();
@@ -45,17 +45,17 @@ public class MetaProcessPickupBorder extends MetaProcess {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.REGION, DatasetType.LINE);
 		this.saveDataset = new ParameterSaveDataset();
-		this.isPreProcessed = new ParameterCheckBox(CommonProperties.getString("String_TopyPreProcessed"));
+		this.isPreProcessed = new ParameterCheckBox(CoreProperties.getString("String_TopyPreProcessed"));
 		this.isPreProcessed.setTip(ProcessProperties.getString("String_TopologyPreProcessWarning"));
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.dataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
 		paramSet.addParameters(this.isPreProcessed);
 		this.parameters.setParameters(sourceData, paramSet, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.REGION, sourceData);
@@ -81,7 +81,7 @@ public class MetaProcessPickupBorder extends MetaProcess {
 			}
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 		}
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 
 	}
 

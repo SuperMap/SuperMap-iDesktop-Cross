@@ -2,7 +2,7 @@ package com.supermap.desktop.realspaceview.utilties;
 
 import com.supermap.data.Workspace;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.realspaceview.RealspaceViewProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -31,7 +31,7 @@ public class SaveAsSceneTemplateUtilties {
 		// 创建SmFileChoose类
 		if(!SmFileChoose.isModuleExist(moduleName)){
 			String fileFilters = SmFileChoose.createFileFilter(RealspaceViewProperties.getString("String_SceneTemplateFilter"), "xml");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"), RealspaceViewProperties.getString("String_Title_SavaAsTemplate"), moduleName, "SaveOne");
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), RealspaceViewProperties.getString("String_Title_SavaAsTemplate"), moduleName, "SaveOne");
 		}
 		SmFileChoose smFileChoose= new SmFileChoose(moduleName);
 		smFileChoose.setSelectedFile(new File("SceneTemplate.xml"));

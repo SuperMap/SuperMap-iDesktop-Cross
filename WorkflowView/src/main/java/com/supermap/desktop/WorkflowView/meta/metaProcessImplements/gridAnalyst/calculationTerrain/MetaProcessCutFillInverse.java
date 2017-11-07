@@ -12,7 +12,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterComboBox;
 import com.supermap.desktop.process.parameter.ipls.ParameterNumber;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 /**
  * Created by ChenS on 2017/10/24 0024.
@@ -42,12 +42,12 @@ public class MetaProcessCutFillInverse extends MetaProcessCalTerrain {
         textFieldResult.setEnabled(false);
 
         ParameterCombine parameterCombine = new ParameterCombine();
-        parameterCombine.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
-        parameterCombine.addParameters(comboBoxType, numberVolume);
+	    parameterCombine.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
+	    parameterCombine.addParameters(comboBoxType, numberVolume);
 
         parameterCombineResultDataset = new ParameterCombine();
-        this.parameterCombineResultDataset.setDescribe(CommonProperties.getString("String_ResultSet"));
-        parameterCombineResultDataset.addParameters(textFieldResult);
+	    this.parameterCombineResultDataset.setDescribe(CoreProperties.getString("String_ResultSet"));
+	    parameterCombineResultDataset.addParameters(textFieldResult);
 
         parameters.addParameters(parameterCombine, parameterCombineResultDataset);
         parameters.addOutputParameters(OUTPUT_DATASET, ProcessOutputResultProperties.getString("String_Result_Height"), BasicTypes.DOUBLE, parameterCombineResultDataset);

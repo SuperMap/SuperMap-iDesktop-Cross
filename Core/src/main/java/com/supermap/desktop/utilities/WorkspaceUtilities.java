@@ -1,26 +1,15 @@
 package com.supermap.desktop.utilities;
 
-import com.supermap.data.Datasource;
-import com.supermap.data.Datasources;
-import com.supermap.data.EngineType;
-import com.supermap.data.ErrorInfo;
+import com.supermap.data.*;
 import com.supermap.data.Toolkit;
-import com.supermap.data.Workspace;
-import com.supermap.data.WorkspaceConnectionInfo;
-import com.supermap.data.WorkspaceType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
-import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.Interface.IFormLayout;
-import com.supermap.desktop.Interface.IFormManager;
-import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.Interface.IFormScene;
+import com.supermap.desktop.Interface.*;
 import com.supermap.desktop._XMLTag;
 import com.supermap.desktop.enums.OpenWorkspaceResult;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.event.SaveWorkspaceEvent;
 import com.supermap.desktop.event.SaveWorkspaceListener;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
@@ -170,7 +159,7 @@ public class WorkspaceUtilities {
 							Datasource datasource = Application.getActiveApplication().getWorkspace().getDatasources().get(index);
 							if (!datasource.isOpened()) {
 								if (!datasource.getConnectionInfo().getServer().contains(":memory:")) {
-									String failedInfo = String.format(CommonProperties.getString("String_Message_DataSource_Openfail"), datasource.getAlias());
+									String failedInfo = String.format(CoreProperties.getString("String_Message_DataSource_Openfail"), datasource.getAlias());
 									Application.getActiveApplication().getOutput().output(failedInfo);
 								} else {
 									Application.getActiveApplication().getWorkspace().getDatasources().close(datasource.getAlias());
@@ -306,7 +295,7 @@ public class WorkspaceUtilities {
 					datasourcesName += datasources[i] + "、";
 				}
 				datasourcesName += datasources[datasources.length - 1];//
-				String message = MessageFormat.format(CommonProperties.getString("String_Message_CloseMemoryDatasource"), datasourcesName);
+				String message = MessageFormat.format(CoreProperties.getString("String_Message_CloseMemoryDatasource"), datasourcesName);
 				result = GlobalParameters.isCloseMemoryDatasourceNotify() ? JOptionPaneUtilities.showConfirmDialog(message) : JOptionPane.YES_OPTION;
 				if (result == JOptionPane.NO_OPTION || result == JOptionPane.CLOSED_OPTION) {
 					isContinue = false;

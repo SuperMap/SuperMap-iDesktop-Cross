@@ -3,12 +3,15 @@ package com.supermap.desktop.datatopology.CtrlAction;
 import com.supermap.data.*;
 import com.supermap.data.topology.TopologyProcessingOptions;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
-import com.supermap.desktop.ui.controls.*;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.ui.controls.DatasetComboBox;
+import com.supermap.desktop.ui.controls.DatasourceComboBox;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.progress.FormProgress;
@@ -85,9 +88,9 @@ public class JDialogTopoBuildRegions extends SmDialog {
 
 	private void initResources() {
 		setTitle(DataTopologyProperties.getString("String_TopoRegionTitle"));
-		this.buttonMore.setText(CommonProperties.getString("String_Button_Advance"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonMore.setText(CoreProperties.getString("String_Button_Advance"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.checkboxLinesIntersected.setSelected(true);
 		this.checkboxLinesIntersected.setText(DataTopologyProperties.getString("String_LinesIntersected"));
 		this.checkboxOvershootsCleaned.setSelected(true);
@@ -102,15 +105,15 @@ public class JDialogTopoBuildRegions extends SmDialog {
 		this.checkboxUndershootsExtended.setText(DataTopologyProperties.getString("String_Label_UndershootsTolerance"));
 		this.checkboxRedundantVerticesCleaned.setSelected(true);
 		this.checkboxRedundantVerticesCleaned.setText(DataTopologyProperties.getString("String_RedundantVertices"));
-		this.labelDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelDataset.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.labelResultDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelResultDataset.setText(CommonProperties.getString("String_Label_Dataset"));
+		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.labelResultDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelResultDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.checkBoxtopologyPropress.setText(DataTopologyProperties.getString("String_Topo_Build"));
 		this.checkBoxtopologyPropress.setToolTipText(DataTopologyProperties.getString("String_TopoLineTipsInfo"));
-		this.panelDatasource.setBorder(new TitledBorder(null, CommonProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
+		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		this.panelResultData.setBorder(new TitledBorder(null, CommonProperties.getString("String_GroupBox_ResultData"), TitledBorder.LEADING, TitledBorder.TOP,
+		this.panelResultData.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_ResultData"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
 	}
 

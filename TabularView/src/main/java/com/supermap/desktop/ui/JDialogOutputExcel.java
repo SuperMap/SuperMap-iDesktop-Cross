@@ -3,7 +3,7 @@ package com.supermap.desktop.ui;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormTabular;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tabularview.TabularViewProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.JFileChooserControl;
@@ -97,10 +97,10 @@ public class JDialogOutputExcel extends SmDialog {
 	}
 
 	private void initResources() {
-		buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-		buttonSelectInverse.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-		buttonSelectSystemField.setToolTipText(CommonProperties.getString("String_ToolBar_SelectSystemField"));
-		buttonSelectUnSystemField.setToolTipText(CommonProperties.getString("String_ToolBar_SelectUnSystemField"));
+		buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+		buttonSelectInverse.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+		buttonSelectSystemField.setToolTipText(CoreProperties.getString("String_ToolBar_SelectSystemField"));
+		buttonSelectUnSystemField.setToolTipText(CoreProperties.getString("String_ToolBar_SelectUnSystemField"));
 
 		buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		buttonSelectInverse.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));

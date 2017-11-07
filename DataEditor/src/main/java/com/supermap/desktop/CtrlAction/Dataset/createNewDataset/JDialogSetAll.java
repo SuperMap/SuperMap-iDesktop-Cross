@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CtrlAction.Dataset.AddToWindowMode;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -129,8 +129,8 @@ public class JDialogSetAll extends SmDialog {
 		this.comboboxAddToNewMap.setModel(new DefaultComboBoxModel<Object>(addTos.toArray(new String[addTos.size()])));
 
 		// 按钮
-		buttonOk = new SmButton(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOk = new SmButton(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 		this.getRootPane().setDefaultButton(this.buttonOk);
 
 		// 添加控件到面板中
@@ -179,7 +179,7 @@ public class JDialogSetAll extends SmDialog {
 	 * 控件资源化
 	 */
 	private void initializeResource() {
-		this.checkBoxTargetDatasource.setText(CommonProperties.getString("String_ColumnHeader_TargetDatasource"));
+		this.checkBoxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
 		this.checkBoxDatasetType.setText(DataEditorProperties.getString("String_CreateType"));
 //		this.checkBoxEncodingType.setText(CommonProperties.getString("String_ColumnHeader_EncodeType"));
 //		this.checkBoxCharest.setText(DataEditorProperties.getString("String_Charset"));

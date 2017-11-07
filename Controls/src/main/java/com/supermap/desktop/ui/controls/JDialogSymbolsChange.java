@@ -5,7 +5,6 @@ import com.supermap.data.SymbolType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolDialog;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
@@ -278,8 +277,8 @@ public class JDialogSymbolsChange extends SmDialog {
 				getResources("String_Transparency"), getResources("String_GradientType"), getResources("String_GradientAngle"),
 				getResources("String_GradientOffXCheck"), getResources("String_GradientOffYCheck")});
 
-		buttonNext.setText(CommonProperties.getString(CommonProperties.Next));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonNext.setText(CoreProperties.getString(CoreProperties.Next));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initLayout() {

@@ -6,7 +6,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -247,8 +247,8 @@ public class JPanelChooseRefer extends JPanelNewTransformationBase {
 	private class ReferenceLayersTableModel extends DefaultTableModel {
 		private ArrayList<Object> dataList = new ArrayList<>();
 		private String[] columnNames = new String[]{
-				CommonProperties.getString(CommonProperties.stringDataset),
-				CommonProperties.getString(CommonProperties.stringDatasource),
+				CoreProperties.getString(CoreProperties.stringDataset),
+				CoreProperties.getString(CoreProperties.stringDatasource),
 		};
 
 		@Override

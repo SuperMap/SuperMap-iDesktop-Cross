@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
 import com.supermap.desktop.utilities.DatasetUtilities;
@@ -31,7 +31,7 @@ import java.beans.PropertyChangeListener;
  * @author caolp
  */
 public class MetaProcessSetProjection extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "SetProjectionResult";
 	private ParameterDatasourceConstrained datasource;
 	private ParameterSingleDataset parameterSingleDataset;
@@ -72,7 +72,7 @@ public class MetaProcessSetProjection extends MetaProcess {
 			this.parameterSingleDataset.setSelectedItem(defaultDataset);
 			this.datasource.setSelectedItem(defaultDataset.getDatasource());
 		}
-		this.datasource.setDescribe(CommonProperties.getString("String_Label_Datasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.parameterCombineSourceData = new ParameterCombine();
 		this.parameterCombineSourceData.addParameters(this.datasource, this.parameterSingleDataset);
 		this.parameterCombineSourceData.setDescribe(ControlsProperties.getString("String_GroupBox_SourceDataset"));

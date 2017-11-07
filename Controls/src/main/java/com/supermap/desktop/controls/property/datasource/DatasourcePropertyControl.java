@@ -9,7 +9,6 @@ import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dialog.JDialogChangePassword;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -278,8 +277,8 @@ public class DatasourcePropertyControl extends AbstractPropertyControl {
 		this.labelOpenType.setText(ControlsProperties.getString("String_OpenMode"));
 		this.labelDescription.setText(ControlsProperties.getString("String_labelDescription"));
 		this.buttonChangePassword.setText(ControlsProperties.getString("String_ButtonChangePassword"));
-		this.buttonApply.setText(CommonProperties.getString("String_Button_Apply"));
-		this.buttonReset.setText(CommonProperties.getString("String_Button_Reset"));
+		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
+		this.buttonReset.setText(CoreProperties.getString("String_Button_Reset"));
 
 	}
 	private void setComponentName() {

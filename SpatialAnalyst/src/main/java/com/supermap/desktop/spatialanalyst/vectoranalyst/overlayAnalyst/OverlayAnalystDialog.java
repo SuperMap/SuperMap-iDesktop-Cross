@@ -10,7 +10,6 @@ import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.enums.LengthUnit;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.FieldsSetDialog;
@@ -590,12 +589,12 @@ public class OverlayAnalystDialog extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(SpatialAnalystProperties.getString("String_Form_OverlayAnalyst"));
-		this.labelSourceDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelSourceDataset.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.labelOverlayAnalystDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelOverlayAnalystDataset.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.labelTargetDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelTargetDataset.setText(CommonProperties.getString("String_Label_Dataset"));
+		this.labelSourceDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelSourceDataset.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.labelOverlayAnalystDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelOverlayAnalystDataset.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.labelTargetDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelTargetDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.buttonFieldsSet.setText(SpatialAnalystProperties.getString("String_Button_FieldsSetting"));
 		this.labelTolerance.setText(SpatialAnalystProperties.getString("String_Label_Tolerance"));
 		this.checkboxResultAnalyst.setText(SpatialAnalystProperties.getString("String_CheckBox_ResultComparison"));

@@ -11,7 +11,7 @@ import com.supermap.desktop.event.FormClosingEvent;
 import com.supermap.desktop.event.FormClosingListener;
 import com.supermap.desktop.event.FormShownEvent;
 import com.supermap.desktop.event.FormShownListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
 import com.supermap.desktop.ui.controls.NodeDataType;
@@ -217,7 +217,7 @@ public class WorkspaceManagerWindow extends FormBaseChild {
 				selectedDatasource = (Datasource) selectedNodeDatas[0].getData();
 				selectedDatasourceNode = (DefaultMutableTreeNode) getWorkspaceManager().getWorkspaceTree().getLastSelectedPathComponent();
 				//model的设置需要依据一下combox的选择值
-				if (datasetTypeComboBox.getSelectedItem().toString().equals(CommonProperties.getString("String_DatasetType_All"))) {
+				if (datasetTypeComboBox.getSelectedItem().toString().equals(CoreProperties.getString("String_DatasetType_All"))) {
 					jTable.setModel(new GetTableModel().getDatasourceTableModel(selectedDatasource));
 				} else {
 					jTable.setModel(new GetTableModel().getDatasourceTypeTableModel(selectedDatasource, CommonToolkit.DatasetTypeWrap.findType(datasetTypeComboBox.getSelectedItem().toString())));
@@ -232,7 +232,7 @@ public class WorkspaceManagerWindow extends FormBaseChild {
 				TreeNodeData selectedLastNodeData = (TreeNodeData) selectedDatasourceNode.getUserObject();
 				selectedDatasource = (Datasource) selectedLastNodeData.getData();
 				//model的设置需要依据一下combox的选择值
-				if (datasetTypeComboBox.getSelectedItem().toString().equals(CommonProperties.getString("String_DatasetType_All"))) {
+				if (datasetTypeComboBox.getSelectedItem().toString().equals(CoreProperties.getString("String_DatasetType_All"))) {
 					jTable.setModel(new GetTableModel().getDatasourceTableModel(selectedDatasource));
 				} else {
 					jTable.setModel(new GetTableModel().getDatasourceTypeTableModel(selectedDatasource, CommonToolkit.DatasetTypeWrap.findType(datasetTypeComboBox.getSelectedItem().toString())));
@@ -632,7 +632,7 @@ public class WorkspaceManagerWindow extends FormBaseChild {
 			//comboxBox改变监听只在第三层生效
 			if (levelNum == THIRD_LEVEL) {
 				//选择了“所有数据集类型
-				if (datasetTypeComboBox.getSelectedItem().toString().equals(CommonProperties.getString("String_DatasetType_All"))) {
+				if (datasetTypeComboBox.getSelectedItem().toString().equals(CoreProperties.getString("String_DatasetType_All"))) {
 					jTable.setModel(new GetTableModel().getDatasourceTableModel(selectedDatasource));
 				} else {
 					jTable.setModel(new GetTableModel().getDatasourceTypeTableModel(selectedDatasource, CommonToolkit.DatasetTypeWrap.findType(datasetTypeComboBox.getSelectedItem().toString())));

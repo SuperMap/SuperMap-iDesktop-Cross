@@ -1,7 +1,7 @@
 package com.supermap.desktop.dialog;
 
 import com.supermap.desktop.GlobalParameters;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -134,9 +134,9 @@ public class SmOptionPane extends SmDialog {
 	}
 
 	private void initResources() {
-		buttonYes.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonNo.setText(CommonProperties.getString(CommonProperties.Cancel));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonYes.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonNo.setText(CoreProperties.getString(CoreProperties.Cancel));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initComponentState() {
@@ -163,8 +163,8 @@ public class SmOptionPane extends SmDialog {
 
 	public int showConfirmDialogWithCancel(String message) {
 		// this.labelIcon.setIcon(UIManager.getIcon("OptionPane.questionIcon"));
-		this.buttonYes.setText(CommonProperties.getString(CommonProperties.yes));
-		this.buttonNo.setText(CommonProperties.getString(CommonProperties.no));
+		this.buttonYes.setText(CoreProperties.getString(CoreProperties.yes));
+		this.buttonNo.setText(CoreProperties.getString(CoreProperties.no));
 		this.buttonCancel.setVisible(true);
 		return showDialog(message);
 	}
@@ -189,8 +189,8 @@ public class SmOptionPane extends SmDialog {
 
 
 	public int showConfirmDialogYesNo(String message) {
-		this.buttonYes.setText(CommonProperties.getString(CommonProperties.yes));
-		this.buttonNo.setText(CommonProperties.getString(CommonProperties.no));
+		this.buttonYes.setText(CoreProperties.getString(CoreProperties.yes));
+		this.buttonNo.setText(CoreProperties.getString(CoreProperties.no));
 		return showDialog(message);
 	}
 
@@ -202,8 +202,8 @@ public class SmOptionPane extends SmDialog {
 		this.setVisible(true);
 
 		// 还原修改
-		this.buttonYes.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonNo.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonYes.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonNo.setText(CoreProperties.getString(CoreProperties.Cancel));
 		this.buttonNo.setVisible(true);
 		this.buttonCancel.setVisible(false);
 		return result;

@@ -2,7 +2,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 
 import com.supermap.data.Dataset;
 import com.supermap.data.Datasource;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.smTables.IModel;
 import com.supermap.desktop.ui.controls.smTables.IModelController;
@@ -24,8 +24,8 @@ public class TableModelBatchPrjTranslatorDatasetsList extends DefaultTableModel 
 	private ArrayList<TableData> dataList = new ArrayList<>();
 	private String[] columnNames = new String[]{
 			"",
-			CommonProperties.getString(CommonProperties.SourceDataset),
-			CommonProperties.getString(CommonProperties.TargetDataset),
+			CoreProperties.getString(CoreProperties.SourceDataset),
+			CoreProperties.getString(CoreProperties.TargetDataset),
 	};
 
 

@@ -12,7 +12,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterDatasetType;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import java.util.ArrayList;
@@ -52,9 +52,9 @@ public class CirculationForDatasetParameters extends AbstractCirculationParamete
 		this.datasetType = new ParameterDatasetType();
 		this.datasetType.setDescribe(ProcessProperties.getString("String_DatasetType"));
 		this.datasetType.setAllShown(true);
-		this.datasourceConstrained.setDescribe(CommonProperties.getString(CommonProperties.Label_Datasource));
+		this.datasourceConstrained.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
 		this.dataset = new ParameterSingleDataset();
-		this.dataset.setDescribe(CommonProperties.getString(CommonProperties.Label_Dataset));
+		this.dataset.setDescribe(CoreProperties.getString(CoreProperties.Label_Dataset));
 		if (null != currentDatasource) {
 			this.datasourceConstrained.setSelectedItem(currentDatasource);
 			this.dataset.setDatasource(currentDatasource);

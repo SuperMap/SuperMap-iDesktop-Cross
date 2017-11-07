@@ -3,12 +3,12 @@ package com.supermap.desktop.CtrlAction.Map.MapOperationSetting;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.SelectionModeUtilities;
@@ -287,8 +287,8 @@ public class JDialogOperationSetting extends SmDialog {
 		this.labelSelectionMode.setText(MapViewProperties.getString("String_Label_SelectionMode"));
 		this.labelSelectionLerance.setText(MapViewProperties.getString("String_Label_SelectionTolerance"));
 
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	@Override

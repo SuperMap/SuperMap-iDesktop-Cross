@@ -9,7 +9,6 @@ import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dialog.JDialogChangePassword;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -221,8 +220,8 @@ public class WorkspacePropertyControl extends AbstractPropertyControl {
 		this.labelVersion.setText(ControlsProperties.getString("String_LabelFileVersion"));
 		this.labelDescription.setText(ControlsProperties.getString("String_LabelFileDescription"));
 		this.buttonChangePassword.setText(ControlsProperties.getString("String_ButtonChangePassword"));
-		this.buttonApply.setText(CommonProperties.getString("String_Button_Apply"));
-		this.buttonReset.setText(CommonProperties.getString("String_Button_Reset"));
+		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
+		this.buttonReset.setText(CoreProperties.getString("String_Button_Reset"));
 	}
 
 	private void fillComponents() {

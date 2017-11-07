@@ -4,7 +4,7 @@ import com.supermap.data.DatasetType;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
@@ -154,8 +154,8 @@ public class ThemeGuidDialog extends SmDialog {
      */
     private void initResources() {
         this.setTitle(MapViewProperties.getString("String_ThemeGuide"));
-        this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-        this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+	    this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+	    this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
     }
 
     /**

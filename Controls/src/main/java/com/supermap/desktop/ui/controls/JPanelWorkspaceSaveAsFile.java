@@ -1,7 +1,6 @@
 package com.supermap.desktop.ui.controls;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
@@ -147,7 +146,7 @@ public class JPanelWorkspaceSaveAsFile extends JPanel {
 							ControlsProperties.getString("String_WorkspaceSMWUFilters")),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_WorkspaceSXWUFilterName"),
 							ControlsProperties.getString("String_WorkspaceSXWUFilters")));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_Title_WorkSpaceSaveAs"), moduleName, "SaveOne");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

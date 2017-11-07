@@ -12,7 +12,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetType
 import com.supermap.desktop.process.parameter.ipls.ParameterColor;
 import com.supermap.desktop.process.parameter.ipls.ParameterColorsTable;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import java.awt.*;
 
@@ -44,7 +44,7 @@ public class MetaProcessCalculateOrthoImage extends MetaProcessCalTerrain {
 		parameterColorsTable.setSelectedItem(new Colors());
 
 		ParameterCombine parameterCombineSet = new ParameterCombine();
-		parameterCombineSet.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineSet.addParameters(parameterColorNoColor, parameterColorsTable);
 
 		// 结果设置

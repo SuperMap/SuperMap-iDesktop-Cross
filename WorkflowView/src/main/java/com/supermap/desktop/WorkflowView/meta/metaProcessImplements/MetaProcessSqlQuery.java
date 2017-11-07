@@ -12,7 +12,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * sql查询简单实现
  */
 public class MetaProcessSqlQuery extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "SqlQueryResult";
 	private ParameterDatasourceConstrained datasource;
 	private ParameterSingleDataset dataset;
@@ -45,15 +45,15 @@ public class MetaProcessSqlQuery extends MetaProcess {
 	private void initMetaInfo() {
 
 		datasource = new ParameterDatasourceConstrained();
-		this.datasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.datasource.setDescribe(CoreProperties.getString("String_SourceDatasource"));
 		this.dataset = new ParameterSingleDataset(datasetTypes);
 		DatasetVector datasetVector = DatasetUtilities.getDefaultDatasetVector();
 		if (datasetVector != null) {
 			datasource.setSelectedItem(datasetVector.getDatasource());
 			dataset.setSelectedItem(datasetVector);
 		}
-		parameterResultFields = new ParameterTextArea(CommonProperties.getString("String_QueryField"));
-		parameterAttributeFilter = new ParameterTextArea(CommonProperties.getString("String_QueryCondition"));
+		parameterResultFields = new ParameterTextArea(CoreProperties.getString("String_QueryField"));
+		parameterAttributeFilter = new ParameterTextArea(CoreProperties.getString("String_QueryCondition"));
 		parameterSaveDataset = new ParameterSaveDataset();
 		parameterSaveDataset.setDefaultDatasetName("result_query");
 		initParameterConstraint();
@@ -68,7 +68,7 @@ public class MetaProcessSqlQuery extends MetaProcess {
 
 		ParameterCombine parameterCombineResultData = new ParameterCombine();
 		parameterCombineResultData.addParameters(parameterSaveDataset);
-		parameterCombineResultData.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombineResultData.setDescribe(CoreProperties.getString("String_ResultSet"));
 
 		parameters.setParameters(parameterCombineSourceData, this.parameterResultFields, this.parameterAttributeFilter, parameterCombineResultData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.VECTOR, parameterCombineSourceData);
@@ -151,10 +151,10 @@ public class MetaProcessSqlQuery extends MetaProcess {
 			}
 			resultRecord.moveFirst();
 			if (resultDataset == null) {
-				Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_SQLQuerySaveAsResultFaield"));
+				Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_SQLQuerySaveAsResultFaield"));
 			} else {
 				Application.getActiveApplication().getOutput()
-						.output(MessageFormat.format(CommonProperties.getString("String_SQLQuerySavaAsResultSucces"), resultDataset.getName()));
+						.output(MessageFormat.format(CoreProperties.getString("String_SQLQuerySavaAsResultSucces"), resultDataset.getName()));
 			}
 		}
 

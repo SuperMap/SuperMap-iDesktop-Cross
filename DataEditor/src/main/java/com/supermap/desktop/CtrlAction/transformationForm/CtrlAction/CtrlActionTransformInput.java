@@ -6,7 +6,7 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormTransformation;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.XmlUtilities;
 
@@ -29,7 +29,7 @@ public class CtrlActionTransformInput extends CtrlAction {
 			String moduleName = "TransformInput";
 			if (!SmFileChoose.isModuleExist(moduleName)) {
 				String fileFilters = SmFileChoose.createFileFilter(DataEditorProperties.getString("String_TransformationFileFilter"), "drfu");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"), DataEditorProperties.getString("String_ImportTransformationFile")
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), DataEditorProperties.getString("String_ImportTransformationFile")
 						, moduleName, "OpenOne");
 			}
 			SmFileChoose fileChoose = new SmFileChoose(moduleName);

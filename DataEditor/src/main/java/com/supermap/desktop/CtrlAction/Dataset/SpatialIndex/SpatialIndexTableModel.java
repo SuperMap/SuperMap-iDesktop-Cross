@@ -7,7 +7,7 @@ import com.supermap.data.SpatialIndexType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.SortTable.SortableTableModel;
 import com.supermap.desktop.ui.controls.progress.FormProgress;
@@ -27,8 +27,8 @@ public class SpatialIndexTableModel extends SortableTableModel {
 	private List<SpatialIndexTableModelBean> datas = new ArrayList<>();
 
 	private String[] columnNames = new String[]{
-			CommonProperties.getString("String_ColumnHeader_Dataset"),
-			CommonProperties.getString("String_ColumnHeader_Datasource"),
+			CoreProperties.getString("String_ColumnHeader_Dataset"),
+			CoreProperties.getString("String_ColumnHeader_Datasource"),
 			DataEditorProperties.getString("String_CurrentInedxType"),
 			DataEditorProperties.getString("String_DealIndexType")
 	};

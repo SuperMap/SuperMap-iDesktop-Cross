@@ -2,15 +2,12 @@ package com.supermap.desktop.workspacemanagerwindow;
 
 import com.supermap.data.Datasources;
 import com.supermap.desktop.dataview.DataViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_NAME;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_NUMBER;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_PATH;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_TYPE;
+import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.*;
 
 /**
  * @author YuanR
@@ -26,9 +23,9 @@ public class TableModelDatasource extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		if (column == COLUMN_NAME) {
-			return CommonProperties.getString("String_Name");
+			return CoreProperties.getString("String_Name");
 		} else if (column == COLUMN_TYPE) {
-			return CommonProperties.getString("String_Type");
+			return CoreProperties.getString("String_Type");
 		} else if (column == COLUMN_NUMBER) {
 			return DataViewProperties.getString("String_ObjectCount");
 		} else if (column == COLUMN_PATH) {

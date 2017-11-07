@@ -5,7 +5,7 @@ import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.data.WorkspaceType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.WorkspaceUtilities;
@@ -70,14 +70,14 @@ public class JDialogWorkspaceOpenSQL extends SmDialog {
 		jLabelEmptyLabel = new JLabel();
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		getRootPane().setDefaultButton(this.jButtonOpen);
-		jButtonClose.setText(CommonProperties.getString("String_Button_Cancel"));
+		jButtonClose.setText(CoreProperties.getString("String_Button_Cancel"));
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				jButtonCloseActionPerformed();
 			}
 		});
-		jButtonOpen.setText(CommonProperties.getString("String_Button_Open"));
+		jButtonOpen.setText(CoreProperties.getString("String_Button_Open"));
 		jButtonOpen.setPreferredSize(new java.awt.Dimension(75, 23));
 
 		// TODO Oracle或Sql Server实例列表初始化

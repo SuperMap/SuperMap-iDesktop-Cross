@@ -2,15 +2,14 @@ package com.supermap.desktop.ui.lbs.ui;
 
 import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.lbs.IServerServiceImpl;
+import com.supermap.desktop.lbs.Interface.IServerService;
+import com.supermap.desktop.lbs.params.IServerLoginInfo;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
-import com.supermap.desktop.lbs.IServerServiceImpl;
-import com.supermap.desktop.lbs.Interface.IServerService;
-import com.supermap.desktop.lbs.params.IServerLoginInfo;
 import com.supermap.desktop.utilities.StringUtilities;
 import org.apache.http.impl.client.CloseableHttpClient;
 
@@ -117,7 +116,7 @@ public class JDialogLogin extends SmDialog {
         }
         if (null == client) {
             labelWorning.setForeground(Color.red);
-            labelWorning.setText(CommonProperties.getString("String_PermissionCheckFailed"));
+	        labelWorning.setText(CoreProperties.getString("String_PermissionCheckFailed"));
         } else {
             IServerLoginInfo.client = client;
             IServerLoginInfo.login = true;

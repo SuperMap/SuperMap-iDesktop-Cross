@@ -6,7 +6,7 @@ import com.supermap.data.Datasource;
 import com.supermap.data.EngineType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -127,10 +127,10 @@ public class JDialogPyramidManager extends SmDialog {
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		this.buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.checkBoxAutoClose.setText(CommonProperties.getString(CommonProperties.CloseDialog));
-		this.buttonCreate.setText(CommonProperties.getString(CommonProperties.Create));
-		this.buttonRemove.setText(CommonProperties.getString(CommonProperties.Delete));
-		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
+		this.checkBoxAutoClose.setText(CoreProperties.getString(CoreProperties.CloseDialog));
+		this.buttonCreate.setText(CoreProperties.getString(CoreProperties.Create));
+		this.buttonRemove.setText(CoreProperties.getString(CoreProperties.Delete));
+		this.buttonClose.setText(CoreProperties.getString(CoreProperties.Close));
 	}
 
 	// region 初始化布局

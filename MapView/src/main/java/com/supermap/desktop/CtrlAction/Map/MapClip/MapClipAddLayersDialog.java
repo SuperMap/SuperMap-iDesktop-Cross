@@ -2,7 +2,7 @@ package com.supermap.desktop.CtrlAction.Map.MapClip;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -110,9 +110,9 @@ public class MapClipAddLayersDialog extends SmDialog {
     private void initResources() {
         this.setTitle(MapViewProperties.getString("String_MapClip_AddClipLayer"));
         this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
-        this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-        this.buttonInterverseSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-        this.buttonInterverseSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+	    this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+	    this.buttonInterverseSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
+	    this.buttonInterverseSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
     }
 
     private void registerEvents() {

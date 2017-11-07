@@ -1,7 +1,7 @@
 package com.supermap.desktop.controls.utilities;
 
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -23,7 +23,7 @@ public class ComponentFactory {
 	 */
 	public static JButton createButtonOK() {
 		SmButton buttonOK = new SmButton();
-		buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
+		buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
 		return buttonOK;
 	}
 
@@ -34,7 +34,7 @@ public class ComponentFactory {
 	 */
 	public static JButton createButtonApply() {
 		SmButton buttonApply = new SmButton();
-		buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 		return buttonApply;
 	}
 
@@ -45,7 +45,7 @@ public class ComponentFactory {
 	 */
 	public static JButton createButtonCancel() {
 		SmButton buttonCancel = new SmButton();
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 		return buttonCancel;
 	}
 
@@ -56,20 +56,20 @@ public class ComponentFactory {
 	 */
 	public static JButton createButtonClose() {
 		SmButton buttonClose = new SmButton();
-		buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
+		buttonClose.setText(CoreProperties.getString(CoreProperties.Close));
 		return buttonClose;
 	}
 
     public static JButton createButtonSelectAll() {
         SmButton buttonClose = new SmButton();
-        buttonClose.setText(CommonProperties.getString(CommonProperties.selectAll));
-        return buttonClose;
+	    buttonClose.setText(CoreProperties.getString(CoreProperties.selectAll));
+	    return buttonClose;
     }
 
     public static JButton createButtonSelectInverse() {
         SmButton buttonClose = new SmButton();
-        buttonClose.setText(CommonProperties.getString(CommonProperties.selectInverse));
-        return buttonClose;
+	    buttonClose.setText(CoreProperties.getString(CoreProperties.selectInverse));
+	    return buttonClose;
     }
 
     /**

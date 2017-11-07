@@ -2,7 +2,7 @@ package com.supermap.desktop.WorkflowView.meta.dataconversion;
 
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.ipls.ParameterFile;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 
 import javax.swing.*;
@@ -55,7 +55,7 @@ public class FileType {
 
 	public static SmFileChoose createFileChooser(String fileFilter, String moduleName) {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
-			SmFileChoose.addNewNode(fileFilter, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilter, CoreProperties.getString("String_DefaultFilePath"),
 					ProcessProperties.getString("String_FileType"), moduleName, "OpenOne");
 		}
 		SmFileChoose fileChoose = new SmFileChoose(moduleName);
@@ -112,7 +112,7 @@ public class FileType {
 				} else {
 					fileFilter = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(MessageFormat.format(ProcessProperties.getString("String_ImportFileType"), importType, importType.toLowerCase()), importType.toLowerCase()));
 				}
-				SmFileChoose.addNewNode(fileFilter, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilter, CoreProperties.getString("String_DefaultFilePath"),
 						ProcessProperties.getString("String_FileType"), importModule, "OpenOne");
 			}
 

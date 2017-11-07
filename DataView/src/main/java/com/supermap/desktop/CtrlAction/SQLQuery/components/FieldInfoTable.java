@@ -1,16 +1,9 @@
 package com.supermap.desktop.CtrlAction.SQLQuery.components;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.FieldInfos;
-import com.supermap.data.FieldType;
-import com.supermap.data.JoinItems;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.dataview.DataViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SortTable.SmSortTable;
 import com.supermap.desktop.ui.controls.SortTable.SortableTableModel;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -96,7 +89,7 @@ public class FieldInfoTable extends SmSortTable {
 
 		public FieldInfoTableModel() {
 			super();
-			columnNames = new String[]{CommonProperties.getString(CommonProperties.Caption), DataViewProperties.getString("String_SQLQueryColumnFieldName"), DataViewProperties.getString("String_SQLQueryColumnFieldType")};
+			columnNames = new String[]{CoreProperties.getString(CoreProperties.Caption), DataViewProperties.getString("String_SQLQueryColumnFieldName"), DataViewProperties.getString("String_SQLQueryColumnFieldType")};
 		}
 
 		public void setDataset(Dataset dataset) {

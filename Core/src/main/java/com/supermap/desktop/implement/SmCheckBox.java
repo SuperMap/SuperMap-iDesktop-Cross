@@ -4,7 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.ICtrlAction;
 import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
@@ -45,7 +45,7 @@ public class SmCheckBox extends JCheckBox implements IBaseItem {
 			setCtrlAction(ctrlAction);
 			Application.getActiveApplication().setCtrlAction(xmlCommand.getPluginInfo().getBundleName(), xmlCommand.getCtrlActionClass(), ctrlAction);
 		} else {
-			this.setToolTipText(this.getToolTipText() + CommonProperties.getString("String_UnDo"));
+			this.setToolTipText(this.getToolTipText() + CoreProperties.getString("String_UnDo"));
 		}
 		this.addItemListener(new ItemListener() {
 			@Override
