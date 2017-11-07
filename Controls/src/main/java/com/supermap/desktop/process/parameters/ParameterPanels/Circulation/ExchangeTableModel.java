@@ -1,4 +1,4 @@
-package com.supermap.desktop.process.Circulation;
+package com.supermap.desktop.process.parameters.ParameterPanels.Circulation;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -21,6 +21,11 @@ public class ExchangeTableModel<T extends Object> extends DefaultTableModel {
 	}
 
 	@Override
+	public String getColumnName(int column) {
+		return title[column];
+	}
+
+	@Override
 	public int getColumnCount() {
 		return title.length;
 	}
@@ -34,8 +39,14 @@ public class ExchangeTableModel<T extends Object> extends DefaultTableModel {
 		}
 	}
 
+	@Override
+	public void removeRow(int row) {
+		this.info.remove(row);
+		fireTableRowsDeleted(row, row);
+	}
+
 	public void addRow(T t) {
-		info.add(t);
+		this.info.add(t);
 		fireTableDataChanged();
 	}
 
@@ -48,7 +59,7 @@ public class ExchangeTableModel<T extends Object> extends DefaultTableModel {
 	}
 
 	public void moveBottom(int... rows) {
-		int index = getRowCount() - rows[rows.length - 1];
+		int index = getRowCount() - rows[rows.length - 1] - 1;
 		for (int i = rows.length - 1; i >= 0; i--) {
 			moveTo(rows[i], rows[i] + index);
 		}

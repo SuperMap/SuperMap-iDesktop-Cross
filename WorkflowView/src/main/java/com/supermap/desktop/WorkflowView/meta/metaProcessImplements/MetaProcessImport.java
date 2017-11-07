@@ -21,8 +21,10 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.loader.IProcessLoader;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.WorkspaceTree;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -39,7 +41,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author XiaJT
  */
 public class MetaProcessImport extends MetaProcess {
-
+	private final static String INPUT_DATA = CommonProperties.getString("String_SelectFile");
 	private final static String OUTPUT_DATA = "ImportResult";
 	protected ImportSetting importSetting;
 	private String importType = "";
@@ -89,6 +91,7 @@ public class MetaProcessImport extends MetaProcess {
 				}
 			}
 		}
+		this.parameters.addInputParameters(INPUT_DATA, BasicTypes.STRING, parameters.getParameters().get(0));
 	}
 
 	private void addOutPutParameters() {

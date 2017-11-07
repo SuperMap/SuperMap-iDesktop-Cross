@@ -21,7 +21,6 @@ public class CirculationGraph extends RectangleGraph {
 		super(canvas, 0, 0);
 		this.circulationType = circulationType;
 		this.outputData = new OutputData(circulationType.getName(), ProcessProperties.getString("String_CurrentValue"), circulationType.getType());
-		this.outputData.setValue(0);
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import com.supermap.desktop.process.parameter.events.ParameterValueLegalEvent;
 import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener;
 import com.supermap.desktop.process.parameter.events.ParameterValueSelectedEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.util.EnumParser;
 import com.supermap.desktop.properties.CommonProperties;
@@ -469,6 +470,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ParameterCombine parameterCombineSourceInfoSet = new ParameterCombine();
 		parameterCombineSourceInfoSet.setDescribe(ProcessProperties.getString("String_ImportSettingPanel_SourceFileInfo"));
 		parameterFile.addPropertyListener(this.fileChangeListener);
+		parameterFile.setValueType(BasicTypes.STRING);
 		// 将文件类型选择单选组合框加入面板-yuanR2017.9.1
 		if (importSetting instanceof ImportSettingSimpleJson) {
 			// 文件/文件夹，单选框,默认选择文件-yuanR2017.9.1
@@ -488,6 +490,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			reflectInfoArray.add(reflectInfoFolderPath);
 			parameterCombineSourceInfoSet.addParameters(parameterFileFolder);
 			parameterFileFolder.addPropertyListener(fileChangeListener);
+			parameterFileFolder.setValueType(BasicTypes.STRING);
 			parameterRadioButtonFolderOrFile.addPropertyListener(new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {

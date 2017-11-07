@@ -1,7 +1,7 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
-import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.process.parameter.ipls.ParameterFile;
+import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
+import com.supermap.desktop.process.parameters.ParameterPanels.Circulation.ParameterForObjectCirculation;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,27 +11,31 @@ import java.util.ArrayList;
  * Created by xie on 2017/11/1.
  */
 public class CirculationForObjectParameters extends AbstractCirculationParameters implements CirculationIterator {
-	private ParameterFile selectedFile;
+	private ParameterForObjectCirculation parameterForObjectCirculation;
 	private ArrayList<String> list = new ArrayList<>();
 	private int count;
+	private OutputData outputData;
 
-	public CirculationForObjectParameters() {
+	public CirculationForObjectParameters(OutputData outputData) {
+		this.outputData = outputData;
 		initParameters();
 		registEvents();
 	}
 
 	private void registEvents() {
-		this.selectedFile.addPropertyListener(new PropertyChangeListener() {
+		this.parameterForObjectCirculation.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-
+				list.clear();
+				if (null != parameterForObjectCirculation.getSelectedItem())
+					list.addAll(parameterForObjectCirculation.getSelectedItem());
 			}
 		});
 	}
 
 	private void initParameters() {
-		selectedFile = new ParameterFile(ProcessProperties.getString("String_InputValue"));
-
+		parameterForObjectCirculation = new ParameterForObjectCirculation();
+		addParameters(parameterForObjectCirculation);
 	}
 
 	@Override
@@ -49,6 +53,11 @@ public class CirculationForObjectParameters extends AbstractCirculationParameter
 	@Override
 	public void reset() {
 		count = 0;
+		if (null != parameterForObjectCirculation.getSelectedItem() && parameterForObjectCirculation.getSelectedItem().size() > 0) {
+			list.clear();
+			list.addAll(parameterForObjectCirculation.getSelectedItem());
+			outputData.setValue(list.get(count));
+		}
 	}
 
 	@Override
