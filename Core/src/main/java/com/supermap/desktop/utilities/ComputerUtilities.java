@@ -1,7 +1,7 @@
 package com.supermap.desktop.utilities;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,8 +104,8 @@ public class ComputerUtilities {
                 String line;
                 while ((line = br.readLine()) != null) {
                     String info = "HWaddr";
-                    String infoChina = CommonProperties.getString("String_ChinaMac");
-                    if (line.contains(info)&&line.indexOf(info) > 0) {
+	                String infoChina = CoreProperties.getString("String_ChinaMac");
+	                if (line.contains(info)&&line.indexOf(info) > 0) {
                             int index = line.indexOf(info) + info.length();
                             address = line.substring(index);
                             break;

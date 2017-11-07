@@ -6,7 +6,7 @@ import com.supermap.desktop.baseUI.PanelTransform;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.localUtilities.CommonUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.FileChooserControl;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -33,8 +33,8 @@ public class PanelTransformForMapGIS extends PanelTransform {
         public void actionPerformed(ActionEvent e) {
             if (!SmFileChoose.isModuleExist("ImportMapGIS")) {
                 String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_color"), "wat");
-                SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
-                        DataConversionProperties.getString("String_Import"), "ImportMapGIS", "OpenMany");
+	            SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
+			            DataConversionProperties.getString("String_Import"), "ImportMapGIS", "OpenMany");
             }
             SmFileChoose fileChooser = new SmFileChoose("ImportMapGIS");
             String filePath = fileChooserColorIndex.getEditor().getText();

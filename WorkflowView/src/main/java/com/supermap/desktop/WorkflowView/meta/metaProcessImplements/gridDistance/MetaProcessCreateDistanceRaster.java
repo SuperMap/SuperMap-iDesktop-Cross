@@ -14,7 +14,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +26,7 @@ import java.text.DecimalFormat;
  * Created by lixiaoyao on 2017/8/7.
  */
 public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String COST_DATA = ProcessProperties.getString("String_GroupBox_CostData");
 	private final static String OUTPUT_DATA_DISTANCE = "CreateDistanceResult";
 	private final static String OUTPUT_DATA_DIRECTION = "CreateDirectionResult";
@@ -54,24 +54,24 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.costDatasource = new ParameterDatasourceConstrained();
-		this.costDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.costDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.costDataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.costDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.costDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.parameterNumberMaxDistance = new ParameterNumber(ProcessProperties.getString("String_MaxDistance"));
 		this.parameterNumberResolvingPower = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
 		this.resultDatasource = new ParameterDatasource();
 		this.resultDatasource.setReadOnlyNeeded(false);
-		this.resultDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.resultDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.resultDistanceDataset = new ParameterTextField(ProcessProperties.getString("String_Distance_Dataset"));
 		this.resultDirectionDataset = new ParameterTextField(ProcessProperties.getString("String_Direction_Dataset"));
 		this.resultAllocationDataset = new ParameterTextField(ProcessProperties.getString("String_Allocation_Dataset"));
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 		ParameterCombine costData = new ParameterCombine();
 		costData.setDescribe(ProcessProperties.getString("String_GroupBox_CostData"));
@@ -80,7 +80,7 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 		parameterSetting.setDescribe(ProcessProperties.getString("String_setParameter"));
 		parameterSetting.addParameters(this.parameterNumberMaxDistance, this.parameterNumberResolvingPower);
 		ParameterCombine resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(this.resultDatasource, this.resultDistanceDataset, this.resultDirectionDataset, this.resultAllocationDataset);
 
 		this.parameters.setParameters(sourceData, costData, parameterSetting, resultData);

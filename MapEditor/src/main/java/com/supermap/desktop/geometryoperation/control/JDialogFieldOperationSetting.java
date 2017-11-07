@@ -3,7 +3,7 @@ package com.supermap.desktop.geometryoperation.control;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -329,8 +329,8 @@ public class JDialogFieldOperationSetting extends SmDialog implements ItemListen
 		this.radioButtonAVG.setText(MapEditorProperties.getString("String_GeometryOperation_AVG"));
 		this.radioButtonSum.setText(MapEditorProperties.getString("String_GeometryOperation_SUM"));
 		this.radioButtonGeometry.setText(MapEditorProperties.getString("String_GeometryOperation_Geometry"));
-		this.buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void registerEvents() {
@@ -889,9 +889,9 @@ public class JDialogFieldOperationSetting extends SmDialog implements ItemListen
 			if (column == FIELD_NAME) {
 				return MapEditorProperties.getString("String_GeometryOperation_ListViewHeader_Field");
 			} else if (column == FIELD_TYPE) {
-				return CommonProperties.getString(CommonProperties.FieldType);
+				return CoreProperties.getString(CoreProperties.FieldType);
 			} else if (column == FIELD_OPERATION) {
-				return CommonProperties.getString(CommonProperties.Operation);
+				return CoreProperties.getString(CoreProperties.Operation);
 			}
 			return null;
 		}

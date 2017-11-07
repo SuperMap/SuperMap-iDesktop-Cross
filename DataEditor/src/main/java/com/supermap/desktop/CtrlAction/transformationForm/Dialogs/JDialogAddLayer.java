@@ -11,7 +11,7 @@ import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.FormTransformationSubFormType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -258,24 +258,24 @@ public class JDialogAddLayer extends SmDialog {
 	}
 
 	private void initResources() {
-		smButtonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		smButtonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+		smButtonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		smButtonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 
 	}
 
 	private void initComponentState() {
 		this.buttonAdd.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
-		this.buttonAdd.setToolTipText(CommonProperties.getString(CommonProperties.Add));
+		this.buttonAdd.setToolTipText(CoreProperties.getString(CoreProperties.Add));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString(CommonProperties.Delete));
+		this.buttonDelete.setToolTipText(CoreProperties.getString(CoreProperties.Delete));
 		this.buttonSelectedAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
-		this.buttonSelectedAll.setToolTipText(CommonProperties.getString(CommonProperties.selectAll));
+		this.buttonSelectedAll.setToolTipText(CoreProperties.getString(CoreProperties.selectAll));
 		this.buttonSelectedInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-		this.buttonSelectedInvert.setToolTipText(CommonProperties.getString(CommonProperties.selectInverse));
+		this.buttonSelectedInvert.setToolTipText(CoreProperties.getString(CoreProperties.selectInverse));
 		this.buttonUp.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/moveUp.png"));
-		this.buttonUp.setToolTipText(CommonProperties.getString(CommonProperties.up));
+		this.buttonUp.setToolTipText(CoreProperties.getString(CoreProperties.up));
 		this.buttonDown.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/moveDown.png"));
-		this.buttonDown.setToolTipText(CommonProperties.getString(CommonProperties.down));
+		this.buttonDown.setToolTipText(CoreProperties.getString(CoreProperties.down));
 		IForm activeForm = Application.getActiveApplication().getActiveForm();
 		if (activeForm instanceof IFormTransformation) {
 			defaultFormType = ((IFormTransformation) activeForm).getCurrentSubFormType();
@@ -296,9 +296,9 @@ public class JDialogAddLayer extends SmDialog {
 
 		private ArrayList<AddLayerItemBean> datas = new ArrayList<>();
 		private String[] columnNames = new String[]{
-				CommonProperties.getString(CommonProperties.Index),
-				CommonProperties.getString(CommonProperties.stringDataset),
-				CommonProperties.getString(CommonProperties.stringDatasource),
+				CoreProperties.getString(CoreProperties.Index),
+				CoreProperties.getString(CoreProperties.stringDataset),
+				CoreProperties.getString(CoreProperties.stringDatasource),
 				DataEditorProperties.getString("String_AddLayerTarget")
 		};
 

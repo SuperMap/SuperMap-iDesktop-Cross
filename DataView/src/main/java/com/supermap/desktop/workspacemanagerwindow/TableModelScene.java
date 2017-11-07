@@ -2,7 +2,7 @@ package com.supermap.desktop.workspacemanagerwindow;
 
 import com.supermap.data.Scenes;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -24,9 +24,9 @@ public class TableModelScene extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		if (column == COLUMN_NAME) {
-			return CommonProperties.getString("String_Name");
+			return CoreProperties.getString("String_Name");
 		} else if (column == COLUMN_TYPE) {
-			return CommonProperties.getString("String_Type");
+			return CoreProperties.getString("String_Type");
 		}
 		return "";
 	}

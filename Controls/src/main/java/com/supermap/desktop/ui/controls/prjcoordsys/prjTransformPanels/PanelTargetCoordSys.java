@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
@@ -51,18 +51,25 @@ public class PanelTargetCoordSys extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource().equals(radioButtonFromDatasource) || e.getSource().equals(radioButtonFromDataset)
 					|| e.getSource().equals(radioButtonPrjSetting) || e.getSource().equals(radioButtonImportPrjFile)) {
-				datasource.setEnabled(radioButtonFromDatasource.isSelected());
+				datasource.setEnabled(radioButtonFromDatasource.isSelected() || radioButtonFromDataset.isSelected());
 				datasetComboBox.setEnabled(radioButtonFromDataset.isSelected());
 				buttonPrjSetting.setEnabled(radioButtonPrjSetting.isSelected());
 				fileChooser.setEnabled(radioButtonImportPrjFile.isSelected());
 				// 坐标系来自数据源
 				if (radioButtonFromDatasource.isSelected()) {
+					resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
 					if (datasource.getSelectedDatasource() != null) {
 						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
 					} else {
 						targetPrjCoordSys = null;
 					}
 				} else if (radioButtonFromDataset.isSelected()) {
+					// 当选择了来源于数据集，此时对数据源不做限制
+					if (datasource.getSelectedDatasource() != null) {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
+					} else {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
+					}
 					if (datasetComboBox.getSelectedDataset() != null) {
 						targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 					} else {
@@ -104,11 +111,20 @@ public class PanelTargetCoordSys extends JPanel {
 					datasetComboBox.removeItemListener(itemListener);
 					resetDatasetComboBox(datasource.getSelectedDatasource(), null);
 					datasetComboBox.addItemListener(itemListener);
-					targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					if (radioButtonFromDatasource.isSelected()) {
+						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					} else {
+						if (datasetComboBox.getSelectedDataset() != null) {
+							targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
+						} else {
+							targetPrjCoordSys = null;
+						}
+					}
 				} else {
 					targetPrjCoordSys = null;
 				}
 			} else if (e.getSource() == datasetComboBox) {
+
 				if (datasetComboBox.getSelectedDataset() != null) {
 					targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 				} else {
@@ -167,7 +183,7 @@ public class PanelTargetCoordSys extends JPanel {
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFiles"), "prj", "xml"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileShape"), "prj"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "xml"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

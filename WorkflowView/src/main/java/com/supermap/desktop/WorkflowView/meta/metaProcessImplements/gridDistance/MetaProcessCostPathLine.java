@@ -16,7 +16,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -62,17 +62,17 @@ public class MetaProcessCostPathLine extends MetaProcessGridAnalyst {
 		numberOriginY = new ParameterNumber(ProcessProperties.getString("String_Ycoordinate"));
 		numberTargetX = new ParameterNumber(ProcessProperties.getString("String_Xcoordinate"));
 		numberTargetY = new ParameterNumber(ProcessProperties.getString("String_Ycoordinate"));
-		comboBoxSmoothMethod = new ParameterComboBox(CommonProperties.getString("String_SmoothMethod"));
+		comboBoxSmoothMethod = new ParameterComboBox(CoreProperties.getString("String_SmoothMethod"));
 		numberSmoothDegree = new ParameterNumber(ProcessProperties.getString("String_Label_Smoothness"));
 
 		ParameterCombine costCombine = new ParameterCombine();
 		costCombine.setDescribe(ProcessProperties.getString("String_GroupBox_CostData"));
 		costCombine.addParameters(costDatasources, costDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
-		settingCombine.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		settingCombine.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		settingCombine.addParameters(labelOrigin, numberOriginX, numberOriginY, labelTarget, numberTargetX, numberTargetY, comboBoxSmoothMethod, numberSmoothDegree);
 		ParameterCombine outputCombine = new ParameterCombine();
-		outputCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		outputCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		outputCombine.addParameters(resultDataset);
 
 		parameters.setParameters(costCombine, settingCombine, outputCombine);
@@ -102,9 +102,9 @@ public class MetaProcessCostPathLine extends MetaProcessGridAnalyst {
 			costDataset.setSelectedItem(datasetGrid);
 			updateCoordinate(datasetGrid);
 		}
-		comboBoxSmoothMethod.setItems(new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
+		comboBoxSmoothMethod.setItems(new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		numberSmoothDegree.setSelectedItem(2);
 		numberSmoothDegree.setEnabled(false);
 	}

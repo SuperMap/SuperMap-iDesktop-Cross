@@ -11,7 +11,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.awt.*;
@@ -20,8 +20,8 @@ import java.awt.*;
  * Created by lixiaoyao on 2017/8/17.
  */
 public class MetaProcessAltitudeStatistics extends MetaProcess {
-	private final static String INTPUT_DATA_POINT = CommonProperties.getString("String_PointData");
-	private final static String INTPUT_DATA_GRID = CommonProperties.getString("String_GridData");
+	private final static String INTPUT_DATA_POINT = CoreProperties.getString("String_PointData");
+	private final static String INTPUT_DATA_GRID = CoreProperties.getString("String_GridData");
 	private final static String OUTPUT_DATA = "AltitudeResult";
 
 	private ParameterDatasourceConstrained pointDatasource;
@@ -39,13 +39,13 @@ public class MetaProcessAltitudeStatistics extends MetaProcess {
 
 	private void initParameters() {
 		this.pointDatasource = new ParameterDatasourceConstrained();
-		this.pointDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.pointDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.pointDataset = new ParameterSingleDataset(DatasetType.POINT);
-		this.pointDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.pointDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.gridDatasource = new ParameterDatasourceConstrained();
-		this.gridDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.gridDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.gridDataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.gridDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.gridDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine pointData = new ParameterCombine();
@@ -55,7 +55,7 @@ public class MetaProcessAltitudeStatistics extends MetaProcess {
 		gridData.setDescribe(INTPUT_DATA_GRID);
 		gridData.addParameters(this.gridDatasource, this.gridDataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(pointData, gridData, targetData);

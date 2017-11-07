@@ -11,13 +11,9 @@ import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListener;
-import com.supermap.desktop.process.parameter.ipls.ParameterCheckBox;
-import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
-import com.supermap.desktop.process.parameter.ipls.ParameterComboBox;
-import com.supermap.desktop.process.parameter.ipls.ParameterFieldComboBox;
-import com.supermap.desktop.process.parameter.ipls.ParameterLabel;
+import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.StatisticsField.ParameterStatisticsField;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import static com.supermap.desktop.WorkflowView.meta.metaProcessImplements.spatialStatistics.ParameterPatternsParameter.DATASET_FIELD_NAME;
@@ -53,7 +49,7 @@ public class SpatialMeasureMeasureParameter extends ParameterCombine {
 		parameterSelfWeightFieldComboBox.setFieldType(fieldType);
 		parameterWeightFieldComboBox.setFieldType(fieldType);
 
-		this.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		this.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterDistanceMethodComboBox.setDescribe(ProcessProperties.getString("String_DistanceMethod"));
 		parameterEllipseSizeComboBox.setDescribe(ProcessProperties.getString("String_EllipseSize"));
 		parameterIgnoreDirectionCheckBox.setDescribe(ProcessProperties.getString("String_IsIgnoreDirection"));

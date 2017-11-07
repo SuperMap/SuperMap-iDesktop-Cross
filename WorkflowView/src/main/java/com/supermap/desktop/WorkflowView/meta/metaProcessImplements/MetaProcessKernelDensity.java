@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CursorUtilities;
 
 
@@ -57,28 +57,28 @@ public class MetaProcessKernelDensity extends MetaProcess {
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");
 		parameterMeshSize.setRequisite(true);
 		parameterMeshSize.setDefaultWarningValue("50");
-		parameterMeshSizeUnit.setItems(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Meter"), "Meter"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Yard"), "Yard"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Foot"), "Foot"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Mile"), "Mile")
+		parameterMeshSizeUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), "Meter"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Yard"), "Yard"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), "Foot"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), "Mile")
 		);
 		parameterRadius.setRequisite(true);
 		parameterRadius.setDefaultWarningValue("300");
-		parameterRadiusUnit.setItems(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Meter"), "Meter"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Yard"), "Yard"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Foot"), "Foot"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Mile"), "Mile")
+		parameterRadiusUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), "Meter"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Yard"), "Yard"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), "Foot"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), "Mile")
 		);
-		parameterAreaUnit.setItems(new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Mile"), "SquareMile"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Meter"), "SquareMeter"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Kilometer"), "SquareKiloMeter"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Hectare"), "Hectare"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Are"), "Are"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Acre"), "Acre"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Foot"), "SquareFoot"),
-				new ParameterDataNode(CommonProperties.getString("String_AreaUnit_Yard"), "SquareYard")
+		parameterAreaUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Mile"), "SquareMile"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Meter"), "SquareMeter"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Kilometer"), "SquareKiloMeter"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Hectare"), "Hectare"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Are"), "Are"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Acre"), "Acre"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Foot"), "SquareFoot"),
+				new ParameterDataNode(CoreProperties.getString("String_AreaUnit_Yard"), "SquareYard")
 		);
 		ParameterCombine parameterCombineAlaysis = new ParameterCombine();
 		parameterCombineAlaysis.setDescribe(ProcessProperties.getString("String_AnalystSet"));

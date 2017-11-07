@@ -8,7 +8,7 @@ import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -423,16 +423,16 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 
 	@Override
 	public void initResources() {
-		this.labelDataPreview.setText(CommonProperties.getString("String_DataPreview"));
+		this.labelDataPreview.setText(CoreProperties.getString("String_DataPreview"));
 		this.labelSeparator.setText(DataConversionProperties.getString("String_Label_Separator"));
 		this.textFieldSeparator.setText(",");
 		this.checkBoxFirstRowAsField.setText(DataConversionProperties.getString("String_ImportSettingPanel_Checkbox_FirstRowisField"));
-		this.radioButtonIndexWKT.setText(CommonProperties.getString("String_WKTIndex"));
-		this.radioButtonIndex.setText(CommonProperties.getString("String_XYField"));
-		this.labelX.setText(CommonProperties.getString("string_longitude"));
-		this.labelY.setText(CommonProperties.getString("string_latitude"));
-		this.labelZ.setText(CommonProperties.getString("string_elevation"));
-		this.checkBoxImportIndexData.setText(CommonProperties.getString("String_ImportIndexData"));
+		this.radioButtonIndexWKT.setText(CoreProperties.getString("String_WKTIndex"));
+		this.radioButtonIndex.setText(CoreProperties.getString("String_XYField"));
+		this.labelX.setText(CoreProperties.getString("string_longitude"));
+		this.labelY.setText(CoreProperties.getString("string_latitude"));
+		this.labelZ.setText(CoreProperties.getString("string_elevation"));
+		this.checkBoxImportIndexData.setText(CoreProperties.getString("String_ImportIndexData"));
 	}
 
 	public JTextField getTextFieldSeparator() {

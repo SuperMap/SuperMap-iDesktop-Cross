@@ -2,11 +2,12 @@ package com.supermap.desktop.CtrlAction.SQLQuery.components;
 
 import com.supermap.data.Datasource;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.borderPanel.SmComponentPanel;
 import com.supermap.desktop.ui.controls.borderPanel.StateTransmitter;
@@ -139,8 +140,8 @@ public class PanelSaveSearchResult extends SmComponentPanel {
 		}
 
 		private void initResources() {
-			this.labelDatasource.setText(DataViewProperties.getString("String_SQLQueryLabelDatasource"));
-			this.labelDataset.setText(DataViewProperties.getString("String_SQLQueryLabelDataset"));
+			this.labelDatasource.setText(ControlsProperties.getString("String_Label_Datasource"));
+			this.labelDataset.setText(ControlsProperties.getString("String_Label_Dataset"));
 		}
 
 		@Override

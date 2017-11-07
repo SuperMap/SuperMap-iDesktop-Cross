@@ -8,7 +8,6 @@ import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.dialog.JDialogGetPassword;
 import com.supermap.desktop.enums.OpenWorkspaceResult;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.LogUtilities;
@@ -33,7 +32,7 @@ public class CtrlActionWorkspaceOpenFile extends CtrlAction {
 
 			if (!SmFileChoose.isModuleExist("WorkspaceOpenFile")) {
 				String fileFilters = SmFileChoose.createFileFilter(DataViewProperties.getString("String_FileFilters_Workspace"), "smwu", "sxwu");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataViewProperties.getString("String_OpenWorkspace"), "WorkspaceOpenFile", "OpenOne");
 			}
 

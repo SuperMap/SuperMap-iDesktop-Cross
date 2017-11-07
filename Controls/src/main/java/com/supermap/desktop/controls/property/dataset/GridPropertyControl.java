@@ -10,7 +10,6 @@ import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -223,7 +222,7 @@ public class GridPropertyControl extends AbstractPropertyControl {
 		this.textFieldMinValue.setEditable(false);
 
 		JPanel panelExtreme = new JPanel();
-		panelExtreme.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString(CommonProperties.Extremum)));
+		panelExtreme.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString(CoreProperties.Extremum)));
 		panelExtreme.setLayout(new GridBagLayout());
 		panelExtreme.add(labelMaxValue, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
 		panelExtreme.add(textFieldMaxValue, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 10));
@@ -295,8 +294,8 @@ public class GridPropertyControl extends AbstractPropertyControl {
 		this.buttonSetClipRegion.setText(ControlsProperties.getString("String_Button_Setting"));
 		this.buttonClearClipRegion.setText(CoreProperties.getString(CoreProperties.Clear));
 		this.labelColorTable.setText(ControlsProperties.getString("String_LabelColorScheme"));
-		this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 	}
 	private void setComponentName() {
 		ComponentUIUtilities.setName(this.labelPixelFormat, "GridPropertyControl_labelPixelFormat");
@@ -368,9 +367,9 @@ public class GridPropertyControl extends AbstractPropertyControl {
 		this.textFieldMaxValue.setText(BigDecimal.valueOf(this.datasetGrid.getMaxValue()).toString());
 		this.textFieldMinValue.setText(BigDecimal.valueOf(this.datasetGrid.getMinValue()).toString());
 		if (this.datasetGrid.getHasPyramid()) {
-			this.textFieldHasPyramid.setText(CommonProperties.getString(CommonProperties.True));
+			this.textFieldHasPyramid.setText(CoreProperties.getString(CoreProperties.True));
 		} else {
-			this.textFieldHasPyramid.setText(CommonProperties.getString(CommonProperties.False));
+			this.textFieldHasPyramid.setText(CoreProperties.getString(CoreProperties.False));
 		}
 		this.comboBoxColors.setSelectedItem(this.colors);
 	}

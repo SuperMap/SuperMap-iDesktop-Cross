@@ -3,7 +3,6 @@ package com.supermap.desktop.dialog;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -226,20 +225,20 @@ public class DialogSaveChildForms extends SmDialog {
 	private void initializeResources() {
 		try {
 			this.setTitle(CoreProperties.getString("String_Save"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-			this.buttonCancel.setToolTipText(CommonProperties.getString("String_Button_Cancel"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonCancel.setToolTipText(CoreProperties.getString("String_Button_Cancel"));
 			this.buttonSave.setText(CoreProperties.getString("String_Save"));
 			this.buttonSave.setToolTipText(CoreProperties.getString("String_Save"));
 			this.buttonUnSave.setText(CoreProperties.getString("String_FormSaveWindow_ButtonNotSave"));
 			this.buttonUnSave.setToolTipText(CoreProperties.getString("String_FormSaveWindow_ButtonNotSave"));
 
 			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.NAME).setHeaderValue(CoreProperties.getString("String_Name"));
-			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.TYPE).setHeaderValue(CoreProperties.getString("String_DataType"));
+			tableChildForms.getColumnModel().getColumn(FormInfoTableModel.TYPE).setHeaderValue(CoreProperties.getString("String_Type"));
 
 			this.buttonActive.setText(CoreProperties.getString("String_FormSaveWindow_ToolStripButtonActive"));
 			this.buttonRename.setText(ControlsProperties.getString("String_Rename"));
-			this.buttonSelectAll.setText(CommonProperties.getString("String_ToolBar_SelectAll"));
-			this.buttonSelectInvert.setText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+			this.buttonSelectAll.setText(CoreProperties.getString("String_ToolBar_SelectAll"));
+			this.buttonSelectInvert.setText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 			this.checkBoxSaveLayer3DKML.setText(CoreProperties.getString("String_FormSaveWindow_SaveSceneLayer3DKML"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);

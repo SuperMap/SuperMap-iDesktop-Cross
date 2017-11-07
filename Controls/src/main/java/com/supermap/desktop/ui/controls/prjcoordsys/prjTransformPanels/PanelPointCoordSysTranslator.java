@@ -2,7 +2,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.DMSLatitudeTextField;
 import com.supermap.desktop.ui.controls.TextFields.DMSLongitudeTextField;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
@@ -392,7 +392,7 @@ public class PanelPointCoordSysTranslator extends JPanel {
 
 		private void initComponent() {
 			this.textField = new SmTextFieldLegit("0");
-			this.labelUnitMeter = new JLabel(CommonProperties.getString("String_DistanceUnit_Meter"));
+			this.labelUnitMeter = new JLabel(CoreProperties.getString("String_DistanceUnit_Meter"));
 		}
 
 		private void initLayout() {
@@ -503,7 +503,7 @@ public class PanelPointCoordSysTranslator extends JPanel {
 		private void initComponent() {
 			this.textField = new SmTextFieldLegit("0");
 			this.textField.setToolTipText(ControlsProperties.getString("String_RangeSection") + "[-180,180]");
-			this.labelUnitDegree = new JLabel(CommonProperties.getString("String_AngleUnit_Degree"));
+			this.labelUnitDegree = new JLabel(CoreProperties.getString("String_AngleUnit_Degree"));
 		}
 
 		private void initLayout() {

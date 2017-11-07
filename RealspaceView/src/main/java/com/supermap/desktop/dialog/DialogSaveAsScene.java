@@ -3,7 +3,7 @@ package com.supermap.desktop.dialog;
 import com.supermap.data.Scenes;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.SceneUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.realspaceview.RealspaceViewProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -132,8 +132,8 @@ public class DialogSaveAsScene extends SmDialog {
 		try {
 			this.setTitle(RealspaceViewProperties.getString("String_Form_SaveAsScene"));
 			this.lblNewLabelSceneName.setText(RealspaceViewProperties.getString("String_Label_InputSceneName"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

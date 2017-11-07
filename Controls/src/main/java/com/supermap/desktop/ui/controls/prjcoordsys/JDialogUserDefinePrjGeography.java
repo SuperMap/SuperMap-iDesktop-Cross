@@ -2,7 +2,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.GeoCoordSys;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -89,8 +89,8 @@ public class JDialogUserDefinePrjGeography extends SmDialog {
 	//endregion
 
 	private void initResources() {
-		buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initComponentStates() {

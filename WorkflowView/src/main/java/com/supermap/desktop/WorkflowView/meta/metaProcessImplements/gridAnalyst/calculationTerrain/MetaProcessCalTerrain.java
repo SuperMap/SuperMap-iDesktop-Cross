@@ -12,7 +12,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -21,7 +21,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  * 地形计算下所有功能输入、输出都为栅格数据类型，将此部分做一封装
  */
 public abstract class MetaProcessCalTerrain extends MetaProcess {
-	private static final String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	protected ParameterDatasource datasource = new ParameterDatasource();
 	protected ParameterSingleDataset sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 	protected ParameterSaveDataset parameterSaveDataset = new ParameterSaveDataset();
@@ -42,13 +42,13 @@ public abstract class MetaProcessCalTerrain extends MetaProcess {
 	private void initParameters() {
         parameterCombineSourceDataset = new ParameterCombine();
         parameterCombineSourceDataset.addParameters(this.datasource, this.sourceDataset);
-		parameterCombineSourceDataset.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
 
 		this.parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.GRID, parameterCombineSourceDataset);
 		this.parameters.setParameters(parameterCombineSourceDataset);
 
 		this.parameterCombineResultDataset.addParameters(this.parameterSaveDataset);
-		this.parameterCombineResultDataset.setDescribe(CommonProperties.getString("String_ResultSet"));
+		this.parameterCombineResultDataset.setDescribe(CoreProperties.getString("String_ResultSet"));
 	}
 
 	private void initParameterConstraint() {

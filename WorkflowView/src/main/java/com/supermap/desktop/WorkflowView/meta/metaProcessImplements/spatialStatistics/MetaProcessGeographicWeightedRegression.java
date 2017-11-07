@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -26,7 +26,7 @@ import java.beans.PropertyChangeListener;
  * @author XiaJT
  */
 public class MetaProcessGeographicWeightedRegression extends MetaProcess {
-	private static final String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private static final String OUTPUT_DATASET = "GeographicWeightedRegression";
 
 	private ParameterDatasourceConstrained datasourceConstraint = new ParameterDatasourceConstrained();
@@ -66,7 +66,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		ParameterCombine parameterCombineSourceDataset = new ParameterCombine();
 		parameterCombineSourceDataset.addParameters(datasourceConstraint);
 		parameterCombineSourceDataset.addParameters(parameterSingleDataset);
-		parameterCombineSourceDataset.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
 
 		ParameterCombine parameterSetting = new ParameterCombine();
 
@@ -111,10 +111,10 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 
 		parameterSetting.addParameters(parameterExplanatory, parameterKernelFunction, parameterModelField,
 				parameterBandWidthType, parameterKernelType, parameterSwitchParent);
-		parameterSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 
 		ParameterCombine parameterResultSet = new ParameterCombine();
-		parameterResultSet.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterResultSet.setDescribe(CoreProperties.getString("String_ResultSet"));
 		parameterResultSet.addParameters(parameterSaveDataset);
 
 		parameters.setParameters(parameterCombineSourceDataset, parameterSetting, parameterResultSet);

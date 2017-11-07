@@ -10,7 +10,7 @@ import com.supermap.desktop.implement.UserDefineType.ExportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.ExportSettingGPX;
 import com.supermap.desktop.implement.UserDefineType.UserDefineExportResult;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import java.io.File;
@@ -49,7 +49,7 @@ public class ExportCallable extends UpdateProgressCallable {
 				ExportFileInfo fileInfo = exportPanels.get(i).getExportsFileInfo();
 				ExportSetting tempExportSetting = fileInfo.getExportSetting();
 				if (null == fileInfo.getFileType()) {
-					Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_FileTypeErrorWarning"));
+					Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_FileTypeErrorWarning"));
 					continue;
 				}
 				String filePath = getFilePath(fileInfo, fileInfo.getFileName());
@@ -168,7 +168,7 @@ public class ExportCallable extends UpdateProgressCallable {
 				int count = exportPanels.size();
 				int totalPercent = (100 * this.i + arg0.getSubPercent()) / count;
 				updateProgressTotal(arg0.getSubPercent(),
-						MessageFormat.format(CommonProperties.getString("String_TotalTaskNumber"), String.valueOf(exportPanels.size())),
+						MessageFormat.format(CoreProperties.getString("String_TotalTaskNumber"), String.valueOf(exportPanels.size())),
 						totalPercent,
 						MessageFormat.format(DataConversionProperties.getString("String_DatasetOutport"), ((Dataset) arg0.getCurrentTask().getSourceData()).getName()));
 			} catch (CancellationException e) {

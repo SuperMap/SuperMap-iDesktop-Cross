@@ -2,7 +2,7 @@ package com.supermap.desktop.ui;
 
 import com.supermap.data.FieldInfos;
 import com.supermap.desktop.Interface.IFormTabular;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -12,9 +12,9 @@ import javax.swing.table.DefaultTableModel;
 public class TableModelOutputExcel extends DefaultTableModel {
 	private FieldInfos fieldInfos;
 	private static String[] column = new String[]{
-			CommonProperties.getString("String_Name"),
-			CommonProperties.getString("String_Field_Caption"),
-			CommonProperties.getString("String_FieldType")
+			CoreProperties.getString("String_Name"),
+			CoreProperties.getString("String_Field_Caption"),
+			CoreProperties.getString("String_Type")
 	};
 
 	public TableModelOutputExcel(IFormTabular tabular) {

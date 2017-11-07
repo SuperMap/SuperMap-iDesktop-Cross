@@ -4,7 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.ICtrlAction;
 import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.XMLButtonDropdown;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -14,11 +14,7 @@ import com.supermap.desktop.utilities.PathUtilities;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 
@@ -103,7 +99,7 @@ public class SmButtonDropdown extends JComponent implements IBaseItem {
                 setCtrlAction(ctrlAction);
                 Application.getActiveApplication().setCtrlAction(xmlCommand.getPluginInfo().getBundleName(), xmlCommand.getCtrlActionClass(), ctrlAction);
             } else {
-                this.setToolTipText(this.getToolTipText() + CommonProperties.getString("String_UnDo"));
+	            this.setToolTipText(this.getToolTipText() + CoreProperties.getString("String_UnDo"));
             }
 
             displayButton.addActionListener(new ActionListener() {

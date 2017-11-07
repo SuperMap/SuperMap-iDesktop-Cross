@@ -5,7 +5,7 @@ import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.event.NewWindowEvent;
 import com.supermap.desktop.event.NewWindowListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import java.util.HashMap;
@@ -709,30 +709,30 @@ public class CommonToolkit {
 
 			datasetTypes = new HashMap<DatasetType, String>(22);
 
-			datasetTypes.put(DatasetType.TABULAR, CommonProperties.getString("String_DatasetType_Tabular"));
-			datasetTypes.put(DatasetType.POINT, CommonProperties.getString("String_DatasetType_Point"));
-			datasetTypes.put(DatasetType.LINE, CommonProperties.getString("String_DatasetType_Line"));
-			datasetTypes.put(DatasetType.NETWORK, CommonProperties.getString("String_DatasetType_Network"));
-			datasetTypes.put(DatasetType.REGION, CommonProperties.getString("String_DatasetType_Region"));
-			datasetTypes.put(DatasetType.TEXT, CommonProperties.getString("String_DatasetType_Text"));
-			datasetTypes.put(DatasetType.PARAMETRICLINE, CommonProperties.getString("String_DatasetType_ParametricLine"));
-			datasetTypes.put(DatasetType.PARAMETRICREGION, CommonProperties.getString("String_DatasetType_ParametricRegion"));
-			datasetTypes.put(DatasetType.IMAGE, CommonProperties.getString("String_DatasetType_Image"));
-			datasetTypes.put(DatasetType.GRID, CommonProperties.getString("String_DatasetType_Grid"));
-			datasetTypes.put(DatasetType.WMS, CommonProperties.getString("String_DatasetType_WMS"));
-			datasetTypes.put(DatasetType.WCS, CommonProperties.getString("String_DatasetType_WCS"));
-			datasetTypes.put(DatasetType.POINT3D, CommonProperties.getString("String_DatasetType_Point3D"));
-			datasetTypes.put(DatasetType.LINE3D, CommonProperties.getString("String_DatasetType_Line3D"));
-			datasetTypes.put(DatasetType.LINEM, CommonProperties.getString("String_DatasetType_LineM"));
-			datasetTypes.put(DatasetType.REGION3D, CommonProperties.getString("String_DatasetType_Region3D"));
-			datasetTypes.put(DatasetType.CAD, CommonProperties.getString("String_DatasetType_CAD"));
-			datasetTypes.put(DatasetType.LINKTABLE, CommonProperties.getString("String_DatasetType_LinkTable"));
-			datasetTypes.put(DatasetType.TOPOLOGY, CommonProperties.getString("String_DatasetType_Topology"));
-			datasetTypes.put(DatasetType.GRIDCOLLECTION, CommonProperties.getString("String_DatasetType_GridCollection"));
-			datasetTypes.put(DatasetType.IMAGECOLLECTION, CommonProperties.getString("String_DatasetType_ImageCollection"));
-			datasetTypes.put(DatasetType.MODEL, CommonProperties.getString("String_DatasetType_Model"));
-			datasetTypes.put(DatasetType.IMAGECOLLECTION, CommonProperties.getString("String_DatasetType_ImageCollection"));
-			datasetTypes.put(DatasetType.NETWORK3D, CommonProperties.getString("String_DatasetType_Network3D"));
+			datasetTypes.put(DatasetType.TABULAR, CoreProperties.getString("String_DatasetType_Tabular"));
+			datasetTypes.put(DatasetType.POINT, CoreProperties.getString("String_DatasetType_Point"));
+			datasetTypes.put(DatasetType.LINE, CoreProperties.getString("String_DatasetType_Line"));
+			datasetTypes.put(DatasetType.NETWORK, CoreProperties.getString("String_DatasetType_Network"));
+			datasetTypes.put(DatasetType.REGION, CoreProperties.getString("String_DatasetType_Region"));
+			datasetTypes.put(DatasetType.TEXT, CoreProperties.getString("String_DatasetType_Text"));
+			datasetTypes.put(DatasetType.PARAMETRICLINE, CoreProperties.getString("String_DatasetType_ParametricLine"));
+			datasetTypes.put(DatasetType.PARAMETRICREGION, CoreProperties.getString("String_DatasetType_ParametricRegion"));
+			datasetTypes.put(DatasetType.IMAGE, CoreProperties.getString("String_DatasetType_Image"));
+			datasetTypes.put(DatasetType.GRID, CoreProperties.getString("String_DatasetType_Grid"));
+			datasetTypes.put(DatasetType.WMS, CoreProperties.getString("String_DatasetType_WMS"));
+			datasetTypes.put(DatasetType.WCS, CoreProperties.getString("String_DatasetType_WCS"));
+			datasetTypes.put(DatasetType.POINT3D, CoreProperties.getString("String_DatasetType_Point3D"));
+			datasetTypes.put(DatasetType.LINE3D, CoreProperties.getString("String_DatasetType_Line3D"));
+			datasetTypes.put(DatasetType.LINEM, CoreProperties.getString("String_DatasetType_LineM"));
+			datasetTypes.put(DatasetType.REGION3D, CoreProperties.getString("String_DatasetType_Region3D"));
+			datasetTypes.put(DatasetType.CAD, CoreProperties.getString("String_DatasetType_CAD"));
+			datasetTypes.put(DatasetType.LINKTABLE, CoreProperties.getString("String_DatasetType_LinkTable"));
+			datasetTypes.put(DatasetType.TOPOLOGY, CoreProperties.getString("String_DatasetType_Topology"));
+			datasetTypes.put(DatasetType.GRIDCOLLECTION, CoreProperties.getString("String_DatasetType_GridCollection"));
+			datasetTypes.put(DatasetType.IMAGECOLLECTION, CoreProperties.getString("String_DatasetType_ImageCollection"));
+			datasetTypes.put(DatasetType.MODEL, CoreProperties.getString("String_DatasetType_Model"));
+			datasetTypes.put(DatasetType.IMAGECOLLECTION, CoreProperties.getString("String_DatasetType_ImageCollection"));
+			datasetTypes.put(DatasetType.NETWORK3D, CoreProperties.getString("String_DatasetType_Network3D"));
 		}
 
 		/**
@@ -771,7 +771,7 @@ public class CommonToolkit {
 			try {
 				initialize();
 				if (datasetTypes.get(type) == null) {
-					result = CommonProperties.getString("String_DatasetType_Unknown");
+					result = CoreProperties.getString("String_DatasetType_Unknown");
 				} else {
 					result = datasetTypes.get(type);
 				}
@@ -1368,16 +1368,16 @@ public class CommonToolkit {
 			}
 			encodeTypes = new HashMap<EncodeType, String>(10);
 
-			encodeTypes.put(EncodeType.NONE, CommonProperties.getString("String_EncodeType_None"));
-			encodeTypes.put(EncodeType.BYTE, CommonProperties.getString("String_EncodeType_Byte"));
-			encodeTypes.put(EncodeType.INT16, CommonProperties.getString("String_EncodeType_Int16"));
-			encodeTypes.put(EncodeType.INT24, CommonProperties.getString("String_EncodeType_Int24"));
-			encodeTypes.put(EncodeType.INT32, CommonProperties.getString("String_EncodeType_Int32"));
-			encodeTypes.put(EncodeType.DCT, CommonProperties.getString("String_EncodeType_DCT"));
-			encodeTypes.put(EncodeType.SGL, CommonProperties.getString("String_EncodeType_SGL"));
-			encodeTypes.put(EncodeType.LZW, CommonProperties.getString("String_EncodeType_LZW"));
-			encodeTypes.put(EncodeType.PNG, CommonProperties.getString("String_EncodeType_PNG"));
-			encodeTypes.put(EncodeType.COMPOUND, CommonProperties.getString("String_EncodeType_Compound"));
+			encodeTypes.put(EncodeType.NONE, CoreProperties.getString("String_EncodeType_None"));
+			encodeTypes.put(EncodeType.BYTE, CoreProperties.getString("String_EncodeType_Byte"));
+			encodeTypes.put(EncodeType.INT16, CoreProperties.getString("String_EncodeType_Int16"));
+			encodeTypes.put(EncodeType.INT24, CoreProperties.getString("String_EncodeType_Int24"));
+			encodeTypes.put(EncodeType.INT32, CoreProperties.getString("String_EncodeType_Int32"));
+			encodeTypes.put(EncodeType.DCT, CoreProperties.getString("String_EncodeType_DCT"));
+			encodeTypes.put(EncodeType.SGL, CoreProperties.getString("String_EncodeType_SGL"));
+			encodeTypes.put(EncodeType.LZW, CoreProperties.getString("String_EncodeType_LZW"));
+			encodeTypes.put(EncodeType.PNG, CoreProperties.getString("String_EncodeType_PNG"));
+			encodeTypes.put(EncodeType.COMPOUND, CoreProperties.getString("String_EncodeType_Compound"));
 		}
 
 		/**
@@ -1416,7 +1416,7 @@ public class CommonToolkit {
 			try {
 				initialize();
 				if (encodeTypes.get(type) == null) {
-					result = CommonProperties.getString("String_EncodeType_None");
+					result = CoreProperties.getString("String_EncodeType_None");
 				} else {
 					result = encodeTypes.get(type);
 				}

@@ -4,7 +4,7 @@ import com.supermap.data.TransformationMode;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -136,7 +136,7 @@ public class JDialogNewTransformation extends SmDialog {
 	private void initResources() {
 		buttonPre.setText(ControlsProperties.getString("String_LastWay"));
 		buttonNext.setText(ControlsProperties.getString("String_NextWay"));
-		buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initComponentStates() {

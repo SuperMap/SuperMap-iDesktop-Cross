@@ -16,7 +16,7 @@ import com.supermap.desktop.event.GlobalParametersChangedEvent;
 import com.supermap.desktop.event.GlobalParametersChangedListener;
 import com.supermap.desktop.event.TableCellValueChangeEvent;
 import com.supermap.desktop.event.TableCellValueChangeListener;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.Convert;
@@ -180,8 +180,8 @@ public class GeometryRecordsetPropertyControl extends AbstractPropertyControl {
 	private void initResources() {
 		this.checkBoxHideSysField.setText(ControlsProperties.getString("String_Hidden_SystemField"));
 		this.checkBoxHideDetail.setText(ControlsProperties.getString("String_DetailInfo"));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
-		this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
+		this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
 	}
 
 	private void registerEvents() {
@@ -455,21 +455,21 @@ public class GeometryRecordsetPropertyControl extends AbstractPropertyControl {
 		public String getColumnName(int column) {
 			if (!hiddenDetailed) {
 				if (column == FIELD_NAME) {
-					return CommonProperties.getString(CommonProperties.FieldName);
+					return CoreProperties.getString(CoreProperties.FieldName);
 				} else if (column == FIELD_CAPTION) {
-					return CommonProperties.getString(CommonProperties.Caption);
+					return CoreProperties.getString(CoreProperties.Caption);
 				} else if (column == FIELD_TYPE) {
-					return CommonProperties.getString(CommonProperties.FieldType);
+					return CoreProperties.getString(CoreProperties.FieldType);
 				} else if (column == IS_REQUIRED) {
-					return CommonProperties.getString(CommonProperties.IsRequired);
+					return CoreProperties.getString(CoreProperties.IsRequired);
 				} else if (column == FIELD_VALUE) {
-					return CommonProperties.getString(CommonProperties.FieldValue);
+					return CoreProperties.getString(CoreProperties.FieldValue);
 				}
 			} else {
 				if (column == FIELD_NAME) {
-					return CommonProperties.getString(CommonProperties.Caption);
+					return CoreProperties.getString(CoreProperties.Caption);
 				} else if (column == getColumnCount() - 1) {
-					return CommonProperties.getString(CommonProperties.FieldValue);
+					return CoreProperties.getString(CoreProperties.FieldValue);
 				}
 			}
 			return null;

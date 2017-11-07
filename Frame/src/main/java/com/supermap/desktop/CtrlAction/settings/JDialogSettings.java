@@ -3,7 +3,7 @@ package com.supermap.desktop.CtrlAction.settings;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.frame.FrameProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -122,8 +122,8 @@ public class JDialogSettings extends SmDialog {
 	}
 
 	private void initResource() {
-		smButtonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		smButtonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+		smButtonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		smButtonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initComponentState() {

@@ -1,21 +1,13 @@
 package com.supermap.desktop.newtheme.saveThemeAsDataset;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.DatasetVectorInfo;
-import com.supermap.data.Datasource;
-import com.supermap.data.EncodeType;
-import com.supermap.data.Geometry;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -207,11 +199,11 @@ public class DiglogSaveThemeAsDataset extends SmDialog {
 	 */
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_SaveAsDataset"));
-		this.datasourcesLabel.setText(CommonProperties.getString("String_Label_Datasource"));
+		this.datasourcesLabel.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.datasourceTypeLabel.setText(MapViewProperties.getString("String_Label_DatasetType"));
 		this.datasourceNameLabel.setText(ControlsProperties.getString("String_Label_DatasetName"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
 	}
 
 	/**
@@ -282,7 +274,7 @@ public class DiglogSaveThemeAsDataset extends SmDialog {
 				//保存失败
 				Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutFailed"));
 				if (toDatasource == null) {
-					Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_Label_Datasource") + toDatasource);
+					Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_Label_Datasource") + toDatasource);
 				} else if (outDatasetType == null) {
 					Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_Label_DatasetType") + outDatasetType);
 				}

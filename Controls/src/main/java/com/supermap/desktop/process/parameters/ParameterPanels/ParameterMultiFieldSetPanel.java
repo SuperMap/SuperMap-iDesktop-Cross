@@ -8,7 +8,7 @@ import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListe
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterMultiFieldSet;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.SmMultiFieldsChooseTable;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
@@ -52,7 +52,7 @@ public class ParameterMultiFieldSetPanel extends SwingPanel {
 		panel.setLayout(new GridBagLayout());
 		panel.add(scrollPane, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.BOTH).setWeight(1, 1));
 		scrollPane.setViewportView(multiFieldsChooseTable);
-		panel.setBorder(new TitledBorder(CommonProperties.getString("String_AddFields")));
+		panel.setBorder(new TitledBorder(CoreProperties.getString("String_AddFields")));
 	}
 
 	private void registEvents() {

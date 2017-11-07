@@ -3,7 +3,7 @@ package com.supermap.desktop.dialog;
 import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.DateTimeComponent.CalendarChooser;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -88,9 +88,9 @@ public class JDialogFindTrack extends SmDialog {
 		this.labelPhoneNumber = new JLabel("电话号码:");
 		this.textPhoneNumber = new JTextField("18645392679");
 		this.buttonOK = new JButton("OK");
-		this.buttonOK.setText(CommonProperties.getString("String_Button_OK"));
+		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
 		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		
 		this.getRootPane().setDefaultButton(this.buttonOK);
 		

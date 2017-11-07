@@ -2,7 +2,7 @@ package com.supermap.desktop.ui.controls.ChooseTable;
 
 import com.supermap.data.DatasetVector;
 import com.supermap.data.FieldInfo;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CheckHeaderCellRenderer;
 import com.supermap.desktop.utilities.FieldTypeUtilities;
 
@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class SmMultiFieldsChooseTable extends JTable {
 	MultipleCheckboxTableModel checkTableModle = null;
-	private final Object[] TABLETITLE = {"", CommonProperties.getString("String_SourceFieldName")
-			, CommonProperties.getString("String_TargetFieldName"), CommonProperties.getString("String_Field_Type")};
+	private final Object[] TABLETITLE = {"", CoreProperties.getString("String_SourceFieldName")
+			, CoreProperties.getString("String_TargetFieldName"), CoreProperties.getString("String_Field_Type")};
 	private final boolean[] ENABLECOLUMNS = {true, false, true, false};
 	private final int checkColumnIndexMaxSize = 40;
 	private final int rowHeight = 23;

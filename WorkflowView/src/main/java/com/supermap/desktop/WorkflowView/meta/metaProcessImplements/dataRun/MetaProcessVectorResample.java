@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -30,7 +30,7 @@ import java.text.MessageFormat;
  * 重采样会修改原数据，当操作的面数据集为只读数据集时，设置为不能进行拓扑预处理
  */
 public class MetaProcessVectorResample extends MetaProcess {
-	private final static String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "VectorResampleResult";
 
 	private ParameterDatasourceConstrained datasource;
@@ -85,7 +85,7 @@ public class MetaProcessVectorResample extends MetaProcess {
 		this.parameterResampleTolerance.setRequisite(true);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
-		parameterCombineParameter.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineParameter.addParameters(this.parameterResampleType, this.parameterResampleTolerance, this.parameterIsSaveSmallGeometry,
 				this.parameterIsTopologyPreprocess, this.parameterVertexTolerance);
 

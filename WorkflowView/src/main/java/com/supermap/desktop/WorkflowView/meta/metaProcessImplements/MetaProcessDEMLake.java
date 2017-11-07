@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -28,8 +28,8 @@ import java.beans.PropertyChangeListener;
  * Created by Chen on 2017/6/22 0022.
  */
 public class MetaProcessDEMLake extends MetaProcess {
-	private final static String DEM_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private final static String LAKE_DATA = CommonProperties.getString("String_GroupBox_LakeData");
+	private final static String DEM_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final static String LAKE_DATA = CoreProperties.getString("String_GroupBox_LakeData");
 	private final static String OUTPUT_DATA = "DEMLakeResult";
 
 	private ParameterDatasourceConstrained DEMDatasource;
@@ -64,9 +64,9 @@ public class MetaProcessDEMLake extends MetaProcess {
 	private void initParameters() {
 	    /*Parameters*/
 		DEMDatasource = new ParameterDatasourceConstrained();
-		DEMDatasource.setDescribe(CommonProperties.getString("String_DEMDatasource"));
+		DEMDatasource.setDescribe(CoreProperties.getString("String_DEMDatasource"));
 		DEMDataset = new ParameterSingleDataset(DatasetType.GRID);
-		DEMDataset.setDescribe(CommonProperties.getString("String_DEMDataset"));
+		DEMDataset.setDescribe(CoreProperties.getString("String_DEMDataset"));
 		DatasetGrid datasetGrid = DatasetUtilities.getDefaultDatasetGrid();
 		if (datasetGrid != null) {
 			DEMDatasource.setSelectedItem(datasetGrid.getDatasource());
@@ -98,14 +98,14 @@ public class MetaProcessDEMLake extends MetaProcess {
 
         /*GroupBox*/
 		ParameterCombine DEMDataCombine = new ParameterCombine();
-		DEMDataCombine.setDescribe(CommonProperties.getString("String_GroupBox_DEMData"));
+		DEMDataCombine.setDescribe(CoreProperties.getString("String_GroupBox_DEMData"));
 		DEMDataCombine.addParameters(DEMDatasource, DEMDataset);
 
 		ParameterCombine lakeDataCombine = new ParameterCombine();
-		lakeDataCombine.setDescribe(CommonProperties.getString("String_GroupBox_LakeData"));
+		lakeDataCombine.setDescribe(CoreProperties.getString("String_GroupBox_LakeData"));
 		lakeDataCombine.addParameters(lakeDatasource, lakeDataset);
 		ParameterCombine parameterSetting = new ParameterCombine();
-		parameterSetting.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
 		parameterSetting.addParameters(fieldOrValue, heightFieldComboBox, heightValue);
 		this.parameters.setParameters(DEMDataCombine, lakeDataCombine, parameterSetting);
 		this.parameters.addInputParameters(DEM_DATA, DatasetTypes.GRID, DEMDataCombine);

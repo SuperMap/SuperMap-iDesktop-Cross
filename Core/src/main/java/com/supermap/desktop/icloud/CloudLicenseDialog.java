@@ -9,7 +9,6 @@ import com.supermap.desktop.icloud.commontypes.LicenseId;
 import com.supermap.desktop.icloud.commontypes.ProductType;
 import com.supermap.desktop.icloud.impl.LicenseServiceFactory;
 import com.supermap.desktop.icloud.online.AuthenticationException;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.CoreResources;
@@ -112,7 +111,7 @@ public class CloudLicenseDialog extends JDialog {
         CloseableHttpClient client = LicenseServiceFactory.getClient(userName, passWord);
         if (null == client) {
             this.labelWarning.setForeground(Color.red);
-            this.labelWarning.setText(CommonProperties.getString("String_PermissionCheckFailed"));
+	        this.labelWarning.setText(CoreProperties.getString("String_PermissionCheckFailed"));
         } else {
             this.labelWarning.setText("");
             try {

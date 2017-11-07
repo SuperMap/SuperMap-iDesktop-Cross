@@ -3,7 +3,6 @@ package com.supermap.desktop.dialog;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -193,17 +192,17 @@ public class JDialogSizeableTemplate extends SmDialog {
 	private void initializeResources() {
 		try {
 			this.setTitle(CoreProperties.getString("String_Save"));
-			this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-			this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
 
 			table.getColumnModel().getColumn(1).setHeaderValue(CoreProperties.getString("String_Name"));
-			table.getColumnModel().getColumn(2).setHeaderValue(CoreProperties.getString("String_DataType"));
+			table.getColumnModel().getColumn(2).setHeaderValue(CoreProperties.getString("String_Type"));
 
-			this.buttonDelete.setText(CommonProperties.getString("String_ToolBar_Delete"));
-			this.buttonSetting.setText(CommonProperties.getString("String_ToolBar_SetBatch"));
-			this.buttonSelectAll.setText(CommonProperties.getString("String_ToolBar_SelectAll"));
-			this.buttonSelectInvert.setText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-			this.chckbxAutoClose.setText(CommonProperties.getString("String_CheckBox_CloseDialog"));
+			this.buttonDelete.setText(CoreProperties.getString("String_ToolBar_Delete"));
+			this.buttonSetting.setText(CoreProperties.getString("String_ToolBar_SetBatch"));
+			this.buttonSelectAll.setText(CoreProperties.getString("String_ToolBar_SelectAll"));
+			this.buttonSelectInvert.setText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+			this.chckbxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

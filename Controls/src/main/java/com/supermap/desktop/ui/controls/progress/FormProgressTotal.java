@@ -5,7 +5,7 @@ import com.supermap.desktop.Interface.IAfterWork;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.progress.Interface.IUpdateProgress;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
 import javax.swing.*;
@@ -54,7 +54,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 		labelTotalMessage = new JLabel("...");
 		labelRemaintime = new JLabel("...");
 		labelCurrentMessage = new JLabel("...");
-		buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+		buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 
 		GroupLayout groupLayout = new GroupLayout(this.getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);
@@ -138,7 +138,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+							buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 							buttonCancel.setEnabled(true);
 							setVisible(false);
 						}
@@ -146,7 +146,14 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 				}
 			}
 		};
-		worker.execute();
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				worker.execute();
+			}
+		});
+
 		if (null != this) {
 			this.setVisible(true);
 		}
@@ -188,7 +195,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+							buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 							buttonCancel.setEnabled(true);
 							setVisible(false);
 						}
@@ -197,7 +204,13 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 			}
 		};
 
-		worker.execute();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				worker.execute();
+			}
+		});
+
 		if (null != this) {
 			this.setVisible(true);
 		}
@@ -291,7 +304,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CommonProperties.getString(CommonProperties.BeingCanceled));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancelling));
 					buttonCancel.setEnabled(false);
 				}
 			});
@@ -299,7 +312,7 @@ public class FormProgressTotal extends JDialog implements IUpdateProgress {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+					buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 					buttonCancel.setEnabled(true);
 				}
 			});

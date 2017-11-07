@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasetChooseTable;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.text.MessageFormat;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Created by lixiaoyao on 2017/8/31.
  */
 public class MetaProcessDataUpdate extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "DataUpdateResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -44,15 +44,15 @@ public class MetaProcessDataUpdate extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDatasource.setReadOnlyNeeded(false);
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.IMAGE);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.chooseTable = new ParameterDatasetChooseTable();
 
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_TargetData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_TargetData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 
 		this.parameters.setParameters(sourceData, this.chooseTable);

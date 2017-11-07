@@ -12,7 +12,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
  * 碎多边形合并
  */
 public class MetaProcessEliminate extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "EliminateResult";
 
 	private ParameterDatasourceConstrained sourceDatasources;
@@ -49,10 +49,10 @@ public class MetaProcessEliminate extends MetaProcess {
 		checkBoxDelete = new ParameterCheckBox(ProcessProperties.getString("String_ColumnDeleteSingleRegion"));
 
 		ParameterCombine sourceCombine = new ParameterCombine();
-		sourceCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasources, sourceDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
-		settingCombine.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		settingCombine.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		settingCombine.addParameters(checkBoxDelete, numberTolerance, numberArea);
 
 		parameters.setParameters(sourceCombine, settingCombine);

@@ -14,7 +14,6 @@ import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListener;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 
@@ -174,7 +173,7 @@ public class ParameterPatternsParameter extends ParameterCombine {
 			this.addParameters(this.parameterCheckBoxFDRAdjusted);
 		}
 
-		this.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		this.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 	}
 
 	private void initParameterState() {

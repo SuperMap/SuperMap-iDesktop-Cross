@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -23,7 +23,7 @@ import java.beans.PropertyChangeListener;
  * Created by lixiaoyao on 2017/10/17.
  */
 public class MetaProcessIntegrate extends MetaProcess {
-	private static final String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "IntegrateResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -56,9 +56,9 @@ public class MetaProcessIntegrate extends MetaProcess {
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.sourceDatasource.setReadOnlyNeeded(false);
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.sourceDataset.setRequisite(true);
 		this.numberTolerance = new ParameterNumber(ProcessProperties.getString("String_IntegrateTolerance"));
 		this.numberTolerance.setRequisite(true);
@@ -67,10 +67,10 @@ public class MetaProcessIntegrate extends MetaProcess {
 		changeUnit(null);
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 		ParameterCombine parameterSetting = new ParameterCombine();
-		parameterSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterSetting.addParameters(this.numberTolerance, this.comboBoxUnit);
 		this.parameters.setParameters(sourceData, parameterSetting);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.SIMPLE_VECTOR, sourceData);

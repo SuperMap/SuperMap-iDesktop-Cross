@@ -17,7 +17,7 @@ public enum CirculationType {
 
 	private String description;
 
-	private CirculationType(String description) {
+	CirculationType(String description) {
 		this.description = description;
 	}
 
@@ -27,8 +27,27 @@ public enum CirculationType {
 	}
 
 	public String getName() {
-		String descriptionStr = "String_";
-		return ProcessProperties.getString(descriptionStr + description);
+		String result = null;
+		switch (this) {
+			case forType:
+				result = ProcessProperties.getString("String_ForType");
+				break;
+			case forFieldType:
+				result = ProcessProperties.getString("String_ForFieldType");
+				break;
+			case forDatasetType:
+				result = ProcessProperties.getString("String_ForDatasetType");
+				break;
+			case forObjectType:
+				result = ProcessProperties.getString("String_ForObjectType");
+				break;
+			case forDatasourceType:
+				result = ProcessProperties.getString("String_ForDatasourceType");
+				break;
+			default:
+				break;
+		}
+		return result;
 	}
 
 	//先支持一种类型

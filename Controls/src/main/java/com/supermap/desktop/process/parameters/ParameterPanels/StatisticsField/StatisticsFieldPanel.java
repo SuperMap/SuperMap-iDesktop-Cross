@@ -6,7 +6,7 @@ import com.supermap.data.FieldInfo;
 import com.supermap.data.FieldInfos;
 import com.supermap.data.FieldType;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.ListFieldTypeCellRender;
 import com.supermap.desktop.ui.controls.CellRenders.ListStatisticsTypeCellRender;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -121,7 +121,7 @@ public class StatisticsFieldPanel extends JPanel {
 		buttonSelectAll = new SmButton();
 		buttonSelectInvert = new SmButton();
 		buttonDel = new SmButton();
-		labelStatisticsType = new JLabel(CommonProperties.getString("String_StatisticType"));
+		labelStatisticsType = new JLabel(CoreProperties.getString("String_StatisticType"));
 		comboBoxStatisticsType = new JComboBox<>();
 		comboBoxStatisticsType.setPreferredSize(new Dimension(150, 23));
 		comboBoxStatisticsType.setMinimumSize(new Dimension(150, 23));
@@ -322,11 +322,11 @@ public class StatisticsFieldPanel extends JPanel {
 		buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		buttonDel.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 
-		buttonScreening.setToolTipText(CommonProperties.getString(CommonProperties.AddField));
-		buttonAddNew.setToolTipText(CommonProperties.getString(CommonProperties.createField));
-		buttonSelectAll.setToolTipText(CommonProperties.getString(CommonProperties.selectAll));
-		buttonSelectInvert.setToolTipText(CommonProperties.getString(CommonProperties.selectInverse));
-		buttonDel.setToolTipText(CommonProperties.getString(CommonProperties.Delete));
+		buttonScreening.setToolTipText(CoreProperties.getString(CoreProperties.AddField));
+		buttonAddNew.setToolTipText(CoreProperties.getString(CoreProperties.createField));
+		buttonSelectAll.setToolTipText(CoreProperties.getString(CoreProperties.selectAll));
+		buttonSelectInvert.setToolTipText(CoreProperties.getString(CoreProperties.selectInverse));
+		buttonDel.setToolTipText(CoreProperties.getString(CoreProperties.Delete));
 	}
 
 	private void initLayout() {
@@ -504,7 +504,7 @@ public class StatisticsFieldPanel extends JPanel {
 		private ArrayList<StatisticsFieldInfo> selectedInfos = new ArrayList<>();
 
 		public JDialogAdd() {
-			this.setTitle(CommonProperties.getString(CommonProperties.AddField));
+			this.setTitle(CoreProperties.getString(CoreProperties.AddField));
 			this.initComponent();
 			this.initLayout();
 			this.registerListener();
@@ -524,10 +524,10 @@ public class StatisticsFieldPanel extends JPanel {
 			buttonSelectInvert = new SmButton();
 			buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 			buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-			buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-			buttonSelectInvert.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-			buttonOK.setText(CommonProperties.getString(CommonProperties.OK));
-			buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+			buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+			buttonSelectInvert.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+			buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+			buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 			scrollPane = new JScrollPane();
 			table = new SmSortTable();
 			this.initTable();

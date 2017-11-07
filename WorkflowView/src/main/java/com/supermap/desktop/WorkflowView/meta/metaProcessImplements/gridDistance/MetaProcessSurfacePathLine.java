@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -36,7 +36,7 @@ import java.beans.PropertyChangeListener;
  */
 public class MetaProcessSurfacePathLine extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "DEMPathLine";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -86,12 +86,12 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 	private void initParameters() {
 		// 源数据
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 
 		// 参数设置
@@ -116,12 +116,12 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 		parameterCombineCopyPaste.setWeightIndex(0);
 
 		// 光滑方式
-		parameterPathLineSmoothMethod = new ParameterComboBox(CommonProperties.getString("String_SmoothMethod"));
-		parameterPathLineSmoothMethod.setItems(new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
+		parameterPathLineSmoothMethod = new ParameterComboBox(CoreProperties.getString("String_SmoothMethod"));
+		parameterPathLineSmoothMethod.setItems(new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		// 光滑系数
-		parameterPathLineSmoothDegree = new ParameterNumber(CommonProperties.getString("String_Smooth"));
+		parameterPathLineSmoothDegree = new ParameterNumber(CoreProperties.getString("String_Smooth"));
 		parameterPathLineSmoothDegree.setSelectedItem("2");
 		parameterPathLineSmoothDegree.setMinValue(2);
 		parameterPathLineSmoothDegree.setMaxValue(10);
@@ -161,7 +161,7 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(sourceData, parameterCombineSet, resultData);

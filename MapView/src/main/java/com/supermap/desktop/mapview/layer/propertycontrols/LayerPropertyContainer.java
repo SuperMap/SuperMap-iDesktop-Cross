@@ -9,7 +9,7 @@ import com.supermap.desktop.event.ActiveFormChangedListener;
 import com.supermap.desktop.event.ActiveLayersChangedEvent;
 import com.supermap.desktop.event.ActiveLayersChangedListener;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -236,7 +236,7 @@ public class LayerPropertyContainer extends JPanel {
 
 	private void initializeResources() {
 		this.checkBoxIsAutoApply.setText(ControlsProperties.getString("String_AutoApply"));
-		this.buttonApply.setText(CommonProperties.getString("String_Button_Apply"));
+		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
 	}
 
 	private void registerEvents() {

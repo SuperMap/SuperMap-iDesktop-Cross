@@ -1,7 +1,7 @@
 package com.supermap.desktop.process.parameters.ParameterPanels.MultiBufferRadioList;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MultiBufferRadioListTableModel extends DefaultTableModel {
 
 	private final String[] columnNames = new String[]{
-			CommonProperties.getString("String_ColumnHeader_Index"),
+			CoreProperties.getString("String_ColumnHeader_Index"),
 			ControlsProperties.getString("String_GeoCircle_Radius")
 	};
 

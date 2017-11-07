@@ -1,24 +1,10 @@
 package com.supermap.desktop.utilities;
 
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetGrid;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.Datasets;
-import com.supermap.data.Datasource;
-import com.supermap.data.Datasources;
-import com.supermap.data.EngineType;
-import com.supermap.data.PrjCoordSysType;
-import com.supermap.data.StatisticMode;
-import com.supermap.data.Tolerance;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.Interface.IFormManager;
-import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.Interface.IFormScene;
-import com.supermap.desktop.Interface.IFormTabular;
+import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.enums.WindowType;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerGroup;
 import com.supermap.mapping.Layers;
@@ -235,7 +221,7 @@ public class DatasetUtilities {
 	public static void deleteDataset(Dataset[] datasets) {
 		closeDataset(datasets);
 		for (int i = 0; i < datasets.length; i++) {
-			String resultInfo = MessageFormat.format(CommonProperties.getString("String_DelectDatasetSuccessfulInfo"), datasets[i]
+			String resultInfo = MessageFormat.format(CoreProperties.getString("String_DelectDatasetSuccessfulInfo"), datasets[i]
 					.getDatasource().getAlias(), datasets[i].getName());
 			datasets[i].getDatasource().getDatasets().delete(datasets[i].getName());
 			Application.getActiveApplication().getOutput().output(resultInfo);

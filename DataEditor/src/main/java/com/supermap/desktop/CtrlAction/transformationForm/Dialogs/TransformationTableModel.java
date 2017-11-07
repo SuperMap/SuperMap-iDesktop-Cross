@@ -6,7 +6,7 @@ import com.supermap.data.TransformationResampleMode;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationAddObjectBean;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.DefaultTableModel;
 import java.text.MessageFormat;
@@ -21,11 +21,11 @@ public class TransformationTableModel extends DefaultTableModel {
 
 	private List<TransformationAddObjectBean> datas = new ArrayList<>();
 	private String[] columnNames = new String[]{
-			CommonProperties.getString("String_ColumnHeader_SourceDataset"),
-			CommonProperties.getString("String_ColumnHeader_SourceDatasource"),
+			CoreProperties.getString("String_ColumnHeader_SourceDataset"),
+			CoreProperties.getString("String_ColumnHeader_SourceDatasource"),
 			DataEditorProperties.getString("String_Transformation_ColumnNeedResave"),
-			CommonProperties.getString("String_Label_Datasource"),
-			CommonProperties.getString("String_Label_Dataset"),
+			CoreProperties.getString("String_Label_Datasource"),
+			CoreProperties.getString("String_Label_Dataset"),
 	};
 	public static final int COLUMN_DATASET = 0;
 	public static final int COLUMN_DATA_SOURCE = 1;

@@ -14,7 +14,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CursorUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -64,11 +64,11 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 		parameterStatisticMode.setTipButtonMessage(ProcessProperties.getString("String_StatisticsModeSimpleTip"));
 		parameterStatisticMode1.setTipButtonMessage(ProcessProperties.getString("String_StatisticsModeSimpleTip"));
 		parameterMeshSize.setDefaultWarningValue("100");
-		parameterMeshSizeUnit.setItems(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Meter"), "Meter"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Yard"), "Yard"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Foot"), "Foot"),
-				new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Mile"), "Mile")
+		parameterMeshSizeUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), "Meter"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Yard"), "Yard"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), "Foot"),
+				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), "Mile")
 		);
 		parameterStandardFields.setSelectedItem(false);
 		parameterWeightedFields.setSelectedItem(false);

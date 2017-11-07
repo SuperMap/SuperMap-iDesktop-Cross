@@ -14,7 +14,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -22,7 +22,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  */
 public class MetaProcessCollectEvents extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "CollectEventsResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -39,18 +39,18 @@ public class MetaProcessCollectEvents extends MetaProcess {
 
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.sourceDataset.setRequisite(true);
 		this.resultDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(sourceData, targetData);

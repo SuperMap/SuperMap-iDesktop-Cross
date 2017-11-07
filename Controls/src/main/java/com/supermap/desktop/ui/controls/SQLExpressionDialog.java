@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.controls;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.table.SmTable;
 
@@ -63,7 +63,7 @@ public class SQLExpressionDialog extends SmDialog {
 	private DefaultTableModel defaultTableModel;
 	private static String[] NAMES = {ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldCaption"),
 			ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldName"),
-			ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")};
+			ControlsProperties.getString("String_Type")};
 	private transient QueryParameter filedQueryParameter;
 	private transient DialogResult dialogResult = DialogResult.CANCEL;
 	private MouseAdapter mouseAdapter = new LocalMouseAdapter();
@@ -222,8 +222,8 @@ public class SQLExpressionDialog extends SmDialog {
 	 * 初始化常用运算符的ComboBox
 	 */
 	private void initResources() {
-		this.jButtonOK.setText(CommonProperties.getString("String_Button_OK"));
-		this.jButtonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.jButtonOK.setText(CoreProperties.getString("String_Button_OK"));
+		this.jButtonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.jButtonClear.setText(ControlsProperties.getString("String_GeometryPropertyStyle3DControl_buttonClearMarkerIconFile"));
 		this.jComboBoxMathsOperation
 				.setModel(new DefaultComboBoxModel<String>(new String[]{"", "Abs()", "Acos()", "Asin()", "Atan()", "Atn2()", "Ceiling()", "Cos()", "Cot()",
@@ -592,7 +592,7 @@ public class SQLExpressionDialog extends SmDialog {
 ////				80);
 ////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_GeometryPropertyTabularControl_DataGridViewColumnFieldName"))
 ////				.setPreferredWidth(100);
-////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")).setPreferredWidth(80);
+////		this.jTableFieldInfo.getColumn(ControlsProperties.getString("String_Type")).setPreferredWidth(80);
 //	}
 
 	/**

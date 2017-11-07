@@ -14,7 +14,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.PixelFormatUtilities;
 
@@ -27,8 +27,8 @@ import java.beans.PropertyChangeListener;
  */
 public class MetaProcessVectorToRaster extends MetaProcessGridAnalyst {
 
-	private final static String SOURCE_DATA = CommonProperties.getString("String_GroupBox_SourceData");
-	private final static String BOUNDARY_DATA = CommonProperties.getString("String_BoundaryData");
+	private final static String SOURCE_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final static String BOUNDARY_DATA = CoreProperties.getString("String_BoundaryData");
 	private final static String OUTPUT_DATA = "VectorToRasterResult";
 
 	//  输入数据
@@ -70,35 +70,35 @@ public class MetaProcessVectorToRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		this.sourceDatasource = new ParameterDatasourceConstrained();
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
-		this.sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		this.boundaryDatasource = new ParameterDatasourceConstrained();
-		this.boundaryDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.boundaryDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.boundaryDataset = new ParameterSingleDataset(DatasetType.REGION).setShowNullValue(true);
-		this.boundaryDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		this.boundaryDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		this.resultDataset = new ParameterSaveDataset();
 
-		this.comboBoxValueField = new ParameterFieldComboBox(CommonProperties.getString("String_m_labelGridValueFieldText"));
-		this.comboBoxPixelFormat = new ParameterComboBox(CommonProperties.getString("String_PixelType"));
-		this.textCellSize = new ParameterNumber(CommonProperties.getString("String_Resolution"));
+		this.comboBoxValueField = new ParameterFieldComboBox(CoreProperties.getString("String_m_labelGridValueFieldText"));
+		this.comboBoxPixelFormat = new ParameterComboBox(CoreProperties.getString("String_PixelType"));
+		this.textCellSize = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 
 		this.sourceData = new ParameterCombine();
-		this.sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		this.sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		this.sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 
 		this.boundaryData = new ParameterCombine();
-		this.boundaryData.setDescribe(CommonProperties.getString("String_BoundaryData"));
+		this.boundaryData.setDescribe(CoreProperties.getString("String_BoundaryData"));
 		this.boundaryData.addParameters(this.boundaryDatasource, this.boundaryDataset);
 
 		this.parameterSetting = new ParameterCombine();
-		this.parameterSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		this.parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		this.parameterSetting.addParameters(this.comboBoxValueField, this.comboBoxPixelFormat, this.textCellSize);
 
 		this.resultData = new ParameterCombine();
-		this.resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		this.resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		this.resultData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(this.sourceData, this.boundaryData, this.parameterSetting, this.resultData);

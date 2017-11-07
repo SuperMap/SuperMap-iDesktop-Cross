@@ -2,7 +2,7 @@ package com.supermap.desktop.process.ui;
 
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.process.ProcessResources;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -30,10 +30,10 @@ public class ButtonExecutor extends JButton implements MouseListener, MouseMotio
 	private final static Icon ICON_COMPLETED_NOMAL = ProcessResources.getIcon("/processresources/task/image_finish.png");
 	private final static Icon ICON_COMPLETED_HOT = ProcessResources.getIcon("/processresources/task/image_run.png");
 
-	private final static String TIP_READY = CommonProperties.getString(CommonProperties.Run);
-	private final static String TIP_RUNNING = CommonProperties.getString(CommonProperties.Cancel);
-	private final static String TIP_CANCELLING = CommonProperties.getString(CommonProperties.BeingCanceled);
-	private final static String TIP_COMPLETED = CommonProperties.getString(CommonProperties.ReRun);
+	private final static String TIP_READY = CoreProperties.getString(CoreProperties.Run);
+	private final static String TIP_RUNNING = CoreProperties.getString(CoreProperties.Cancel);
+	private final static String TIP_CANCELLING = CoreProperties.getString(CoreProperties.Cancelling);
+	private final static String TIP_COMPLETED = CoreProperties.getString(CoreProperties.ReRun);
 
 	public final static int NORMAL = 1;
 	public final static int HOT = 2;

@@ -1,26 +1,15 @@
 package com.supermap.desktop.workspacemanagerwindow;
 
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetGrid;
-import com.supermap.data.DatasetGridCollection;
-import com.supermap.data.DatasetImage;
-import com.supermap.data.DatasetImageCollection;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.Datasource;
+import com.supermap.data.*;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_NAME;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_NULL;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_NUMBER;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_PRJCOORDSYS;
-import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.COLUMN_TYPE;
+import static com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindowResources.*;
 
 /**
  * @author YuanR
@@ -60,9 +49,9 @@ public class TableModelDatasetType extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		if (column == COLUMN_NAME) {
-			return CommonProperties.getString("String_Name");
+			return CoreProperties.getString("String_Name");
 		} else if (column == COLUMN_TYPE) {
-			return CommonProperties.getString("String_Type");
+			return CoreProperties.getString("String_Type");
 		} else if (column == COLUMN_NUMBER) {
 			return DataViewProperties.getString("String_ObjectCount");
 		} else if (column == COLUMN_PRJCOORDSYS) {

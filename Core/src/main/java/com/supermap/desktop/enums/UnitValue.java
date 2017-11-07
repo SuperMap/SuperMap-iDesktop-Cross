@@ -1,7 +1,7 @@
 package com.supermap.desktop.enums;
 
 import com.supermap.data.Unit;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 public class UnitValue {
 
@@ -25,43 +25,43 @@ public class UnitValue {
 	public static String parseToString(Unit unit){
 		String result = "";
 		if (unit.equals(Unit.CENTIMETER)) {
-			result=CommonProperties.getString("String_DistanceUnit_Centimeter");
+			result = CoreProperties.getString("String_DistanceUnit_Centimeter");
 		}
 		if (unit.equals(Unit.DECIMETER)) {
-			result=CommonProperties.getString("String_DistanceUnit_Decimeter");
+			result = CoreProperties.getString("String_DistanceUnit_Decimeter");
 		}
 		if (unit.equals(Unit.DEGREE)) {
-			result=CommonProperties.getString("String_AngleUnit_Degree");
+			result = CoreProperties.getString("String_AngleUnit_Degree");
 		}
 		if (unit.equals(Unit.FOOT)) {
-			result=CommonProperties.getString("String_DistanceUnit_Foot");
+			result = CoreProperties.getString("String_DistanceUnit_Foot");
 		}
 		if (unit.equals(Unit.INCH)) {
-			result=CommonProperties.getString("String_DistanceUnit_Inch");
+			result = CoreProperties.getString("String_DistanceUnit_Inch");
 		}
 		if (unit.equals(Unit.KILOMETER)) {
-			result=CommonProperties.getString("String_DistanceUnit_Kilometer");
+			result = CoreProperties.getString("String_DistanceUnit_Kilometer");
 		}
 		if (unit.equals(Unit.METER)) {
-			result=CommonProperties.getString("String_DistanceUnit_Meter");
+			result = CoreProperties.getString("String_DistanceUnit_Meter");
 		}
 		if (unit.equals(Unit.MILE)) {
-			result=CommonProperties.getString("String_DistanceUnit_Mile");
+			result = CoreProperties.getString("String_DistanceUnit_Mile");
 		}
 		if (unit.equals(Unit.MILIMETER)) {
-			result=CommonProperties.getString("String_DistanceUnit_Millimeter");
+			result = CoreProperties.getString("String_DistanceUnit_Millimeter");
 		}
 		if (unit.equals(Unit.MINUTE)) {
-			result=CommonProperties.getString("String_AngleUnit_Minute");
+			result = CoreProperties.getString("String_AngleUnit_Minute");
 		}
 		if (unit.equals(Unit.RADIAN)) {
-			result=CommonProperties.getString("String_AngleUnit_Radian");
+			result = CoreProperties.getString("String_AngleUnit_Radian");
 		}
 		if (unit.equals(Unit.SECOND)) {
-			result=CommonProperties.getString("String_AngleUnit_Second");
+			result = CoreProperties.getString("String_AngleUnit_Second");
 		}
 		if (unit.equals(Unit.YARD)) {
-			result=CommonProperties.getString("String_DistanceUnit_Yard");
+			result = CoreProperties.getString("String_DistanceUnit_Yard");
 		}
 		return result;
 	}

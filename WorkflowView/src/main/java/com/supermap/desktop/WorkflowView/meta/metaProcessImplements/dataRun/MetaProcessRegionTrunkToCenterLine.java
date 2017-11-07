@@ -11,14 +11,14 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
  * Created by lixiaoyao on 2017/7/22.
  */
 public class MetaProcessRegionTrunkToCenterLine extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "TrunkCenterLineResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -27,7 +27,7 @@ public class MetaProcessRegionTrunkToCenterLine extends MetaProcess {
 	private ParameterSaveDataset saveDataset;
 
 	public MetaProcessRegionTrunkToCenterLine() {
-		setTitle(CommonProperties.getString("String_RegionTrunkToCenterLine"));
+		setTitle(CoreProperties.getString("String_RegionTrunkToCenterLine"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();
@@ -40,10 +40,10 @@ public class MetaProcessRegionTrunkToCenterLine extends MetaProcess {
 		this.saveDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.dataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 		this.parameters.setParameters(sourceData, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.REGION, sourceData);
@@ -66,7 +66,7 @@ public class MetaProcessRegionTrunkToCenterLine extends MetaProcess {
 			this.dataset.setSelectedItem(defaultDataset);
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 		}
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 	}
 

@@ -10,7 +10,7 @@ import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasetChooseTable;
 import com.supermap.desktop.process.parameters.ParameterPanels.JPanelDatasetChooseForParameter;
 import com.supermap.desktop.process.parameters.ParameterPanels.SwingPanel;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
 import javax.swing.border.TitledBorder;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	private ParameterDatasetChooseTable datasetChooseTable;
 	private JPanelDatasetChooseForParameter datasetChoosePanel;
-	private final String[] columnNames = {"", CommonProperties.getString("String_ColumnHeader_Dataset"), CommonProperties.getString("String_ColumnHeader_Datasource")};
+	private final String[] columnNames = {"", CoreProperties.getString("String_ColumnHeader_Dataset"), CoreProperties.getString("String_ColumnHeader_Datasource")};
 	private final boolean[] enables = {false, false, false};
 
 	public ParameterDatasetChooseTablePanel(IParameter parameter) {
@@ -63,7 +63,7 @@ public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	private void initLayout() {
 		panel.setLayout(new GridBagLayout());
 		panel.add(this.datasetChoosePanel, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(1, 1));
-		panel.setBorder(new TitledBorder(CommonProperties.getString("String_ColumnHeader_SourceData")));
+		panel.setBorder(new TitledBorder(CoreProperties.getString("String_ColumnHeader_SourceData")));
 	}
 
 	private void initComponents() {

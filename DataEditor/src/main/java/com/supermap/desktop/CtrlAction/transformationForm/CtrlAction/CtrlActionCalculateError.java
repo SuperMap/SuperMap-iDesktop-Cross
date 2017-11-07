@@ -13,7 +13,7 @@ import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.FormTransformationSubFormType;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -108,8 +108,8 @@ public class CtrlActionCalculateError extends CtrlAction {
 		JRadioButton radioButtonLinear = new JRadioButton(DataEditorProperties.getString("String_TransformationModeLINEAR"));
 		JRadioButton radioButtonSQUARE = new JRadioButton(DataEditorProperties.getString("String_TransformationModeSQUARE"));
 
-		SmButton buttonOk = new SmButton(CommonProperties.getString(CommonProperties.OK));
-		SmButton buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+		SmButton buttonOk = new SmButton(CoreProperties.getString(CoreProperties.OK));
+		SmButton buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 
 
 		JDialogChooseMode() {

@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.PixelFormatUtilities;
 
@@ -47,7 +47,7 @@ public class MetaProcessStreamGrid extends MetaProcessGridAnalyst {
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		resultDataset = new ParameterSaveDataset();
 		numberThreshold = new ParameterNumber(ProcessProperties.getString("String_Label_ThresholdGreaterThan"));
-		comboBoxPixel = new ParameterComboBox(CommonProperties.getString("String_PixelType"));
+		comboBoxPixel = new ParameterComboBox(CoreProperties.getString("String_PixelType"));
 		checkBoxIgnore = new ParameterCheckBox(ProcessProperties.getString("String_IgnoreNoValue"));
 		checkBoxZip = new ParameterCheckBox(ProcessProperties.getString("String_IsZip"));
 

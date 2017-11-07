@@ -8,7 +8,7 @@ import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.editHistory.TabularEditHistory;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tabularview.TabularViewProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.utilities.*;
@@ -1554,7 +1554,7 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 
 	private void fileChooserClicked() {
 		if (!SmFileChoose.isModuleExist("GetLongBinary")) {
-			SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), "", "GetLongBinary", "OpenOne");
+			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), "", "GetLongBinary", "OpenOne");
 		}
 		SmFileChoose fileChooserc = new SmFileChoose("GetLongBinary");
 		fileChooserc.setAcceptAllFileFilterUsed(true);

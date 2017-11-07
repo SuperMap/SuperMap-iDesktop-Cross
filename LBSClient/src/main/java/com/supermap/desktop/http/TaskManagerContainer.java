@@ -2,7 +2,7 @@ package com.supermap.desktop.http;
 
 import com.supermap.Interface.ITaskManager;
 import com.supermap.desktop.lbsclient.LBSClientProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
@@ -50,7 +50,7 @@ public class TaskManagerContainer extends JPanel {
 	}
 
 	private void initializeResources() {
-		this.buttonRun.setText(CommonProperties.getString("String_Button_OK"));
+		this.buttonRun.setText(CoreProperties.getString("String_Button_OK"));
 		this.labelTitle.setText(LBSClientProperties.getString("String_TaskType"));
 	}
 

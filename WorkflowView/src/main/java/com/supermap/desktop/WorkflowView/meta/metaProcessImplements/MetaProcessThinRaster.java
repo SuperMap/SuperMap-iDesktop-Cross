@@ -14,7 +14,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -25,7 +25,7 @@ import java.beans.PropertyChangeListener;
  * Created by lixiaoyao on 2017/7/11.
  */
 public class MetaProcessThinRaster extends MetaProcessGridAnalyst {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "ThinRasterResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -50,25 +50,25 @@ public class MetaProcessThinRaster extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.IMAGE);
-		sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		resultDataset = new ParameterSaveDataset();
 
-		textFieldNoValue = new ParameterNumber(CommonProperties.getString("String_Label_NoData"));
-		textFieldNoValueTolerance = new ParameterNumber(CommonProperties.getString("String_Label_NoValueTolerance"));
+		textFieldNoValue = new ParameterNumber(CoreProperties.getString("String_Label_NoData"));
+		textFieldNoValueTolerance = new ParameterNumber(CoreProperties.getString("String_Label_NoValueTolerance"));
 
 		sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasource, sourceDataset);
 
 		parameterSetting = new ParameterCombine();
-		parameterSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterSetting.addParameters(textFieldNoValue, textFieldNoValueTolerance);
 
 		resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(resultDataset);
 
 

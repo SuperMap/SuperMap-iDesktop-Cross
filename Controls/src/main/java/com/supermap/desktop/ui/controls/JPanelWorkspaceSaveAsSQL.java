@@ -1,7 +1,6 @@
 package com.supermap.desktop.ui.controls;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
@@ -32,11 +31,11 @@ public class JPanelWorkspaceSaveAsSQL extends JPanel {
 	 */
 	private void initResources() {
 		if (1 == index) {
-			jLabelServer.setText(CommonProperties.getString("String_Label_DataSource_Instance"));
+			jLabelServer.setText(CoreProperties.getString("String_Label_DataSource_Instance"));
 		} else {
-			jLabelServer.setText(CommonProperties.getString("String_Label_DataSource_Server"));
+			jLabelServer.setText(CoreProperties.getString("String_Label_DataSource_Server"));
 		}
-		jLabelDatabaseName.setText(CommonProperties.getString("String_Label_DatabaseName"));
+		jLabelDatabaseName.setText(CoreProperties.getString("String_Label_DatabaseName"));
 		jLabelUserName.setText(CoreProperties.getString("String_Label_DataUser"));
 		jLabelPassword.setText(CoreProperties.getString("String_Label_DataPassword"));
 		jLabelWorkspaceName.setText(CoreProperties.getString("String_Label_WorkspaceName"));

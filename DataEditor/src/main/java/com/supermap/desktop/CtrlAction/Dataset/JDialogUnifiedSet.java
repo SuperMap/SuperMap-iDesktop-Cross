@@ -4,7 +4,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -220,12 +220,12 @@ public class JDialogUnifiedSet extends JDialog {
 	 */
 	private void initResources() {
 		setTitle(DataEditorProperties.getString("String_GroupBox_ParameterSetting"));
-		okButton.setText(CommonProperties.getString("String_Button_OK"));
-		cancelButton.setText(CommonProperties.getString("String_Button_Cancel"));
+		okButton.setText(CoreProperties.getString("String_Button_OK"));
+		cancelButton.setText(CoreProperties.getString("String_Button_Cancel"));
 		panel.setBorder(new TitledBorder(null, DataEditorProperties.getString("String_GroupBox_ParameterSetting"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
-		checkboxTargetDatasource.setText(CommonProperties.getString("String_ColumnHeader_TargetDatasource"));
-		checkboxEncodeType.setText(CommonProperties.getString("String_ColumnHeader_EncodeType"));
+		checkboxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
+		checkboxEncodeType.setText(CoreProperties.getString("String_ColumnHeader_EncodeType"));
 		checkboxCharset.setText(DataEditorProperties.getString("String_Charset"));
 	}
 

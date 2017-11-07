@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -26,7 +26,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  */
 public class MetaProcessAggregatePoints extends MetaProcess {
 
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "AggregateResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -68,14 +68,14 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterNumberMinPilePointCount.setRequisite(true);
 
 		parameterComboBoxUnit = new ParameterComboBox(null);
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Millimeter"), Unit.MILIMETER));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Centimeter"), Unit.CENTIMETER));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Decimeter"), Unit.DECIMETER));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Meter"), Unit.METER));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Kilometer"), Unit.KILOMETER));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Mile"), Unit.MILE));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Inch"), Unit.INCH));
-		parameterComboBoxUnit.addItem(new ParameterDataNode(CommonProperties.getString("String_DistanceUnit_Foot"), Unit.FOOT));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Millimeter"), Unit.MILIMETER));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Centimeter"), Unit.CENTIMETER));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Decimeter"), Unit.DECIMETER));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), Unit.METER));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), Unit.KILOMETER));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), Unit.MILE));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Inch"), Unit.INCH));
+		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), Unit.FOOT));
 
 		this.saveDataset = new ParameterSaveDataset();
 
@@ -91,11 +91,11 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterCombineParent.setWeightIndex(0);
 		ParameterCombine parameterCombineSet = new ParameterCombine();
 		parameterCombineSet.addParameters(parameterCombineParent, parameterNumberMinPilePointCount);
-		parameterCombineSet.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 
 		// 结果数据
 		ParameterCombine parameterCombineResultData = new ParameterCombine();
-		parameterCombineResultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		parameterCombineResultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		parameterCombineResultData.addParameters(saveDataset);
 
 		parameters.setParameters(parameterCombineSourceData, parameterCombineSet, parameterCombineResultData);

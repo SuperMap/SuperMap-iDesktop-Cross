@@ -14,7 +14,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -28,7 +28,7 @@ import java.beans.PropertyChangeListener;
  * Created by Chen on 2017/6/30 0030.
  */
 public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "ExtractResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -67,47 +67,47 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 	private void initParameters() {
 		initEnvironment();
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.IMAGE);
-		sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 
 		resultDataset = new ParameterSaveDataset();
 
 		comboBoxType = new ParameterComboBox(ProcessProperties.getString("string_label_lblDatasetType"));
 
-		comboBoxSmoothMethod = new ParameterComboBox(CommonProperties.getString("String_SmoothMethod"));
-		textFieldSmoothDegree = new ParameterNumber(CommonProperties.getString("String_Smooth"));
-		checkBoxThinRaster = new ParameterCheckBox(CommonProperties.getString("String_CheckBox_IsThinRaster"));
+		comboBoxSmoothMethod = new ParameterComboBox(CoreProperties.getString("String_SmoothMethod"));
+		textFieldSmoothDegree = new ParameterNumber(CoreProperties.getString("String_Smooth"));
+		checkBoxThinRaster = new ParameterCheckBox(CoreProperties.getString("String_CheckBox_IsThinRaster"));
 
-		textFieldNoValue = new ParameterNumber(CommonProperties.getString("String_Label_NoData"));
-		textFieldNoValueTolerance = new ParameterNumber(CommonProperties.getString("String_Label_NoValueTolerance"));
-		textFieldGridField = new ParameterTextField(CommonProperties.getString("String_m_labelGridValueFieldText"));
-		checkBoxChooseSpecifiedValue = new ParameterCheckBox(CommonProperties.getString("String_CheckBox_ChooseSpecifiedValue"));
-		textFieldGridValue = new ParameterNumber(CommonProperties.getString("String_Label_GridValue"));
-		textFieldGridValueTolerance = new ParameterNumber(CommonProperties.getString("String_Label_GridValueTolerance"));
+		textFieldNoValue = new ParameterNumber(CoreProperties.getString("String_Label_NoData"));
+		textFieldNoValueTolerance = new ParameterNumber(CoreProperties.getString("String_Label_NoValueTolerance"));
+		textFieldGridField = new ParameterTextField(CoreProperties.getString("String_m_labelGridValueFieldText"));
+		checkBoxChooseSpecifiedValue = new ParameterCheckBox(CoreProperties.getString("String_CheckBox_ChooseSpecifiedValue"));
+		textFieldGridValue = new ParameterNumber(CoreProperties.getString("String_Label_GridValue"));
+		textFieldGridValueTolerance = new ParameterNumber(CoreProperties.getString("String_Label_GridValueTolerance"));
 
-		comboBoxBackColor = new ParameterColor(CommonProperties.getString("String_Label_BackColor"));
-		textFieldColorTolerance = new ParameterNumber(CommonProperties.getString("String_Label_BackColoTolerance"));
+		comboBoxBackColor = new ParameterColor(CoreProperties.getString("String_Label_BackColor"));
+		textFieldColorTolerance = new ParameterNumber(CoreProperties.getString("String_Label_BackColoTolerance"));
 
 
 		sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasource, sourceDataset);
 
 		resultData = new ParameterCombine();
-		resultData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(resultDataset, comboBoxType);
 
 		vertorizeLineSetting = new ParameterCombine();
-		vertorizeLineSetting.setDescribe(CommonProperties.getString("String_GroupBox_VertorizeLineSetting"));
+		vertorizeLineSetting.setDescribe(CoreProperties.getString("String_GroupBox_VertorizeLineSetting"));
 		vertorizeLineSetting.addParameters(comboBoxSmoothMethod, textFieldSmoothDegree, checkBoxThinRaster);
 
 		gridDatasetSetting = new ParameterCombine();
-		gridDatasetSetting.setDescribe(CommonProperties.getString("String_GroupBox_GridDatasetSetting"));
+		gridDatasetSetting.setDescribe(CoreProperties.getString("String_GroupBox_GridDatasetSetting"));
 		gridDatasetSetting.addParameters(textFieldNoValue, textFieldNoValueTolerance, textFieldGridField, checkBoxChooseSpecifiedValue, textFieldGridValue, textFieldGridValueTolerance);
 
 		imageDatasetSetting = new ParameterCombine();
-		imageDatasetSetting.setDescribe(CommonProperties.getString("String_GroupBox_ImageDatasetSetting"));
+		imageDatasetSetting.setDescribe(CoreProperties.getString("String_GroupBox_ImageDatasetSetting"));
 		imageDatasetSetting.addParameters(comboBoxBackColor, textFieldColorTolerance);
 
 		this.parameters.setParameters(sourceData, vertorizeLineSetting, gridDatasetSetting, imageDatasetSetting, resultData);
@@ -145,13 +145,13 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 		}
 
 		resultDataset.setDefaultDatasetName("result_gridToVector");
-		comboBoxType.setItems(new ParameterDataNode(CommonProperties.getString("String_Item_Point"), DatasetType.POINT),
-				new ParameterDataNode(CommonProperties.getString("String_Item_Line"), DatasetType.LINE),
-				new ParameterDataNode(CommonProperties.getString("String_Item_Region"), DatasetType.REGION));
+		comboBoxType.setItems(new ParameterDataNode(CoreProperties.getString("String_Item_Point"), DatasetType.POINT),
+				new ParameterDataNode(CoreProperties.getString("String_Item_Line"), DatasetType.LINE),
+				new ParameterDataNode(CoreProperties.getString("String_Item_Region"), DatasetType.REGION));
 
-		comboBoxSmoothMethod.setItems(new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
-				new ParameterDataNode(CommonProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
+		comboBoxSmoothMethod.setItems(new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
+				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		textFieldSmoothDegree.setSelectedItem("2");
 		textFieldSmoothDegree.setMinValue(2);
 		textFieldSmoothDegree.setMaxValue(10);

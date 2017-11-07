@@ -3,11 +3,11 @@ package com.supermap.desktop.datatopology.CtrlAction;
 import com.supermap.data.*;
 import com.supermap.data.topology.TopologyProcessingOptions;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
 import com.supermap.desktop.enums.LengthUnit;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.DatasetUtilities;
@@ -108,8 +108,8 @@ public class JDialogTopoAdvance extends SmDialog {
 		this.labelVertexTolerance.setText(DataTopologyProperties.getString("String_Label_VertexTolerance"));
 		this.labelFilterExpression.setText(DataTopologyProperties.getString("String_FilterExpression"));
 		this.labelNotCutting.setText(DataTopologyProperties.getString("String_NotCutting"));
-		this.buttonSure.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonQuite.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.panelLinesIntersected.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), DataTopologyProperties
 				.getString("String_LinesIntersected"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.panelToleranceSetting.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), DataTopologyProperties
