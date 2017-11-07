@@ -11,7 +11,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by lixiaoyao on 2017/7/26.
  */
 public class MetaProcessFieldIndex extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 
 	private ParameterDatasourceConstrained sourceDatasource;
 	private ParameterSingleDataset sourceDataset;
@@ -50,11 +50,11 @@ public class MetaProcessFieldIndex extends MetaProcess {
 
 	private void initParameters() {
 		sourceDatasource = new ParameterDatasourceConstrained();
-		sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		sourceDataset = new ParameterSingleDataset(DatasetTypeUtilities.getDatasetTypeVector());
-		sourceDataset.setDescribe(CommonProperties.getString("String_Label_Dataset"));
+		sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(sourceDatasource, sourceDataset);
 
 		//parameterComboBox = new ParameterComboBox(ProcessProperties.getString("String_FieldIndex_Form"));
@@ -74,7 +74,7 @@ public class MetaProcessFieldIndex extends MetaProcess {
 //		parameterCombineParent.setWeightIndex(0);
 
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CommonProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
 		paramSet.addParameters(parameterTextField, parameterTextAreaField);
 
 		this.parameters.setParameters(sourceData, paramSet);

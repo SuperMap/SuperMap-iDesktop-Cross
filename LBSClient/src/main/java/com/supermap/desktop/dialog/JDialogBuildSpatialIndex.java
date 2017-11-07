@@ -3,10 +3,10 @@ package com.supermap.desktop.dialog;
 import com.supermap.data.Rectangle2D;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.lbs.WebHDFS;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.lbs.WebHDFS;
 import com.supermap.desktop.ui.lbs.ui.JDialogHDFSFiles;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.ui.Action;
@@ -107,8 +107,8 @@ public class JDialogBuildSpatialIndex extends SmDialog {
 	}
 	
 	private void initializeResources() {
-		this.buttonOK.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.setTitle("创建索引");
 		this.panelIndexBounds.setBorder(new TitledBorder(null, "索引范围", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));

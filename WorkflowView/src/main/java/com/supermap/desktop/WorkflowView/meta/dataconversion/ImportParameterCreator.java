@@ -15,7 +15,6 @@ import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.util.EnumParser;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -193,7 +192,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 				return ParameterValueLegalListener.DO_NOT_CARE;
 			}
 		});
-		parameterDatasource.setDescribe(CommonProperties.getString(CommonProperties.Label_Datasource));
+		parameterDatasource.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
 		Datasource[] activeDatasources = Application.getActiveApplication().getActiveDatasources();
 		if (activeDatasources.length > 0) {
 			for (Datasource activeDatasource : activeDatasources) {
@@ -212,7 +211,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 
 		final ReflectInfo targetDatasetName = new ReflectInfo();
 		targetDatasetName.methodName = "setTargetDatasetName";
-		parameterDataset = new ParameterTextField(CommonProperties.getString(CommonProperties.Label_Dataset));
+		parameterDataset = new ParameterTextField(CoreProperties.getString(CoreProperties.Label_Dataset));
 		parameterDataset.setSelectedItem(importSetting.getTargetDatasetName());
 		targetDatasetName.parameter = parameterDataset;
 
@@ -523,7 +522,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 
 	private IParameter initResultsetParameterCombine(IParameter... parameter) {
 		parameterCombineResultSet = new ParameterCombine();
-		parameterCombineResultSet.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombineResultSet.setDescribe(CoreProperties.getString("String_ResultSet"));
 		parameterCombineResultSet.addParameters(parameter);
 		return parameterCombineResultSet;
 	}
@@ -584,7 +583,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		} else if (importSetting instanceof ImportSettingGRD
 				|| importSetting instanceof ImportSettingGBDEM || importSetting instanceof ImportSettingUSGSDEM) {
 			parser.setEnumNames(new String[]{"NONE", "SGL", "LZW"});
-			parser.setChName(new String[]{CommonProperties.getString("String_EncodeType_None"), "SGL", "LZW"});
+			parser.setChName(new String[]{CoreProperties.getString("String_EncodeType_None"), "SGL", "LZW"});
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
 			result = new ParameterEnum(parser);
@@ -594,7 +593,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 				importSetting instanceof ImportSettingIMG || importSetting instanceof ImportSettingTIF ||
 				importSetting instanceof ImportSettingGIF || importSetting instanceof ImportSettingMrSID
 				|| importSetting instanceof ImportSettingSIT) {
-			parser.setChName(new String[]{CommonProperties.getString("String_EncodeType_None"), "DCT", "PNG", "LZW"});
+			parser.setChName(new String[]{CoreProperties.getString("String_EncodeType_None"), "DCT", "PNG", "LZW"});
 			parser.setEnumNames(new String[]{"NONE", "DCT", "PNG", "LZW"});
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
@@ -602,13 +601,13 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			result.setSelectedItem(EncodeType.DCT);
 		} else if (importSetting instanceof ImportSettingECW) {
 			parser.setEnumNames(new String[]{"NONE"});
-			parser.setChName(new String[]{CommonProperties.getString("String_EncodeType_None")});
+			parser.setChName(new String[]{CoreProperties.getString("String_EncodeType_None")});
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
 			result = new ParameterEnum(parser);
 			result.setSelectedItem(EncodeType.NONE);
 		} else if (importSetting instanceof ImportSettingJP2) {
-			parser.setChName(new String[]{CommonProperties.getString("String_EncodeType_None"), "DCT", "SGL", "PNG", "LZW"});
+			parser.setChName(new String[]{CoreProperties.getString("String_EncodeType_None"), "DCT", "SGL", "PNG", "LZW"});
 			parser.setEnumNames(new String[]{"NONE", "DCT", "SGL", "PNG", "LZW"});
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
@@ -619,11 +618,11 @@ public class ImportParameterCreator implements IImportParameterCreator {
 	}
 
 	private IParameter getModelTransformParameterCombine() {
-		ParameterTextField textFieldX = new ParameterTextField(CommonProperties.getString("string_longitude"));
+		ParameterTextField textFieldX = new ParameterTextField(CoreProperties.getString("string_longitude"));
 		textFieldX.setSelectedItem("0");
-		ParameterTextField textFieldY = new ParameterTextField(CommonProperties.getString("string_latitude"));
+		ParameterTextField textFieldY = new ParameterTextField(CoreProperties.getString("string_latitude"));
 		textFieldY.setSelectedItem("0");
-		ParameterTextField textFieldZ = new ParameterTextField(CommonProperties.getString("string_elevation"));
+		ParameterTextField textFieldZ = new ParameterTextField(CoreProperties.getString("string_elevation"));
 		textFieldZ.setSelectedItem("0");
 		ReflectInfo setPosition = new ReflectInfo();
 		setPosition.methodName = "setPosition";
@@ -650,7 +649,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFiles"), "prj", "xml"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileShape"), "prj"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "xml"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 		}
 
@@ -740,7 +739,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo setColorIndexFilePath = new ReflectInfo();
 		setColorIndexFilePath.methodName = "setColorIndexFilePath";
 
-		ParameterFile colorIndex = new ParameterFile(CommonProperties.getString("String_ColorIndexFile"));
+		ParameterFile colorIndex = new ParameterFile(CoreProperties.getString("String_ColorIndexFile"));
 		colorIndex.setModuleName("ColorIndexFile");
 		colorIndex.addExtension(ProcessProperties.getString("string_filetype_color"), "wat");
 		String filePath = ((ImportSettingMAPGIS) importSetting).getColorIndexFilePath();
@@ -756,7 +755,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 	private IParameter getKMLTransformParameterCombine(Object importSetting) {
 		ReflectInfo setUnvisibleObjectIgnored = new ReflectInfo();
 		setUnvisibleObjectIgnored.methodName = "setUnvisibleObjectIgnored";
-		ParameterCheckBox parameterImportUnvisibleObject = new ParameterCheckBox(CommonProperties.getString("String_ImportUnvisibleObject"));
+		ParameterCheckBox parameterImportUnvisibleObject = new ParameterCheckBox(CoreProperties.getString("String_ImportUnvisibleObject"));
 		parameterImportUnvisibleObject.setSelectedItem(importSetting instanceof ImportSettingKML ? (((ImportSettingKML) importSetting).isUnvisibleObjectIgnored() ? "false" : "true")
 				: (((ImportSettingKMZ) importSetting).isUnvisibleObjectIgnored() ? "false" : "true"));
 		setUnvisibleObjectIgnored.parameter = parameterImportUnvisibleObject;
@@ -771,7 +770,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 
 		ReflectInfo setWorldFilePath = new ReflectInfo();
 		setWorldFilePath.methodName = "setWorldFilePath";
-		ParameterFile worldFilePath = new ParameterFile(CommonProperties.getString("String_WorldFile"));
+		ParameterFile worldFilePath = new ParameterFile(CoreProperties.getString("String_WorldFile"));
 		worldFilePath.setModuleName("WorldFile");
 		worldFilePath.setModuleType("OpenOne");
 		worldFilePath.addExtension(ProcessProperties.getString("string_filetype_tfw"), "tfw");
@@ -786,8 +785,8 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo importBandMode = new ReflectInfo();
 		importBandMode.methodName = "setMultiBandImportMode";
 		ParameterEnum parameterBandMode = new ParameterEnum(new EnumParser(MultiBandImportMode.class, new String[]{"SINGLEBAND", "MULTIBAND", "COMPOSITE"},
-				new String[]{CommonProperties.getString("String_MultiBand_SingleBand"), CommonProperties.getString("String_MultiBand_MultiBand"),
-						CommonProperties.getString("String_MultiBand_Composite")}));
+				new String[]{CoreProperties.getString("String_MultiBand_SingleBand"), CoreProperties.getString("String_MultiBand_MultiBand"),
+						CoreProperties.getString("String_MultiBand_Composite")}));
 		parameterBandMode.setDescribe(ProcessProperties.getString("String_BandImportMode"));
 		parameterBandMode.setSelectedItem(MultiBandImportMode.COMPOSITE);
 		importBandMode.parameter = parameterBandMode;
@@ -806,7 +805,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 	private IParameter getGRDTransformParameterCombine() {
 		ReflectInfo setAttributeIgnored = new ReflectInfo();
 		setAttributeIgnored.methodName = "setAttributeIgnored";
-		setAttributeIgnored.parameter = new ParameterCheckBox(CommonProperties.getString("String_IngoreProperty"));
+		setAttributeIgnored.parameter = new ParameterCheckBox(CoreProperties.getString("String_IngoreProperty"));
 		reflectInfoArray.add(setAttributeIgnored);
 		return initTransformParameterCombine(setAttributeIgnored.parameter);
 	}
@@ -814,13 +813,13 @@ public class ImportParameterCreator implements IImportParameterCreator {
 	private IParameter getDGNTransformParameterCombine(Object importSetting) {
 		ReflectInfo importCellAsPoint = new ReflectInfo();
 		importCellAsPoint.methodName = "setImportingCellAsPoint";
-		ParameterCheckBox parameterImportingCellAsPoint = new ParameterCheckBox(CommonProperties.getString("String_ImportCellAsPoint"));
+		ParameterCheckBox parameterImportingCellAsPoint = new ParameterCheckBox(CoreProperties.getString("String_ImportCellAsPoint"));
 		parameterImportingCellAsPoint.setSelectedItem(((ImportSettingDGN) importSetting).isImportingCellAsPoint() ? "true" : "false");
 		importCellAsPoint.parameter = parameterImportingCellAsPoint;
 
 		ReflectInfo setImportingByLayer = new ReflectInfo();
 		setImportingByLayer.methodName = "setImportingByLayer";
-		ParameterCheckBox parameterImportingByLayer = new ParameterCheckBox(CommonProperties.getString("String_MergeLayer"));
+		ParameterCheckBox parameterImportingByLayer = new ParameterCheckBox(CoreProperties.getString("String_MergeLayer"));
 		parameterImportingByLayer.setSelectedItem(((ImportSettingDGN) importSetting).isImportingByLayer() ? "false" : "true");
 		setImportingByLayer.parameter = parameterImportingByLayer;
 
@@ -843,8 +842,8 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo importBandMode = new ReflectInfo();
 		importBandMode.methodName = "setMultiBandImportMode";
 		ParameterEnum parameterBandMode = new ParameterEnum(new EnumParser(MultiBandImportMode.class, new String[]{"SINGLEBAND", "MULTIBAND", "COMPOSITE"},
-				new String[]{CommonProperties.getString("String_MultiBand_SingleBand"), CommonProperties.getString("String_MultiBand_MultiBand"),
-						CommonProperties.getString("String_MultiBand_Composite")}));
+				new String[]{CoreProperties.getString("String_MultiBand_SingleBand"), CoreProperties.getString("String_MultiBand_MultiBand"),
+						CoreProperties.getString("String_MultiBand_Composite")}));
 		parameterBandMode.setSelectedItem(MultiBandImportMode.COMPOSITE);
 		parameterBandMode.setDescribe(ProcessProperties.getString("String_BandImportMode"));
 		importBandMode.parameter = parameterBandMode;
@@ -855,7 +854,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 
 		ReflectInfo setWorldFilePath = new ReflectInfo();
 		setWorldFilePath.methodName = "setWorldFilePath";
-		ParameterFile worldFilePath = new ParameterFile(CommonProperties.getString("String_WorldFile"));
+		ParameterFile worldFilePath = new ParameterFile(CoreProperties.getString("String_WorldFile"));
 		worldFilePath.setModuleName("WorldFile");
 		worldFilePath.setModuleType("OpenOne");
 		worldFilePath.addExtension(ProcessProperties.getString("string_filetype_tfw"), "tfw");
@@ -870,8 +869,8 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo importBandMode = new ReflectInfo();
 		importBandMode.methodName = "setMultiBandImportMode";
 		ParameterEnum parameterBandMode = new ParameterEnum(new EnumParser(MultiBandImportMode.class, new String[]{"SINGLEBAND", "MULTIBAND", "COMPOSITE"},
-				new String[]{CommonProperties.getString("String_MultiBand_SingleBand"), CommonProperties.getString("String_MultiBand_MultiBand"),
-						CommonProperties.getString("String_MultiBand_Composite")}));
+				new String[]{CoreProperties.getString("String_MultiBand_SingleBand"), CoreProperties.getString("String_MultiBand_MultiBand"),
+						CoreProperties.getString("String_MultiBand_Composite")}));
 		parameterBandMode.setDescribe(ProcessProperties.getString("String_BandImportMode"));
 		parameterBandMode.setSelectedItem(MultiBandImportMode.COMPOSITE);
 		importBandMode.parameter = parameterBandMode;
@@ -896,7 +895,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		// 首行为字段信息
 		ReflectInfo setFirstRowIsField = new ReflectInfo();
 		setFirstRowIsField.methodName = "setFirstRowIsField";
-		ParameterCheckBox parameterSetFirstRowIsField = new ParameterCheckBox(CommonProperties.getString("String_FirstRowisField"));
+		ParameterCheckBox parameterSetFirstRowIsField = new ParameterCheckBox(CoreProperties.getString("String_FirstRowisField"));
 		parameterSetFirstRowIsField.setSelectedItem("true");
 		setFirstRowIsField.parameter = parameterSetFirstRowIsField;
 		if (importSetting instanceof ImportSettingExcel || importSetting instanceof ImportSettingGPX) {
@@ -906,20 +905,20 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			// 分隔符
 			ReflectInfo setSeparator = new ReflectInfo();
 			setSeparator.methodName = "setSeparator";
-			ParameterTextField parameterSeparator = new ParameterTextField(CommonProperties.getString("String_Separator"));
+			ParameterTextField parameterSeparator = new ParameterTextField(CoreProperties.getString("String_Separator"));
 			parameterSeparator.setSelectedItem(",");
 			setSeparator.parameter = parameterSeparator;
 			// 导入空间数据
 			ReflectInfo setImportIndexData = new ReflectInfo();
 			setSeparator.methodName = "setImportIndexData";
-			parameterImportIndexData = new ParameterCheckBox(CommonProperties.getString("String_ImportIndexData"));
+			parameterImportIndexData = new ParameterCheckBox(CoreProperties.getString("String_ImportIndexData"));
 			parameterImportIndexData.setSelectedItem(false);
 			setImportIndexData.parameter = parameterImportIndexData;
 			//设置wkt字段
 			ReflectInfo setWKTField = new ReflectInfo();
 			setWKTField.methodName = "setWKTField";
 			final ParameterRadioButton parameterRadioButtonSetWKTField = new ParameterRadioButton();
-			ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(CommonProperties.getString("String_WKTIndex"), true), new ParameterDataNode(CommonProperties.getString("String_XYField"), false)};
+			ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(CoreProperties.getString("String_WKTIndex"), true), new ParameterDataNode(CoreProperties.getString("String_XYField"), false)};
 			parameterRadioButtonSetWKTField.setItems(parameterDataNodes);
 			parameterRadioButtonSetWKTField.setSelectedItem(parameterDataNodes[0]);
 			parameterRadioButtonSetWKTField.setEnabled(false);
@@ -927,7 +926,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			//字段选择器
 			ReflectInfo setIndexAsGeometry = new ReflectInfo();
 			setIndexAsGeometry.methodName = "setIndexAsGeometry";
-			parameterWKTFieldName = new ParameterComboBox(CommonProperties.getString("String_WKTIndex"));
+			parameterWKTFieldName = new ParameterComboBox(CoreProperties.getString("String_WKTIndex"));
 			parameterWKTFieldName.setEnabled(false);
 			setIndexAsGeometry.parameter = parameterWKTFieldName;
 
@@ -935,16 +934,16 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			setFieldsAsPoint.methodName = "setFieldsAsPoint";
 
 
-			parameterXFieldName = new ParameterComboBox(CommonProperties.getString("string_longitude"));
+			parameterXFieldName = new ParameterComboBox(CoreProperties.getString("string_longitude"));
 			parameterXFieldName.setEnabled(false);
 			setFieldsAsPoint.mixReflectInfo = new HashMap<>();
 			setFieldsAsPoint.mixReflectInfo.put("setXFieldName", parameterXFieldName);
 
-			parameterYFieldName = new ParameterComboBox(CommonProperties.getString("string_latitude"));
+			parameterYFieldName = new ParameterComboBox(CoreProperties.getString("string_latitude"));
 			setFieldsAsPoint.mixReflectInfo.put("setYFieldName", parameterYFieldName);
 			parameterYFieldName.setEnabled(false);
 
-			parameterZFieldName = new ParameterComboBox(CommonProperties.getString("string_elevation"));
+			parameterZFieldName = new ParameterComboBox(CoreProperties.getString("string_elevation"));
 			parameterZFieldName.setEnabled(false);
 			setFieldsAsPoint.mixReflectInfo.put("setZFieldName", parameterZFieldName);
 
@@ -1005,51 +1004,51 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo setImportingBlockAsPoint = new ReflectInfo();
 		setImportingBlockAsPoint.methodName = "setImportingBlockAsPoint";
 
-		ParameterTextField parameterTextField = new ParameterTextField(CommonProperties.getString("String_CurveSegment"));
+		ParameterTextField parameterTextField = new ParameterTextField(CoreProperties.getString("String_CurveSegment"));
 		parameterTextField.setSelectedItem(importSetting instanceof ImportSettingDXF ? ((ImportSettingDXF) importSetting).getCurveSegment() : ((ImportSettingDWG) importSetting).getCurveSegment());
 		setCurveSegment.parameter = parameterTextField;
 
-		ParameterCheckBox parameterImportExternalData = new ParameterCheckBox(CommonProperties.getString("string_ImportExtendsData"));
+		ParameterCheckBox parameterImportExternalData = new ParameterCheckBox(CoreProperties.getString("string_ImportExtendsData"));
 		parameterImportExternalData.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImportingExternalData() ? "true" : "false")
 				: (((ImportSettingDWG) importSetting).isImportingExternalData() ? "true" : "false"));
 		setImportingExternalData.parameter = parameterImportExternalData;
 
-		ParameterCheckBox parameterImportingXRecord = new ParameterCheckBox(CommonProperties.getString("String_ImportExtendsRecord"));
+		ParameterCheckBox parameterImportingXRecord = new ParameterCheckBox(CoreProperties.getString("String_ImportExtendsRecord"));
 		parameterImportingXRecord.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImportingXRecord() ? "true" : "false") :
 				(((ImportSettingDWG) importSetting).isImportingXRecord() ? "true" : "false"));
 		setImportingXRecord.parameter = parameterImportingXRecord;
 
-		ParameterCheckBox parameterImporttingAs3D = new ParameterCheckBox(CommonProperties.getString("String_SaveHeight"));
+		ParameterCheckBox parameterImporttingAs3D = new ParameterCheckBox(CoreProperties.getString("String_SaveHeight"));
 		parameterImporttingAs3D.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImporttingAs3D() ? "true" : "false")
 				: (((ImportSettingDWG) importSetting).isImporttingAs3D() ? "true" : "false"));
 		setImporttingAs3D.parameter = parameterImporttingAs3D;
 
-		ParameterCheckBox parameterImportingInvisibleLayer = new ParameterCheckBox(CommonProperties.getString("String_ImportInvisibleLayer"));
+		ParameterCheckBox parameterImportingInvisibleLayer = new ParameterCheckBox(CoreProperties.getString("String_ImportInvisibleLayer"));
 		parameterImportingInvisibleLayer.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImportingInvisibleLayer() ? "true" : "false")
 				: (((ImportSettingDWG) importSetting).isImportingInvisibleLayer() ? "true" : "false"));
 		setImportingInvisibleLayer.parameter = parameterImportingInvisibleLayer;
 
-		ParameterCheckBox parameterLWPLineWidthIgnored = new ParameterCheckBox(CommonProperties.getString("String_SaveWPLineWidth"));
+		ParameterCheckBox parameterLWPLineWidthIgnored = new ParameterCheckBox(CoreProperties.getString("String_SaveWPLineWidth"));
 		parameterLWPLineWidthIgnored.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isLWPLineWidthIgnored() ? "false" : "true")
 				: (((ImportSettingDWG) importSetting).isLWPLineWidthIgnored() ? "false" : "true"));
 		setLWPLineWidthIgnored.parameter = parameterLWPLineWidthIgnored;
 
-		ParameterCheckBox parameterImportingByLayer = new ParameterCheckBox(CommonProperties.getString("String_MergeLayer"));
+		ParameterCheckBox parameterImportingByLayer = new ParameterCheckBox(CoreProperties.getString("String_MergeLayer"));
 		parameterImportingByLayer.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImportingByLayer() ? "false" : "true")
 				: (((ImportSettingDWG) importSetting).isImportingByLayer() ? "false" : "true"));
 		setImportingByLayer.parameter = parameterImportingByLayer;
 
-		ParameterCheckBox parameterBlockAttributeIgnored = new ParameterCheckBox(CommonProperties.getString("String_ImportProperty"));
+		ParameterCheckBox parameterBlockAttributeIgnored = new ParameterCheckBox(CoreProperties.getString("String_ImportProperty"));
 		parameterBlockAttributeIgnored.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isBlockAttributeIgnored() ? "false" : "true")
 				: (((ImportSettingDWG) importSetting).isBlockAttributeIgnored() ? "false" : "true"));
 		setBlockAttributeIgnored.parameter = parameterBlockAttributeIgnored;
 
-		ParameterCheckBox parameterKeepingParametricPart = new ParameterCheckBox(CommonProperties.getString("String_SaveField"));
+		ParameterCheckBox parameterKeepingParametricPart = new ParameterCheckBox(CoreProperties.getString("String_SaveField"));
 		parameterKeepingParametricPart.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isKeepingParametricPart() ? "true" : "false")
 				: (((ImportSettingDWG) importSetting).isKeepingParametricPart() ? "true" : "false"));
 		setKeepingParametricPart.parameter = parameterKeepingParametricPart;
 
-		ParameterCheckBox parameterImportingBlockAsPoint = new ParameterCheckBox(CommonProperties.getString("String_ImportingSymbol"));
+		ParameterCheckBox parameterImportingBlockAsPoint = new ParameterCheckBox(CoreProperties.getString("String_ImportingSymbol"));
 		parameterImportingBlockAsPoint.setSelectedItem(importSetting instanceof ImportSettingDXF ? (((ImportSettingDXF) importSetting).isImportingBlockAsPoint() ? "false" : "true")
 				: (((ImportSettingDWG) importSetting).isImportingBlockAsPoint() ? "false" : "true"));
 		setImportingBlockAsPoint.parameter = parameterImportingBlockAsPoint;

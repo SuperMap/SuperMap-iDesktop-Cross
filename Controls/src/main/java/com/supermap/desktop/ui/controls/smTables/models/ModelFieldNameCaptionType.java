@@ -2,7 +2,7 @@ package com.supermap.desktop.ui.controls.smTables.models;
 
 import com.supermap.data.*;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.smTables.IModel;
 import com.supermap.desktop.ui.controls.smTables.IModelController;
 import com.supermap.desktop.ui.controls.smTables.ModelControllerAdapter;
@@ -19,8 +19,8 @@ public class ModelFieldNameCaptionType extends DefaultTableModel implements IMod
 	String[] columnHeaders = new String[]{
 			"",
 			ControlsProperties.getString("String_ColumnRampName"),
-			CommonProperties.getString("String_Field_Caption"),
-			ControlsProperties.getString("String_GeometryPropertyTabularControl_DatGridViewColumnFieldType")
+			CoreProperties.getString("String_Field_Caption"),
+			ControlsProperties.getString("String_Type")
 	};
 	private ArrayList<TableData> tableDatas = new ArrayList<>();
 

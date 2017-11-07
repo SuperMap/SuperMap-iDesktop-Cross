@@ -21,7 +21,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.awt.*;
@@ -33,7 +33,7 @@ import java.text.DecimalFormat;
  * Created by lixiaoyao on 2017/8/8.
  */
 public class MetaProcessDissolve extends MetaProcess {
-	private static final String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "DissolveResult";
 	private static final double STANDARD_NUMBER = 1000000.0;
 	private DecimalFormat decimalFormat = new DecimalFormat("###############0.00000000#");
@@ -85,11 +85,11 @@ public class MetaProcessDissolve extends MetaProcess {
 		parameterCombineParent.setWeightIndex(0);
 		this.textSQLExpression.setAnchor(GridBagConstraints.EAST);
 		ParameterCombine parameterSetting = new ParameterCombine();
-		parameterSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterSetting.addParameters(this.comboBoxDissolveMode, this.numberDissolveTolerance, parameterCombineParent, this.checkBoxIsNullValue, this.fieldsDissolve, this.statisticsFieldGroup);
 
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
 		this.parameters.setParameters(sourceData, parameterSetting, targetData);

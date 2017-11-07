@@ -7,7 +7,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterColor;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
@@ -81,7 +81,7 @@ public class ParameterColorPanel extends SwingPanel implements IParameterPanel {
 	private String getDescribe() {
 		String describe = parameterColor.getDescribe();
 		if (parameterColor.isRequisite()) {
-			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
+			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
 		}

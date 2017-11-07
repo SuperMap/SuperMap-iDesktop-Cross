@@ -4,10 +4,10 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.event.FormClosingEvent;
-import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.lbs.HDFSDefine;
 import com.supermap.desktop.lbs.WebHDFS;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -151,8 +151,8 @@ public class JPanelHDFSFiles extends JPanel {
         this.rowHeader.setCellRenderer(new RowHeaderRenderer(table));
         this.rowHeader.setBackground(this.getBackground());
         this.scrollPaneFormLBSControl.setRowHeaderView(rowHeader);
-        JLabel scrollPaneUpperLeftLabel = new JLabel(CommonProperties.getString("String_ColumnHeader_Index"), SwingConstants.CENTER);
-        scrollPaneFormLBSControl.setCorner(JScrollPane.UPPER_LEFT_CORNER, scrollPaneUpperLeftLabel);
+	    JLabel scrollPaneUpperLeftLabel = new JLabel(CoreProperties.getString("String_ColumnHeader_Index"), SwingConstants.CENTER);
+	    scrollPaneFormLBSControl.setCorner(JScrollPane.UPPER_LEFT_CORNER, scrollPaneUpperLeftLabel);
         listDirectory(this.textServerURL.getText(), "", this.getIsOutputFolder());
         if (0 < table.getRowCount()) {
             table.setRowSelectionInterval(0, 0);
@@ -381,11 +381,11 @@ public class JPanelHDFSFiles extends JPanel {
             HDFSDefine define = (HDFSDefine) ((HDFSTableModel) this.table.getModel()).getRowTagAt(index);
             this.setText(String.valueOf(index + 1));
             if (define.isDir()) {
-                this.setToolTipText(CommonProperties.getString("String_Dir"));
-                this.setIcon(ControlsResources.getIcon("/controlsresources/Image_DatasetGroup_Normal.png"));
+	            this.setToolTipText(CoreProperties.getString("String_Dir"));
+	            this.setIcon(ControlsResources.getIcon("/controlsresources/Image_DatasetGroup_Normal.png"));
             } else {
-                this.setToolTipText(CommonProperties.getString("String_File"));
-                this.setIcon(ControlsResources.getIcon("/controlsresources/file.png"));
+	            this.setToolTipText(CoreProperties.getString("String_File"));
+	            this.setIcon(ControlsResources.getIcon("/controlsresources/file.png"));
             }
             this.setPreferredSize(new Dimension(100, 50));
             return this;

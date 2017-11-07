@@ -11,7 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 /**
  * @author XiaJT
@@ -32,7 +32,7 @@ public class MetaProcessClusterOutlierAnalyst extends MetaProcessAnalyzingPatter
 		parameterSaveDataset.setDefaultDatasetName("result_clusterOutlier");
 		ParameterCombine parameterCombine = new ParameterCombine();
 		parameterCombine.addParameters(parameterSaveDataset);
-		parameterCombine.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombine.setDescribe(CoreProperties.getString("String_ResultSet"));
 		DatasourceConstraint.getInstance().constrained(parameterSaveDataset, ParameterSaveDataset.DATASOURCE_FIELD_NAME);
 		parameters.addParameters(parameterCombine);
 		parameters.addOutputParameters(OUTPUT_DATASET, ProcessOutputResultProperties.getString("String_Result_Analyst"), DatasetTypes.VECTOR, parameterCombine);

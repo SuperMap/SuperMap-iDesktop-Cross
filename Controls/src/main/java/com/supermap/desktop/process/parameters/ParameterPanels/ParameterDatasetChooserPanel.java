@@ -11,7 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasetChooser;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
@@ -62,8 +62,8 @@ public class ParameterDatasetChooserPanel extends SwingPanel implements IParamet
 	}
 
 	private void initResources() {
-		this.labelDatasetName.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.buttonChooseDataset.setText(CommonProperties.getString("String_Choose"));
+		this.labelDatasetName.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.buttonChooseDataset.setText(CoreProperties.getString("String_Choose"));
 		ComponentUIUtilities.setName(this.buttonChooseDataset, parameter.getDescribe() + "_button");
 		ComponentUIUtilities.setName(this.textFieldDatasetName, parameter.getDescribe() + "_textField");
 	}

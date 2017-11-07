@@ -20,7 +20,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -33,7 +33,7 @@ import java.text.MessageFormat;
  * Created by xie on 2017/6/29.
  */
 public class MetaProcessAbstractExport extends MetaProcess {
-	protected final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	protected final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	protected final static String OUTPUT_DATA = "ExportResult";
 	protected static String OUTPUT_DATA_TYPE;
 	//	protected ParameterDatasetChooser chooseDataset;
@@ -131,7 +131,7 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		this.cover = new ParameterCheckBox(ProcessProperties.getString("String_Cover"));
 		this.cover.setEnabled(false);
 		this.basicCombine = new ParameterCombine();
-		this.basicCombine.setDescribe(CommonProperties.getString("String_ResultSet"));
+		this.basicCombine.setDescribe(CoreProperties.getString("String_ResultSet"));
 		this.basicCombine.addParameters(this.supportType, this.targetName, this.exportPath, this.cover);
 		//输出为文件路径，没有控件能对应
 		this.parameters.addOutputParameters(OUTPUT_DATA,

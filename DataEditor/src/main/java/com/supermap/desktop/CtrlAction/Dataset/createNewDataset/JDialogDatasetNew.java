@@ -8,7 +8,7 @@ import com.supermap.desktop.CtrlAction.Dataset.AddToWindowMode;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -178,17 +178,17 @@ public class JDialogDatasetNew extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(DataEditorProperties.getString("String_ToolStripMenuItem_NewDataset"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
-		this.buttonSelectInvert.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonSelectInvert.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.buttonSetting.setToolTipText(CommonProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonSetting.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
 		this.buttonSetting.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
-		this.checkboxAutoClose.setText(CommonProperties.getString("String_CheckBox_CloseDialog"));
+		this.checkboxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 	}
 
 	private void addListeners() {

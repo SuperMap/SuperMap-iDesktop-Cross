@@ -8,7 +8,7 @@ import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.MapUtilities;
@@ -41,7 +41,7 @@ public class CtrlActionLoadMapTemplate extends CtrlAction {
 
 			if (!SmFileChoose.isModuleExist("LoadMapTemplate")) {
 				String fileFilters = SmFileChoose.createFileFilter(MapViewProperties.getString("String_LoadMapTemplateFileFilter"), "xml");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						MapViewProperties.getString("String_LoadMapTemplateTitle"), "LoadMapTemplate", "OpenOne");
 			}
 			SmFileChoose fileChooser = new SmFileChoose("LoadMapTemplate");

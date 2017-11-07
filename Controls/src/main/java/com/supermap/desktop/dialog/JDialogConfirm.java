@@ -1,7 +1,6 @@
 package com.supermap.desktop.dialog;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -78,8 +77,8 @@ public class JDialogConfirm extends SmDialog {
 		setSize(new Dimension(450, 150));
 		setLocationRelativeTo(null);
 
-		this.buttonOk = new SmButton(CommonProperties.getString(CommonProperties.True));
-		this.buttonCancel = new SmButton(CommonProperties.getString(CommonProperties.False));
+		this.buttonOk = new SmButton(CoreProperties.getString(CoreProperties.True));
+		this.buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.False));
 		this.checkBoxConfirm = new JCheckBox(ControlsProperties.getString("String_MessageBox_Checked"));
 		this.checkBoxConfirm.setSelected(true);
 		this.textAreaMessage = new JTextArea();
@@ -112,8 +111,8 @@ public class JDialogConfirm extends SmDialog {
 	}
 
 	public DialogResult showDialogWithYesNoOpition() {
-		this.buttonOk.setText(CommonProperties.yes);
-		this.buttonCancel.setText(CommonProperties.no);
+		this.buttonOk.setText(CoreProperties.yes);
+		this.buttonCancel.setText(CoreProperties.no);
 		return super.showDialog();
 	}
 }

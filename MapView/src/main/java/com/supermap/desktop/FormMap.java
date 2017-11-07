@@ -23,7 +23,7 @@ import com.supermap.desktop.implement.SmTextField;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.geometry.property.GeometryPropertyFactory;
 import com.supermap.desktop.mapview.geometry.property.geometryNode.GeometryNodeFactory;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.LayersComponentManager;
 import com.supermap.desktop.ui.UICommonToolkit;
@@ -213,7 +213,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
                 Point2D mousePosition = FormMap.this.mapControl.getMap().pixelToMap(e.getPoint());
 
                 if (mousePosition.getX() > 180 || mousePosition.getX() < -180 || mousePosition.getY() > 90 || mousePosition.getY() < -90) {
-                    Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_ExceedBounds"));
+	                Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ExceedBounds"));
                 }
             }
         }

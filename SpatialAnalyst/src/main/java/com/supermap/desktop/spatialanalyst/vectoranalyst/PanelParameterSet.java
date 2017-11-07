@@ -1,6 +1,6 @@
 package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.TextFields.RightValueListener;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
@@ -115,7 +115,7 @@ public class PanelParameterSet extends JPanel {
 //	}
 
 	public void setOtherPanelResultSetLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString("String_GroupBox_ParamSetting")));
+		this.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_GroupBox_ParamSetting")));
 		GroupLayout panelResultSetLayout = new GroupLayout(this);
 		panelResultSetLayout.setAutoCreateContainerGaps(true);
 		panelResultSetLayout.setAutoCreateGaps(true);

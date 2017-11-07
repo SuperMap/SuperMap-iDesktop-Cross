@@ -17,7 +17,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -31,7 +31,7 @@ import java.beans.PropertyChangeListener;
  * 3、根据数据集类型重写执行
  */
 public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
-	private static final String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATASET = "OptimizedHotSpotResult";
 	private ParameterDatasource parameterDatasource;
 	private ParameterSingleDataset parameterSingleDataset;
@@ -39,12 +39,12 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 
 	// 线面数据集所需要的面板:
 	private ParameterFieldComboBox parameterFieldComboBoxNotPoint;
+	//private ParameterComboBox parameterComboBoxNotPointMethod;
 	// 点数据需要的面板:
 	private ParameterComboBox parameterComboBoxAggregationMethod;
 	private ParameterDatasource parameterDatasourceAggregating;
 	private ParameterSingleDataset parameterSingleDatasetAggregating;
-	private
-	ParameterDatasource parameterDatasourceBounding;
+	private ParameterDatasource parameterDatasourceBounding;
 	// 网络聚合方式范围数据集可以为空
 	private ParameterSingleDataset parameterSingleDatasetBounding;
 
@@ -94,6 +94,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_NETWORK"), AggregationMethod.NETWORKPOLYGONS));
+		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_SNAPNEARBYPOINTS"), AggregationMethod.SNAPNEARBYPOINTS));
 
 		parameterDatasourceAggregating = new ParameterDatasource();
 		parameterSingleDatasetAggregating = new ParameterSingleDataset(DatasetType.REGION);
@@ -133,7 +134,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		ParameterCombine parameterCombineSource = new ParameterCombine();
 		parameterCombineSource.addParameters(parameterDatasource);
 		parameterCombineSource.addParameters(parameterSingleDataset);
-		parameterCombineSource.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSource.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
 		// 参数面板
 		ParameterCombine parameterCombineSet = new ParameterCombine();
 		parameterCombineSet.addParameters(parameterSwitchDatasetType);
@@ -141,7 +142,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		// 结果
 		ParameterCombine parameterCombineResult = new ParameterCombine();
 		parameterCombineResult.addParameters(parameterSaveDataset);
-		parameterCombineResult.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombineResult.setDescribe(CoreProperties.getString("String_ResultSet"));
 
 		parameters.setParameters(parameterCombineSource, parameterCombineSet, parameterCombineResult);
 		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.VECTOR, parameterCombineSource);

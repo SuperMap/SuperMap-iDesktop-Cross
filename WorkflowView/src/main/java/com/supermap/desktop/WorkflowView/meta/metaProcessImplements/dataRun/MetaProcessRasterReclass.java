@@ -16,14 +16,14 @@ import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.RasterReclass.ParameterRasterReclass;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
  * Created by lixiaoyao on 2017/9/1.
  */
 public class MetaProcessRasterReclass extends MetaProcess {
-	private final static String INPUT_DATA = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "ReclassResult";
 
 	private ParameterDatasourceConstrained sourceDatasource;
@@ -41,14 +41,14 @@ public class MetaProcessRasterReclass extends MetaProcess {
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.parameterRasterReclass = new ParameterRasterReclass(CommonProperties.getString("String_FormEdgeCount_Text"));
+		this.parameterRasterReclass = new ParameterRasterReclass(CoreProperties.getString("String_FormEdgeCount_Text"));
 		this.saveDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
-		sourceData.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.dataset);
 		ParameterCombine targetData = new ParameterCombine();
-		targetData.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 
 		this.parameters.setParameters(sourceData, this.parameterRasterReclass, targetData);
@@ -78,7 +78,7 @@ public class MetaProcessRasterReclass extends MetaProcess {
 			this.saveDataset.setResultDatasource(defaultDataset.getDatasource());
 			this.parameterRasterReclass.setDataset((DatasetGrid) defaultDataset);
 		}
-		this.sourceDatasource.setDescribe(CommonProperties.getString("String_SourceDatasource"));
+		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.parameterRasterReclass.setComplexParameter(true);
 	}
 

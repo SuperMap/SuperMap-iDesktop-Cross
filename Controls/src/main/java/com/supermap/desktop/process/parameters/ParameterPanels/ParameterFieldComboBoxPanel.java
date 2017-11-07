@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterFieldComboBox;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.ArrayUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -239,7 +239,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 	private String getDescribe() {
 		String describe = parameterFieldComboBox.getDescribe();
 		if (parameterFieldComboBox.isRequisite()) {
-			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
+			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
 		}

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1508117380913
+Bnd-LastModified: 1510025956259
 Build-Jdk: 1.7.0_80
-Built-By: Administrator
+Built-By: highsad
 Bundle-Activator: com.supermap.desktop.realspaceEffect.RealspaceEffectAc
  tivator
 Bundle-ManifestVersion: 2

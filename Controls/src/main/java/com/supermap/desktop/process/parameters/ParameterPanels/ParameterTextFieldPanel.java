@@ -11,7 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.ProviderLabel.NewHelpProvider;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
@@ -135,7 +135,7 @@ public class ParameterTextFieldPanel extends SwingPanel implements IParameterPan
 	protected String getDescribe() {
 		String describe = parameterTextField.getDescribe();
 		if (parameterTextField.isRequisite()) {
-			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
+			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
 		}

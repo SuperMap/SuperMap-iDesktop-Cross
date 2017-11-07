@@ -1,19 +1,11 @@
 package com.supermap.desktop.controls.property.dataset;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.GeoRegion;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.controls.DatasetComboBox;
-import com.supermap.desktop.ui.controls.DatasourceComboBox;
-import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.ui.controls.SQLExpressionDialog;
-import com.supermap.desktop.ui.controls.SmDialog;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
 import javax.swing.*;
@@ -159,11 +151,11 @@ public class JDialogSetClipRegion extends SmDialog {
 
 	private void initializeResources() {
 		this.setTitle(ControlsProperties.getString("String_SetClipRegion"));
-		this.labelDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		this.labelDataset.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
+		this.labelDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		this.labelDataset.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
 		this.labelFilter.setText(ControlsProperties.getString("String_LabelFilter"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 	private void setComponentName() {
 		ComponentUIUtilities.setName(this.labelDatasource, "JDialogSetClipRegion_labelDatasource");

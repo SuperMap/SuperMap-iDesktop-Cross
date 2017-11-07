@@ -5,8 +5,11 @@ import com.supermap.data.topology.TopologyProcessingOptions;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
-import com.supermap.desktop.properties.CommonProperties;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.controls.DatasetComboBox;
+import com.supermap.desktop.ui.controls.DatasourceComboBox;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.progress.FormProgress;
 
@@ -66,9 +69,9 @@ public class JDialogDatasetLineTopo extends SmDialog {
 
 	private void initResources() {
 		setTitle(DataTopologyProperties.getString("String_TopoLineTitle"));
-		this.buttonMore.setText(CommonProperties.getString("String_Button_Advance"));
-		this.buttonSure.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonQuite.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonMore.setText(CoreProperties.getString("String_Button_Advance"));
+		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
 		this.checkboxLinesIntersected.setText(DataTopologyProperties.getString("String_LinesIntersected"));
 		this.checkboxOvershootsCleaned.setText(DataTopologyProperties.getString("String_CleanOvershoots"));
 		this.checkboxPseudoNodesCleaned.setText(DataTopologyProperties.getString("String_CleanPseudoNodes"));
@@ -76,9 +79,9 @@ public class JDialogDatasetLineTopo extends SmDialog {
 		this.checkboxDuplicatedLinesCleaned.setText(DataTopologyProperties.getString("String_CleanDuplicatedLines"));
 		this.checkboxUndershootsExtended.setText(DataTopologyProperties.getString("String_CleanUndershoots"));
 		this.checkboxRedundantVerticesCleaned.setText(DataTopologyProperties.getString("String_RedundantVertices"));
-		this.labelDatasource.setText(CommonProperties.getString("String_Label_Datasource"));
-		this.labelDataset.setText(CommonProperties.getString("String_Label_Dataset"));
-		this.panelDatasource.setBorder(new TitledBorder(null, CommonProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
+		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
+		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
+		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		this.panelTopoProcessingOptions.setBorder(new TitledBorder(null, DataTopologyProperties.getString("String_FixTopoErrorSettings"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));

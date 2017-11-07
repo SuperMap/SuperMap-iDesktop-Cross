@@ -17,7 +17,6 @@ import com.supermap.desktop.process.parameter.ipls.ParameterComboBox;
 import com.supermap.desktop.process.parameter.ipls.ParameterIServerLogin;
 import com.supermap.desktop.process.parameter.ipls.ParameterInputDataType;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CursorUtilities;
 
@@ -44,7 +43,7 @@ public class MetaProcessOverlayanalystgeo extends MetaProcess {
 		parameterInputDataType.setDescribe(ProcessProperties.getString("String_FileInputPath"));
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		//设置裁剪数据
-		parameterClipDataType.setDescribe(CommonProperties.getString("String_clipDataset"));
+		parameterClipDataType.setDescribe(CoreProperties.getString("String_clipDataset"));
 		parameterClipDataType.setiServerLogin(parameterIServerLogin);
 		//设置分析参数
 		parameterOverlayTypeComboBox = new ParameterComboBox(CoreProperties.getString("String_OverlayAnalystType"));

@@ -6,7 +6,6 @@ import com.supermap.data.WorkspaceType;
 import com.supermap.data.WorkspaceVersion;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.PropertyManagerUtilities;
@@ -57,8 +56,8 @@ public class JDialogWorkspaceSaveAs extends SmDialog {
 		listWorkspaceType.setBorder(MetalBorders.getTextBorder());
 		listWorkspaceType.setModel(new ListModel<String>() {
 			// @formatter:off
-			private String[] values = SystemPropertyUtilities.isWindows() ? 
-						new String[] { CoreProperties.getString("String_WorkspaceType_File"), CoreProperties.getString("String_WorkspaceType_Oracle"), CoreProperties.getString("String_WorkspaceType_SQL") }: 
+			private String[] values = SystemPropertyUtilities.isWindows() ?
+					new String[]{CoreProperties.getString("String_WorkspaceType_File"), CoreProperties.getString("String_WorkspaceType_Oracle"), CoreProperties.getString("String_WorkspaceType_SQL")} :
 						new String[] { CoreProperties.getString("String_WorkspaceType_File"), CoreProperties.getString("String_WorkspaceType_Oracle")};
 			// @formatter:on
 
@@ -109,13 +108,13 @@ public class JDialogWorkspaceSaveAs extends SmDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		this.buttonOk = new JButton(CommonProperties.getString("String_Button_OK"));
+		this.buttonOk = new JButton(CoreProperties.getString("String_Button_OK"));
 		this.buttonOk.setPreferredSize(new java.awt.Dimension(75, 23));
 		this.buttonOk.setActionCommand("OK");
 		buttonPane.add(buttonOk);
 		getRootPane().setDefaultButton(buttonOk);
 
-		this.buttonCancel = new JButton(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonCancel = new JButton(CoreProperties.getString("String_Button_Cancel"));
 		this.buttonCancel.setPreferredSize(new java.awt.Dimension(75, 23));
 		this.buttonCancel.setActionCommand("Cancel");
 		buttonPane.add(buttonCancel);

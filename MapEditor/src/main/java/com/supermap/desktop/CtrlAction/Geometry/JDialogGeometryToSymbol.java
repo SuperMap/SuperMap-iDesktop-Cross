@@ -6,7 +6,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.symbolDialogs.symbolTrees.SymbolGroupTree;
 import com.supermap.desktop.dialog.symbolDialogs.symbolTrees.SymbolGroupTreeNode;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -80,8 +80,8 @@ public class JDialogGeometryToSymbol extends SmDialog {
 	private void initResources() {
 		labelSymbolGroup.setText(MapEditorProperties.getString("String_SymbolGroup"));
 		labelName.setText(ControlsProperties.getString("String_Label_SymbolName"));
-		buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+		buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	private void initListeners() {

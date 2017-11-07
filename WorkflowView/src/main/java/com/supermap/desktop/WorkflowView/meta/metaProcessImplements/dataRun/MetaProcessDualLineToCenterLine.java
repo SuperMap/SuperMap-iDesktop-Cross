@@ -3,7 +3,7 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.dataRun;
 import com.supermap.data.DatasetType;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.metaProcessImplements.MetaProcessCenterLine;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 /**
  * Created by lixiaoyao on 2017/7/22.
@@ -11,7 +11,7 @@ import com.supermap.desktop.properties.CommonProperties;
 public class MetaProcessDualLineToCenterLine extends MetaProcessCenterLine {
 
 	public MetaProcessDualLineToCenterLine() {
-		setTitle(CommonProperties.getString("String_DualLineToCenterLine"));
+		setTitle(CoreProperties.getString("String_DualLineToCenterLine"));
 	}
 
 	public DatasetType getSonDatasetType() {

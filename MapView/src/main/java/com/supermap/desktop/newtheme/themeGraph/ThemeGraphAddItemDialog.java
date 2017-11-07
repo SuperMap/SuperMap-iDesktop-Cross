@@ -4,7 +4,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SQLExpressionDialog;
@@ -68,8 +68,8 @@ public class ThemeGraphAddItemDialog extends SmDialog {
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_Title_Add"));
 		this.buttonAddExpression.setText(MapViewProperties.getString("String_Combobox_Expression"));
-		this.buttonSure.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 	}
 
 	private void initComponents() {

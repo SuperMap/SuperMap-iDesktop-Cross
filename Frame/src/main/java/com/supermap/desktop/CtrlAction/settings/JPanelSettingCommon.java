@@ -2,11 +2,10 @@ package com.supermap.desktop.CtrlAction.settings;
 
 import com.supermap.desktop.CtrlAction.WorkspaceTempSave;
 import com.supermap.desktop.GlobalParameters;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.frame.FrameProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.labels.SmURLLabel;
 import com.supermap.desktop.utilities.PathUtilities;
@@ -296,7 +295,7 @@ public class JPanelSettingCommon extends BaseSettingPanel {
 //		checkBoxIsBindQueryWhileClickHead.setText(FrameProperties.getString("String_IsBindQueryWhileClickHead"));
 		checkBoxWorkspaceRecovery.setText(FrameProperties.getString("String_WorkspaceRecovery"));
 		labelMapRefreshDelayWhileResize.setText(FrameProperties.getString("String_MapRefreshDelay"));
-		labelMapDelayUnit.setText(CommonProperties.getString("String_ms"));
+		labelMapDelayUnit.setText(CoreProperties.getString("String_ms"));
 //		checkBoxAutoSaveWorkspace.setText(FrameProperties.getString("String_AutoSaveWorkspace"));
 		labelAutoSaveTime.setText(FrameProperties.getString("String_AutoSaveWorkspaceTime"));
 		labelAutoSaveTimeUnit.setText(CoreProperties.getString("String_Time_Minutes"));

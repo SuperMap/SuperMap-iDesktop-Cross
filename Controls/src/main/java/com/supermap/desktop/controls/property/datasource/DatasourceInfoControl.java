@@ -7,7 +7,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
@@ -72,7 +71,7 @@ public class DatasourceInfoControl extends AbstractPropertyControl {
 
 		fillTableStatisticValue();
 		fillStrDatasetTypeMap();
-		TOTAL = CommonProperties.getString(CommonProperties.Total);
+		TOTAL = CoreProperties.getString(CoreProperties.Total);
 		OTHERS = CoreProperties.getString(CoreProperties.Other);
 		fillComponents();
 		ComponentUIUtilities.setName(this.table, "DatasourceInfoControl_table");

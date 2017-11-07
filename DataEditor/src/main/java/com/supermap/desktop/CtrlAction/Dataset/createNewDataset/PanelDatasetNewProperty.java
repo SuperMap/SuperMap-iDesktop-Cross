@@ -3,7 +3,7 @@ package com.supermap.desktop.CtrlAction.Dataset.createNewDataset;
 import com.supermap.data.*;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
 import com.supermap.desktop.ui.controls.comboBox.ComboBoxCharset;
 import com.supermap.desktop.utilities.BlockSizeOptionUtilities;
@@ -14,7 +14,10 @@ import com.supermap.desktop.utilities.StringUtilities;
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
@@ -67,9 +70,9 @@ public class PanelDatasetNewProperty extends JPanel {
 	}
 
 	private void initComponents() {
-		this.encodingTypeLabel = new JLabel(CommonProperties.getString("String_Label_EncodeType"));
+		this.encodingTypeLabel = new JLabel(CoreProperties.getString("String_Label_EncodeType"));
 		this.charestTypeLabel = new JLabel(ControlsProperties.getString("String_LabelCharset"));
-		this.pixelFormatLabel = new JLabel(CommonProperties.getString("String_PixelType"));
+		this.pixelFormatLabel = new JLabel(CoreProperties.getString("String_PixelType"));
 		this.blockSizeOptionLabel = new JLabel(DataEditorProperties.getString("String_NewDatasetBlockSizeOption"));
 		this.bandCountLabel = new JLabel(ControlsProperties.getString("String_LabelBandsSize"));
 		this.advancedSetLabel = new JLabel(ControlsProperties.getString("String_AdvancedSetLabel"));

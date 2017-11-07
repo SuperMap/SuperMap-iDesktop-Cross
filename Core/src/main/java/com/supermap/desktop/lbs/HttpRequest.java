@@ -1,7 +1,7 @@
 package com.supermap.desktop.lbs;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -50,8 +50,8 @@ public class HttpRequest {
                 }
             }
         } catch (Exception e) {
-            Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_ConnectException"));
-            e.printStackTrace();
+	        Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ConnectException"));
+	        e.printStackTrace();
         }
         // 使用finally块来关闭输入流
         finally {
@@ -105,7 +105,7 @@ public class HttpRequest {
 
             inputStream = connection.getInputStream();
         } catch (Exception e) {
-            Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_ConnectException"));
+	        Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ConnectException"));
         }
         return inputStream;
     }

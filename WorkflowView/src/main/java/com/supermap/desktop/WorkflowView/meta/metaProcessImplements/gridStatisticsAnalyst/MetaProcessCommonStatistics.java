@@ -17,7 +17,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -76,13 +76,13 @@ public class MetaProcessCommonStatistics extends MetaProcess {
         parameterSwitch.add("1", chooseTable);
 
 		ParameterCombine sourceCombine = new ParameterCombine();
-		sourceCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasource, sourceDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
 		settingCombine.setDescribe(ProcessProperties.getString("String_setParameter"));
         settingCombine.addParameters(comboBoxCompareType, radioButton, parameterSwitch, checkBoxIgnore);
         ParameterCombine resultCombine = new ParameterCombine();
-		resultCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultCombine.addParameters(resultDataset);
 
 		parameters.setParameters(sourceCombine, settingCombine, resultCombine);

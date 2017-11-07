@@ -2,7 +2,7 @@ package com.supermap.desktop.dialog;
 
 import com.supermap.desktop.Interface.IPasswordCheck;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -187,8 +187,8 @@ public class JDialogChangePassword extends SmDialog {
 		this.labelOldPassword.setText(ControlsProperties.getString("String_Label_OldPassword"));
 		this.labelNewPassword.setText(ControlsProperties.getString("String_Label_NewPassword"));
 		this.labelConfirm.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
 	}
 
 	private void registerEvents() {

@@ -7,15 +7,15 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.http.FileManagerContainer;
 import com.supermap.desktop.http.callable.DownloadProgressCallable;
+import com.supermap.desktop.lbs.FileInfo;
 import com.supermap.desktop.lbsclient.LBSClientProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.task.TaskFactory;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.ui.controls.button.SmButton;
-import com.supermap.desktop.lbs.FileInfo;
 import com.supermap.desktop.utilities.CommonUtilities;
 import com.supermap.desktop.utilities.CursorUtilities;
 
@@ -200,7 +200,7 @@ public class JDialogFileSaveAs extends SmDialog {
 		try {
 			String modelName = "HDFSFileDownload";
 			if (!SmFileChoose.isModuleExist(modelName)) {
-				SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), LBSClientProperties.getString("String_ChooseFile"),
+				SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), LBSClientProperties.getString("String_ChooseFile"),
 						modelName, "GetDirectories");
 			}
 			SmFileChoose smFileChoose = new SmFileChoose(modelName);

@@ -5,7 +5,7 @@ import com.supermap.data.DatasetType;
 import com.supermap.data.Datasource;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableModel;
 import com.supermap.desktop.ui.controls.CommonListCellRenderer;
 import com.supermap.desktop.ui.controls.DataCell;
@@ -190,13 +190,13 @@ public abstract class JPanelDatasetChoose extends JPanel {
 		this.buttonMoveLast.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveLast.png"));
 //		this.buttonRefresh.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Refresh.png"));
 		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_AddColor"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
-		this.buttonDelete.setToolTipText(CommonProperties.getString("String_ToolBar_Remove"));
-		this.buttonMoveFirst.setToolTipText(CommonProperties.getString("String_ToolBar_MoveFirst"));
-		this.buttonMoveUp.setToolTipText(CommonProperties.getString("String_ToolBar_MoveUp"));
-		this.buttonMoveDown.setToolTipText(CommonProperties.getString("String_ToolBar_MoveDown"));
-		this.buttonMoveLast.setToolTipText(CommonProperties.getString("String_ToolBar_MoveLast"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonDelete.setToolTipText(CoreProperties.getString("String_ToolBar_Remove"));
+		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_ToolBar_MoveFirst"));
+		this.buttonMoveUp.setToolTipText(CoreProperties.getString("String_ToolBar_MoveUp"));
+		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_ToolBar_MoveDown"));
+		this.buttonMoveLast.setToolTipText(CoreProperties.getString("String_ToolBar_MoveLast"));
 //		this.buttonRefresh.setToolTipText(CommonProperties.getString("String_Tooltip_RefreshStatus"));
 	}
 

@@ -6,7 +6,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasetType;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
@@ -84,7 +84,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 	protected String getDescribe() {
 		String describe = parameterDatasetType.getDescribe();
 		if (parameterDatasetType.isRequisite()) {
-			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
+			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
 		}

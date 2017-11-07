@@ -14,7 +14,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -53,7 +53,7 @@ public class MetaProcessAverageNearestNeighbor extends MetaProcess {
 		// 参数设置
 		ParameterCombine parameterCombineSetting = new ParameterCombine();
 		parameterCombineSetting.addParameters(parameterTextFieldArea, parameterComboBox);
-		parameterCombineSetting.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 
 		parameters.addParameters(parameterCombine, parameterCombineSetting);
 		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.VECTOR, parameterCombine);

@@ -10,7 +10,7 @@ import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.netservices.NetServicesProperties;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -412,9 +412,9 @@ public class JDialogServerRelease extends SmDialog implements ActionListener, It
 		this.checkBoxWMTS100.setText(NetServicesProperties.getString("String_iServer_ServicesType_WMTS100"));
 		this.checkBoxWPS100.setText(NetServicesProperties.getString("String_iServer_ServicesType_WPS100"));
 		this.checkBoxWMTSCHINA.setText(NetServicesProperties.getString("String_iServer_ServicesType_WMTSCHINA"));
-		this.checkBoxIsEditable.setText(CommonProperties.getString(CommonProperties.IsEditable));
+		this.checkBoxIsEditable.setText(CoreProperties.getString(CoreProperties.IsEditable));
 		this.buttonRelease.setText(NetServicesProperties.getString("String_Release"));
-		this.buttonClose.setText(CommonProperties.getString(CommonProperties.Close));
+		this.buttonClose.setText(CoreProperties.getString(CoreProperties.Close));
 	}
 
 	private void registerEvents() {

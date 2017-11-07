@@ -2,7 +2,7 @@ package com.supermap.desktop.netservices.iserver;
 
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.netservices.NetServicesProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -98,8 +98,8 @@ public class JDialogFolderSelector extends SmDialog implements ActionListener {
 	private void initializeResources() {
 		setTitle(NetServicesProperties.getString("String_Title_ConfirmSelection"));
 		this.labelMessage.setText(NetServicesProperties.getString("String_Message_ConfirmSelection"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 	}
 
 	@Override

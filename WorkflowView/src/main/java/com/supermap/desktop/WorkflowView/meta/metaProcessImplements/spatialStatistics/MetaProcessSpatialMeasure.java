@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -21,7 +21,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  * 度量地理分布 父类
  */
 public abstract class MetaProcessSpatialMeasure extends MetaProcess {
-	private static final String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	protected ParameterDatasource datasource = new ParameterDatasource();
 	protected ParameterSaveDataset parameterSaveDataset;
 	protected String OUTPUT_DATASET = "SpatialMeasureResult";
@@ -56,13 +56,13 @@ public abstract class MetaProcessSpatialMeasure extends MetaProcess {
 	private void initParameters() {
 		ParameterCombine parameterCombineSource = new ParameterCombine();
 		parameterCombineSource.addParameters(datasource, dataset);
-		parameterCombineSource.setDescribe(CommonProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSource.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
 
 		parameterSaveDataset = new ParameterSaveDataset();
 		parameterSaveDataset.setDefaultDatasetName(resultName);
 		ParameterCombine parameterCombineResult = new ParameterCombine();
 		parameterCombineResult.addParameters(parameterSaveDataset);
-		parameterCombineResult.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombineResult.setDescribe(CoreProperties.getString("String_ResultSet"));
 
 		parameters.setParameters(parameterCombineSource, measureParameter, parameterCombineResult);
 		parameters.addInputParameters(INPUT_SOURCE_DATASET, getKey().equals(MetaKeys.LINEAR_DIRECTIONAL_MEAN) ? DatasetTypes.LINE : DatasetTypes.SIMPLE_VECTOR, parameterCombineSource);

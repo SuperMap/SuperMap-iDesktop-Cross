@@ -15,7 +15,7 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -27,7 +27,7 @@ import java.text.MessageFormat;
  * 线面光滑
  */
 public class MetaProcessLinePolygonSmooth extends MetaProcess {
-	private final static String INPUT_SOURCE_DATASET = CommonProperties.getString("String_GroupBox_SourceData");
+	private final static String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "LinePolygonSmoothResult";
 
 	private ParameterDatasourceConstrained datasource;
@@ -59,7 +59,7 @@ public class MetaProcessLinePolygonSmooth extends MetaProcess {
 		parameterCombineSourceData.setRequisite(true);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
-		parameterCombineParameter.setDescribe(CommonProperties.getString("String_GroupBox_ParamSetting"));
+		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterCombineParameter.addParameters(this.parameterTextFieldSmoothness);
 
 		this.parameters.setParameters(parameterCombineSourceData, parameterCombineParameter);

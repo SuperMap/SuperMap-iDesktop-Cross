@@ -10,7 +10,6 @@ import com.supermap.desktop.enums.PropertyType;
 import com.supermap.desktop.geometry.property.geoText.GeoInfoChangeListener;
 import com.supermap.desktop.geometry.property.geoText.IGeoTextProperty;
 import com.supermap.desktop.geometry.property.geoText.JPanelGeoTextProperty;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -139,8 +138,8 @@ public class GeometryGeoTextPropertyControl extends AbstractPropertyControl {
     }
 
     private void initResources() {
-        buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
-        buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
+	    buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
+	    buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
     }
 
     ;

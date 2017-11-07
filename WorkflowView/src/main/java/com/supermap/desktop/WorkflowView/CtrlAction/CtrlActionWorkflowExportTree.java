@@ -5,7 +5,7 @@ import com.supermap.desktop.Interface.IDataEntry;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.ui.controls.TreeNodeData;
@@ -34,7 +34,7 @@ public class CtrlActionWorkflowExportTree extends CtrlAction {
 		String moduleName = "CtrlActionWorkflowExport";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			SmFileChoose.addNewNode(SmFileChoose.createFileFilter(ProcessProperties.getString("String_ProcessFile"), "xml"),
-					CommonProperties.getString("String_DefaultFilePath"), ProcessProperties.getString("String_ImportWorkFLowFile"),
+					CoreProperties.getString("String_DefaultFilePath"), ProcessProperties.getString("String_ImportWorkFLowFile"),
 					moduleName, "SaveOne");
 		}
 		SmFileChoose fileChoose = new SmFileChoose(moduleName);

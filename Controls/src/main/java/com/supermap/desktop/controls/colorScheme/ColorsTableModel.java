@@ -1,7 +1,7 @@
 package com.supermap.desktop.controls.colorScheme;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ColorsTableModel extends DefaultTableModel {
 
 	private static final String[] columnNames = new String[]{
-			CommonProperties.getString(CommonProperties.Index),
+			CoreProperties.getString(CoreProperties.Index),
 			ControlsProperties.getString("String_Column_Color")
 	};
 	private final Color defaultColor = new Color(255, 128, 128);

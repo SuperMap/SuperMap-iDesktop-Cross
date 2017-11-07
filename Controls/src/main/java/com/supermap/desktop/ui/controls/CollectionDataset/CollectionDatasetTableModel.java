@@ -1,6 +1,6 @@
 package com.supermap.desktop.ui.controls.CollectionDataset;
 
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.MessageFormat;
@@ -32,11 +32,11 @@ public class CollectionDatasetTableModel extends AbstractTableModel {
 	public CollectionDatasetTableModel(int collectionType) {
 		super();
 		title = collectionType == IMAGE_COLLECTION_TYPE ?
-				new String[]{CommonProperties.getString("String_Field_Caption"),
-						CommonProperties.getString("String_FieldName"),
-						CommonProperties.getString("String_State")} :
-				new String[]{CommonProperties.getString("String_FieldName")
-						, CommonProperties.getString("String_DatasourceConnectionInfo")
+				new String[]{CoreProperties.getString("String_Field_Caption"),
+						CoreProperties.getString("String_FieldName"),
+						CoreProperties.getString("String_State")} :
+				new String[]{CoreProperties.getString("String_FieldName")
+						, CoreProperties.getString("String_DatasourceConnectionInfo")
 				};
 	}
 
@@ -127,7 +127,7 @@ public class CollectionDatasetTableModel extends AbstractTableModel {
 				return datasetInfo.getName();
 			}
 			if (columnIndex == COLUMN_VECTOR_CONNECTIONINFO) {
-				return MessageFormat.format(CommonProperties.getString("String_DatasourceConnectionInfoTip"),
+				return MessageFormat.format(CoreProperties.getString("String_DatasourceConnectionInfoTip"),
 						datasetInfo.getServer(), datasetInfo.getEngineType(), datasetInfo.getDataBase(), datasetInfo.getUser());
 			}
 		}

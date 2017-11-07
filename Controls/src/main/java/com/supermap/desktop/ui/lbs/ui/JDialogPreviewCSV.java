@@ -9,7 +9,7 @@ import com.supermap.data.GeometryType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.HDFSDefine;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.ListDataCellRender;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -35,11 +35,7 @@ import org.apache.http.impl.client.HttpClients;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -82,7 +78,7 @@ public class JDialogPreviewCSV extends SmDialog {
 
 	private JCheckBox checkBoxHasHeader = new JCheckBox();
 
-	private JLabel labelEncoding = new JLabel(CommonProperties.getString("String_Label_EncodeType"));
+	private JLabel labelEncoding = new JLabel(CoreProperties.getString("String_Label_EncodeType"));
 	private WarningOrHelpProvider warningOrHelpProvider = new WarningOrHelpProvider(ControlsProperties.getString("String_PreviewCsvOnly"), WarningOrHelpProvider.HELP);
 	private JComboBox<String> comboBoxEncoding = new JComboBox<>();
 
@@ -90,7 +86,7 @@ public class JDialogPreviewCSV extends SmDialog {
 	private JComboBox<GeoCoordSysType> comboBoxCoorSysType = new JComboBox<>();
 
 	private SmButton buttonOk = new SmButton(ControlsProperties.getString("String_Save"));
-	private SmButton buttonCancle = new SmButton(CommonProperties.getString(CommonProperties.Cancel));
+	private SmButton buttonCancle = new SmButton(CoreProperties.getString(CoreProperties.Cancel));
 
 	private static final int BUFF_LENGTH = 1024 * 8;
 

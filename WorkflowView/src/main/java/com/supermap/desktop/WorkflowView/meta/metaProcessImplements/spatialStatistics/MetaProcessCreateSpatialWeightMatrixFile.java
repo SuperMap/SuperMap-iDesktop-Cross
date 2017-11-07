@@ -13,7 +13,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterFile;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 
 import java.io.File;
@@ -60,7 +60,7 @@ public class MetaProcessCreateSpatialWeightMatrixFile extends MetaProcessAnalyzi
 
 		ParameterCombine parameterCombine = new ParameterCombine();
 		parameterCombine.addParameters(parameterFile);
-		parameterCombine.setDescribe(CommonProperties.getString("String_ResultSet"));
+		parameterCombine.setDescribe(CoreProperties.getString("String_ResultSet"));
 		parameters.addParameters(parameterCombine);
 		this.parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_SpatialWeightMatrixFile"), BasicTypes.STRING, parameterFile);
 	}

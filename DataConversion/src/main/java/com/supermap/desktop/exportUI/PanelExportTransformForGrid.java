@@ -6,7 +6,7 @@ import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.ExportFileInfo;
 import com.supermap.desktop.localUtilities.CommonUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
@@ -48,7 +48,7 @@ public class PanelExportTransformForGrid extends PanelExportTransform {
 		public void actionPerformed(ActionEvent e) {
 			if (!SmFileChoose.isModuleExist("DataExportFrame")) {
 				String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_tfw"), "tfw");
-				SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataConversionProperties.getString("String_Export"), "DataExportFrame", "SaveOne");
 			}
 

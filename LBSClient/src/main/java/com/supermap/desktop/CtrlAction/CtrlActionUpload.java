@@ -10,14 +10,13 @@ import com.supermap.desktop.Interface.IFormLBSControl;
 import com.supermap.desktop.http.FileManagerContainer;
 import com.supermap.desktop.http.callable.UploadPropressCallable;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.lbs.FileInfo;
+import com.supermap.desktop.lbs.HDFSDefine;
+import com.supermap.desktop.lbs.WebHDFS;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.task.TaskFactory;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.SmFileChoose;
-import com.supermap.desktop.lbs.FileInfo;
-import com.supermap.desktop.lbs.HDFSDefine;
-import com.supermap.desktop.lbs.WebHDFS;
 import com.supermap.desktop.utilities.CommonUtilities;
 import com.supermap.desktop.utilities.CursorUtilities;
 
@@ -37,7 +36,7 @@ public class CtrlActionUpload extends CtrlAction {
             IFormLBSControl control = (IFormLBSControl) Application.getActiveApplication().getActiveForm();
             String modelName = "HDFSFileUpload";
             if (!SmFileChoose.isModuleExist(modelName)) {
-                SmFileChoose.addNewNode("", CommonProperties.getString("String_DefaultFilePath"), CommonProperties.getString("String_SelectFile"),
+                SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
                         modelName, "OpenOne");
             }
             SmFileChoose smFileChoose = new SmFileChoose(modelName);

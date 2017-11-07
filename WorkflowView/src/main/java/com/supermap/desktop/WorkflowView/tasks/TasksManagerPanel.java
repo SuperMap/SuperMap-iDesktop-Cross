@@ -9,6 +9,7 @@ import com.supermap.desktop.process.tasks.events.WorkerStateChangedListener;
 import com.supermap.desktop.process.tasks.events.WorkersChangedEvent;
 import com.supermap.desktop.process.tasks.events.WorkersChangedListener;
 import com.supermap.desktop.process.ui.SingleProgressPanel;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -30,7 +31,7 @@ public class TasksManagerPanel extends JPanel implements WorkerStateChangedListe
 	private final static String TITLE_RUNNING = ProcessProperties.getString("String_Running");
 	private final static String TITLE_READY = ProcessProperties.getString("String_Ready");
 	private final static String TITLE_WAITING = ProcessProperties.getString("String_Waiting");
-	private final static String TITLE_COMPLETED = ProcessProperties.getString("String_Completed");
+	private final static String TITLE_COMPLETED = CoreProperties.getString("String_Completed");
 	private final static String TITLE_CANCELLED = ProcessProperties.getString("String_Cancelled");
 	private final static String TITLE_EXCEPTION = ProcessProperties.getString("String_Failed");
 	private final static String TITLE_WARNING = ProcessProperties.getString("String_warning");

@@ -1,7 +1,7 @@
 package com.supermap.test;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.button.SmButton;
 
 import javax.swing.*;
@@ -48,8 +48,8 @@ public class TableAndLayout extends JDialog {
 		this.table2 = new JTable(new Table2Model());
 
 		this.labelStatus = new JLabel("服务器链接状态 : Connected.");
-		this.buttonOK = new SmButton(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel = new SmButton(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonOK = new SmButton(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel = new SmButton(CoreProperties.getString("String_Button_Cancel"));
 		
 		GroupLayout gLayout = new GroupLayout(this.getContentPane());
 		gLayout.setAutoCreateContainerGaps(true);

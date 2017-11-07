@@ -8,7 +8,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterDataset;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasetComboBox;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -87,8 +87,8 @@ public class ParameterDatasetPanel extends SwingPanel {
 	public ParameterDatasetPanel(IParameter parameterDataset) {
 		super(parameterDataset);
 		this.parameterDataset = (ParameterDataset) parameterDataset;
-		labelDatasource.setText(CommonProperties.getString(CommonProperties.Label_Datasource));
-		labelDataset.setText(CommonProperties.getString(CommonProperties.Label_Dataset));
+		labelDatasource.setText(CoreProperties.getString(CoreProperties.Label_Datasource));
+		labelDataset.setText(CoreProperties.getString(CoreProperties.Label_Dataset));
 		this.datasourceComboBox = new DatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources());
 		if (datasourceComboBox.getSelectedItemAlias() != null) {
 			datasetComboBox = new DatasetComboBox(datasourceComboBox.getSelectedDatasource().getDatasets());

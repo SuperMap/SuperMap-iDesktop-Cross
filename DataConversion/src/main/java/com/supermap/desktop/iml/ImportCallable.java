@@ -10,7 +10,7 @@ import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
 import com.supermap.desktop.implement.UserDefineType.UserDefineImportResult;
 import com.supermap.desktop.importUI.DataImportDialog;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tableModel.ImportTableModel;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.WorkspaceTree;
@@ -191,7 +191,7 @@ public class ImportCallable extends UpdateProgressCallable {
 				double count = fileInfos.size();
 				int totalPercent = (int) ((100 * this.i + arg0.getSubPercent()) / count);
 				updateProgressTotal(arg0.getSubPercent(),
-						MessageFormat.format(CommonProperties.getString("String_TotalTaskNumber"), String.valueOf(fileInfos.size())), totalPercent,
+						MessageFormat.format(CoreProperties.getString("String_TotalTaskNumber"), String.valueOf(fileInfos.size())), totalPercent,
 						MessageFormat.format(DataConversionProperties.getString("String_FileInport"), arg0.getCurrentTask().getSourceFilePath()));
 			} catch (CancellationException e) {
 				arg0.setCancel(true);

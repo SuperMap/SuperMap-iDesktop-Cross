@@ -5,7 +5,7 @@ import com.supermap.data.Resources;
 import com.supermap.data.Symbol;
 import com.supermap.data.SymbolType;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.FontUtilities;
 
@@ -111,8 +111,8 @@ public abstract class SymbolPanel extends JPanel {
             builder.append("</html>");
             result = builder.toString();
         }
-        Dimension preferredSize = new Dimension(fontSize + 20, (int) (labelDimension.getHeight() + line * (FontUtilities.getStringHeight(CommonProperties.getString(CommonProperties.OK), font) + 5)));
-        this.setMinimumSize(preferredSize);
+	    Dimension preferredSize = new Dimension(fontSize + 20, (int) (labelDimension.getHeight() + line * (FontUtilities.getStringHeight(CoreProperties.getString(CoreProperties.OK), font) + 5)));
+	    this.setMinimumSize(preferredSize);
         this.setPreferredSize(preferredSize);
         this.setMaximumSize(preferredSize);
         return result;

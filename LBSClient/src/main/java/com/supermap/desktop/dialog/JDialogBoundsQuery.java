@@ -5,9 +5,8 @@ import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.DatasetComboBox;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -52,9 +51,9 @@ public class JDialogBoundsQuery extends SmDialog {
 		this.labelResult = new JLabel("结果数据集:");
 		this.textDatasetName = new JTextField("SpatialQuery");
 		this.buttonOK = new JButton("OK");
-		this.buttonOK.setText(CommonProperties.getString("String_Button_OK"));
+		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
 		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
 		
 		this.getRootPane().setDefaultButton(this.buttonOK);
 		

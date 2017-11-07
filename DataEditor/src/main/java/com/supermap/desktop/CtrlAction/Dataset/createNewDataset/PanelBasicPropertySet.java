@@ -4,7 +4,7 @@ import com.supermap.data.DatasetType;
 import com.supermap.data.EncodeType;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.utilities.EncodeTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -97,7 +97,7 @@ public class PanelBasicPropertySet extends JPanel {
 	private void initComponents() {
 		this.datasetNameLabel = new JLabel(ControlsProperties.getString("String_Label_DatasetName"));
 		this.targetDatasourceLabel = new JLabel(ControlsProperties.getString("String_Label_TargetDatasource"));
-		this.encodeTypeLabel = new JLabel(CommonProperties.getString("String_Label_EncodeType"));
+		this.encodeTypeLabel = new JLabel(CoreProperties.getString("String_Label_EncodeType"));
 		this.datasetNameTextField = new JTextField();
 		this.datasourceComboBox = new DatasourceComboBox();
 		this.comboboxEncodingType = new JComboBox<>();

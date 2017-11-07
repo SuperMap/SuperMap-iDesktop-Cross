@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
@@ -111,11 +111,20 @@ public class PanelTargetCoordSys extends JPanel {
 					datasetComboBox.removeItemListener(itemListener);
 					resetDatasetComboBox(datasource.getSelectedDatasource(), null);
 					datasetComboBox.addItemListener(itemListener);
-					targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					if (radioButtonFromDatasource.isSelected()) {
+						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
+					} else {
+						if (datasetComboBox.getSelectedDataset() != null) {
+							targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
+						} else {
+							targetPrjCoordSys = null;
+						}
+					}
 				} else {
 					targetPrjCoordSys = null;
 				}
 			} else if (e.getSource() == datasetComboBox) {
+
 				if (datasetComboBox.getSelectedDataset() != null) {
 					targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 				} else {
@@ -174,7 +183,7 @@ public class PanelTargetCoordSys extends JPanel {
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFiles"), "prj", "xml"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileShape"), "prj"),
 					SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "xml"));
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_ImportPrjFile"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

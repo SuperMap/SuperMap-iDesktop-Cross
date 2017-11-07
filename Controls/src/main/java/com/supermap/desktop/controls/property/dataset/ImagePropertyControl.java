@@ -8,7 +8,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.AbstractPropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMFormattedTextField;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -166,8 +165,8 @@ public class ImagePropertyControl extends AbstractPropertyControl {
 
 		// 波段信息
 		this.tableBandInfo = new JTable();
-		this.tableBandInfo.setModel(new DefaultTableModel(new String[]{CommonProperties.getString(CommonProperties.Index),
-				CommonProperties.getString(CommonProperties.Name), CommonProperties.getString(CommonProperties.PixelFormat)}, 0) {
+		this.tableBandInfo.setModel(new DefaultTableModel(new String[]{CoreProperties.getString(CoreProperties.Index),
+				CoreProperties.getString(CoreProperties.Name), CoreProperties.getString(CoreProperties.PixelFormat)}, 0) {
 			/**
 			 *
 			 */
@@ -232,10 +231,10 @@ public class ImagePropertyControl extends AbstractPropertyControl {
 		this.labelWidth.setText(ControlsProperties.getString("String_LabelColumnsSize"));
 		this.labelHasPyramid.setText(ControlsProperties.getString("String_LabelPyramid"));
 		this.labelClipRegion.setText(ControlsProperties.getString("String_LabelClipRegion"));
-		this.buttonSetClipRegion.setText(CommonProperties.getString(CommonProperties.Button_Setting));
+		this.buttonSetClipRegion.setText(CoreProperties.getString(CoreProperties.Button_Setting));
 		this.buttonClearClipRegion.setText(CoreProperties.getString(CoreProperties.Clear));
-		this.buttonReset.setText(CommonProperties.getString(CommonProperties.Reset));
-		this.buttonApply.setText(CommonProperties.getString(CommonProperties.Apply));
+		this.buttonReset.setText(CoreProperties.getString(CoreProperties.Reset));
+		this.buttonApply.setText(CoreProperties.getString(CoreProperties.Apply));
 	}
 	private void setComponentName() {
 		ComponentUIUtilities.setName(this.labelBandCount, "ImagePropertyControl_labelBandCount");
@@ -288,9 +287,9 @@ public class ImagePropertyControl extends AbstractPropertyControl {
 		this.textFieldWidth.setText(BigDecimal.valueOf(this.datasetImage.getWidth()).toString());
 		this.textFieldHeight.setText(BigDecimal.valueOf(this.datasetImage.getHeight()).toString());
 		if (this.datasetImage.getHasPyramid()) {
-			this.textFieldHasPyramid.setText(CommonProperties.getString(CommonProperties.True));
+			this.textFieldHasPyramid.setText(CoreProperties.getString(CoreProperties.True));
 		} else {
-			this.textFieldHasPyramid.setText(CommonProperties.getString(CommonProperties.False));
+			this.textFieldHasPyramid.setText(CoreProperties.getString(CoreProperties.False));
 		}
 
 		DefaultTableModel tableModel = (DefaultTableModel) this.tableBandInfo.getModel();

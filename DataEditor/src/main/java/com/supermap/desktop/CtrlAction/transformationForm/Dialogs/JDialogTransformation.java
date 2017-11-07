@@ -5,17 +5,16 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CtrlAction.transformationForm.CtrlAction.TransformCallable;
 import com.supermap.desktop.CtrlAction.transformationForm.TransformationUtilties;
 import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationAddObjectBean;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.SortTable.SmSortTable;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooseMode;
@@ -228,7 +227,7 @@ public class JDialogTransformation extends SmDialog {
 	}
 
 	private void initPanelProperties() {
-		panelProperties.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString("String_FormEdgeCount_Text")));
+		panelProperties.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_FormEdgeCount_Text")));
 		panelProperties.setLayout(new GridBagLayout());
 		panelProperties.add(labelTransformationFile, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setInsets(10, 10, 0, 0).setAnchor(GridBagConstraints.WEST));
 		panelProperties.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setInsets(10, 5, 0, 10).setFill(GridBagConstraints.HORIZONTAL));
@@ -314,7 +313,7 @@ public class JDialogTransformation extends SmDialog {
 				String moduleName = "transformOpen";
 				if (!SmFileChoose.isModuleExist(moduleName)) {
 					String fileFilters = SmFileChoose.createFileFilter(DataEditorProperties.getString("String_TransformationFileFilter"), "drfu");
-					SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"), CommonProperties.getString(CommonProperties.open)
+					SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString(CoreProperties.open)
 							, moduleName, "OpenOne");
 				}
 				SmFileChoose fileChoose = new SmFileChoose(moduleName);
@@ -568,9 +567,9 @@ public class JDialogTransformation extends SmDialog {
 		labelResampleMode.setText(DataEditorProperties.getString("String_TransformationMode_ResampleMode"));
 		labelPixel.setText(DataEditorProperties.getString("String_Transformation_LabelCellSize"));
 		checkBoxIsSaveAs.setText(DataEditorProperties.getString("String_Transformation_CheckBoxResaveDataset"));
-		checkBoxAutoClose.setText(CommonProperties.getString("String_CheckBox_CloseDialog"));
-		buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		checkBoxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
+		buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 		buttonAdd.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
 		buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
@@ -746,8 +745,8 @@ public class JDialogTransformation extends SmDialog {
 			this.add(panelSetting, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.BOTH).setInsets(10, 10, 0, 10));
 			this.add(new JPanel(), new GridBagConstraintsHelper(0, 1, 1, 1).setWeight(1, 1).setFill(GridBagConstraints.BOTH));
 			this.add(panelButton, new GridBagConstraintsHelper(0, 2, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(5, 10, 10, 10));
-			smButtonOk.setText(CommonProperties.getString(CommonProperties.OK));
-			smButtonCancle.setText(CommonProperties.getString(CommonProperties.Cancel));
+			smButtonOk.setText(CoreProperties.getString(CoreProperties.OK));
+			smButtonCancle.setText(CoreProperties.getString(CoreProperties.Cancel));
 			smButtonOk.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

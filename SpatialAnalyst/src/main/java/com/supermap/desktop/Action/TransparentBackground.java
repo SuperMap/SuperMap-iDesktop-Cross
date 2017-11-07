@@ -1,5 +1,6 @@
 package com.supermap.desktop.Action;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.ui.MapControl;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 public class TransparentBackground extends JPanel {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel jLabelDatasource = new JLabel("datasource:");
@@ -40,8 +41,8 @@ public class TransparentBackground extends JPanel {
 	 * 资源化
 	 */
 	private void initResources() {
-		jLabelDatasource.setText(SpatialAnalystProperties.getString("String_QueryGridValue_Datasource").replace("{0}", "-"));
-		jLabelDataset.setText(SpatialAnalystProperties.getString("String_QueryGridValue_Dataset").replace("{0}", "-"));
+		jLabelDatasource.setText(ControlsProperties.getString("String_Label_Datasource") + "-");
+		jLabelDataset.setText(ControlsProperties.getString("String_Label_Dataset") + "-");
 		jLabelPointX.setText(SpatialAnalystProperties.getString("String_QueryGridValue_CooX").replace("{0}", "-"));
 		jLabelPointY.setText(SpatialAnalystProperties.getString("String_QueryGridValue_CooY").replace("{0}", "-"));
 		jLabelRowOfGrid.setText(SpatialAnalystProperties.getString("String_QueryGridValue_Row").replace("{0}", "-"));

@@ -39,9 +39,9 @@ public class PanelCoordSysInfo extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(this.textAreaCoordInfo);
 		this.setLayout(new GridBagLayout());
 		if (this.isAddTip) {
-			this.add(labelCoordInfoWithProvider, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.NORTH).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 0, 0));
+			this.add(labelCoordInfoWithProvider, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.NORTH).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
 		} else {
-			this.add(labelCoordInfo, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.NORTH).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 0, 0));
+			this.add(labelCoordInfo, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.NORTH).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
 		}
 		this.add(scrollPane, new GridBagConstraintsHelper(0, 1, 1, 3).setAnchor(GridBagConstraints.CENTER).setWeight(1, 1).setFill(GridBagConstraints.BOTH).setInsets(10, 0, 0, 0));
 	}

@@ -6,7 +6,6 @@ import com.supermap.desktop.enums.AngleUnit;
 import com.supermap.desktop.enums.AreaUnit;
 import com.supermap.desktop.enums.LengthUnit;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -30,17 +29,17 @@ public class JDialogMeasureSetting extends SmDialog {
 	private JComboBox comboBoxArea;
 	private JComboBox comboBoxAngle;
 
-	private static final String[] distanceModel = new String[] { CommonProperties.getString("String_DistanceUnit_Millimeter"),
-			CommonProperties.getString("String_DistanceUnit_Centimeter"), CommonProperties.getString("String_DistanceUnit_Inch"),
-			CommonProperties.getString("String_DistanceUnit_Decimeter"), CommonProperties.getString("String_DistanceUnit_Foot"),
-			CommonProperties.getString("String_DistanceUnit_Yard"), CommonProperties.getString("String_DistanceUnit_Meter"),
-			CommonProperties.getString("String_DistanceUnit_Kilometer"), CommonProperties.getString("String_DistanceUnit_Mile") };
+	private static final String[] distanceModel = new String[]{CoreProperties.getString("String_DistanceUnit_Millimeter"),
+			CoreProperties.getString("String_DistanceUnit_Centimeter"), CoreProperties.getString("String_DistanceUnit_Inch"),
+			CoreProperties.getString("String_DistanceUnit_Decimeter"), CoreProperties.getString("String_DistanceUnit_Foot"),
+			CoreProperties.getString("String_DistanceUnit_Yard"), CoreProperties.getString("String_DistanceUnit_Meter"),
+			CoreProperties.getString("String_DistanceUnit_Kilometer"), CoreProperties.getString("String_DistanceUnit_Mile")};
 
-	private static final String[] areaModel = new String[] { CommonProperties.getString("String_AreaUnit_Millimeter"),
-			CommonProperties.getString("String_AreaUnit_Centimeter"), CommonProperties.getString("String_AreaUnit_Inch"),
-			CommonProperties.getString("String_AreaUnit_Decimeter"), CommonProperties.getString("String_AreaUnit_Foot"),
-			CommonProperties.getString("String_AreaUnit_Yard"), CommonProperties.getString("String_AreaUnit_Meter"),
-			CommonProperties.getString("String_AreaUnit_Kilometer"), CommonProperties.getString("String_AreaUnit_Mile"), };
+	private static final String[] areaModel = new String[]{CoreProperties.getString("String_AreaUnit_Millimeter"),
+			CoreProperties.getString("String_AreaUnit_Centimeter"), CoreProperties.getString("String_AreaUnit_Inch"),
+			CoreProperties.getString("String_AreaUnit_Decimeter"), CoreProperties.getString("String_AreaUnit_Foot"),
+			CoreProperties.getString("String_AreaUnit_Yard"), CoreProperties.getString("String_AreaUnit_Meter"),
+			CoreProperties.getString("String_AreaUnit_Kilometer"), CoreProperties.getString("String_AreaUnit_Mile"),};
 
 	private static final String[] angleModel = new String[] { CoreProperties.getString("String_Degree_Format_Degree"),
 			CoreProperties.getString("String_Degree_Format_DDMMSS"), CoreProperties.getString("String_Degree_Format_Radian") };
@@ -124,8 +123,8 @@ public class JDialogMeasureSetting extends SmDialog {
 		this.labelDistance.setText(MapViewProperties.getString("label_DistanceUnit"));
 		this.labelArea.setText(MapViewProperties.getString("label_AreaUnit"));
 		this.labelAngle.setText(MapViewProperties.getString("label_AngleUnit"));
-		this.buttonOk.setText(CommonProperties.getString(CommonProperties.OK));
-		this.buttonCancel.setText(CommonProperties.getString(CommonProperties.Cancel));
+		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
+		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 
 	}
 

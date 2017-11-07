@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IExportPanelFactory;
 import com.supermap.desktop.Interface.IPanelModel;
 import com.supermap.desktop.baseUI.PanelExportTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.*;
@@ -17,7 +18,7 @@ import com.supermap.desktop.implement.UserDefineType.UserDefineFileType;
 import com.supermap.desktop.localUtilities.CommonUtilities;
 import com.supermap.desktop.localUtilities.FiletypeUtilities;
 import com.supermap.desktop.localUtilities.LocalFileUtilities;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -71,7 +72,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 	private PanelExportTransform panelExportsTemp;
 	private JPanel panelEmpty;
 
-	private String[] title = {DataConversionProperties.getString("String_Dataset"),
+	private String[] title = {ControlsProperties.getString("String_Dataset"),
 			DataConversionProperties.getString("string_outputtype"),
 			DataConversionProperties.getString("string_tabletitle_filename"),
 			DataConversionProperties.getString("string_directory"),
@@ -488,7 +489,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 			int size = fileTypes.length;
 			if (size == 1 && fileTypes[0] == FileType.ModelX) {
 				//Modify DSPJ-59 屏蔽.x文件
-				Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_ExportModelXError"));
+				Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ExportModelXError"));
 				return;
 			}
 			Object[] temp = new Object[6];
@@ -725,15 +726,15 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonExportsSet.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
-		this.buttonExportsSet.setToolTipText(CommonProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonExportsSet.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
 		this.buttonAddDataset.setToolTipText(DataConversionProperties.getString("string_button_add"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(DataConversionProperties.getString("string_button_selectAll"));
 		this.buttonInvertSelect.setToolTipText(DataConversionProperties.getString("string_button_invertSelect"));
-		this.buttonExport.setText(CommonProperties.getString("String_Button_Export"));
-		this.buttonExport.setToolTipText(CommonProperties.getString("String_Button_Export"));
-		this.buttonClose.setText(CommonProperties.getString("String_Button_Close"));
-		this.buttonClose.setToolTipText(CommonProperties.getString("String_Button_Close"));
+		this.buttonExport.setText(CoreProperties.getString("String_Button_Export"));
+		this.buttonExport.setToolTipText(CoreProperties.getString("String_Button_Export"));
+		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));
+		this.buttonClose.setToolTipText(CoreProperties.getString("String_Button_Close"));
 		this.checkBoxAutoClose.setText(DataConversionProperties.getString("String_CloseAfterExportEnd"));
 	}
 

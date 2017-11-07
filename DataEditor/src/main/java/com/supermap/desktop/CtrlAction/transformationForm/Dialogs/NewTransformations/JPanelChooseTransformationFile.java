@@ -4,9 +4,12 @@ import com.supermap.data.TransformationMode;
 import com.supermap.desktop.CtrlAction.transformationForm.TransformationUtilties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.ComponentDropDown;
+import com.supermap.desktop.ui.controls.FileChooserControl;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.TransformationModeUtilities;
@@ -141,7 +144,7 @@ public class JPanelChooseTransformationFile extends JPanelNewTransformationBase 
 				String moduleName = "transformOpen";
 				if (!SmFileChoose.isModuleExist(moduleName)) {
 					String fileFilters = SmFileChoose.createFileFilter(DataEditorProperties.getString("String_TransformationFileFilter"), "drfu");
-					SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"), CommonProperties.getString(CommonProperties.open)
+					SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString(CoreProperties.open)
 							, moduleName, "OpenOne");
 				}
 				SmFileChoose fileChoose = new SmFileChoose(moduleName);

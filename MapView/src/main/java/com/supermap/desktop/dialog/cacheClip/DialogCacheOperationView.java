@@ -8,7 +8,7 @@ import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.dialog.cacheClip.cache.LogWriter;
 import com.supermap.desktop.mapview.MapViewProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.JFileChooserControl;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -320,24 +320,24 @@ public class DialogCacheOperationView extends SmDialog {
 	}
 
 	private void initResources() {
-		this.setTitle(CommonProperties.getString("String_CacheType"));
+		this.setTitle(CoreProperties.getString("String_CacheType"));
 		this.smButtonNextStep.setText(ControlsProperties.getString("String_NextWay"));
 		switch (operationType) {
 			case DialogMapCacheClipBuilder.SingleProcessClip:
-				this.radioButtonNewMission.setText(CommonProperties.getString("String_NewCacheMission"));
-				this.labelNewMission.setText(CommonProperties.getString("String_NewCacheMissionTip"));
-				this.radioButtonUpdateSciFile.setText(CommonProperties.getString("String_UpdateCacheSciFile"));
-				this.radioButtonResumeSciFile.setText(CommonProperties.getString("String_ResumeCacheSciFile"));
-				this.labelSciFileForUpdate.setText(CommonProperties.getString("String_SciFilePath"));
-				this.labelSciFileForResume.setText(CommonProperties.getString("String_SciFilePath"));
+				this.radioButtonNewMission.setText(CoreProperties.getString("String_NewCacheMission"));
+				this.labelNewMission.setText(CoreProperties.getString("String_NewCacheMissionTip"));
+				this.radioButtonUpdateSciFile.setText(CoreProperties.getString("String_UpdateCacheSciFile"));
+				this.radioButtonResumeSciFile.setText(CoreProperties.getString("String_ResumeCacheSciFile"));
+				this.labelSciFileForUpdate.setText(CoreProperties.getString("String_SciFilePath"));
+				this.labelSciFileForResume.setText(CoreProperties.getString("String_SciFilePath"));
 				break;
 			case DialogMapCacheClipBuilder.MultiProcessClip:
-				this.radioButtonMultiMissionNew.setText(CommonProperties.getString("String_MultiCacheNew"));
-				this.labelMultiMissionNew.setText(CommonProperties.getString("String_MultiCacheNewTip"));
-				this.radioButtonMultiMissionExecute.setText(CommonProperties.getString("String_MultiCacheExecute"));
-				this.labelMultiMissionExecute.setText(CommonProperties.getString("String_MultiCahceExecuteTip"));
-				this.radioButtonUpdateSciFile.setText(CommonProperties.getString("String_UpdateCacheSciFile"));
-				this.labelSciFileForUpdate.setText(CommonProperties.getString("String_SciFilePath"));
+				this.radioButtonMultiMissionNew.setText(CoreProperties.getString("String_MultiCacheNew"));
+				this.labelMultiMissionNew.setText(CoreProperties.getString("String_MultiCacheNewTip"));
+				this.radioButtonMultiMissionExecute.setText(CoreProperties.getString("String_MultiCacheExecute"));
+				this.labelMultiMissionExecute.setText(CoreProperties.getString("String_MultiCahceExecuteTip"));
+				this.radioButtonUpdateSciFile.setText(CoreProperties.getString("String_UpdateCacheSciFile"));
+				this.labelSciFileForUpdate.setText(CoreProperties.getString("String_SciFilePath"));
 				break;
 			default:
 				break;

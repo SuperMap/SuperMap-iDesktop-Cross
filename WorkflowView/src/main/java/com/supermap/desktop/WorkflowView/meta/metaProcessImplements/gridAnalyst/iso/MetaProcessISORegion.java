@@ -8,7 +8,7 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 /**
  * 提取等值面
@@ -17,7 +17,7 @@ import com.supermap.desktop.properties.CommonProperties;
 public class MetaProcessISORegion extends MetaProcessISO {
 
 	public MetaProcessISORegion() {
-		setTitle(CommonProperties.getString("String_SurfaceISORegion"));
+		setTitle(CoreProperties.getString("String_SurfaceISORegion"));
 		OUTPUT_DATA_TYPE = ProcessOutputResultProperties.getString("String_SurfaceAnalyst_ISORegionResult");
 		super.initParameters();
 		super.initParameterConstraint();

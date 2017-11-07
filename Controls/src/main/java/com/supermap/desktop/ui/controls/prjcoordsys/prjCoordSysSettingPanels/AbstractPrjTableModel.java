@@ -5,7 +5,7 @@ package com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels;
  */
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -37,9 +37,9 @@ public abstract class AbstractPrjTableModel extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		if (column == CAPTION) {
-			return CommonProperties.getString(CommonProperties.Name);
+			return CoreProperties.getString(CoreProperties.Name);
 		} else if (column == TYPE) {
-			return CommonProperties.getString(CommonProperties.Type);
+			return CoreProperties.getString(CoreProperties.Type);
 		} else if (column == GROUP) {
 			return ControlsProperties.getString("String_BelongToGroup");
 		} else {

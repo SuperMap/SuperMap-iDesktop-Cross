@@ -62,11 +62,12 @@
                         ***************************************************
                         -->
                         <Bundle-Activator>com.supermap.desktop.WorkflowView.WorkflowViewActivator</Bundle-Activator>
-
+                        <Export-Package>{local-packages}</Export-Package>
                         <!--
                         此处配置的是 OSGI bundle 间的运行时依赖，Core、Control 为 SuperMap iDesktop Cross 的核心库，为必填依赖。
                         -->
-                        <Require-Bundle>${project.groupId}.Core,${project.groupId}.Process,${project.groupId}.Controls</Require-Bundle>
+                        <Require-Bundle>${project.groupId}.Core,${project.groupId}.Process,${project.groupId}.Controls
+                        </Require-Bundle>
                     </instructions>
                 </configuration>
             </plugin>

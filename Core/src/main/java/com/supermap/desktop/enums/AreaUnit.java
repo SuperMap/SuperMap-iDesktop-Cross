@@ -4,7 +4,7 @@ import com.supermap.data.PrjCoordSys;
 import com.supermap.data.PrjCoordSysType;
 import com.supermap.data.Unit;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 public enum AreaUnit {
 	// @formatter:off
@@ -91,54 +91,54 @@ public enum AreaUnit {
 		String result = "";
 
 		if (this == AreaUnit.MILIMETER) {
-			result = CommonProperties.getString("String_AreaUnit_Millimeter");
+			result = CoreProperties.getString("String_AreaUnit_Millimeter");
 		} else if (this == AreaUnit.CENTIMETER) {
-			result = CommonProperties.getString("String_AreaUnit_Centimeter");
+			result = CoreProperties.getString("String_AreaUnit_Centimeter");
 		} else if (this == AreaUnit.DECIMETER) {
-			result = CommonProperties.getString("String_AreaUnit_Decimeter");
+			result = CoreProperties.getString("String_AreaUnit_Decimeter");
 		} else if (this == METER) {
-			result = CommonProperties.getString("String_AreaUnit_Meter");
+			result = CoreProperties.getString("String_AreaUnit_Meter");
 		} else if (this == KILOMETER) {
-			result = CommonProperties.getString("String_AreaUnit_Kilometer");
+			result = CoreProperties.getString("String_AreaUnit_Kilometer");
 		} else if (this == AreaUnit.MILE) {
-			result = CommonProperties.getString("String_AreaUnit_Mile");
+			result = CoreProperties.getString("String_AreaUnit_Mile");
 		} else if (this == AreaUnit.INCH) {
-			result = CommonProperties.getString("String_AreaUnit_Inch");
+			result = CoreProperties.getString("String_AreaUnit_Inch");
 		} else if (this == AreaUnit.FOOT) {
-			result = CommonProperties.getString("String_AreaUnit_Foot");
+			result = CoreProperties.getString("String_AreaUnit_Foot");
 		} else if (this == AreaUnit.YARD) {
-			result = CommonProperties.getString("String_AreaUnit_Yard");
+			result = CoreProperties.getString("String_AreaUnit_Yard");
 		} else if (this == AreaUnit.ACRE) {
-			result = CommonProperties.getString("String_AreaUnit_Acre");
+			result = CoreProperties.getString("String_AreaUnit_Acre");
 		} else if (this == AreaUnit.MU) {
-			result = CommonProperties.getString("String_AreaUnit_Mu");
+			result = CoreProperties.getString("String_AreaUnit_Mu");
 		}
 		return result;
 	}
 
 	public static AreaUnit getValueOf(String name) {
 		AreaUnit result = AreaUnit.METER;
-		if (name.equals(CommonProperties.getString("String_AreaUnit_Millimeter"))) {
+		if (name.equals(CoreProperties.getString("String_AreaUnit_Millimeter"))) {
 			result = AreaUnit.MILIMETER;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Centimeter"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Centimeter"))) {
 			result = AreaUnit.CENTIMETER;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Decimeter"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Decimeter"))) {
 			result = AreaUnit.DECIMETER;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Meter"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Meter"))) {
 			result = AreaUnit.METER;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Kilometer"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Kilometer"))) {
 			result = AreaUnit.KILOMETER;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Mile"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Mile"))) {
 			result = AreaUnit.MILE;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Inch"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Inch"))) {
 			result = AreaUnit.INCH;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Foot"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Foot"))) {
 			result = AreaUnit.FOOT;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Yard"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Yard"))) {
 			result = AreaUnit.YARD;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Acre"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Acre"))) {
 			result = AreaUnit.ACRE;
-		} else if (name.equals(CommonProperties.getString("String_AreaUnit_Mu"))) {
+		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Mu"))) {
 			result = AreaUnit.MU;
 		}
 

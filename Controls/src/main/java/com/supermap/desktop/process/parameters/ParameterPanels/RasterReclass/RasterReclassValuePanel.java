@@ -10,7 +10,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmComboBox;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -475,7 +475,7 @@ public class RasterReclassValuePanel extends JPanel {
 		String moduleName = "ImportMappingTable";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ReclassFile"), "xml");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
@@ -516,7 +516,7 @@ public class RasterReclassValuePanel extends JPanel {
 		String moduleName = "ExportMappingTable";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ReclassFile"), "xml");
-			SmFileChoose.addNewNode(fileFilters, CommonProperties.getString("String_DefaultFilePath"),
+			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_SaveAsFile"), moduleName, "SaveOne");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);

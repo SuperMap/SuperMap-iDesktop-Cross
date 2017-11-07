@@ -1,12 +1,8 @@
 package com.supermap.desktop.CtrlAction.spatialQuery;
 
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetType;
-import com.supermap.data.Datasource;
-import com.supermap.data.Datasources;
-import com.supermap.data.Recordset;
-import com.supermap.data.SpatialQueryMode;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.mapping.Layer;
@@ -23,7 +19,7 @@ public class TableModelSpatialQuery extends DefaultTableModel {
 
 	private String[] columns = new String[]{
 			"",
-			DataViewProperties.getString("String_Type"),
+			ControlsProperties.getString("String_Type"),
 			DataViewProperties.getString("String__SearchedLayerName"),
 			DataViewProperties.getString("String_SpatialQueryMode"),
 			DataViewProperties.getString("String_TabularQueryCondition"),

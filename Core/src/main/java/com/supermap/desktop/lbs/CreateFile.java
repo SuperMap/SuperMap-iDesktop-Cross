@@ -1,7 +1,7 @@
 package com.supermap.desktop.lbs;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -66,7 +66,7 @@ public class CreateFile {
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_TEMPORARY_REDIRECT) {
 					Header locationHeader = response.getFirstHeader("Location");
 					if (locationHeader == null) {
-						Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_UnlandFailed"));
+						Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_UnlandFailed"));
 					} else {
 						// 获取登陆成功之后跳转链接
 						locationURL = locationHeader.getValue();
@@ -145,7 +145,7 @@ public class CreateFile {
 				if (response.getStatusLine().getStatusCode() == HttpStatus.SC_TEMPORARY_REDIRECT) {
 					Header locationHeader = response.getFirstHeader("Location");
 					if (locationHeader == null) {
-						Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_UnlandFailed"));
+						Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_UnlandFailed"));
 						return;
 					} else {
 						// 获取登陆成功之后跳转链接
@@ -169,11 +169,11 @@ public class CreateFile {
 				response = new DefaultHttpClient().execute(requestPost);
 				if (response != null && response.getStatusLine().getStatusCode() == 200) {
 					Application.getActiveApplication().getOutput()
-							.output("File:\"" + fullPath + "\"" + CommonProperties.getString("String_UploadEndString"));
+							.output("File:\"" + fullPath + "\"" + CoreProperties.getString("String_UploadEndString"));
 					isCreated = true;
 				} else {
 					Application.getActiveApplication().getOutput()
-							.output("File: \"" + fullPath + "\"" + CommonProperties.getString("String_UploadEndFailed"));
+							.output("File: \"" + fullPath + "\"" + CoreProperties.getString("String_UploadEndFailed"));
 					isFailed = true;
 				}
 			}

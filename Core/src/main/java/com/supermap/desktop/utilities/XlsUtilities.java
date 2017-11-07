@@ -8,7 +8,7 @@ import com.supermap.desktop.implement.UserDefineType.ExportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.UserDefineExportResult;
 import com.supermap.desktop.implement.UserDefineType.UserDefineImportResult;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -97,7 +97,7 @@ public class XlsUtilities {
 		try {
 			File xlsFile = new File(filePath);
 			if (!xlsFile.exists()) {
-				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_FileNotExistsError"), filePath));
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_FileNotExistsError"), filePath));
 				return null;
 			}
 			FileInputStream stream = new FileInputStream(filePath);
@@ -148,7 +148,7 @@ public class XlsUtilities {
 		try {
 			File xlsFile = new File(filePath);
 			if (!xlsFile.exists()) {
-				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_FileNotExistsError"), filePath));
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_FileNotExistsError"), filePath));
 				return null;
 			}
 
@@ -276,7 +276,7 @@ public class XlsUtilities {
 		try {
 			File xlsFile = new File(filePath);
 			if (!xlsFile.exists()) {
-				Application.getActiveApplication().getOutput().output(MessageFormat.format(CommonProperties.getString("String_FileNotExistsError"), filePath));
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_FileNotExistsError"), filePath));
 				return null;
 			}
 			String tempXlsName = xlsFile.getName();
@@ -377,7 +377,7 @@ public class XlsUtilities {
 			}
 		} catch (Exception e) {
 			//todo 为字段设置名称时有可能异常（首行作为字段信息时，数据库字段类型长度名称重复问题）,直接输出异常终止导入
-			Application.getActiveApplication().getOutput().output(CommonProperties.getString("String_FieldName_Illegal"));
+			Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_FieldName_Illegal"));
 		}
 		return importResults;
 	}

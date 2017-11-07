@@ -13,7 +13,6 @@ import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.Outputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.util.ParameterUtil;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.CursorUtilities;
@@ -186,7 +185,7 @@ public class DefaultParameters implements IParameters {
 								.setWeight(1, 0).setInsets(0, 0, 0, 0));
 						buttonPanel.add(buttonSetAsGlobalParameter, new GridBagConstraintsHelper(1, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.EAST)
 								.setWeight(0, 0).setInsets(0, 5, 0, 0));
-						buttonReset.setText(CommonProperties.getString("String_Button_Reset"));
+						buttonReset.setText(CoreProperties.getString("String_Button_Reset"));
 						buttonSetAsGlobalParameter.setText(ProcessProperties.getString("String_SetAsGlobal"));
 						buttonReset.addActionListener(new ActionListener() {
 							@Override

@@ -2,7 +2,6 @@ package com.supermap.desktop.ui.controls.datasetChoose;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.properties.CommonProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.SortTable.SmSortTable;
@@ -310,10 +309,10 @@ public class DatasetChooser extends SmDialog {
 		this.labelScense.setText(CoreProperties.getString("String_FormDatasetBrowse_ToolStripLabelDisplayType"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
-		this.buttonOk.setText(CommonProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CommonProperties.getString("String_Button_Cancel"));
-		this.buttonSelectAll.setToolTipText(CommonProperties.getString("String_ToolBar_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(CommonProperties.getString("String_ToolBar_SelectInverse"));
+		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
+		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 	}
 
 	private void initComponentStates() {

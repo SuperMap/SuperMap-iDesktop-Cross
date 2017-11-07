@@ -15,7 +15,7 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.ResampleModeUtilities;
 
@@ -58,15 +58,15 @@ public class MetaProcessGridResample extends MetaProcess {
 		resultDataset = new ParameterSaveDataset();
 		textFieldSourceXPixel = new ParameterTextField(ControlsProperties.getString("String_LabelXPixelFormat"));
 		textFieldSourceYPixel = new ParameterTextField(ControlsProperties.getString("String_LabelYPixelFormat"));
-		textFieldSourceRow = new ParameterTextField(CommonProperties.getString("String_Row"));
-		textFieldSourceColumn = new ParameterTextField(CommonProperties.getString("String_Column"));
+		textFieldSourceRow = new ParameterTextField(CoreProperties.getString("String_Row"));
+		textFieldSourceColumn = new ParameterTextField(CoreProperties.getString("String_Column"));
 		comboBoxMethod = new ParameterComboBox(ProcessProperties.getString("String_Label_ResampleMethod"));
-		numberPixel = new ParameterNumber(CommonProperties.getString("String_Resolution"));
-		textFieldRow = new ParameterTextField(CommonProperties.getString("String_Row"));
-		textFieldColumn = new ParameterTextField(CommonProperties.getString("String_Column"));
+		numberPixel = new ParameterNumber(CoreProperties.getString("String_Resolution"));
+		textFieldRow = new ParameterTextField(CoreProperties.getString("String_Row"));
+		textFieldColumn = new ParameterTextField(CoreProperties.getString("String_Column"));
 
 		ParameterCombine sourceCombine = new ParameterCombine();
-		sourceCombine.setDescribe(CommonProperties.getString("String_GroupBox_SourceData"));
+		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasource, sourceDataset);
 		ParameterCombine infoCombine = new ParameterCombine();
 		infoCombine.setDescribe(ProcessProperties.getString("String_GroupBox_SourceInfo"));
@@ -75,7 +75,7 @@ public class MetaProcessGridResample extends MetaProcess {
 		settingCombine.setDescribe(ProcessProperties.getString("String_setParameter"));
 		settingCombine.addParameters(comboBoxMethod, numberPixel, textFieldRow, textFieldColumn);
 		ParameterCombine resultCombine = new ParameterCombine();
-		resultCombine.setDescribe(CommonProperties.getString("String_GroupBox_ResultData"));
+		resultCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultCombine.addParameters(resultDataset);
 
 		parameters.setParameters(sourceCombine, infoCombine, settingCombine, resultCombine);

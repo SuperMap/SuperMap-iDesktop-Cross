@@ -9,7 +9,7 @@ public enum AddToWindowMode {
 
 	private static final String WINDOWMODE_NONE = CoreProperties.getString("String_UnAddToMap");
 	private static final String WINDOWMODE_NEW = CoreProperties.getString("String_AddToNewMap");
-	private static final String WINDOWMODE_CURRENT = CoreProperties.getString("String_AddToCurrentMap");	
+	private static final String WINDOWMODE_CURRENT = CoreProperties.getString("String_AddToCurrentMap");
 
 	public static AddToWindowMode getWindowMode(String windowModeString) {
 		AddToWindowMode windowMode = AddToWindowMode.NONEWINDOW;

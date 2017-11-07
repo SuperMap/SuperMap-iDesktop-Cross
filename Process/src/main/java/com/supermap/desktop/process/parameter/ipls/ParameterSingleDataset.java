@@ -5,7 +5,7 @@ import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 
 import java.beans.PropertyChangeEvent;
 
@@ -25,7 +25,7 @@ public class ParameterSingleDataset extends AbstractParameter implements ISelect
 	private PixelFormat[] pixelFormats = null;//栅格数据集像素类型
 	@ParameterField(name = DATASOURCE_FIELD_NAME)
 	private Datasource datasource;
-	private String describe = CommonProperties.getString(CommonProperties.Label_Dataset);
+	private String describe = CoreProperties.getString(CoreProperties.Label_Dataset);
 	private DatasourceClosingListener datasourceClosingListener = new DatasourceClosingListener() {
 		@Override
 		public void datasourceClosing(DatasourceClosingEvent datasourceClosingEvent) {
