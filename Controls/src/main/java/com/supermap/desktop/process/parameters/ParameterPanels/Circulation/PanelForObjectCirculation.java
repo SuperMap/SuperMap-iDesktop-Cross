@@ -1,10 +1,11 @@
-package com.supermap.desktop.process.Circulation;
+package com.supermap.desktop.process.parameters.ParameterPanels.Circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.process.parameters.ParameterPanels.MultiBufferRadioList.MultiBufferRadioListTableModel;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmFileChoose;
+import com.supermap.desktop.ui.controls.TableTooltipCellRenderer;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CoreResources;
 import com.supermap.desktop.utilities.TableUtilities;
@@ -16,6 +17,7 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -24,9 +26,11 @@ import java.util.ArrayList;
 public class PanelForObjectCirculation extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private final int COLUMN_INDEX_INDEX = 0;
+	private final int COLUMN_INDEX_CONTENT = 1;
 
 	private JToolBar toolBar;
-	private SmButton buttonInsert;
+	private SmButton buttonAddObject;
 	private SmButton buttonSelectAll;
 	private SmButton buttonSelectInvert;
 	private SmButton buttonDelete;
@@ -51,8 +55,8 @@ public class PanelForObjectCirculation extends JPanel {
 		this.toolBar = new JToolBar();
 		this.toolBar.setFloatable(false);
 
-		this.buttonInsert = new SmButton();
-		this.buttonInsert.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/insert.png"));
+		this.buttonAddObject = new SmButton();
+		this.buttonAddObject.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/add.png"));
 
 		this.buttonSelectAll = new SmButton();
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
@@ -77,7 +81,7 @@ public class PanelForObjectCirculation extends JPanel {
 
 		this.tableForObjectCirculation = new JTable();
 		this.exchangeTableModel = new ExchangeTableModel();
-		this.exchangeTableModel.setEditable(new boolean[]{false, true});
+		this.exchangeTableModel.setEditable(new boolean[]{false, false});
 		this.exchangeTableModel.setInfo(this.pathList);
 		this.exchangeTableModel.setTitle(new String[]{CoreProperties.getString("String_ColumnHeader_Index"),
 				CoreProperties.getString("String_Content")});
@@ -86,15 +90,18 @@ public class PanelForObjectCirculation extends JPanel {
 		this.tableForObjectCirculation.getTableHeader().setReorderingAllowed(false);
 		this.tableForObjectCirculation.setRowHeight(23);
 		// 设置列宽
-		TableColumn indexColumn = this.tableForObjectCirculation.getColumnModel().getColumn(MultiBufferRadioListTableModel.COLUMN_INDEX_INDEX);
+		TableColumn indexColumn = this.tableForObjectCirculation.getColumnModel().getColumn(COLUMN_INDEX_INDEX);
 		indexColumn.setMinWidth(80);
 		indexColumn.setPreferredWidth(80);
 		indexColumn.setMaxWidth(150);
+		this.tableForObjectCirculation.getColumnModel().getColumn(COLUMN_INDEX_CONTENT).setCellRenderer(TableTooltipCellRenderer.getInstance());
+		this.setPreferredSize(new Dimension(this.getWidth(), 200));
+		this.setMinimumSize(new Dimension(this.getWidth(), 200));
 		checkButtonStates();
 	}
 
 	private void initLayout() {
-		this.toolBar.add(this.buttonInsert);
+		this.toolBar.add(this.buttonAddObject);
 		this.toolBar.addSeparator();
 		this.toolBar.add(this.buttonSelectAll);
 		this.toolBar.add(this.buttonSelectInvert);
@@ -112,7 +119,7 @@ public class PanelForObjectCirculation extends JPanel {
 	}
 
 	private void initResources() {
-		this.buttonInsert.setToolTipText(ControlsProperties.getString("String_InsertDefaultValue"));
+		this.buttonAddObject.setToolTipText(ControlsProperties.getString("String_Add"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
@@ -123,6 +130,26 @@ public class PanelForObjectCirculation extends JPanel {
 	}
 
 	private void registerEvent() {
+		this.buttonAddObject.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String modelName = "CirculationForObjectModel";
+				if (!SmFileChoose.isModuleExist(modelName)) {
+					SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
+							modelName, "OpenMany");
+				}
+				SmFileChoose smFileChoose = new SmFileChoose(modelName);
+				smFileChoose.setAcceptAllFileFilterUsed(true);
+				int state = smFileChoose.showDefaultDialog();
+				if (state == JFileChooser.APPROVE_OPTION) {
+					File[] files = smFileChoose.getSelectFiles();
+					for (int i = 0, length = files.length; i < length; i++) {
+						exchangeTableModel.addRow(files[i].getAbsolutePath());
+					}
+					tableForObjectCirculation.setRowSelectionInterval(tableForObjectCirculation.getRowCount() - 1, tableForObjectCirculation.getRowCount() - 1);
+				}
+			}
+		});
 		this.buttonSelectAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -220,7 +247,7 @@ public class PanelForObjectCirculation extends JPanel {
 				int[] selectedRows = tableForObjectCirculation.getSelectedRows();
 				if (selectedRows.length > 0 && selectedRows[selectedRows.length - 1] < tableForObjectCirculation.getRowCount() - 1) {
 					exchangeTableModel.moveBottom(selectedRows);
-					int index = tableForObjectCirculation.getRowCount() - selectedRows[selectedRows.length - 1];
+					int index = tableForObjectCirculation.getRowCount() - selectedRows[selectedRows.length - 1] - 1;
 					tableForObjectCirculation.clearSelection();
 					for (int selectedRow : selectedRows) {
 						tableForObjectCirculation.addRowSelectionInterval(selectedRow + index, selectedRow + index);
@@ -254,5 +281,17 @@ public class PanelForObjectCirculation extends JPanel {
 		this.buttonMoveDown.setEnabled(selectedRowCount > 0 && !this.tableForObjectCirculation.isRowSelected(rowCount - 1));
 		this.buttonMoveTop.setEnabled(selectedRowCount > 0 && !this.tableForObjectCirculation.isRowSelected(0));
 		this.buttonMoveBottom.setEnabled(selectedRowCount > 0 && !this.tableForObjectCirculation.isRowSelected(rowCount - 1));
+	}
+
+	public JTable getTableForObjectCirculation() {
+		return tableForObjectCirculation;
+	}
+
+	public ExchangeTableModel getExchangeTableModel() {
+		return exchangeTableModel;
+	}
+
+	public ArrayList<String> getPathList() {
+		return pathList;
 	}
 }

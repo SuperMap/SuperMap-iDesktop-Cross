@@ -5,8 +5,6 @@ import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
 import com.supermap.desktop.utilities.StringUtilities;
 
-import java.util.Iterator;
-
 /**
  * Created by xie on 2017/10/27.
  */
@@ -54,7 +52,7 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 	@Override
 	public void reset() {
 		count = 0;
-		if (StringUtilities.isInteger(startValue.getSelectedItem())) {
+		if (StringUtilities.isInteger(startValue.getSelectedItem()) || "0".equals(startValue.getSelectedItem())) {
 			nowValue = start = Integer.valueOf(startValue.getSelectedItem());
 			outputData.setValue(start);
 		}

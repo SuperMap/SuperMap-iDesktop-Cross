@@ -356,6 +356,7 @@ public class SmFileChoose extends JFileChooser {
 			this.filePath = this.getSelectedFile().getAbsolutePath();
 			this.fileName = this.getSelectedFile().getName();
 			if (getSelectedFiles().length > 0) {
+				setSelectFiles(getSelectedFiles());
 				selectFileNames = new String[getSelectedFiles().length];
 				for (int i = 0; i < getSelectedFiles().length; i++) {
 					selectFileNames[i] = getSelectedFiles()[i].getName();

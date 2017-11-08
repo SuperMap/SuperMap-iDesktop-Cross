@@ -146,7 +146,9 @@ public class GraphConnectAction extends CanvasActionAdapter {
 						selectedItemIndex = finalI;
 						if (parameters.get(selectedItemIndex) instanceof ISelectionParameter && finalItem.isEnabled()) {
 							//没有想好怎样修改链接关系，此处直接添加链接线,后面再做修改
-							((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(selectValue);
+							if (null != selectValue) {
+								((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(selectValue);
+							}
 							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, toGraph);
 							canvas.addGraph(connectionLineGraph);
 							canvas.repaint();

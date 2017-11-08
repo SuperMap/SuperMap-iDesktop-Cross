@@ -16,6 +16,9 @@ public class CirculationParametersFactory {
 			case forDatasetType:
 				circulationOutParameters = new CirculationForDatasetOutputParameters(outputData);
 				break;
+			case forObjectType:
+				circulationOutParameters = new CirculationForObjectOutputParameters(outputData);
+				break;
 			default:
 				break;
 		}
@@ -31,6 +34,9 @@ public class CirculationParametersFactory {
 				break;
 			case forDatasetType:
 				circulationParameters = new CirculationForDatasetParameters(outputData);
+				break;
+			case forObjectType:
+				circulationParameters = new CirculationForObjectParameters(outputData);
 				break;
 			default:
 				break;

@@ -44,8 +44,10 @@ public class CirculationDialog extends SmDialog {
 		this.setTitle(type.getName());
 		init();
 		int size;
-		if (parameters.getParameters().size() == 1) {
+		if (parameters.getParameters().size() == 1 && (type != CirculationType.forObjectType || isOutput)) {
 			size = 120;
+		} else if (parameters.getParameters().size() == 1 && type == CirculationType.forObjectType && !isOutput) {
+			size = 300;
 		} else {
 			size = parameters.getParameters().size() * 60;
 		}
