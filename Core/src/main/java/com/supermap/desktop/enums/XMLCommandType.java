@@ -23,6 +23,8 @@ public enum XMLCommandType {
     RIBBONTAB,
     CONTEXTUALTAB,
 
+	RIBBONS,
+
     FRAMEMENUS,
     FRAMEMENU,    
     CONTEXTMENUS,

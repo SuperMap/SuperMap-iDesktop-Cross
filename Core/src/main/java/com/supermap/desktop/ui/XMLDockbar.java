@@ -5,14 +5,11 @@ import com.supermap.desktop.Plugin;
 import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.enums.XMLCommandType;
 import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.XmlUtilities;
 import org.osgi.framework.Bundle;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class XMLDockbar extends XMLCommand {
 	private final static String ATTRIBUTION_DOCK_DIRECTION = "dockDirection";
@@ -182,7 +179,7 @@ public class XMLDockbar extends XMLCommand {
 	 * @param parent 指定的父容器
 	 * @return
 	 */
-	private XMLCommandBase createNew(XMLCommandBase parent) {
+	protected XMLCommandBase createNew(XMLCommandBase parent) {
 		return new XMLDockbar(getPluginInfo(), parent);
 	}
 

@@ -34,6 +34,7 @@ public interface IFormMain {
 	 */
 	IToolbarManager getToolbarManager();
 
+	IRibbonManager getRibbonManager();
 	/**
 	 * 获取浮动窗口管理器。
 	 */

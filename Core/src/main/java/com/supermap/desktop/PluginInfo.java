@@ -1,7 +1,9 @@
 package com.supermap.desktop;
 
+import com.supermap.desktop.Interface.IToolbarManager;
 import com.supermap.desktop.enums.XMLCommandType;
 import com.supermap.desktop.ui.*;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbons;
 import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,8 +16,32 @@ public class PluginInfo {
 	private Element toolbarsElement = null;
 	private Element statusbarsElement = null;
 	private Element dockbarsElement = null;
+	private Element ribbonsElement = null;
 	private Element contextMenusElement = null;
 	private Element processManagerElement = null;
+
+	private String configLocation = "";
+	private String bundleName = "";
+	private String description = "";
+	private String uiDefinition = "";
+	private Boolean enable = false;
+	private Boolean hasRecentFile = false;
+	private String recentFile = "";
+	private Boolean isCurrent = false;
+	private String helpLocalRoot = "";
+	private String name = "";
+	private String author = "";
+	private String url = "";
+	String namespaceURL = "";
+	private String helpOnlineRoot = "";
+
+	private XMLMenus xmlFrameMenus = null;
+	private XMLToolbars xmlToolbars = null;
+	private XMLStatusbars xmlStatusbars = null;
+	private XMLDockbars xmlDockbars = null;
+	private XMLMenus xmlContextMenus = null;
+	private XMLRibbons xmlRibbons = null;
+
 
 	public PluginInfo(Element element) {
 		this.name = "";
@@ -35,8 +61,8 @@ public class PluginInfo {
 		this.setName(pluginInfo.getName());
 	}
 
-	String namespaceURL = "";
 
+	//region getter and setter
 	public String getNamespaceURL() {
 		return this.namespaceURL;
 	}
@@ -44,8 +70,6 @@ public class PluginInfo {
 	public void setNamespaceURL(String namespaceURL) {
 		this.namespaceURL = namespaceURL;
 	}
-
-	private String name = "";
 
 	public String getName() {
 		return this.name;
@@ -55,8 +79,6 @@ public class PluginInfo {
 		this.name = name;
 	}
 
-	private String author = "";
-
 	public String getAuthor() {
 		return this.author;
 	}
@@ -64,8 +86,6 @@ public class PluginInfo {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-	private String url = "";
 
 	public String getURL() {
 		return this.url;
@@ -75,8 +95,6 @@ public class PluginInfo {
 		this.url = url;
 	}
 
-	private String configLocation = "";
-
 	public String getConfigLocation() {
 		return this.configLocation;
 	}
@@ -85,7 +103,6 @@ public class PluginInfo {
 		this.configLocation = configLocation;
 	}
 
-	private String bundleName = "";
 
 	public String getBundleName() {
 		return this.bundleName;
@@ -95,8 +112,6 @@ public class PluginInfo {
 		this.bundleName = bundleName;
 	}
 
-	private String description = "";
-
 	public String getDescription() {
 		return this.description;
 	}
@@ -104,8 +119,6 @@ public class PluginInfo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	private String uiDefinition = "";
 
 	public String getUIDefinition() {
 		return this.uiDefinition;
@@ -115,8 +128,6 @@ public class PluginInfo {
 		this.uiDefinition = uiDefinition;
 	}
 
-	private Boolean enable = false;
-
 	public Boolean getEnable() {
 		return this.enable;
 	}
@@ -124,8 +135,6 @@ public class PluginInfo {
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
 	}
-
-	private Boolean hasRecentFile = false;
 
 	public Boolean getHasRecentFile() {
 		return this.hasRecentFile;
@@ -135,8 +144,6 @@ public class PluginInfo {
 		this.hasRecentFile = hasRecentFile;
 	}
 
-	private String recentFile = "";
-
 	public String getRecentFile() {
 		return this.recentFile;
 	}
@@ -144,8 +151,6 @@ public class PluginInfo {
 	public void setRecentFile(String recentFile) {
 		this.recentFile = recentFile;
 	}
-
-	private Boolean isCurrent = false;
 
 	public Boolean getIsCurrent() {
 		return this.isCurrent;
@@ -155,8 +160,6 @@ public class PluginInfo {
 		this.isCurrent = isCurrent;
 	}
 
-	private String helpLocalRoot = "";
-
 	public String getHelpLocalRoot() {
 		return this.helpLocalRoot;
 	}
@@ -164,8 +167,6 @@ public class PluginInfo {
 	public void setHelpLocalRoot(String helpLocalRoot) {
 		this.helpLocalRoot = helpLocalRoot;
 	}
-
-	private String helpOnlineRoot = "";
 
 	public String getHelpOnlineRoot() {
 		return this.helpOnlineRoot;
@@ -175,31 +176,22 @@ public class PluginInfo {
 		this.helpOnlineRoot = helpOnlineRoot;
 	}
 
-	private XMLMenus xmlFrameMenus = null;
 
 	public XMLMenus getFrameMenus() {
 		return this.xmlFrameMenus;
 	}
 
-	private XMLToolbars xmlToolbars = null;
-
 	public XMLToolbars getToolbars() {
 		return this.xmlToolbars;
 	}
-
-	private XMLStatusbars xmlStatusbars = null;
 
 	public XMLStatusbars getStatusbars() {
 		return this.xmlStatusbars;
 	}
 
-	private XMLDockbars xmlDockbars = null;
-
 	public XMLDockbars getDockbars() {
 		return this.xmlDockbars;
 	}
-
-	private XMLMenus xmlContextMenus = null;
 
 	public XMLMenus getContextMenus() {
 		return this.xmlContextMenus;
@@ -209,10 +201,14 @@ public class PluginInfo {
 		return this.processManagerElement;
 	}
 
+	public XMLRibbons getRibbons() {
+		// TODO: 2017/10/25
+		return xmlRibbons;
+	}
+	//endregion
+
 	public Boolean IsValid() {
-		Boolean valid = false;
-		valid = true;
-		return valid;
+		return true;
 	}
 
 	public boolean FromConfig(Element element) {
@@ -249,23 +245,26 @@ public class PluginInfo {
 				if (nodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					Element item = (Element) (nodes.item(i));
 
-					if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_Runtime)) {
+					String nodeName = item.getNodeName();
+					if (nodeName.equalsIgnoreCase(_XMLTag.g_Runtime)) {
 						this.setBundleName(item.getAttribute(_XMLTag.g_AttributionBundleName));
 						if (item.hasAttribute(_XMLTag.g_AttributionEnabled) && "false".equalsIgnoreCase(item.getAttribute(_XMLTag.g_AttributionEnabled))) {
 							this.setEnable(false);
 						}
-					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeFrameMenus)) {
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeFrameMenus)) {
 						this.frameMenusElement = item;
-					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeToolbars)) {
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeToolbars)) {
 						this.toolbarsElement = item;
-					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeStatusbars)) {
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeStatusbars)) {
 						this.statusbarsElement = item;
-					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeDockbars)) {
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeDockbars)) {
 						this.dockbarsElement = item;
-					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeContextMenus)) {
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeContextMenus)) {
 						this.contextMenusElement = item;
-					} else if (item.getNodeName().equalsIgnoreCase("ProcessManager")) {
+					} else if (nodeName.equalsIgnoreCase("ProcessManager")) {
 						this.processManagerElement = item;
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeRibbons)) {
+						this.ribbonsElement = item;
 					}
 				}
 			}
@@ -296,6 +295,9 @@ public class PluginInfo {
 		this.xmlStatusbars = new XMLStatusbars(this);
 		this.xmlStatusbars.load(this.statusbarsElement);
 
+		this.xmlRibbons = new XMLRibbons(this);
+		this.xmlRibbons.load(this.ribbonsElement);
+
 		return true;
 	}
 
@@ -321,14 +323,17 @@ public class PluginInfo {
 
 						if (childElement.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeToolbar)) {
 							String id = childElement.getAttribute(_XMLTag.g_AttributionID);
-							XMLToolbar xmlToolbar = Application.getActiveApplication().getMainFrame().getToolbarManager().get(id).getXMLToolbar();
+							IToolbarManager toolbarManager = Application.getActiveApplication().getMainFrame().getToolbarManager();
+							if (toolbarManager != null && toolbarManager.get(id) != null) {
+								XMLToolbar xmlToolbar = toolbarManager.get(id).getXMLToolbar();
+								if (xmlToolbar != null) {
+									childElement.setAttribute(_XMLTag.g_AttributionIndex, Integer.toString(xmlToolbar.getIndex()));
 
-							if (xmlToolbar != null) {
-								childElement.setAttribute(_XMLTag.g_AttributionIndex, Integer.toString(xmlToolbar.getIndex()));
-
-								childElement.setAttribute(_XMLTag.g_AttributionVisible, Boolean.toString(xmlToolbar.getVisible()));
-								childElement.setAttribute(_XMLTag.g_RowIndex, Integer.toString(xmlToolbar.getRowIndex()));
+									childElement.setAttribute(_XMLTag.g_AttributionVisible, Boolean.toString(xmlToolbar.getVisible()));
+									childElement.setAttribute(_XMLTag.g_RowIndex, Integer.toString(xmlToolbar.getRowIndex()));
+								}
 							}
+
 						}
 					}
 				}
@@ -342,4 +347,6 @@ public class PluginInfo {
 	public String toString() {
 		return this.getName();
 	}
+
+
 }

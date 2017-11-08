@@ -2,10 +2,8 @@ package com.supermap.desktop.ui;
 
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.controls.utilities.SystemUIUtilities;
-import com.supermap.desktop.event.FormActivatedListener;
 import com.supermap.desktop.utilities.PathUtilities;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -49,12 +47,12 @@ public class MainFrame extends FormBase implements WindowListener {
 		this.setIconImages(images);
 		this.addWindowListener(this);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				setVisible(true);
-			}
-		});
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				setVisible(true);
+//			}
+//		});
 	}
 
 
