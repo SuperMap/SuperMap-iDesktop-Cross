@@ -132,7 +132,7 @@ public class CADStyleTitlePanel extends JPanel {
     private void initResources() {
         switch (styleType) {
             case GEOPOINTTYPE:
-                this.setBorder(new TitledBorder(MapEditorProperties.getString("String_Point")));
+                this.setBorder(new TitledBorder(ControlsProperties.getString("String_Point")));
                 break;
             case GEOLINETYPE:
                 this.setBorder(new TitledBorder(MapEditorProperties.getString("String_Line")));

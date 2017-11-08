@@ -1,7 +1,7 @@
 package com.supermap.desktop.newtheme.guidPanel;
 
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class GridRangeThemePanel extends JPanel {
 
 	private void initComponents() {
 		// @formatter:off
-		this.labelGridRangeTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRIDRANGE,MapViewProperties.getString("String_Default"));
+		this.labelGridRangeTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRIDRANGE, CoreProperties.getString("String_Default"));
 		this.labelGridRangeTheme.selected(true);
 		this.setBackground(Color.WHITE);
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));

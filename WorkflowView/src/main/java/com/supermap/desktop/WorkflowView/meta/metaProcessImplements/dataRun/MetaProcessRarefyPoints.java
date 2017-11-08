@@ -58,7 +58,7 @@ public class MetaProcessRarefyPoints extends MetaProcess {
 		this.saveDataset = new ParameterSaveDataset();
 		this.parameterNumberRadius = new ParameterNumber(CoreProperties.getString("String_RarefyPointsRadius"));
 		this.parameterNumberRadius.setRequisite(true);
-		this.comboBoxStatisticsType = new ParameterComboBox(ProcessProperties.getString("String_StatisticsMode"));
+		this.comboBoxStatisticsType = new ParameterComboBox(CoreProperties.getString("String_StatisticType"));
 		this.checkBoxRandomSaveRerefyPoints = new ParameterCheckBox(ProcessProperties.getString("String_RandomSaveRerefyPoints"));
 		this.checkBoxSaveOriginField = new ParameterCheckBox(ProcessProperties.getString("String_RandomSaveOriginField"));
 		this.statisticsFieldGroupForRarefyPoints = new ParameterStatisticsFieldGroupForRarefyPoints(ProcessProperties.getString("String_StatisticsField"));

@@ -1,5 +1,6 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
@@ -25,9 +26,9 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 	}
 
 	private void initParameters() {
-		this.startValue = new ParameterTextField(ProcessProperties.getString("String_StartValue"));
+		this.startValue = new ParameterTextField(ControlsProperties.getString("String_BatchAddColorTableMinValue"));
 		this.startValue.setSelectedItem(0);
-		this.endValue = new ParameterTextField(ProcessProperties.getString("String_EndValue"));
+		this.endValue = new ParameterTextField(ControlsProperties.getString("String_BatchAddColorTableMaxValue"));
 		this.endValue.setRequisite(true);
 		this.iteratorValue = new ParameterTextField(ProcessProperties.getString("String_MeasureValue"));
 		this.iteratorValue.setSelectedItem(1);

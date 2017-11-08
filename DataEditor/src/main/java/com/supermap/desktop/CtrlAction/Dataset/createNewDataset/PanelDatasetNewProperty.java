@@ -66,7 +66,7 @@ public class PanelDatasetNewProperty extends JPanel {
 		initLayout(DatasetType.POINT);
 //		initStates(this.datasetBeanFrist);
 		registerEvent();
-		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_GroupBox_ParameterSetting")));
+		this.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_toolStripButtonAdvanced")));
 	}
 
 	private void initComponents() {

@@ -7,8 +7,8 @@ import com.supermap.data.TextStyle;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormTransformation;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.event.*;
 import com.supermap.desktop.ui.LayersComponentManager;
@@ -266,9 +266,9 @@ public abstract class TransformationBase implements IFormMap {
 				ArrayList<String> removingLayers = new ArrayList<String>();
 				String message = "";
 				if (layers.length == 1) {
-					message = String.format(DataEditorProperties.getString("String_validateRemoveLayerMessage"), layers[0].getCaption());
+					message = String.format(ControlsProperties.getString("String_validateRemoveLayerMessage"), layers[0].getCaption());
 				} else {
-					message = MessageFormat.format(DataEditorProperties.getString("String_validateRemoveRangeMessage"), layers.length);
+					message = MessageFormat.format(ControlsProperties.getString("String_validateRemoveRangeMessage"), layers.length);
 				}
 
 				int result = UICommonToolkit.showConfirmDialog(message);

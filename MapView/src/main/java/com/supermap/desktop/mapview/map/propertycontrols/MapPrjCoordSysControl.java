@@ -4,6 +4,7 @@ import com.supermap.data.PrjCoordSys;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.implement.SmTextField;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -59,7 +60,7 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 	 * Create the panel.
 	 */
 	public MapPrjCoordSysControl() {
-		super(MapViewProperties.getString("String_TabPage_ProjectionSetting"));
+		super(ControlsProperties.getString("String_TabPage_ProjectionSetting"));
 	}
 
 	@Override
@@ -122,8 +123,8 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 	@Override
 	protected void initializeResources() {
 		this.checkBoxIsDynamicProjection.setText(MapViewProperties.getString("String_CheckBox_DynamicProjection"));
-		this.buttonProjectionSetting.setText(MapViewProperties.getString("String_Button_ProjectionSetting"));
-		this.labelCoordName.setText(MapViewProperties.getString("String_Label_PrjCoordSysName"));
+		this.buttonProjectionSetting.setText(ControlsProperties.getString("String_Button_ProjectionSetting"));
+		this.labelCoordName.setText(ControlsProperties.getString("String_Message_CoordSysName"));
 		this.labelCoordUnit.setText(MapViewProperties.getString("String_Label_PrjCoordSysUnit"));
 	}
 

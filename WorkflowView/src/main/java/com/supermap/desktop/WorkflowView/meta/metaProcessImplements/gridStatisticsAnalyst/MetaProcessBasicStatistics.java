@@ -8,6 +8,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.definedClass.StatisticsCollection;
@@ -49,7 +50,7 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasource, sourceDataset);
 		ParameterCombine resultCombine = new ParameterCombine();
-		resultCombine.setDescribe(ProcessProperties.getString("String_GroupBox_StatisticsResult"));
+		resultCombine.setDescribe(ControlsProperties.getString("String_StatisticResult"));
 		resultCombine.addParameters(textAreaResult, histogram);
 
 		parameters.setParameters(sourceCombine, resultCombine);
@@ -100,11 +101,11 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 			double mean = basicStatisticsAnalystResult.getMean();
 			double std = basicStatisticsAnalystResult.getStandardDeviation();
 			double var = Math.pow(std, 2);
-			textAreaResult.setSelectedItem(ProcessProperties.getString("String_Result_MaxValue") + max + "\n" +
-					ProcessProperties.getString("String_Result_MinValue") + min + "\n" +
-					ProcessProperties.getString("String_Result_Mean") + mean + "\n" +
+			textAreaResult.setSelectedItem(ControlsProperties.getString("String_LabelMaxValue") + max + "\n" +
+					ControlsProperties.getString("String_LabelMinValue") + min + "\n" +
+					CoreProperties.getString("String_Mean") + mean + "\n" +
 					ProcessProperties.getString("String_Result_StandardDeviation") + std + "\n" +
-					ProcessProperties.getString("String_Result_Variance") + var);
+					ControlsProperties.getString("String_Variance") + var);
 			StatisticsCollection statisticsCollection = new StatisticsCollection(max, min, mean, std, var);
 			if (histogram.isCreate()) {
 				histogram.setSelectedItem(StatisticsAnalyst.createHistogram(src, histogram.getGroupCount(), histogram.getFunctionType()));

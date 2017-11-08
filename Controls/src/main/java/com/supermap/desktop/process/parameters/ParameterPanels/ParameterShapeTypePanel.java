@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.analyst.spatialanalyst.*;
 import com.supermap.data.*;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
@@ -10,6 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterShapeType;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.TextFields.NumTextFieldLegit;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -50,12 +52,12 @@ public class ParameterShapeTypePanel extends SwingPanel implements IParameterPan
 	private NeighbourShape neighbourShape;
 	Dataset dataset;
 
-	private static final String RECTANGLE = ProcessProperties.getString("String_Rectangle");
-	private static final String CIRCLE = ProcessProperties.getString("String_Circle");
-	private static final String ANNULUS = ProcessProperties.getString("String_Annulus");
-	private static final String WEDGE = ProcessProperties.getString("String_Wedge");
+	private static final String RECTANGLE = ControlsProperties.getString("String_ThemeLabelBackShape_Rect");
+	private static final String CIRCLE = ControlsProperties.getString("String_Circle");
+	private static final String ANNULUS = ControlsProperties.getString("String_Annulus");
+	private static final String WEDGE = ControlsProperties.getString("String_Wedge");
 	private static final String UNIT_TYPE_CELL = ProcessProperties.getString("String_NeighbourUnitType_Cell");
-	private static final String UNIT_TYPE_MAP = ProcessProperties.getString("String_NeighbourUnitType_Map");
+	private static final String UNIT_TYPE_MAP = ControlsProperties.getString("String_NeighbourUnitType_Map");
 
 	public ParameterShapeTypePanel(IParameter parameterShapeType) {
 		super(parameterShapeType);
@@ -100,15 +102,15 @@ public class ParameterShapeTypePanel extends SwingPanel implements IParameterPan
 	}
 
 	private void initResources() {
-		labelShapeType.setText(ProcessProperties.getString("String_Label_NeighbourShapeType"));
-		labelUnitType.setText(ProcessProperties.getString("String_Label_NeighbourUnitType"));
-		labelWidth.setText(ProcessProperties.getString("String_Label_Width"));
+		labelShapeType.setText(ControlsProperties.getString("String_Label_NeighbourShapeType"));
+		labelUnitType.setText(ControlsProperties.getString("String_Label_NeighbourUnitType"));
+		labelWidth.setText(CoreProperties.getString("String_Label_Width"));
 		labelHeight.setText(ProcessProperties.getString("String_Label_Height"));
-		labelRadius.setText(ProcessProperties.getString("String_Label_Radius"));
-		labelInnerRadius.setText(ProcessProperties.getString("String_Label_InnerRadius"));
-		labelOuterRadius.setText(ProcessProperties.getString("String_Label_OuterRadius"));
-		labelStartAngle.setText(ProcessProperties.getString("String_Label_StartAngle"));
-		labelEndAngle.setText(ProcessProperties.getString("String_Label_EndAngle"));
+		labelRadius.setText(ControlsProperties.getString("String_Label_Radius"));
+		labelInnerRadius.setText(ControlsProperties.getString("String_Label_InnerRadius"));
+		labelOuterRadius.setText(ControlsProperties.getString("String_Label_OuterRadius"));
+		labelStartAngle.setText(ControlsProperties.getString("String_ThemeGraphAdvance_LabelStartAngle"));
+		labelEndAngle.setText(ControlsProperties.getString("String_Label_EndAngle"));
 	}
 
 	private void initLayout() {

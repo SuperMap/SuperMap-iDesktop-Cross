@@ -114,7 +114,7 @@ public class MetaProcessDissolve extends MetaProcess {
 		}
 		this.resultDataset.setDefaultDatasetName("result_Dissolve");
 
-		ParameterDataNode parameterDataNodeOnlyMultipart = new ParameterDataNode(ProcessProperties.getString("String_Dissolve_Mode_OnlyMultiPart"), DissolveType.ONLYMULTIPART);
+		ParameterDataNode parameterDataNodeOnlyMultipart = new ParameterDataNode(ControlsProperties.getString("String_GeometryOperation_Combination"), DissolveType.ONLYMULTIPART);
 		ParameterDataNode parameterDataNodeOnlySingle = new ParameterDataNode(ProcessProperties.getString("String_Dissolve_Mode_Single"), DissolveType.SINGLE);
 		ParameterDataNode parameterDataNodeMultipart = new ParameterDataNode(ProcessProperties.getString("String_Dissolve_Mode_MultiPart"), DissolveType.MULTIPART);
 		this.comboBoxDissolveMode.setItems(parameterDataNodeOnlyMultipart, parameterDataNodeOnlySingle, parameterDataNodeMultipart);

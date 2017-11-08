@@ -345,7 +345,7 @@ public class OverlayAnalystDialog extends SmDialog {
 		Dataset sourceDataset = null;
 		Dataset overlayAnalystDataset = null;
 		FormProgress progress = new FormProgress();
-		progress.setTitle(SpatialAnalystProperties.getString("String_Form_OverlayAnalyst"));
+		progress.setTitle(ControlsProperties.getString("String_OverlayAnalyst"));
 		IOverlayAnalyst overlayAnalyst = new OverlayAnalystCallable();
 		if (null != comboboxSourceDataset.getSelectedDataset()) {
 			sourceDataset = comboboxSourceDataset.getSelectedDataset();
@@ -355,8 +355,8 @@ public class OverlayAnalystDialog extends SmDialog {
 			overlayAnalystDataset = comboboxOverlayAnalystDataset.getSelectedDataset();
 		}
 		if (null != sourceDataset && null != overlayAnalystDataset && !isSameProjection(sourceDataset.getPrjCoordSys(), overlayAnalystDataset.getPrjCoordSys())) {
-			Application.getActiveApplication().getOutput().output(SpatialAnalystProperties.getString("String_PrjCoordSys_Different") + "\n" + SpatialAnalystProperties.getString("String_Parameters"));
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(SpatialAnalystProperties.getString("String_OverlayAnalyst_Failed"), sourceDataset.getName() + "@" + sourceDataset.getDatasource().getAlias()
+			Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_PrjCoordSys_Different") + "\n" + SpatialAnalystProperties.getString("String_Parameters"));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_OverlayAnalyst_Failed"), sourceDataset.getName() + "@" + sourceDataset.getDatasource().getAlias()
 					, overlayAnalystDataset.getName() + "@" + overlayAnalystDataset.getDatasource().getAlias(), OVERLAYANALYSTTTYPE.toString()));
 			return;
 		} else if (null != sourceDataset && null != overlayAnalystDataset && isSameProjection(sourceDataset.getPrjCoordSys(), overlayAnalystDataset.getPrjCoordSys())) {
@@ -521,7 +521,7 @@ public class OverlayAnalystDialog extends SmDialog {
 			sourceGeoStyle.setFillForeColor(new Color(233, 255, 190));
 			sourceGeoStyle.setFillBackOpaque(false);
 			Layer sourceLayer = MapUtilities.addDatasetToMap(form.getMapControl().getMap(), comboboxSourceDataset.getSelectedDataset(), true);
-			sourceLayer.setCaption(SpatialAnalystProperties.getString("String_OverlayAnalyst_SourceDataset"));
+			sourceLayer.setCaption(CoreProperties.getString("String_ColumnHeader_SourceDataset"));
 			LayerSettingVector sourceLayerSetting = (LayerSettingVector) sourceLayer.getAdditionalSetting();
 			sourceLayerSetting.setStyle(sourceGeoStyle);
 		}
@@ -588,19 +588,19 @@ public class OverlayAnalystDialog extends SmDialog {
 	}
 
 	private void initResources() {
-		this.setTitle(SpatialAnalystProperties.getString("String_Form_OverlayAnalyst"));
+		this.setTitle(ControlsProperties.getString("String_OverlayAnalyst"));
 		this.labelSourceDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelSourceDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.labelOverlayAnalystDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelOverlayAnalystDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.labelTargetDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelTargetDataset.setText(CoreProperties.getString("String_Label_Dataset"));
-		this.buttonFieldsSet.setText(SpatialAnalystProperties.getString("String_Button_FieldsSetting"));
+		this.buttonFieldsSet.setText(CoreProperties.getString("String_FieldsSetting"));
 		this.labelTolerance.setText(SpatialAnalystProperties.getString("String_Label_Tolerance"));
-		this.checkboxResultAnalyst.setText(SpatialAnalystProperties.getString("String_CheckBox_ResultComparison"));
+		this.checkboxResultAnalyst.setText(CoreProperties.getString("String_CheckBox_ResultComparison"));
 		this.panelSource.setBorder(new TitledBorder(ControlsProperties.getString("String_GroupBox_SourceDataset")));
-		this.panelOverlayAnalyst.setBorder(new TitledBorder(SpatialAnalystProperties.getString("String_GroupBox_OverlayDataset")));
-		this.panelTarget.setBorder(new TitledBorder(SpatialAnalystProperties.getString("String_ResultSet")));
+		this.panelOverlayAnalyst.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_OverlayDataset")));
+		this.panelTarget.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
 	}
 
 	private void initComponents() {

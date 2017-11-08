@@ -2,13 +2,13 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CoreProperties;
@@ -38,6 +38,7 @@ public class MetaProcessPointToLine extends MetaProcessTypeConversion {
 		outputData = new ParameterSaveDataset();
 		comboBoxConnect = new ParameterFieldComboBox(ProcessProperties.getString("String_ConnectionField"));
 		comboBoxConnect.setRequisite(true);
+		comboBoxConnect.setValueType(BasicTypes.STRING);
 
 		Dataset dataset = DatasetUtilities.getDefaultDataset(DatasetType.POINT);
 		if (dataset != null) {
@@ -60,7 +61,7 @@ public class MetaProcessPointToLine extends MetaProcessTypeConversion {
 
 		parameters.setParameters(inputCombine, settingCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, DatasetTypes.POINT, inputCombine);
-		parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Line_Dataset"), DatasetTypes.LINE, outputCombine);
+		parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Line"), DatasetTypes.LINE, outputCombine);
 	}
 
 	private void initParameterConstraint() {

@@ -3,13 +3,14 @@ package com.supermap.desktop.geometryoperation.control;
 import com.supermap.data.Datasource;
 import com.supermap.data.Workspace;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -241,7 +242,7 @@ public class JDialogRegionExtractCenter extends SmDialog {
 	}
 
 	private void initializeComponents() {
-		setTitle(MapEditorProperties.getString("String_GeometryOperation_RegionExtractCenter"));
+		setTitle(CoreProperties.getString("String_RegionToCenterLine"));
 		this.labelDesDatasource = new JLabel(ControlsProperties.getString("String_Label_TargetDatasource"));
 		this.labelMax = new JLabel(ControlsProperties.getString(ControlsProperties.Label_Max));
 		this.labelMin = new JLabel(ControlsProperties.getString(ControlsProperties.Label_Min));

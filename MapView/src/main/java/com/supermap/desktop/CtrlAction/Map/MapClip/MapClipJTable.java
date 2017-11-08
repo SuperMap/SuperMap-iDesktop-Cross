@@ -8,6 +8,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.TableDataCellRender;
 import com.supermap.desktop.ui.controls.DataCell;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
@@ -82,9 +83,9 @@ public class MapClipJTable extends JTable {
 
 		String[] clipType = {MapViewProperties.getString("String_MapClip_Out"), MapViewProperties.getString("String_MapClip_In")};
 		JComboBox clipTypeComboBox = new JComboBox(clipType);
-		String[] erase = {MapViewProperties.getString("String_MapClip_Yes"), MapViewProperties.getString("String_MapClip_No")};
+		String[] erase = {CoreProperties.getString("String_True"), MapViewProperties.getString("String_MapClip_No")};
 		JComboBox eraseComboBox = new JComboBox(erase);
-		String[] acurrent = {MapViewProperties.getString("String_MapClip_Yes"), MapViewProperties.getString("String_MapClip_No")};
+		String[] acurrent = {CoreProperties.getString("String_True"), MapViewProperties.getString("String_MapClip_No")};
 		JComboBox acurrentComboBox = new JComboBox(acurrent);
 
 		this.layerCaptionColumn = this.getColumn(this.getModel().getColumnName(COLUMN_INDEX_LAYERCAPTION));
@@ -156,7 +157,7 @@ public class MapClipJTable extends JTable {
 		//基于当前默认的排序表头添加help icon
 		JTableHeader tableHeader = this.getTableHeader();
 		tableHeader.setDefaultRenderer(new ColumnHeadRenderer(tableHeader.getDefaultRenderer()));
-		ImageAndTextTableHeaderCell eraseTip = new ImageAndTextTableHeaderCell(MapViewProperties.getString("String_MapClip_Erase"), ControlsResources.getIcon("/controlsresources/Icon_Warning.png"));
+		ImageAndTextTableHeaderCell eraseTip = new ImageAndTextTableHeaderCell(CoreProperties.getString("String_OverlayAnalystMethod_Erase"), ControlsResources.getIcon("/controlsresources/Icon_Warning.png"));
 		eraseTip.setToolTipText(""); //  用来激活表头显示的tip，并且只能为空字符串，如果非空则会覆盖掉tip
 		this.eraseColumn.setCellRenderer(new MapClipCellRender());
 		this.acurrentClipColumn.setCellRenderer(new MapClipCellRender());
@@ -205,7 +206,7 @@ public class MapClipJTable extends JTable {
 
 			String clipType = MapViewProperties.getString("String_MapClip_In");
 			String erase = MapViewProperties.getString("String_MapClip_No");
-			String exactClip = MapViewProperties.getString("String_MapClip_Yes");
+			String exactClip = CoreProperties.getString("String_True");
 			this.mapClipTableModel.addRowLayerInfo(layerCaption, targetDatasource, targetDatasetName, clipType, erase, exactClip);
 		}
 		if (this.mapClipTableModel.getRowCount() >= 1) {

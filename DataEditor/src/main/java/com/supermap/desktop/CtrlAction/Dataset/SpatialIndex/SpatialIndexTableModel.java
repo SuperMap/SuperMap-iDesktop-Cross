@@ -5,6 +5,7 @@ import com.supermap.data.DatasetVector;
 import com.supermap.data.SpatialIndexInfo;
 import com.supermap.data.SpatialIndexType;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -164,7 +165,7 @@ public class SpatialIndexTableModel extends SortableTableModel {
 			}
 		}
 		fireTableDataChanged();
-		FormProgress formProgress = new FormProgress(DataEditorProperties.getString("String_CreateDatasetSpatialIndex"));
+		FormProgress formProgress = new FormProgress(ControlsProperties.getString("string_checkbox_chckbxSpatialIndex"));
 		formProgress.doWork(new BulidSpatialIndexCallable(tableModelBeans, this));
 		return true;
 	}

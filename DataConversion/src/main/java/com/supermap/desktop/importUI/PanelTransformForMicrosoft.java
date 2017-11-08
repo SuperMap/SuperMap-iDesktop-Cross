@@ -4,6 +4,7 @@ import com.supermap.data.*;
 import com.supermap.data.conversion.ImportSetting;
 import com.supermap.data.conversion.ImportSettingCSV;
 import com.supermap.desktop.baseUI.PanelTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingExcel;
@@ -327,7 +328,7 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 		panelDefault.add(this.labelEmpty, new GridBagConstraintsHelper(6, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 10).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 		panelDefault.add(this.labelDataPreview, new GridBagConstraintsHelper(0, 1, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 5, 5, 45).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 		panelDefault.add(this.scrollPanePreviewCSV, new GridBagConstraintsHelper(2, 1, 6, 6).setAnchor(GridBagConstraints.WEST).setInsets(0, 0, 5, 10).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setIpad(0, 80));
-		panelDefault.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
+		panelDefault.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
 		this.setLayout(new GridBagLayout());
 		this.add(panelDefault, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.BOTH).setWeight(1, 0));
 		this.add(this.paneForIndexAsPoint, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.BOTH).setWeight(1, 0));
@@ -426,7 +427,7 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 		this.labelDataPreview.setText(CoreProperties.getString("String_DataPreview"));
 		this.labelSeparator.setText(DataConversionProperties.getString("String_Label_Separator"));
 		this.textFieldSeparator.setText(",");
-		this.checkBoxFirstRowAsField.setText(DataConversionProperties.getString("String_ImportSettingPanel_Checkbox_FirstRowisField"));
+		this.checkBoxFirstRowAsField.setText(CoreProperties.getString("String_FirstRowisField"));
 		this.radioButtonIndexWKT.setText(CoreProperties.getString("String_WKTIndex"));
 		this.radioButtonIndex.setText(CoreProperties.getString("String_XYField"));
 		this.labelX.setText(CoreProperties.getString("string_longitude"));

@@ -269,12 +269,12 @@ public class LayerHeatmapPropertyControl extends AbstractLayerPropertyControl {
 		this.panelMaximumSetting.setBorder(BorderFactory.createTitledBorder(MapViewProperties.getString("String_LayerHeatmap_MaxiumSetting")));
 		this.labelKernelRadius.setText(MapViewProperties.getString("String_LayerHeatmap_KernelRadius"));
 		this.labelKernelRadius.setToolTipText(ControlsProperties.getString("String_ValidRange") + "[1,50]");
-		this.labelWeightField.setText(MapViewProperties.getString("String_LayerHeatmap_WeightField"));
-		this.labelColorScheme.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+		this.labelWeightField.setText(ControlsProperties.getString("String_LayerHeatmap_WeightField"));
+		this.labelColorScheme.setText(ControlsProperties.getString("String_LabelColorScheme"));
 		this.labelMaxColor.setText(MapViewProperties.getString("String_LayerHeatmap_MaxColor"));
-		this.labelMaxColorTransparence.setText(MapViewProperties.getString("String_Opaque"));
+		this.labelMaxColorTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
 		this.labelMinColor.setText(MapViewProperties.getString("String_LayerHeatmap_MinColor"));
-		this.labelMinColorTransparence.setText(MapViewProperties.getString("String_Opaque"));
+		this.labelMinColorTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
 		this.labelFuzzyDegree.setText(MapViewProperties.getString("String_LayerHeatmap_FuzzyDegree"));
 		this.labelIntensity.setText(MapViewProperties.getString("String_LayerHeatmap_Intensity"));
 		this.radioButtonCurrentViewMaximum.setText(MapViewProperties.getString("String_LayerHeatmap_CurrentMaximun"));

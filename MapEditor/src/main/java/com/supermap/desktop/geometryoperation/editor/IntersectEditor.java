@@ -1,16 +1,11 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.Geometry;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.geometry.Abstract.IRegionFeature;
 import com.supermap.desktop.geometryoperation.EditEnvironment;
 import com.supermap.desktop.geometryoperation.control.JDialogFieldOperationSetting;
-import com.supermap.desktop.mapeditor.MapEditorProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.GeometryUtilities;
@@ -45,7 +40,7 @@ public class IntersectEditor extends AbstractEditor {
 			if (environment.getEditProperties().getSelectedGeometryTypes().size() == 1) {
 				datasetType = DatasetType.REGION;
 			}
-			JDialogFieldOperationSetting form = new JDialogFieldOperationSetting(MapEditorProperties.getString("String_GeometryOperation_Intersect"),
+			JDialogFieldOperationSetting form = new JDialogFieldOperationSetting(CoreProperties.getString("String_OverlayAnalystMethod_Intersect"),
 					environment.getMapControl().getMap(), datasetType);
 			if (form.showDialog() == DialogResult.OK) {
 				CursorUtilities.setWaitCursor(environment.getMapControl());

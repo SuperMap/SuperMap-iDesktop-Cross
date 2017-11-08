@@ -1223,7 +1223,7 @@ public class JDialogSpatialQuery extends SmDialog {
 	//endregion
 
 	private void initResources() {
-		this.setTitle(DataViewProperties.getString("String_SpatialQuery"));
+		this.setTitle(ControlsProperties.getString("String_SpatialQuery"));
 		panelDescribe.setBorder(BorderFactory.createTitledBorder(DataViewProperties.getString("String_GroupBoxSQModeDescription")));
 		labelSearchLayer.setText(DataViewProperties.getString("String__LabelSearchingLayer"));
 		labelSelectedCount.setText(MessageFormat.format(DataViewProperties.getString("String_CountofFeaturesSelecte"), 0));

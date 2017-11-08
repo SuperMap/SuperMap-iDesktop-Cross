@@ -2,6 +2,7 @@ package com.supermap.desktop.newtheme.themeGraph;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
@@ -14,6 +15,7 @@ import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeItemLabelDecorator;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
 import com.supermap.desktop.ui.controls.*;
@@ -132,7 +134,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
     private transient Layer themeGraphLayer;
     private String layerName;
     private String[] nameStrings = new String[]{MapViewProperties.getString("String_ThemeGraphItemManager_ClmExpression"),
-            MapViewProperties.getString("String_Title_Sytle"), MapViewProperties.getString("String_ThemeGraphTextFormat_Caption")};
+            MapViewProperties.getString("String_Title_Sytle"), CoreProperties.getString("String_Caption")};
     private final int TABLE_COLUMN_EXPRESSION = 0;
     private final int TABLE_COLUMN_STYLE = 1;
     private final int TABLE_COLUMN_CAPTION = 2;
@@ -202,16 +204,16 @@ public class ThemeGraphContainer extends ThemeChangePanel {
     }
 
     private void initResources() {
-        this.labelColorStyle.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+        this.labelColorStyle.setText(ControlsProperties.getString("String_LabelColorScheme"));
         this.labelGraphType.setText(MapViewProperties.getString("String_ThemeGraphProperty_LabelGraphType"));
         this.labelMethod.setText(MapViewProperties.getString("String_ThemeGraphProperty_LabelStatisticMode"));
         this.buttonDelete.setToolTipText(MapViewProperties.getString("String_Title_Delete"));
         this.buttonAdd.setToolTipText(MapViewProperties.getString("String_Title_Add"));
         this.buttonStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
-        this.buttonMoveToFrist.setToolTipText(MapViewProperties.getString("String_Title_MoveToFrist"));
-        this.buttonMoveToForward.setToolTipText(MapViewProperties.getString("String_Title_MoveToForward"));
-        this.buttonMoveToNext.setToolTipText(MapViewProperties.getString("String_Title_MoveToNext"));
-        this.buttonMoveToLast.setToolTipText(MapViewProperties.getString("String_Title_MoveToLast"));
+        this.buttonMoveToFrist.setToolTipText(ControlsProperties.getString("String_FirstColor"));
+        this.buttonMoveToForward.setToolTipText(ControlsProperties.getString("String_UpColor"));
+        this.buttonMoveToNext.setToolTipText(ControlsProperties.getString("String_DownColor"));
+        this.buttonMoveToLast.setToolTipText(ControlsProperties.getString("String_LastColor"));
         this.checkBoxRemark.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxDisplayLabel"));
         this.checkBoxAxis.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxAxe"));
         this.checkBoxShowFlow.setText(MapViewProperties.getString("String_CheckBox_ShowFlow"));
@@ -223,8 +225,8 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.labelMaxValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMaxSize"));
         this.labelMinValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMinSize"));
         this.labelOffsetUnity.setText(MapViewProperties.getString("String_Label_GetoffUnit"));
-        this.labelOffsetX.setText(MapViewProperties.getString("String_Label_GetoffX"));
-        this.labelOffsetY.setText(MapViewProperties.getString("String_Label_GetoffY"));
+        this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
+        this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
         this.labelRemarkFormat.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelGraphLabelFormat"));
         this.labelRemarkStyle.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelGraphStyle"));
         this.labelAxisColor.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelAxeColor"));
@@ -234,7 +236,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
 //        this.labelBarWidth.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelBarWidth"));
         this.labelBarWidthRatio.setText(MapViewProperties.getString("String_BarWidthRatio"));
         this.labelBarSpaceRatio.setText(MapViewProperties.getString("String_BarSpaceRatio"));
-        this.labelStartAngle.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelStartAngle"));
+        this.labelStartAngle.setText(ControlsProperties.getString("String_ThemeGraphAdvance_LabelStartAngle"));
         this.labelRoseRAngle.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelRoseAngle"));
         this.panelOptions.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeGraphAdvance_GroupBoxOption")));
         this.panelSizeLimite.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeGraphAdvance_GroupBoxLimited")));
@@ -436,8 +438,8 @@ public class ThemeGraphContainer extends ThemeChangePanel {
     }
 
     private void initComboBoxRemarkFormat() {
-        this.comboBoxRemarkFormat.setModel(new DefaultComboBoxModel<String>(new String[]{MapViewProperties.getString("String_ThemeGraphTextFormat_Percent"),
-                MapViewProperties.getString("String_ThemeGraphTextFormat_Value"), MapViewProperties.getString("String_ThemeGraphTextFormat_Caption"),
+        this.comboBoxRemarkFormat.setModel(new DefaultComboBoxModel<String>(new String[]{ControlsProperties.getString("String_ThemeGraphTextFormat_Percent"),
+                MapViewProperties.getString("String_ThemeGraphTextFormat_Value"), CoreProperties.getString("String_Caption"),
                 MapViewProperties.getString("String_ThemeGraphTextFormat_CaptionPercent"),
                 MapViewProperties.getString("String_ThemeGraphTextFormat_CaptionValue"),}));
         this.comboBoxRemarkFormat.setEnabled(false);
@@ -491,7 +493,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
      */
     private void initComboBoxOffsetUnity() {
         this.comboBoxOffsetUnity.setModel(new DefaultComboBoxModel<String>(new String[]{
-                MapViewProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
+                ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
         if (this.themeGraph.isOffsetFixed()) {
             this.comboBoxOffsetUnity.setSelectedIndex(0);
         } else {
@@ -586,7 +588,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.tableGraphInfo.getTableHeader().setReorderingAllowed(false);
         this.tableGraphInfo.getColumn(MapViewProperties.getString("String_ThemeGraphItemManager_ClmExpression")).setMaxWidth(200);
         this.tableGraphInfo.getColumn(MapViewProperties.getString("String_Title_Sytle")).setMaxWidth(100);
-        this.tableGraphInfo.getColumn(MapViewProperties.getString("String_ThemeGraphTextFormat_Caption")).setMaxWidth(200);
+        this.tableGraphInfo.getColumn(CoreProperties.getString("String_Caption")).setMaxWidth(200);
         this.tableGraphInfo.getModel().removeTableModelListener(this.graphCaptionChangeListener);
         this.tableGraphInfo.getModel().addTableModelListener(this.graphCaptionChangeListener);
         return this.tableGraphInfo;
@@ -621,7 +623,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
             comboBox.removeItem(tempExpression);
         }
         comboBox.addItem(expression);
-        comboBox.removeItem(MapViewProperties.getString("String_Combobox_Expression"));
+        comboBox.removeItem(CoreProperties.getString("String_ThemeGraphItemExpressionPicker_ButtonExpression"));
     }
 
     class CaptionChangeListener implements TableModelListener {
@@ -703,8 +705,8 @@ public class ThemeGraphContainer extends ThemeChangePanel {
     }
 
     private void initComboBoxMethod() {
-        this.comboBoxMethod.setModel(new DefaultComboBoxModel<String>(new String[]{MapViewProperties.getString("String_GraduatedMode_Constant"),
-                MapViewProperties.getString("String_GraduatedMode_Logarithm"), MapViewProperties.getString("String_GraduatedMode_SquareRoot")}));
+        this.comboBoxMethod.setModel(new DefaultComboBoxModel<String>(new String[]{ControlsProperties.getString("String_GraduatedMode_Constant"),
+                ControlsProperties.getString("String_GraduatedMode_Logarithm"), ControlsProperties.getString("String_GraduatedMode_SquareRoot")}));
         if (this.themeGraph.getGraduatedMode() == GraduatedMode.CONSTANT) {
             this.comboBoxMethod.setSelectedIndex(0);
             return;
@@ -728,10 +730,10 @@ public class ThemeGraphContainer extends ThemeChangePanel {
     private void initComboBoxGraphType() {
         this.comboBoxGraphType.setModel(new DefaultComboBoxModel<String>(new String[]{MapViewProperties.getString("String_GraphType_Area"),
                 MapViewProperties.getString("String_GraphType_Step"), MapViewProperties.getString("String_GraphType_Line"),
-                MapViewProperties.getString("String_GraphType_Point"), MapViewProperties.getString("String_GraphType_Bar"),
-                MapViewProperties.getString("String_GraphType_Bar3D"), MapViewProperties.getString("String_GraphType_Pie"),
+                MapViewProperties.getString("String_GraphType_Point"), ControlsProperties.getString("String_GraphType_Bar"),
+                MapViewProperties.getString("String_GraphType_Bar3D"), ControlsProperties.getString("String_GraphType_Pie"),
                 MapViewProperties.getString("String_GraphType_Pie3D"), MapViewProperties.getString("String_GraphType_Rose"),
-                MapViewProperties.getString("String_GraphType_Rose3D"), MapViewProperties.getString("String_GraphType_StackedBar"),
+                MapViewProperties.getString("String_GraphType_Rose3D"), ControlsProperties.getString("String_GraphType_StackedBar"),
                 MapViewProperties.getString("String_GraphType_StackedBar3D"), MapViewProperties.getString("String_GraphType_Ring")}));
         if (this.themeGraph.getGraphType() == ThemeGraphType.AREA) {
             this.comboBoxGraphType.setSelectedIndex(0);

@@ -42,7 +42,7 @@ public class MetaProcessAverageNearestNeighbor extends MetaProcess {
 
 	private void initParameters() {
 		parameterTextFieldArea.setDescribe(ProcessProperties.getString("String_SearchArea"));
-		parameterTextFieldArea.setUnit(ProcessProperties.getString("String_SquareMeter"));
+		parameterTextFieldArea.setUnit(CoreProperties.getString("String_AreaUnit_Meter"));
 		parameterComboBox.setDescribe(ProcessProperties.getString("String_DistanceMethod"));
 		parameterComboBox.setItems(new ParameterDataNode(ProcessProperties.getString("String_EUCLIDEAN"), DistanceMethod.EUCLIDEAN),
 				new ParameterDataNode(ProcessProperties.getString("String_MANHATTAN"), DistanceMethod.MANHATTAN));

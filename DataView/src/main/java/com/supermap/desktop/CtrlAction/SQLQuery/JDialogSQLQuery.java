@@ -313,12 +313,12 @@ public class JDialogSQLQuery extends SmDialog {
 		this.radioButtonQuerySpaceAndProperty.setText(DataViewProperties.getString("String_SQLQueryRadioQuerySpatialandAttributeInfo"));
 		this.radioButtonQueryAttributeInfo.setText(DataViewProperties.getString("String_QueryProperty"));
 		this.labelOperator.setText(DataViewProperties.getString("String_SQLQueryLabelOperator"));
-		this.buttonGetAllValue.setText(DataViewProperties.getString("String_getallvalue"));
+		this.buttonGetAllValue.setText(ControlsProperties.getString("String_getallvalue"));
 		this.labelCommonFunction.setText(DataViewProperties.getString("String_SQLQueryLabelCommonFunction"));
 		this.labelGoTO.setText(DataViewProperties.getString("String_SQLQueryGoTo"));
-		this.labelQueryField.setText(DataViewProperties.getString("String_SQLQueryLabelQueryField"));
-		this.labelQueryCondition.setText(DataViewProperties.getString("String_SQLQueryLabelCondition"));
-		this.labelGroupField.setText(DataViewProperties.getString("String_SQLQueryLabelGroupField"));
+		this.labelQueryField.setText(CoreProperties.getString("String_QueryField"));
+		this.labelQueryCondition.setText(CoreProperties.getString("String_QueryCondition"));
+		this.labelGroupField.setText(ControlsProperties.getString("String_SQLQueryLabelGroupField"));
 		this.labelOrderByField.setText(DataViewProperties.getString("String_SQLQueryLabelOrderBy"));
 		this.checkBoxShowTabular.setText(DataViewProperties.getString("String_SQLQueryShowTabular"));
 		this.checkBoxHighLigthMap.setText(DataViewProperties.getString("String_SQLQueryHighLightMapWnd"));
@@ -1247,7 +1247,7 @@ public class JDialogSQLQuery extends SmDialog {
 			}
 			resultRecord.moveFirst();
 			if (resultDataset == null) {
-				Application.getActiveApplication().getOutput().output(DataViewProperties.getString("String_SQLQuerySaveAsResultFaield"));
+				Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_SQLQuerySaveAsResultFaield"));
 			} else {
 				Application.getActiveApplication().getOutput()
 						.output(MessageFormat.format(DataViewProperties.getString("String_SQLQuerySavaAsResultSucces"), resultDataset.getName()));

@@ -1,6 +1,7 @@
 package com.supermap.desktop.workspacemanagerwindow;
 
 import com.supermap.data.Workspace;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.properties.CoreProperties;
 
@@ -67,7 +68,7 @@ public class TableModelWorkspace extends AbstractTableModel {
 			if (col == COLUMN_NAME) {
 				return this.workspace.getScenes();
 			} else if (col == COLUMN_TYPE) {
-				return DataViewProperties.getString("String_SceneType");
+				return ControlsProperties.getString("String_SceneType");
 			} else if (col == COLUMN_NUMBER) {
 				return this.workspace.getScenes().getCount();
 			}

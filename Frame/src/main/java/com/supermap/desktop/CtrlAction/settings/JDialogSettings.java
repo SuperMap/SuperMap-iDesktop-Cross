@@ -2,6 +2,7 @@ package com.supermap.desktop.CtrlAction.settings;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.frame.FrameProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -24,9 +25,9 @@ import java.util.HashMap;
 public class JDialogSettings extends SmDialog {
 	public static final String[] lists = new String[]{
 			FrameProperties.getString("String_Option_Common"),
-			FrameProperties.getString("String_Option_Environment"),
-//			FrameProperties.getString("String_Option_Server"),
-			FrameProperties.getString("String_Option_Edit"),
+			ControlsProperties.getString("String_Option_Environment"),
+//			CoreProperties.getString("String_Services"),
+			CoreProperties.getString("String_Edit"),
 //			FrameProperties.getString("String_Option_Help"),
 			FrameProperties.getString("String_Resources"),
 
@@ -140,19 +141,19 @@ public class JDialogSettings extends SmDialog {
 			rightPanels.put(FrameProperties.getString("String_Option_Common"), jPanelSettingCommon);
 			return jPanelSettingCommon;
 		}
-		if (panelName.equals(FrameProperties.getString("String_Option_Environment"))) {
+		if (panelName.equals(ControlsProperties.getString("String_Option_Environment"))) {
 			JPanelSettingEnvironment jPanelSettingEnvironment = new JPanelSettingEnvironment();
-			rightPanels.put(FrameProperties.getString("String_Option_Environment"), jPanelSettingEnvironment);
+			rightPanels.put(ControlsProperties.getString("String_Option_Environment"), jPanelSettingEnvironment);
 			return jPanelSettingEnvironment;
 		}
-		if (panelName.equals(FrameProperties.getString("String_Option_Server"))) {
+		if (panelName.equals(CoreProperties.getString("String_Services"))) {
 			JPanelSettingServer jPanelSettingServer = new JPanelSettingServer();
-			rightPanels.put(FrameProperties.getString("String_Option_Server"), jPanelSettingServer);
+			rightPanels.put(CoreProperties.getString("String_Services"), jPanelSettingServer);
 			return jPanelSettingServer;
 		}
-		if (panelName.equals(FrameProperties.getString("String_Option_Edit"))) {
+		if (panelName.equals(CoreProperties.getString("String_Edit"))) {
 			JPanelSettingEdit panelSettingEdit = new JPanelSettingEdit();
-			rightPanels.put(FrameProperties.getString("String_Option_Edit"), panelSettingEdit);
+			rightPanels.put(CoreProperties.getString("String_Edit"), panelSettingEdit);
 			return panelSettingEdit;
 		}
 		if (panelName.equals(FrameProperties.getString("String_Option_Help"))) {

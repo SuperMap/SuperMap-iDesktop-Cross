@@ -2,6 +2,7 @@ package com.supermap.desktop.tableModel;
 
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.ImportInfo;
+import com.supermap.desktop.properties.CoreProperties;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ImportTableModel extends AbstractTableModel {
 
     private String[] title = {DataConversionProperties.getString("string_tabletitle_data"),
             DataConversionProperties.getString("string_tabletitle_filetype"),
-            DataConversionProperties.getString("string_tabletitle_state")};
+            CoreProperties.getString("String_State")};
     private ArrayList<ImportInfo> importInfos = new ArrayList<ImportInfo>();
 
     public ImportTableModel() {

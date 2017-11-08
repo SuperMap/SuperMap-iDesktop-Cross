@@ -4,6 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.baseUI.PanelExportTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.exportUI.DataExportDialog;
 import com.supermap.desktop.implement.UserDefineType.ExportSettingExcel;
@@ -37,7 +38,7 @@ public class ExportCallable extends UpdateProgressCallable {
 
 	private String getDatasetAlis(ExportSetting tempSetting) {
 		Dataset tempDataset = (Dataset) tempSetting.getSourceData();
-		return tempDataset.getName() + DataConversionProperties.getString("string_index_and") + tempDataset.getDatasource().getAlias();
+		return tempDataset.getName() + ControlsProperties.getString("string_index_and") + tempDataset.getDatasource().getAlias();
 	}
 
 	@Override
@@ -60,7 +61,7 @@ public class ExportCallable extends UpdateProgressCallable {
 					tempExportSetting.setTargetFileType((FileType) fileInfo.getFileType());
 				}
 				if (new File(filePath).exists() && !tempExportSetting.isOverwrite()) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(DataConversionProperties.getString("String_DuplicateFileError"), filePath));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_DuplicateFileError"), filePath));
 				} else {
 					tempExportSetting.setTargetFilePath(filePath);
 					PercentProgress progress = new PercentProgress(i);
@@ -117,9 +118,9 @@ public class ExportCallable extends UpdateProgressCallable {
 		FileType fileType = exportFileInfo.getExportSetting().getTargetFileType();
 		if (FileType.TEMSClutter == fileType) {
 			if (!filePath.endsWith(File.separator)) {
-				result = filePath + File.separator + fileName + DataConversionProperties.getString("string_index_pause") + "b";
+				result = filePath + File.separator + fileName + CoreProperties.getString("String_Dot") + "b";
 			} else {
-				result = filePath + fileName + DataConversionProperties.getString("string_index_pause") + "b";
+				result = filePath + fileName + CoreProperties.getString("String_Dot") + "b";
 			}
 		} else if (FileType.ModelX == fileType) {
 			if (!filePath.endsWith(File.separator)) {
@@ -135,10 +136,10 @@ public class ExportCallable extends UpdateProgressCallable {
 			}
 		} else {
 			if (!filePath.endsWith(File.separator)) {
-				result = filePath + File.separator + fileName + DataConversionProperties.getString("string_index_pause")
+				result = filePath + File.separator + fileName + CoreProperties.getString("String_Dot")
 						+ exportFileInfo.getFileType().toString().toLowerCase();
 			} else {
-				result = filePath + fileName + DataConversionProperties.getString("string_index_pause")
+				result = filePath + fileName + CoreProperties.getString("String_Dot")
 						+ exportFileInfo.getFileType().toString().toLowerCase();
 			}
 		}
@@ -187,15 +188,15 @@ public class ExportCallable extends UpdateProgressCallable {
 	private void printExportInfo(UserDefineExportResult result, int i, String time) {
 		try {
 			if (null != result) {
-				String successExportInfo = DataConversionProperties.getString("String_FormExport_OutPutInfoTwo");
-				String failExportInfo = DataConversionProperties.getString("String_FormExport_OutPutInfoOne");
+				String successExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoTwo");
+				String failExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoOne");
 				if (null != result.getSuccess()) {
 					exportTable.setValueAt(DataConversionProperties.getString("String_FormImport_Succeed"), i, DataExportDialog.COLUMN_STATE);
 					String successDatasetAlis = getDatasetAlis(result.getSuccess());
 					Application.getActiveApplication().getOutput()
 							.output(MessageFormat.format(successExportInfo, successDatasetAlis, result.getSuccess().getTargetFilePath(), time));
 				} else if (null != result.getFail()) {
-					exportTable.setValueAt(DataConversionProperties.getString("String_FormImport_NotSucceed"), i, DataExportDialog.COLUMN_STATE);
+					exportTable.setValueAt(CoreProperties.getString("String_Failed"), i, DataExportDialog.COLUMN_STATE);
 					String failDatasetAlis = getDatasetAlis(result.getFail());
 					Application.getActiveApplication().getOutput()
 							.output(MessageFormat.format(failExportInfo, failDatasetAlis));
@@ -217,8 +218,8 @@ public class ExportCallable extends UpdateProgressCallable {
 	private void printExportInfo(ExportResult result, int i, String time) {
 		try {
 			if (null != result) {
-				String successExportInfo = DataConversionProperties.getString("String_FormExport_OutPutInfoTwo");
-				String failExportInfo = DataConversionProperties.getString("String_FormExport_OutPutInfoOne");
+				String successExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoTwo");
+				String failExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoOne");
 				ExportSetting[] successExportSettings = result.getSucceedSettings();
 				ExportSetting[] failExportSettings = result.getFailedSettings();
 
@@ -228,7 +229,7 @@ public class ExportCallable extends UpdateProgressCallable {
 					Application.getActiveApplication().getOutput()
 							.output(MessageFormat.format(successExportInfo, successDatasetAlis, successExportSettings[0].getTargetFilePath(), time));
 				} else if (null != failExportSettings && 0 < failExportSettings.length) {
-					exportTable.setValueAt(DataConversionProperties.getString("String_FormImport_NotSucceed"), i, DataExportDialog.COLUMN_STATE);
+					exportTable.setValueAt(CoreProperties.getString("String_Failed"), i, DataExportDialog.COLUMN_STATE);
 					String failDatasetAlis = getDatasetAlis(failExportSettings[0]);
 					Application.getActiveApplication().getOutput()
 							.output(MessageFormat.format(failExportInfo, failDatasetAlis));

@@ -1,8 +1,8 @@
 package com.supermap.desktop.newtheme.guidPanel;
 
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
 
 import javax.swing.*;
@@ -26,7 +26,7 @@ public class RangeThemePanel extends JPanel {
 	}
 
 	private void initComponents() {
-		this.labelRangeTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_RANGE, MapViewProperties.getString("String_Default"));
+		this.labelRangeTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_RANGE, CoreProperties.getString("String_Default"));
 		this.labelRangeTheme.selected(true);
 		this.setBackground(Color.WHITE);
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));

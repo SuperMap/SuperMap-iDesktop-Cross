@@ -77,7 +77,7 @@ public class TableModelDatasetType extends AbstractTableModel {
 				return this.aimDataset[row];
 			}
 			if (col == COLUMN_TYPE) {
-				String replaceString = DataViewProperties.getString("String_Dataset_T");
+				String replaceString = ControlsProperties.getString("String_Dataset");
 				String datasetTypeName = CommonToolkit.DatasetTypeWrap.findName(this.datasetType);
 				String newDatasetTypeName = datasetTypeName.replace(replaceString, "");
 				return newDatasetTypeName;

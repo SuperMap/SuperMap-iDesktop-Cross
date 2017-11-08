@@ -5,10 +5,11 @@ import com.supermap.data.Datasource;
 import com.supermap.data.Point3D;
 import com.supermap.data.conversion.DataImport;
 import com.supermap.data.conversion.ImportSetting;
-import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import java.lang.reflect.Method;
@@ -90,9 +91,9 @@ public class ImportSettingSetter {
 									}
 								} else {
 									String type = datasetType.toString();
-									if (type.equals(ProcessProperties.getString("String_datasetType3D"))
-											|| type.equals(ProcessProperties.getString("String_DatasetType_CAD"))
-											|| type.equals(ProcessProperties.getString("string_comboboxitem_grid"))) {
+									if (type.equals(ControlsProperties.getString("String_datasetType3D"))
+											|| type.equals(CoreProperties.getString("String_DatasetType_CAD"))
+											|| type.equals(CoreProperties.getString("String_DatasetType_Grid"))) {
 										arg = true;
 									}
 								}

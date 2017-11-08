@@ -4,6 +4,7 @@ import com.supermap.Interface.ILBSTask;
 import com.supermap.Interface.ITaskFactory;
 import com.supermap.Interface.TaskEnum;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.http.FileManagerContainer;
 import com.supermap.desktop.http.callable.DownloadProgressCallable;
@@ -69,10 +70,10 @@ public class JDialogFileSaveAs extends SmDialog {
 
 	private void initializeResources() {
 		this.labelServerURL.setText(LBSClientProperties.getString("String_URL"));
-		this.buttonBrowser.setText(LBSClientProperties.getString("String_Scale"));
+		this.buttonBrowser.setText(ControlsProperties.getString("String_Scale"));
 		this.labelLocalPath.setText(LBSClientProperties.getString("String_LocalPath"));
 		this.buttonOK.setText(LBSClientProperties.getString("String_Download"));
-		this.labelFileName.setText(LBSClientProperties.getString("String_FileName"));
+		this.labelFileName.setText(ControlsProperties.getString("String_LabelFileName"));
 	}
 
 	private void registEvnets() {
@@ -200,7 +201,7 @@ public class JDialogFileSaveAs extends SmDialog {
 		try {
 			String modelName = "HDFSFileDownload";
 			if (!SmFileChoose.isModuleExist(modelName)) {
-				SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), LBSClientProperties.getString("String_ChooseFile"),
+				SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
 						modelName, "GetDirectories");
 			}
 			SmFileChoose smFileChoose = new SmFileChoose(modelName);

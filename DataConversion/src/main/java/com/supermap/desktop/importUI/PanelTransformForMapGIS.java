@@ -5,7 +5,6 @@ import com.supermap.data.conversion.ImportSettingMAPGIS;
 import com.supermap.desktop.baseUI.PanelTransform;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.localUtilities.CommonUtilities;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.FileChooserControl;
@@ -33,7 +32,7 @@ public class PanelTransformForMapGIS extends PanelTransform {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!SmFileChoose.isModuleExist("ImportMapGIS")) {
-                String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_color"), "wat");
+                String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("string_filetype_color"), "wat");
 	            SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 			            ControlsProperties.getString("String_Import"), "ImportMapGIS", "OpenMany");
             }
@@ -117,8 +116,8 @@ public class PanelTransformForMapGIS extends PanelTransform {
 
     @Override
     public void initResources() {
-        this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
-        this.labelColorIndex.setText(DataConversionProperties.getString("string_label_lblColorFile"));
+        this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
+        this.labelColorIndex.setText(CoreProperties.getString("String_ColorIndexFile"));
     }
 
     public FileChooserControl getFileChooserColorIndex() {

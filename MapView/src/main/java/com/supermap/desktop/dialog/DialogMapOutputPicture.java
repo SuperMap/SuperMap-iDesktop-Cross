@@ -267,14 +267,14 @@ public class DialogMapOutputPicture extends SmDialog {
 	 */
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_OutputPicture"));
-		this.fileNameLabel.setText(MapViewProperties.getString("String_FileName"));
+		this.fileNameLabel.setText(ControlsProperties.getString("String_FileName"));
 		this.resolutionLabel.setText(CoreProperties.getString("String_Resolution"));
 		this.DPILabel.setText("DPI");
-		this.widthLabel.setText(MapViewProperties.getString("String_FormSavePicture_Width"));
+		this.widthLabel.setText(CoreProperties.getString("String_Label_Width"));
 		this.heightLabel.setText(MapViewProperties.getString("String_FormSavePicture_Height"));
 		this.expectedMemoryLabel.setText(MapViewProperties.getString("String_ExpectedOccupyMemory"));
 
-		this.backTransparent.setText(MapViewProperties.getString("String_PNG_BackTransparent"));
+		this.backTransparent.setText(ControlsProperties.getString("String_BackgroundTransparency"));
 	}
 
 	/**
@@ -894,7 +894,7 @@ public class DialogMapOutputPicture extends SmDialog {
 				String resultMessage;
 				// 将地图输出为图片之前，新建一个地图，对当前地图不会产生影响
 				Map copyMap = map;
-				Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImage_AvoidAndFlowEnabled"));
+				Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_OutputImage_AvoidAndFlowEnabled"));
 				//  设置是否在出图的时候关掉地图的自动避让效果。
 				copyMap.setDisableAutoAvoidEffect(true);
 				// 设置是否在出图的时候关闭地图的动态效果
@@ -924,9 +924,9 @@ public class DialogMapOutputPicture extends SmDialog {
 				}
 				// 输出结果信息
 				if (isSuccess) {
-					resultMessage = String.format(MapViewProperties.getString("String_OutputToFile_Successed"), path);
+					resultMessage = String.format(ControlsProperties.getString("String_OutputToFile_Successed"), path);
 				} else {
-					resultMessage = String.format(MapViewProperties.getString("String_OutputToFile_Failed"), path);
+					resultMessage = String.format(ControlsProperties.getString("String_OutputToFile_Failed"), path);
 				}
 				Application.getActiveApplication().getOutput().output(resultMessage);
 

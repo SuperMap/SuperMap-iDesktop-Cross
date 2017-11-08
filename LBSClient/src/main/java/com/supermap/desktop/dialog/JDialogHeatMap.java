@@ -3,18 +3,20 @@ package com.supermap.desktop.dialog;
 import com.supermap.data.Rectangle2D;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
-import com.supermap.desktop.lbsclient.LBSClientProperties;
-import com.supermap.desktop.messagebus.NewMessageBus;
-import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.ui.controls.TextFields.DefaultValueTextField;
 import com.supermap.desktop.lbs.IServerServiceImpl;
 import com.supermap.desktop.lbs.Interface.IServerService;
 import com.supermap.desktop.lbs.WebHDFS;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
+import com.supermap.desktop.lbsclient.LBSClientProperties;
+import com.supermap.desktop.messagebus.NewMessageBus;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmDialog;
+import com.supermap.desktop.ui.controls.TextFields.DefaultValueTextField;
 import com.supermap.desktop.ui.lbs.ui.JDialogHDFSFiles;
 import com.supermap.ui.Action;
 import com.supermap.ui.*;
@@ -203,27 +205,27 @@ public class JDialogHeatMap extends SmDialog {
 	}
 
 	private void initResources() {
-		this.labelXIndex.setText(LBSClientProperties.getString("String_XIndex"));
-		this.labelYIndex.setText(LBSClientProperties.getString("String_YIndex"));
+		this.labelXIndex.setText(ControlsProperties.getString("String_XIndex"));
+		this.labelYIndex.setText(ControlsProperties.getString("String_YIndex"));
 		this.labelSeparator.setText(LBSClientProperties.getString("String_Seperator"));
 		this.labelCacheType.setText(LBSClientProperties.getString("String_CacheType"));
-		this.labelCacheLevel.setText(LBSClientProperties.getString("String_CacheLevel"));
-		this.buttonDrawBounds.setText(LBSClientProperties.getString("String_DrawBounds"));
-		this.buttonDrawBounds.setToolTipText(LBSClientProperties.getString("String_DrawBounds"));
+		this.labelCacheLevel.setText(ControlsProperties.getString("String_CacheLevel"));
+		this.buttonDrawBounds.setText(ControlsProperties.getString("String_DrawBounds"));
+		this.buttonDrawBounds.setToolTipText(ControlsProperties.getString("String_DrawBounds"));
 		this.labelFileInputPath.setText(LBSClientProperties.getString("String_InputData"));
-		this.labelCacheName.setText(LBSClientProperties.getString("String_CacheName"));
-		this.labelDatabaseType.setText(LBSClientProperties.getString("String_DatabaseType"));
-		this.labelServiceAddress.setText(LBSClientProperties.getString("String_ServiceAddress"));
-		this.labelDatabase.setText(LBSClientProperties.getString("String_Database"));
-		this.labelVersion.setText(LBSClientProperties.getString("String_Version"));
+		this.labelCacheName.setText(ControlsProperties.getString("String_CacheName"));
+		this.labelDatabaseType.setText(ControlsProperties.getString("String_DatabaseType"));
+		this.labelServiceAddress.setText(CoreProperties.getString("String_Server"));
+		this.labelDatabase.setText(ControlsProperties.getString("String_Database"));
+		this.labelVersion.setText(ControlsProperties.getString("String_Version"));
 		this.labelBoundsLeft.setText(LBSClientProperties.getString("String_Left"));
 		this.labelBoundsBottom.setText(LBSClientProperties.getString("String_Bottom"));
 		this.labelBoundsRight.setText(LBSClientProperties.getString("String_Right"));
 		this.labelBoundsTop.setText(LBSClientProperties.getString("String_Top"));
-		this.setTitle(LBSClientProperties.getString("String_HeatMap"));
-		this.buttonInputBrowser.setText(LBSClientProperties.getString("String_Browser"));
-		this.buttonInputBrowser.setToolTipText(LBSClientProperties.getString("String_Browser"));
-		this.panelBounds.setBorder(new TitledBorder(null, LBSClientProperties.getString("String_CacheBounds"), TitledBorder.LEADING,
+		this.setTitle(ControlsProperties.getString("String_HeatMap"));
+		this.buttonInputBrowser.setText(ControlsProperties.getString("String_Scale"));
+		this.buttonInputBrowser.setToolTipText(ControlsProperties.getString("String_Scale"));
+		this.panelBounds.setBorder(new TitledBorder(null, ControlsProperties.getString("String_CacheBounds"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 	}
 

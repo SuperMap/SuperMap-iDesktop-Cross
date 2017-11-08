@@ -1,7 +1,7 @@
 package com.supermap.desktop.newtheme.guidPanel;
 
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class GridUniqueThemePanel extends JPanel {
 
 	private void initComponents() {
 		// @formatter:off
-		this.labelGridUniqueTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRIDUNIQUE, MapViewProperties.getString("String_Default"));
+		this.labelGridUniqueTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRIDUNIQUE, CoreProperties.getString("String_Default"));
 		this.labelGridUniqueTheme.selected(true);
 		this.setBackground(Color.WHITE);
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));

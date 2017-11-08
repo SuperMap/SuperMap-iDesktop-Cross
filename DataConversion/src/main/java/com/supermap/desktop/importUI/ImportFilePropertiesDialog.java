@@ -1,6 +1,7 @@
 package com.supermap.desktop.importUI;
 
 import com.supermap.data.conversion.ImportSetting;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -220,12 +221,12 @@ public class ImportFilePropertiesDialog extends SmDialog {
     private void initResource() {
         setTitle(DataConversionProperties.getString("string_fileProperty"));
         this.labelFileLocation.setText(DataConversionProperties.getString("string_label_lblFileLocation"));
-        this.labelFileType.setText(DataConversionProperties.getString("string_label_lblFileType"));
+        this.labelFileType.setText(ControlsProperties.getString("String_LabelFileType"));
         this.labelFileModify.setText(DataConversionProperties.getString("string_label_lblFileLastModify"));
         this.labelFileSize.setText(DataConversionProperties.getString("string_label_lblFileSize"));
         this.labelProperty.setText(DataConversionProperties.getString("string_label_lblFileProperty"));
         this.checkboxHidden.setText(DataConversionProperties.getString("string_chcekbox_hidden"));
-        this.buttonSure.setText(DataConversionProperties.getString("string_button_sure"));
+        this.buttonSure.setText(ControlsProperties.getString("String_Button_Ok"));
         this.buttonQuit.setText(DataConversionProperties.getString("string_button_quit"));
     }
 }

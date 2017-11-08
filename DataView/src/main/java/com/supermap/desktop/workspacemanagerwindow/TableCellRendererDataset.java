@@ -3,9 +3,8 @@ package com.supermap.desktop.workspacemanagerwindow;
 import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
 import com.supermap.desktop.CommonToolkit;
-import com.supermap.desktop.dataview.DataViewProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewResources;
-import com.supermap.desktop.properties.DatasetTypeProperties;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,7 +27,7 @@ public class TableCellRendererDataset extends DefaultTableCellRenderer {
 
 		//根据数据集类型添加图标
 		if (column == COLUMN_NAME) {
-			String dataTypeString = table.getValueAt(row, COLUMN_TYPE) + DataViewProperties.getString("String_Dataset_T");
+			String dataTypeString = table.getValueAt(row, COLUMN_TYPE) + ControlsProperties.getString("String_Dataset");
 			DatasetType datasetType = CommonToolkit.DatasetTypeWrap.findType(dataTypeString);
 			this.setIcon(DataViewResources.getIcon(DATAVIEW_ICON_ROOTPATH + datasetType + ".png"));
 			// 设置其显示为数据集名称
@@ -37,12 +36,12 @@ public class TableCellRendererDataset extends DefaultTableCellRenderer {
 
 
 		if (column == COLUMN_NUMBER) {
-			if (table.getValueAt(row, COLUMN_TYPE).equals(DatasetTypeProperties.getString("String_DatasetType_Grid"))) {
+			if (table.getValueAt(row, COLUMN_TYPE).equals(ControlsProperties.getString("String_Grid"))) {
 				String widthGrid = String.valueOf(table.getValueAt(row, COLUMN_NULL));
 				String heightGrid = String.valueOf((Integer) value / (Integer) (table.getValueAt(row, COLUMN_NULL)));
 				this.setText(heightGrid + "*" + widthGrid);
 			}
-			if (table.getValueAt(row, COLUMN_TYPE).equals(DatasetTypeProperties.getString("String_DatasetType_Image"))) {
+			if (table.getValueAt(row, COLUMN_TYPE).equals(ControlsProperties.getString("String_ImageProperty"))) {
 				String widthImage = String.valueOf(table.getValueAt(row, COLUMN_NULL));
 				String heightImage = String.valueOf((Integer) value / (Integer) (table.getValueAt(row, COLUMN_NULL)));
 				this.setText(heightImage + "*" + widthImage);

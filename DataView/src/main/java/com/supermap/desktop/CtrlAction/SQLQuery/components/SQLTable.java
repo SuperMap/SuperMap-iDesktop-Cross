@@ -1,6 +1,7 @@
 package com.supermap.desktop.CtrlAction.SQLQuery.components;
 
 import com.supermap.desktop.CtrlAction.SQLQuery.SqlUtilties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -99,7 +100,7 @@ public class SQLTable extends JTable implements ISQLBuildComponent {
 
 			private void getCombobox() {
 				if (comboBox == null) {
-					comboBox = new JComboBox(new DefaultComboBoxModel(new String[]{DataViewProperties.getString("String_SQLQueryASC"), DataViewProperties.getString("String_Descend_D")}));
+					comboBox = new JComboBox(new DefaultComboBoxModel(new String[]{DataViewProperties.getString("String_SQLQueryASC"), ControlsProperties.getString("String_Descend_D")}));
 					comboBox.addItemListener(new ItemListener() {
 						@Override
 						public void itemStateChanged(ItemEvent e) {

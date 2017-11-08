@@ -10,6 +10,7 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.DatasetUtilities;
@@ -58,31 +59,31 @@ public class MetaProcessExportGrid extends MetaProcessAbstractExport {
 		}
 		String module = "ExportGrid_OutPutDirectories";
 		if (!SmFileChoose.isModuleExist(module)) {
-			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_DataExport"),
+			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ControlsProperties.getString("String_FormExport_FormText"),
 					module, "GetDirectories");
 		}
 		exportPath.setModuleName(module);
 
 		this.gridCombine = new ParameterCombine();
-		this.gridCombine.setDescribe(ProcessProperties.getString("String_ParamSet"));
-		this.compressionRatio = new ParameterTextField(ProcessProperties.getString("String_CompressionRatio"));
+		this.gridCombine.setDescribe(ControlsProperties.getString("string_border_panelTransform"));
+		this.compressionRatio = new ParameterTextField(ControlsProperties.getString("String_CompressionRatio"));
 		this.compressionRatio.setEnabled(false);
-		this.prjFile = new ParameterFile(ProcessProperties.getString("String_PrjFile"));
+		this.prjFile = new ParameterFile(CoreProperties.getString("String_WorldFile"));
 		String moduleForTFW = "ExportGrid_TFW";
 		if (!SmFileChoose.isModuleExist(moduleForTFW)) {
-			String fileFilters = SmFileChoose.createFileFilter(ProcessProperties.getString("string_filetype_tfw"), "tfw");
+			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("string_filetype_tfw"), "tfw");
 			SmFileChoose.addNewNode(fileFilters, System.getProperty("user.dir"),
-					ProcessProperties.getString("String_DataExport"), moduleForTFW, "SaveOne");
+					ControlsProperties.getString("String_FormExport_FormText"), moduleForTFW, "SaveOne");
 		}
 		prjFile.setModuleName(moduleForTFW);
 
 		this.prjFile.setEnabled(false);
-		this.checkBoxTFW = new ParameterCheckBox(ProcessProperties.getString("String_TFW"));
+		this.checkBoxTFW = new ParameterCheckBox(ControlsProperties.getString("String_ExportingAsGeoTransformFile"));
 		this.checkBoxTFW.setEnabled(false);
 		this.checkBoxTFW.setSelectedItem(true);
 		this.password = new ParameterPassword(ProcessProperties.getString("String_Password"));
 		this.password.setEnabled(false);
-		this.confirmPassword = new ParameterPassword(ProcessProperties.getString("String_ConfirmPassword"));
+		this.confirmPassword = new ParameterPassword(ControlsProperties.getString("String_Label_ConfirmPassword"));
 		this.confirmPassword.setEnabled(false);
 		this.basicCombine.addParameters(this.supportType, this.targetName
 				, this.exportPath, this.cover);
@@ -140,7 +141,7 @@ public class MetaProcessExportGrid extends MetaProcessAbstractExport {
 			return false;
 		}
 		if (new File(targetPath).exists() && !isOverwrite) {
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_DuplicateFileError"), targetPath));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_DuplicateFileError"), targetPath));
 		} else if (!StringUtilities.isNullOrEmpty(targetPath)) {
 			setExportSettingInfo(isOverwrite);
 			isSuccessful = printResultInfo(isSuccessful, targetPath, this.exportListener);

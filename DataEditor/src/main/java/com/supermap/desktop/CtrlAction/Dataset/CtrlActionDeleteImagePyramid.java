@@ -5,8 +5,8 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.implement.CtrlAction;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CursorUtilities;
 
 import java.text.MessageFormat;
@@ -60,10 +60,10 @@ public class CtrlActionDeleteImagePyramid extends CtrlAction {
 				}
 
 				if (isSucceeded) {
-					String message = MessageFormat.format(DataEditorProperties.getString("String_DeleteImagePyramid_Success"), dataset.getName());
+					String message = MessageFormat.format(CoreProperties.getString("String_DeleteImagePyramid_Success"), dataset.getName());
 					Application.getActiveApplication().getOutput().output(message);
 				} else {
-					String message = MessageFormat.format(DataEditorProperties.getString("String_DeleteImagePyramid_Failed"), dataset.getName());
+					String message = MessageFormat.format(CoreProperties.getString("String_DeleteImagePyramid_Failed"), dataset.getName());
 					Application.getActiveApplication().getOutput().output(message);
 				}
 			}

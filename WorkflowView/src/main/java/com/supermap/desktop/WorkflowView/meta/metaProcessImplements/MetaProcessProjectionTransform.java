@@ -40,7 +40,7 @@ public class MetaProcessProjectionTransform extends MetaProcess {
 	private ParameterSingleDataset parameterDataset;
 
 	private ParameterComboBox parameterMode = new ParameterComboBox(ControlsProperties.getString("String_TransMethod"));
-	private ParameterButton parameterSetTransform = new ParameterButton(ProcessProperties.getString("String_ParamSet"));
+	private ParameterButton parameterSetTransform = new ParameterButton(ControlsProperties.getString("string_border_panelTransform"));
 
 	// 目标坐标系
 	private ParameterTargetCoordSys parameterTargetCoordSys = new ParameterTargetCoordSys();

@@ -6,6 +6,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
@@ -38,7 +39,7 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
     protected void initHook() {
         datasourceParameter = new ParameterDatasourceConstrained();
         datasetParameter = new ParameterSingleDataset(DatasetType.REGION, DatasetType.LINE3D, DatasetType.LINE);
-        numberHeight = new ParameterNumber(ProcessProperties.getString("String_SurfaceAnalyst_ViewShed_Unit_AddHeight"));
+        numberHeight = new ParameterNumber(ControlsProperties.getString("String_SurfaceAnalyst_ViewShed_Unit_AddHeight"));
         comboBoxType = new ParameterComboBox(ProcessProperties.getString("String_Label_BufferType"));
         numberRadius = new ParameterNumber(ProcessProperties.getString("String_Label_BufferRadius"));
 
@@ -70,8 +71,8 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
             Rectangle2D bounds = defaultDataset.getBounds();
             numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
         }
-        comboBoxType.setItems(new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferFlat"), false),
-                new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferRound"), true));
+        comboBoxType.setItems(new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferFlat"), false),
+                new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferRound"), true));
         numberHeight.setSelectedItem(0);
         numberRadius.setSelectedItem(10);
         numberRadius.setMinValue(0);

@@ -1,6 +1,7 @@
 package com.supermap.desktop.mapview.layer.propertycontrols;
 
 import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorsTable.ColorsDictionarySet;
 import com.supermap.desktop.controls.colorsTable.LayerGridParamColorTableDialog;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
@@ -212,7 +213,7 @@ public class LayerGridParamPropertyControl extends AbstractLayerPropertyControl 
 		((TitledBorder) this.getBorder()).setTitle(MapViewProperties.getString("String_LayerProperty_Grid"));
 		this.labelBrightness.setText(MapViewProperties.getString("String_Brightness"));
 		this.labelContrast.setText(MapViewProperties.getString("String_Contrast"));
-		this.labelColorTable.setText(MapViewProperties.getString("String_LayerControl_Grid_ColorTable"));
+		this.labelColorTable.setText(ControlsProperties.getString("String_LayerControl_Grid_ColorTable"));
 		this.labelSpecialValue.setText(MapViewProperties.getString("String_LayerControl_Grid_SpacialValue"));
 		this.labelSpecialValueColor.setText(MapViewProperties.getString("String_LayerControl_Grid_SetSpecialRasterColor"));
 		this.checkBoxIsSpecialValueTransparent.setText(MapViewProperties.getString("String_LayerControl_Grid_SpecialValueTransparency"));

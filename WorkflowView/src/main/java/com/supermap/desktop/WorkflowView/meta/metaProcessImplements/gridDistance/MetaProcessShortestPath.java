@@ -75,10 +75,10 @@ public class MetaProcessShortestPath extends MetaProcessGridAnalyst {
 		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_TargetData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 		ParameterCombine distanceData = new ParameterCombine();
-		distanceData.setDescribe(ProcessProperties.getString("String_GroupBox_DistanceData"));
+		distanceData.setDescribe(CoreProperties.getString("String_GroupBox_DistanceData"));
 		distanceData.addParameters(this.distanceDatasource, this.distanceDataset);
 		ParameterCombine directionData = new ParameterCombine();
-		directionData.setDescribe(ProcessProperties.getString("String_GroupBox_DirectionData"));
+		directionData.setDescribe(CoreProperties.getString("String_GroupBox_DirectionData"));
 		directionData.addParameters(this.directionDatasource, this.directionDataset);
 		ParameterCombine computeType = new ParameterCombine();
 		computeType.setDescribe(ProcessProperties.getString("String_ComputeType"));

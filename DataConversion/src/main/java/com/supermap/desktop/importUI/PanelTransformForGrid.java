@@ -2,8 +2,8 @@ package com.supermap.desktop.importUI;
 
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.baseUI.PanelTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
@@ -130,8 +130,8 @@ public class PanelTransformForGrid extends PanelTransform {
 
     @Override
     public void initResources() {
-        this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
-        this.checkBoxBuildImgPyramid.setText(DataConversionProperties.getString("string_checkbox_chckbxImageInfo"));
+        this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
+        this.checkBoxBuildImgPyramid.setText(ControlsProperties.getString("string_checkbox_chckbxImageInfo"));
     }
 
     public JCheckBox getCheckBoxBuildImgPyramid() {

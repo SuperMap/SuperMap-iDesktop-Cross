@@ -299,7 +299,7 @@ public class PanelTransformFor3D extends PanelTransform {
 
 		JPanel panelModel = new JPanel();
 		panelModel.setLayout(new GridBagLayout());
-		panelModel.setBorder(new TitledBorder(DataConversionProperties.getString("string_modelPoint")));
+		panelModel.setBorder(new TitledBorder(ControlsProperties.getString("string_modelPoint")));
 		panelModel.add(this.labelPositionX, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 		panelModel.add(this.textFieldPositionX, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 10).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 		panelModel.add(this.labelPositionY, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
@@ -401,11 +401,11 @@ public class PanelTransformFor3D extends PanelTransform {
 
 	@Override
 	public void initResources() {
-		this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
+		this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
 		this.labelRotationType.setText(DataConversionProperties.getString("string_rotationType"));
-		this.labelPositionX.setText(DataConversionProperties.getString("string_label_lblx"));
-		this.labelPositionY.setText(DataConversionProperties.getString("string_label_lbly"));
-		this.labelPositionZ.setText(DataConversionProperties.getString("string_label_lblz"));
+		this.labelPositionX.setText(CoreProperties.getString("string_longitude"));
+		this.labelPositionY.setText(CoreProperties.getString("string_latitude"));
+		this.labelPositionZ.setText(CoreProperties.getString("string_elevation"));
 		this.checkBoxSplitForMore.setText(DataConversionProperties.getString("string_splitForMore"));
 		this.radioButtonImportPrjFile.setText(ControlsProperties.getString("String_ImportPrjFile"));
 		this.radioButtonPrjSet.setText(ControlsProperties.getString("String_SetProjection_Caption"));

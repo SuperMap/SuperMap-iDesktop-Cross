@@ -2,8 +2,8 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -56,7 +56,7 @@ public class MetaProcessCADToSimple extends MetaProcessTypeConversion {
 		parameters.setParameters(inputCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, DatasetTypes.CAD, inputCombine);
 		for (int i = 0; i < datasetTypes.size(); i++) {
-			parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Simple_Dataset"),
+			parameters.addOutputParameters(OUTPUT_DATA, ControlsProperties.getString("string_comboboxitem_sample"),
 					datasetTypes.get(i), outputCombine);
 		}
 	}

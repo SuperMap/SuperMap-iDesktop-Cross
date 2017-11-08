@@ -41,7 +41,7 @@ public class JDialogSetAll extends SmDialog {
 	private SmButton buttonCancel;
 
 	public JDialogSetAll() {
-		this.setTitle(DataEditorProperties.getString("String_FormSetDatasetInfos"));
+		this.setTitle(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.setSize(300, 165);
 		this.setLocationRelativeTo(null);
 		this.initComponent();

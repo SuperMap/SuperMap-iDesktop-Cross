@@ -105,8 +105,8 @@ public class CtrlActionCalculateError extends CtrlAction {
 //				TransformationMode.SQUARE
 //		});
 		ButtonGroup buttonGroup = new ButtonGroup();
-		JRadioButton radioButtonLinear = new JRadioButton(DataEditorProperties.getString("String_TransformationModeLINEAR"));
-		JRadioButton radioButtonSQUARE = new JRadioButton(DataEditorProperties.getString("String_TransformationModeSQUARE"));
+		JRadioButton radioButtonLinear = new JRadioButton(CoreProperties.getString("String_TransformationModeLINEAR"));
+		JRadioButton radioButtonSQUARE = new JRadioButton(CoreProperties.getString("String_TransformationModeSQUARE"));
 
 		SmButton buttonOk = new SmButton(CoreProperties.getString(CoreProperties.OK));
 		SmButton buttonCancel = new SmButton(CoreProperties.getString(CoreProperties.Cancel));

@@ -11,6 +11,7 @@ import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.CoreResources;
@@ -127,8 +128,8 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 		this.labelBGShape.setText(MapViewProperties.getString("String_BackShape"));
 		this.labelBGStyle.setText(MapViewProperties.getString("String_BackStyle"));
 		this.labelOffsetUnity.setText(MapViewProperties.getString("String_LabelOffsetUnit"));
-		this.labelOffsetX.setText(MapViewProperties.getString("String_LabelOffsetX"));
-		this.labelOffsetY.setText(MapViewProperties.getString("String_LabelOffsetY"));
+		this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
+		this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
 		this.checkBoxFlowVisual.setSelected(true);
 		this.checkBoxFlowVisual.setText(MapViewProperties.getString("String_CheckBox_ShowFlow"));
 		this.checkBoxShowSubscription.setText(MapViewProperties.getString("String_TextExpression"));
@@ -214,10 +215,10 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 	 * 初始化背景形状下拉框
 	 */
 	private void initComboBoxBackGround() {
-		this.comboBoxBGShape.setModel(new DefaultComboBoxModel<>(new String[]{MapViewProperties.getString("String_ColorTable_Default"),
-				MapViewProperties.getString("String_ThemeLabelBackShape_Rect"), MapViewProperties.getString("String_ThemeLabelBackShape_BoundRect"),
+		this.comboBoxBGShape.setModel(new DefaultComboBoxModel<>(new String[]{CoreProperties.getString("String_Default"),
+				ControlsProperties.getString("String_ThemeLabelBackShape_Rect"), MapViewProperties.getString("String_ThemeLabelBackShape_BoundRect"),
 				MapViewProperties.getString("String_ThemeLabelBackShape_Ellipse"), MapViewProperties.getString("String_ThemeLabelBackShape_Diamond"),
-				MapViewProperties.getString("String_ThemeLabelBackShape_Triangle"), MapViewProperties.getString("String_ThemeLabelBackShape_Marker")}));
+				MapViewProperties.getString("String_ThemeLabelBackShape_Triangle"), ControlsProperties.getString("String_Point")}));
 		LabelBackShape labelBackShape = themeLabel.getBackShape();
 		if (labelBackShape == LabelBackShape.NONE) {
 			this.comboBoxBGShape.setSelectedIndex(0);
@@ -278,7 +279,7 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 	 * 初始化偏移量单位下拉框
 	 */
 	private void initComboBoxUnity() {
-		this.comboBoxOffsetUnity.setModel(new DefaultComboBoxModel<>(new String[]{MapViewProperties.getString("String_ThemeLabelOffsetUnit_Millimeter"),
+		this.comboBoxOffsetUnity.setModel(new DefaultComboBoxModel<>(new String[]{ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"),
 				MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
 		if (this.themeLabel.isOffsetFixed()) {
 			this.comboBoxOffsetUnity.setSelectedIndex(0);
@@ -530,7 +531,7 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 		 */
 		private void setOffsetUnity() {
 			String offsetUnity = comboBoxOffsetUnity.getSelectedItem().toString();
-			if (MapViewProperties.getString("String_ThemeLabelOffsetUnit_Millimeter").equals(offsetUnity)) {
+			if (ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit").equals(offsetUnity)) {
 				labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
 				labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
 				themeLabel.setOffsetFixed(true);
@@ -546,11 +547,11 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 		 */
 		private void setBackgroundShap() {
 			String backgroudShap = comboBoxBGShape.getSelectedItem().toString();
-			if (MapViewProperties.getString("String_ColorTable_Default").equals(backgroudShap)) {
+			if (CoreProperties.getString("String_Default").equals(backgroudShap)) {
 				buttonBGStyle.setEnabled(false);
 				themeLabel.setBackShape(LabelBackShape.NONE);
 				symbolType = SymbolType.FILL;
-			} else if (MapViewProperties.getString("String_ThemeLabelBackShape_Rect").equals(backgroudShap)) {
+			} else if (ControlsProperties.getString("String_ThemeLabelBackShape_Rect").equals(backgroudShap)) {
 				buttonBGStyle.setEnabled(true);
 				themeLabel.setBackShape(LabelBackShape.RECT);
 				symbolType = SymbolType.FILL;
@@ -570,7 +571,7 @@ public class ThemeLabelPropertyPanel extends ThemeChangePanel {
 				buttonBGStyle.setEnabled(true);
 				themeLabel.setBackShape(LabelBackShape.TRIANGLE);
 				symbolType = SymbolType.FILL;
-			} else if (MapViewProperties.getString("String_ThemeLabelBackShape_Marker").equals(backgroudShap)) {
+			} else if (ControlsProperties.getString("String_Point").equals(backgroudShap)) {
 				buttonBGStyle.setEnabled(true);
 				themeLabel.setBackShape(LabelBackShape.MARKER);
 				symbolType = SymbolType.MARKER;

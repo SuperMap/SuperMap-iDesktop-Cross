@@ -48,7 +48,7 @@ public class PanelExportTransformForGrid extends PanelExportTransform {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!SmFileChoose.isModuleExist("DataExportFrame")) {
-				String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_tfw"), "tfw");
+				String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("string_filetype_tfw"), "tfw");
 				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						ControlsProperties.getString("String_Export"), "DataExportFrame", "SaveOne");
 			}
@@ -377,11 +377,11 @@ public class PanelExportTransformForGrid extends PanelExportTransform {
 	@Override
 	public void initResources() {
 		this.setBorder(new TitledBorder(null, DataConversionProperties.getString("string_border_panelproperty")));
-		this.labelCompressionRatio.setText(DataConversionProperties.getString("String_CompressionRatio"));
-		this.labelPrjFile.setText(DataConversionProperties.getString("string_label_lblFile"));
-		this.checkBoxExportTFW.setText(DataConversionProperties.getString("String_ExportingAsGeoTransformFile"));
+		this.labelCompressionRatio.setText(ControlsProperties.getString("String_CompressionRatio"));
+		this.labelPrjFile.setText(CoreProperties.getString("String_WorldFile"));
+		this.checkBoxExportTFW.setText(ControlsProperties.getString("String_ExportingAsGeoTransformFile"));
 		this.labelPassword.setText(DataConversionProperties.getString("string_label_lblPassword"));
-		this.labelPasswordConfrim.setText(DataConversionProperties.getString("string_label_lblConfrimPassword"));
+		this.labelPasswordConfrim.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
 	}
 
 	public void setUnEnabled() {

@@ -2,6 +2,7 @@ package com.supermap.desktop.newtheme.themeLabel;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.enums.UnitValue;
 import com.supermap.desktop.mapview.MapViewProperties;
@@ -9,6 +10,7 @@ import com.supermap.desktop.newtheme.commonPanel.TextStyleDialog;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
@@ -73,7 +75,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
     private ArrayList<String> comboBoxArray = new ArrayList<String>();
 
     private static String[] nameStrings = {MapViewProperties.getString("String_Title_Visible"), MapViewProperties.getString("String_Title_RangeValue"),
-            MapViewProperties.getString("String_ThemeGraphTextFormat_Caption")};
+            CoreProperties.getString("String_Caption")};
     private transient DatasetVector datasetVector;
     private transient Map map;
     private String rangeExpression;
@@ -243,12 +245,12 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
     private void initResources() {
         this.labelExpression.setText(MapViewProperties.getString("String_label_Expression"));
         this.labelRangeMethod.setText(MapViewProperties.getString("String_Label_RangeMethed"));
-        this.labelRangeCount.setText(MapViewProperties.getString("String_Label_RangeCount"));
+        this.labelRangeCount.setText(ControlsProperties.getString("String_Label_RangeCount"));
         this.labelRangeLength.setText(MapViewProperties.getString("String_Label_RangeSize"));
         this.labelRangeFormat.setText(MapViewProperties.getString("String_Label_CaptionFormat"));
-        this.labelColorStyle.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+        this.labelColorStyle.setText(ControlsProperties.getString("String_LabelColorScheme"));
         this.buttonMerge.setEnabled(false);
-        this.buttonMerge.setToolTipText(MapViewProperties.getString("String_Title_Merge"));
+        this.buttonMerge.setToolTipText(CoreProperties.getString("String_OverlayAnalystMethod_Union"));
         this.buttonSplit.setToolTipText(MapViewProperties.getString("String_Title_Split"));
         this.buttonStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
         this.buttonVisible.setToolTipText(MapViewProperties.getString("String_Title_Visible"));
@@ -931,7 +933,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
                         .getDisplayFilter().getJoinItems());
                 if (null == theme) {
                     // 专题图为空，提示专题图更新失败
-                    UICommonToolkit.showErrorMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+                    UICommonToolkit.showErrorMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
                     resetComboBoxRangeExpression(themeLabel.getRangeExpression());
                 } else {
                     refreshThemeLabel(theme);
@@ -954,7 +956,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
             refreshColor();
             getTable();
         } else {
-            UICommonToolkit.showConfirmDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+            UICommonToolkit.showConfirmDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
         }
         if (2 <= this.themeLabel.getCount()) {
             this.labelCount = this.themeLabel.getCount();
@@ -1008,7 +1010,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
                     .getDisplayFilter().getJoinItems());
             if (null == theme || theme.getCount() == 0) {
                 // 专题图为空，提示专题图更新失败
-                UICommonToolkit.showErrorMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+                UICommonToolkit.showErrorMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
                 resetComboBoxRangeExpression(themeLabel.getLabelExpression());
             } else {
                 this.isCustom = true;

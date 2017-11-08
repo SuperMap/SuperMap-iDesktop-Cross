@@ -60,7 +60,7 @@ public class MetaProcessGridResample extends MetaProcess {
 		textFieldSourceYPixel = new ParameterTextField(ControlsProperties.getString("String_LabelYPixelFormat"));
 		textFieldSourceRow = new ParameterTextField(CoreProperties.getString("String_Row"));
 		textFieldSourceColumn = new ParameterTextField(CoreProperties.getString("String_Column"));
-		comboBoxMethod = new ParameterComboBox(ProcessProperties.getString("String_Label_ResampleMethod"));
+		comboBoxMethod = new ParameterComboBox(ControlsProperties.getString("String_TransformationMode_ResampleMode"));
 		numberPixel = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		textFieldRow = new ParameterTextField(CoreProperties.getString("String_Row"));
 		textFieldColumn = new ParameterTextField(CoreProperties.getString("String_Column"));

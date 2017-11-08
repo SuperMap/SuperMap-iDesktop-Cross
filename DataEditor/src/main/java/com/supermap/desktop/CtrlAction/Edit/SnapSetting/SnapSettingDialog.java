@@ -416,7 +416,7 @@ public class SnapSettingDialog extends SmDialog {
 		this.add(panelButton, new GridBagConstraintsHelper(4, 1, 2, 1).setAnchor(GridBagConstraints.EAST).setWeight(0, 0));
 
 		this.tabbedPane.addTab(ControlsProperties.getString("String_Type"), panelSnapMode);
-		this.tabbedPane.addTab(DataEditorProperties.getString("String_SnapSetting_TabPageParameters"), panelSnapParams);
+		this.tabbedPane.addTab(CoreProperties.getString("String_parameter"), panelSnapParams);
 		this.tabbedPane.setBorder(null);
 		initPanelSnapModeLayout();
 		initPanelSnapParamsLayout();

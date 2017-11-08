@@ -4,6 +4,7 @@ import com.supermap.data.*;
 import com.supermap.data.topology.TopologyProcessingOptions;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -102,7 +103,7 @@ public class JDialogTopoBuildRegions extends SmDialog {
 		this.checkboxDuplicatedLinesCleaned.setSelected(true);
 		this.checkboxDuplicatedLinesCleaned.setText(DataTopologyProperties.getString("String_CleanDuplicatedLines"));
 		this.checkboxUndershootsExtended.setSelected(true);
-		this.checkboxUndershootsExtended.setText(DataTopologyProperties.getString("String_Label_UndershootsTolerance"));
+		this.checkboxUndershootsExtended.setText(ControlsProperties.getString("String_LabelToleranceExtend"));
 		this.checkboxRedundantVerticesCleaned.setSelected(true);
 		this.checkboxRedundantVerticesCleaned.setText(DataTopologyProperties.getString("String_RedundantVertices"));
 		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
@@ -110,7 +111,7 @@ public class JDialogTopoBuildRegions extends SmDialog {
 		this.labelResultDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelResultDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.checkBoxtopologyPropress.setText(DataTopologyProperties.getString("String_Topo_Build"));
-		this.checkBoxtopologyPropress.setToolTipText(DataTopologyProperties.getString("String_TopoLineTipsInfo"));
+		this.checkBoxtopologyPropress.setToolTipText(ControlsProperties.getString("String_TopoLineTipsInfo"));
 		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		this.panelResultData.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_ResultData"), TitledBorder.LEADING, TitledBorder.TOP,

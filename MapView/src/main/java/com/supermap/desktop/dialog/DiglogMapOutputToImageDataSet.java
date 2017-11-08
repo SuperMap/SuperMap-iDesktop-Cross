@@ -9,6 +9,7 @@ import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.map.propertycontrols.PanelGroupBoxViewBounds;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.ProviderLabel.WarningOrHelpProvider;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -100,7 +101,7 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 		this.warningProviderDataSet = new WarningOrHelpProvider(MapViewProperties.getString("String_OutputImageDataset_DatasetNameIsInvalid"), true);
 		this.warningProviderResolution = new WarningOrHelpProvider(MapViewProperties.getString("String_OutputImageDataset_ResoltionIsNotEmpty"), true);
 
-		this.panelOutPutRangeSetting = new PanelGroupBoxViewBounds(this, MapViewProperties.getString("String_OutputImageDataset_OutPutRange"), map);
+		this.panelOutPutRangeSetting = new PanelGroupBoxViewBounds(this, ControlsProperties.getString("String_MapOutputBounds"), map);
 		this.outRangeWaringTextFieldLeft = this.panelOutPutRangeSetting.getTextFieldCurrentViewLeft();
 		this.outRangeWaringTextFieldTop = this.panelOutPutRangeSetting.getTextFieldCurrentViewTop();
 		this.outRangeWaringTextFieldRight = this.panelOutPutRangeSetting.getTextFieldCurrentViewRight();
@@ -146,7 +147,7 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 	}
 
 	private void initPanelResultSettingLayout() {
-		this.panelResultSetting.setBorder(BorderFactory.createTitledBorder(MapViewProperties.getString("String_OutputImageDataset_ResultSetting")));
+		this.panelResultSetting.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
 		GroupLayout groupLayout = new GroupLayout(this.panelResultSetting);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);
@@ -200,10 +201,10 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 	private void initResources() {
 		this.labelDataSource.setText(ControlsProperties.getString("String_Label_Datasource"));
 		this.labelDataSet.setText(ControlsProperties.getString("String_Label_Dataset"));
-		this.labelResolution.setText(MapViewProperties.getString("String_OutputImageDataset_Resolution"));
-		this.labelRowCount.setText(MapViewProperties.getString("String_OutputImageDataset_RowCount"));
-		this.labelColumnCount.setText(MapViewProperties.getString("String_OutputImageDataset_ColumnCount"));
-		this.labelCodeType.setText(MapViewProperties.getString("String_OutputImageDataset_CodeType"));
+		this.labelResolution.setText(CoreProperties.getString("String_Resolution"));
+		this.labelRowCount.setText(ControlsProperties.getString("String_LabelRowsSize"));
+		this.labelColumnCount.setText(ControlsProperties.getString("String_LabelColumnsSize"));
+		this.labelCodeType.setText(CoreProperties.getString("String_Label_EncodeType"));
 		Datasource currentDatasource = null;
 		if (null != Application.getActiveApplication().getActiveDatasources() && Application.getActiveApplication().getActiveDatasources().length > 0) {
 			currentDatasource = Application.getActiveApplication().getActiveDatasources()[0];
@@ -265,9 +266,9 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 		String time = String.valueOf((endTime - startTime) / 1000.0);
 		Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetEnd"));
 		if (result) {
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetSucessed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + MapViewProperties.getString("MapCache_ShowTime"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetSucessed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Time_Seconds"));
 		} else {
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetFailed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + MapViewProperties.getString("MapCache_ShowTime"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetFailed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Time_Seconds"));
 		}
 		cancelAndCloseDailog();
 		CursorUtilities.setDefaultCursor();

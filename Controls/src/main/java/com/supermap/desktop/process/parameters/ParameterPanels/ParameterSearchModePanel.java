@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 
 import com.supermap.analyst.spatialanalyst.SearchMode;
 import com.supermap.data.Dataset;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
@@ -210,7 +211,7 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
 
     private void initComponents() {
         this.labelSearchModel = new JLabel();
-        this.labelSearchModel.setText(ProcessProperties.getString("String_SearchMode"));
+        this.labelSearchModel.setText(ControlsProperties.getString("String_SearchMode"));
         this.radioSearchModelCount = new JRadioButton();
         this.radioSearchModelRadius = new JRadioButton();
         this.radioSearchModelQuadTree = new JRadioButton();

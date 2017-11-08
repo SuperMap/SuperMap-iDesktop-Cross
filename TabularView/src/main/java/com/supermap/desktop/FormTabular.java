@@ -2,6 +2,7 @@ package com.supermap.desktop;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Interface.*;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.property.WorkspaceTreeDataPropertyFactory;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.editHistory.TabularEditHistoryManager;
@@ -210,7 +211,7 @@ public class FormTabular extends FormBaseChild implements IFormTabular {
 		//设置每行数据的序号（第几个数据）
 		jScrollPaneChildWindow.setRowHeaderView(rowHeader);
 		//在jscrollPaneChildWindow左上角设置一个序号标签
-		JLabel scrollPaneUpperLeftLabel = new JLabel(TabularViewProperties.getString("String_TabularForm_Sequence"), SwingConstants.CENTER);
+		JLabel scrollPaneUpperLeftLabel = new JLabel(ControlsProperties.getString("String_identifier"), SwingConstants.CENTER);
 		scrollPaneUpperLeftLabel.setOpaque(true);
 		scrollPaneUpperLeftLabel.setBackground(COLOR_HEADER);
 		scrollPaneUpperLeftLabel.setBorder(new LineBorder(Color.LIGHT_GRAY));

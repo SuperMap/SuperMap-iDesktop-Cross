@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -28,8 +29,8 @@ import java.beans.PropertyChangeListener;
  * Created By Chens on 2017/8/17 0017
  */
 public class MetaProcessZonalStatistics extends MetaProcess {
-	private final static String VALUE_DATA = ProcessProperties.getString("String_ZonalStatistic_ValueData");
-	private final static String ZONAL_DATA = ProcessProperties.getString("String_ZonalStatistic_ZonalData");
+	private final static String VALUE_DATA = ControlsProperties.getString("String_ZonalStatistic_ValueData");
+	private final static String ZONAL_DATA = ControlsProperties.getString("String_ZonalStatistic_ZonalData");
 	private final static String OUTPUT_DATA_GRID = "ZonalStatisticsGridResult";
 	private final static String OUTPUT_DATA_TABLE = "ZonalStatisticsTableResult";
 
@@ -45,7 +46,7 @@ public class MetaProcessZonalStatistics extends MetaProcess {
 	private ParameterCheckBox checkBoxIgnore;
 
 	public MetaProcessZonalStatistics() {
-		setTitle(ProcessProperties.getString("String_Title_ZonalStatisticsOnRasterValue"));
+		setTitle(ControlsProperties.getString("String_Title_ZonalStatisticsOnRasterValue"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();
@@ -60,11 +61,11 @@ public class MetaProcessZonalStatistics extends MetaProcess {
 		zonalDataset.setPixelFormat(new PixelFormat[]{PixelFormat.UBIT1, PixelFormat.UBIT4, PixelFormat.UBIT8, PixelFormat.UBIT16});
 		resultDatasource = new ParameterDatasourceConstrained();
 		resultDatasource.setReadOnlyNeeded(false);
-		resultDatasetGrid = new ParameterTextField(ProcessProperties.getString("String_Label_StatisticResult_Grid"));
-		resultTable = new ParameterTextField(ProcessProperties.getString("String_Label_StatisticResult_Tabular"));
+		resultDatasetGrid = new ParameterTextField(ControlsProperties.getString("String_Label_StatisticResult_Grid"));
+		resultTable = new ParameterTextField(ControlsProperties.getString("String_Label_StatisticResult_Tabular"));
 		comboBoxZonalField = new ParameterFieldComboBox(ProcessProperties.getString("String_Label_StatisticField"));
-		comboBoxStatisticMode = new ParameterComboBox(ProcessProperties.getString("String_Label_StatisticType"));
-		checkBoxIgnore = new ParameterCheckBox(ProcessProperties.getString("String_IgnoreNoValue"));
+		comboBoxStatisticMode = new ParameterComboBox(ControlsProperties.getString("String_StaticModel"));
+		checkBoxIgnore = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValue"));
 
 		ParameterCombine valueCombine = new ParameterCombine();
 		valueCombine.setDescribe(VALUE_DATA);

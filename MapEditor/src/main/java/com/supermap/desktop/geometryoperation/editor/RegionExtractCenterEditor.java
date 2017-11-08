@@ -6,6 +6,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.geometryoperation.EditEnvironment;
 import com.supermap.desktop.geometryoperation.control.JDialogRegionExtractCenter;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.ListUtilities;
@@ -41,13 +42,13 @@ public class RegionExtractCenterEditor extends AbstractEditor {
 							.getActiveApplication()
 							.getOutput()
 							.output(MessageFormat.format(MapEditorProperties.getString("String_GeometryOperation_ConvertSuccess"),
-									MapEditorProperties.getString("String_GeometryOperation_RegionExtractCenter"), dialog.getNewDatasetName()));
+									CoreProperties.getString("String_RegionToCenterLine"), dialog.getNewDatasetName()));
 				} else {
 					Application
 							.getActiveApplication()
 							.getOutput()
 							.output(MessageFormat.format(MapEditorProperties.getString("String_GeometryOperation_ConvertFailed"),
-									MapEditorProperties.getString("String_GeometryOperation_RegionExtractCenter")));
+									CoreProperties.getString("String_RegionToCenterLine")));
 				}
 			}
 		} catch (Exception e) {

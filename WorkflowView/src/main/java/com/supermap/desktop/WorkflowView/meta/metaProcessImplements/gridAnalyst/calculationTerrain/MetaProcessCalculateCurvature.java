@@ -7,7 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
-import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
@@ -32,7 +32,7 @@ public class MetaProcessCalculateCurvature extends MetaProcess {
     private ParameterTextField textFieldPlanCurvature;
 
     public MetaProcessCalculateCurvature() {
-        setTitle(ProcessProperties.getString("String_Form_CalculateCurvature"));
+        setTitle(ControlsProperties.getString("String_Form_CalculateCurvature"));
         initParameters();
         initParameterConstraint();
         initParametersState();
@@ -41,11 +41,11 @@ public class MetaProcessCalculateCurvature extends MetaProcess {
     private void initParameters() {
         sourceDatasource = new ParameterDatasourceConstrained();
         sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
-        numberZFactor = new ParameterNumber(ProcessProperties.getString("String_Label_ZFactor"));
+        numberZFactor = new ParameterNumber(ControlsProperties.getString("String_Label_ZFactor"));
         resultDatasource = new ParameterDatasourceConstrained();
-        textFieldAverageCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_AverageCurvatureDataset"));
-        textFieldProfileCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_ProfileCurvatureDataset"));
-        textFieldPlanCurvature = new ParameterTextField(ProcessProperties.getString("String_Label_PlanCurvatureDataset"));
+        textFieldAverageCurvature = new ParameterTextField(ControlsProperties.getString("String_Label_AverageCurvatureDataset"));
+        textFieldProfileCurvature = new ParameterTextField(ControlsProperties.getString("String_Label_ProfileCurvatureDataset"));
+        textFieldPlanCurvature = new ParameterTextField(ControlsProperties.getString("String_Label_PlanCurvatureDataset"));
 
         ParameterCombine sourceCombine = new ParameterCombine();
         sourceCombine.setDescribe(INPUT_DATA);

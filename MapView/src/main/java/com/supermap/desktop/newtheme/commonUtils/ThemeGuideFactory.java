@@ -1,22 +1,10 @@
 package com.supermap.desktop.newtheme.commonUtils;
 
-import com.supermap.data.ColorGradientType;
-import com.supermap.data.CursorType;
-import com.supermap.data.Dataset;
-import com.supermap.data.DatasetGrid;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.FieldType;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.JoinItems;
-import com.supermap.data.Point2D;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
-import com.supermap.data.Size2D;
-import com.supermap.data.StatisticMode;
-import com.supermap.data.TextStyle;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonPanel.ThemeMainContainer;
@@ -34,23 +22,7 @@ import com.supermap.desktop.newtheme.themeUnique.ThemeUniqueContainer;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.LayersTree;
 import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.mapping.GraduatedMode;
-import com.supermap.mapping.Layer;
-import com.supermap.mapping.MixedTextStyle;
-import com.supermap.mapping.RangeMode;
-import com.supermap.mapping.Theme;
-import com.supermap.mapping.ThemeCustom;
-import com.supermap.mapping.ThemeDotDensity;
-import com.supermap.mapping.ThemeGraduatedSymbol;
-import com.supermap.mapping.ThemeGraph;
-import com.supermap.mapping.ThemeGraphItem;
-import com.supermap.mapping.ThemeGraphType;
-import com.supermap.mapping.ThemeGridRange;
-import com.supermap.mapping.ThemeGridUnique;
-import com.supermap.mapping.ThemeLabel;
-import com.supermap.mapping.ThemeRange;
-import com.supermap.mapping.ThemeType;
-import com.supermap.mapping.ThemeUnique;
+import com.supermap.mapping.*;
 import com.supermap.ui.MapControl;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -259,7 +231,7 @@ public class ThemeGuideFactory {
 				setDockbarActive(themeUniqueLayer, themeUniqueContainer);
 			} else {
 				success = false;
-				UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+				UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 			}
 		}
 		return success;
@@ -296,7 +268,7 @@ public class ThemeGuideFactory {
 				setDockbarActive(themeRangeLayer, themeRangeContainer);
 			} else {
 				success = false;
-				UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+				UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 			}
 		}
 		return success;
@@ -337,7 +309,7 @@ public class ThemeGuideFactory {
 				success = true;
 			} else {
 				success = false;
-				UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+				UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 			}
 		}
 		return success;
@@ -401,7 +373,7 @@ public class ThemeGuideFactory {
 					setDockbarActive(themeGridUniqueLayer, themeUniqueContainer);
 				} else {
 					success = false;
-					UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+					UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 				}
 			} catch (Exception e) {
 				success = false;
@@ -432,7 +404,7 @@ public class ThemeGuideFactory {
 					setDockbarActive(themeGridRangeLayer, themeGridRangeContainer);
 				} else {
 					success = false;
-					UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+					UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

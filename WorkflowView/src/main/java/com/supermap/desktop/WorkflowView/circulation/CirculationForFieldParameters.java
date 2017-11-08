@@ -1,0 +1,119 @@
+package com.supermap.desktop.WorkflowView.circulation;
+
+import com.supermap.data.DatasetVector;
+import com.supermap.data.Datasource;
+import com.supermap.data.FieldInfos;
+import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.process.constraint.ipls.EqualDatasetTypeConstraint;
+import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
+import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
+import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.utilities.DatasetTypeUtilities;
+import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.DatasourceUtilities;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
+/**
+ * Created by xie on 2017/11/8.
+ */
+public class CirculationForFieldParameters extends AbstractCirculationParameters implements CirculationIterator {
+	private ParameterDatasourceConstrained datasource;
+	private ParameterDatasetType datasetType;
+	private ParameterSingleDataset dataset;
+	private ParameterFieldComboBox fieldComboBox;
+	private OutputData outputData;
+	private Datasource currentDatasource;
+	private ArrayList<String> fieldNames = new ArrayList<>();
+	private int count;
+	private PropertyChangeListener datasetChangeListener = new PropertyChangeListener() {
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+			if (dataset.getSelectedDataset() instanceof DatasetVector)
+				fieldComboBox.setFieldName((DatasetVector) dataset.getSelectedDataset());
+		}
+	};
+
+	public CirculationForFieldParameters(OutputData outputData) {
+		this.outputData = outputData;
+		initParameters();
+		initConstrained();
+		registEvents();
+	}
+
+	private void registEvents() {
+		this.dataset.addPropertyListener(datasetChangeListener);
+	}
+
+	private void initConstrained() {
+		EqualDatasourceConstraint datasourceConstraint = new EqualDatasourceConstraint();
+		datasourceConstraint.constrained(this.datasource, ParameterDatasource.DATASOURCE_FIELD_NAME);
+		datasourceConstraint.constrained(this.dataset, ParameterSingleDataset.DATASOURCE_FIELD_NAME);
+		EqualDatasetTypeConstraint datasetTypeConstraint = new EqualDatasetTypeConstraint();
+		datasetTypeConstraint.constrained(this.datasetType, ParameterDatasetType.DATASETTYPE_FIELD_NAME);
+		datasetTypeConstraint.constrained(this.dataset, ParameterSingleDataset.DATASETTYPES_FIELD_NAME);
+	}
+
+	private void initParameters() {
+		this.datasource = new ParameterDatasourceConstrained();
+		this.datasetType = new ParameterDatasetType();
+		this.datasetType.setAllShown(true);
+		this.datasetType.setDescribe(ProcessProperties.getString("String_DatasetType"));
+		this.dataset = new ParameterSingleDataset();
+		this.dataset.setDescribe(CoreProperties.getString(CoreProperties.Label_Dataset));
+		this.dataset.setDatasetTypes(DatasetTypeUtilities.getDatasetTypeVector());
+		this.fieldComboBox = new ParameterFieldComboBox();
+		this.fieldComboBox.setDescribe(CoreProperties.getString("String_FieldValue"));
+		this.currentDatasource = DatasourceUtilities.getDefaultResultDatasource();
+		if (null != this.currentDatasource) {
+			this.datasource.setSelectedItem(this.currentDatasource);
+			this.dataset.setDatasource(this.currentDatasource);
+		}
+		DatasetVector datasetVector = DatasetUtilities.getDefaultDatasetVector();
+		if (null != DatasetUtilities.getDefaultDatasetVector()) {
+			this.dataset.setSelectedItem(datasetVector);
+			this.fieldComboBox.setFieldName(datasetVector);
+		}
+		addParameters(this.datasource, this.datasetType, this.dataset, this.fieldComboBox);
+	}
+
+	@Override
+	public void reset() {
+		this.count = 0;
+		this.fieldNames.clear();
+		if (null != this.fieldComboBox.getFieldName()) {
+			this.fieldNames.add(this.fieldComboBox.getFieldName());
+			if (null != this.dataset.getSelectedDataset() && this.dataset.getSelectedDataset() instanceof DatasetVector) {
+				FieldInfos tempFieldInfo = ((DatasetVector) this.dataset.getSelectedDataset()).getFieldInfos();
+				for (int i = 0, size = tempFieldInfo.getCount(); i < size; i++) {
+					if (!fieldComboBox.getFieldName().equalsIgnoreCase(tempFieldInfo.get(i).getName()) && !tempFieldInfo.get(i).isSystemField()) {
+						fieldNames.add(tempFieldInfo.get(i).getName());
+					}
+				}
+			}
+			outputData.setValue(this.fieldComboBox.getFieldName());
+		}
+	}
+
+	@Override
+	public boolean hasNext() {
+		return count < this.fieldComboBox.getParameters().size();
+	}
+
+	@Override
+	public Object next() {
+		String fieldName = this.fieldNames.get(count);
+		count++;
+		return fieldName;
+	}
+
+	@Override
+	public void remove() {
+		this.fieldNames.clear();
+		this.fieldNames = null;
+		this.dataset.removePropertyListener(this.datasetChangeListener);
+	}
+}

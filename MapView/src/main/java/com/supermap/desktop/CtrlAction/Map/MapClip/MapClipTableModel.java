@@ -5,6 +5,7 @@ import com.supermap.data.DatasetVector;
 import com.supermap.data.Datasource;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.mapping.Layer;
 
 import javax.swing.table.DefaultTableModel;
@@ -60,11 +61,11 @@ public class MapClipTableModel extends DefaultTableModel {
         } else if (column == COLUMN_INDEX_AIMDATASOURCE) {
             return ControlsProperties.getString("String_TargetDatasource");
         } else if (column == COLUMN_INDEX_AIMDATASET) {
-            return MapViewProperties.getString("String_MapClip_TargetDataset");
+            return CoreProperties.getString("String_ColumnHeader_TargetDataset");
         } else if (column == COLUMN_INDEX_CLIPTYPE) {
             return MapViewProperties.getString("String_MapClip_ClipType");
         } else if (column == COLUMN_INDEX_ERASE) {
-            return MapViewProperties.getString("String_MapClip_Erase");
+            return CoreProperties.getString("String_OverlayAnalystMethod_Erase");
         }else if (column == COLUMN_INDEX_EXACTCLIP) {
             return MapViewProperties.getString("String_MapClip_AcurrentClip");
         }

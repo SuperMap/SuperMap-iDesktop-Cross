@@ -7,6 +7,7 @@ import com.supermap.data.DatasetImage;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterColor;
@@ -36,10 +37,10 @@ public class MetaProcessCalculateOrthoImage extends MetaProcessCalTerrain {
 	@Override
 	protected void initHook() {
 		// 参数设置
-		parameterColorNoColor = new ParameterColor(ProcessProperties.getString("String_Label_NoColor_Color"));
+		parameterColorNoColor = new ParameterColor(ControlsProperties.getString("String_Label_NoColor_Color"));
 		parameterColorNoColor.setSelectedItem(Color.WHITE);
 		parameterColorNoColor.setRequisite(true);
-		parameterColorsTable = new ParameterColorsTable(ProcessProperties.getString("String_Label_ColorTable"));
+		parameterColorsTable = new ParameterColorsTable(ControlsProperties.getString("String_LabelColorScheme"));
 		parameterColorsTable.setRequisite(true);
 		parameterColorsTable.setSelectedItem(new Colors());
 

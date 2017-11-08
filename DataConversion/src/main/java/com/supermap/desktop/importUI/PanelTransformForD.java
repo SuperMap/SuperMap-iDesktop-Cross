@@ -5,8 +5,9 @@ import com.supermap.data.conversion.ImportSetting;
 import com.supermap.data.conversion.ImportSettingDWG;
 import com.supermap.data.conversion.ImportSettingDXF;
 import com.supermap.desktop.baseUI.PanelTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.Convert;
@@ -485,17 +486,17 @@ public class PanelTransformForD extends PanelTransform {
 
     @Override
     public void initResources() {
-        this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
-        this.labelCurveSegment.setText(DataConversionProperties.getString("string_label_lblCurve"));
-        this.checkBoxExtendsData.setText(DataConversionProperties.getString("string_checkbox_chckbxExtendsData"));//导入扩展数据
-        this.checkBoxImportingXRecord.setText(DataConversionProperties.getString("String_ImportExtendsRecord"));//导入扩展记录
-        this.checkBoxSaveHeight.setText(DataConversionProperties.getString("string_checkbox_chckbxHeight"));//保留对象高度
-        this.checkBoxImportInvisibleLayer.setText(DataConversionProperties.getString("string_checkbox_chckbxImportLayer"));//导入不可见图层
-        this.checkBoxSaveWPLineWidth.setText(DataConversionProperties.getString("string_checkbox_chckbxLineWidth"));//保留多义线宽度
-        this.checkBoxMergeLayer.setText(DataConversionProperties.getString("string_checkbox_chckbxMergeLayer"));//合并图层
-        this.checkBoxImportProperty.setText(DataConversionProperties.getString("string_checkbox_chckbxProperty"));//导入块属性
-        this.checkBoxKeepingParametricPart.setText(DataConversionProperties.getString("string_checkbox_chckbxSaveField"));//保留参数化对象
-        this.checkBoxImportSymbol.setText(DataConversionProperties.getString("string_checkbox_chckbxSymbol"));//导入符号块
+        this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
+        this.labelCurveSegment.setText(CoreProperties.getString("String_CurveSegment"));
+        this.checkBoxExtendsData.setText(CoreProperties.getString("string_ImportExtendsData"));//导入扩展数据
+        this.checkBoxImportingXRecord.setText(CoreProperties.getString("String_ImportExtendsRecord"));//导入扩展记录
+        this.checkBoxSaveHeight.setText(CoreProperties.getString("String_SaveHeight"));//保留对象高度
+        this.checkBoxImportInvisibleLayer.setText(CoreProperties.getString("String_ImportInvisibleLayer"));//导入不可见图层
+        this.checkBoxSaveWPLineWidth.setText(CoreProperties.getString("String_SaveWPLineWidth"));//保留多义线宽度
+        this.checkBoxMergeLayer.setText(CoreProperties.getString("String_MergeLayer"));//合并图层
+        this.checkBoxImportProperty.setText(CoreProperties.getString("String_ImportProperty"));//导入块属性
+        this.checkBoxKeepingParametricPart.setText(CoreProperties.getString("String_SaveField"));//保留参数化对象
+        this.checkBoxImportSymbol.setText(CoreProperties.getString("String_ImportingSymbol"));//导入符号块
     }
 
     public JTextField getTextFieldCurveSegment() {

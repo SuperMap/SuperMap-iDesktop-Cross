@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.mapeditor.MapEditorProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -254,8 +254,8 @@ public class CtrlActionCreateAlongLineText extends ActionCreateBase {
 		}
 
 		private void initResources() {
-			this.setTitle(MapEditorProperties.getString("String_AlongLineTitle"));
-			labelDescribe.setText((MapEditorProperties.getString("String_AlongLineText")));
+			this.setTitle(ControlsProperties.getString("String_AlongLineTitle"));
+			labelDescribe.setText((ControlsProperties.getString("String_AlongLineText")));
 			buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
 			buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
 		}

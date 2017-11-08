@@ -11,6 +11,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerGridAggregationPropertyModel;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.SMSpinner;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
@@ -121,7 +122,7 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.dataCellNULL = new DataCell();
 		this.dataCellSolidLine = new DataCell();
 		this.dataCellDottedLine = new DataCell();
-		this.dataCellNULL.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_Null.png")), MapViewProperties.getString("String_SymbolImage_None"));
+		this.dataCellNULL.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_Null.png")), CoreProperties.getString("String_None"));
 		this.dataCellSolidLine.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_SolidLine.png")), MapViewProperties.getString("String_SymbolImage_SolidLine"));
 		this.dataCellDottedLine.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_DottedLine.png")), MapViewProperties.getString("String_SymbolImage_DottedLine"));
 
@@ -240,18 +241,18 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.labelGridField.setText(MapViewProperties.getString("String_LayerGridAggregation_GridField"));
 		this.labelGridType.setText(MapViewProperties.getString("String_LayerGridAggregation_GridType"));
 		this.labelLength.setText(MapViewProperties.getString("String_LayerGridAggregation_HeightAndWidth"));
-		this.labelPixel.setText(MapViewProperties.getString("String_LayerGridAggregation_Pixel"));
-		this.labelColorScheme.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+		this.labelPixel.setText(CoreProperties.getString("String_Label_Pixel"));
+		this.labelColorScheme.setText(ControlsProperties.getString("String_LabelColorScheme"));
 		this.labelMaxColor.setText(MapViewProperties.getString("String_LayerHeatmap_MaxColor"));
-		this.labelMaxColorTransparence.setText(MapViewProperties.getString("String_Opaque"));
+		this.labelMaxColorTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
 		this.labelMinColor.setText(MapViewProperties.getString("String_LayerHeatmap_MinColor"));
-		this.labelMinColorTransparence.setText(MapViewProperties.getString("String_Opaque"));
+		this.labelMinColorTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
 		this.checkboxShowLabel.setText(MapViewProperties.getString("String_LayerGridAggregation_ShowLabel"));
 		this.buttonSetingLabel.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
 		this.labelLineType.setText(MapViewProperties.getString("String_LayerGridAggregation_LineType"));
-		this.labelLineColor.setText(MapViewProperties.getString("String_LayerGridAggregation_LineColor"));
-		this.labelBorderTransparence.setText(MapViewProperties.getString("String_Opaque"));
-		this.labelBoderWidth.setText(MapViewProperties.getString("String_LayerGridAggregation_BoderWidth"));
+		this.labelLineColor.setText(ControlsProperties.getString("String_Label_LineColor"));
+		this.labelBorderTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
+		this.labelBoderWidth.setText(CoreProperties.getString("String_Label_LineWidth"));
 	}
 
 	@Override

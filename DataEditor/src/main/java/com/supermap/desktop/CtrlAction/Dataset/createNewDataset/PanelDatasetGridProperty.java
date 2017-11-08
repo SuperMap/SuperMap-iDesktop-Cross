@@ -2,6 +2,7 @@ package com.supermap.desktop.CtrlAction.Dataset.createNewDataset;
 
 import com.supermap.data.BlockSizeOption;
 import com.supermap.data.PixelFormat;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
@@ -139,7 +140,7 @@ public class PanelDatasetGridProperty extends JPanel {
 	private void initComponents() {
 		this.blockSizeOptionLabel = new JLabel(DataEditorProperties.getString("String_NewDatasetBlockSizeOption"));
 		this.pixelFormatLabel = new JLabel(CoreProperties.getString("String_PixelType"));
-		this.noValueLabel = new JLabel(DataEditorProperties.getString("String_NewDatasetNoValue"));
+		this.noValueLabel = new JLabel(ControlsProperties.getString("String_LabelNoValue"));
 		this.maxValueLabel = new JLabel(CoreProperties.getString("String_MAXGrid"));
 		this.minValueLabel = new JLabel(CoreProperties.getString("String_MINGrid"));
 
@@ -175,7 +176,7 @@ public class PanelDatasetGridProperty extends JPanel {
 	}
 
 	private void initLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_NewDatasetProperty")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_DatasetGridPropertyControl_GroupBoxImageProperty")));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);

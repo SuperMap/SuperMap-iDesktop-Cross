@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -45,7 +46,7 @@ public class MetaProcessCommonStatistics extends MetaProcess {
     private ParameterSwitch parameterSwitch;
 
     public MetaProcessCommonStatistics() {
-        setTitle(ProcessProperties.getString("String_Title_CommonStatistics"));
+        setTitle(ControlsProperties.getString("String_Title_CommonStatistics"));
         initParameters();
         initParameterConstraint();
         initParametersState();
@@ -65,8 +66,8 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 		sourceDatasource = new ParameterDatasourceConstrained();
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		resultDataset = new ParameterSaveDataset();
-		comboBoxCompareType = new ParameterComboBox(ProcessProperties.getString("String_CompareType"));
-		checkBoxIgnore = new ParameterCheckBox(ProcessProperties.getString("String_IgnoreNoValue"));
+		comboBoxCompareType = new ParameterComboBox(ControlsProperties.getString("String_CompareType"));
+		checkBoxIgnore = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValue"));
         radioButton = new ParameterRadioButton();
         number = new ParameterNumber(ProcessProperties.getString("String_Label_CommonStatisticType_Single"));
         chooseTable = new ParameterDatasetChooseTable();
@@ -113,7 +114,7 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 		checkBoxIgnore.setSelectedItem(true);
         radioButton.setItems(new ParameterDataNode[]{
                 new ParameterDataNode(ProcessProperties.getString("String_RadioButton_CommonStatisticType_Single"), NUMBER),
-                new ParameterDataNode(ProcessProperties.getString("String_RadioButton_DatasetGrid"), TABLE)});
+                new ParameterDataNode(CoreProperties.getString("String_DatasetType_Grid"), TABLE)});
         comboBoxCompareType.setItems(new ParameterDataNode("<", StatisticsCompareType.LESS),
 				new ParameterDataNode("<=", StatisticsCompareType.LESS_OR_EQUAL),
 				new ParameterDataNode("==", StatisticsCompareType.EQUAL),

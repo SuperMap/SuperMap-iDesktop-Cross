@@ -543,12 +543,12 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 	public void initResources() {
 		this.setBorder(new TitledBorder(null, DataConversionProperties.getString("string_border_panelproperty")));
 		this.checkBoxExportExternalData.setText(DataConversionProperties.getString("string_chcekbox_extends"));
-		this.checkBoxExportExternalRecord.setText(DataConversionProperties.getString("String_ExportExternalRecord"));
+		this.checkBoxExportExternalRecord.setText(ControlsProperties.getString("String_ExportExternalRecord"));
 		this.checkBoxExportPointAsWKT.setText(CoreProperties.getString("String_ExportPointAsWKT"));
 		this.checkBoxExportFieldName.setText(CoreProperties.getString("String_ExportFieldName"));
 		this.labelDatasets.setText(ControlsProperties.getString("String_LabelCharset"));
-		this.labelCADVersion.setText(DataConversionProperties.getString("string_label_lblCAD"));
-		this.labelExpression.setText(DataConversionProperties.getString("String_FilterExpression"));
+		this.labelCADVersion.setText(ControlsProperties.getString("string_label_lblCAD"));
+		this.labelExpression.setText(ControlsProperties.getString("String_LabelFilter"));
 		this.buttonExpression.setText(ControlsProperties.getString("String_SQLExpression") + "...");
 	}
 

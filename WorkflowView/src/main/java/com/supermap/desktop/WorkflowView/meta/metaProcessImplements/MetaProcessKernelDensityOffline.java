@@ -67,7 +67,7 @@ public class MetaProcessKernelDensityOffline extends MetaProcess {
 	};
 
 	public MetaProcessKernelDensityOffline() {
-		setTitle(ProcessProperties.getString("String_KernelDensityAnalyst"));
+		setTitle(ControlsProperties.getString("String_KernelDensity"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();
@@ -79,7 +79,7 @@ public class MetaProcessKernelDensityOffline extends MetaProcess {
 		sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE);
 		resultDataset = new ParameterSaveDataset();
 		comboBoxField = new ParameterFieldComboBox(ProcessProperties.getString("String_DensityAnalyst_DensityField"));
-		numberCellSize = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
+		numberCellSize = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		numberTop = new ParameterNumber(ControlsProperties.getString("String_LabelTop"));
 		numberBottom = new ParameterNumber(ControlsProperties.getString("String_LabelBottom"));
 		numberRight = new ParameterNumber(ControlsProperties.getString("String_LabelRight"));

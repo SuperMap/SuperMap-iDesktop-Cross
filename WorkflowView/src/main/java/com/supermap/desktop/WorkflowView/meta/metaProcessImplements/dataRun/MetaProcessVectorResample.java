@@ -67,13 +67,13 @@ public class MetaProcessVectorResample extends MetaProcess {
 		parameterCombineSourceData.addParameters(this.datasource, this.dataset);
 
 		// 参数设置
-		this.parameterResampleType = new ParameterComboBox(ProcessProperties.getString("String_Resample_Type"));
+		this.parameterResampleType = new ParameterComboBox(ControlsProperties.getString("String_Resample_Type"));
 		this.parameterResampleTolerance = new ParameterNumber(ProcessProperties.getString("String_Resample_Tolerance"));
 		this.parameterIsSaveSmallGeometry = new ParameterCheckBox(ProcessProperties.getString("String_Resample_SaveSmallGeometry"));
-		this.parameterIsTopologyPreprocess = new ParameterCheckBox(ProcessProperties.getString("String_Resample_TopologyPreprocess"));
+		this.parameterIsTopologyPreprocess = new ParameterCheckBox(CoreProperties.getString("String_TopyPreProcessed"));
 		this.parameterVertexTolerance = new ParameterNumber(ProcessProperties.getString("String_Resample_VertexInterval"));
 
-		this.parameterResampleType.addItem(new ParameterDataNode(ProcessProperties.getString("String_ResampleType_RTBEND"), ResampleType.RTBEND));
+		this.parameterResampleType.addItem(new ParameterDataNode(ControlsProperties.getString("String_RTBend"), ResampleType.RTBEND));
 		this.parameterResampleType.addItem(new ParameterDataNode(ProcessProperties.getString("String_ResampleType_RTGENERAL"), ResampleType.RTGENERAL));
 		this.parameterResampleTolerance.setMaxBit(17);
 		this.parameterResampleTolerance.setMinValue(0);

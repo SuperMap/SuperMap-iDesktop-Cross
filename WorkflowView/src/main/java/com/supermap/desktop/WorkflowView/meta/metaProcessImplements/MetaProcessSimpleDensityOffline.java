@@ -81,7 +81,7 @@ public class MetaProcessSimpleDensityOffline extends MetaProcess {
 		resultDataset = new ParameterSaveDataset();
 		comboBoxField = new ParameterFieldComboBox(ProcessProperties.getString("String_DensityAnalyst_DensityField"));
 		shapeType = new ParameterShapeType();
-		numberCellSize = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
+		numberCellSize = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		numberTop = new ParameterNumber(ControlsProperties.getString("String_LabelTop"));
 		numberBottom = new ParameterNumber(ControlsProperties.getString("String_LabelBottom"));
 		numberRight = new ParameterNumber(ControlsProperties.getString("String_LabelRight"));

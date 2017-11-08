@@ -8,6 +8,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.metaProcessImplements.MetaProcessGridAnalyst;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -27,7 +28,7 @@ import java.text.DecimalFormat;
  */
 public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
-	private final static String COST_DATA = ProcessProperties.getString("String_GroupBox_CostData");
+	private final static String COST_DATA = ControlsProperties.getString("String_GroupBox_CostData");
 	private final static String OUTPUT_DATA_DISTANCE = "CreateDistanceResult";
 	private final static String OUTPUT_DATA_DIRECTION = "CreateDirectionResult";
 	private final static String OUTPUT_DATA_ALLOCATION = "CreateAllocationResult";
@@ -61,8 +62,8 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 		this.costDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.costDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.costDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
-		this.parameterNumberMaxDistance = new ParameterNumber(ProcessProperties.getString("String_MaxDistance"));
-		this.parameterNumberResolvingPower = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
+		this.parameterNumberMaxDistance = new ParameterNumber(ControlsProperties.getString("String_Label_MaxDistance"));
+		this.parameterNumberResolvingPower = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		this.resultDatasource = new ParameterDatasource();
 		this.resultDatasource.setReadOnlyNeeded(false);
 		this.resultDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
@@ -74,7 +75,7 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.sourceDataset);
 		ParameterCombine costData = new ParameterCombine();
-		costData.setDescribe(ProcessProperties.getString("String_GroupBox_CostData"));
+		costData.setDescribe(ControlsProperties.getString("String_GroupBox_CostData"));
 		costData.addParameters(this.costDatasource, this.costDataset);
 		ParameterCombine parameterSetting = new ParameterCombine();
 		parameterSetting.setDescribe(ProcessProperties.getString("String_setParameter"));

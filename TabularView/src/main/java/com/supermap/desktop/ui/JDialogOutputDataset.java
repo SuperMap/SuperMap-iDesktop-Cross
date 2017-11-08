@@ -4,9 +4,9 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.Interface.IFormTabular;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.properties.CoreProperties;
-import com.supermap.desktop.tabularview.TabularViewProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
@@ -61,7 +61,7 @@ public class JDialogOutputDataset extends SmDialog {
 	public JDialogOutputDataset(IFormTabular tabular) {
 		super();
 		this.tabular = tabular;
-		setTitle(TabularViewProperties.getString("String_FormText_OutputDataset"));
+		setTitle(ControlsProperties.getString("String_FormText_OutputDataset"));
 		setSize(620, 420);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = this.getSize();

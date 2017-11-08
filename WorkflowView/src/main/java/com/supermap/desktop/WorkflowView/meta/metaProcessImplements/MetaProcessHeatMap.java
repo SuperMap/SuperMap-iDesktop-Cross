@@ -3,6 +3,7 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -12,6 +13,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CursorUtilities;
 
 /**
@@ -21,8 +23,8 @@ import com.supermap.desktop.utilities.CursorUtilities;
 public class MetaProcessHeatMap extends MetaProcess {
 	private ParameterIServerLogin parameterIServerLogin = new ParameterIServerLogin();
 	private ParameterHDFSPath parameterHDFSPath;
-	private ParameterTextField parameterTextFieldXIndex = new ParameterTextField(ProcessProperties.getString("String_XIndex"));
-	private ParameterTextField parameterTextFieldYIndex = new ParameterTextField(ProcessProperties.getString("String_YIndex"));
+	private ParameterTextField parameterTextFieldXIndex = new ParameterTextField(ControlsProperties.getString("String_XIndex"));
+	private ParameterTextField parameterTextFieldYIndex = new ParameterTextField(ControlsProperties.getString("String_YIndex"));
 	private ParameterTextField parameterTextFieldSeparator = new ParameterTextField(ProcessProperties.getString("String_Separator"));
 	private ParameterComboBox parameterCacheType;
 	private ParameterTextField parameterBounds;
@@ -36,7 +38,7 @@ public class MetaProcessHeatMap extends MetaProcess {
 	ParameterTextArea parameterTextAreaOutPut = new ParameterTextArea();
 
 	public MetaProcessHeatMap() {
-		setTitle(ProcessProperties.getString("String_HeatMap"));
+		setTitle(ControlsProperties.getString("String_HeatMap"));
 		initMetaInfo();
 	}
 
@@ -54,19 +56,19 @@ public class MetaProcessHeatMap extends MetaProcess {
 		//流程图中不支持在地图中绘制范围，范围表示与iServer的表示相同
 		parameterBounds = new ParameterTextField().setDescribe(ProcessProperties.getString("String_CacheBounds"));
 		parameterBounds.setSelectedItem("-74.050,40.650,-73.850,40.850");
-		parameterCacheLevel = new ParameterTextField().setDescribe(ProcessProperties.getString("String_CacheLevel"));
+		parameterCacheLevel = new ParameterTextField().setDescribe(ControlsProperties.getString("String_CacheLevel"));
 		parameterCacheLevel.setSelectedItem("1");
-		parameterCacheName = new ParameterTextField().setDescribe(ProcessProperties.getString("String_CacheName"));
+		parameterCacheName = new ParameterTextField().setDescribe(ControlsProperties.getString("String_CacheName"));
 		parameterCacheName.setSelectedItem("test1_heat");
-		parameterDatabaseType = new ParameterComboBox(ProcessProperties.getString("String_DatabaseType"));
+		parameterDatabaseType = new ParameterComboBox(ControlsProperties.getString("String_DatabaseType"));
 		ParameterDataNode parameterDataNode = new ParameterDataNode("MongoDB", "MongoDB");
 		parameterDatabaseType.setItems(parameterDataNode);
 		parameterDatabaseType.setSelectedItem(parameterDataNode);
-		parameterServiceAddress = new ParameterTextField().setDescribe(ProcessProperties.getString("String_ServiceAddress"));
+		parameterServiceAddress = new ParameterTextField().setDescribe(CoreProperties.getString("String_Server"));
 		parameterServiceAddress.setSelectedItem("192.168.13.161:27017");
-		parameterDatabase = new ParameterTextField().setDescribe(ProcessProperties.getString("String_Database"));
+		parameterDatabase = new ParameterTextField().setDescribe(ControlsProperties.getString("String_Database"));
 		parameterDatabase.setSelectedItem("test");
-		parameterVersion = new ParameterTextField().setDescribe(ProcessProperties.getString("String_Version"));
+		parameterVersion = new ParameterTextField().setDescribe(ControlsProperties.getString("String_Version"));
 		parameterVersion.setSelectedItem("V1");
 
 		ParameterCombine parameterCombineSetting = new ParameterCombine();

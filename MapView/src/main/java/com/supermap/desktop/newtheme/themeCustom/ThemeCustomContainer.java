@@ -3,10 +3,12 @@ package com.supermap.desktop.newtheme.themeCustom;
 import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.mapping.*;
@@ -451,7 +453,7 @@ public class ThemeCustomContainer extends ThemeChangePanel {
 
     private void initResources() {
         this.labelFillStyle.setText(MapViewProperties.getString("String_ThemeCustom_FillSymbolID"));
-        this.labelFillOpaque.setText(MapViewProperties.getString("String_Opaque"));
+        this.labelFillOpaque.setText(ControlsProperties.getString("String_Label_Transparence"));
         this.labelFillForeColor.setText(MapViewProperties.getString("String_ThemeCustom_ForeColor"));
         this.labelFillBackColor.setText(MapViewProperties.getString("String_ThemeCustom_BackColor"));
         this.labelFillGradientMode.setText(MapViewProperties.getString("String_ThemeCustom_FillGradientMode"));
@@ -459,15 +461,15 @@ public class ThemeCustomContainer extends ThemeChangePanel {
         this.labelFillGradientOffsetRatioX.setText(MapViewProperties.getString("String_ThemeCustom_FillOffsetX"));
         this.labelFillGradientOffsetRatioY.setText(MapViewProperties.getString("String_ThemeCustom_FillOffsetY"));
         this.labelLineSymbol.setText(MapViewProperties.getString("String_ThemeCustom_LineSymbolID"));
-        this.labelLineColor.setText(MapViewProperties.getString("String_ThemeCustom_LineColor"));
-        this.labelLineWidth.setText(MapViewProperties.getString("String_ThemeCustom_LineWidth"));
+        this.labelLineColor.setText(ControlsProperties.getString("String_ThemeCustom_LineColor"));
+        this.labelLineWidth.setText(ControlsProperties.getString("String_ThemeCustom_LineWidth"));
         this.labelMarkerSymbol.setText(MapViewProperties.getString("String_ThemeCustom_MarkerSymbolID"));
-        this.labelMarkerColor.setText(MapViewProperties.getString("String_ThemeCustom_MarkerColor"));
+        this.labelMarkerColor.setText(CoreProperties.getString("String_Label_SymbolColor"));
         this.labelMarkerSize.setText(MapViewProperties.getString("String_ThemeCustom_MarkerSize"));
-        this.labelMarkerAngle.setText(MapViewProperties.getString("String_ThemeCustom_MarkerAngle"));
-        this.panelFill.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeCustom_Fill")));
-        this.panelLine.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeCustom_Line")));
-        this.panelMarker.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeCustom_Symbol")));
+        this.labelMarkerAngle.setText(ControlsProperties.getString("String_Label_SymbolAngle"));
+        this.panelFill.setBorder(new TitledBorder(CoreProperties.getString("String_FillMode3D_Fill")));
+        this.panelLine.setBorder(new TitledBorder(CoreProperties.getString("String_LineType")));
+        this.panelMarker.setBorder(new TitledBorder(ControlsProperties.getString("String_SYMBOL")));
     }
 
     @Override

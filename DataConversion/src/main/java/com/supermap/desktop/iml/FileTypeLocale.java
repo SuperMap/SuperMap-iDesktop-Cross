@@ -1,5 +1,6 @@
 package com.supermap.desktop.iml;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 
 public class FileTypeLocale {
@@ -9,32 +10,32 @@ public class FileTypeLocale {
 
 	// 文件类型描述
 	private static final String[] descriptionNew = {
-			DataConversionProperties.getString("string_filetype_all"),
+			ControlsProperties.getString("string_filetype_all"),
 			DataConversionProperties.getString("string_filetype_autocad"),
 			DataConversionProperties.getString("string_filetype_arcgis"),
 			DataConversionProperties.getString("string_filetype_mapinfo"),
 			DataConversionProperties.getString("string_filetype_mapgis"),
 			DataConversionProperties.getString("string_filetype_microsoft"),
-			DataConversionProperties.getString("string_filetype_bitmap"),
-			DataConversionProperties.getString("string_filetype_3ds"),
-			DataConversionProperties.getString("string_filetype_kml"),
-			DataConversionProperties.getString("string_filetype_grid"),
-			DataConversionProperties.getString("string_filetype_lidar"),
-			DataConversionProperties.getString("string_filetype_vct"),
+			ControlsProperties.getString("string_filetype_bitmap"),
+			ControlsProperties.getString("string_filetype_3ds"),
+			ControlsProperties.getString("string_filetype_kml"),
+			ControlsProperties.getString("string_filetype_grid"),
+			ControlsProperties.getString("string_filetype_lidar"),
+			ControlsProperties.getString("string_filetype_vct"),
 			DataConversionProperties.getString("string_filetype_geojson"),
 			DataConversionProperties.getString("string_filetype_simplejson"),
 			DataConversionProperties.getString("string_filetype_gpx")
 	};
 	private static final String[] descriptionNewForLinux = {
-			DataConversionProperties.getString("string_filetypeForLinux_all"),
+			ControlsProperties.getString("string_filetype_all"),
 			DataConversionProperties.getString("string_filetypeForLinux_arcgis"),
 			DataConversionProperties.getString("string_filetypeForLinux_mapinfo"),
 			DataConversionProperties.getString("string_filetypeForLinux_microsoft"),
-			DataConversionProperties.getString("string_filetypeForLinux_bitmap"),
-			DataConversionProperties.getString("string_filetypeForLinux_3ds"),
-			DataConversionProperties.getString("string_filetypeForLinux_kml"),
-			DataConversionProperties.getString("string_filetypeForLinux_grid"),
-			DataConversionProperties.getString("string_filetypeForLinux_vct"),
+			ControlsProperties.getString("string_filetype_bitmap"),
+			ControlsProperties.getString("string_filetypeForLinux_3ds"),
+			ControlsProperties.getString("string_filetype_kml"),
+			ControlsProperties.getString("string_filetypeForLinux_grid"),
+			ControlsProperties.getString("string_filetypeForLinux_vct"),
 			DataConversionProperties.getString("string_filetype_geojson"),
 			DataConversionProperties.getString("string_filetype_simplejson"),
 			DataConversionProperties.getString("string_filetype_gpx")};

@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameters.ParameterPanels;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.lbs.WebHDFS;
 import com.supermap.desktop.process.ProcessProperties;
@@ -48,7 +49,7 @@ public class ParameterHDFSPathPanel extends SwingPanel {
 		this.textFieldFileInputPath.setText((String) parameterHDFSPath.getSelectedItem());
 		textFieldFileInputPath.setPreferredSize(new Dimension(20, 23));
 		this.buttonInputBrowser = new JButton();
-		this.buttonInputBrowser.setText(ProcessProperties.getString("String_Browser"));
+		this.buttonInputBrowser.setText(ControlsProperties.getString("String_Scale"));
 		this.labelFileInputPath.setText(ProcessProperties.getString("label_ChooseFile"));
 		this.labelFileInputPath.setPreferredSize(ParameterUtil.LABEL_DEFAULT_SIZE);
 		ComponentUIUtilities.setName(this.textFieldFileInputPath, parameter.getDescribe() + "_textField");

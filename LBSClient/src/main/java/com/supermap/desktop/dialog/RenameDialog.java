@@ -1,17 +1,18 @@
 package com.supermap.desktop.dialog;
 
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
-import com.supermap.desktop.lbsclient.LBSClientProperties;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.utilities.StringUtilities;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class RenameDialog extends SmDialog{
 	/**
@@ -87,8 +88,8 @@ public class RenameDialog extends SmDialog{
 	}
 
 	private void initResources() {
-		this.labelNewName.setText(LBSClientProperties.getString("String_FileName"));
-		this.setTitle(LBSClientProperties.getString("String_TitleRename"));
+		this.labelNewName.setText(ControlsProperties.getString("String_LabelFileName"));
+		this.setTitle(ControlsProperties.getString("String_Rename"));
 	}
 
 	public String getNewName() {

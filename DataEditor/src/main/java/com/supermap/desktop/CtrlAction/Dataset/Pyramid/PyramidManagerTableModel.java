@@ -24,8 +24,8 @@ public class PyramidManagerTableModel extends SortableTableModel {
 			CoreProperties.getString("String_ColumnHeader_Dataset"),
 			CoreProperties.getString("String_ColumnHeader_Datasource"),
 			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnHasPyramid"),
-			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnWidth"),
-			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnHeight"),
+			ControlsProperties.getString("String_Geometry_Width"),
+			ControlsProperties.getString("String_Geometry_Height"),
 	};
 
 

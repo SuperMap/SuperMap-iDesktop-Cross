@@ -13,7 +13,6 @@ import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.event.ActiveLayer3DsChangedEvent;
 import com.supermap.desktop.event.ActiveLayer3DsChangedListener;
 import com.supermap.desktop.event.FormClosingEvent;
-import com.supermap.desktop.realspaceview.RealspaceViewProperties;
 import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.FormManager;
 import com.supermap.desktop.ui.LayersComponentManager;
@@ -567,9 +566,9 @@ public class FormScene extends FormBaseChild implements IFormScene, WorkspaceClo
 			if (layer3Ds != null && layer3Ds.length > 0) {
 				String message = "";
 				if (layer3Ds.length == 1) {
-					message = String.format(RealspaceViewProperties.getString("String_validateRemoveLayer3DMessage"), layer3Ds[0].getCaption());
+					message = String.format(ControlsProperties.getString("String_validateRemoveLayerMessage"), layer3Ds[0].getCaption());
 				} else {
-					message = String.format(RealspaceViewProperties.getString("String_validateRemoveRangeMessage"), layer3Ds.length);
+					message = String.format(ControlsProperties.getString("String_validateRemoveRangeMessage"), layer3Ds.length);
 				}
 
 				int result = UICommonToolkit.showConfirmDialog(message);

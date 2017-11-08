@@ -19,6 +19,9 @@ public class CirculationParametersFactory {
 			case forObjectType:
 				circulationOutParameters = new CirculationForObjectOutputParameters(outputData);
 				break;
+			case forFieldType:
+				circulationOutParameters = new CirculationForFieldOutputParameters(outputData);
+				break;
 			default:
 				break;
 		}
@@ -37,6 +40,9 @@ public class CirculationParametersFactory {
 				break;
 			case forObjectType:
 				circulationParameters = new CirculationForObjectParameters(outputData);
+				break;
+			case forFieldType:
+				circulationParameters = new CirculationForFieldParameters(outputData);
 				break;
 			default:
 				break;

@@ -9,11 +9,11 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IFormTransformation;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.FormTransformationSubFormType;
 import com.supermap.desktop.event.FormClosedListener;
 import com.supermap.desktop.event.FormClosingListener;
 import com.supermap.desktop.event.FormShownListener;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.mapping.Layer;
@@ -38,7 +38,7 @@ public class TransformationTarget extends TransformationBase implements ITransfo
 		transformationBeens = new ArrayList<>();
 		this.formTransformation = formTransformation;
 		this.mapControl.getMap().setWorkspace(Application.getActiveApplication().getWorkspace());
-		this.mapControl.getMap().setName(DataEditorProperties.getString("String_Transfernation_TargetLayer"));
+		this.mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_TargetLayer"));
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class TransformationTarget extends TransformationBase implements ITransfo
 			isNeedRefresh = true;
 			addedMaps.add(maps.get(0));
 			mapControl.getMap().open(maps.get(0).getName());
-			mapControl.getMap().setName(DataEditorProperties.getString("String_Transfernation_TargetLayer"));
+			mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_TargetLayer"));
 			IForm activeForm = Application.getActiveApplication().getActiveForm();
 			if (activeForm instanceof IFormTransformation && ((IFormTransformation) activeForm).getCurrentSubFormType() == FormTransformationSubFormType.Target) {
 				UICommonToolkit.getLayersManager().setMap(mapControl.getMap());

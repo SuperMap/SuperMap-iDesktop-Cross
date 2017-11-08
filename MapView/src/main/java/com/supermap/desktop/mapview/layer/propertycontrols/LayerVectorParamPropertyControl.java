@@ -7,6 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.ScaleModel;
 import com.supermap.desktop.controls.ControlDefaultValues;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerVectorParamPropertyModel;
@@ -254,12 +255,12 @@ public class LayerVectorParamPropertyControl extends AbstractLayerPropertyContro
 		this.checkBoxIsCrossroadOptimized.setText(MapViewProperties.getString("String_LayerControl_CrossroadOptimized"));
 		this.checkBoxIsSymbolScalable.setText(MapViewProperties.getString("String_LayerControl_SymbolScalable"));
 		this.checkBoxIsAntialias.setText(MapViewProperties.getString("String_CheckBox_IsLayerAntialias"));
-		this.checkBoxIsOverlapDisplayed.setText(MapViewProperties.getString("String_CheckBox_IsOverlapDisplayed"));
+		this.checkBoxIsOverlapDisplayed.setText(ControlsProperties.getString("String_CheckBox_IsOverlapDisplayed"));
 		this.labelSymbolScale.setText(MapViewProperties.getString("String_LayerControl_SymbolScale"));
 		this.labelMinVisibleGeometrySize.setText(MapViewProperties.getString("String_LayerControl_MinVisibleGeometrySize"));
 		this.labelDisplayFilter.setText(MapViewProperties.getString("String_LayerControl_DisplayFilter"));
 		this.labelGeometryDisplayedOrder.setText(MapViewProperties.getString("String_LayerControl_ObjShowOrderFiled"));
-		this.checkBoxDesc.setText(MapViewProperties.getString("String_LayerControl_Descending"));
+		this.checkBoxDesc.setText(ControlsProperties.getString("String_Descend_D"));
 		this.buttonJoinItem.setText(MapViewProperties.getString("String_LayerControl_SetJoinItems"));
 	}
 

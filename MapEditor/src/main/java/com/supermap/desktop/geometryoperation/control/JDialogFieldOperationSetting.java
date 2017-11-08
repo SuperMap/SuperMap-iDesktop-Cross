@@ -2,6 +2,7 @@ package com.supermap.desktop.geometryoperation.control;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -887,7 +888,7 @@ public class JDialogFieldOperationSetting extends SmDialog implements ItemListen
 		@Override
 		public String getColumnName(int column) {
 			if (column == FIELD_NAME) {
-				return MapEditorProperties.getString("String_GeometryOperation_ListViewHeader_Field");
+				return ControlsProperties.getString("String_RecordsetStruct");
 			} else if (column == FIELD_TYPE) {
 				return CoreProperties.getString(CoreProperties.FieldType);
 			} else if (column == FIELD_OPERATION) {

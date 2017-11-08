@@ -6,6 +6,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CtrlAction.transformationForm.beans.AddLayerItemBean;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormTransformation;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
@@ -68,7 +69,7 @@ public class JDialogAddLayer extends SmDialog {
 	}
 
 	private void init() {
-		setTitle(DataEditorProperties.getString("String_addLayer"));
+		setTitle(ControlsProperties.getString("String_addLayer"));
 		setSize(500, 380);
 		setLocationRelativeTo(null);
 		initComponent();

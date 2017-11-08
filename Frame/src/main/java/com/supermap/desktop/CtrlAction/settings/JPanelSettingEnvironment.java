@@ -5,6 +5,7 @@ import com.supermap.data.Environment;
 import com.supermap.data.OpenCLCapability;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolSpinnerUtilties;
 import com.supermap.desktop.frame.FrameProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -110,7 +111,7 @@ public class JPanelSettingEnvironment extends BaseSettingPanel {
 		cudaCapability = Environment.checkCUDACapability();
 		openCLCapability = Environment.checkOpenCLCapability();
 		panelBasicSetting = new JPanel();
-		panelBasicSetting.setBorder(BorderFactory.createTitledBorder(FrameProperties.getString("String_CaptionBaseSetting")));
+		panelBasicSetting.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_ParameterSetting_Base")));
 		checkBoxUseThousandPointDivision = new JCheckBox();
 //		labelTitle = new JLabel();
 //		smTextFieldLegitTitle = new SmTextFieldLegit();
