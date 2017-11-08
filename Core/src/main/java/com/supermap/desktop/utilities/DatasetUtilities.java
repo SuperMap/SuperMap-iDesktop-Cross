@@ -25,23 +25,6 @@ public class DatasetUtilities {
 	}
 
 	/**
-	 * 判断数据集名称是否合法
-	 *
-	 * @param newDatasetName
-	 * @param datasource
-	 * @return
-	 */
-	public static boolean isAvailableDatasetName(String newDatasetName, Datasource datasource) {
-		if (!datasource.getDatasets().isAvailableDatasetName(newDatasetName)) {
-			return false;
-		}
-		if (datasource.getDatasets().contains(newDatasetName)) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
 	 * 获取数据集的默认容限
 	 *
 	 * @param dataset

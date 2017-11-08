@@ -44,7 +44,6 @@ public class SmMenu extends JMenu implements IMenu {
 				if (xmlMenu.getImageFile() == null || "".equals(xmlMenu.getImageFile())) {
 					xmlMenu.setImageFile("../Resources/MenuHeight16.png");
 				}
-
 				String[] pathPrams = new String[]{PathUtilities.getRootPathName(), xmlMenu.getImageFile()};
 				String path = PathUtilities.combinePath(pathPrams, false);
 				File file = new File(path);
@@ -62,7 +61,7 @@ public class SmMenu extends JMenu implements IMenu {
 	}
 
 	public ArrayList<IBaseItem> items() {
-		ArrayList<IBaseItem> items = new ArrayList<IBaseItem>();
+		ArrayList<IBaseItem> items = new ArrayList<>();
 		for (int i = 0; i < this.getCount(); i++) {
 			items.add(this.getAt(i));
 		}

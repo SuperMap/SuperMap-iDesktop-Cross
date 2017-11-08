@@ -2,6 +2,7 @@ package com.supermap.desktop.frame;
 
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.MainFrame;
 import com.supermap.desktop.utilities.LogUtilities;
@@ -30,6 +31,7 @@ public class FrameActivator implements BundleActivator {
 			startUp(bundleContext);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			isError = true;
 		}
 	}
@@ -67,6 +69,8 @@ public class FrameActivator implements BundleActivator {
 		Application.getActiveApplication().setMainFrame(mainFrame);
 		mainFrame.loadProcesses();
 		mainFrame.loadUI();
+		mainFrame.setVisible(true);
+		ToolbarUIUtilities.updataToolbarsState();
 	}
 
 	/*

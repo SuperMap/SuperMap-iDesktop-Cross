@@ -18,7 +18,7 @@ public class XMLToolbars extends XMLCommandBase {
 
 	public XMLToolbars() {
 		this.commandType = XMLCommandType.TOOLBARS;
-		this.toolbars = new ArrayList<XMLToolbar>();
+		this.toolbars = new ArrayList<>();
 	}
 
 	public XMLToolbars(PluginInfo pluginInfo) {

@@ -139,7 +139,7 @@ public class XMLToolbar extends XMLCommand {
 				boolean isContains = false;
 				for (int j = 0; j < this.items().size(); j++) {
 					XMLCommand thisCommand = this.items().get(j);
-					if (thisCommand.canMerge() && thisCommand.getID() != "" && thisCommand.getID().equalsIgnoreCase(otherCommand.getID())) {
+					if (thisCommand.canMerge() && thisCommand.getID() != null && thisCommand.getID().equalsIgnoreCase(otherCommand.getID())) {
 						thisCommand.merge(otherCommand);
 						isContains = true;
 						break;

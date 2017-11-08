@@ -14,14 +14,26 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.properties.Properties;
 import com.supermap.desktop.utilities.LogUtilities;
 import com.supermap.desktop.utilities.SplashScreenUtilities;
-import org.osgi.framework.*;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleEvent;
+import org.osgi.framework.SynchronousBundleListener;
 
+import javax.swing.*;
 import java.io.File;
 
 public class CoreActivator implements BundleActivator {
 
 	static {
 		GlobalParameters.initResource();
+		try {
+			javax.swing.UIManager.setLookAndFeel(new SubstanceOfficeBlue2007LookAndFeel());
+			JFrame.setDefaultLookAndFeelDecorated(true); //windows功能失效
+//			JDialog.setDefaultLookAndFeelDecorated(true); //Dialog功能失效
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	//    ServiceRegistration<?> registration;
