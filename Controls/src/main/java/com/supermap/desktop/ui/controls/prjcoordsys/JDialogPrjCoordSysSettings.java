@@ -1262,7 +1262,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void addCoordsysToFavorites() {
 		if (this.currentPrjDefine != null) {
-			String grantParentName = ControlsProperties.getString("String_MyFavorite");
+			String grantParentName = ControlsProperties.getString("String_Favorite");
 			if (this.currentPrjDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 				CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
 				result.setCoordSysCode(this.currentPrjDefine.getCoordSysCode());
