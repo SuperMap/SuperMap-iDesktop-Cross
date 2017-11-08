@@ -10,6 +10,7 @@ import com.supermap.desktop.controls.utilities.JComboBoxUIUtilities;
 import com.supermap.desktop.process.enums.ParameterType;
 import com.supermap.desktop.process.parameter.events.FieldConstraintChangedEvent;
 import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener;
+import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
@@ -56,6 +57,18 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 						parameterFieldComboBox.setSelectedItem(null);
 						isSelectingItem = false;
 					}
+				} else if (evt.getPropertyName().equals(AbstractParameter.PROPERTY_VALE)) {
+					isSelectingItem = true;
+					if (evt.getNewValue() instanceof String) {
+						int count = ParameterFieldComboBoxPanel.this.comboBox.getItemCount();
+						for (int i = 0; i < count; i++) {
+							if (evt.getNewValue().equals(ParameterFieldComboBoxPanel.this.comboBox.getItemAt(i).getName())) {
+								ParameterFieldComboBoxPanel.this.comboBox.setSelectedItem(evt.getNewValue());
+								break;
+							}
+						}
+					}
+					isSelectingItem = false;
 				}
 			}
 		});
@@ -115,7 +128,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 					jLabel.setText("");
 				}
 				jLabel.setOpaque(true);
-				jLabel.setPreferredSize(new Dimension(0,16));
+				jLabel.setPreferredSize(new Dimension(0, 16));
 				if (isSelected) {
 					jLabel.setBackground(list.getSelectionBackground());
 					jLabel.setForeground(list.getSelectionForeground());
