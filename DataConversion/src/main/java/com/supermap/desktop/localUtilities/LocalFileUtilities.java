@@ -1,5 +1,6 @@
 package com.supermap.desktop.localUtilities;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.FileTypeLocale;
 import com.supermap.desktop.properties.CoreProperties;
@@ -24,7 +25,7 @@ public class LocalFileUtilities {
 
 	public static SmFileChoose createExportFileChooser(String filePath) {
 		if (!SmFileChoose.isModuleExist("DataExportFrame_OutPutDirectories")) {
-			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), DataConversionProperties.getString("String_Export"),
+			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_Export"),
 					"DataExportFrame_OutPutDirectories", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("DataExportFrame_OutPutDirectories");

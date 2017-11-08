@@ -2,6 +2,7 @@ package com.supermap.desktop.importUI;
 
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.baseUI.PanelTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.localUtilities.CommonUtilities;
@@ -229,7 +230,7 @@ public class PanelTransformForImage extends PanelTransform {
 		if (!SmFileChoose.isModuleExist("ImportPI")) {
 			String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_tfw"), "tfw");
 			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-					DataConversionProperties.getString("String_Import"), "ImportPI", "OpenOne");
+					ControlsProperties.getString("String_Import"), "ImportPI", "OpenOne");
 		}
 		SmFileChoose fileChooser = new SmFileChoose("ImportPI");
 		this.chooserControlPrjFile.setFileChooser(fileChooser);

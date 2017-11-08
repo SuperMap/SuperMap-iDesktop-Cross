@@ -153,8 +153,8 @@ public class MapClipSetDialog extends SmDialog {
         this.setTitle(MapViewProperties.getString("String_MapClip_GiveSameValue"));
 
         this.accuratelyClipCheckBox.setText(MapViewProperties.getString("String_MapClip_Image_ExactClip"));
-        this.checkBoxAimDataDatasource.setText(ControlsProperties.getString("String_Label_TargetDatasource"));
-        this.checkBoxClipMode.setText(MapViewProperties.getString("String_MapClip_ClipTypeD"));
+	    this.checkBoxAimDataDatasource.setText(ControlsProperties.getString("String_TargetDatasource"));
+	    this.checkBoxClipMode.setText(MapViewProperties.getString("String_MapClip_ClipTypeD"));
         this.eraseCheckBox.setText(MapViewProperties.getString("String_MapClip_EraseCheck"));
     }
 

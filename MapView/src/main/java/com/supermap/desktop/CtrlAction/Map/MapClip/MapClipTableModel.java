@@ -3,6 +3,7 @@ package com.supermap.desktop.CtrlAction.Map.MapClip;
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.Datasource;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.mapping.Layer;
 
@@ -57,7 +58,7 @@ public class MapClipTableModel extends DefaultTableModel {
         if (column == COLUMN_INDEX_LAYERCAPTION) {
             return MapViewProperties.getString("String_MapClip_LayerCaption");
         } else if (column == COLUMN_INDEX_AIMDATASOURCE) {
-            return MapViewProperties.getString("String_MapClip_TargetDatasource");
+            return ControlsProperties.getString("String_TargetDatasource");
         } else if (column == COLUMN_INDEX_AIMDATASET) {
             return MapViewProperties.getString("String_MapClip_TargetDataset");
         } else if (column == COLUMN_INDEX_CLIPTYPE) {

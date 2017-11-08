@@ -546,7 +546,7 @@ public class OverlayAnalystDialog extends SmDialog {
 		resultGeoStyle.setFillForeColor(new Color(255, 255, 255));
 		resultGeoStyle.setFillBackOpaque(false);
 		Layer resultLayer = MapUtilities.addDatasetToMap(form.getMapControl().getMap(), dataset, true);
-		resultLayer.setCaption(SpatialAnalystProperties.getString("String_OverlayAnalyst_ResultDataset"));
+		resultLayer.setCaption(ControlsProperties.getString("String_ResultDataset"));
 		LayerSettingVector resultLayerSetting = (LayerSettingVector) resultLayer.getAdditionalSetting();
 		resultLayerSetting.setStyle(resultGeoStyle);
 		// 更新地图属性面板

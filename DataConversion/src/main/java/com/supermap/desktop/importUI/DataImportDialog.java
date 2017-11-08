@@ -354,7 +354,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 						formProgress.doWork(new ImportCallable(fileInfos, DataImportDialog.this));
 					}
 				} else {
-					UICommonToolkit.showMessageDialog(DataConversionProperties.getString("String_ImportSettingPanel_Cue_AddFiles"));
+					UICommonToolkit.showMessageDialog(DataConversionProperties.getString("String_AddImportFiles"));
 				}
 			} catch (Exception ex) {
 				Application.getActiveApplication().getOutput().output(ex);
@@ -571,11 +571,11 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.buttonImport.setText(CoreProperties.getString("String_Button_Import"));
+		this.buttonImport.setText(CoreProperties.getString("String_Import"));
 		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));
 		this.checkBoxAutoClose.setText(DataConversionProperties.getString("string_chcekbox_autoCloseIn"));
 		this.labelTitle.setText(DataConversionProperties.getString("string_label_importData"));
-		this.labelRemind.setText(DataConversionProperties.getString("string_label_addFileRemind"));
+		this.labelRemind.setText(DataConversionProperties.getString("String_AddImportFiles"));
 		this.buttonAddDir.setToolTipText(DataConversionProperties.getString("String_button_addDir"));
 		this.buttonAddFile.setToolTipText(DataConversionProperties.getString("String_button_addFile"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
@@ -632,7 +632,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_CAD"));
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_FilterModel"));
 			} else if (fileType.equals(FileTypeLocale.BIL_STRING)) {
-				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_GRID"));
+				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FileTypeTEMSClutter"));
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_BIL"));
 			} else if (fileType.equalsIgnoreCase(FileTypeLocale.DEM_STRING)) {
 				steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_ArcGIS"));
@@ -662,7 +662,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 							// bil 导入为BIL文件
 							newImportSetting = new ImportSettingBIL();
 							replaceImportPanel(newImportSetting);
-						} else if (nowType.equalsIgnoreCase(DataConversionProperties.getString("String_FormImport_GRID"))) {
+						} else if (nowType.equalsIgnoreCase(DataConversionProperties.getString("String_FileTypeTEMSClutter"))) {
 							// 导入为电信栅格文件
 							newImportSetting = new ImportSettingTEMSClutter();
 							replaceImportPanel(newImportSetting);
