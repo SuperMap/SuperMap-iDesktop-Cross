@@ -240,21 +240,6 @@ public abstract class SymbolDialog extends SmDialog {
 	private void initTabbedPane() {
 		tabbedPane.addTab(ControlsProperties.getString("String_WorkspaceResources"), panelWorkspaceResources);
 	}
-
-	private String getVerticalTitle(String s) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("<html>");
-		if (s.length() > 0) {
-			builder.append(s.charAt(0));
-		}
-		for (int i = 1; i < s.length(); i++) {
-			builder.append("<br>");
-			builder.append(s.charAt(i));
-		}
-		builder.append("</html>");
-		return builder.toString();
-	}
-
 	/**
 	 * 初始化时用于给子类使用，如无需要可不重写
 	 */
