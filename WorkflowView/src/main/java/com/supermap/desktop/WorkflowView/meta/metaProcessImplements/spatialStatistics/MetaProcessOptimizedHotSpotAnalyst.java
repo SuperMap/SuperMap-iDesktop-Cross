@@ -102,9 +102,8 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterFieldComboBoxNotPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField"));
 		parameterFieldComboBoxNotPoint.setFieldType(fieldType);
 
-		parameterFieldComboBoxPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField"));
+		parameterFieldComboBoxPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField")).setShowNullValue(true);
 		parameterFieldComboBoxPoint.setFieldType(fieldType);
-		parameterFieldComboBoxPoint.setShowNullValue(true);
 
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));
@@ -186,14 +185,14 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		if (defaultDatasetVector != null) {
 			parameterDatasource.setSelectedItem(defaultDatasetVector.getDatasource());
 			parameterSingleDataset.setSelectedItem(defaultDatasetVector);
-			parameterFieldComboBoxNotPoint.setFieldName(defaultDatasetVector);
-			parameterFieldComboBoxPoint.setFieldName(defaultDatasetVector);
 			parameterDatasourceBounding.setSelectedItem(defaultDatasetVector.getDatasource());
 			parameterSingleDatasetBounding.setSelectedItem(defaultDatasetVector);
 
 			if (defaultDatasetVector.getType().equals(DatasetType.POINT)) {
+				parameterFieldComboBoxPoint.setFieldName(defaultDatasetVector);
 				parameterSwitchDatasetType.switchParameter("PointType");
 			} else {
+				parameterFieldComboBoxNotPoint.setFieldName(defaultDatasetVector);
 				parameterSwitchDatasetType.switchParameter("NotPointType");
 			}
 		}
@@ -207,7 +206,6 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterSingleDataset.addPropertyListener(propertyChangeListener);
 		parameterComboBoxAggregationMethod.addPropertyListener(propertyChangeListener);
 		parameterFieldComboBoxPoint.addPropertyListener(propertyChangeListener);
-
 	}
 
 	private void initParameterConstraint() {
