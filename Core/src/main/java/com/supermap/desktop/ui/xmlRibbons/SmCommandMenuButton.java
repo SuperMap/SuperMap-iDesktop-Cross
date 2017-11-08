@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.xmlRibbons;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.ICtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
 import com.supermap.desktop.utilities.XmlCommandUtilities;
@@ -36,7 +36,7 @@ public class SmCommandMenuButton extends JCommandMenuButton implements IBaseItem
 			setCtrlAction(ctrlAction);
 			this.setActionRichTooltip(new RichTooltip(xmlCommand.getLabel(), xmlCommand.getTooltip()));
 		} else {
-			this.setActionRichTooltip(new RichTooltip("Undo", this.getToolTipText() + CommonProperties.getString("String_UnDo")));
+			this.setActionRichTooltip(new RichTooltip("Undo", this.getToolTipText() + CoreProperties.getString("String_UnDo")));
 		}
 		this.addActionListener(new java.awt.event.ActionListener() {
 			@Override

@@ -3,7 +3,7 @@ package com.supermap.desktop.ui.xmlRibbons;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.ICtrlAction;
-import com.supermap.desktop.properties.CommonProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
@@ -84,7 +84,7 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 				// 下拉为gallery的情况
 			}
 		} else if (ctrlAction == null) {
-			this.setActionRichTooltip(new RichTooltip(CommonProperties.getString("String_UnDo"), this.getToolTipText() + CommonProperties.getString("String_UnDo")));
+			this.setActionRichTooltip(new RichTooltip(CoreProperties.getString("String_UnDo"), this.getToolTipText() + CoreProperties.getString("String_UnDo")));
 		}
 
 	}

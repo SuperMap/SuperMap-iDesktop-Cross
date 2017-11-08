@@ -19,6 +19,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.SynchronousBundleListener;
+import org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel;
 
 import javax.swing.*;
 import java.io.File;
