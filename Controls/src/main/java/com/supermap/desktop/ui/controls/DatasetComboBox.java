@@ -215,7 +215,7 @@ public class DatasetComboBox extends JComboBox<Dataset> {
 			this.removeAllItems();
 			if (this.datasets != null) {
 				try {
-					if (isShowNullValue) {
+					if (isShowNullValue()) {
 						this.addItem(null);//添加首项为空
 					}
 					for (int i = 0; i < this.datasets.getCount(); i++) {
@@ -234,7 +234,7 @@ public class DatasetComboBox extends JComboBox<Dataset> {
 							this.addItem(dataset);
 						}
 					}
-					if (!isShowNullValue && selectedDataset != null && JComboBoxUIUtilities.getItemIndex(this, selectedDataset) != -1) {
+					if (!isShowNullValue() && selectedDataset != null && JComboBoxUIUtilities.getItemIndex(this, selectedDataset) != -1) {
 						this.isFireItemListener = false;
 						setSelectedDataset(selectedDataset);
 					} else {
