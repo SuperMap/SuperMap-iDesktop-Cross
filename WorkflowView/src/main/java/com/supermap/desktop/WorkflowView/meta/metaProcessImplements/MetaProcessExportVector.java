@@ -81,15 +81,15 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 		}
 		String module = "ExportVector_OutPutDirectories";
 		if (!SmFileChoose.isModuleExist(module)) {
-			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ProcessProperties.getString("String_DataExport"),
+			SmFileChoose.addNewNode("", System.getProperty("user.dir"), ControlsProperties.getString("String_FormExport_FormText"),
 					module, "GetDirectories");
 		}
 		exportPath.setModuleName(module);
 		this.vectorCombine = new ParameterCombine();
-		this.vectorCombine.setDescribe(ProcessProperties.getString("String_ParamSet"));
+		this.vectorCombine.setDescribe(ControlsProperties.getString("string_border_panelTransform"));
 		this.externalData = new ParameterCheckBox(ProcessProperties.getString("String_ExportExternalData"));
 		this.externalData.setEnabled(false);
-		this.externalRecord = new ParameterCheckBox(ProcessProperties.getString("String_ExportExternalRecord"));
+		this.externalRecord = new ParameterCheckBox(ControlsProperties.getString("String_ExportExternalRecord"));
 		this.externalRecord.setEnabled(false);
 		this.exportPointAsWKT = new ParameterCheckBox(CoreProperties.getString("String_ExportPointAsWKT"));
 		this.exportPointAsWKT.setEnabled(false);
@@ -97,13 +97,13 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 		this.exportFieldName.setEnabled(false);
 		this.charset = new ParameterCharset();
 		this.charset.setEnabled(false);
-		this.cadVersion = new ParameterComboBox(ProcessProperties.getString("String_CADVersion"));
+		this.cadVersion = new ParameterComboBox(ControlsProperties.getString("string_label_lblCAD"));
 		this.cadVersion.setItems(new ParameterDataNode("CAD2007", CADVersion.CAD2007)
 				, new ParameterDataNode("CAD2004", CADVersion.CAD2004), new ParameterDataNode("CAD2000", CADVersion.CAD2000)
 				, new ParameterDataNode("CAD12", CADVersion.CAD12), new ParameterDataNode("CAD14", CADVersion.CAD14),
 				new ParameterDataNode("CAD13", CADVersion.CAD13));
 		this.cadVersion.setEnabled(false);
-		this.expression = new ParameterTextArea(ProcessProperties.getString("String_ExpressionForTextArea"));
+		this.expression = new ParameterTextArea(ControlsProperties.getString("String_LabelFilter"));
 		this.expression.setEnabled(false);
 		this.sqlExpression = new ParameterSQLExpression(ProcessProperties.getString("String_Expression"));
 		this.sqlExpression.setEnabled(false);
@@ -189,7 +189,7 @@ public class MetaProcessExportVector extends MetaProcessAbstractExport {
 			return false;
 		}
 		if (new File(targetPath).exists() && !isOverwrite) {
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_DuplicateFileError"), targetPath));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_DuplicateFileError"), targetPath));
 		} else if (!StringUtilities.isNullOrEmpty(targetPath)) {
 			setExportSettingInfo(isOverwrite);
 			isSuccessful = printResultInfo(isSuccessful, targetPath, this.exportListener);

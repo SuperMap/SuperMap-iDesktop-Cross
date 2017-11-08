@@ -57,9 +57,9 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 		parameterFieldComboBox.setFieldType(fieldType);
 		parameterCheckBox.setDescribe(ProcessProperties.getString("String_Standardization"));
 		parameterTextFieldBeginDistance.setDescribe(ProcessProperties.getString("String_BeginDistance"));
-		parameterTextFieldBeginDistance.setUnit(ProcessProperties.getString("String_Label_meter"));
+		parameterTextFieldBeginDistance.setUnit(CoreProperties.getString("String_DistanceUnit_Meter"));
 		parameterTextFieldIncrementalDistance.setDescribe(ProcessProperties.getString("String_IncrementalDistance"));
-		parameterTextFieldIncrementalDistance.setUnit(ProcessProperties.getString("String_Label_meter"));
+		parameterTextFieldIncrementalDistance.setUnit(CoreProperties.getString("String_DistanceUnit_Meter"));
 		parameterTextFieldIncrementalNumber.setDescribe(ProcessProperties.getString("String_IncrementalNumber"));
 		parameterDistanceMethod.setDescribe(ProcessProperties.getString("String_DistanceMethod"));
 		// 数据源
@@ -153,7 +153,7 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 				result += ProcessProperties.getString("String_Column_IncrementalDistance") + "    "
 						+ ProcessProperties.getString("String_Column_Morans") + "       "
 						+ ProcessProperties.getString("String_Column_Expectation") + "       "
-						+ ProcessProperties.getString("String_Column_Variance") + "        "
+						+ CoreProperties.getString("String_Evariance") + "        "
 						+ ProcessProperties.getString("String_Column_ZScor") + "        "
 						+ ProcessProperties.getString("String_Column_PValue") + "\n";
 				for (int i = 0; i < incrementalResults.length; i++) {

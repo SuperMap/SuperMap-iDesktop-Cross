@@ -1,8 +1,8 @@
 package com.supermap.desktop.newtheme.guidPanel;
 
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
 
 import javax.swing.*;
@@ -29,7 +29,7 @@ public class GraduatedSymbolThemePanel extends JPanel{
 	 */
 	private void initComponents() {
 		// @formatter:off
-		this.graduatedSymbolTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRADUATEDSYMBOL, MapViewProperties.getString("String_ThemeDefaultItem"));
+		this.graduatedSymbolTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_GRADUATEDSYMBOL, CoreProperties.getString("String_Default"));
 		this.graduatedSymbolTheme.selected(true);
 		this.setBackground(Color.WHITE);
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));

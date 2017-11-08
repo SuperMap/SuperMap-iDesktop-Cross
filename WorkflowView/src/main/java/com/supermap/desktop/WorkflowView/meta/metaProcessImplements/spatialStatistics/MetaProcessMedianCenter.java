@@ -3,9 +3,8 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.spatialStat
 import com.supermap.analyst.spatialstatistics.SpatialMeasure;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
-import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 
 /**
  * @author XiaJT
@@ -13,13 +12,13 @@ import com.supermap.desktop.process.ProcessProperties;
 public class MetaProcessMedianCenter extends MetaProcessSpatialMeasure {
 
 	public MetaProcessMedianCenter() {
-		setTitle(ProcessProperties.getString("String_MedianCenter"));
+		setTitle(ControlsProperties.getString("String_MedianCenter"));
 	}
 
 	protected void initHook() {
 		OUTPUT_DATASET = "MedianCenterResult";
 		resultName = "result_medianCenter";
-		outputName = ProcessOutputResultProperties.getString("String_Result_MedianCenter");
+		outputName = ControlsProperties.getString("String_MedianCenter");
 	}
 
 	@Override

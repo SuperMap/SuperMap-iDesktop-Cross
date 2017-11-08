@@ -4,6 +4,7 @@ import com.supermap.data.*;
 import com.supermap.data.topology.TopologyProcessingOptions;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.datatopology.DataTopologyProperties;
 import com.supermap.desktop.enums.LengthUnit;
 import com.supermap.desktop.properties.CoreProperties;
@@ -103,9 +104,9 @@ public class JDialogTopoAdvance extends SmDialog {
 
 	private void initResources() {
 		setTitle(DataTopologyProperties.getString("String_Form_AdvanceSettings"));
-		this.labelOvershootsTolerance.setText(DataTopologyProperties.getString("String_Label_OvershootsTolerance"));
-		this.labelUndershootsTolerance.setText(DataTopologyProperties.getString("String_Label_UndershootsTolerance"));
-		this.labelVertexTolerance.setText(DataTopologyProperties.getString("String_Label_VertexTolerance"));
+		this.labelOvershootsTolerance.setText(ControlsProperties.getString("String_LabelToleranceDangle"));
+		this.labelUndershootsTolerance.setText(ControlsProperties.getString("String_LabelToleranceExtend"));
+		this.labelVertexTolerance.setText(ControlsProperties.getString("String_LabelToleranceFuzzy"));
 		this.labelFilterExpression.setText(DataTopologyProperties.getString("String_FilterExpression"));
 		this.labelNotCutting.setText(DataTopologyProperties.getString("String_NotCutting"));
 		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));

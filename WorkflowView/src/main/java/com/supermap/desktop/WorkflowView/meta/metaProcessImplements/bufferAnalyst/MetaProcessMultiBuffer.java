@@ -74,16 +74,16 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 
 		// 类型-只对线数据集有效
 		this.radioButtonFlatOrRound = new ParameterRadioButton();
-		ParameterDataNode round = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferRound"), BUFFERTYPE_ROUND);
-		ParameterDataNode flat = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferFlat"), BUFFERTYPE_FLAT);
+		ParameterDataNode round = new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferRound"), BUFFERTYPE_ROUND);
+		ParameterDataNode flat = new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferFlat"), BUFFERTYPE_FLAT);
 		this.radioButtonFlatOrRound.setItems(new ParameterDataNode[]{round, flat});
 		this.comboBoxBufferLeftOrRight = new ParameterComboBox(ProcessProperties.getString("Label_LineBufferDirection"));
-		this.comboBoxBufferLeftOrRight.addItem(new ParameterDataNode(ProcessProperties.getString("String_CheckBox_Left"), true));
-		this.comboBoxBufferLeftOrRight.addItem(new ParameterDataNode(ProcessProperties.getString("String_CheckBox_Right"), false));
+		this.comboBoxBufferLeftOrRight.addItem(new ParameterDataNode(ControlsProperties.getString("String_CheckBox_Left"), true));
+		this.comboBoxBufferLeftOrRight.addItem(new ParameterDataNode(ControlsProperties.getString("String_CheckBox_Right"), false));
 
 		ParameterCombine parameterCombineBufferType = new ParameterCombine();
 		parameterCombineBufferType.addParameters(this.radioButtonFlatOrRound, this.comboBoxBufferLeftOrRight);
-		parameterCombineBufferType.setDescribe(ProcessProperties.getString("String_Title_BufferType"));
+		parameterCombineBufferType.setDescribe(ControlsProperties.getString("String_Title_BufferType"));
 
 		// 半径列表
 		this.parameterMultiBufferRadioList = new ParameterMultiBufferRadioList();
@@ -105,9 +105,9 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 		parameterCombineRadioList.addParameters(this.parameterMultiBufferRadioList, this.parameterRadiusUnit);
 
 		// 参数
-		this.parameterUnionBuffer = new ParameterCheckBox(ProcessProperties.getString("String_UnionBufferItem"));
+		this.parameterUnionBuffer = new ParameterCheckBox(ControlsProperties.getString("String_UnionBufferItem"));
 		this.parameterRingBuffer = new ParameterCheckBox(ProcessProperties.getString("String_CreateRingBuffer"));
-		this.parameterRetainAttribute = new ParameterCheckBox(ProcessProperties.getString("String_RetainAttribute"));
+		this.parameterRetainAttribute = new ParameterCheckBox(ControlsProperties.getString("String_RetainAttribute"));
 
 		this.parameterTextFieldSemicircleLineSegment = new ParameterNumber(ProcessProperties.getString("Label_SemicircleLineSegment"));
 		this.parameterTextFieldSemicircleLineSegment.setMaxBit(0);

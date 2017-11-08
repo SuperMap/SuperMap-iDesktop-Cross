@@ -228,7 +228,7 @@ public class PanelTransformForImage extends PanelTransform {
 		this.labelPrjFile = new JLabel();
 		this.chooserControlPrjFile = new JFileChooserControl();
 		if (!SmFileChoose.isModuleExist("ImportPI")) {
-			String fileFilters = SmFileChoose.createFileFilter(DataConversionProperties.getString("string_filetype_tfw"), "tfw");
+			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("string_filetype_tfw"), "tfw");
 			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 					ControlsProperties.getString("String_Import"), "ImportPI", "OpenOne");
 		}
@@ -322,20 +322,20 @@ public class PanelTransformForImage extends PanelTransform {
 
 	private void resetBandImportModel(boolean isGrid, boolean isTiff, MultiBandImportMode multiBandImportMode) {
 		if (isGrid && isTiff) {
-			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{DataConversionProperties.getString("string_singleBand")}));
+			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{CoreProperties.getString("String_MultiBand_SingleBand")}));
 		} else if (isGrid && !isTiff) {
-			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{DataConversionProperties.getString("string_singleBand"),
-					DataConversionProperties.getString("string_multiBand")}));
+			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{CoreProperties.getString("String_MultiBand_SingleBand"),
+					CoreProperties.getString("String_MultiBand_MultiBand")}));
 		} else {
-			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{DataConversionProperties.getString("string_singleBand"),
-					DataConversionProperties.getString("string_multiBand"), DataConversionProperties.getString("string_compositeBand")}));
+			this.comboBoxBandImportModel.setModel(new DefaultComboBoxModel<Object>(new String[]{CoreProperties.getString("String_MultiBand_SingleBand"),
+					CoreProperties.getString("String_MultiBand_MultiBand"), CoreProperties.getString("String_MultiBand_Composite")}));
 		}
 		if (multiBandImportMode.equals(MultiBandImportMode.SINGLEBAND)) {
-			this.comboBoxBandImportModel.setSelectedItem(DataConversionProperties.getString("string_singleBand"));
+			this.comboBoxBandImportModel.setSelectedItem(CoreProperties.getString("String_MultiBand_SingleBand"));
 		} else if (multiBandImportMode.equals(MultiBandImportMode.MULTIBAND)) {
-			this.comboBoxBandImportModel.setSelectedItem(DataConversionProperties.getString("string_multiBand"));
+			this.comboBoxBandImportModel.setSelectedItem(CoreProperties.getString("String_MultiBand_MultiBand"));
 		} else if (multiBandImportMode.equals(MultiBandImportMode.COMPOSITE)) {
-			this.comboBoxBandImportModel.setSelectedItem(DataConversionProperties.getString("string_compositeBand"));
+			this.comboBoxBandImportModel.setSelectedItem(CoreProperties.getString("String_MultiBand_Composite"));
 		}
 	}
 
@@ -568,11 +568,11 @@ public class PanelTransformForImage extends PanelTransform {
 
 	@Override
 	public void initResources() {
-		this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
+		this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
 		this.labelPassWord.setText(DataConversionProperties.getString("string_label_lblPassword") + "       ");
-		this.labelPrjFile.setText(DataConversionProperties.getString("String_FormExport_LabelWorldFile"));
-		this.labelBandImportModel.setText(DataConversionProperties.getString("string_label_lblSaveImport"));
-		this.checkBoxBuildImgPyramid.setText(DataConversionProperties.getString("string_checkbox_chckbxImageInfo"));
+		this.labelPrjFile.setText(CoreProperties.getString("String_WorldFile"));
+		this.labelBandImportModel.setText(ControlsProperties.getString("string_label_lblSaveImport"));
+		this.checkBoxBuildImgPyramid.setText(ControlsProperties.getString("string_checkbox_chckbxImageInfo"));
 	}
 
 	public JComboBox getComboBoxBandImportModel() {

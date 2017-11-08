@@ -6,6 +6,7 @@ import com.supermap.data.FieldInfos;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
@@ -41,7 +42,7 @@ public class MetaProcessFieldIndex extends MetaProcess {
 	private ArrayList<String> indexs = new ArrayList<>();
 
 	public MetaProcessFieldIndex() {
-		setTitle(ProcessProperties.getString("string_checkbox_chckbxFieldIndex"));
+		setTitle(ControlsProperties.getString("string_checkbox_chckbxFieldIndex"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();

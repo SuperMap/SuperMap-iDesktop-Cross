@@ -6,6 +6,7 @@ import com.supermap.data.DatasetGrid;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
@@ -38,16 +39,16 @@ public class MetaProcessCalculateHillShade extends MetaProcessCalTerrain {
 	protected void initHook() {
 
 		// 参数设置
-		parameterComboBoxShadowType = new ParameterComboBox(ProcessProperties.getString("String_Label_ShadowType"));
+		parameterComboBoxShadowType = new ParameterComboBox(ControlsProperties.getString("String_Label_ShadowType"));
 		parameterComboBoxShadowType.setItems(
 				new ParameterDataNode(ProcessProperties.getString("String_ShadowMode_Illuminatton"), ShadowMode.IllUMINATION),
-				new ParameterDataNode(ProcessProperties.getString("String_ShadowMode_Shadow"), ShadowMode.SHADOW),
+				new ParameterDataNode(ControlsProperties.getString("String_Shadow"), ShadowMode.SHADOW),
 				new ParameterDataNode(ProcessProperties.getString("String_ShadowMode_IlluminattonAndShadow"), ShadowMode.IllUMINATION_AND_SHADOW)
 		);
 		parameterComboBoxShadowType.setSelectedItem(ShadowMode.IllUMINATION);
 
-		parameterAzimuth = new ParameterNumber(ProcessProperties.getString("String_Label_LightAzimuth"));
-		parameterAltitudeAngle = new ParameterNumber(ProcessProperties.getString("String_Label_LightAltitudeAngle"));
+		parameterAzimuth = new ParameterNumber(ControlsProperties.getString("String_Label_LightAzimuth"));
+		parameterAltitudeAngle = new ParameterNumber(ControlsProperties.getString("String_Label_LightAltitudeAngle"));
 		parameterZFactor = new ParameterNumber(ProcessProperties.getString("String_CalculateSlope_zFactor"));
 
 		parameterAzimuth.setMinValue(0);

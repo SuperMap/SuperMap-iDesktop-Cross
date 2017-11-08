@@ -2,7 +2,7 @@ package com.supermap.desktop.CtrlAction.SQLQuery.components;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.dataview.DataViewProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SortTable.SmSortTable;
 import com.supermap.desktop.ui.controls.SortTable.SortableTableModel;
@@ -89,7 +89,7 @@ public class FieldInfoTable extends SmSortTable {
 
 		public FieldInfoTableModel() {
 			super();
-			columnNames = new String[]{CoreProperties.getString(CoreProperties.Caption), DataViewProperties.getString("String_SQLQueryColumnFieldName"), DataViewProperties.getString("String_SQLQueryColumnFieldType")};
+			columnNames = new String[]{CoreProperties.getString(CoreProperties.Caption), ControlsProperties.getString("String_FieldInfoName"), ControlsProperties.getString("String_FieldInfoType")};
 		}
 
 		public void setDataset(Dataset dataset) {

@@ -4,6 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.GeoStyle;
 import com.supermap.data.SymbolType;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
 import com.supermap.desktop.dialog.symbolDialogs.ISymbolApply;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolDialog;
@@ -12,31 +13,18 @@ import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.mapping.GraduatedMode;
-import com.supermap.mapping.Layer;
-import com.supermap.mapping.Map;
-import com.supermap.mapping.Theme;
-import com.supermap.mapping.ThemeGraduatedSymbol;
-import com.supermap.mapping.ThemeType;
+import com.supermap.mapping.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -198,8 +186,8 @@ public class ThemeGraduatedSymbolContainer extends ThemeChangePanel {
 	}
 
 	private void initComboBoxGraduatedMode() {
-		this.comboBoxGraduatedMode.setModel(new DefaultComboBoxModel<String>(new String[]{MapViewProperties.getString("String_GraduatedMode_Constant"),
-				MapViewProperties.getString("String_GraduatedMode_Logarithm"), MapViewProperties.getString("String_GraduatedMode_SquareRoot")}));
+		this.comboBoxGraduatedMode.setModel(new DefaultComboBoxModel<String>(new String[]{ControlsProperties.getString("String_GraduatedMode_Constant"),
+				ControlsProperties.getString("String_GraduatedMode_Logarithm"), ControlsProperties.getString("String_GraduatedMode_SquareRoot")}));
 		this.graduatedMode = themeGraduatedSymbol.getGraduatedMode();
 		if (graduatedMode.equals(GraduatedMode.CONSTANT)) {
 			this.comboBoxGraduatedMode.setSelectedIndex(0);
@@ -297,7 +285,7 @@ public class ThemeGraduatedSymbolContainer extends ThemeChangePanel {
 	 */
 	private void initComboBoxOffsetUnity() {
 		this.comboBoxOffsetUnity.setModel(new DefaultComboBoxModel<String>(new String[]{
-				MapViewProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
+				ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
 		if (this.themeGraduatedSymbol.isOffsetFixed()) {
 			this.comboBoxOffsetUnity.setSelectedIndex(0);
 		} else {
@@ -328,14 +316,14 @@ public class ThemeGraduatedSymbolContainer extends ThemeChangePanel {
 	private void initResources() {
 		this.labelExpression.setText(MapViewProperties.getString("String_Label_Expression"));
 		this.labelGraduatedMode.setText(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_LabelStatisticMode"));
-		this.labelBaseValue.setText(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_LabelBaseValue"));
+		this.labelBaseValue.setText(CoreProperties.getString("String_DatumValue"));
 		this.labelShowPositiveStyle.setText(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_LabelPositive"));
 		this.checkBoxShowZero.setText(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_CheckBoxZero"));
 		this.checkBoxShowNegativeStyle.setText(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_CheckBoxNegative"));
 		this.checkBoxIsFlowEnabled.setText(MapViewProperties.getString("String_CheckBox_ShowFlow"));
 		this.labelOffsetUnity.setText(MapViewProperties.getString("String_LabelOffsetUnit"));
-		this.labelOffsetX.setText(MapViewProperties.getString("String_LabelOffsetX"));
-		this.labelOffsetY.setText(MapViewProperties.getString("String_LabelOffsetY"));
+		this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
+		this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
 		this.checkBoxShowLeaderLine.setText(MapViewProperties.getString("String_ShowLeaderLine"));
 		this.buttonLeaderLineStyle.setText(MapViewProperties.getString("String_Button_LineStyle"));
 		this.panelSymbolStyle.setBorder(new TitledBorder(MapViewProperties.getString("String_ThemeGraduatedSymbolProperty_GroupBoxSymbolStyle")));
@@ -758,7 +746,7 @@ public class ThemeGraduatedSymbolContainer extends ThemeChangePanel {
 			tempTheme.dispose();
 		}
 		if (null == tempTheme && !comboBoxArray.contains(expression)) {
-			UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+			UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
 			if (resetExpression) {
 				resetThemeItem();
 			}

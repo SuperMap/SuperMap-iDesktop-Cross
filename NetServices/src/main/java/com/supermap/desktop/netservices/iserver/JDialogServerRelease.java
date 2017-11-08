@@ -7,6 +7,7 @@ import com.supermap.data.DatasetType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IAfterWork;
 import com.supermap.desktop.controls.ControlDefaultValues;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.netservices.NetServicesProperties;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
@@ -225,7 +226,7 @@ public class JDialogServerRelease extends SmDialog implements ActionListener, It
 
 		// 服务器设置面板
 		JPanel panelService = new JPanel();
-		panelService.setBorder(BorderFactory.createTitledBorder(NetServicesProperties.getString("String_iServer_Panel_Services")));
+		panelService.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_Services")));
 		this.radioButtonLocalHost = new JRadioButton("LocalHost");
 		this.radioButtonRemoteHost = new JRadioButton("RemoteHost");
 		this.labelServer = new JLabel("Server:");
@@ -255,7 +256,7 @@ public class JDialogServerRelease extends SmDialog implements ActionListener, It
 
 		// 用户设置面板
 		JPanel panelUser = new JPanel();
-		panelUser.setBorder(BorderFactory.createTitledBorder(NetServicesProperties.getString("String_iServer_Panel_Admin")));
+		panelUser.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_Admin")));
 		this.labelUserName = new JLabel("UserName:");
 		this.textFieldUserName = new JTextField();
 		this.textFieldUserName.setPreferredSize(ControlDefaultValues.DEFAULT_PREFERREDSIZE);
@@ -394,10 +395,10 @@ public class JDialogServerRelease extends SmDialog implements ActionListener, It
 
 	private void initializeResources() {
 		this.setTitle(NetServicesProperties.getString("String_iServer_ServerRelease"));
-		this.radioButtonLocalHost.setText(NetServicesProperties.getString("String_iServer_RadioButton_LocalHost"));
-		this.radioButtonRemoteHost.setText(NetServicesProperties.getString("String_iServer_RadioButton_RemoteHost"));
-		this.labelServer.setText(NetServicesProperties.getString("String_iServer_Label_Server"));
-		this.labelUserName.setText(NetServicesProperties.getString("String_iServer_Label_UserName"));
+		this.radioButtonLocalHost.setText(CoreProperties.getString("String_LocalHost"));
+		this.radioButtonRemoteHost.setText(CoreProperties.getString("String_RemoteHost"));
+		this.labelServer.setText(CoreProperties.getString("String_Server"));
+		this.labelUserName.setText(ControlsProperties.getString("String_FormLogin_UserName"));
 		this.labelPassword.setText(NetServicesProperties.getString("String_iServer_Label_UserPassword"));
 		this.checkBoxRestData.setText(NetServicesProperties.getString("String_iServer_ServicesType_RestData"));
 		this.checkBoxRestRealspace.setText(NetServicesProperties.getString("String_iServer_ServicesType_RestRealspace"));

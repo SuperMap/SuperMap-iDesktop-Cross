@@ -3,6 +3,7 @@ package com.supermap.desktop.CtrlAction.Map.MapClip;
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
@@ -112,12 +113,12 @@ public class DialogMapClip extends SmDialog {
 					// 获得是否擦除或者精确裁剪，需要根据数据集类型分别赋值
 					if (targetDataset instanceof DatasetVector) {
 						String isErase = (String) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_ERASE);
-						if (isErase.equals(MapViewProperties.getString("String_MapClip_Yes"))) {
+						if (isErase.equals(CoreProperties.getString("String_True"))) {
 							isExactClipOrIsEarsesource = true;
 						}
 					} else {
 						String isExactClip = (String) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_EXACTCLIP);
-						if (isExactClip.equals(MapViewProperties.getString("String_MapClip_Yes"))) {
+						if (isExactClip.equals(CoreProperties.getString("String_True"))) {
 							isExactClipOrIsEarsesource = true;
 						}
 //                        isExactClipOrIsEarsesource = (Boolean) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_EXACTCLIP);
@@ -690,7 +691,7 @@ public class DialogMapClip extends SmDialog {
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_MapClip"));
 		this.buttonAddLayers.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
-		this.buttonAddLayers.setToolTipText(MapViewProperties.getString("String_MapClip_AddLayers"));
+		this.buttonAddLayers.setToolTipText(ControlsProperties.getString("String_addLayer"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));

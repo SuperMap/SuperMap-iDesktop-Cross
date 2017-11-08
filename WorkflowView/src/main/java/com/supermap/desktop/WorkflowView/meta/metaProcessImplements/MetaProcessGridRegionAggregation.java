@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -28,7 +29,7 @@ public class MetaProcessGridRegionAggregation extends MetaProcess {
 	private ParameterComboBox parameterMeshType = new ParameterComboBox(ProcessProperties.getString("String_MeshType"));
 	private ParameterDefaultValueTextField parameterBounds = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_AnalystBounds"));
 	private ParameterDefaultValueTextField parameterResolution = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_MeshSize"));
-	private ParameterDefaultValueTextField parameterStaticModel = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_StaticModel"));
+	private ParameterDefaultValueTextField parameterStaticModel = new ParameterDefaultValueTextField().setDescribe(ControlsProperties.getString("String_StaticModel"));
 	private ParameterDefaultValueTextField parameterWeightIndex = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_Index"));
 
 	public MetaProcessGridRegionAggregation() {
@@ -46,7 +47,7 @@ public class MetaProcessGridRegionAggregation extends MetaProcess {
 		parameterAggregationType.setItems(parameterDataNode);
 		parameterAggregationType.setSelectedItem(parameterDataNode);
 
-		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ProcessProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ProcessProperties.getString("String_HexagonalMesh"), "1")};
+		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1")};
 		parameterMeshType.setSelectedItem(parameterDataNodes[0]);
 		parameterMeshType.setRequisite(true);
 		parameterMeshType.setItems(parameterDataNodes);

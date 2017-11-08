@@ -3,6 +3,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels;
 import com.supermap.analyst.spatialanalyst.FunctionType;
 import com.supermap.analyst.spatialanalyst.GridHistogram;
 import com.supermap.analyst.spatialanalyst.HistogramSegmentInfo;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.enums.ParameterType;
@@ -76,8 +77,8 @@ public class ParameterHistogramPanel extends SwingPanel implements IParameterPan
 		numCount = new NumTextFieldLegit();
 		comboBoxFunction = new JComboBox<>();
 		checkBox.setText(ProcessProperties.getString("String_CheckBox_CreateHistogram"));
-		labelCount.setText(ProcessProperties.getString("String_Label_GroupCount"));
-		labelFunction.setText(ProcessProperties.getString("String_Label_ChangeFunc"));
+		labelCount.setText(ControlsProperties.getString("String_Label_RangeCount"));
+		labelFunction.setText(ControlsProperties.getString("String_Label_ChangeFunc"));
 		scrollPane.setViewportView(histogramPanel);
 		numCount.setText("5");
 		numCount.setMinValue(1);

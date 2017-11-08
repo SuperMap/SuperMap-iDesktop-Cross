@@ -7,6 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -44,8 +45,8 @@ public class MetaProcessNeighbourStatistics extends MetaProcess {
 		sourceDatasource = new ParameterDatasourceConstrained();
 		sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		resultDataset = new ParameterSaveDataset();
-		comboBoxStatisticMode = new ParameterComboBox(ProcessProperties.getString("String_Label_StatisticType"));
-		checkBoxIgnore = new ParameterCheckBox(ProcessProperties.getString("String_IgnoreNoValue"));
+		comboBoxStatisticMode = new ParameterComboBox(ControlsProperties.getString("String_StaticModel"));
+		checkBoxIgnore = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValue"));
 		shapeType = new ParameterShapeType();
 
 		ParameterCombine sourceCombine = new ParameterCombine();

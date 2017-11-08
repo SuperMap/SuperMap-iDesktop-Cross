@@ -6,6 +6,7 @@ import com.supermap.data.DatasetGrid;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
@@ -34,11 +35,11 @@ public class MetaProcessCalculateSlope extends MetaProcessCalTerrain {
 	protected void initHook() {
 
 		// 参数设置
-		parameterComboBoxSlopeType = new ParameterComboBox(ProcessProperties.getString("String_CalculateSlope_SlopeType"));
+		parameterComboBoxSlopeType = new ParameterComboBox(ControlsProperties.getString("String_CalculateSlope_SlopeType"));
 		parameterComboBoxSlopeType.setItems(
-				new ParameterDataNode(ProcessProperties.getString("String_SlopeType_Degree"), SlopeType.DEGREE),
-				new ParameterDataNode(ProcessProperties.getString("String_SlopeType_Percent"), SlopeType.PERCENT),
-				new ParameterDataNode(ProcessProperties.getString("String_SlopeType_Radian"), SlopeType.RADIAN)
+				new ParameterDataNode(ControlsProperties.getString("String_SlopeType_Degree"), SlopeType.DEGREE),
+				new ParameterDataNode(ControlsProperties.getString("String_ThemeGraphTextFormat_Percent"), SlopeType.PERCENT),
+				new ParameterDataNode(CoreProperties.getString("String_Degree_Format_Radian"), SlopeType.RADIAN)
 		);
 		parameterComboBoxSlopeType.setSelectedItem(SlopeType.DEGREE);
 

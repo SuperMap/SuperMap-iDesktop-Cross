@@ -1,11 +1,8 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.core.recordset.RecordsetDelete;
 import com.supermap.desktop.geometry.Abstract.IGeometry;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
@@ -44,7 +41,7 @@ public class CombinationEditor extends AbstractEditor {
 			}
 
 			JDialogFieldOperationSetting formCombination = new JDialogFieldOperationSetting(
-					MapEditorProperties.getString("String_GeometryOperation_Combination"), environment.getMap(), datasetType);
+					ControlsProperties.getString("String_GeometryOperation_Combination"), environment.getMap(), datasetType);
 			if (formCombination.showDialog() == DialogResult.OK) {
 				CursorUtilities.setWaitCursor(environment.getMapControl());
 				MouseMotionListener[] listeners = environment.getMapControl().getMouseMotionListeners();

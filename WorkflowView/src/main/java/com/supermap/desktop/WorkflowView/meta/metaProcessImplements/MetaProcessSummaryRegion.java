@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -33,9 +34,9 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 	private ParameterDefaultValueTextField parameterBounds = new ParameterDefaultValueTextField(ProcessProperties.getString("String_AnalystBounds"));
 	private ParameterCheckBox parameterStandardFields = new ParameterCheckBox(ProcessProperties.getString("String_standardSummaryFields"));
 	private ParameterCheckBox parameterWeightedFields = new ParameterCheckBox(ProcessProperties.getString("String_weightedSummaryFields"));
-	private ParameterDefaultValueTextField parameterStatisticMode = new ParameterDefaultValueTextField(ProcessProperties.getString("String_StaticModel"));
+	private ParameterDefaultValueTextField parameterStatisticMode = new ParameterDefaultValueTextField(ControlsProperties.getString("String_StaticModel"));
 	private ParameterTextField parameterFeildName = new ParameterTextField(ProcessProperties.getString("String_FeildName"));
-	private ParameterDefaultValueTextField parameterStatisticMode1 = new ParameterDefaultValueTextField(ProcessProperties.getString("String_StaticModel"));
+	private ParameterDefaultValueTextField parameterStatisticMode1 = new ParameterDefaultValueTextField(ControlsProperties.getString("String_StaticModel"));
 	private ParameterTextField parameterFeildName1 = new ParameterTextField(ProcessProperties.getString("String_FeildName"));
 	private ParameterDefaultValueTextField parameterMeshSize = new ParameterDefaultValueTextField(ProcessProperties.getString("String_MeshSize"));
 	private ParameterComboBox parameterMeshSizeUnit = new ParameterComboBox(ProcessProperties.getString("String_MeshSizeUnit"));
@@ -57,7 +58,7 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 		parameterSummaryType.setRequisite(true);
 		parameterSummaryType.setItems(new ParameterDataNode(ProcessProperties.getString("String_summaryMesh"), "SUMMARYMESH"), new ParameterDataNode(ProcessProperties.getString("String_summaryRegion"), "SUMMARYREGION"));
 		parameterMeshType.setRequisite(true);
-		parameterMeshType.setItems(new ParameterDataNode(ProcessProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ProcessProperties.getString("String_HexagonalMesh"), "1"));
+		parameterMeshType.setItems(new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1"));
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");
 		parameterFeildName.setTipButtonMessage(ProcessProperties.getString("String_FeildNameTip"));
 		parameterFeildName1.setTipButtonMessage(ProcessProperties.getString("String_FeildNameTip"));
@@ -81,10 +82,10 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 
 	private void initComponentState() {
 		parameterInputDataType.resetInputItems(new ParameterDataNode(ProcessProperties.getString("String_BigDataStore"), "3"),
-				new ParameterDataNode(ProcessProperties.getString("String_UDBFile"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
+				new ParameterDataNode(ControlsProperties.getString("String_UDBFileFilters"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
 		parameterInputDataType.parameterSwitch.switchParameter("3");
 		parameterAnalystDataType.resetInputItems(new ParameterDataNode(ProcessProperties.getString("String_BigDataStore"), "3"),
-				new ParameterDataNode(ProcessProperties.getString("String_UDBFile"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
+				new ParameterDataNode(ControlsProperties.getString("String_UDBFileFilters"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
 		parameterAnalystDataType.parameterSwitch.switchParameter("3");
 		parameterAnalystDataType.setBool(true);
 		parameterInputDataType.setSupportDatasetType(DatasetType.LINE, DatasetType.REGION);

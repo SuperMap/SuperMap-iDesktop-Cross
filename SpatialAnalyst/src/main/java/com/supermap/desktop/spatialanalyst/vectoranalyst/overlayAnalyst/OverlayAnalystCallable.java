@@ -6,6 +6,7 @@ import com.supermap.data.DatasetVector;
 import com.supermap.data.SteppedEvent;
 import com.supermap.data.SteppedListener;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.core.Time;
 import com.supermap.desktop.core.TimeType;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
@@ -75,7 +76,7 @@ public class OverlayAnalystCallable extends UpdateProgressCallable implements IO
 				componentManager.setSelectedDataProperty();
 				Application.getActiveApplication().getOutput().output(MessageFormat.format(SpatialAnalystProperties.getString("String_OverlayAnalyst_SuccessTip"), type.toString()));
 			} else {
-				Application.getActiveApplication().getOutput().output(MessageFormat.format(SpatialAnalystProperties.getString("String_OverlayAnalyst_Failed"), sourceDataset.getName() + "@" + sourceDataset.getDatasource().getAlias(),
+				Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_OverlayAnalyst_Failed"), sourceDataset.getName() + "@" + sourceDataset.getDatasource().getAlias(),
 						overlayAnalystDataset.getName() + "@" + overlayAnalystDataset.getDatasource().getAlias(), type.toString()));
 				return false;
 			}

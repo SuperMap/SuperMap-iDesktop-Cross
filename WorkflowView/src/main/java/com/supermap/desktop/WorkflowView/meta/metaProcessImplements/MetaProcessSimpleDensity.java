@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -24,7 +25,7 @@ import com.supermap.desktop.utilities.CursorUtilities;
 public class MetaProcessSimpleDensity extends MetaProcess {
 	private ParameterIServerLogin parameterIServerLogin = new ParameterIServerLogin();
 	ParameterInputDataType parameterInputDataType = new ParameterInputDataType();
-	private ParameterComboBox parameterComboBoxAnalyseType = new ParameterComboBox(ProcessProperties.getString("String_AnalyseType"));
+	private ParameterComboBox parameterComboBoxAnalyseType = new ParameterComboBox(ControlsProperties.getString("String_AnalyseType"));
 	private ParameterComboBox parameterComboBoxMeshType = new ParameterComboBox(ProcessProperties.getString("String_MeshType"));
 	private ParameterDefaultValueTextField parameterIndex = new ParameterDefaultValueTextField(ProcessProperties.getString("String_Index"));
 	private ParameterDefaultValueTextField parameterBounds = new ParameterDefaultValueTextField(ProcessProperties.getString("String_AnalystBounds"));
@@ -32,7 +33,7 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 	private ParameterComboBox parameterMeshSizeUnit = new ParameterComboBox(ProcessProperties.getString("String_MeshSizeUnit"));
 	private ParameterDefaultValueTextField parameterRadius = new ParameterDefaultValueTextField(ProcessProperties.getString("String_Radius"));
 	private ParameterComboBox parameterRadiusUnit = new ParameterComboBox(ProcessProperties.getString("String_RadiusUnit"));
-	private ParameterComboBox parameterAreaUnit = new ParameterComboBox(ProcessProperties.getString("String_AreaUnit"));
+	private ParameterComboBox parameterAreaUnit = new ParameterComboBox(ControlsProperties.getString("label_AreaUnit"));
 
 
 	public MetaProcessSimpleDensity() {
@@ -44,12 +45,12 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 		parameterInputDataType.setDescribe(ProcessProperties.getString("String_FileInputPath"));
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT);
-		ParameterDataNode parameterDataNode = new ParameterDataNode(ProcessProperties.getString("String_SimplePointDensity"), "0");
+		ParameterDataNode parameterDataNode = new ParameterDataNode(ControlsProperties.getString("String_SimpleDensity"), "0");
 		parameterComboBoxAnalyseType.setRequisite(true);
 		parameterComboBoxAnalyseType.setItems(parameterDataNode);
 		parameterComboBoxAnalyseType.setSelectedItem(parameterDataNode);
-		parameterComboBoxMeshType.setItems(new ParameterDataNode(ProcessProperties.getString("String_QuadrilateralMesh"), "0"),
-				new ParameterDataNode(ProcessProperties.getString("String_HexagonalMesh"), "1"));
+		parameterComboBoxMeshType.setItems(new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"),
+				new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1"));
 		parameterComboBoxMeshType.setRequisite(true);
 		//流程图中不支持在地图中绘制范围，范围表示与iServer的表示相同
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");

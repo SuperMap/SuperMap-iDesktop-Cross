@@ -6,7 +6,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolMarkerSizeController;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolSpinnerUtilties;
 import com.supermap.desktop.enums.SymbolMarkerType;
-import com.supermap.desktop.mapeditor.MapEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -1168,7 +1167,7 @@ public class CADStyleContainer extends JPanel {
         this.labelFillGradientOffsetYUnity.setText("%");
         this.labelFillGradientAngel.setText(CoreProperties.getString("String_GeometryDrawingParam_Angle"));
         this.labelFillGradientAngelUnity.setText(CoreProperties.getString("String_Degree_Format_Degree"));
-        this.labelFillOpaque.setText(MapEditorProperties.getString("String_Oqaue_I"));
+        this.labelFillOpaque.setText(ControlsProperties.getString("String_Label_Transparence"));
     }
 
     public void setNullPanel() {

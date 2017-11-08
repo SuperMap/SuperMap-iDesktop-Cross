@@ -8,6 +8,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.metaProcessImplements.MetaProcessGridAnalyst;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -48,7 +49,7 @@ public class MetaProcessStreamGrid extends MetaProcessGridAnalyst {
 		resultDataset = new ParameterSaveDataset();
 		numberThreshold = new ParameterNumber(ProcessProperties.getString("String_Label_ThresholdGreaterThan"));
 		comboBoxPixel = new ParameterComboBox(CoreProperties.getString("String_PixelType"));
-		checkBoxIgnore = new ParameterCheckBox(ProcessProperties.getString("String_IgnoreNoValue"));
+		checkBoxIgnore = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValue"));
 		checkBoxZip = new ParameterCheckBox(ProcessProperties.getString("String_IsZip"));
 
 		ParameterCombine sourceCombine = new ParameterCombine();

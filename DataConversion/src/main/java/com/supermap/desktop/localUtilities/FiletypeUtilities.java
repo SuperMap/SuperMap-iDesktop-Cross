@@ -1,6 +1,7 @@
 package com.supermap.desktop.localUtilities;
 
 import com.supermap.data.conversion.FileType;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.FileTypeLocale;
 import com.supermap.desktop.implement.UserDefineType.UserDefineFileType;
@@ -47,7 +48,7 @@ public class FiletypeUtilities {
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.VCT_STRING)) {
 			fileType = DataConversionProperties.getString("String_FileTypeVCT");
 			// vct文件
-		} else if ((fileType.equalsIgnoreCase(FileTypeLocale.DXF_STRING) && !fileFilter.equals(DataConversionProperties.getString("string_filetype_3ds"))) || fileType.equalsIgnoreCase(FileTypeLocale.DWG_STRING)) {
+		} else if ((fileType.equalsIgnoreCase(FileTypeLocale.DXF_STRING) && !fileFilter.equals(ControlsProperties.getString("string_filetype_3ds"))) || fileType.equalsIgnoreCase(FileTypeLocale.DWG_STRING)) {
 			fileType = DataConversionProperties.getString("String_FormImport_CAD");
 			// AutoCAD 格式(*.dxf,*.dwg)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.SHP_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.GRD_STRING)
@@ -88,7 +89,7 @@ public class FiletypeUtilities {
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.BIL_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.RAW_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.BSQ_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.BIP_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.B_STRING)) {
-			fileType = DataConversionProperties.getString("String_FileTypeTEMSClutter");
+			fileType = ControlsProperties.getString("String_FileTypeTEMSClutter");
 			// 栅格文件(*.bil,*.raw,*.bsq,*.bip,*.sid,*.b)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.SID_STRING)) {
 			fileType = DataConversionProperties.getString("String_FileTypeSID");
@@ -112,10 +113,10 @@ public class FiletypeUtilities {
 			} else {
 				fileType = DataConversionProperties.getString("String_FormImport_GEOJSON");
 			}
-		} else if (fileFilter.equalsIgnoreCase(DataConversionProperties.getString("string_filetype_lidar"))) {
+		} else if (fileFilter.equalsIgnoreCase(ControlsProperties.getString("string_filetype_lidar"))) {
 			// LIDAR文件(*.txt)
 			fileType = DataConversionProperties.getString("String_FormImport_FilterLIDAR");
-		} else if (fileFilter.equalsIgnoreCase(DataConversionProperties.getString("string_filetype_3ds"))) {
+		} else if (fileFilter.equalsIgnoreCase(ControlsProperties.getString("string_filetype_3ds"))) {
 			fileType = DataConversionProperties.getString("String_FormImport_FilterModel");
 			// 三维dxf文件（.ModelDXF）
 		}
@@ -136,7 +137,7 @@ public class FiletypeUtilities {
 			result = FileType.DXF;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeVCT"))) {
 			result = FileType.VCT;
-		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeBMP"))) {
+		} else if (alias.equals(ControlsProperties.getString("String_FileTypeBMP"))) {
 			result = FileType.BMP;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeGIF"))) {
 			result = FileType.GIF;
@@ -152,7 +153,7 @@ public class FiletypeUtilities {
 			result = FileType.IMG;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeSCV"))) {
 			result = FileType.SCV;
-		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeOSGB"))) {
+		} else if (alias.equals(ControlsProperties.getString("String_FileTypeOSGB"))) {
 			result = FileType.ModelOSG;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeModel3DS"))) {
 			result = FileType.Model3DS;
@@ -196,11 +197,11 @@ public class FiletypeUtilities {
 			result = FileType.BIP;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeSID"))) {
 			result = FileType.MrSID;
-		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeTEMSClutter"))) {
+		} else if (alias.equals(ControlsProperties.getString("String_FileTypeTEMSClutter"))) {
 			result = FileType.TEMSClutter;
-		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeLIDAR"))) {
+		} else if (alias.equals(ControlsProperties.getString("String_FileTypeLIDAR"))) {
 			result = FileType.LIDAR;
-		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeDBF"))) {
+		} else if (alias.equals(ControlsProperties.getString("String_FileTypeDBF"))) {
 			result = FileType.DBF;
 		} else if (alias.equals(DataConversionProperties.getString("String_FileTypeTEMSBuildingVector"))) {
 			result = FileType.TEMSBuildingVector;

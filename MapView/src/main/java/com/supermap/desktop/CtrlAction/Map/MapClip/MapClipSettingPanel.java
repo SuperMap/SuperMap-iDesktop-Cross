@@ -2,6 +2,7 @@ package com.supermap.desktop.CtrlAction.Map.MapClip;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.ProviderLabel.WarningOrHelpProvider;
 
@@ -108,7 +109,7 @@ public class MapClipSettingPanel extends JPanel {
 		//@formatter:on
 
 
-		this.setBorder(BorderFactory.createTitledBorder(MapViewProperties.getString("String_MapClip_GiveSameValue")));
+		this.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_toolStripButtonAdvanced")));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);

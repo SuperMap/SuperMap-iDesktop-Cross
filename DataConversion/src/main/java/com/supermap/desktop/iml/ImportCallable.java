@@ -263,7 +263,7 @@ public class ImportCallable extends UpdateProgressCallable {
 			}
 
 		} else if (null != failImportSettings && 0 < failImportSettings.length) {
-			fileInfos.get(i).setState(DataConversionProperties.getString("String_FormImport_NotSucceed"));
+			fileInfos.get(i).setState(CoreProperties.getString("String_Failed"));
 			Application.getActiveApplication().getOutput().output(MessageFormat.format(failImportInfo, failImportSettings[0].getSourceFilePath(), "->", ""));
 		}
 	}

@@ -49,8 +49,8 @@ public class MetaProcessBuffer extends MetaProcess {
 	private ParameterCheckBox parameterRetainAttribute;
 	private ParameterSaveDataset parameterSaveDataset;
 
-	private final static String BUFFER_ROUND = ProcessProperties.getString("String_CheckBox_BufferRound");
-	private final static String BUFFER_FLAT = ProcessProperties.getString("String_CheckBox_BufferFlat");
+	private final static String BUFFER_ROUND = ControlsProperties.getString("String_CheckBox_BufferRound");
+	private final static String BUFFER_FLAT = ControlsProperties.getString("String_CheckBox_BufferFlat");
 
 	private final static String VALUE_RELY = ProcessProperties.getString("String_Value_Rely");
 	private final static String FIELD_RELY = ProcessProperties.getString("String_Field_Rely");
@@ -102,26 +102,26 @@ public class MetaProcessBuffer extends MetaProcess {
 		this.datasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 
 		this.radioButtonFlatOrRound = new ParameterRadioButton();
-		ParameterDataNode gound = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferRound"), BUFFER_ROUND);
-		ParameterDataNode flat = new ParameterDataNode(ProcessProperties.getString("String_CheckBox_BufferFlat"), BUFFER_FLAT);
+		ParameterDataNode gound = new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferRound"), BUFFER_ROUND);
+		ParameterDataNode flat = new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferFlat"), BUFFER_FLAT);
 		this.radioButtonFlatOrRound.setItems(new ParameterDataNode[]{gound, flat});
 
-		this.checkBoxBufferLeft = new ParameterCheckBox(ProcessProperties.getString("String_CheckBox_Left"));
-		this.checkBoxBufferRight = new ParameterCheckBox(ProcessProperties.getString("String_CheckBox_Right"));
+		this.checkBoxBufferLeft = new ParameterCheckBox(ControlsProperties.getString("String_CheckBox_Left"));
+		this.checkBoxBufferRight = new ParameterCheckBox(ControlsProperties.getString("String_CheckBox_Right"));
 
 		this.radioButtonNumOrField = new ParameterRadioButton();
 		ParameterDataNode num = new ParameterDataNode(ProcessProperties.getString("String_Value_Rely"), VALUE_RELY);
 		ParameterDataNode field = new ParameterDataNode(ProcessProperties.getString("String_Field_Rely"), FIELD_RELY);
 		this.radioButtonNumOrField.setItems(new ParameterDataNode[]{num, field});
 
-		this.parameterTextFieldLeftRadius = new ParameterTextField(ProcessProperties.getString("String_leftRadius"));
-		this.parameterTextFieldRightRadius = new ParameterTextField(ProcessProperties.getString("String_rightRadius"));
-		this.comboBoxFieldLeft = new ParameterFieldComboBox(ProcessProperties.getString("String_leftRadius"));
+		this.parameterTextFieldLeftRadius = new ParameterTextField(ControlsProperties.getString("String_leftRadius"));
+		this.parameterTextFieldRightRadius = new ParameterTextField(ControlsProperties.getString("String_rightRadius"));
+		this.comboBoxFieldLeft = new ParameterFieldComboBox(ControlsProperties.getString("String_leftRadius"));
 		this.comboBoxFieldLeft.setShowNullValue(true);
-		this.comboBoxFieldRight = new ParameterFieldComboBox(ProcessProperties.getString("String_rightRadius"));
+		this.comboBoxFieldRight = new ParameterFieldComboBox(ControlsProperties.getString("String_rightRadius"));
 		this.comboBoxFieldRight.setShowNullValue(true);
-		this.parameterUnionBuffer = new ParameterCheckBox(ProcessProperties.getString("String_UnionBufferItem"));
-		this.parameterRetainAttribute = new ParameterCheckBox(ProcessProperties.getString("String_RetainAttribute"));
+		this.parameterUnionBuffer = new ParameterCheckBox(ControlsProperties.getString("String_UnionBufferItem"));
+		this.parameterRetainAttribute = new ParameterCheckBox(ControlsProperties.getString("String_RetainAttribute"));
 		this.parameterTextFieldSemicircleLineSegment = new ParameterNumber(ProcessProperties.getString("Label_SemicircleLineSegment"));
 		this.parameterTextFieldSemicircleLineSegment.setMaxBit(0);
 		this.parameterTextFieldSemicircleLineSegment.setMinValue(4);

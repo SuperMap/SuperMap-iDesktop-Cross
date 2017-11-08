@@ -346,7 +346,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 				// 导入表中数据
 				if (table.getRowCount() > 0) {
 					final FormProgressTotal formProgress = new FormProgressTotal();
-					formProgress.setTitle(DataConversionProperties.getString("String_FormImport_FormText"));
+					formProgress.setTitle(ControlsProperties.getString("String_FormImport_FormText"));
 					ArrayList<ImportInfo> fileInfos = new ArrayList<ImportInfo>();
 					for (IPanelImport panelImport : panelImports) {
 						fileInfos.add(panelImport.getImportInfo());
@@ -566,7 +566,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 	}
 
 	private void initResources() {
-		this.setTitle(DataConversionProperties.getString("String_FormImport_FormText"));
+		this.setTitle(ControlsProperties.getString("String_FormImport_FormText"));
 		this.buttonAddDir.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Add.png"));
 		this.buttonAddFile.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
@@ -574,14 +574,14 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonImport.setText(CoreProperties.getString("String_Import"));
 		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));
-		this.checkBoxAutoClose.setText(DataConversionProperties.getString("string_chcekbox_autoCloseIn"));
+		this.checkBoxAutoClose.setText(ControlsProperties.getString("string_chcekbox_autoCloseIn"));
 		this.labelTitle.setText(DataConversionProperties.getString("string_label_importData"));
 		this.labelRemind.setText(DataConversionProperties.getString("String_AddImportFiles"));
 		this.buttonAddDir.setToolTipText(DataConversionProperties.getString("String_button_addDir"));
 		this.buttonAddFile.setToolTipText(DataConversionProperties.getString("String_button_addFile"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(DataConversionProperties.getString("string_button_invertSelect"));
+		this.buttonInvertSelect.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
 		this.labelRemind.setForeground(new Color(32, 178, 170));
 	}
 
@@ -633,7 +633,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_CAD"));
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_FilterModel"));
 			} else if (fileType.equals(FileTypeLocale.BIL_STRING)) {
-				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FileTypeTEMSClutter"));
+				this.steppedComboBox.addItem(ControlsProperties.getString("String_FileTypeTEMSClutter"));
 				this.steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_BIL"));
 			} else if (fileType.equalsIgnoreCase(FileTypeLocale.DEM_STRING)) {
 				steppedComboBox.addItem(DataConversionProperties.getString("String_FormImport_ArcGIS"));
@@ -663,7 +663,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 							// bil 导入为BIL文件
 							newImportSetting = new ImportSettingBIL();
 							replaceImportPanel(newImportSetting);
-						} else if (nowType.equalsIgnoreCase(DataConversionProperties.getString("String_FileTypeTEMSClutter"))) {
+						} else if (nowType.equalsIgnoreCase(ControlsProperties.getString("String_FileTypeTEMSClutter"))) {
 							// 导入为电信栅格文件
 							newImportSetting = new ImportSettingTEMSClutter();
 							replaceImportPanel(newImportSetting);
@@ -787,7 +787,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 
 	private void initImportDirectoryInfo(int type) {
 		if (!SmFileChoose.isModuleExist("DataImportFrame_ImportDirectories")) {
-			SmFileChoose.addNewNode("", "", DataConversionProperties.getString("String_ScanDir"),
+			SmFileChoose.addNewNode("", "", ControlsProperties.getString("String_ScanDir"),
 					"DataImportFrame_ImportDirectories", "GetDirectories");
 		}
 		SmFileChoose tempfileChooser = new SmFileChoose("DataImportFrame_ImportDirectories");

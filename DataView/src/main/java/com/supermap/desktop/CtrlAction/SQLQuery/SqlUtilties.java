@@ -1,5 +1,6 @@
 package com.supermap.desktop.CtrlAction.SQLQuery;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataview.DataViewProperties;
 
 /**
@@ -32,7 +33,7 @@ public class SqlUtilties {
 		if (data.equals("asc")) {
 			return DataViewProperties.getString("String_SQLQueryASC");
 		} else if (data.equals("desc")) {
-			return DataViewProperties.getString("String_Descend_D");
+			return ControlsProperties.getString("String_Descend_D");
 		} else {
 			return "";
 		}
@@ -47,7 +48,7 @@ public class SqlUtilties {
 	public static String covert(String data) {
 		if (data.equals(DataViewProperties.getString("String_SQLQueryASC"))) {
 			return "asc";
-		} else if (data.equals(DataViewProperties.getString("String_Descend_D"))) {
+		} else if (data.equals(ControlsProperties.getString("String_Descend_D"))) {
 			return "desc";
 		} else {
 			return "";

@@ -13,6 +13,7 @@ import com.supermap.desktop.WorkflowView.meta.dataconversion.ImportSettingCreato
 import com.supermap.desktop.WorkflowView.meta.dataconversion.ImportSettingSetter;
 import com.supermap.desktop.WorkflowView.meta.dataconversion.ReflectInfo;
 import com.supermap.desktop.WorkflowView.meta.loader.ImportProcessLoader;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
@@ -70,7 +71,7 @@ public class MetaProcessImport extends MetaProcess {
 		if (importType.equalsIgnoreCase("GBDEM")) {
 			setTitle(MessageFormat.format(ProcessProperties.getString("String_ImportTitle"), "ArcGIS DEM"));
 		} else if (importType.equalsIgnoreCase("GRD_DEM")) {
-			setTitle(MessageFormat.format(ProcessProperties.getString("String_ImportTitle"), ProcessProperties.getString("String_Grid") + "DEM"));
+			setTitle(MessageFormat.format(ProcessProperties.getString("String_ImportTitle"), ControlsProperties.getString("String_Grid") + "DEM"));
 		} else {
 			setTitle(MessageFormat.format(ProcessProperties.getString("String_ImportTitle"), importType));
 		}

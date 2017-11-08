@@ -4,6 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -284,7 +285,7 @@ public class JDialogOperationSetting extends SmDialog {
 		this.checkBoxRefreshInInvalidArea.setText(MapViewProperties.getString("String_MapProperty_RefreshInInvalidArea"));
 		this.checkBoxRefreshAtTracked.setText(MapViewProperties.getString("String_MapProperty_RefreshAtTracked"));
 
-		this.labelSelectionMode.setText(MapViewProperties.getString("String_Label_SelectionMode"));
+		this.labelSelectionMode.setText(ControlsProperties.getString("String_Positive"));
 		this.labelSelectionLerance.setText(MapViewProperties.getString("String_Label_SelectionTolerance"));
 
 		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));

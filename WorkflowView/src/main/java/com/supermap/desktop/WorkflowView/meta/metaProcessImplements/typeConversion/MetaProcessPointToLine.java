@@ -2,7 +2,6 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
@@ -60,7 +59,7 @@ public class MetaProcessPointToLine extends MetaProcessTypeConversion {
 
 		parameters.setParameters(inputCombine, settingCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, DatasetTypes.POINT, inputCombine);
-		parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Line_Dataset"), DatasetTypes.LINE, outputCombine);
+		parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Line"), DatasetTypes.LINE, outputCombine);
 	}
 
 	private void initParameterConstraint() {

@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -64,7 +65,7 @@ public class MetaProcessDEMBuild extends MetaProcess {
 
 	private static final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private static final String LAKE_DATA = CoreProperties.getString("String_GroupBox_LakeData");
-	private static final String CLIP_DATA = ProcessProperties.getString("String_GroupBox_ClipData");
+	private static final String CLIP_DATA = CoreProperties.getString("String_clipDataset");
 	private static final String ERASE_DATA = ProcessProperties.getString("String_GroupBox_EraseData");
 	private static final String OUTPUT_DATA = "DEMBuildResult";
 
@@ -96,7 +97,7 @@ public class MetaProcessDEMBuild extends MetaProcess {
 		clipDatasource = new ParameterDatasourceConstrained();
 		clipDataset = new ParameterSingleDataset(DatasetType.REGION).setShowNullValue(true);
 		ParameterCombine clipData = new ParameterCombine();
-		clipData.setDescribe(ProcessProperties.getString("String_GroupBox_ClipData"));
+		clipData.setDescribe(CoreProperties.getString("String_clipDataset"));
 		clipData.addParameters(clipDatasource, clipDataset);
 
 		eraseDatasource = new ParameterDatasourceConstrained();
@@ -110,15 +111,15 @@ public class MetaProcessDEMBuild extends MetaProcess {
 		comboBoxInterpolateType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_InterpolateType"));
 		comboBoxTerrainStatisticType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_Label_TerrainStatisticType"));
 		textNumResampleTolerance = new ParameterNumber(ProcessProperties.getString("String_Resample_Tolerance"));
-		textNumZFactor = new ParameterNumber(ProcessProperties.getString("String_Label_ZFactor"));
+		textNumZFactor = new ParameterNumber(ControlsProperties.getString("String_Label_ZFactor"));
 		checkBox = new ParameterCheckBox(ProcessProperties.getString("String_ProcessFlatArea"));
 		ParameterCombine baseSetting = new ParameterCombine();
-		baseSetting.setDescribe(ProcessProperties.getString("String_GroupBox_ParameterSetting_Base"));
+		baseSetting.setDescribe(ControlsProperties.getString("String_GroupBox_ParameterSetting_Base"));
 		baseSetting.addParameters(comboBoxSourceField, comboBoxInterpolateType, comboBoxTerrainStatisticType, textNumResampleTolerance, textNumZFactor, checkBox, comboBoxLakeField);
 
-		comboBoxEncodeType = new ParameterComboBox().setDescribe(ProcessProperties.getString("label_encodingType"));
+		comboBoxEncodeType = new ParameterComboBox().setDescribe(CoreProperties.getString("String_Label_EncodeType"));
 		comboBoxPixelFormat = new ParameterComboBox().setDescribe(CoreProperties.getString("String_PixelType"));
-		textFieldCellSize = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
+		textFieldCellSize = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		textFieldRowCount = new ParameterTextField(CoreProperties.getString("String_Row"));
 		textFieldColumnCount = new ParameterTextField(CoreProperties.getString("String_Column"));
 		textFieldSizeOf = new ParameterTextField(ProcessProperties.getString("String_Label_SizeOf"));

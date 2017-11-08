@@ -7,6 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -48,7 +49,7 @@ public class MetaProcessGridSlice extends MetaProcess{
 		this.sourceDataset.setRequisite(true);
 		this.numberSeries=new ParameterNumber(ProcessProperties.getString("String_SeriesNumber"));
 		this.numberSeries.setRequisite(true);
-		this.numberMinValue=new ParameterNumber(ProcessProperties.getString("String_Result_MinValue"));
+		this.numberMinValue=new ParameterNumber(ControlsProperties.getString("String_LabelMinValue"));
 		this.numberMinValue.setRequisite(true);
 		this.numberMinValue.setTipButtonMessage(ProcessProperties.getString("String_SeriesTip"));
 		this.resultDataset = new ParameterSaveDataset();

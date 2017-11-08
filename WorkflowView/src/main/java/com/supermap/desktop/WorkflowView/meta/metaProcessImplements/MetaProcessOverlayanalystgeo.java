@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -64,7 +65,7 @@ public class MetaProcessOverlayanalystgeo extends MetaProcess {
 
 	private void initComponentState() {
 		parameterClipDataType.resetInputItems(new ParameterDataNode(ProcessProperties.getString("String_BigDataStore"), "3"),
-				new ParameterDataNode(ProcessProperties.getString("String_UDBFile"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
+				new ParameterDataNode(ControlsProperties.getString("String_UDBFileFilters"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
 		parameterClipDataType.parameterSwitch.switchParameter("3");
 		parameterClipDataType.setBool(true);
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);

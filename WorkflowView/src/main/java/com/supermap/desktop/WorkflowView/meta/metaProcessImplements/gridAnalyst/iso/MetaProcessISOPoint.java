@@ -9,7 +9,6 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
-import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -212,7 +211,7 @@ public class MetaProcessISOPoint extends MetaProcess {
 		this.minISOLine = new ParameterTextField(CoreProperties.getString("String_MINISOLine"));
 		this.isoLine = new ParameterTextField(CoreProperties.getString("String_ISOData"));
 		this.terrainInterpolateType = new ParameterComboBox(CoreProperties.getString("String_InterpolateType"));
-		this.resolution = new ParameterNumber(ProcessProperties.getString("String_Resolution"));
+		this.resolution = new ParameterNumber(CoreProperties.getString("String_Resolution"));
 		resolution.setMinValue(0);
 		resolution.setIsIncludeMin(false);
 		this.datumValue = new ParameterNumber(CoreProperties.getString("String_DatumValue"));

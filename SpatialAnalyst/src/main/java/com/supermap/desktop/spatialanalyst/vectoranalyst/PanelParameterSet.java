@@ -1,5 +1,6 @@
 package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.TextFields.RightValueListener;
@@ -75,8 +76,8 @@ public class PanelParameterSet extends JPanel {
 	}
 
 	private void initResources() {
-		this.checkBoxUnionBuffer.setText(SpatialAnalystProperties.getString("String_UnionBufferItem"));
-		this.checkBoxRemainAttributes.setText(SpatialAnalystProperties.getString("String_RetainAttribute"));
+		this.checkBoxUnionBuffer.setText(ControlsProperties.getString("String_UnionBufferItem"));
+		this.checkBoxRemainAttributes.setText(ControlsProperties.getString("String_RetainAttribute"));
 		this.checkBoxDisplayInMap.setText(SpatialAnalystProperties.getString("String_DisplayInMap"));
 		this.checkBoxDisplayInScene.setText(SpatialAnalystProperties.getString("String_DisplayInScene"));
 		this.labelSemicircleLineSegment.setText(SpatialAnalystProperties.getString("String_Label_SemicircleLineSegment"));

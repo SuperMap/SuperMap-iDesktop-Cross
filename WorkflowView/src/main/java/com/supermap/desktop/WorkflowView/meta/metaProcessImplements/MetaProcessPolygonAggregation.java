@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.lbs.params.CommonSettingCombine;
 import com.supermap.desktop.lbs.params.JobResultResponse;
 import com.supermap.desktop.process.ProcessProperties;
@@ -26,7 +27,7 @@ public class MetaProcessPolygonAggregation extends MetaProcess {
 	private ParameterInputDataType parameterInputDataType = new ParameterInputDataType();
 	private ParameterInputDataType parameterAnalystDataType = new ParameterInputDataType();
 	private ParameterComboBox parameterAggregationType = new ParameterComboBox().setDescribe(ProcessProperties.getString("String_AggregationType"));
-	private ParameterDefaultValueTextField parameterStaticModel = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_StaticModel"));
+	private ParameterDefaultValueTextField parameterStaticModel = new ParameterDefaultValueTextField().setDescribe(ControlsProperties.getString("String_StaticModel"));
 	private ParameterDefaultValueTextField parameterWeightIndex = new ParameterDefaultValueTextField().setDescribe(ProcessProperties.getString("String_Index"));
 
 	public MetaProcessPolygonAggregation() {
@@ -67,7 +68,7 @@ public class MetaProcessPolygonAggregation extends MetaProcess {
 
 	private void initComponentState() {
 		parameterAnalystDataType.resetInputItems(new ParameterDataNode(ProcessProperties.getString("String_BigDataStore"), "3"),
-				new ParameterDataNode(ProcessProperties.getString("String_UDBFile"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
+				new ParameterDataNode(ControlsProperties.getString("String_UDBFileFilters"), "1"), new ParameterDataNode(ProcessProperties.getString("String_PG"), "2"));
 		parameterAnalystDataType.parameterSwitch.switchParameter("3");
 		parameterAnalystDataType.setBool(true);
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT);

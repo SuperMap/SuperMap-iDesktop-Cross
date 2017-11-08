@@ -5,10 +5,9 @@ import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
-import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
@@ -31,7 +30,7 @@ public class MetaProcessThiessenPolygon extends MetaProcess {
 	private ParameterSaveDataset resultDataset;
 
 	public MetaProcessThiessenPolygon() {
-		setTitle(ProcessProperties.getString("String_Form_ThiessenPolygon"));
+		setTitle(ControlsProperties.getString("String_Form_ThiessenPolygon"));
 		initParameters();
 		initParameterConstraint();
 		initParametersState();
@@ -54,7 +53,7 @@ public class MetaProcessThiessenPolygon extends MetaProcess {
 
 		parameters.setParameters(sourceData, resultData);
 		parameters.addInputParameters(INPUT_DATA, DatasetTypes.POINT, sourceData);
-		parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_ThiessenPolygon"), DatasetTypes.REGION, resultData);
+		parameters.addOutputParameters(OUTPUT_DATA, ControlsProperties.getString("String_Form_ThiessenPolygon"), DatasetTypes.REGION, resultData);
 	}
 
 	private void initParameterConstraint() {

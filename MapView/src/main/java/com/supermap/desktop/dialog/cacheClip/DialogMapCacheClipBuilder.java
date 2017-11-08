@@ -14,6 +14,7 @@ import com.supermap.desktop.dialog.cacheClip.cache.LogWriter;
 import com.supermap.desktop.dialog.cacheClip.cache.TaskBuilder;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.mapCache.CacheProgressCallable;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -192,7 +193,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
 		}
 		if (this.cmdType == SingleProcessClip || this.cmdType == ResumeProcessClip || this.cmdType == SingleUpdateProcessClip) {
 			this.setTitle(MessageFormat.format(MapViewProperties.getString("MapCache_Title"), mapName));
-			this.buttonOk.setText(MapViewProperties.getString("String_BatchAddColorTableOKButton"));
+			this.buttonOk.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
 		} else if (this.cmdType == MultiProcessClip) {
 			this.setTitle(MessageFormat.format(MapViewProperties.getString("MapCache_Title_TaskBuilder"), mapName));
 			this.buttonOk.setText(ControlsProperties.getString("String_NextWay"));
@@ -204,7 +205,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
 			this.checkBoxAutoClosed.setVisible(false);
 			this.checkBoxShowProcessBar.setVisible(false);
 		}
-		this.checkBoxAutoClosed.setText(MapViewProperties.getString("MapCache_AutoCloseDailog"));
+		this.checkBoxAutoClosed.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 		this.checkBoxShowProcessBar.setText(MapViewProperties.getString("MapCache_ShowProgressBar"));
 		this.buttonStep.setText(ControlsProperties.getString("String_NextWay"));
 	}

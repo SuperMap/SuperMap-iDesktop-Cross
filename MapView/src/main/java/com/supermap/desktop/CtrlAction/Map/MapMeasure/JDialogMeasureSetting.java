@@ -2,6 +2,7 @@ package com.supermap.desktop.CtrlAction.Map.MapMeasure;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.enums.AngleUnit;
 import com.supermap.desktop.enums.AreaUnit;
 import com.supermap.desktop.enums.LengthUnit;
@@ -120,8 +121,8 @@ public class JDialogMeasureSetting extends SmDialog {
 	}
 
 	private void initResources() {
-		this.labelDistance.setText(MapViewProperties.getString("label_DistanceUnit"));
-		this.labelArea.setText(MapViewProperties.getString("label_AreaUnit"));
+		this.labelDistance.setText(ControlsProperties.getString("String_DistanceUnit"));
+		this.labelArea.setText(ControlsProperties.getString("label_AreaUnit"));
 		this.labelAngle.setText(MapViewProperties.getString("label_AngleUnit"));
 		this.buttonOk.setText(CoreProperties.getString(CoreProperties.OK));
 		this.buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));

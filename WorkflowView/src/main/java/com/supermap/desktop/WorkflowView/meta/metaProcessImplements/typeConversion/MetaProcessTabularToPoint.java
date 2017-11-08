@@ -2,8 +2,8 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
@@ -35,7 +35,7 @@ public class MetaProcessTabularToPoint extends MetaProcessTypeConversion {
 				DatasetType.TEXT, DatasetType.TABULAR, DatasetType.POINT3D, DatasetType.LINE3D, DatasetType.REGION3D, DatasetType.CAD);
 		outputData = new ParameterSaveDataset();
 		comboBoxX = new ParameterFieldComboBox(ProcessProperties.getString("String_Xcoordinate"));
-		comboBoxY = new ParameterFieldComboBox(ProcessProperties.getString("String_Ycoordinate"));
+		comboBoxY = new ParameterFieldComboBox(ControlsProperties.getString("String_MapClip_Y"));
 
 		DatasetVector datasetVector = DatasetUtilities.getDefaultDatasetVector();
 		if (datasetVector != null) {
@@ -66,7 +66,7 @@ public class MetaProcessTabularToPoint extends MetaProcessTypeConversion {
 
 		parameters.setParameters(inputCombine, settingCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, datasetTypes, inputCombine);
-		parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Point_Dataset"), DatasetTypes.POINT, outputCombine);
+		parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Point"), DatasetTypes.POINT, outputCombine);
 	}
 
 	private void initParameterConstraint() {

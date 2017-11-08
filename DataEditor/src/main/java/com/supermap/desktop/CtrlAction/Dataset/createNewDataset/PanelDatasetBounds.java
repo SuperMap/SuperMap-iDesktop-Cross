@@ -3,7 +3,6 @@ package com.supermap.desktop.CtrlAction.Dataset.createNewDataset;
 import com.supermap.data.Rectangle2D;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
 import com.supermap.desktop.utilities.ClipBoardUtilties;
@@ -443,7 +442,7 @@ public class PanelDatasetBounds extends JPanel {
 
 	private void initLayout() {
 
-		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_NewDatasetBounds")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_DatasetBounds")));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
@@ -488,7 +487,7 @@ public class PanelDatasetBounds extends JPanel {
 		);
 		//@formatter:on
 
-//		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_NewDatasetBounds")));
+//		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_DatasetBounds")));
 //		this.setLayout(new GridBagLayout());
 //		this.add(this.labelCurrentViewLeft, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10).setWeight(0, 0));
 //		this.add(this.textFieldCurrentViewLeft, new GridBagConstraintsHelper(1, 0, 3, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(5, 0, 5, 10).setWeight(3, 0));

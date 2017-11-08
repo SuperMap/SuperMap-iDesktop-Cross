@@ -5,6 +5,7 @@ import com.supermap.analyst.spatialstatistics.AnalyzingPatternsResult;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.ui.OutputFrame;
@@ -37,7 +38,7 @@ public class MetaProcessAutoCorrelation extends MetaProcessAnalyzingPatterns {
 				String result = "";
 				result += ProcessProperties.getString("String_Morans") + " " + analyzingPatternsResult.getIndex() + "\n";
 				result += ProcessProperties.getString("String_Expectation") + " " + analyzingPatternsResult.getExpectation() + "\n";
-				result += ProcessProperties.getString("String_Variance") + " " + analyzingPatternsResult.getVariance() + "\n";
+				result += ControlsProperties.getString("String_Variance") + " " + analyzingPatternsResult.getVariance() + "\n";
 				result += ProcessProperties.getString("String_ZScor") + " " + analyzingPatternsResult.getZScore() + "\n";
 				result += ProcessProperties.getString("String_PValue") + " " + analyzingPatternsResult.getPValue() + "\n";
 				// 不显示时间-yuanR2017.9.6

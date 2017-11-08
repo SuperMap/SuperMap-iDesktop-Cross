@@ -4,6 +4,7 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
@@ -15,6 +16,7 @@ import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeItemLabelDecorator;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.utilities.CoreResources;
@@ -102,7 +104,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
     private JComboBox<String> comboBoxOffsetY = new JComboBox<String>();
 
     private static String[] nameStrings = {MapViewProperties.getString("String_Title_Visible"), MapViewProperties.getString("String_Title_Sytle"),
-            MapViewProperties.getString("String_Title_RangeValue"), MapViewProperties.getString("String_ThemeGraphTextFormat_Caption")};
+            MapViewProperties.getString("String_Title_RangeValue"), CoreProperties.getString("String_Caption")};
     private transient DatasetVector datasetVector;
     private transient Map map;
     private transient ThemeRange themeRange;
@@ -267,7 +269,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
      */
     private void initComboBoxOffsetUnity() {
         this.comboBoxOffsetUnity.setModel(new DefaultComboBoxModel<String>(new String[]{
-                MapViewProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
+                ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit"), MapViewProperties.getString("String_ThemeLabelOffsetUnit_Map")}));
         if (this.themeRange.isOffsetFixed()) {
             this.comboBoxOffsetUnity.setSelectedIndex(0);
         } else {
@@ -397,13 +399,13 @@ public class ThemeRangeContainer extends ThemeChangePanel {
     private void initResources() {
         this.labelExpression.setText(MapViewProperties.getString("String_label_Expression"));
         this.labelRangeMethod.setText(MapViewProperties.getString("String_Label_RangeMethed"));
-        this.labelRangeCount.setText(MapViewProperties.getString("String_Label_RangeCount"));
+        this.labelRangeCount.setText(ControlsProperties.getString("String_Label_RangeCount"));
         this.labelRangeLength.setText(MapViewProperties.getString("String_Label_RangeSize"));
         this.labelRangePrecision.setText(MapViewProperties.getString("String_RangePrecision"));
         this.labelRangeFormat.setText(MapViewProperties.getString("String_Label_CaptionFormat"));
-        this.labelColorStyle.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+        this.labelColorStyle.setText(ControlsProperties.getString("String_LabelColorScheme"));
         this.buttonMerge.setEnabled(false);
-        this.buttonMerge.setToolTipText(MapViewProperties.getString("String_Title_Merge"));
+        this.buttonMerge.setToolTipText(CoreProperties.getString("String_OverlayAnalystMethod_Union"));
         this.buttonSplit.setToolTipText(MapViewProperties.getString("String_Title_Split"));
         this.buttonStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
         this.buttonVisible.setToolTipText(MapViewProperties.getString("String_Title_Visible"));
@@ -414,8 +416,8 @@ public class ThemeRangeContainer extends ThemeChangePanel {
         this.menuItemMapLocation.setText(MapViewProperties.getString("String_MapLocation"));
 
         this.labelOffsetUnity.setText(MapViewProperties.getString("String_LabelOffsetUnit"));
-        this.labelOffsetX.setText(MapViewProperties.getString("String_LabelOffsetX"));
-        this.labelOffsetY.setText(MapViewProperties.getString("String_LabelOffsetY"));
+        this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
+        this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
         this.comboBoxOffsetX.setEditable(true);
         this.comboBoxOffsetY.setEditable(true);
         this.panelOffsetSet.setBorder(new TitledBorder(null, MapViewProperties.getString("String_GroupBoxOffset"), TitledBorder.LEADING, TitledBorder.TOP,
@@ -1385,7 +1387,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
                         .getDisplayFilter().getJoinItems(), precision);
                 if (null == theme) {
                     // 专题图为空，提示专题图更新失败
-                    UICommonToolkit.showErrorMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+                    UICommonToolkit.showErrorMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
                     resetComboBoxRangeExpression(themeRange.getRangeExpression());
                 } else {
                     refreshThemeRange(theme);
@@ -1424,7 +1426,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
          * 修改偏移量单位
          */
         private void setOffsetUnity() {
-            if (MapViewProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit").equals(comboBoxOffsetUnity.getSelectedItem().toString())) {
+            if (ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit").equals(comboBoxOffsetUnity.getSelectedItem().toString())) {
                 themeRange.setOffsetFixed(true);
                 labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
                 labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
@@ -1560,7 +1562,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
                     .getDisplayFilter().getJoinItems(), precision);
             if (null == theme || theme.getCount() == 0) {
                 // 专题图为空，提示专题图更新失败
-                UICommonToolkit.showErrorMessageDialog(MapViewProperties.getString("String_Theme_UpdataFailed"));
+                UICommonToolkit.showErrorMessageDialog(ControlsProperties.getString("String_Theme_UpdataFailed"));
                 comboBoxExpression.setSelectedItem(themeRange.getRangeExpression());
             } else {
                 this.isCustom = true;

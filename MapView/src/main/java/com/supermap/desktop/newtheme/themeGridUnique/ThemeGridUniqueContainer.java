@@ -4,12 +4,14 @@ import com.supermap.data.ColorGradientType;
 import com.supermap.data.Colors;
 import com.supermap.data.DatasetGrid;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonPanel.ThemeChangePanel;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeItemLabelDecorator;
 import com.supermap.desktop.newtheme.themeUnique.AddItemPanel;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.ColorSelectionPanel;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -53,7 +55,7 @@ public class ThemeGridUniqueContainer extends ThemeChangePanel {
 
 	private AddItemPanel addItemPanel;
 	private String[] nameStrings = {MapViewProperties.getString("String_Title_Visible"), MapViewProperties.getString("String_Title_Sytle"),
-			MapViewProperties.getString("String_ThemeGraphItemManager_UniqueValue"), MapViewProperties.getString("String_ThemeGraphTextFormat_Caption")};
+			MapViewProperties.getString("String_ThemeGraphItemManager_UniqueValue"), CoreProperties.getString("String_Caption")};
 	private transient ThemeGridUnique themeUnique;
 	private transient DatasetGrid datasetGrid;
 	private transient Layer themeUniqueLayer;
@@ -110,7 +112,7 @@ public class ThemeGridUniqueContainer extends ThemeChangePanel {
 	 * 资源化
 	 */
 	private void initResources() {
-		this.labelColorStyle.setText(MapViewProperties.getString("String_Label_ColorScheme"));
+		this.labelColorStyle.setText(ControlsProperties.getString("String_LabelColorScheme"));
 		this.buttonVisble.setToolTipText(MapViewProperties.getString("String_Title_Visible"));
 		this.buttonForeGroundColor.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
 		this.buttonAdd.setToolTipText(MapViewProperties.getString("String_Title_Add"));

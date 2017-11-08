@@ -92,7 +92,7 @@ public class PanelDatasetImageProperty extends JPanel {
 	}
 
 	private void initLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_NewDatasetProperty")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_DatasetGridPropertyControl_GroupBoxImageProperty")));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);

@@ -4,9 +4,10 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.Interface.IFormManager;
 import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.frame.FrameProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.ui.controls.TextFields.SmTextFieldLegit;
 import com.supermap.desktop.utilities.SelectionModeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -127,7 +128,7 @@ public class JPanelSettingEdit extends BaseSettingPanel {
 	@Override
 	protected void initResources() {
 		labelMaxVisibleVertex.setText(FrameProperties.getString("String_VisibleItemCount"));
-		labelSelectionMode.setText(FrameProperties.getString("String_Positive"));
+		labelSelectionMode.setText(ControlsProperties.getString("String_Positive"));
 		checkBoxThemeRefresh.setText(FrameProperties.getString("String_ThemeRefersh"));
 	}
 

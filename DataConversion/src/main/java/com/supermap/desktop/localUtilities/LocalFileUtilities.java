@@ -1,7 +1,6 @@
 package com.supermap.desktop.localUtilities;
 
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.FileTypeLocale;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -63,7 +62,7 @@ public class LocalFileUtilities {
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnew()[14], "gpx")
 				);
 				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-						DataConversionProperties.getString("String_FileType"), "CommonFunction", "OpenMany");
+						CoreProperties.getString("String_SelectFile"), "CommonFunction", "OpenMany");
 			} else {
 				String fileFilters = SmFileChoose.buildFileFilters(
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnewforlinux()[0], FileTypeLocale.getExtensionsnewforlinux()),
@@ -80,7 +79,7 @@ public class LocalFileUtilities {
 						SmFileChoose.createFileFilter(FileTypeLocale.getDescriptionnewforlinux()[11], "gpx")
 				);
 				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-						DataConversionProperties.getString("String_FileType"), "CommonFunction", "OpenMany");
+						CoreProperties.getString("String_SelectFile"), "CommonFunction", "OpenMany");
 			}
 
 		}

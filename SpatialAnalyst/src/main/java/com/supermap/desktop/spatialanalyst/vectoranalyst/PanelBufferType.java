@@ -1,6 +1,6 @@
 package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
-import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.ui.controls.comboBox.SmNumericFieldComboBox;
 
 import javax.swing.*;
@@ -96,10 +96,10 @@ public class PanelBufferType extends JPanel {
 
 
 	private void initResources() {
-		this.radioButtonBufferTypeRound.setText(SpatialAnalystProperties.getString("String_BufferTypeRound"));
-		this.radioButtonBufferTypeFlat.setText(SpatialAnalystProperties.getString("String_BufferTypeFlat"));
-		this.checkBoxBufferLeft.setText(SpatialAnalystProperties.getString("String_BufferTypeLeft"));
-		this.checkBoxBufferRight.setText(SpatialAnalystProperties.getString("String_BufferTypeRight"));
+		this.radioButtonBufferTypeRound.setText(ControlsProperties.getString("String_CheckBox_BufferRound"));
+		this.radioButtonBufferTypeFlat.setText(ControlsProperties.getString("String_CheckBox_BufferFlat"));
+		this.checkBoxBufferLeft.setText(ControlsProperties.getString("String_CheckBox_Left"));
+		this.checkBoxBufferRight.setText(ControlsProperties.getString("String_CheckBox_Right"));
 	}
 
 	private void initLayout() {

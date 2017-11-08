@@ -4,9 +4,9 @@ import com.supermap.data.Rectangle2D;
 import com.supermap.data.SteppedEvent;
 import com.supermap.data.SteppedListener;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.core.Time;
 import com.supermap.desktop.core.TimeType;
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
 import com.supermap.mapping.ImageType;
 import com.supermap.mapping.Map;
@@ -51,7 +51,7 @@ public class MapOutputPictureProgressCallable extends UpdateProgressCallable {
 
 	@Override
 	public Boolean call() throws Exception {
-		Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImage_AvoidAndFlowEnabled"));
+		Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_OutputImage_AvoidAndFlowEnabled"));
 		try {
 			this.createMapOutputPictureProgress = false;
 			String resultMessage;
@@ -75,9 +75,9 @@ public class MapOutputPictureProgressCallable extends UpdateProgressCallable {
 			}
 			// 输出结果信息
 			if (createMapOutputPictureProgress) {
-				resultMessage = String.format(MapViewProperties.getString("String_OutputToFile_Successed"), path);
+				resultMessage = String.format(ControlsProperties.getString("String_OutputToFile_Successed"), path);
 			} else {
-				resultMessage = String.format(MapViewProperties.getString("String_OutputToFile_Failed"), path);
+				resultMessage = String.format(ControlsProperties.getString("String_OutputToFile_Failed"), path);
 			}
 			Application.getActiveApplication().getOutput().output(resultMessage);
 

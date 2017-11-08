@@ -7,11 +7,11 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IFormTransformation;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.enums.FormTransformationSubFormType;
 import com.supermap.desktop.event.FormClosedListener;
 import com.supermap.desktop.event.FormClosingListener;
 import com.supermap.desktop.event.FormShownListener;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerGroup;
@@ -32,7 +32,7 @@ public class TransformationReference extends TransformationBase implements ITran
 	public TransformationReference(FormTransformation formTransformation) {
 		super(formTransformation);
 		mapControl.getMap().setWorkspace(Application.getActiveApplication().getWorkspace());
-		mapControl.getMap().setName(DataEditorProperties.getString("String_Transfernation_ReferLayer"));
+		mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_ReferLayer"));
 		this.addedMaps = new ArrayList<>();
 	}
 
@@ -54,7 +54,7 @@ public class TransformationReference extends TransformationBase implements ITran
 		if (mapControl.getMap().getLayers().getCount() == 0 && maps.size() == 1) {
 			addedMaps.add(maps.get(0));
 			mapControl.getMap().open(maps.get(0).getName());
-			mapControl.getMap().setName(DataEditorProperties.getString("String_Transfernation_ReferLayer"));
+			mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_ReferLayer"));
 			IForm activeForm = Application.getActiveApplication().getActiveForm();
 			if (activeForm instanceof IFormTransformation && ((IFormTransformation) activeForm).getCurrentSubFormType() == FormTransformationSubFormType.Reference) {
 				UICommonToolkit.getLayersManager().setMap(mapControl.getMap());

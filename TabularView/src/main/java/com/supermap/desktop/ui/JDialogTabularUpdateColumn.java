@@ -474,19 +474,19 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 	private void setComboBoxSourceOfFieldItems(FieldType defaultType) {
 		if (defaultType.equals(FieldType.BOOLEAN)) {
 			comboBoxSourceOfField.removeAllItems();
-			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"));
+			comboBoxSourceOfField.addItem(CoreProperties.getString("String_ToolBar_Advanced"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeOneField"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeTwoFields"));
 		} else if (defaultType.equals(FieldType.DATETIME)) {
 			comboBoxSourceOfField.removeAllItems();
-			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"));
+			comboBoxSourceOfField.addItem(CoreProperties.getString("String_ToolBar_Advanced"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeMath"));
 		} else if (defaultType.equals(FieldType.LONGBINARY)) {
 			comboBoxSourceOfField.removeAllItems();
-			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"));
+			comboBoxSourceOfField.addItem(CoreProperties.getString("String_ToolBar_Advanced"));
 		} else {
 			comboBoxSourceOfField.removeAllItems();
-			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"));
+			comboBoxSourceOfField.addItem(CoreProperties.getString("String_ToolBar_Advanced"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeOneField"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeTwoFields"));
 			comboBoxSourceOfField.addItem(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeMath"));
@@ -815,7 +815,7 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 	private void sourceOfFieldChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			String sourceOfField = comboBoxSourceOfField.getSelectedItem().toString();
-			if (sourceOfField.equals(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"))) {
+			if (sourceOfField.equals(CoreProperties.getString("String_ToolBar_Advanced"))) {
 				// 设置统一运算界面
 				setUnityEvaluationInfo();
 				return;
@@ -932,7 +932,7 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 			FieldType updataFieldType = fieldInfoMap.get(comboBoxUpdateField.getSelectedIndex()).getType();
 			String expressionValue = "";
 			String updateMode = comboBoxSourceOfField.getSelectedItem().toString();
-			if (updateMode.equals(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"))) {
+			if (updateMode.equals(CoreProperties.getString("String_ToolBar_Advanced"))) {
 				try {
 					expressionValue = getTextBoxSecondFieldValue(updataFieldType).toString();
 				} catch (Exception e) {
@@ -1041,12 +1041,12 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 		try {
 			String updateMode = comboBoxSourceOfField.getSelectedItem().toString();
 			String secondVaule = textFieldSecondField.getText();
-			if (updateFieldType == FieldType.BOOLEAN && updateMode.equals(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"))) {
+			if (updateFieldType == FieldType.BOOLEAN && updateMode.equals(CoreProperties.getString("String_ToolBar_Advanced"))) {
 				secondVaule = comboBoxSecondField.getSelectedItem().toString();
 			}
 			if (updateFieldType == FieldType.BYTE || updateFieldType == FieldType.SINGLE || updateFieldType == FieldType.INT16 ||
 					updateFieldType == FieldType.INT32 || updateFieldType == FieldType.INT64 || updateFieldType == FieldType.DOUBLE) {
-//                    ||updateMode.equals(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"))) {
+//                    ||updateMode.equals(CoreProperties.getString("String_ToolBar_Advanced"))) {
 				try {
 					value = Convert.toDouble(secondVaule);
 				} catch (Exception e) {
@@ -1141,7 +1141,7 @@ public class JDialogTabularUpdateColumn extends SmDialog {
 		this.buttonApply.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try {
 			String updateMode = comboBoxSourceOfField.getSelectedItem().toString();
-			if (updateMode.equals(TabularViewProperties.getString("String_FormTabularUpdataColumn_UpdataModeSetValue"))) {
+			if (updateMode.equals(CoreProperties.getString("String_ToolBar_Advanced"))) {
 				FieldInfo fieldInfo = fieldInfoMap.get(comboBoxUpdateField.getSelectedIndex());
 				FieldType updataFieldType = fieldInfo.getType();
 				Object value = getTextBoxSecondFieldValue(updataFieldType);

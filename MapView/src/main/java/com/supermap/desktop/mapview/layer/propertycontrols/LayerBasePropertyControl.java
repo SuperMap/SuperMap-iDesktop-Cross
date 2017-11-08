@@ -186,7 +186,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 	protected void initializeResources() {
 		((TitledBorder) this.getBorder()).setTitle(MapViewProperties.getString("String_MapProperty_VisualControl"));
 		this.checkBoxIsVisible.setText(MapViewProperties.getString("String_Visible"));
-		this.checkBoxIsEditable.setText(MapViewProperties.getString("String_Editable"));
+		this.checkBoxIsEditable.setText(CoreProperties.getString("String_IsEditable"));
 		this.checkBoxIsSelectable.setText(MapViewProperties.getString("String_LayerControl_Selectable"));
 		this.checkBoxIsSnapable.setText(MapViewProperties.getString("String_LayerControl_Snapable"));
 		this.labelLayerName.setText(MapViewProperties.getString("String_LayerControl_Label_LayerName"));

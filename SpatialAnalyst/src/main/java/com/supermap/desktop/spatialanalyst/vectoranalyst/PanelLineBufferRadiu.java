@@ -1,6 +1,7 @@
 package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
 import com.supermap.data.DatasetVector;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.comboBox.ComboBoxLengthUnit;
@@ -79,13 +80,13 @@ public class PanelLineBufferRadiu extends JPanel {
 
 	private void initResources() {
 		this.labelUnit.setText(SpatialAnalystProperties.getString("String_BufferRadiusUnit"));
-		this.labelLeftNumericFieldRadius.setText(SpatialAnalystProperties.getString("String_Label_LeftBufferRadius"));
-		this.labelRightNumericFieldRadius.setText(SpatialAnalystProperties.getString("String_Label_RightBufferRadius"));
+		this.labelLeftNumericFieldRadius.setText(ControlsProperties.getString("String_leftRadius"));
+		this.labelRightNumericFieldRadius.setText(ControlsProperties.getString("String_rightRadius"));
 
 	}
 
 	private void initLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(SpatialAnalystProperties.getString("String_BufferRadius")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_BufferRadius")));
 
 		//@formatter:off
 		GroupLayout panelBufferRadiusLayout = new GroupLayout(this);

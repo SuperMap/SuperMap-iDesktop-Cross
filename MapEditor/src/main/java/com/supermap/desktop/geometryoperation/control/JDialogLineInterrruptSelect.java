@@ -3,6 +3,7 @@ package com.supermap.desktop.geometryoperation.control;
 import com.supermap.data.GeoLine;
 import com.supermap.data.GeoStyle;
 import com.supermap.data.Recordset;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.geometryoperation.EditEnvironment;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
@@ -47,7 +48,7 @@ public class JDialogLineInterrruptSelect extends SmDialog {
 
 
     private Object[] tableHeadTitles = {MapEditorProperties.getString("String_Interrupt"),
-            MapEditorProperties.getString("String_Object"),
+            ControlsProperties.getString("String_Object"),
             "SMID",
             MapEditorProperties.getString("String_LayersOfObject")};
     private ActionListener actionListener = new ActionListener() {

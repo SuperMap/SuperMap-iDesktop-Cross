@@ -294,7 +294,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.labelDatabaseName = new JLabel();
 		this.labelMutiTenseVersion = new JLabel();
 		this.helpProvider = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_ServeNameHelp"), false);
-		this.warningProviderPasswordNotSame = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_PasswordIsNotSame"), true);
+		this.warningProviderPasswordNotSame = new WarningOrHelpProvider(CoreProperties.getString("String_ErrorProvider_Password_Confirm"), true);
 		this.checkBoxBackgroundTransparency = new JCheckBox();
 		this.checkBoxFullFillCacheImage = new JCheckBox();
 		this.checkBoxFilterSelectionObjectInLayer = new JCheckBox();
@@ -379,7 +379,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.localSplitTable = new MutiTable();
 		this.scrollPane.setViewportView(this.localSplitTable);
 
-		this.tabbedPane.add(MapViewProperties.getString("MapCache_BasicSetting"), panelBasicSetting);
+		this.tabbedPane.add(ControlsProperties.getString("String_GroupBox_ParameterSetting_Base"), panelBasicSetting);
 		this.tabbedPane.add(MapViewProperties.getString("MapCache_RangeParameter"), panelRangeParameter);
 		this.tabbedPane.add(MapViewProperties.getString("MapCache_ImageSave"), panelImageSave);
 		initPanelBasicSetting();
@@ -578,7 +578,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 
 	private void initPanelRangeParameter() {
 		Map activeMap = MapUtilities.getActiveMap();
-		this.panelCacheRange = new PanelGroupBoxViewBounds(this, MapViewProperties.getString("MapCache_CacheRange"), activeMap);
+		this.panelCacheRange = new PanelGroupBoxViewBounds(this, ControlsProperties.getString("String_CacheBounds"), activeMap);
 		this.panelIndexRange = new PanelGroupBoxViewBounds(this, MapViewProperties.getString("MapCache_IndexRange"), activeMap);
 		GroupLayout groupLayoutImageSave = new GroupLayout(this.panelRangeParameter);
 		groupLayoutImageSave.setHorizontalGroup(groupLayoutImageSave.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -603,11 +603,11 @@ public class DialogMapCacheBuilder extends SmDialog {
 	}
 
 	private void initResouces() {
-		this.autoCloseDialog.setText(MapViewProperties.getString("MapCache_AutoCloseDailog"));
+		this.autoCloseDialog.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 		this.showProgressBar.setText(MapViewProperties.getString("MapCache_ShowProgressBar"));
 		this.mutiProcessCache.setText(MapViewProperties.getString("MapCache_MutiProcessCache"));
 		this.buttonSetting.setText(MapViewProperties.getString("MapCache_Setting"));
-		this.buttonOK.setText(MapViewProperties.getString("String_BatchAddColorTableOKButton"));
+		this.buttonOK.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
 		this.buttonCancel.setText(MapViewProperties.getString("String_BatchAddColorTableCancelButton"));
 
 
@@ -622,22 +622,22 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.labelSplitMode.setText(MapViewProperties.getString("MapCache_LabelSplitMode"));
 		this.labelConfig.setText(MapViewProperties.getString("MapCache_LabelConfig"));
 		this.labelConfigValue.setText(MapViewProperties.getString("MapCache_LabelConfigValue"));
-		this.labelCacheName.setText(MapViewProperties.getString("MapCache_LabelCacheName"));
-		this.labelCachePath.setText(MapViewProperties.getString("MapCache_LabelCachePath"));
-		this.checkBoxUpdataOrAddCacheFile.setText(MapViewProperties.getString("MapCache_UpdataOrAddCacheFile"));
-		this.checkBoxGoOnOrRecoveryCacheFile.setText(MapViewProperties.getString("MapCache_GoOnOrRecoveryCacheFile"));
+		this.labelCacheName.setText(ControlsProperties.getString("String_CacheName"));
+		this.labelCachePath.setText(ControlsProperties.getString("MapCache_LabelCachePath"));
+		this.checkBoxUpdataOrAddCacheFile.setText(CoreProperties.getString("String_UpdateCacheSciFile"));
+		this.checkBoxGoOnOrRecoveryCacheFile.setText(CoreProperties.getString("String_ResumeCacheSciFile"));
 
 		this.labelImageType.setText(MapViewProperties.getString("MapCache_ImageType"));
 		this.labelPixel.setText(MapViewProperties.getString("MapCache_Pixel"));
 		this.labelImageCompressionRatio.setText(MapViewProperties.getString("MapCache_ImageCompressionRation"));
-		this.labelSaveType.setText(MapViewProperties.getString("MapCache_SaveType"));
-		this.labelUserName.setText(MapViewProperties.getString("MapCache_UserName"));
-		this.labelUserPassword.setText(MapViewProperties.getString("MapCache_UserPassword"));
-		this.labelConfirmPassword.setText(MapViewProperties.getString("MapCache_ConfirmPassword"));
-		this.labelServerName.setText(MapViewProperties.getString("MapCache_ServerName"));
-		this.labelDatabaseName.setText(MapViewProperties.getString("MapCache_DatabaseName"));
+		this.labelSaveType.setText(ControlsProperties.getString("String_DatabaseType"));
+		this.labelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
+		this.labelUserPassword.setText(ControlsProperties.getString("String_Label_UserPassword"));
+		this.labelConfirmPassword.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
+		this.labelServerName.setText(ControlsProperties.getString("String_Label_ServersName"));
+		this.labelDatabaseName.setText(ControlsProperties.getString("String_Label_DatabaseName"));
 		this.labelMutiTenseVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
-		this.checkBoxBackgroundTransparency.setText(MapViewProperties.getString("MapCache_BackgroundTransparency"));
+		this.checkBoxBackgroundTransparency.setText(ControlsProperties.getString("String_BackgroundTransparency"));
 		this.checkBoxFullFillCacheImage.setText(MapViewProperties.getString("MapCache_FullFillCacheImage"));
 		this.checkBoxFilterSelectionObjectInLayer.setText(MapViewProperties.getString("MapCache_FilterSelectObjectInLayer"));
 
@@ -834,7 +834,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setMinWidth(125);
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_INDEX).setHeaderValue("");
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_SCALE).setHeaderValue(MapViewProperties.getString("MapCache_Scale"));
-		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setHeaderValue(MapViewProperties.getString("MapCache_ScaleTitle"));
+		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setHeaderValue(CoreProperties.getString("String_Caption"));
 	}
 
 	private void setLocalSplitTableValue(double value[]) {
@@ -1228,7 +1228,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 			} else {
 				Application.getActiveApplication().getOutput().output("\"" + this.mapCacheBuilder.getMap().getName() + "\"" + MapViewProperties.getString("MapCache_StartCreateFailed"));
 			}
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + MapViewProperties.getString("MapCache_ShowTime"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + CoreProperties.getString("String_Time_Seconds"));
 			if (this.autoCloseDialog.isSelected()) {
 				cancelAndCloseDailog();
 				this.mapCacheBuilder.dispose();

@@ -6,6 +6,7 @@ import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.implement.DefaultComboBoxUI;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.CellRenders.ListDataCellRender;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
@@ -91,14 +92,14 @@ public class MapClipSetDialog extends SmDialog {
         this.clipModeComboBox.setEnabled(false);
 
         this.accuratelyClipCheckBox = new JCheckBox();
-        this.accuratelyClipComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), MapViewProperties.getString("String_MapClip_Yes")});
+        this.accuratelyClipComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_True")});
         this.accuratelyClipComboBox.setPreferredSize(ControlDefaultValues.DEFAULT_PREFERREDSIZE);
         this.accuratelyClipComboBox.setRenderer(new ListDataCellRender());
         this.accuratelyClipComboBox.setUI(new DefaultComboBoxUI());
         this.accuratelyClipComboBox.setEnabled(false);
 
         this.eraseCheckBox = new JCheckBox();
-        this.eraseComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), MapViewProperties.getString("String_MapClip_Yes")});
+        this.eraseComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_True")});
         this.eraseComboBox.setPreferredSize(ControlDefaultValues.DEFAULT_PREFERREDSIZE);
         this.eraseComboBox.setRenderer(new ListDataCellRender());
         this.eraseComboBox.setUI(new DefaultComboBoxUI());
@@ -150,7 +151,7 @@ public class MapClipSetDialog extends SmDialog {
     }
 
     private void initResources() {
-        this.setTitle(MapViewProperties.getString("String_MapClip_GiveSameValue"));
+        this.setTitle(CoreProperties.getString("String_toolStripButtonAdvanced"));
 
         this.accuratelyClipCheckBox.setText(MapViewProperties.getString("String_MapClip_Image_ExactClip"));
 	    this.checkBoxAimDataDatasource.setText(ControlsProperties.getString("String_TargetDatasource"));

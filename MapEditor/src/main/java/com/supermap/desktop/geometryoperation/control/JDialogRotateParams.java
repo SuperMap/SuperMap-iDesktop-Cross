@@ -2,6 +2,7 @@ package com.supermap.desktop.geometryoperation.control;
 
 import com.supermap.data.Point2D;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -71,7 +72,7 @@ public class JDialogRotateParams extends SmDialog {
 		setTitle(MapEditorProperties.getString("String_GeometryOperation_Rotate_Title"));
 		this.labelCenterX = new JLabel(MapEditorProperties.getString("String_GeometryOperation_Rotate_CenterPointX"));
 		this.labelCenterY = new JLabel(MapEditorProperties.getString("String_GeometryOperation_Rotate_CenterPointY"));
-		this.labelAngle = new JLabel(MapEditorProperties.getString("String_GeometryOperation_Rotate_Parameter"));
+		this.labelAngle = new JLabel(ControlsProperties.getString("String_Label_SymbolAngle"));
 		this.textFieldCenterX = ComponentFactory.createNumericTextField(center.getX(), -1 * Double.MAX_VALUE, Double.MAX_VALUE);
 		this.textFieldCenterY = ComponentFactory.createNumericTextField(center.getY(), -1 * Double.MAX_VALUE, Double.MAX_VALUE);
 		this.textFieldAngle = ComponentFactory.createNumericTextField(15, -360, 360);

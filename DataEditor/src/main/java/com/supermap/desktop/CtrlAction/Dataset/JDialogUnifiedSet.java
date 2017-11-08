@@ -219,10 +219,10 @@ public class JDialogUnifiedSet extends JDialog {
 	 * 资源化
 	 */
 	private void initResources() {
-		setTitle(DataEditorProperties.getString("String_GroupBox_ParameterSetting"));
+		setTitle(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		okButton.setText(CoreProperties.getString("String_Button_OK"));
 		cancelButton.setText(CoreProperties.getString("String_Button_Cancel"));
-		panel.setBorder(new TitledBorder(null, DataEditorProperties.getString("String_GroupBox_ParameterSetting"), TitledBorder.LEADING, TitledBorder.TOP,
+		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_toolStripButtonAdvanced"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
 		checkboxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
 		checkboxEncodeType.setText(CoreProperties.getString("String_ColumnHeader_EncodeType"));

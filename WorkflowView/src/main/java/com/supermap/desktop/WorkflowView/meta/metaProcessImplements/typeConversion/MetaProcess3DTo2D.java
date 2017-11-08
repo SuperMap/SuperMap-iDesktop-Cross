@@ -2,7 +2,6 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.geometry.Abstract.IGeometry;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
@@ -63,11 +62,11 @@ public abstract class MetaProcess3DTo2D extends MetaProcessTypeConversion {
 		parameters.setParameters(inputCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, datasetTypeToTypes(inputType), inputCombine);
 		if (outputType.equals(DatasetType.REGION)) {
-			parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Region_Dataset"), datasetTypeToTypes(outputType), outputCombine);
+			parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Region"), datasetTypeToTypes(outputType), outputCombine);
 		} else if (outputType.equals(DatasetType.LINE)) {
-			parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Line_Dataset"), datasetTypeToTypes(outputType), outputCombine);
+			parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Line"), datasetTypeToTypes(outputType), outputCombine);
 		} else if (outputType.equals(DatasetType.POINT)) {
-			parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_Result_Point_Dataset"), datasetTypeToTypes(outputType), outputCombine);
+			parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Point"), datasetTypeToTypes(outputType), outputCombine);
 		}
 	}
 

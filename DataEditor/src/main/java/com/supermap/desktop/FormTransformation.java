@@ -7,6 +7,7 @@ import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationTa
 import com.supermap.desktop.Interface.IContextMenuManager;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IFormTransformation;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
@@ -629,17 +630,17 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 
 			String x;
 			if (Double.isInfinite(point.getX())) {
-				x = DataEditorProperties.getString("String_Infinite");
+				x = ControlsProperties.getString("String_Infinite");
 			} else if (Double.isNaN(point.getX())) {
-				x = DataEditorProperties.getString("String_NotANumber");
+				x = ControlsProperties.getString("String_NotANumber");
 			} else {
 				x = format.format(point.getX());
 			}
 			String y;
 			if (Double.isInfinite(point.getY())) {
-				y = DataEditorProperties.getString("String_Infinite");
+				y = ControlsProperties.getString("String_Infinite");
 			} else if (Double.isNaN(point.getY())) {
-				y = DataEditorProperties.getString("String_NotANumber");
+				y = ControlsProperties.getString("String_NotANumber");
 			} else {
 				y = format.format(point.getY());
 			}
@@ -696,14 +697,14 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 		pointTemp = (pointTemp - min) * 60;
 		DecimalFormat format = new DecimalFormat("######0.00");
 
-		return MessageFormat.format(DataEditorProperties.getString("String_LongitudeLatitude"), angles, min, format.format(pointTemp));
+		return MessageFormat.format(CoreProperties.getString("String_Degree_DDMMSS"), angles, min, format.format(pointTemp));
 	}
 
 	private void initCenter(MapControl mapControl) {
 		DecimalFormat format = new DecimalFormat("######0.####");
-		String x = Double.isNaN(mapControl.getMap().getCenter().getX()) ? DataEditorProperties.getString("String_NotANumber") : format.format(mapControl.getMap()
+		String x = Double.isNaN(mapControl.getMap().getCenter().getX()) ? ControlsProperties.getString("String_NotANumber") : format.format(mapControl.getMap()
 				.getCenter().getX());
-		String y = Double.isNaN(mapControl.getMap().getCenter().getY()) ? DataEditorProperties.getString("String_NotANumber") : format.format(mapControl.getMap()
+		String y = Double.isNaN(mapControl.getMap().getCenter().getY()) ? ControlsProperties.getString("String_NotANumber") : format.format(mapControl.getMap()
 				.getCenter().getY());
 		((SmTextField) getStatusbar(STATE_BAR_CENTER_X)).setText(x);
 		((SmTextField) getStatusbar(STATE_BAR_CENTER_X)).setCaretPosition(0);

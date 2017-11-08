@@ -76,8 +76,8 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 			DataConversionProperties.getString("string_outputtype"),
 			DataConversionProperties.getString("string_tabletitle_filename"),
 			DataConversionProperties.getString("string_directory"),
-			DataConversionProperties.getString("string_coverage"),
-			DataConversionProperties.getString("string_tabletitle_state")};
+			ControlsProperties.getString("string_coverage"),
+			CoreProperties.getString("String_State")};
 
 	private ActionListener addDatasetListener = new ActionListener() {
 		@Override
@@ -187,7 +187,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 				UICommonToolkit.showMessageDialog(DataConversionProperties.getString("String_ExportSettingPanel_Cue_AddFiles"));
 			} else {
 				FormProgressTotal formProgress = new FormProgressTotal();
-				formProgress.setTitle(DataConversionProperties.getString("String_FormExport_FormText"));
+				formProgress.setTitle(ControlsProperties.getString("String_FormExport_FormText"));
 				formProgress.doWork(new ExportCallable(panelExports, tableExport));
 				if (checkBoxAutoClose.isSelected()) {
 					dispose();
@@ -720,7 +720,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 	}
 
 	private void initResources() {
-		this.setTitle(DataConversionProperties.getString("String_FormExport_FormText"));
+		this.setTitle(ControlsProperties.getString("String_FormExport_FormText"));
 		this.buttonAddDataset.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_AddItem.png"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
@@ -730,7 +730,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		this.buttonAddDataset.setToolTipText(DataConversionProperties.getString("string_button_add"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
-		this.buttonInvertSelect.setToolTipText(DataConversionProperties.getString("string_button_invertSelect"));
+		this.buttonInvertSelect.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
 		this.buttonExport.setText(CoreProperties.getString("String_Export"));
 		this.buttonExport.setToolTipText(CoreProperties.getString("String_Export"));
 		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));

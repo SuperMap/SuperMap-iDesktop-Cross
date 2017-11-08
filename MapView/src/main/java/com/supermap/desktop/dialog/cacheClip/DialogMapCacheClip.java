@@ -1,7 +1,9 @@
 package com.supermap.desktop.dialog.cacheClip;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -117,9 +119,9 @@ public class DialogMapCacheClip extends SmDialog {
 	}
 
 	private void initResources() {
-		this.setTitle(MapViewProperties.getString("String_ClipCacheType"));
+		this.setTitle(CoreProperties.getString("String_CacheType"));
 		this.singleProcessClip.setText(MapViewProperties.getString("String_SingleProcessClip"));
-		this.multiProcessClip.setText(MapViewProperties.getString("String_MultiProcessClip"));
+		this.multiProcessClip.setText(ControlsProperties.getString("String_MultiProcessClip"));
 		this.labelWarning.setText(MapViewProperties.getString("String_ClipProcess"));
 		this.radioButtonYes.setText(MapViewProperties.getString("String_ClipProcessYes"));
 		this.radioButtonNo.setText(MapViewProperties.getString("String_ClipProcessNo"));

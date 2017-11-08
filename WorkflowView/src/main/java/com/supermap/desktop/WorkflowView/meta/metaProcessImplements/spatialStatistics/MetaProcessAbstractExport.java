@@ -120,15 +120,15 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		EqualDatasourceConstraint constraint = new EqualDatasourceConstraint();
 		constraint.constrained(datasource, ParameterDatasource.DATASOURCE_FIELD_NAME);
 		constraint.constrained(dataset, ParameterSingleDataset.DATASOURCE_FIELD_NAME);
-		this.supportType = new ParameterComboBox(ProcessProperties.getString("String_ExportType"));
+		this.supportType = new ParameterComboBox(ControlsProperties.getString("String_ExportType"));
 		this.supportType.setEnabled(false);
 		this.targetName = new ParameterTextField(ProcessProperties.getString("String_TargetName"));
 		this.targetName.setEnabled(false);
-		this.exportPath = new ParameterFile(ProcessProperties.getString("String_ExportPath"));
+		this.exportPath = new ParameterFile(ControlsProperties.getString("String_ExportPath"));
 		this.exportPath.setValueType(BasicTypes.STRING);
 		this.exportPath.setRequisite(true);
 		this.exportPath.setEnabled(false);
-		this.cover = new ParameterCheckBox(ProcessProperties.getString("String_Cover"));
+		this.cover = new ParameterCheckBox(ControlsProperties.getString("string_coverage"));
 		this.cover.setEnabled(false);
 		this.basicCombine = new ParameterCombine();
 		this.basicCombine.setDescribe(CoreProperties.getString("String_ResultSet"));
@@ -291,10 +291,10 @@ public class MetaProcessAbstractExport extends MetaProcess {
 				if (succeedSettings.length > 0) {
 					isSuccessful = true;
 					time = String.valueOf((System.currentTimeMillis() - startTime) / 1000);
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_FormExport_OutPutInfoTwo"),
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_FormExport_OutPutInfoTwo"),
 							selectDataset.getName() + "@" + selectDataset.getDatasource().getAlias(), targetPath, time));
 				} else {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_FormExport_OutPutInfoOne"), selectDataset.getName() + "@" + selectDataset.getDatasource().getAlias()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_FormExport_OutPutInfoOne"), selectDataset.getName() + "@" + selectDataset.getDatasource().getAlias()));
 				}
 			} catch (Exception e) {
 				Application.getActiveApplication().getOutput().output(e);
@@ -314,8 +314,8 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		boolean isSuccess = false;
 		try {
 			if (null != result) {
-				String successExportInfo = ProcessProperties.getString("String_FormExport_OutPutInfoTwo");
-				String failExportInfo = ProcessProperties.getString("String_FormExport_OutPutInfoOne");
+				String successExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoTwo");
+				String failExportInfo = ControlsProperties.getString("String_FormExport_OutPutInfoOne");
 				if (null != result.getSuccess()) {
 					isSuccess = true;
 					String successDatasetAlis = getDatasetAlis(result.getSuccess());
@@ -333,7 +333,7 @@ public class MetaProcessAbstractExport extends MetaProcess {
 
 	private String getDatasetAlis(ExportSetting tempSetting) {
 		Dataset tempDataset = (Dataset) tempSetting.getSourceData();
-		return tempDataset.getName() + ProcessProperties.getString("string_index_and") + tempDataset.getDatasource().getAlias();
+		return tempDataset.getName() + ControlsProperties.getString("string_index_and") + tempDataset.getDatasource().getAlias();
 	}
 
 	@Override

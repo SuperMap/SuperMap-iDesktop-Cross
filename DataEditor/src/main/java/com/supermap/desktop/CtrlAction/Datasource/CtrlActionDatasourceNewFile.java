@@ -6,6 +6,7 @@ import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.properties.CoreProperties;
@@ -33,8 +34,8 @@ public class CtrlActionDatasourceNewFile extends CtrlAction {
 			String filePath = "";
 			String alias = "";
 			if (!SmFileChoose.isModuleExist("DatasourceNewFile")) {
-				String fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(DataEditorProperties.getString("String_UDBFileFilterName"),
-						DataEditorProperties.getString("String_UDBFileFilters")));
+				String fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(ControlsProperties.getString("String_FileFilters_Datasourse"),
+						ControlsProperties.getString("String_UDBFileFilters")));
 				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 						DataEditorProperties.getString("String_NewDatasourceFile"), "DatasourceNewFile", "SaveOne");
 			}

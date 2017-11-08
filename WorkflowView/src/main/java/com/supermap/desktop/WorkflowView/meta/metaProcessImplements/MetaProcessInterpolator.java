@@ -160,7 +160,7 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 		info.expectedCount = 12;
 		searchMode.setSelectedItem(info);
 		ParameterCombine modeSetCombine = new ParameterCombine();
-		modeSetCombine.setDescribe(ProcessProperties.getString("String_InterpolationAnalyst_SearchModeSetting"));
+		modeSetCombine.setDescribe(ControlsProperties.getString("String_InterpolationAnalyst_SearchModeSetting"));
 		modeSetCombine.addParameters(searchMode);
 
 		parameterPower = new ParameterNumber(CoreProperties.getString("String_Power"));
@@ -196,7 +196,7 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 		parameterNugget = new ParameterNumber(CoreProperties.getString("String_Nugget"));
 		parameterNugget.setSelectedItem(0);
 		ParameterCombine otherParamCombine = new ParameterCombine();
-		otherParamCombine.setDescribe(ProcessProperties.getString("String_InterpolationAnalyst_OtherParameters"));
+		otherParamCombine.setDescribe(ControlsProperties.getString("String_InterpolationAnalyst_OtherParameters"));
 
 		if (interpolationAlgorithmType.equals(InterpolationAlgorithmType.IDW)) {
 			otherParamCombine.addParameters(parameterPower);

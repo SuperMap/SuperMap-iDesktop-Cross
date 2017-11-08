@@ -42,7 +42,7 @@ public class MetaProcessWatershed extends MetaProcessHydrology {
 	protected void initParaComponent() {
 		pointsDatasource = new ParameterDatasourceConstrained();
 		pointsDataset = new ParameterSingleDataset(DatasetType.GRID, DatasetType.POINT);
-		textAreaSQL = new ParameterTextArea(ProcessProperties.getString("String_ExpressionForTextArea"));
+		textAreaSQL = new ParameterTextArea(ControlsProperties.getString("String_LabelFilter"));
 		buttonSQL = new ParameterSQLExpression(ControlsProperties.getString("String_SQLExpression"));
 
 		EqualDatasourceConstraint constraintSource1 = new EqualDatasourceConstraint();

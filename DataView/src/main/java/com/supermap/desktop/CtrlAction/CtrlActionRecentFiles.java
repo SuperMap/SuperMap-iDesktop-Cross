@@ -7,7 +7,6 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.DatasourceOpenFileUtilties;
-import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.dialog.JDialogGetPassword;
 import com.supermap.desktop.enums.OpenWorkspaceResult;
 import com.supermap.desktop.implement.CtrlAction;
@@ -78,7 +77,7 @@ public class CtrlActionRecentFiles extends CtrlAction {
 					}
 				} else {
 					// 提示文件不存在，删除最近文件项
-					UICommonToolkit.showMessageDialog(DataViewProperties.getString("String_FileDonotExist"));
+					UICommonToolkit.showMessageDialog(ControlsProperties.getString("String_Error_FileUnExisted"));
 					if (isWorkSpaceFile(file)) {
 						RecentFileUtilties.removeRecentFile(RecentFileUtilties.FILE_TYPE_WORKSPACE, filePath);
 						RecentFileUtilties.fillMenu(RecentFileUtilties.FILE_TYPE_WORKSPACE);

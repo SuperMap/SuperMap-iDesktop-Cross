@@ -6,6 +6,7 @@ import com.supermap.desktop.core.Time;
 import com.supermap.desktop.core.TimeType;
 import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import java.text.MessageFormat;
@@ -52,7 +53,7 @@ public class SQLQueryProgressCallable extends UpdateProgressCallable {
 			resultRecord.moveFirst();
 			if (resultDataset == null) {
 				result = false;
-				Application.getActiveApplication().getOutput().output(DataViewProperties.getString("String_SQLQuerySaveAsResultFaield"));
+				Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_SQLQuerySaveAsResultFaield"));
 			} else {
 				Application.getActiveApplication().getOutput()
 						.output(MessageFormat.format(DataViewProperties.getString("String_SQLQuerySavaAsResultSucces"), resultDataset.getName()));

@@ -2,8 +2,8 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.spatialStat
 
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -19,7 +19,7 @@ import com.supermap.desktop.utilities.DatasetUtilities;
  */
 public abstract class MetaProcessAnalyzingPatterns extends MetaProcess {
 	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
-	protected static final String INPUT_SPATIALWEIGHTMATRIXFILE = ProcessOutputResultProperties.getString("String_SpatialWeightMatrixFile");
+	protected static final String INPUT_SPATIALWEIGHTMATRIXFILE = ControlsProperties.getString("String_SPATIALWEIGHTMATRIXFILE");
 	protected ParameterDatasource datasource = new ParameterDatasource();
 	protected ParameterSingleDataset dataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 	protected ParameterPatternsParameter parameterPatternsParameter = new ParameterPatternsParameter(getKey());

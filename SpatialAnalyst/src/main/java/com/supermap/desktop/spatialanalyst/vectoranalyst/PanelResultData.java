@@ -4,7 +4,6 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -83,7 +82,7 @@ public class PanelResultData extends JPanel {
 	}
 
 	private void setPanelResultDataLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(SpatialAnalystProperties.getString("String_ResultData")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_Label_ResultDataSetting")));
 
 		GroupLayout panelResultDataLayout = new GroupLayout(this);
 		panelResultDataLayout.setAutoCreateGaps(true);

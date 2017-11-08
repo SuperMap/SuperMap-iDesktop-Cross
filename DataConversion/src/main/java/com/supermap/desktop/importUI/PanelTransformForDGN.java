@@ -3,8 +3,9 @@ package com.supermap.desktop.importUI;
 import com.supermap.data.conversion.ImportSetting;
 import com.supermap.data.conversion.ImportSettingDGN;
 import com.supermap.desktop.baseUI.PanelTransform;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
@@ -137,9 +138,9 @@ public class PanelTransformForDGN extends PanelTransform {
 
     @Override
     public void initResources() {
-        this.setBorder(new TitledBorder(DataConversionProperties.getString("string_border_panelTransform")));
-        this.checkBoxImportCellAsPoint.setText(DataConversionProperties.getString("String_importCellAsPoint"));
-        this.checkBoxImportByLayer.setText(DataConversionProperties.getString("string_checkbox_chckbxMergeLayer"));
+        this.setBorder(new TitledBorder(ControlsProperties.getString("string_border_panelTransform")));
+        this.checkBoxImportCellAsPoint.setText(ControlsProperties.getString("String_importCellAsPoint"));
+        this.checkBoxImportByLayer.setText(CoreProperties.getString("String_MergeLayer"));
     }
 
     public JCheckBox getCheckBoxImportCellAsPoint() {

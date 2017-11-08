@@ -1,6 +1,7 @@
 package com.supermap.desktop.CtrlAction.Map.MapClip;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DataCell;
@@ -93,7 +94,7 @@ public class MapClipAddLayersDialog extends SmDialog {
     }
 
     private void initTable() {
-        DDLExportTableModel tableModel = new DDLExportTableModel(new String[]{MapViewProperties.getString("String_MapClip_INDEX"), MapViewProperties.getString("String_MapClip_LayerCaption")}) {
+        DDLExportTableModel tableModel = new DDLExportTableModel(new String[]{ControlsProperties.getString("String_identifier"), MapViewProperties.getString("String_MapClip_LayerCaption")}) {
             boolean[] columnEditables = new boolean[]{false, false, false};
 
             @Override

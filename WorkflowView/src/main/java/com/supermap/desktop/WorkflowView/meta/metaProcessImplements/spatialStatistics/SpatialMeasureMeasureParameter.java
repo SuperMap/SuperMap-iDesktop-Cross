@@ -6,6 +6,7 @@ import com.supermap.analyst.spatialstatistics.MeasureParameter;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.FieldType;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
@@ -54,9 +55,9 @@ public class SpatialMeasureMeasureParameter extends ParameterCombine {
 		parameterEllipseSizeComboBox.setDescribe(ProcessProperties.getString("String_EllipseSize"));
 		parameterIgnoreDirectionCheckBox.setDescribe(ProcessProperties.getString("String_IsIgnoreDirection"));
 		//// FIXME: 2017/5/2 字段类型限制；可以为空
-		parameterGroupFieldComboBox.setDescribe(ProcessProperties.getString("String_GroupField"));
+		parameterGroupFieldComboBox.setDescribe(ControlsProperties.getString("String_SQLQueryLabelGroupField"));
 		parameterSelfWeightFieldComboBox.setDescribe(ProcessProperties.getString("String_SelfWeightField"));
-		parameterWeightFieldComboBox.setDescribe(ProcessProperties.getString("String_WeightField"));
+		parameterWeightFieldComboBox.setDescribe(ControlsProperties.getString("String_LayerHeatmap_WeightField"));
 		parameterStatisticsTypesLabel.setDescribe(ProcessProperties.getString("String_StatisticsTypes"));
 
 		parameterDistanceMethodComboBox.setItems(new ParameterDataNode(ProcessProperties.getString("String_EUCLIDEAN"), DistanceMethod.EUCLIDEAN));

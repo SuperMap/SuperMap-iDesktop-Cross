@@ -3,8 +3,8 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.gridAnalyst
 import com.supermap.analyst.spatialanalyst.CalculationTerrain;
 import com.supermap.data.DatasetGrid;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
@@ -31,11 +31,11 @@ public class MetaProcessCutFillInverse extends MetaProcessCalTerrain {
     @Override
     protected void initHook() {
         comboBoxType = new ParameterComboBox(ProcessProperties.getString("String_CutFill_Type"));
-        numberVolume = new ParameterNumber(ProcessProperties.getString("String_CutFillVolum"));
+        numberVolume = new ParameterNumber(ControlsProperties.getString("String_CutFillVolum"));
         textFieldResult = new ParameterNumber(ProcessProperties.getString("String_Label_Altitude"));
 
-        comboBoxType.setItems(new ParameterDataNode(ProcessProperties.getString("String_Fill"), true),
-                new ParameterDataNode(ProcessProperties.getString("String_Cut"), false));
+        comboBoxType.setItems(new ParameterDataNode(ControlsProperties.getString("String_Fill"), true),
+                new ParameterDataNode(ControlsProperties.getString("String_Cut"), false));
         numberVolume.setSelectedItem(1);
         numberVolume.setMinValue(0);
         numberVolume.setIsIncludeMin(true);
@@ -50,7 +50,7 @@ public class MetaProcessCutFillInverse extends MetaProcessCalTerrain {
 	    parameterCombineResultDataset.addParameters(textFieldResult);
 
         parameters.addParameters(parameterCombine, parameterCombineResultDataset);
-        parameters.addOutputParameters(OUTPUT_DATASET, ProcessOutputResultProperties.getString("String_Result_Height"), BasicTypes.DOUBLE, parameterCombineResultDataset);
+        parameters.addOutputParameters(OUTPUT_DATASET, CoreProperties.getString("String_Label_Altitude"), BasicTypes.DOUBLE, parameterCombineResultDataset);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class MetaProcessCutFillInverse extends MetaProcessCalTerrain {
             double result = CalculationTerrain.cutFill(datasetGrid, volume, isFill);
             textFieldResult.setSelectedItem(result);
             parameters.getOutputs().getData(OUTPUT_DATASET).setValue(result);
-            Application.getActiveApplication().getOutput().output(ProcessOutputResultProperties.getString("String_Result_Height") + result);
+            Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_Label_Altitude") + result);
             isSuccessful = true;
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);

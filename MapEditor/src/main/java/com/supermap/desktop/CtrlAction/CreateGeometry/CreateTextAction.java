@@ -5,6 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.mapping.Layer;
@@ -194,7 +195,7 @@ public class CreateTextAction {
             this.editingGeoText.getTextStyle().setSizeFixed(false);
             // DEFAULT_INPUT_HEIGHT / 2 是一个经验值，使得不固定大小的时候，最后绘制到地图上的文本大小与输入的时候基本一致
             // 绘制时暂时设置为宋体，windows下能支持，linux下暂不支持
-            this.editingGeoText.getTextStyle().setFontName(MapEditorProperties.getString("String_DefualtFontName"));
+            this.editingGeoText.getTextStyle().setFontName(CoreProperties.getString("String_Font"));
             if (DEFAULT_INPUT_HEIGHT / 2 * MapUtilities.pixelLength(this.mapControl) > 0) {
                 this.editingGeoText.getTextStyle().setFontHeight(DEFAULT_INPUT_HEIGHT / 2 * MapUtilities.pixelLength(this.mapControl));
             }

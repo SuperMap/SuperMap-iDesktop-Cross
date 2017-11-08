@@ -6,6 +6,7 @@ import com.supermap.data.processing.MapCacheBuilder;
 import com.supermap.data.processing.MapTilingMode;
 import com.supermap.data.processing.TileFormat;
 import com.supermap.data.processing.TileSize;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.map.propertycontrols.PanelGroupBoxViewBounds;
@@ -375,7 +376,7 @@ public class NextStepPane extends JPanel implements IState {
 		this.labelImageType.setText(MapViewProperties.getString("MapCache_ImageType"));
 		this.labelPixel.setText(MapViewProperties.getString("MapCache_Pixel"));
 		this.labelImageCompressionRatio.setText(MapViewProperties.getString("MapCache_ImageCompressionRation"));
-		this.checkBoxBackgroundTransparency.setText(MapViewProperties.getString("MapCache_BackgroundTransparency"));
+		this.checkBoxBackgroundTransparency.setText(ControlsProperties.getString("String_BackgroundTransparency"));
 		this.checkBoxFullFillCacheImage.setText(MapViewProperties.getString("MapCache_FullFillCacheImage"));
 		this.labelTaskStorePath.setText(MapViewProperties.getString("String_TaskStorePath"));
 		this.checkBoxMultiProcessClip.setText(MapViewProperties.getString("String_SplitMultiProcessClip"));
@@ -389,7 +390,7 @@ public class NextStepPane extends JPanel implements IState {
 		if (null == activeMap) {
 			activeMap = MapUtilities.getActiveMap() == null ? CacheUtilities.getWorkspaceSelectedMap() : MapUtilities.getActiveMap();
 		}
-		this.panelCacheRange = new PanelGroupBoxViewBounds(parent, MapViewProperties.getString("MapCache_CacheRange"), activeMap);
+		this.panelCacheRange = new PanelGroupBoxViewBounds(parent, ControlsProperties.getString("String_CacheBounds"), activeMap);
 		this.panelIndexRange = new PanelGroupBoxViewBounds(parent, MapViewProperties.getString("MapCache_IndexRange"), activeMap);
 		this.cacheRangeBounds = this.mapCacheBuilder.getBounds();
 		if (null != cacheRangeBounds) {

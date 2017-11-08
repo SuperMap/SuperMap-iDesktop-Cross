@@ -90,7 +90,7 @@ public class MetaProcessComputeDistance extends MetaProcess {
 		comboBoxComputeMethod = new ParameterComboBox(ProcessProperties.getString("String_Label_ComputeMethod"));
 		checkBoxMax = new ParameterCheckBox(ProcessProperties.getString("String_CheckBox_MaxDistance"));
 		checkBoxMin = new ParameterCheckBox(ProcessProperties.getString("String_CheckBox_MinDistance"));
-		textNumMax = new ParameterNumber(ProcessProperties.getString("String_Label_MaxDistance"));
+		textNumMax = new ParameterNumber(ControlsProperties.getString("String_Label_MaxDistance"));
 		textNumMin = new ParameterNumber(ProcessProperties.getString("String_Label_MinDistance"));
 		ParameterCombine setting = new ParameterCombine();
 		setting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));

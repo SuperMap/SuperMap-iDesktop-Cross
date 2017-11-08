@@ -3,10 +3,11 @@ package com.supermap.desktop.iml;
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IImportSettingFactory;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingExcel;
 import com.supermap.desktop.implement.UserDefineType.ImportSettingGPX;
-import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.utilities.FileUtilities;
+
 import java.io.File;
 
 /**
@@ -20,7 +21,7 @@ public class ImportSettingFactory implements IImportSettingFactory {
 		ImportSetting importSetting = null;
 		String fileType = FileUtilities.getFileType(filePath);
 		if (fileType.equalsIgnoreCase(FileTypeLocale.DXF_STRING)) {
-			if (!fileFilter.equalsIgnoreCase(DataConversionProperties.getString("string_filetype_3ds"))) {
+			if (!fileFilter.equalsIgnoreCase(ControlsProperties.getString("string_filetype_3ds"))) {
 				importSetting = new ImportSettingDXF();
 				((ImportSettingDXF) importSetting).setImportEmptyDataset(true);
 			} else {
@@ -40,7 +41,7 @@ public class ImportSettingFactory implements IImportSettingFactory {
 			//.dem类型的文件默认导入为GRD
 			importSetting = new ImportSettingGRD();
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.TXT_STRING)) {
-			if (fileFilter.equalsIgnoreCase(DataConversionProperties.getString("string_filetype_lidar"))) {
+			if (fileFilter.equalsIgnoreCase(ControlsProperties.getString("string_filetype_lidar"))) {
 				// 雷达文件
 				importSetting = new ImportSettingLIDAR();
 			} else {

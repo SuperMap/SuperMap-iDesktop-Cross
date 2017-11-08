@@ -1,6 +1,7 @@
 package com.supermap.desktop.geometryoperation.control;
 
 import com.supermap.data.ResampleType;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -45,7 +46,7 @@ public class JDialogResample extends SmDialog {
 
 	private void initializeComponents() {
 		setTitle(MapEditorProperties.getString("String_GeometryOperation_Resample_Title"));
-		this.labelResampleType = new JLabel(MapEditorProperties.getString("String_Label_ResampleType"));
+		this.labelResampleType = new JLabel(ControlsProperties.getString("String_Resample_Type"));
 		this.labelParameter = new JLabel(MapEditorProperties.getString("String_GeometryOperation_Resample_Parameter"));
 		this.comboBoxResampleType = new JComboBox<>();
 		this.comboBoxResampleType.addItem(ResampleTypeUtilities.toString(ResampleType.RTBEND));

@@ -1,8 +1,8 @@
 package com.supermap.desktop.newtheme.guidPanel;
 
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.newtheme.commonUtils.ThemeGuideFactory;
 import com.supermap.desktop.newtheme.commonUtils.ThemeUtil;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.InternalImageIconFactory;
 
 import javax.swing.*;
@@ -27,7 +27,7 @@ public class UniqueThemePanel extends JPanel {
 	private void initComponents() {
 		this.setBackground(Color.WHITE);
 		this.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		this.labelUniqueTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_UNIQUE, MapViewProperties.getString("String_Default"));
+		this.labelUniqueTheme = new ThemeLabelDecorator(InternalImageIconFactory.THEMEGUIDE_UNIQUE, CoreProperties.getString("String_Default"));
 		this.labelUniqueTheme.selected(true);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(

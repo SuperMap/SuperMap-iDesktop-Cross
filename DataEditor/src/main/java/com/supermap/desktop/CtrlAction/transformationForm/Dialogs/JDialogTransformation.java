@@ -6,6 +6,7 @@ import com.supermap.desktop.CtrlAction.transformationForm.CtrlAction.TransformCa
 import com.supermap.desktop.CtrlAction.transformationForm.TransformationUtilties;
 import com.supermap.desktop.CtrlAction.transformationForm.beans.TransformationAddObjectBean;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
@@ -150,11 +151,11 @@ public class JDialogTransformation extends SmDialog {
 			public Component getListCellRendererComponent(JList<? extends TransformationResampleMode> list, TransformationResampleMode value, int index, boolean isSelected, boolean cellHasFocus) {
 				JLabel jLabel = new JLabel();
 				if (value == TransformationResampleMode.NEAREST) {
-					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeNearest"));
+					jLabel.setText(ControlsProperties.getString("String_Nearest"));
 				} else if (value == TransformationResampleMode.BILINEAR) {
-					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeBilinear"));
+					jLabel.setText(ControlsProperties.getString("String_Bilinear"));
 				} else {
-					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeCubic"));
+					jLabel.setText(ControlsProperties.getString("String_Cubic"));
 				}
 				jLabel.setOpaque(true);
 				jLabel.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
@@ -546,13 +547,13 @@ public class JDialogTransformation extends SmDialog {
 		TransformationMode transformMode = transformation.getTransformMode();
 		String s = null;
 		if (transformMode == TransformationMode.OFFSET) {
-			s = DataEditorProperties.getString("String_TransformationModeOFFSET");
+			s = CoreProperties.getString("String_TransformationModeOFFSET");
 		} else if (transformMode == TransformationMode.RECT) {
-			s = DataEditorProperties.getString("String_TransformationModeRECT");
+			s = CoreProperties.getString("String_TransformationModeRECT");
 		} else if (transformMode == TransformationMode.LINEAR) {
-			s = DataEditorProperties.getString("String_TransformationModeLINEAR");
+			s = CoreProperties.getString("String_TransformationModeLINEAR");
 		} else if (transformMode == TransformationMode.SQUARE) {
-			s = DataEditorProperties.getString("String_TransformationModeSQUARE");
+			s = CoreProperties.getString("String_TransformationModeSQUARE");
 		}
 		textFieldTransformationMode.setText(s);
 	}
@@ -564,7 +565,7 @@ public class JDialogTransformation extends SmDialog {
 		labelTransformationFile.setText(DataEditorProperties.getString("String_Transformation_LabelConfigFile"));
 		labelTransformationMode.setText(DataEditorProperties.getString("String_TransformationMode"));
 		checkBoxResample.setText(DataEditorProperties.getString("String_TransformationMode_ResampleYesOrNot"));
-		labelResampleMode.setText(DataEditorProperties.getString("String_TransformationMode_ResampleMode"));
+		labelResampleMode.setText(ControlsProperties.getString("String_TransformationMode_ResampleMode"));
 		labelPixel.setText(DataEditorProperties.getString("String_Transformation_LabelCellSize"));
 		checkBoxIsSaveAs.setText(DataEditorProperties.getString("String_Transformation_CheckBoxResaveDataset"));
 		checkBoxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));

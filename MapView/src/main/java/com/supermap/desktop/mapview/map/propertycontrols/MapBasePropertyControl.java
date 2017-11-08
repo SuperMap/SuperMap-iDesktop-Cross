@@ -161,7 +161,7 @@ public class MapBasePropertyControl extends AbstractPropertyControl {
 	 * Create the panel.
 	 */
 	public MapBasePropertyControl() {
-		super(MapViewProperties.getString("String_TabPage_BaseSetting"));
+		super(ControlsProperties.getString("String_TabPage_BaseSetting"));
 	}
 
 	@Override
@@ -323,14 +323,14 @@ public class MapBasePropertyControl extends AbstractPropertyControl {
 
 	@Override
 	protected void initializeResources() {
-		this.labelMapName.setText(MapViewProperties.getString("String_Label_MapName"));
-		this.labelAngle.setText(MapViewProperties.getString("String_Label_MapAngle"));
+		this.labelMapName.setText(ControlsProperties.getString("String_Label_MapName"));
+		this.labelAngle.setText(ControlsProperties.getString("String_Label_SymbolAngle"));
 		this.labelColorMode.setText(MapViewProperties.getString("String_Label_ColorMode"));
-		this.labelBackgroundColor.setText(MapViewProperties.getString("String_Label_BackColor"));
+		this.labelBackgroundColor.setText(ControlsProperties.getString("String_Label_BackColor"));
 		this.labelMinVisibleTextSize.setText(MapViewProperties.getString("String_Label_MinVisibleTextSize"));
 		this.labelMaxVisibleTextSize.setText(MapViewProperties.getString("String_Label_MaxVisibleTextSize"));
 		this.labelMaxVisibleVertex.setText(MapViewProperties.getString("String_Label_MaxVisibleVertex"));
-		this.checkBoxIsOverlapDisplayed.setText(MapViewProperties.getString("String_CheckBox_IsOverlapDisplayed"));
+		this.checkBoxIsOverlapDisplayed.setText(ControlsProperties.getString("String_CheckBox_IsOverlapDisplayed"));
 		this.checkBoxIsMarkerAngleFixed.setText(MapViewProperties.getString("String_CheckBox_IsMarkerAngleFixed"));
 		this.checkBoxIsLineAntialias.setText(MapViewProperties.getString("String_CheckBox_IsLineAntialias"));
 		this.checkBoxIsTextAngleFixed.setText(MapViewProperties.getString("String_CheckBox_IsTextAngleFixed"));

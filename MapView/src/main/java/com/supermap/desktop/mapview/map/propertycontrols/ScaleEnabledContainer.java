@@ -2,6 +2,7 @@ package com.supermap.desktop.mapview.map.propertycontrols;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.ScaleModel;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.exception.InvalidScaleException;
 import com.supermap.desktop.mapview.MapViewProperties;
@@ -67,7 +68,7 @@ public class ScaleEnabledContainer extends SmDialog {
 	private ActionListener panelButtonAction;
 	private double[] scales;
 	private MapBoundsPropertyControl control;
-	private String[] title = {MapViewProperties.getString("String_Index"), MapViewProperties.getString("String_Scales")};
+	private String[] title = {ControlsProperties.getString("String_identifier"), MapViewProperties.getString("String_Scales")};
 	private ComponentDropDown addScale;
 
 	private TableModelListener tableModelListener = new TableModelListener() {
@@ -708,7 +709,7 @@ public class ScaleEnabledContainer extends SmDialog {
 			this.table.setValueAt(i + 1, i, 0);
 			this.table.setValueAt(scaleDisplays.get(i), i, 1);
 		}
-		this.table.getColumn(MapViewProperties.getString("String_Index")).setMaxWidth(40);
+		this.table.getColumn(ControlsProperties.getString("String_identifier")).setMaxWidth(40);
 		this.table.getModel().removeTableModelListener(this.tableModelListener);
 		this.table.getModel().addTableModelListener(this.tableModelListener);
 	}

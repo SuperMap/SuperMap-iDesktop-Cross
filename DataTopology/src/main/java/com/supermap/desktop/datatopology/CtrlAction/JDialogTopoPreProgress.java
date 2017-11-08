@@ -114,7 +114,7 @@ public class JDialogTopoPreProgress extends SmDialog {
 	}
 
 	private void initResources() {
-		setTitle(DataTopologyProperties.getString("String_Text_Preprogress"));
+		setTitle(CoreProperties.getString("String_TopyPreProcessed"));
 		buttonAdd.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Add.png"));
 		buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
@@ -444,7 +444,7 @@ public class JDialogTopoPreProgress extends SmDialog {
 		options.setPolygonsChecked(isPolygonsChecked);
 		// 单进度条实现
 		FormProgress totalProgress = new FormProgress();
-		totalProgress.setTitle(DataTopologyProperties.getString("String_Text_Preprogress"));
+		totalProgress.setTitle(CoreProperties.getString("String_TopyPreProcessed"));
 		totalProgress.doWork(new TopoPregressCallable(table, tolerance, options));
 	}
 

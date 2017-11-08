@@ -96,10 +96,10 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 
 		// 参数设置
 		// 原点和目标点坐标值
-		parameterSourcePointX = new ParameterNumber(ProcessProperties.getString("String_SourcePointX"));
-		parameterSourcePointY = new ParameterNumber(ProcessProperties.getString("String_SourcePointY"));
-		parameterTargetPointX = new ParameterNumber(ProcessProperties.getString("String_TargetPointX"));
-		parameterTargetPointY = new ParameterNumber(ProcessProperties.getString("String_TargetPointY"));
+		parameterSourcePointX = new ParameterNumber(ControlsProperties.getString("String_SourcePointX"));
+		parameterSourcePointY = new ParameterNumber(ControlsProperties.getString("String_SourcePointY"));
+		parameterTargetPointX = new ParameterNumber(ControlsProperties.getString("String_TargetPointX"));
+		parameterTargetPointY = new ParameterNumber(ControlsProperties.getString("String_TargetPointY"));
 
 		parameterSourcePointX.setRequisite(true);
 		parameterSourcePointY.setRequisite(true);
@@ -130,7 +130,7 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 		parameterPathLineSmoothDegree.setIsIncludeMin(true);
 
 		// 最大上坡角度
-		parameterMaxUpslopeDegree = new ParameterNumber(ProcessProperties.getString("String_Label_MaxUpslopeDegree"));
+		parameterMaxUpslopeDegree = new ParameterNumber(ControlsProperties.getString("String_Label_MaxUpslopeDegree"));
 		parameterMaxUpslopeDegree.setSelectedItem("90");
 		parameterMaxUpslopeDegree.setMinValue(0);
 		parameterMaxUpslopeDegree.setMaxValue(90);
@@ -138,7 +138,7 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 		parameterMaxUpslopeDegree.setIncludeMax(true);
 		parameterMaxUpslopeDegree.setIsIncludeMin(true);
 		// 最大下坡角度
-		parameterMaxDownslopeDegree = new ParameterNumber(ProcessProperties.getString("String_Label_MaxDownslopeDegree"));
+		parameterMaxDownslopeDegree = new ParameterNumber(ControlsProperties.getString("String_Label_MaxDownslopeDegree"));
 		parameterMaxDownslopeDegree.setSelectedItem("90");
 		parameterMaxDownslopeDegree.setMinValue(0);
 		parameterMaxDownslopeDegree.setMaxValue(90);

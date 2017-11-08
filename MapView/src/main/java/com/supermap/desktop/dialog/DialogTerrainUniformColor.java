@@ -183,9 +183,9 @@ public class DialogTerrainUniformColor extends SmDialog {
 	    buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
 	    checkBoxTip.setText(MapViewProperties.getString("Sring_TerrainUniformColorCheckBox"));
         mutiTable.getColumnModel().getColumn(COLUMN_INDEX_LAYER).setHeaderValue(MapViewProperties.getString("String_TerrainUniformLayer"));
-        mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MINVALUE).setHeaderValue(MapViewProperties.getString("String_TerrainUniformLayerMinValue"));
+        mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MINVALUE).setHeaderValue(CoreProperties.getString("String_StatisticsType_MIN"));
         mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MINVALUE).setMaxWidth(MAX_COLUMN_WIDTH);
-        mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MAXVALUE).setHeaderValue(MapViewProperties.getString("String_TerrainUniformLayerMaxValue"));
+        mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MAXVALUE).setHeaderValue(CoreProperties.getString("String_StatisticsType_MAX"));
         mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MAXVALUE).setMaxWidth(MAX_COLUMN_WIDTH);
     }
 

@@ -2,6 +2,7 @@ package com.supermap.desktop.ui;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormTabular;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tabularview.TabularViewProperties;
@@ -107,10 +108,10 @@ public class JDialogOutputExcel extends SmDialog {
 		buttonSelectSystemField.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectSystemField.png"));
 		buttonSelectUnSystemField.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectNonSystemField.png"));
 
-		labelFileName.setText(TabularViewProperties.getString("String_FileName"));
-		labelFilePath.setText(TabularViewProperties.getString("String_Path"));
+		labelFileName.setText(ControlsProperties.getString("String_FileName"));
+		labelFilePath.setText(CoreProperties.getString("String_FormDatasetBrowse_ToolStripLabelPath"));
 
-		checkBoxOnlySaveSelectedRow.setText(TabularViewProperties.getString("String_SaveSelectedRowOnly"));
+		checkBoxOnlySaveSelectedRow.setText(CoreProperties.getString("String_OnlySaveSelectedRows"));
 	}
 
 	private void initComponents() {

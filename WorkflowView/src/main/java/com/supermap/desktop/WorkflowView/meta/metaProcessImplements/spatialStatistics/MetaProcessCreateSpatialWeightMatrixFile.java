@@ -5,7 +5,6 @@ import com.supermap.analyst.spatialstatistics.WeightsUtilities;
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
@@ -42,11 +41,11 @@ public class MetaProcessCreateSpatialWeightMatrixFile extends MetaProcessAnalyzi
 				new ParameterDataNode(ProcessProperties.getString("String_INVERSEDISTANCE"), ConceptualizationModel.INVERSEDISTANCE),
 				new ParameterDataNode(ProcessProperties.getString("String_INVERSEDISTANCESQUARED"), ConceptualizationModel.INVERSEDISTANCESQUARED),
 				new ParameterDataNode(ProcessProperties.getString("String_KNEARESTNEIGHBORS"), ConceptualizationModel.KNEARESTNEIGHBORS),
-//				new ParameterDataNode(ProcessProperties.getString("String_SPATIALWEIGHTMATRIXFILE"), ConceptualizationModel.SPATIALWEIGHTMATRIXFILE),
+//				new ParameterDataNode(ControlsProperties.getString("String_SPATIALWEIGHTMATRIXFILE"), ConceptualizationModel.SPATIALWEIGHTMATRIXFILE),
 				new ParameterDataNode(ProcessProperties.getString("String_ZONEOFINDIFFERENCE"), ConceptualizationModel.ZONEOFINDIFFERENCE));
 
 
-		this.parameterFile = new ParameterFile(ProcessProperties.getString("String_Label_FilePath"));
+		this.parameterFile = new ParameterFile(ControlsProperties.getString("String_FileInputPath"));
 		String modelName = "CreateSWMBFile";
 		if (!SmFileChoose.isModuleExist(modelName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ProcessProperties.getString("String_SWMFilePath"), "swmb");
@@ -62,7 +61,7 @@ public class MetaProcessCreateSpatialWeightMatrixFile extends MetaProcessAnalyzi
 		parameterCombine.addParameters(parameterFile);
 		parameterCombine.setDescribe(CoreProperties.getString("String_ResultSet"));
 		parameters.addParameters(parameterCombine);
-		this.parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_SpatialWeightMatrixFile"), BasicTypes.STRING, parameterFile);
+		this.parameters.addOutputParameters(OUTPUT_DATA, ControlsProperties.getString("String_SPATIALWEIGHTMATRIXFILE"), BasicTypes.STRING, parameterFile);
 	}
 
 	@Override

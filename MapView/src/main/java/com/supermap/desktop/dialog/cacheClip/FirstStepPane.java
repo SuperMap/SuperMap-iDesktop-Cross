@@ -864,14 +864,14 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelSplitMode.setText(MapViewProperties.getString("MapCache_LabelSplitMode"));
 		this.labelConfig.setText(MapViewProperties.getString("MapCache_LabelConfig"));
 		this.labelConfigValue.setText(MapViewProperties.getString("MapCache_LabelConfigValue"));
-		this.labelCacheName.setText(MapViewProperties.getString("MapCache_LabelCacheName"));
-		this.labelCachePath.setText(MapViewProperties.getString("MapCache_LabelCachePath"));
-		this.labelSaveType.setText(MapViewProperties.getString("MapCache_SaveType"));
-		this.labelUserName.setText(MapViewProperties.getString("MapCache_UserName"));
-		this.labelUserPassword.setText(MapViewProperties.getString("MapCache_UserPassword"));
-		this.labelConfirmPassword.setText(MapViewProperties.getString("MapCache_ConfirmPassword"));
-		this.labelServerName.setText(MapViewProperties.getString("MapCache_ServerName"));
-		this.labelDatabaseName.setText(MapViewProperties.getString("MapCache_DatabaseName"));
+		this.labelCacheName.setText(ControlsProperties.getString("String_CacheName"));
+		this.labelCachePath.setText(ControlsProperties.getString("MapCache_LabelCachePath"));
+		this.labelSaveType.setText(ControlsProperties.getString("String_DatabaseType"));
+		this.labelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
+		this.labelUserPassword.setText(ControlsProperties.getString("String_Label_UserPassword"));
+		this.labelConfirmPassword.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
+		this.labelServerName.setText(ControlsProperties.getString("String_Label_ServersName"));
+		this.labelDatabaseName.setText(ControlsProperties.getString("String_Label_DatabaseName"));
 		this.labelMutiTenseVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
 		this.checkBoxFilterSelectionObjectInLayer.setText(MapViewProperties.getString("MapCache_FilterSelectObjectInLayer"));
 	}
@@ -916,7 +916,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelDatabaseName = new JLabel();
 		this.labelMutiTenseVersion = new JLabel();
 		this.helpProviderForDatabaseName = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_DatabaseNameHelp"), false);
-		this.warningProviderPasswordNotSame = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_PasswordIsNotSame"), true);
+		this.warningProviderPasswordNotSame = new WarningOrHelpProvider(CoreProperties.getString("String_ErrorProvider_Password_Confirm"), true);
 		this.checkBoxFilterSelectionObjectInLayer = new JCheckBox();
 		this.checkBoxFilterSelectionObjectInLayer.setEnabled(false);
 		this.comboBoxSaveType = new JComboBox();
@@ -964,7 +964,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setMinWidth(125);
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_INDEX).setHeaderValue("");
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_SCALE).setHeaderValue(MapViewProperties.getString("MapCache_Scale"));
-		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setHeaderValue(MapViewProperties.getString("MapCache_ScaleTitle"));
+		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setHeaderValue(CoreProperties.getString("String_Caption"));
 	}
 
 	private void setLocalSplitTableValue(double value[]) {

@@ -3,7 +3,6 @@ package com.supermap.desktop.CtrlAction.Dataset.createNewDataset;
 import com.supermap.data.DatasetType;
 import com.supermap.data.EncodeType;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.utilities.EncodeTypeUtilities;
@@ -122,7 +121,7 @@ public class PanelBasicPropertySet extends JPanel {
 
 
 	private void initLayout() {
-		this.setBorder(BorderFactory.createTitledBorder(DataEditorProperties.getString("String_NewDatasetBase")));
+		this.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_BasicInfo")));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);

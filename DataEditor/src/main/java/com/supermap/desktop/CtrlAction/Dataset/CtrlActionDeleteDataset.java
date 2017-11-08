@@ -6,6 +6,7 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dataeditor.DataEditorProperties;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
@@ -32,7 +33,7 @@ public class CtrlActionDeleteDataset extends CtrlAction {
 
 			if (isDataset) {
 				if (Application.getActiveApplication().getActiveDatasources()[0].isReadOnly()) {
-					UICommonToolkit.showErrorMessageDialog(DataEditorProperties.getString("String_DelectReadonlyDataset"));
+					UICommonToolkit.showErrorMessageDialog(ControlsProperties.getString("String_DelectReadonlyDataset"));
 					return;
 				}
 				String message = "";

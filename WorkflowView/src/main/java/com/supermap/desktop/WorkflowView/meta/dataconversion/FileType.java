@@ -1,5 +1,6 @@
 package com.supermap.desktop.WorkflowView.meta.dataconversion;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.ipls.ParameterFile;
 import com.supermap.desktop.properties.CoreProperties;
@@ -16,29 +17,29 @@ public class FileType {
 	public static String LastFileFilter = "";
 //	// 文件类型描述
 //	private static final String[] descriptionNew = {
-//			ProcessProperties.getString("String_filetype_all"),
+//			ControlsProperties.getString("string_filetype_all"),
 //			ProcessProperties.getString("String_filetype_autocad"),
 //			ProcessProperties.getString("String_filetype_arcgis"),
 //			ProcessProperties.getString("String_filetype_mapinfo"),
 //			ProcessProperties.getString("String_filetype_mapgis"),
 //			ProcessProperties.getString("String_filetype_microsoft"),
-//			ProcessProperties.getString("String_filetype_bitmap"),
-//			ProcessProperties.getString("String_filetype_3ds"),
-//			ProcessProperties.getString("String_filetype_kml"),
-//			ProcessProperties.getString("String_filetype_grid"),
-//			ProcessProperties.getString("String_filetype_lidar"),
-//			ProcessProperties.getString("String_filetype_vct")
+//			ControlsProperties.getString("string_filetype_bitmap"),
+//			ControlsProperties.getString("string_filetype_3ds"),
+//			ControlsProperties.getString("string_filetype_kml"),
+//			ControlsProperties.getString("string_filetype_grid"),
+//			ControlsProperties.getString("string_filetype_lidar"),
+//			ControlsProperties.getString("string_filetype_vct")
 //	};
 //	private static final String[] descriptionNewForLinux = {
-//			ProcessProperties.getString("String_filetypeForLinux_all"),
+//			ControlsProperties.getString("string_filetype_all"),
 //			ProcessProperties.getString("String_filetypeForLinux_arcgis"),
 //			ProcessProperties.getString("String_filetypeForLinux_mapinfo"),
 //			ProcessProperties.getString("String_filetypeForLinux_microsoft"),
-//			ProcessProperties.getString("String_filetypeForLinux_bitmap"),
-//			ProcessProperties.getString("String_filetypeForLinux_3ds"),
-//			ProcessProperties.getString("String_filetypeForLinux_kml"),
-//			ProcessProperties.getString("String_filetypeForLinux_grid"),
-//			ProcessProperties.getString("String_filetypeForLinux_vct")};
+//			ControlsProperties.getString("string_filetype_bitmap"),
+//			ControlsProperties.getString("string_filetypeForLinux_3ds"),
+//			ControlsProperties.getString("string_filetype_kml"),
+//			ControlsProperties.getString("string_filetypeForLinux_grid"),
+//			ControlsProperties.getString("string_filetypeForLinux_vct")};
 //	// 文件类型匹配数组
 //	private static final String[] extensionsNew = {"dxf", "dwg", "grd", "txt",
 //			"shp", "tab", "mif", "kml", "kmz", "wat", "wal", "wap", "wan",
@@ -56,7 +57,7 @@ public class FileType {
 	public static SmFileChoose createFileChooser(String fileFilter, String moduleName) {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			SmFileChoose.addNewNode(fileFilter, CoreProperties.getString("String_DefaultFilePath"),
-					ProcessProperties.getString("String_FileType"), moduleName, "OpenOne");
+					CoreProperties.getString("String_SelectFile"), moduleName, "OpenOne");
 		}
 		SmFileChoose fileChoose = new SmFileChoose(moduleName);
 
@@ -77,7 +78,7 @@ public class FileType {
 		ParameterFile parameterFile = new ParameterFile(ProcessProperties.getString("label_ChooseFile"));
 		if ("GJB".equalsIgnoreCase(importType) || "TEMSVector".equalsIgnoreCase(importType) || "TEMSBuildingVector".equalsIgnoreCase(importType) || "FileGDBVector".equalsIgnoreCase(importType)) {
 			if (!SmFileChoose.isModuleExist("DataImportFrame_ImportDirectories")) {
-				SmFileChoose.addNewNode("", "", ProcessProperties.getString("String_ScanDir"),
+				SmFileChoose.addNewNode("", "", ControlsProperties.getString("String_ScanDir"),
 						"DataImportFrame_ImportDirectories", "GetDirectories");
 			}
 			parameterFile.setModuleName("DataImportFrame_ImportDirectories");
@@ -113,7 +114,7 @@ public class FileType {
 					fileFilter = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(MessageFormat.format(ProcessProperties.getString("String_ImportFileType"), importType, importType.toLowerCase()), importType.toLowerCase()));
 				}
 				SmFileChoose.addNewNode(fileFilter, CoreProperties.getString("String_DefaultFilePath"),
-						ProcessProperties.getString("String_FileType"), importModule, "OpenOne");
+						CoreProperties.getString("String_SelectFile"), importModule, "OpenOne");
 			}
 
 			parameterFile.setModuleName(importModule);
@@ -141,7 +142,7 @@ public class FileType {
 		ParameterFile parameterFile = new ParameterFile(ProcessProperties.getString("label_ChooseFile"));
 		if ("SIMPLEJSON".equalsIgnoreCase(importType)) {
 			if (!SmFileChoose.isModuleExist("DataImportFrame_ImportFolder")) {
-				SmFileChoose.addNewNode("", "", ProcessProperties.getString("String_ScanDir"),
+				SmFileChoose.addNewNode("", "", ControlsProperties.getString("String_ScanDir"),
 						"DataImportFrame_ImportFolder", "GetDirectories");
 			}
 			parameterFile.setModuleName("DataImportFrame_ImportFolder");

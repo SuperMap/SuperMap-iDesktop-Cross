@@ -5,7 +5,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.utilities.DatasetUIUtilities;
-import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.SQLExpressionDialog;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -212,7 +212,7 @@ public class ThemeUtil {
 				}
 			}
 		}
-		comboBox.addItem(MapViewProperties.getString("String_Combobox_Expression"));
+		comboBox.addItem(CoreProperties.getString("String_ThemeGraphItemExpressionPicker_ButtonExpression"));
 		return comboBox;
 	}
 
@@ -245,7 +245,7 @@ public class ThemeUtil {
 	                                       boolean isDataType) {
 		// 判断是否为“表达式”项
 		boolean itemHasChanged = false;
-		if (MapViewProperties.getString("String_Combobox_Expression").equals(jComboBoxField.getSelectedItem())) {
+		if (CoreProperties.getString("String_ThemeGraphItemExpressionPicker_ButtonExpression").equals(jComboBoxField.getSelectedItem())) {
 			SQLExpressionDialog sqlDialog = new SQLExpressionDialog();
 			int allItems = jComboBoxField.getItemCount();
 			DialogResult dialogResult = DialogResult.CANCEL;

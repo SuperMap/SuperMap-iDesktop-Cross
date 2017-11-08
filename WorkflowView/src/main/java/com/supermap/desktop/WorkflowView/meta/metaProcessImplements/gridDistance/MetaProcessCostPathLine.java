@@ -9,6 +9,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.metaProcessImplements.MetaProcessGridAnalyst;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
@@ -27,7 +28,7 @@ import java.beans.PropertyChangeListener;
  * 最小耗费距离
  */
 public class MetaProcessCostPathLine extends MetaProcessGridAnalyst {
-	private static final String COST_DATA = ProcessProperties.getString("String_GroupBox_CostData");
+	private static final String COST_DATA = ControlsProperties.getString("String_GroupBox_CostData");
 	private static final String OUTPUT_DATA = "CostPathLineResult";
 
 	private ParameterDatasourceConstrained costDatasources;
@@ -59,14 +60,14 @@ public class MetaProcessCostPathLine extends MetaProcessGridAnalyst {
 		labelTarget = new ParameterLabel();
 		labelTarget.setDescribe(ProcessProperties.getString("String_TargetPoint"));
 		numberOriginX = new ParameterNumber(ProcessProperties.getString("String_Xcoordinate"));
-		numberOriginY = new ParameterNumber(ProcessProperties.getString("String_Ycoordinate"));
+		numberOriginY = new ParameterNumber(ControlsProperties.getString("String_MapClip_Y"));
 		numberTargetX = new ParameterNumber(ProcessProperties.getString("String_Xcoordinate"));
-		numberTargetY = new ParameterNumber(ProcessProperties.getString("String_Ycoordinate"));
+		numberTargetY = new ParameterNumber(ControlsProperties.getString("String_MapClip_Y"));
 		comboBoxSmoothMethod = new ParameterComboBox(CoreProperties.getString("String_SmoothMethod"));
 		numberSmoothDegree = new ParameterNumber(ProcessProperties.getString("String_Label_Smoothness"));
 
 		ParameterCombine costCombine = new ParameterCombine();
-		costCombine.setDescribe(ProcessProperties.getString("String_GroupBox_CostData"));
+		costCombine.setDescribe(ControlsProperties.getString("String_GroupBox_CostData"));
 		costCombine.addParameters(costDatasources, costDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
 		settingCombine.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));

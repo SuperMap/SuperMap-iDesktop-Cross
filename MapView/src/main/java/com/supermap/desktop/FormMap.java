@@ -696,17 +696,17 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
             String x = "";
             if (Double.isInfinite(point.getX())) {
-                x = MapViewProperties.getString("String_Infinite");
+                x = ControlsProperties.getString("String_Infinite");
             } else if (Double.isNaN(point.getX())) {
-                x = MapViewProperties.getString("String_NotANumber");
+                x = ControlsProperties.getString("String_NotANumber");
             } else {
                 x = DoubleUtilities.getFormatString(point.getX());
             }
             String y = "";
             if (Double.isInfinite(point.getY())) {
-                y = MapViewProperties.getString("String_Infinite");
+                y = ControlsProperties.getString("String_Infinite");
             } else if (Double.isNaN(point.getY())) {
-                y = MapViewProperties.getString("String_NotANumber");
+                y = ControlsProperties.getString("String_NotANumber");
             } else {
                 y = DoubleUtilities.getFormatString(point.getY());
             }
@@ -768,7 +768,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
         pointTemp = (pointTemp - min) * 60;
         DecimalFormat format = new DecimalFormat("######0.00");
 
-        return MessageFormat.format(MapViewProperties.getString("String_LongitudeLatitude"), angles, min, format.format(pointTemp));
+        return MessageFormat.format(CoreProperties.getString("String_Degree_DDMMSS"), angles, min, format.format(pointTemp));
     }
 
     /**
@@ -868,9 +868,9 @@ public class FormMap extends FormBaseChild implements IFormMap {
     }
 
     private void initCenter() {
-        String x = Double.isNaN(mapControl.getMap().getCenter().getX()) ? MapViewProperties.getString("String_NotANumber") : DoubleUtilities.getFormatString(mapControl.getMap()
+        String x = Double.isNaN(mapControl.getMap().getCenter().getX()) ? ControlsProperties.getString("String_NotANumber") : DoubleUtilities.getFormatString(mapControl.getMap()
                 .getCenter().getX());
-        String y = Double.isNaN(mapControl.getMap().getCenter().getY()) ? MapViewProperties.getString("String_NotANumber") : DoubleUtilities.getFormatString(mapControl.getMap()
+        String y = Double.isNaN(mapControl.getMap().getCenter().getY()) ? ControlsProperties.getString("String_NotANumber") : DoubleUtilities.getFormatString(mapControl.getMap()
                 .getCenter().getY());
         this.pointXField.setText(x);
         this.pointXField.setCaretPosition(0);
@@ -1316,9 +1316,9 @@ public class FormMap extends FormBaseChild implements IFormMap {
                 ArrayList<String> removingLayers = new ArrayList<String>();
                 String message = "";
                 if (layers.length == 1) {
-                    message = String.format(MapViewProperties.getString("String_validateRemoveLayerMessage"), layers[0].getCaption());
+                    message = String.format(ControlsProperties.getString("String_validateRemoveLayerMessage"), layers[0].getCaption());
                 } else {
-                    message = MessageFormat.format(MapViewProperties.getString("String_validateRemoveRangeMessage"), layers.length);
+                    message = MessageFormat.format(ControlsProperties.getString("String_validateRemoveRangeMessage"), layers.length);
                 }
 
                 int result = UICommonToolkit.showConfirmDialog(message);
