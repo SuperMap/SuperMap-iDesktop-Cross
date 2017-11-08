@@ -69,9 +69,11 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 			}
 
 			if (parameterComboBoxAggregationMethod.getSelectedData().equals(AggregationMethod.AGGREGATIONPOLYGONS)) {
-				parameterSwitchAggregationMethod.switchParameter("Aggregating");
-			} else {
+				parameterSwitchAggregationMethod.switchParameter("AggregationPolygons");
+			} else if (parameterComboBoxAggregationMethod.getSelectedData().equals(AggregationMethod.NETWORKPOLYGONS)) {
 				parameterSwitchAggregationMethod.switchParameter("Bounding");
+			} else {
+				parameterSwitchAggregationMethod.switchParameter("AggregationPoints");
 			}
 
 			if (StringUtilities.isNullOrEmpty(parameterFieldComboBoxPoint.getFieldName())) {
@@ -131,8 +133,9 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterCombineBounding.addParameters(parameterDatasourceBounding);
 		parameterCombineBounding.addParameters(parameterSingleDatasetBounding);
 		// 聚合方式选择下两种面板
-		parameterSwitchAggregationMethod.add("Aggregating", parameterCombineAggregating);
+		parameterSwitchAggregationMethod.add("AggregationPolygons", parameterCombineAggregating);
 		parameterSwitchAggregationMethod.add("Bounding", parameterCombineBounding);
+		parameterSwitchAggregationMethod.add("AggregationPoints", new ParameterCombine());
 
 		// 点类型数据、评估字段不为空
 		ParameterCombine parameterCombinePointFieldisNull = new ParameterCombine();
@@ -250,7 +253,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 				optimizedParameter.setAggregationMethod((AggregationMethod) parameterComboBoxAggregationMethod.getSelectedData());
 				if (optimizedParameter.getAggregationMethod().equals(AggregationMethod.AGGREGATIONPOLYGONS)) {
 					optimizedParameter.setAggregatingPolygons((DatasetVector) parameterSingleDatasetAggregating.getSelectedItem());
-				} else {
+				} else if (optimizedParameter.getAggregationMethod().equals(AggregationMethod.NETWORKPOLYGONS)) {
 					optimizedParameter.setBoundingPolygons((DatasetVector) parameterSingleDatasetBounding.getSelectedItem());
 				}
 			}
@@ -266,8 +269,8 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = (result != null);
 		} catch (Exception e) {
-			Application.getActiveApplication().getOutput().output(e);
-			//e.printStackTrace();
+			Application.getActiveApplication().getOutput().output(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			ClusteringDistributions.removeSteppedListener(steppedListener);
 		}
