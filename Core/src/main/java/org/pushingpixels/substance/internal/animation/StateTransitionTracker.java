@@ -33,7 +33,6 @@ import org.pushingpixels.lafwidget.animation.AnimationConfigurationManager;
 import org.pushingpixels.lafwidget.animation.AnimationFacet;
 import org.pushingpixels.substance.api.ComponentState;
 import org.pushingpixels.substance.api.ComponentStateFacet;
-import org.pushingpixels.substance.api.UiThreadingViolationException;
 import org.pushingpixels.substance.api.renderers.SubstanceRenderer;
 import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
 import org.pushingpixels.trident.Timeline;
@@ -163,12 +162,12 @@ public class StateTransitionTracker {
 		}
 
 		void clear() {
-			if (!SwingUtilities.isEventDispatchThread()) {
-				UiThreadingViolationException uiThreadingViolationError = new UiThreadingViolationException(
-						"State tracking must be done on Event Dispatch Thread");
-				uiThreadingViolationError.printStackTrace(System.err);
-				throw uiThreadingViolationError;
-			}
+//			if (!SwingUtilities.isEventDispatchThread()) {
+//				UiThreadingViolationException uiThreadingViolationError = new UiThreadingViolationException(
+//						"State tracking must be done on Event Dispatch Thread");
+//				uiThreadingViolationError.printStackTrace(System.err);
+//				throw uiThreadingViolationError;
+//			}
 			this.stateContributionMap.clear();
 			this.stateContributionMap.put(this.currState,
 					new StateContributionInfo(1.0f, 1.0f));

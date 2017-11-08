@@ -29,6 +29,7 @@
  */
 package org.pushingpixels.substance.internal.utils;
 
+import com.supermap.desktop.properties.LabelsProperties;
 import org.pushingpixels.lafwidget.animation.effects.GhostPaintingUtils;
 import org.pushingpixels.lafwidget.icon.HiDpiAwareIcon;
 import org.pushingpixels.lafwidget.utils.RenderingUtils;
@@ -1258,7 +1259,7 @@ public class SubstanceTitlePane extends JComponent {
 		 * Creates a new close action.
 		 */
 		public CloseAction() {
-			super(SubstanceCoreUtilities.getResourceBundle(rootPane).getString("SystemMenu.close"),
+			super(LabelsProperties.getString("SystemMenu.close"),
 					SubstanceImageCreator.getCloseIcon(
 							SubstanceCoreUtilities.getSkin(rootPane)
 									.getActiveColorScheme(DecorationAreaType.PRIMARY_TITLE_PANE),

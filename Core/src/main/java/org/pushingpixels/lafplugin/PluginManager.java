@@ -29,6 +29,8 @@
  */
 package org.pushingpixels.lafplugin;
 
+import org.pushingpixels.substance.flamingo.SubstanceFlamingoPlugin;
+
 import javax.swing.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -136,6 +138,8 @@ public class PluginManager {
 			return this.plugins;
 
 		this.plugins = new HashSet();
+		// 方便快捷，不考虑扩展
+		plugins.add(new SubstanceFlamingoPlugin());
 
 		// the following is fix by Dag Joar and Christian Schlichtherle
 		// for application running with -Xbootclasspath VM flag. In this case,
@@ -145,21 +149,23 @@ public class PluginManager {
 		// added to the system class path, the extension class path and
 		// regardless of the class loader architecture set up by some
 		// frameworks.
-		ClassLoader cl = (ClassLoader) UIManager.get("ClassLoader");
-		if (cl == null)
-			cl = Thread.currentThread().getContextClassLoader();
-		try {
-			Enumeration urls = cl.getResources(this.xmlName);
-			while (urls.hasMoreElements()) {
-				URL pluginUrl = (URL) urls.nextElement();
-				Object pluginInstance = this.getPlugin(pluginUrl);
-				if (pluginInstance != null)
-					this.plugins.add(pluginInstance);
-
-			}
-		} catch (Exception exc) {
-			return null;
-		}
+//		ClassLoader cl = (ClassLoader) UIManager.get("ClassLoader");
+//		if (cl == null)
+//			cl = Thread.currentThread().getContextClassLoader();
+//		try {
+//
+//
+//			Enumeration urls = cl.getResources(this.xmlName);
+//			while (urls.hasMoreElements()) {
+//				URL pluginUrl = (URL) urls.nextElement();
+//				Object pluginInstance = this.getPlugin(pluginUrl);
+//				if (pluginInstance != null)
+//					this.plugins.add(pluginInstance);
+//
+//			}
+//		} catch (Exception exc) {
+//			return null;
+//		}
 
 		return plugins;
 	}

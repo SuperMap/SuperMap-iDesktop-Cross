@@ -17,13 +17,22 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.SynchronousBundleListener;
+import org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel;
 
+import javax.swing.*;
 import java.io.File;
 
 public class CoreActivator implements BundleActivator {
 
 	static {
 		GlobalParameters.initResource();
+		try {
+			javax.swing.UIManager.setLookAndFeel(new SubstanceOfficeBlue2007LookAndFeel());
+			JFrame.setDefaultLookAndFeelDecorated(true); //windows功能失效
+//			JDialog.setDefaultLookAndFeelDecorated(true); //Dialog功能失效
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	//    ServiceRegistration<?> registration;

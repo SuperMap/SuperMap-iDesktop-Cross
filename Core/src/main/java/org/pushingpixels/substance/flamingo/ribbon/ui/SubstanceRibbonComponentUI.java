@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2016 Flamingo Kirill Grouchnikov. All Rights Reserved.
+ * Copyright (c) 2005-2016 Flamingo / Substance Kirill Grouchnikov. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -27,83 +27,53 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
-package org.pushingpixels.flamingo.api.common;
+package org.pushingpixels.substance.flamingo.ribbon.ui;
 
 import org.pushingpixels.flamingo.api.common.icon.ResizableIcon;
-import org.pushingpixels.flamingo.api.common.model.ActionToggleButtonModel;
-import org.pushingpixels.flamingo.internal.ui.common.BasicCommandToggleButtonUI;
-import org.pushingpixels.flamingo.internal.ui.common.CommandButtonUI;
+import org.pushingpixels.flamingo.api.ribbon.JRibbonComponent;
+import org.pushingpixels.flamingo.internal.ui.ribbon.BasicRibbonComponentUI;
+import org.pushingpixels.substance.flamingo.utils.SubstanceDisabledResizableIcon;
+import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
 
 import javax.swing.*;
+import javax.swing.plaf.ComponentUI;
+import java.awt.*;
 
 /**
- * Command button.
+ * UI for {@link JRibbonComponent} components in <b>Substance</b> look and feel.
  *
  * @author Kirill Grouchnikov
  */
-public class JCommandToggleButton extends AbstractCommandButton {
-	/**
-	 * The UI class ID string.
-	 */
-	public static final String uiClassID = "CommandToggleButtonUI";
-
-	/**
-	 * Creates a new command toggle button with empty text
-	 *
-	 * @param icon Button icon.
-	 */
-	public JCommandToggleButton(ResizableIcon icon) {
-		this(null, icon);
-	}
-
-	/**
-	 * Creates a new command toggle button without an icon.
-	 *
-	 * @param title Button title. May contain any number of words.
-	 */
-	public JCommandToggleButton(String title) {
-		this(title, null);
-	}
-
-	/**
-	 * Creates a new command toggle button.
-	 *
-	 * @param title Button title. May contain any number of words.
-	 * @param icon  Button icon.
-	 */
-	public JCommandToggleButton(String title, ResizableIcon icon) {
-		super(title, icon);
-		this.setName(title);
-		this.setActionModel(new ActionToggleButtonModel(false));
-		this.updateUI();
-	}
-
-	/**
-	 * Resets the UI property to a value from the current look and feel.
-	 *
-	 * @see JComponent#updateUI
-	 */
-	@Override
-	public void updateUI() {
-		if (UIManager.get(getUIClassID()) != null) {
-			setUI((CommandButtonUI) UIManager.getUI(this));
-		} else {
-			setUI(BasicCommandToggleButtonUI.createUI(this));
-		}
+public class SubstanceRibbonComponentUI extends BasicRibbonComponentUI {
+	public static ComponentUI createUI(JComponent c) {
+		return new SubstanceRibbonComponentUI();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.swing.JComponent#getUIClassID()
+	 * @see
+	 * org.jvnet.flamingo.ribbon.ui.BasicRibbonComponentUI#createDisabledIcon()
 	 */
 	@Override
-	public String getUIClassID() {
-		return uiClassID;
+	protected ResizableIcon createDisabledIcon() {
+		return new SubstanceDisabledResizableIcon(this.ribbonComponent.getIcon());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.jvnet.flamingo.ribbon.ui.BasicRibbonComponentUI#paintIcon(java.awt
+	 * .Graphics, org.jvnet.flamingo.ribbon.JRibbonComponent, javax.swing.Icon,
+	 * int, int)
+	 */
 	@Override
-	public String toString() {
-		return "Command toggle button[" + this.getText() + "]";
+	protected void paintIcon(Graphics g, JRibbonComponent ribbonComp, Icon icon, int x, int y) {
+		if (ribbonComp.isEnabled() && (icon != null)
+				&& SubstanceCoreUtilities.useThemedDefaultIcon(ribbonComp)) {
+			icon = SubstanceCoreUtilities.getThemedIcon(ribbonComp, icon);
+		}
+		super.paintIcon(g, ribbonComp, icon, x, y);
 	}
 }

@@ -1,6 +1,4 @@
-package com.supermap.desktop.utilities;
-
-import com.supermap.desktop.properties.Properties;
+package com.supermap.desktop.properties;
 
 import java.util.ResourceBundle;
 

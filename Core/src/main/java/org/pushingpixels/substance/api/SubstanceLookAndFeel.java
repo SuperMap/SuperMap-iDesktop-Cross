@@ -1985,10 +1985,10 @@ public abstract class SubstanceLookAndFeel extends BasicLookAndFeel {
 	 */
 	private static boolean setSkin(SubstanceSkin newSkin,
 	                               boolean toUpdateWindows) {
-		if (!SwingUtilities.isEventDispatchThread()) {
-			throw new IllegalStateException(
-					"This method must be called on the Event Dispatch Thread");
-		}
+//		if (!SwingUtilities.isEventDispatchThread()) {
+//			throw new IllegalStateException(
+//					"This method must be called on the Event Dispatch Thread");
+//		}
 
 		if (!newSkin.isValid())
 			return false;

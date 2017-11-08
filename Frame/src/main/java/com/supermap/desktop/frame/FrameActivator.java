@@ -31,6 +31,7 @@ public class FrameActivator implements BundleActivator {
 			startUp(bundleContext);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			isError = true;
 		}
 	}

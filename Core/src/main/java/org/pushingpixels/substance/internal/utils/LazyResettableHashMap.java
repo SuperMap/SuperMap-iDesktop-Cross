@@ -29,7 +29,6 @@
  */
 package org.pushingpixels.substance.internal.utils;
 
-import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -86,9 +85,9 @@ public class LazyResettableHashMap<T> {
 	 * @param entry Pair value.
 	 */
 	public void put(HashMapKey key, T entry) {
-		if (!SwingUtilities.isEventDispatchThread())
-			throw new IllegalArgumentException(
-					"Called outside Event Dispatch Thread");
+//		if (!SwingUtilities.isEventDispatchThread())
+//			throw new IllegalArgumentException(
+//					"Called outside Event Dispatch Thread");
 		this.createIfNecessary();
 		this.cache.put(key, entry);
 	}
