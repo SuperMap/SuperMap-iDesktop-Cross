@@ -6,6 +6,7 @@ import com.supermap.desktop.Interface.IImportPanelFactory;
 import com.supermap.desktop.Interface.IImportSettingFactory;
 import com.supermap.desktop.Interface.IPanelImport;
 import com.supermap.desktop.Interface.IPanelModel;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.*;
@@ -579,7 +580,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		this.buttonAddDir.setToolTipText(DataConversionProperties.getString("String_button_addDir"));
 		this.buttonAddFile.setToolTipText(DataConversionProperties.getString("String_button_addFile"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
-		this.buttonSelectAll.setToolTipText(DataConversionProperties.getString("string_button_selectAll"));
+		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(DataConversionProperties.getString("string_button_invertSelect"));
 		this.labelRemind.setForeground(new Color(32, 178, 170));
 	}

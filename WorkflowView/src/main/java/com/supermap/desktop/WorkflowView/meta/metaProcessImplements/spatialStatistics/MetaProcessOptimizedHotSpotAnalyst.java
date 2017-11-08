@@ -19,6 +19,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetType
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -39,8 +40,8 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 
 	// 线面数据集所需要的面板:
 	private ParameterFieldComboBox parameterFieldComboBoxNotPoint;
-	//private ParameterComboBox parameterComboBoxNotPointMethod;
 	// 点数据需要的面板:
+	private ParameterFieldComboBox parameterFieldComboBoxPoint;
 	private ParameterComboBox parameterComboBoxAggregationMethod;
 	private ParameterDatasource parameterDatasourceAggregating;
 	private ParameterSingleDataset parameterSingleDatasetAggregating;
@@ -49,6 +50,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 	private ParameterSingleDataset parameterSingleDatasetBounding;
 
 	private ParameterSwitch parameterSwitchDatasetType = new ParameterSwitch();
+	private ParameterSwitch parameterSwitchPointFieldisNull = new ParameterSwitch();
 	private ParameterSwitch parameterSwitchAggregationMethod = new ParameterSwitch();
 
 	/**
@@ -71,6 +73,13 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 			} else {
 				parameterSwitchAggregationMethod.switchParameter("Bounding");
 			}
+
+			if (StringUtilities.isNullOrEmpty(parameterFieldComboBoxPoint.getFieldName())) {
+				parameterSwitchPointFieldisNull.switchParameter("FieldisNull");
+			} else {
+				parameterSwitchPointFieldisNull.switchParameter("FieldisNotNull");
+			}
+
 		}
 	};
 
@@ -91,6 +100,10 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterFieldComboBoxNotPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField"));
 		parameterFieldComboBoxNotPoint.setFieldType(fieldType);
 
+		parameterFieldComboBoxPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField"));
+		parameterFieldComboBoxPoint.setFieldType(fieldType);
+		parameterFieldComboBoxPoint.setShowNullValue(true);
+
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_NETWORK"), AggregationMethod.NETWORKPOLYGONS));
@@ -105,28 +118,37 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterDatasourceAggregating.setDescribe(ProcessProperties.getString("String_AggregatingPolygons_Datasource"));
 		parameterSingleDatasetAggregating.setDescribe(ProcessProperties.getString("String_AggregatingPolygons_Dataset"));
 
-
 	}
 
 	private void initComponentLayout() {
 
-		// 聚合
+		// 聚合面
 		ParameterCombine parameterCombineAggregating = new ParameterCombine();
 		parameterCombineAggregating.addParameters(parameterDatasourceAggregating);
 		parameterCombineAggregating.addParameters(parameterSingleDatasetAggregating);
-		// 网格
+		// 网格面、聚合点
 		ParameterCombine parameterCombineBounding = new ParameterCombine();
 		parameterCombineBounding.addParameters(parameterDatasourceBounding);
 		parameterCombineBounding.addParameters(parameterSingleDatasetBounding);
-		// 聚合方式选择面板
+		// 聚合方式选择下两种面板
 		parameterSwitchAggregationMethod.add("Aggregating", parameterCombineAggregating);
 		parameterSwitchAggregationMethod.add("Bounding", parameterCombineBounding);
 
+		// 点类型数据、评估字段不为空
+		ParameterCombine parameterCombinePointFieldisNull = new ParameterCombine();
+		parameterCombinePointFieldisNull.addParameters(parameterComboBoxAggregationMethod);
+		parameterCombinePointFieldisNull.addParameters(parameterSwitchAggregationMethod);
+
+		// 点数据评估字段是否为空下两种面板
+		parameterSwitchPointFieldisNull.add("FieldisNull", parameterCombinePointFieldisNull);
+		parameterSwitchPointFieldisNull.add("FieldisNotNull", new ParameterCombine());
+
 		// 点数据集参数面板
 		ParameterCombine parameterCombinePoint = new ParameterCombine();
-		parameterCombinePoint.addParameters(parameterComboBoxAggregationMethod);
-		parameterCombinePoint.addParameters(parameterSwitchAggregationMethod);
+		parameterCombinePoint.addParameters(parameterFieldComboBoxPoint);
+		parameterCombinePoint.addParameters(parameterSwitchPointFieldisNull);
 
+		// 数据类型下两种面板
 		parameterSwitchDatasetType.add("NotPointType", parameterFieldComboBoxNotPoint);
 		parameterSwitchDatasetType.add("PointType", parameterCombinePoint);
 
@@ -162,6 +184,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 			parameterDatasource.setSelectedItem(defaultDatasetVector.getDatasource());
 			parameterSingleDataset.setSelectedItem(defaultDatasetVector);
 			parameterFieldComboBoxNotPoint.setFieldName(defaultDatasetVector);
+			parameterFieldComboBoxPoint.setFieldName(defaultDatasetVector);
 			parameterDatasourceBounding.setSelectedItem(defaultDatasetVector.getDatasource());
 			parameterSingleDatasetBounding.setSelectedItem(defaultDatasetVector);
 
@@ -174,11 +197,13 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterComboBoxAggregationMethod.setSelectedItem(AggregationMethod.AGGREGATIONPOLYGONS);
 		parameterSwitchAggregationMethod.switchParameter("Aggregating");
 
+		parameterSwitchPointFieldisNull.switchParameter("FieldisNull");
 	}
 
 	private void initListener() {
 		parameterSingleDataset.addPropertyListener(propertyChangeListener);
 		parameterComboBoxAggregationMethod.addPropertyListener(propertyChangeListener);
+		parameterFieldComboBoxPoint.addPropertyListener(propertyChangeListener);
 
 	}
 
@@ -203,6 +228,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		EqualDatasetConstraint equalDatasetConstraint = new EqualDatasetConstraint();
 		equalDatasetConstraint.constrained(parameterSingleDataset, ParameterSingleDataset.DATASET_FIELD_NAME);
 		equalDatasetConstraint.constrained(parameterFieldComboBoxNotPoint, ParameterFieldComboBox.DATASET_FIELD_NAME);
+		equalDatasetConstraint.constrained(parameterFieldComboBoxPoint, ParameterFieldComboBox.DATASET_FIELD_NAME);
 	}
 
 	@Override
@@ -218,16 +244,19 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		// 根据数据集类型进行不同参数设置
 		OptimizedParameter optimizedParameter = new OptimizedParameter();
 		if (datasetVector.getType().equals(DatasetType.POINT)) {
-			// 点类型
-			optimizedParameter.setAggregationMethod((AggregationMethod) parameterComboBoxAggregationMethod.getSelectedData());
-			if (optimizedParameter.getAggregationMethod().equals(AggregationMethod.AGGREGATIONPOLYGONS)) {
-				optimizedParameter.setAggregatingPolygons((DatasetVector) parameterSingleDatasetAggregating.getSelectedItem());
+			if (!StringUtilities.isNullOrEmpty(parameterFieldComboBoxPoint.getFieldName())) {
+				optimizedParameter.setAssessmentFieldName(parameterFieldComboBoxPoint.getFieldName());
 			} else {
-				optimizedParameter.setBoundingPolygons((DatasetVector) parameterSingleDatasetBounding.getSelectedItem());
+				optimizedParameter.setAggregationMethod((AggregationMethod) parameterComboBoxAggregationMethod.getSelectedData());
+				if (optimizedParameter.getAggregationMethod().equals(AggregationMethod.AGGREGATIONPOLYGONS)) {
+					optimizedParameter.setAggregatingPolygons((DatasetVector) parameterSingleDatasetAggregating.getSelectedItem());
+				} else {
+					optimizedParameter.setBoundingPolygons((DatasetVector) parameterSingleDatasetBounding.getSelectedItem());
+				}
 			}
+			// 点类型评估字段为空
 		} else {
 			// 线面类型
-			optimizedParameter.setAggregationMethod(AggregationMethod.NETWORKPOLYGONS);
 			optimizedParameter.setAssessmentFieldName(parameterFieldComboBoxNotPoint.getFieldName());
 		}
 		try {
