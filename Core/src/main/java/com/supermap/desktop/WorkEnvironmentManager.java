@@ -1,5 +1,6 @@
 package com.supermap.desktop;
 
+import com.alibaba.fastjson.JSONArray;
 import com.supermap.desktop.properties.Properties;
 import com.supermap.desktop.utilities.PathUtilities;
 import com.supermap.desktop.utilities.XmlUtilities;
@@ -27,12 +28,18 @@ public class WorkEnvironmentManager {
 		Boolean result = false;
 		String name = Properties.getLocale().getLanguage() + "_" + Properties.getLocale().getCountry();
 		try {
-			String language = name;
-			if (language.equals("zh_CN")) {
+			String desktopCrossStartArgs = System.getProperty("DesktopCrossStartArgs");
+			JSONArray fileLists = (JSONArray) JSONArray.parse(desktopCrossStartArgs);
+			if (fileLists != null && fileLists.size() != 0) {
 				name = "Default";
-			}
-			if (language.equals("en_US")) {
-				name = "Default_EN_US";
+			} else {
+				String language = name;
+				if (language.equals("zh_CN")) {
+					name = "Default";
+				}
+				if (language.equals("en_US")) {
+					name = "Default_EN_US";
+				}
 			}
 			String workEnvironmentPath = PathUtilities.getFullPathName(_XMLTag.g_FolderWorkEnvironment, true);
 			File file = new File(workEnvironmentPath);
