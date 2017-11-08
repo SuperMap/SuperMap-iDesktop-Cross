@@ -50,7 +50,7 @@ public class JDialogColorScheme extends SmDialog {
 	//存放删除的颜色方案，确定时删除
 	private java.util.List<ColorScheme> deletedList;
 	private JMenuItem menuItemExport = new JMenuItem(CoreProperties.getString(CoreProperties.EXPORT));
-	private JMenuItem menuItemFavorite = new JMenuItem(CoreProperties.getString("String_Favorite"));
+	private JMenuItem menuItemFavorite = new JMenuItem(CoreProperties.getString("String_Collent"));
 
 	private JScrollPane scrollPane = new JScrollPane();
 	private JTree tree = new JTree();

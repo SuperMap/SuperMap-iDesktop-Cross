@@ -16,6 +16,7 @@ import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.AbstractPrjTableModel;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.CoordSysDefine;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.PrjCoordSysTableModel;
+import com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels.DefaultCoordsysTreeCellRenderer;
 import com.supermap.desktop.utilities.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -106,7 +107,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			ControlsProperties.getString("String_Customize")).setFolderNode(true);
 	// 收藏夹坐标系集合
 	private transient CoordSysDefine favoriteCoordinate = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, null,
-			ControlsProperties.getString("String_MyFavorite")).setFolderNode(true);
+			ControlsProperties.getString("String_Favorite")).setFolderNode(true);
 
 	// 当前选中的坐标系
 	private transient CoordSysDefine currentPrjDefine = null;
@@ -229,9 +230,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				newGeoCoordsys();
 			} else if (e.getSource().equals(menuItemNewFormEPSG) || e.getSource().equals(menuItemNewFormEPSGClone)) {
 				newCoordsysFromEPSG();
-			} else if (e.getSource().equals(textFieldSearch)) {
-				textFieldSearchAction();
 			}
+			//else if (e.getSource().equals(textFieldSearch)) {
+			//	textFieldSearchAction();
+			//}
 		}
 	};
 
@@ -294,12 +296,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		}
 	}
 
+
 	/**
 	 * 初始化根节点
 	 */
 	private void bulidRootDefine() {
 		rootDefine = new CoordSysDefine(CoordSysDefine.USER_DEFINED);
-		//rootDefine.setCaption(ControlsProperties.getString("String_CoordSystem"));
 		rootDefine.add(noneEarth);
 		rootDefine.add(projectionSystem);
 		rootDefine.add(geographyCoordinate);
@@ -437,7 +439,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonDelete.addMouseListener(this.buttonMouseAdapter);
 		this.buttonApply.addActionListener(this.actionListener);
 		this.buttonClose.addActionListener(this.actionListener);
-		this.textFieldSearch.addActionListener(this.actionListener);
+		//this.textFieldSearch.addActionListener(this.actionListener);
 		this.textFieldSearch.getDocument().addDocumentListener(this.documentListener);
 	}
 
@@ -461,7 +463,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.buttonDelete.removeMouseListener(this.buttonMouseAdapter);
 		this.buttonApply.removeActionListener(this.actionListener);
 		this.buttonClose.removeActionListener(this.actionListener);
-		this.textFieldSearch.removeActionListener(this.actionListener);
+		//this.textFieldSearch.removeActionListener(this.actionListener);
 		this.textFieldSearch.getDocument().removeDocumentListener(this.documentListener);
 	}
 
@@ -476,9 +478,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		JToolBar toolBarButton = new JToolBar();
 		toolBarButton.setFloatable(false);
 
-		this.buttonImport = new JButton(ControlsProperties.getString("String_Button_ImportCoordsys"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Import.png"));
-		this.buttonExport = new JButton(ControlsProperties.getString("String_Button_ExportCoordsys"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Export.png"));
-		this.buttonFavorites = new JButton(CoreProperties.getString("String_Favorite"), CoreResources.getIcon("/coreresources/ToolBar/Image_Favorite.png"));
+		this.buttonImport = new JButton(ControlsProperties.getString("String_Import"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Import.png"));
+		this.buttonExport = new JButton(ControlsProperties.getString("String_Export"), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Export.png"));
+		this.buttonFavorites = new JButton(CoreProperties.getString("String_Collent"), CoreResources.getIcon("/coreresources/ToolBar/Image_Favorite.png"));
 		this.buttonNewCoordSys = new JButton(ControlsProperties.getString("String_NewCoorSys"), CoreResources.getIcon("/coreresources/ToolBar/Image_NewCoordsys.png"));
 		this.buttonNewGroup = new JButton(ControlsProperties.getString("String_NewGroup"), ControlsResources.getIcon("/controlsresources/SortType/Image_NewGroup.png"));
 		this.buttonDelete = new JButton(CoreProperties.getString(CoreProperties.Delete), CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
@@ -552,14 +554,21 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		this.splitPaneMain.setContinuousLayout(true);
 
 		JScrollPane scrollPane = new JScrollPane();
-		this.treePrjCoordSys = new JTree(new DefaultTreeModel(new DefaultMutableTreeNode(ControlsProperties.getString("String_CoordSystem"))));
-		this.treePrjCoordSys.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		// 设置不显示根节点
-		this.treePrjCoordSys.setRootVisible(false);
+		createtreePrjCoordSys();
+		this.treePrjCoordSys = createtreePrjCoordSys();
+		this.treePrjCoordSys.setCellRenderer(new DefaultCoordsysTreeCellRenderer());
 		scrollPane.setViewportView(this.treePrjCoordSys);
 		this.splitPaneMain.setLeftComponent(scrollPane);
 		this.splitPaneMain.setRightComponent(createSplitPaneDetails());
 		return this.splitPaneMain;
+	}
+
+
+	private JTree createtreePrjCoordSys() {
+		JTree tree = new JTree(new DefaultTreeModel(new DefaultMutableTreeNode(ControlsProperties.getString("String_CoordSystem"))));
+		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		//tree.setRootVisible(false);
+		return tree;
 	}
 
 	/**
@@ -882,11 +891,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.treePrjCoordSys.getSelectionPath().getLastPathComponent();
 
 				// 去除根节点的显示
-				//if (selectedNode == treePrjCoordSys.getModel().getRoot()) {
-				//	this.prjModel.setDefine(rootDefine);
-				//	this.currentPrjDefine = null;
-				//} else
-				if (selectedNode.getUserObject() instanceof CoordSysDefine) {
+				if (selectedNode == treePrjCoordSys.getModel().getRoot()) {
+					this.prjModel.setDefine(rootDefine);
+					this.currentPrjDefine = null;
+				} else if (selectedNode.getUserObject() instanceof CoordSysDefine) {
 					this.prjModel.setDefine((CoordSysDefine) selectedNode.getUserObject());
 					this.currentPrjDefine = (CoordSysDefine) selectedNode.getUserObject();
 				} else {
@@ -1066,8 +1074,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void refreshStates() {
 		refreshTextAreaDetails();
-		//refreshPath();
 	}
+
 
 	/**
 	 * 当前选中的投影信息发生改变时，刷新投影信息详情
@@ -1119,7 +1127,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private void searchDefine(String pattern, CoordSysDefine define, SearchResultModel searchModel) {
 		CoordSysDefine[] allLeafDefines = null;
 
-		// 如果选中的是最后一级子节点，那么就选择改节点的父节点进行搜索
+		// 如果选中的是最后一级子节点，那么就选择该节点的父节点进行搜索
 		if (define.size() == 0) {
 			allLeafDefines = define.getParent().getAllLeaves();
 		} else {
@@ -1139,9 +1147,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			this.popupmenu = new JPopupMenu();
 
 			this.menuItemNewGroup = new JMenuItem(ControlsProperties.getString("String_NewGroup"));
-			this.menuItemImportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ImportCoordsys"));
-			this.menuItemExportCoordSys = new JMenuItem(ControlsProperties.getString("String_Button_ExportCoordsys"));
-			this.menuItemAddFavorites = new JMenuItem(CoreProperties.getString("String_Favorite"));
+			this.menuItemImportCoordSys = new JMenuItem(ControlsProperties.getString("String_Import"));
+			this.menuItemExportCoordSys = new JMenuItem(ControlsProperties.getString("String_Export"));
+			this.menuItemAddFavorites = new JMenuItem(CoreProperties.getString("String_Collent"));
 			this.menuItemDelete = new JMenuItem(CoreProperties.getString(CoreProperties.Delete));
 
 			this.menuNewCoordsys = new JMenu(ControlsProperties.getString("String_NewCoorSys"));
