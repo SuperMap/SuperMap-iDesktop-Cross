@@ -2,6 +2,7 @@ package com.supermap.desktop.ui.trees;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.ui.controls.HitTestIconType;
+import com.supermap.desktop.ui.controls.LayerCacheNodeDecorator;
 import com.supermap.mapping.Layer;
 
 import javax.swing.*;

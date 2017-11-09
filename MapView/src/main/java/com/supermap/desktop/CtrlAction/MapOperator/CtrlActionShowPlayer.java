@@ -34,4 +34,9 @@ public class CtrlActionShowPlayer extends CtrlAction {
         }
         return false;
     }
+
+    @Override
+    public boolean check() {
+        return ((FormMap) Application.getActiveApplication().getActiveForm()).getCachePlayerBar().isVisible();
+    }
 }

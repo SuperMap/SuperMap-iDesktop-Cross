@@ -4,7 +4,6 @@ import com.supermap.data.Toolkit;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -105,7 +104,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
     private void initComponent() {
         labelServer = new JLabel(ControlsProperties.getString("String_Label_ServersName"));
         labelDatabase = new JLabel(ControlsProperties.getString("String_Label_DatabaseName"));
-        labelCache = new JLabel(MapViewProperties.getString("MapCache_LabelCacheName"));
+        labelCache = new JLabel(ControlsProperties.getString("String_CacheName"));
         labelClient = new JLabel(CoreProperties.getString("String_Label_DataUser"));
         labelPassword = new JLabel(ControlsProperties.getString("String_Label_UserPassword"));
         labelVersion = new JLabel(ControlsProperties.getString("String_Label_CurrentVersion"));

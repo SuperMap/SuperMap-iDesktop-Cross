@@ -1,5 +1,8 @@
 package com.supermap.desktop.ui.controls;
 
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.TreeNodeDecorator;
 import com.supermap.mapping.LayerCache;
 
 import javax.swing.*;
