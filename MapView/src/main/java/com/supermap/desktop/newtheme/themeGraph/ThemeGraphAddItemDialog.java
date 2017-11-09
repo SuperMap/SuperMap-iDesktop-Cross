@@ -68,8 +68,8 @@ public class ThemeGraphAddItemDialog extends SmDialog {
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_Title_Add"));
 		this.buttonAddExpression.setText(CoreProperties.getString("String_ThemeGraphItemExpressionPicker_ButtonExpression"));
-		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonSure.setText(CoreProperties.getString("String_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 	}
 
 	private void initComponents() {

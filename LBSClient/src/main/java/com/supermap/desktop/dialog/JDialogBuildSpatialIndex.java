@@ -107,8 +107,8 @@ public class JDialogBuildSpatialIndex extends SmDialog {
 	}
 	
 	private void initializeResources() {
-		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOK.setText(CoreProperties.getString("String_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		this.setTitle("创建索引");
 		this.panelIndexBounds.setBorder(new TitledBorder(null, "索引范围", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));

@@ -46,7 +46,7 @@ public class LabelSettingDialog extends SmDialog {
 		this.textStylePanel.setFontHeight(false);
 		this.textStylePanel.setRotationAngl(false);
 		this.textStylePanel.setFixedSize(false);
-		this.okSmButton.setText(ControlsProperties.getString("String_Button_Ok"));
+		this.okSmButton.setText(ControlsProperties.getString("String_Ok"));
 		this.cancelSmButton.setText(ControlsProperties.getString("String_BatchAddColorTableCancelButton"));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setAutoCreateContainerGaps(true);

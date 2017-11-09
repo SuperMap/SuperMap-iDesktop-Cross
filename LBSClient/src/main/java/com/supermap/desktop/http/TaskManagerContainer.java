@@ -50,7 +50,7 @@ public class TaskManagerContainer extends JPanel {
 	}
 
 	private void initializeResources() {
-		this.buttonRun.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonRun.setText(CoreProperties.getString("String_OK"));
 		this.labelTitle.setText(LBSClientProperties.getString("String_TaskType"));
 	}
 

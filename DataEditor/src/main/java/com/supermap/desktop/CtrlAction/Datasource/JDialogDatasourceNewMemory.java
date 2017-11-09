@@ -129,8 +129,8 @@ public class JDialogDatasourceNewMemory extends SmDialog {
 		try {
 			this.setTitle(DataEditorProperties.getString("String_Title_NewDatasourceMemory"));
 			this.jLabelAlias.setText(CoreProperties.getString("String_Label_Datasource"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

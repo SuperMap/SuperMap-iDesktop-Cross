@@ -225,8 +225,8 @@ public class DialogSaveChildForms extends SmDialog {
 	private void initializeResources() {
 		try {
 			this.setTitle(CoreProperties.getString("String_Save"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
-			this.buttonCancel.setToolTipText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
+			this.buttonCancel.setToolTipText(CoreProperties.getString("String_Cancel"));
 			this.buttonSave.setText(CoreProperties.getString("String_Save"));
 			this.buttonSave.setToolTipText(CoreProperties.getString("String_Save"));
 			this.buttonUnSave.setText(CoreProperties.getString("String_FormSaveWindow_ButtonNotSave"));

@@ -138,8 +138,8 @@ public class DialogSaveAsLayout extends SmDialog {
 		try {
 			this.setTitle(LayoutViewProperties.getString("String_Form_SaveAsLayout"));
 			this.lblNewLabelLayoutName.setText(LayoutViewProperties.getString("String_FormSaveAsLayout_LabelLayoutName"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
