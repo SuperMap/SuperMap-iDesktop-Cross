@@ -657,13 +657,13 @@ public class SubstanceColorUtilities {
 					: ComponentState.DISABLED_UNSELECTED;
 			JTextComponent matchingTextComp = SubstanceCoreUtilities
 					.getTextComponentForTransitions(component);
-			if (matchingTextComp != null) {
-				component = matchingTextComp;
-				boolean isEditable = matchingTextComp.isEditable();
-				if (!isEditable) {
-					return getBackgroundFillColor(component.getParent());
-				}
-			}
+//			if (matchingTextComp != null) {
+//				component = matchingTextComp;
+//				boolean isEditable = matchingTextComp.isEditable();
+//				if (!isEditable) {
+//					return getBackgroundFillColor(component.getParent());
+//				}
+//			}
 			// menu items always use the same background color so that the
 			// menu looks continuous
 			if (component instanceof JMenuItem) {

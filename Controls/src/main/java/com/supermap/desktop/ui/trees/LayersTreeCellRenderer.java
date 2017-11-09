@@ -2,6 +2,7 @@ package com.supermap.desktop.ui.trees;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.ui.controls.HitTestIconType;
+import com.supermap.desktop.ui.controls.LayerCacheNodeDecorator;
 import com.supermap.mapping.Layer;
 
 import javax.swing.*;
@@ -165,6 +166,15 @@ public class LayersTreeCellRenderer implements TreeCellRenderer {
 		imageList.add(new LayerImageNodeDecorator());
 		imageDecoratorList.add(imageList);
 		decoratorsMap.put(NodeDataType.LAYER_IMAGE, imageDecoratorList);
+
+		/*
+         *缓存图层
+		 */
+        ArrayList<ArrayList<TreeNodeDecorator>> cacheDecoratorList = prepareDecoratorListsForLayerChangeVisible();
+        ArrayList<TreeNodeDecorator> cacheList = new ArrayList<TreeNodeDecorator>();
+        cacheList.add(new LayerCacheNodeDecorator());
+        cacheDecoratorList.add(cacheList);
+        decoratorsMap.put(NodeDataType.LAYER_CACHE, cacheDecoratorList);
 
 		/*
 		 * 影像集合图层
