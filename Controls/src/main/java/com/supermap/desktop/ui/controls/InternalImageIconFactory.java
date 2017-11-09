@@ -365,6 +365,8 @@ public final class InternalImageIconFactory {
 
 	public final static ImageIcon LAYER_GROUP = createIconFromFile("Image_LayerGroup.png");
 
+    public final static ImageIcon LAYER_CACHE = createIconFromFile("Image_LayerCache_Normal.png");
+
 	public final static ImageIcon LAYER_SNAPSHOT=createIconFromFile("Image_Layer_LayerSnapshot.png");
 
 	public final static ImageIcon REGION_STYLE = createIconFromFile("Image_ThemeGuide_GeoRegionStyle.png");

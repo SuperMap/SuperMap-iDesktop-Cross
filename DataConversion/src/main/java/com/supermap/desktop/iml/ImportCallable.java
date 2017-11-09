@@ -13,7 +13,7 @@ import com.supermap.desktop.progress.Interface.UpdateProgressCallable;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.tableModel.ImportTableModel;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import javax.swing.*;

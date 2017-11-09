@@ -7,9 +7,9 @@ import com.supermap.desktop.Interface.IFormScene;
 import com.supermap.desktop.controls.utilities.SceneUIUtilities;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.Layer3DsTree;
-import com.supermap.desktop.ui.controls.NodeDataType;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.Layer3DsTree;
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.realspace.*;
 
 import javax.swing.tree.DefaultMutableTreeNode;

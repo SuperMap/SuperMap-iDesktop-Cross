@@ -20,6 +20,7 @@ import com.supermap.desktop.implement.SmComboBox;
 import com.supermap.desktop.implement.SmLabel;
 import com.supermap.desktop.implement.SmStatusbar;
 import com.supermap.desktop.implement.SmTextField;
+import com.supermap.desktop.mapview.CachePlayer.CachePlayerBar;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.geometry.property.GeometryPropertyFactory;
 import com.supermap.desktop.mapview.geometry.property.geometryNode.GeometryNodeFactory;
@@ -29,9 +30,9 @@ import com.supermap.desktop.ui.LayersComponentManager;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.*;
-import com.supermap.desktop.ui.controls.LayersTree;
-import com.supermap.desktop.ui.controls.NodeDataType;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.LayersTree;
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.desktop.ui.controls.scrollPanel.SmMapControlScrollPanel;
 import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.*;
@@ -80,6 +81,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
     };
 
     private MapControl mapControl = null;
+    private CachePlayerBar cachePlayerBar;
     private LayerRemovedListener layerRemovedListner = new LayerRemovedListener() {
         @Override
         public void layerRemoved(LayerRemovedEvent layerRemovedEvent) {
@@ -91,10 +93,16 @@ public class FormMap extends FormBaseChild implements IFormMap {
                     }
                 });
             }
-
+            cachePlayerBar.updateLayerCaches(layerRemovedEvent.getLayer(), false);
             if (Application.getActiveApplication().getMainFrame().getPropertyManager().isUsable()) {
                 setSelectedGeometryProperty();
             }
+        }
+    };
+    private LayerAddedListener layerAddedListener = new LayerAddedListener() {
+        @Override
+        public void layerAdded(LayerAddedEvent layerAddedEvent) {
+            cachePlayerBar.updateLayerCaches(layerAddedEvent.getLayer(), true);
         }
     };
     JScrollPane jScrollPaneChildWindow = null;
@@ -449,6 +457,8 @@ public class FormMap extends FormBaseChild implements IFormMap {
         Map map = this.mapControl.getMap();
         map.setWorkspace(Application.getActiveApplication().getWorkspace());
         map.setName(title);
+        cachePlayerBar = new CachePlayerBar(this);
+        this.add(cachePlayerBar, BorderLayout.NORTH);
 
         this.add(this.jScrollPaneChildWindow);
 
@@ -559,7 +569,9 @@ public class FormMap extends FormBaseChild implements IFormMap {
             // 防止多次注册
             this.isRegisterEvents = true;
             this.mapControl.getMap().getLayers().removeLayerRemovedListener(layerRemovedListner);
+            this.mapControl.getMap().getLayers().removeLayerAddedListener(layerAddedListener);
             this.mapControl.getMap().getLayers().addLayerRemovedListener(layerRemovedListner);
+            this.mapControl.getMap().getLayers().addLayerAddedListener(layerAddedListener);
             this.mapControl.addKeyListener(this.mapKeyListener);
             this.mapControl.addGeometrySelectChangedListener(this.geometrySelectChangedListener);
             this.mapControl.addGeometryAddedListener(this.geometryAddedListener);
@@ -944,6 +956,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
         removeDrag();
         if (this.mapControl != null && this.mapControl.getMap() != null && this.mapControl.getMap().getLayers() != null) {
             this.mapControl.getMap().getLayers().removeLayerRemovedListener(layerRemovedListner);
+            this.mapControl.getMap().getLayers().removeLayerAddedListener(layerAddedListener);
         }
         if (layersTree.getMap() == this.getMapControl().getMap()) {
             this.layersTree.setMap(null);
@@ -1180,7 +1193,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
         return nodeDataType == NodeDataType.LAYER || nodeDataType == NodeDataType.LAYER_IMAGE || nodeDataType == NodeDataType.LAYER_THEME
                 || nodeDataType == NodeDataType.LAYER_GRID || nodeDataType == NodeDataType.THEME_UNIQUE || nodeDataType == NodeDataType.THEME_RANGE
                 || nodeDataType == NodeDataType.THEME_LABEL_ITEM || nodeDataType == NodeDataType.THEME_UNIQUE_ITEM
-                || nodeDataType == NodeDataType.THEME_RANGE_ITEM || nodeDataType == NodeDataType.LAYER_GROUP
+                || nodeDataType == NodeDataType.THEME_RANGE_ITEM || nodeDataType == NodeDataType.LAYER_GROUP || nodeDataType == NodeDataType.LAYER_CACHE
                 || nodeDataType == NodeDataType.DATASET_IMAGE_COLLECTION || nodeDataType == NodeDataType.DATASET_GRID_COLLECTION
                 || nodeDataType == NodeDataType.THEME_CUSTOM || nodeDataType == NodeDataType.HEAT_MAP || nodeDataType == NodeDataType.GRID_AGGREGATION;
     }
@@ -1650,5 +1663,12 @@ public class FormMap extends FormBaseChild implements IFormMap {
         this.lengthUnit = lengthUnit;
     }
 
+    public void setCachePlayerBar(CachePlayerBar cachePlayerBar) {
+        this.cachePlayerBar = cachePlayerBar;
+    }
+
+    public CachePlayerBar getCachePlayerBar() {
+        return cachePlayerBar;
+    }
 }
 

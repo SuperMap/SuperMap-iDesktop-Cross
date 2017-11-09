@@ -8,8 +8,8 @@ import com.supermap.desktop.Interface.IPropertyManager;
 import com.supermap.desktop.controls.property.WorkspaceTreeDataPropertyFactory;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;

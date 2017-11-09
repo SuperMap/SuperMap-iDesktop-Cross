@@ -7,8 +7,8 @@ import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IFormMain;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.ui.controls.DockbarManager;
-import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 import com.supermap.mapping.Layer;
 
 import javax.swing.*;

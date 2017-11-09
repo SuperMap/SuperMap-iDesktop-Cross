@@ -7,6 +7,7 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
 import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
 import com.supermap.desktop.implement.CtrlAction;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.tasks.TasksManager;
 
 import java.util.Iterator;
@@ -36,7 +37,7 @@ public class CtrlActionRun extends CtrlAction {
 							@Override
 							public void run() {
 								CirculationIterator iterator = formWorkflow.iterator();
-								iterator.reset();
+								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorStart"));
 								while (iterator.hasNext()) {
 									formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
 									if (formWorkflow.getTasksManager().getStatus() == TasksManager.WORKFLOW_STATE_COMPLETED
@@ -56,6 +57,7 @@ public class CtrlActionRun extends CtrlAction {
 										}
 									}
 								}
+								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorExecuted"));
 							}
 						}).start();
 

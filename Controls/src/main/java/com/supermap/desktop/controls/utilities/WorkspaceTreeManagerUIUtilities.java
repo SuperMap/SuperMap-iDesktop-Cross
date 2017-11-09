@@ -3,8 +3,8 @@ package com.supermap.desktop.controls.utilities;
 import com.supermap.data.Datasource;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.WorkspaceComponentManager;
-import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 

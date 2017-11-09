@@ -20,14 +20,11 @@ import java.util.ArrayList;
 /**
  * Created by xie on 2017/11/2.
  */
-public class CirculationForDatasetParameters extends AbstractCirculationParameters implements CirculationIterator {
+public class CirculationForDatasetParameters extends AbstractCirculationParameters{
 	private ParameterDatasourceConstrained datasourceConstrained;
 	private ParameterSingleDataset dataset;
 	private ParameterDatasetType datasetType;
-	private ArrayList<Dataset> datasetList;
 	private Datasource currentDatasource;
-	private int count;
-	private OutputData outputData;
 
 	public CirculationForDatasetParameters(OutputData outputData) {
 		this.outputData = outputData;
@@ -45,8 +42,6 @@ public class CirculationForDatasetParameters extends AbstractCirculationParamete
 	}
 
 	private void initParameters() {
-		this.count = 0;
-		this.datasetList = new ArrayList<>();
 		this.datasourceConstrained = new ParameterDatasourceConstrained();
 		this.currentDatasource = DatasourceUtilities.getDefaultDatasource();
 		this.datasetType = new ParameterDatasetType();
@@ -65,40 +60,21 @@ public class CirculationForDatasetParameters extends AbstractCirculationParamete
 
 	@Override
 	public void reset() {
-		this.count = 0;
-		this.datasetList.clear();
+		this.infoList.clear();
 		if (null != this.datasourceConstrained.getSelectedItem()) {
 			Datasource datasource = this.datasourceConstrained.getSelectedItem();
 			DatasetType[] datasetTypes = (DatasetType[]) this.datasetType.getSelectedItem();
 			Datasets datasets = datasource.getDatasets();
-			this.datasetList.add(this.dataset.getSelectedDataset());
+			this.infoList.add(this.dataset.getSelectedDataset());
 			for (int i = 0, size = datasets.getCount(); i < size; i++) {
 				for (int j = 0, length = datasetTypes.length; j < length; j++) {
 					if (datasets.get(i).getType().equals(datasetTypes[j])
 							&& datasets.get(i) != this.dataset.getSelectedDataset()) {
-						this.datasetList.add(datasets.get(i));
+						this.infoList.add(datasets.get(i));
 					}
 				}
 			}
 		}
 		this.outputData.setValue(dataset.getSelectedDataset());
-	}
-
-	@Override
-	public boolean hasNext() {
-		return count < datasetList.size();
-	}
-
-	@Override
-	public Dataset next() {
-		Dataset result = datasetList.get(count);
-		count++;
-		return result;
-	}
-
-	@Override
-	public void remove() {
-		datasetList.clear();
-		datasetList = null;
 	}
 }

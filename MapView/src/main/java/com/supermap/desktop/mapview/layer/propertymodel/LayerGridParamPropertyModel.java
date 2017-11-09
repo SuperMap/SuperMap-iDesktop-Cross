@@ -181,14 +181,14 @@ public class LayerGridParamPropertyModel extends LayerPropertyModel {
 			this.isSpecialValueTransparent = ComplexPropertyUtilties.union(this.isSpecialValueTransparent, setting.isSpecialValueTransparent());
 			this.layerGridColorDictionary = ComplexPropertyUtilties.union(this.layerGridColorDictionary, setting.getColorDictionary());
 			DatasetGrid datasetGrid = (DatasetGrid) layer.getDataset();
-			int colorLegth = datasetGrid.getColorTable().getCount();
-			double minValue = datasetGrid.getMinValue();
-			double maxValue = datasetGrid.getMaxValue();
-			this.originKey = new double[colorLegth];
-			double valueGap = (maxValue - minValue) / (colorLegth - 1);
-			for (int i = 0; i < colorLegth; i++) {
-				this.originKey[i] = minValue + valueGap * i;
-			}
+            int colorLength = datasetGrid.getColorTable().getCount();
+            double minValue = datasetGrid.getMinValue();
+            double maxValue = datasetGrid.getMaxValue();
+            this.originKey = new double[colorLength];
+            double valueGap = (maxValue - minValue) / (colorLength - 1);
+            for (int i = 0; i < colorLength; i++) {
+                this.originKey[i] = minValue + valueGap * i;
+            }
 		}
 	}
 
