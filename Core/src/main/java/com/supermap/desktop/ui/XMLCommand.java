@@ -214,7 +214,7 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 	 * @param parent
 	 * @return
 	 */
-	private XMLCommandBase createNew(XMLCommandBase parent) {
+	protected XMLCommandBase createNew(XMLCommandBase parent) {
 		XMLCommand result = null;
 		try {
 			if (this instanceof XMLMenuCommand) {

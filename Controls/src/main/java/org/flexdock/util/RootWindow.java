@@ -18,28 +18,13 @@
  OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 package org.flexdock.util;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Frame;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.WeakHashMap;
-
-import javax.swing.JApplet;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JRootPane;
-import javax.swing.JWindow;
-import javax.swing.RootPaneContainer;
-import javax.swing.SwingUtilities;
 
 /**
  * This class provides an abstraction of root containers used in Swing. It

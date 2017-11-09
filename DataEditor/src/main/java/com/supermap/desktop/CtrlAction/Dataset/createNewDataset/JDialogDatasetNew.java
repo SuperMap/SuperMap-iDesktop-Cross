@@ -178,8 +178,8 @@ public class JDialogDatasetNew extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(DataEditorProperties.getString("String_ToolStripMenuItem_NewDataset"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
-		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_OK"));
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
 		this.buttonSelectInvert.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));

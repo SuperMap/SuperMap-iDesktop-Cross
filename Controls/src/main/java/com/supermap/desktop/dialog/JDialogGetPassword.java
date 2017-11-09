@@ -64,8 +64,8 @@ public class JDialogGetPassword extends SmDialog {
 		this.jlabelPasswordMessage = new JLabel(ControlsProperties.getString("String_LOGIN_PASSWORD_Message"));
 		this.jlabelPasswordMessage.setForeground(Color.RED);
 		this.jlabelPasswordMessage.setVisible(false);
-		this.buttonOk = new SmButton(ControlsProperties.getString("String_Button_Ok"));
-		this.buttonCancel = new SmButton(ControlsProperties.getString("String_Button_Cancel"));
+		this.buttonOk = new SmButton(ControlsProperties.getString("String_Ok"));
+		this.buttonCancel = new SmButton(ControlsProperties.getString("String_Cancel"));
 		this.getRootPane().setDefaultButton(this.buttonOk);
 		// @formatter:off
 		this.contentPanel.setLayout(new GridBagLayout());

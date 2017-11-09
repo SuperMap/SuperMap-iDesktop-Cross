@@ -220,8 +220,8 @@ public class JDialogUnifiedSet extends JDialog {
 	 */
 	private void initResources() {
 		setTitle(CoreProperties.getString("String_toolStripButtonAdvanced"));
-		okButton.setText(CoreProperties.getString("String_Button_OK"));
-		cancelButton.setText(CoreProperties.getString("String_Button_Cancel"));
+		okButton.setText(CoreProperties.getString("String_OK"));
+		cancelButton.setText(CoreProperties.getString("String_Cancel"));
 		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_toolStripButtonAdvanced"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
 		checkboxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));

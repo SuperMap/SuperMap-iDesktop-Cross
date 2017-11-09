@@ -192,8 +192,8 @@ public class JDialogSizeableTemplate extends SmDialog {
 	private void initializeResources() {
 		try {
 			this.setTitle(CoreProperties.getString("String_Save"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_OK"));
 
 			table.getColumnModel().getColumn(1).setHeaderValue(CoreProperties.getString("String_Name"));
 			table.getColumnModel().getColumn(2).setHeaderValue(CoreProperties.getString("String_Type"));

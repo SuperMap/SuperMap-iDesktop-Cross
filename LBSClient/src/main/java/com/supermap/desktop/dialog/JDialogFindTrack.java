@@ -88,9 +88,9 @@ public class JDialogFindTrack extends SmDialog {
 		this.labelPhoneNumber = new JLabel("电话号码:");
 		this.textPhoneNumber = new JTextField("18645392679");
 		this.buttonOK = new JButton("OK");
-		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonOK.setText(CoreProperties.getString("String_OK"));
 		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		
 		this.getRootPane().setDefaultButton(this.buttonOK);
 		

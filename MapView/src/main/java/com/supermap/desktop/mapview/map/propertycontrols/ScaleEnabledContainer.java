@@ -456,8 +456,8 @@ public class ScaleEnabledContainer extends SmDialog {
 
 	private void initResources() {
 		this.setTitle(MapViewProperties.getString("String_SetScaleFixed"));
-		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));

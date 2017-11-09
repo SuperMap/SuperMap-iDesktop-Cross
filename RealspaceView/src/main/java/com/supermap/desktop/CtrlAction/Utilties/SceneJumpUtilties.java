@@ -2,8 +2,8 @@ package com.supermap.desktop.CtrlAction.Utilties;
 
 import com.supermap.data.*;
 import com.supermap.desktop.Interface.IFormScene;
-import com.supermap.desktop.ui.controls.NodeDataType;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.realspace.*;
 
 /**

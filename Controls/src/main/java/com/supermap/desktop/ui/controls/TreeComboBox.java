@@ -3,6 +3,7 @@ package com.supermap.desktop.ui.controls;
 import com.sun.java.swing.plaf.motif.MotifComboBoxUI;
 import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
 import com.supermap.desktop.controls.utilities.JTreeUIUtilities;
+import org.pushingpixels.substance.internal.ui.SubstanceComboBoxUI;
 
 import javax.swing.*;
 import javax.swing.plaf.ComboBoxUI;
@@ -10,12 +11,21 @@ import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.plaf.synth.SynthComboBoxUI;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.applet.Applet;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.AWTEventListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 /**
  * 树下拉列表
@@ -60,6 +70,12 @@ public class TreeComboBox extends JComboBox {
 	 */
 	public TreeComboBox(JTree tree, TreeCellRenderer treeCellRenderer, boolean isNotShowRoot) {
 		this.setTree(tree);
+		tree.setCellRenderer(new DefaultTreeCellRenderer() {
+			@Override
+			public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+				return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+			}
+		});
 		tree.setCellRenderer(treeCellRenderer);
 		if (!isNotShowRoot) {
 			tree.expandPath(new TreePath(tree.getModel().getRoot()));
@@ -127,6 +143,8 @@ public class TreeComboBox extends JComboBox {
 			comboBoxUi = new WindowsTreeComboBoxUI();
 		} else if (comboBoxUi instanceof SynthComboBoxUI) {
 			comboBoxUi = new SynthTreeComboBoxUI();
+		} else if (comboBoxUi instanceof SubstanceComboBoxUI) {
+			comboBoxUi = new SubstanceTreeComboBoxUI(this);
 		}
 		setUI(comboBoxUi);
 	}
@@ -156,6 +174,17 @@ public class TreeComboBox extends JComboBox {
 	}
 
 	class WindowsTreeComboBoxUI extends WindowsComboBoxUI {
+		@Override
+		protected ComboPopup createPopup() {
+			return new TreePopup(comboBox);
+		}
+	}
+
+	class SubstanceTreeComboBoxUI extends SubstanceComboBoxUI {
+		public SubstanceTreeComboBoxUI(JComboBox combo) {
+			super(combo);
+		}
+
 		@Override
 		protected ComboPopup createPopup() {
 			return new TreePopup(comboBox);

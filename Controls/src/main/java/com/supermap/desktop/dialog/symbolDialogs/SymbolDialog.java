@@ -1,6 +1,16 @@
 package com.supermap.desktop.dialog.symbolDialogs;
 
-import com.supermap.data.*;
+import com.supermap.data.GeoPicture;
+import com.supermap.data.GeoStyle;
+import com.supermap.data.Point2D;
+import com.supermap.data.Rectangle2D;
+import com.supermap.data.Resources;
+import com.supermap.data.Symbol;
+import com.supermap.data.SymbolGroup;
+import com.supermap.data.SymbolGroups;
+import com.supermap.data.SymbolLibrary;
+import com.supermap.data.SymbolMarker;
+import com.supermap.data.SymbolType;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
@@ -228,24 +238,8 @@ public abstract class SymbolDialog extends SmDialog {
 	 * 初始化左侧选择框
 	 */
 	private void initTabbedPane() {
-		tabbedPane.addTab(getVerticalTitle(ControlsProperties.getString("String_WorkspaceResources")), panelWorkspaceResources);
-//		tabbedPane.addTab(getVerticalTitle("hehe"), new JPanel());
+		tabbedPane.addTab(ControlsProperties.getString("String_WorkspaceResources"), panelWorkspaceResources);
 	}
-
-	private String getVerticalTitle(String s) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("<html>");
-		if (s.length() > 0) {
-			builder.append(s.charAt(0));
-		}
-		for (int i = 1; i < s.length(); i++) {
-			builder.append("<br>");
-			builder.append(s.charAt(i));
-		}
-		builder.append("</html>");
-		return builder.toString();
-	}
-
 	/**
 	 * 初始化时用于给子类使用，如无需要可不重写
 	 */

@@ -1,22 +1,17 @@
 package com.supermap.desktop.CtrlAction;
 
 import com.supermap.data.Datasource;
-import com.supermap.data.DatasourceConnectionInfo;
-import com.supermap.data.Workspace;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.dataview.DataViewProperties;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
-import java.io.File;
-import java.text.MessageFormat;
 
 public class CtrlActionDatasourceRefresh extends CtrlAction {
 

@@ -33,6 +33,9 @@ public class CtrlActionTerrainUniformColor extends CtrlAction {
     public boolean enable() {
         boolean result = false;
         IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+	    if (formMap == null) {
+		    return false;
+	    }
         ArrayList<Layer> arrayList = MapUtilities.getLayers(formMap.getMapControl().getMap(), true); //针对formap获取layers，如果当有图层分组时会拿不到所有图层
         int indexCount = 0; // 用来判断当前地图窗口打开的删格数据集有几个，如果只有一个功能不可用，如果有两个或两个以上，才可用
         if (arrayList != null) {

@@ -115,8 +115,8 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
         comboBoxDatabase = new JComboBox<>();
         comboBoxCache = new JComboBox<>();
         comboBoxVersion = new JComboBox<>();
-        buttonCancel = new SmButton(CoreProperties.getString("String_Button_Cancel"));
-        buttonOK = new SmButton(CoreProperties.getString("String_Button_OK"));
+	    buttonCancel = new SmButton(CoreProperties.getString("String_Cancel"));
+	    buttonOK = new SmButton(CoreProperties.getString("String_OK"));
 
         textFieldServer.setText("localhost:27017");
         comboBoxDatabase.setEditable(true);

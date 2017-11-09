@@ -234,7 +234,7 @@ public class JDialogOutputDataset extends SmDialog {
 		this.labelCodeType.setText(CoreProperties.getString("String_CodeType"));
 		this.checkBoxIsSaveRows.setText(CoreProperties.getString("String_OnlySaveSelectedRows"));
 		this.buttonOK.setText(CoreProperties.getString("String_FormEdgeCount_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 	}
 
 	private void registerEvents() {

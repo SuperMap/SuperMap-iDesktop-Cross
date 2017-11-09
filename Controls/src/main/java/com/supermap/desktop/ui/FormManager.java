@@ -451,16 +451,18 @@ public class FormManager extends MdiPane implements IFormManager {
 
 		// 如果窗口类型不一致，刷新子选项卡和工具条
 		if (beforeType != this.activatedChildFormType) {
-			final FrameMenuManager frameMenuManager = (FrameMenuManager) Application.getActiveApplication().getMainFrame().getFrameMenuManager();
-			final ToolbarManager toolbarManager = (ToolbarManager) Application.getActiveApplication().getMainFrame().getToolbarManager();
+//			final FrameMenuManager frameMenuManager = (FrameMenuManager) Application.getActiveApplication().getMainFrame().getFrameMenuManager();
+//			final ToolbarManager toolbarManager = (ToolbarManager) Application.getActiveApplication().getMainFrame().getToolbarManager();
+            final RibbonManager ribbonManager = (RibbonManager) Application.getActiveApplication().getMainFrame().getRibbonManager();
 
 			boolean needRefresh = false;
 			// 如果之前存在子窗口，则需要移除原来的子菜单和工具条
 			if (beforeType != WindowType.UNKNOWN) {
 				// 移除原子窗体的子菜单
-				frameMenuManager.removeChildMenu(beforeType);
+//				frameMenuManager.removeChildMenu(beforeType);
+                ribbonManager.removeChildMenu(beforeType);
 				// 移除原子窗体的子工具条
-				toolbarManager.removeChildToolbar(beforeType);
+//				toolbarManager.removeChildToolbar(beforeType);
 
 				needRefresh = true;
 			}
@@ -468,16 +470,18 @@ public class FormManager extends MdiPane implements IFormManager {
 			// 如果切换后存在子窗口，则需要添加子菜单和工具条
 			if (!this.activatedChildFormType.equals(WindowType.UNKNOWN)) {
 				// 激活新子窗体的子菜单
-				frameMenuManager.loadChildMenu(activatedChildFormType);
+//				frameMenuManager.loadChildMenu(activatedChildFormType);
+                ribbonManager.loadChildMenu(activatedChildFormType);
 				// 激活新子窗体的子工具条
-				toolbarManager.loadChildToolbar(activatedChildFormType);
+//				toolbarManager.loadChildToolbar(activatedChildFormType);
 
 				needRefresh = true;
 			}
 			if (needRefresh) {
-				frameMenuManager.getMenuBar().updateUI();
-				toolbarManager.getToolbarsContainer().repaint();
-			}
+                ToolbarUIUtilities.updataToolbarsState();
+//                frameMenuManager.getMenuBar().updateUI();
+//				toolbarManager.getToolbarsContainer().repaint();
+            }
 		}
 	}
 

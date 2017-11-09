@@ -11,7 +11,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
 import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.SmDialog;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
@@ -202,8 +202,8 @@ public class DiglogSaveThemeAsDataset extends SmDialog {
 		this.datasourcesLabel.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.datasourceTypeLabel.setText(MapViewProperties.getString("String_Label_DatasetType"));
 		this.datasourceNameLabel.setText(ControlsProperties.getString("String_Label_DatasetName"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
-		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_OK"));
 	}
 
 	/**

@@ -226,7 +226,7 @@ public class ImportFilePropertiesDialog extends SmDialog {
         this.labelFileSize.setText(DataConversionProperties.getString("string_label_lblFileSize"));
         this.labelProperty.setText(DataConversionProperties.getString("string_label_lblFileProperty"));
         this.checkboxHidden.setText(DataConversionProperties.getString("string_chcekbox_hidden"));
-        this.buttonSure.setText(ControlsProperties.getString("String_Button_Ok"));
-        this.buttonQuit.setText(DataConversionProperties.getString("string_button_quit"));
+	    this.buttonSure.setText(ControlsProperties.getString("String_Ok"));
+	    this.buttonQuit.setText(DataConversionProperties.getString("string_button_quit"));
     }
 }
