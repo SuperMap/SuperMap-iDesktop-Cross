@@ -477,7 +477,8 @@ public class SubstanceRootPaneUI extends BasicRootPaneUI {
 
 						@Override
 						public void componentResized(ComponentEvent e) {
-							this.processNewPosition();
+							// frameResize的时候太卡了，注释掉
+//							this.processNewPosition();
 						}
 
 						protected void processNewPosition() {
