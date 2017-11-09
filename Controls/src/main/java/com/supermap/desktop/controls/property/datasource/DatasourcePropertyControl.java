@@ -277,8 +277,8 @@ public class DatasourcePropertyControl extends AbstractPropertyControl {
 		this.labelOpenType.setText(ControlsProperties.getString("String_OpenMode"));
 		this.labelDescription.setText(ControlsProperties.getString("String_labelDescription"));
 		this.buttonChangePassword.setText(ControlsProperties.getString("String_ButtonChangePassword"));
-		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
-		this.buttonReset.setText(CoreProperties.getString("String_Button_Reset"));
+		this.buttonApply.setText(CoreProperties.getString("String_Apply"));
+		this.buttonReset.setText(CoreProperties.getString("String_Reset"));
 
 	}
 	private void setComponentName() {

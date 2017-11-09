@@ -157,9 +157,9 @@ public class RasterAlgebraOperationDialog extends SmDialog {
 	}
 
 	private void initResources() {
-		this.buttonOK.setText(ControlsProperties.getString("String_Button_Ok"));
+		this.buttonOK.setText(ControlsProperties.getString("String_Ok"));
 		this.buttonClear.setText(ControlsProperties.getString("String_GeometryPropertyStyle3DControl_buttonClearMarkerIconFile"));
-		this.buttonClose.setText(ControlsProperties.getString("String_Button_Cancel"));
+		this.buttonClose.setText(ControlsProperties.getString("String_Cancel"));
 	}
 
 	private void initWorkspaceTree() {

@@ -48,8 +48,8 @@ public class TableAndLayout extends JDialog {
 		this.table2 = new JTable(new Table2Model());
 
 		this.labelStatus = new JLabel("服务器链接状态 : Connected.");
-		this.buttonOK = new SmButton(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel = new SmButton(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOK = new SmButton(CoreProperties.getString("String_OK"));
+		this.buttonCancel = new SmButton(CoreProperties.getString("String_Cancel"));
 		
 		GroupLayout gLayout = new GroupLayout(this.getContentPane());
 		gLayout.setAutoCreateContainerGaps(true);

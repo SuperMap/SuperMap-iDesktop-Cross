@@ -27,8 +27,8 @@ import java.util.ArrayList;
 public class JDialogTopoBuildRegions extends SmDialog {
 	private static final long serialVersionUID = 1L;
 	private SmButton buttonMore = new SmButton("String_Button_Advance");
-	private SmButton buttonOk = new SmButton("String_Button_OK");
-	private SmButton buttonCancel = new SmButton("String_Button_Cancel");
+	private SmButton buttonOk = new SmButton("String_OK");
+	private SmButton buttonCancel = new SmButton("String_Cancel");
 	private JCheckBox checkboxLinesIntersected = new JCheckBox("String_LinesIntersected");
 	private JCheckBox checkboxOvershootsCleaned = new JCheckBox("String_CleanOvershoots");
 	private JCheckBox checkboxPseudoNodesCleaned = new JCheckBox("String_CleanPseudoNodes");
@@ -90,8 +90,8 @@ public class JDialogTopoBuildRegions extends SmDialog {
 	private void initResources() {
 		setTitle(DataTopologyProperties.getString("String_TopoRegionTitle"));
 		this.buttonMore.setText(CoreProperties.getString("String_Button_Advance"));
-		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		this.checkboxLinesIntersected.setSelected(true);
 		this.checkboxLinesIntersected.setText(DataTopologyProperties.getString("String_LinesIntersected"));
 		this.checkboxOvershootsCleaned.setSelected(true);

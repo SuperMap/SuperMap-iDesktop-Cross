@@ -40,8 +40,8 @@ public class JDialogTopoPreProgress extends SmDialog {
 	private DatasetComboBox comboBoxConsultDataset;
 	private JToolBar toolBar = new JToolBar();
 	private JScrollPane scrollPane = new JScrollPane();
-	private SmButton buttonSure = new SmButton("String_Button_OK");
-	private SmButton buttonQuite = new SmButton("String_Button_Cancel");
+	private SmButton buttonSure = new SmButton("String_OK");
+	private SmButton buttonQuite = new SmButton("String_Cancel");
 	private JLabel labelTolerance = new JLabel("String_Label_Tolerance");
 	private SmButton buttonAdd = new SmButton();
 	private SmButton buttonSelectAll = new SmButton();
@@ -133,8 +133,8 @@ public class JDialogTopoPreProgress extends SmDialog {
 		checkBoxPolygonsChecked.setEnabled(false);
 		checkBoxPolygonsChecked.setText(DataTopologyProperties.getString("String_CheckBox_PolygonsChecked"));
 		buttonSure.setEnabled(false);
-		buttonSure.setText(CoreProperties.getString("String_Button_OK"));
-		buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
+		buttonSure.setText(CoreProperties.getString("String_OK"));
+		buttonQuite.setText(CoreProperties.getString("String_Cancel"));
 		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_FormEdgeCount_Text"), TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 	}

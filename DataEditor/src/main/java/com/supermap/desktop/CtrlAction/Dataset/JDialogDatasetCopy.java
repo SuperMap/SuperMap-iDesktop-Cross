@@ -454,7 +454,7 @@ public class JDialogDatasetCopy extends SmDialog {
 	private void initResources() {
 		try {
 			this.setTitle(DataEditorProperties.getString("String_CopyDataset"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 			this.buttonOk.setText(DataEditorProperties.getString("String_Copy"));
 
 			table.getColumnModel().getColumn(COLUMN_INDEX_Dataset).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDataset"));

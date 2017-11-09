@@ -279,7 +279,7 @@ public class TasksManagerPanel extends JPanel implements WorkerStateChangedListe
 	}
 
 	private void initializeResources() {
-		// this.buttonApply.setText(CommonProperties.getString("String_Button_Apply"));
+		// this.buttonApply.setText(CommonProperties.getString("String_Apply"));
 	}
 
 	@Override
