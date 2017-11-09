@@ -137,4 +137,5 @@ public class NodeDataType extends Enum {
 
     //add by lixiaoyao 2017/10/31
     public static final NodeDataType LAYER_SNAPSHOT = new NodeDataType(3025,3025);
+    public static final NodeDataType LAYER_CACHE = new NodeDataType(3026, 3026);
 }

@@ -167,6 +167,15 @@ public class LayersTreeCellRenderer implements TreeCellRenderer {
 		decoratorsMap.put(NodeDataType.LAYER_IMAGE, imageDecoratorList);
 
 		/*
+         *缓存图层
+		 */
+        ArrayList<ArrayList<TreeNodeDecorator>> cacheDecoratorList = prepareDecoratorListsForLayerChangeVisible();
+        ArrayList<TreeNodeDecorator> cacheList = new ArrayList<TreeNodeDecorator>();
+        cacheList.add(new LayerCacheNodeDecorator());
+        cacheDecoratorList.add(cacheList);
+        decoratorsMap.put(NodeDataType.LAYER_CACHE, cacheDecoratorList);
+
+		/*
 		 * 影像集合图层
 		 */
 		ArrayList<ArrayList<TreeNodeDecorator>> imageCollectionDecoratorList = prepareDecoratorListsForLayerChangeVisible();
