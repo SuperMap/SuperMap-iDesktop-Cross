@@ -14,9 +14,9 @@ import com.supermap.desktop.event.FormShownListener;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.controls.DatasetTypeComboBox;
-import com.supermap.desktop.ui.controls.NodeDataType;
+import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.controls.TextFieldSearch;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

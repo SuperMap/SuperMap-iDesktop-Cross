@@ -7,6 +7,10 @@ import com.supermap.desktop.Interface.IContextMenuManager;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.trees.Layer3DsTree;
+import com.supermap.desktop.ui.trees.LayersTree;
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.mapping.*;
 import com.supermap.realspace.Scene;
 

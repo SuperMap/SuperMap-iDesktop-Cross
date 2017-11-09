@@ -21,6 +21,7 @@ import com.supermap.desktop.ui.controls.ComponentBorderPanel.CompTitledPane;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.ui.controls.TextFields.RightValueListener;
 import com.supermap.desktop.ui.controls.TextFields.WaringTextField;
+import com.supermap.desktop.ui.trees.LayersTree;
 import com.supermap.desktop.utilities.CoreResources;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
