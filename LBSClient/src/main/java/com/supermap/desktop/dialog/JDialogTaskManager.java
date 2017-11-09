@@ -1,5 +1,6 @@
 package com.supermap.desktop.dialog;
 
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.lbsclient.LBSClientProperties;
@@ -98,8 +99,8 @@ public class JDialogTaskManager extends SmDialog {
     private void initResources() {
         this.labelDownloadTask.setText(LBSClientProperties.getString("String_DownloadTask"));
         this.labelUploadTask.setText(LBSClientProperties.getString("String_UploadTask"));
-        this.checkboxRecoverUploadTask.setText(LBSClientProperties.getString("String_Recover"));
-        this.checkboxRecoverDownloadTask.setText(LBSClientProperties.getString("String_Recover"));
+        this.checkboxRecoverUploadTask.setText(ControlsProperties.getString("SystemMenu.restore"));
+        this.checkboxRecoverDownloadTask.setText(ControlsProperties.getString("SystemMenu.restore"));
         this.setTitle(LBSClientProperties.getString("String_TaskRecover"));
     }
 

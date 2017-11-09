@@ -4,6 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormLBSControl;
+import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentFactory;
 import com.supermap.desktop.http.upload.LocalCreateFile;
 import com.supermap.desktop.implement.CtrlAction;
@@ -135,7 +136,7 @@ public class CtrlActionMkdir extends CtrlAction {
 
 		private void initResources() {
 			this.labelDirName.setText(LBSClientProperties.getString("String_DirectoryName"));
-			this.setTitle(LBSClientProperties.getString("String_MakeDirectory"));
+			this.setTitle(ControlsProperties.getString("FileChooser.other.newFolder"));
 		}
 
 		public String getDirectoryName() {
