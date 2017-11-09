@@ -60,11 +60,17 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 				} else if (evt.getPropertyName().equals(AbstractParameter.PROPERTY_VALE)) {
 					isSelectingItem = true;
 					if (evt.getNewValue() instanceof String) {
-						int count = ParameterFieldComboBoxPanel.this.comboBox.getItemCount();
-						for (int i = 0; i < count; i++) {
-							if (evt.getNewValue().equals(ParameterFieldComboBoxPanel.this.comboBox.getItemAt(i).getName())) {
-								ParameterFieldComboBoxPanel.this.comboBox.setSelectedItem(evt.getNewValue());
-								break;
+						// 当控件中存在空值时，ParameterFieldComboBoxPanel.this.comboBox.getItemAt(i) 会抛异常，所以直接设置-yuanR2017.11.9
+						if (StringUtilities.isNullOrEmpty(evt.getNewValue().toString())) {
+							ParameterFieldComboBoxPanel.this.comboBox.setSelectedItem(null);
+						} else {
+							int count = ParameterFieldComboBoxPanel.this.comboBox.getItemCount();
+							for (int i = 0; i < count; i++) {
+								// 存疑yuanR
+								if (ParameterFieldComboBoxPanel.this.comboBox.getItemAt(i) != null && evt.getNewValue().equals(ParameterFieldComboBoxPanel.this.comboBox.getItemAt(i).getName())) {
+									ParameterFieldComboBoxPanel.this.comboBox.setSelectedItem(evt.getNewValue());
+									break;
+								}
 							}
 						}
 					}
