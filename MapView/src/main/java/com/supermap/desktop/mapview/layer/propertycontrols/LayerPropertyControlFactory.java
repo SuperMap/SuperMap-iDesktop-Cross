@@ -12,6 +12,7 @@ public class LayerPropertyControlFactory {
 	private LayerGridParamPropertyControl gridParamPropertyControl;
 	private LayerHeatmapPropertyControl heatmapPropertyControl;
 	private LayerGridAggregationPropertyControl gridAggregationPropertyControl;
+    private LayerCachePropertyControl cachePropertyControl;
 
 	public AbstractLayerPropertyControl createLayerPropertyControl(LayerPropertyModel model) {
 		if (model instanceof LayerBasePropertyModel) {
@@ -70,8 +71,16 @@ public class LayerPropertyControlFactory {
 			gridAggregationPropertyControl.setLayerPropertyModel(model);
 			ComponentUIUtilities.setName(this.gridAggregationPropertyControl, "LayerPropertyControlFactory_gridAggregationPropertyControl");
 			return gridAggregationPropertyControl;
-		}else {
-			return null;
-		}
+        } else if (model instanceof LayerCachePropertyModel) {
+            if (cachePropertyControl != null) {
+                cachePropertyControl = new LayerCachePropertyControl();
+            }
+            cachePropertyControl.setLayerPropertyModel(model);
+            //TODO
+            ComponentUIUtilities.setName(this.cachePropertyControl, "");
+            return cachePropertyControl;
+        } else {
+            return null;
+        }
 	}
 }
