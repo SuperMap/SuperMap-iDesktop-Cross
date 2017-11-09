@@ -328,7 +328,14 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		if (parameter instanceof ParameterCombine) {
 			ArrayList<IParameter> parameterList = ((ParameterCombine) parameter).getParameterList();
 			for (int j = 0; j < parameterList.size(); j++) {
-				if (null != ((AbstractParameter) parameterList.get(j)).getValueType()
+				if (parameterList.get(j) instanceof ParameterCombine) {
+					getSameTypeParameter(valueTypes, parameterList.get(j), startGraphType);
+				} else if (parameterList.get(j) instanceof ParameterSwitch) {
+					int count = ((ParameterSwitch) parameterList.get(j)).getCount();
+					for (int i = 0; i < count; i++) {
+						getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
+					}
+				} else if (null != ((AbstractParameter) parameterList.get(j)).getValueType()
 						&& ((AbstractParameter) parameterList.get(j)).getValueType().equals(startGraphType)) {
 					valueTypes.add((AbstractParameter) parameterList.get(j));
 				}

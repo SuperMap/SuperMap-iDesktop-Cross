@@ -10,7 +10,6 @@ import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
  */
 public class CirculationForDatasetOutputParameters extends AbstractCirculationParameters {
 	private ParameterSingleDataset dataset;
-	private OutputData outputData;
 
 	public CirculationForDatasetOutputParameters(OutputData outputData) {
 		this.outputData = outputData;

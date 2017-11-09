@@ -5,16 +5,12 @@ import com.supermap.desktop.process.parameters.ParameterPanels.Circulation.Param
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 /**
  * Created by xie on 2017/11/1.
  */
-public class CirculationForObjectParameters extends AbstractCirculationParameters implements CirculationIterator {
+public class CirculationForObjectParameters extends AbstractCirculationParameters {
 	private ParameterForObjectCirculation parameterForObjectCirculation;
-	private ArrayList<String> list = new ArrayList<>();
-	private int count;
-	private OutputData outputData;
 
 	public CirculationForObjectParameters(OutputData outputData) {
 		this.outputData = outputData;
@@ -26,9 +22,9 @@ public class CirculationForObjectParameters extends AbstractCirculationParameter
 		this.parameterForObjectCirculation.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				list.clear();
+				infoList.clear();
 				if (null != parameterForObjectCirculation.getSelectedItem())
-					list.addAll(parameterForObjectCirculation.getSelectedItem());
+					infoList.addAll(parameterForObjectCirculation.getSelectedItem());
 			}
 		});
 	}
@@ -39,30 +35,12 @@ public class CirculationForObjectParameters extends AbstractCirculationParameter
 	}
 
 	@Override
-	public boolean hasNext() {
-		return count < list.size();
-	}
-
-	@Override
-	public Object next() {
-		String result = list.get(count);
-		count++;
-		return result;
-	}
-
-	@Override
 	public void reset() {
 		count = 0;
 		if (null != parameterForObjectCirculation.getSelectedItem() && parameterForObjectCirculation.getSelectedItem().size() > 0) {
-			list.clear();
-			list.addAll(parameterForObjectCirculation.getSelectedItem());
-			outputData.setValue(list.get(count));
+			infoList.clear();
+			infoList.addAll(parameterForObjectCirculation.getSelectedItem());
+			outputData.setValue(infoList.get(count));
 		}
-	}
-
-	@Override
-	public void remove() {
-		list.clear();
-		list = null;
 	}
 }

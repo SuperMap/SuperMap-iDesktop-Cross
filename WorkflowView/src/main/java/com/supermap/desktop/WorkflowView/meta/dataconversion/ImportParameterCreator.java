@@ -13,6 +13,7 @@ import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener
 import com.supermap.desktop.process.parameter.events.ParameterValueSelectedEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
+import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.util.EnumParser;
 import com.supermap.desktop.properties.CoreProperties;
@@ -193,6 +194,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			}
 		});
 		parameterDatasource.setDescribe(CoreProperties.getString(CoreProperties.Label_Datasource));
+		parameterDatasource.setValueType(CommonTypes.DATASOURCE);
 		Datasource[] activeDatasources = Application.getActiveApplication().getActiveDatasources();
 		if (activeDatasources.length > 0) {
 			for (Datasource activeDatasource : activeDatasources) {

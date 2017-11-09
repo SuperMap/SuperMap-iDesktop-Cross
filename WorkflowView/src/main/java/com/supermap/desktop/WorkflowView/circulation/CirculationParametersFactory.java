@@ -22,6 +22,9 @@ public class CirculationParametersFactory {
 			case forFieldType:
 				circulationOutParameters = new CirculationForFieldOutputParameters(outputData);
 				break;
+			case forDatasourceType:
+				circulationOutParameters = new CirculationForDatasourceOutputParameters(outputData);
+				break;
 			default:
 				break;
 		}
@@ -43,6 +46,9 @@ public class CirculationParametersFactory {
 				break;
 			case forFieldType:
 				circulationParameters = new CirculationForFieldParameters(outputData);
+				break;
+			case forDatasourceType:
+				circulationParameters = new CirculationForDatasourceParameters(outputData);
 				break;
 			default:
 				break;

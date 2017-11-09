@@ -12,6 +12,8 @@ import com.supermap.desktop.ui.controls.ExpressionComponent.FunctionComboBox;
 import com.supermap.desktop.ui.controls.ExpressionComponent.FunctionComboBoxSelectedChangeListener;
 import com.supermap.desktop.ui.controls.ExpressionComponent.OperatorsPanel;
 import com.supermap.desktop.ui.controls.button.SmButton;
+import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
