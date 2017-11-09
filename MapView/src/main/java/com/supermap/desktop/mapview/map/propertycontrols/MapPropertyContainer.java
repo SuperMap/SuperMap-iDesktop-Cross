@@ -191,7 +191,7 @@ public class MapPropertyContainer extends JPanel {
 
 	private void initializeResources() {
 		this.checkBoxAutoApply.setText(ControlsProperties.getString("String_AutoApply"));
-		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
+		this.buttonApply.setText(CoreProperties.getString("String_Apply"));
 	}
 
 	private void checkBoxAutoApply() {

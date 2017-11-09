@@ -573,7 +573,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonImport.setText(CoreProperties.getString("String_Import"));
-		this.buttonClose.setText(CoreProperties.getString("String_Button_Close"));
+		this.buttonClose.setText(CoreProperties.getString("String_Close"));
 		this.checkBoxAutoClose.setText(ControlsProperties.getString("string_chcekbox_autoCloseIn"));
 		this.labelTitle.setText(DataConversionProperties.getString("string_label_importData"));
 		this.labelRemind.setText(DataConversionProperties.getString("String_AddImportFiles"));

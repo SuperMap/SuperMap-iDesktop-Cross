@@ -151,11 +151,11 @@ public class JDialogTransformation extends SmDialog {
 			public Component getListCellRendererComponent(JList<? extends TransformationResampleMode> list, TransformationResampleMode value, int index, boolean isSelected, boolean cellHasFocus) {
 				JLabel jLabel = new JLabel();
 				if (value == TransformationResampleMode.NEAREST) {
-					jLabel.setText(ControlsProperties.getString("String_Nearest"));
+					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeNearest"));
 				} else if (value == TransformationResampleMode.BILINEAR) {
-					jLabel.setText(ControlsProperties.getString("String_Bilinear"));
+					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeBilinear"));
 				} else {
-					jLabel.setText(ControlsProperties.getString("String_Cubic"));
+					jLabel.setText(DataEditorProperties.getString("String_Transformation_ResampleModeCubic"));
 				}
 				jLabel.setOpaque(true);
 				jLabel.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());

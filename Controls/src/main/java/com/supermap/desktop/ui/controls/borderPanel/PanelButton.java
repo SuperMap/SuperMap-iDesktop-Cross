@@ -49,7 +49,7 @@ public class PanelButton extends JPanel {
 	}
 
 	private void initResources() {
-		this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonOk.setText(CoreProperties.getString("String_OK"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 	}
 }

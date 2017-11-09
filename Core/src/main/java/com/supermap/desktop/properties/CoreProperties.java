@@ -43,14 +43,14 @@ public class CoreProperties extends Properties {
 	public static final String Bottom = "String_Bottom";
 
 	//common转移
-	public static final String Reset = "String_Button_Reset";
-	public static final String Apply = "String_Button_Apply";
-	public static java.lang.String down = "String_Button_down";
-	public static java.lang.String up = "String_Button_up";
-	public static final String Cancel = "String_Button_Cancel";
-	public static final String Cancelling = "String_Button_Cancelling";
-	public static final String Close = "String_Button_Close";
-	public static final String OK = "String_Button_OK";
+	public static final String Reset = "String_Reset";
+	public static final String Apply = "String_Apply";
+	public static java.lang.String down = "String_Down";
+	public static java.lang.String up = "String_Up";
+	public static final String Cancel = "String_Cancel";
+	public static final String Cancelling = "String_Cancelling";
+	public static final String Close = "String_Close";
+	public static final String OK = "String_OK";
 	public static final String Index = "String_Index";
 	public static final String Name = "String_Name";
 	public static final String PixelFormat = "String_PixelFormat";

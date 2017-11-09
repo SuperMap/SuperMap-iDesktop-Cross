@@ -51,9 +51,9 @@ public class JDialogBoundsQuery extends SmDialog {
 		this.labelResult = new JLabel("结果数据集:");
 		this.textDatasetName = new JTextField("SpatialQuery");
 		this.buttonOK = new JButton("OK");
-		this.buttonOK.setText(CoreProperties.getString("String_Button_OK"));
+		this.buttonOK.setText(CoreProperties.getString("String_OK"));
 		this.buttonCancel = new JButton("Cancel");
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		
 		this.getRootPane().setDefaultButton(this.buttonOK);
 		

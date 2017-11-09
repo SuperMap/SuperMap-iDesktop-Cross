@@ -108,13 +108,13 @@ public class JDialogWorkspaceSaveAs extends SmDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		this.buttonOk = new JButton(CoreProperties.getString("String_Button_OK"));
+		this.buttonOk = new JButton(CoreProperties.getString("String_OK"));
 		this.buttonOk.setPreferredSize(new java.awt.Dimension(75, 23));
 		this.buttonOk.setActionCommand("OK");
 		buttonPane.add(buttonOk);
 		getRootPane().setDefaultButton(buttonOk);
 
-		this.buttonCancel = new JButton(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonCancel = new JButton(CoreProperties.getString("String_Cancel"));
 		this.buttonCancel.setPreferredSize(new java.awt.Dimension(75, 23));
 		this.buttonCancel.setActionCommand("Cancel");
 		buttonPane.add(buttonCancel);

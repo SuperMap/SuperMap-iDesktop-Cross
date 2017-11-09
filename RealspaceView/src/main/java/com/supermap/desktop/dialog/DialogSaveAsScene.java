@@ -132,8 +132,8 @@ public class DialogSaveAsScene extends SmDialog {
 		try {
 			this.setTitle(RealspaceViewProperties.getString("String_Form_SaveAsScene"));
 			this.lblNewLabelSceneName.setText(RealspaceViewProperties.getString("String_Label_InputSceneName"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

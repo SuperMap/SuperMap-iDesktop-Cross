@@ -41,8 +41,8 @@ public class JDialogTopoAdvance extends SmDialog {
 	private JPanel panelLinesIntersected = new JPanel();
 	private JPanel panelToleranceSetting = new JPanel();
 	private SmButton buttonMore = new SmButton("...");
-	private SmButton buttonSure = new SmButton("String_Button_OK");
-	private SmButton buttonQuite = new SmButton("String_Button_Cancel");
+	private SmButton buttonSure = new SmButton("String_OK");
+	private SmButton buttonQuite = new SmButton("String_Cancel");
 	private transient TopologyProcessingOptions topologyProcessingOptions = new TopologyProcessingOptions();
 	private DatasetComboBox comboBoxNotCutting;
 	private SQLExpressionDialog sqlExpressionDialog;
@@ -109,8 +109,8 @@ public class JDialogTopoAdvance extends SmDialog {
 		this.labelVertexTolerance.setText(ControlsProperties.getString("String_LabelToleranceFuzzy"));
 		this.labelFilterExpression.setText(DataTopologyProperties.getString("String_FilterExpression"));
 		this.labelNotCutting.setText(DataTopologyProperties.getString("String_NotCutting"));
-		this.buttonSure.setText(CoreProperties.getString("String_Button_OK"));
-		this.buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonSure.setText(CoreProperties.getString("String_OK"));
+		this.buttonQuite.setText(CoreProperties.getString("String_Cancel"));
 		this.panelLinesIntersected.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), DataTopologyProperties
 				.getString("String_LinesIntersected"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		this.panelToleranceSetting.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), DataTopologyProperties

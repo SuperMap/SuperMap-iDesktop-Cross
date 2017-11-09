@@ -34,9 +34,9 @@ public class DialogTerrainUniformColor extends SmDialog {
     private JComboBox comboBoxLayer;
     private JToolBar toolBar = new JToolBar();
     private JScrollPane scrollPane = new JScrollPane();
-    private SmButton buttonSure = new SmButton("String_Button_OK");
-    private SmButton buttonQuite = new SmButton("String_Button_Cancel");
-    private SmButton buttonEditColorTable = new SmButton("String_TerrainUniformColorEditColorTable");
+	private SmButton buttonSure = new SmButton("String_OK");
+	private SmButton buttonQuite = new SmButton("String_Cancel");
+	private SmButton buttonEditColorTable = new SmButton("String_TerrainUniformColorEditColorTable");
     private JLabel labelLayer = new JLabel();
     private JCheckBox checkBoxTip = new JCheckBox();
     private final int COLUMN_INDEX_CHECK = 0;
@@ -179,8 +179,8 @@ public class DialogTerrainUniformColor extends SmDialog {
         setTitle(MapViewProperties.getString("String_TerrainUniformColor"));
         labelLayer.setText(MapViewProperties.getString("String_TerrainUniformColorLayer"));
         buttonEditColorTable.setText(MapViewProperties.getString("String_TerrainUniformColorEditColorTable"));
-	    buttonSure.setText(CoreProperties.getString("String_Button_OK"));
-	    buttonQuite.setText(CoreProperties.getString("String_Button_Cancel"));
+	    buttonSure.setText(CoreProperties.getString("String_OK"));
+	    buttonQuite.setText(CoreProperties.getString("String_Cancel"));
 	    checkBoxTip.setText(MapViewProperties.getString("Sring_TerrainUniformColorCheckBox"));
         mutiTable.getColumnModel().getColumn(COLUMN_INDEX_LAYER).setHeaderValue(MapViewProperties.getString("String_TerrainUniformLayer"));
         mutiTable.getColumnModel().getColumn(COLUMN_INDEX_MINVALUE).setHeaderValue(CoreProperties.getString("String_StatisticsType_MIN"));

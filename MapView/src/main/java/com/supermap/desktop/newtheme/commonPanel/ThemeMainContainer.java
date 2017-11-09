@@ -81,7 +81,7 @@ public class ThemeMainContainer extends JPanel {
     private void initResources() {
         this.labelThemeLayer.setText(MapViewProperties.getString("String_Themelayers"));
         this.checkBoxRefreshAtOnce.setText(CoreProperties.getString("String_RefreshAtOnce"));
-        this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
+	    this.buttonApply.setText(CoreProperties.getString("String_Apply"));
     }
 
     /**
