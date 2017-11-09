@@ -15,20 +15,16 @@ import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 /**
  * Created by xie on 2017/11/8.
  */
-public class CirculationForFieldParameters extends AbstractCirculationParameters implements CirculationIterator {
+public class CirculationForFieldParameters extends AbstractCirculationParameters{
 	private ParameterDatasourceConstrained datasource;
 	private ParameterDatasetType datasetType;
 	private ParameterSingleDataset dataset;
 	private ParameterFieldComboBox fieldComboBox;
-	private OutputData outputData;
 	private Datasource currentDatasource;
-	private ArrayList<String> fieldNames = new ArrayList<>();
-	private int count;
 	private PropertyChangeListener datasetChangeListener = new PropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
@@ -83,14 +79,14 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 	@Override
 	public void reset() {
 		this.count = 0;
-		this.fieldNames.clear();
+		this.infoList.clear();
 		if (null != this.fieldComboBox.getFieldName()) {
-			this.fieldNames.add(this.fieldComboBox.getFieldName());
+			this.infoList.add(this.fieldComboBox.getFieldName());
 			if (null != this.dataset.getSelectedDataset() && this.dataset.getSelectedDataset() instanceof DatasetVector) {
 				FieldInfos tempFieldInfo = ((DatasetVector) this.dataset.getSelectedDataset()).getFieldInfos();
 				for (int i = 0, size = tempFieldInfo.getCount(); i < size; i++) {
 					if (!fieldComboBox.getFieldName().equalsIgnoreCase(tempFieldInfo.get(i).getName()) && !tempFieldInfo.get(i).isSystemField()) {
-						fieldNames.add(tempFieldInfo.get(i).getName());
+						infoList.add(tempFieldInfo.get(i).getName());
 					}
 				}
 			}
@@ -98,22 +94,4 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 		}
 	}
 
-	@Override
-	public boolean hasNext() {
-		return count < this.fieldComboBox.getParameters().size();
-	}
-
-	@Override
-	public Object next() {
-		String fieldName = this.fieldNames.get(count);
-		count++;
-		return fieldName;
-	}
-
-	@Override
-	public void remove() {
-		this.fieldNames.clear();
-		this.fieldNames = null;
-		this.dataset.removePropertyListener(this.datasetChangeListener);
-	}
 }

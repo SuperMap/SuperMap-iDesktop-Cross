@@ -9,16 +9,16 @@ import com.supermap.desktop.WorkflowView.circulation.CirculationType;
 import com.supermap.desktop.implement.CtrlAction;
 
 /**
- * Created by xie on 2017/11/3.
+ * Created by  on 2017/11/9.
  */
-public class CtrlActionCirculationForDatasetType extends CtrlAction {
-	public CtrlActionCirculationForDatasetType(IBaseItem caller, IForm formClass) {
+public class CtrlActionCirculationForDatasourceType extends CtrlAction {
+	public CtrlActionCirculationForDatasourceType(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
 	}
 
 	@Override
 	protected void run() {
-		CirculationGraphFactory.addCirculationGraph(CirculationType.forDatasetType);
+		CirculationGraphFactory.addCirculationGraph(CirculationType.forDatasourceType);
 	}
 
 	@Override

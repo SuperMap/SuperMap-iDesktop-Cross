@@ -9,7 +9,7 @@ import com.supermap.desktop.utilities.StringUtilities;
 /**
  * Created by xie on 2017/10/27.
  */
-public class CirculationForParameters extends AbstractCirculationParameters implements CirculationIterator {
+public class CirculationForParameters extends AbstractCirculationParameters {
 	private ParameterTextField startValue;
 	private ParameterTextField endValue;
 	private ParameterTextField iteratorValue;
@@ -17,8 +17,6 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 	private int nowValue;
 	private int iterator;
 	private int end;
-	private int count = 0;
-	private OutputData outputData;
 
 	public CirculationForParameters(OutputData outputData) {
 		this.outputData = outputData;
@@ -39,18 +37,6 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 	}
 
 	@Override
-	public boolean hasNext() {
-		return nowValue < end;
-	}
-
-	@Override
-	public Object next() {
-		nowValue = start + iterator * count;
-		count++;
-		return nowValue;
-	}
-
-	@Override
 	public void reset() {
 		count = 0;
 		if (StringUtilities.isInteger(startValue.getSelectedItem()) || "0".equals(startValue.getSelectedItem())) {
@@ -63,10 +49,10 @@ public class CirculationForParameters extends AbstractCirculationParameters impl
 		if (StringUtilities.isInteger(iteratorValue.getSelectedItem())) {
 			iterator = Integer.valueOf(iteratorValue.getSelectedItem());
 		}
-	}
-
-	@Override
-	public void remove() {
-
+		infoList.clear();
+		for (int i = nowValue, tempCount = 0; i <= end; i = start + iterator * tempCount) {
+			infoList.add(i);
+			tempCount++;
+		}
 	}
 }
