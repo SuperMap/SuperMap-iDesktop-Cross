@@ -103,7 +103,7 @@ public class JDialogDatasourceOpenAndNew extends SmDialog {
 		buttonPane.add(buttonOk);
 
 		this.buttonCancel = new JButton();
-		this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		this.buttonCancel.setPreferredSize(new Dimension(75, 23));
 		buttonPane.add(buttonCancel);
 

@@ -15,8 +15,8 @@ import com.supermap.desktop.newtheme.themeLabel.ThemeLabelUniformContainer;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.ui.controls.LayersTree;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.LayersTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.ThemeLabel;
@@ -81,7 +81,7 @@ public class ThemeMainContainer extends JPanel {
     private void initResources() {
         this.labelThemeLayer.setText(MapViewProperties.getString("String_Themelayers"));
         this.checkBoxRefreshAtOnce.setText(CoreProperties.getString("String_RefreshAtOnce"));
-        this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
+	    this.buttonApply.setText(CoreProperties.getString("String_Apply"));
     }
 
     /**

@@ -2,14 +2,12 @@ package com.supermap.desktop.framemenus;
 
 import com.supermap.data.Datasource;
 import com.supermap.data.Workspace;
-import com.supermap.data.WorkspaceConnectionInfo;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.TreeNodeData;
-import com.supermap.desktop.ui.controls.WorkspaceTree;
+import com.supermap.desktop.ui.trees.WorkspaceTree;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 
 import javax.swing.tree.DefaultMutableTreeNode;

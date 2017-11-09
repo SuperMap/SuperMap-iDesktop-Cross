@@ -20,8 +20,8 @@ import com.supermap.desktop.newtheme.themeLabel.ThemeLabelUniformContainer;
 import com.supermap.desktop.newtheme.themeRange.ThemeRangeContainer;
 import com.supermap.desktop.newtheme.themeUnique.ThemeUniqueContainer;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.LayersTree;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.LayersTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.mapping.*;
 import com.supermap.ui.MapControl;
 

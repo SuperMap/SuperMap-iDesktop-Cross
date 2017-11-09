@@ -143,8 +143,8 @@ public class DialogSaveAsMap extends SmDialog {
 		try {
 			this.setTitle(MapViewProperties.getString("String_Form_SaveAsMap"));
 			this.lblNewLabelMapName.setText(MapViewProperties.getString("String_Label_InputMapName"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_OK"));
-			this.buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+			this.buttonOk.setText(CoreProperties.getString("String_OK"));
+			this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

@@ -1,6 +1,6 @@
 package com.supermap.desktop.controls.utilities;
 
-import com.supermap.desktop.ui.controls.NodeDataType;
+import com.supermap.desktop.ui.trees.NodeDataType;
 
 public class NodeDataTypeUtilities {
 	public static boolean isNodeDataset(NodeDataType type) {

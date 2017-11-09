@@ -70,7 +70,7 @@ public class JDialogWorkspaceOpenSQL extends SmDialog {
 		jLabelEmptyLabel = new JLabel();
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		getRootPane().setDefaultButton(this.jButtonOpen);
-		jButtonClose.setText(CoreProperties.getString("String_Button_Cancel"));
+		jButtonClose.setText(CoreProperties.getString("String_Cancel"));
 		jButtonClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

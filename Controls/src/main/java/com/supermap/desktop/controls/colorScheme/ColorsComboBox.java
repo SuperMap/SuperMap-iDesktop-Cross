@@ -21,11 +21,18 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.metal.MetalComboBoxIcon;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import java.applet.Applet;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.AWTEventListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
@@ -158,7 +165,7 @@ public class ColorsComboBox extends JComponent implements ItemSelectable {
 		tree = new JTree(ColorSchemeManager.getColorSchemeManager().getRootTreeNode());
 		tree.setRootVisible(false);
 		tree.setShowsRootHandles(true);
-		((DefaultTreeCellRenderer) tree.getCellRenderer()).setLeafIcon(((DefaultTreeCellRenderer) tree.getCellRenderer()).getDefaultClosedIcon());
+//		((DefaultTreeCellRenderer) tree.getCellRenderer()).setLeafIcon(((DefaultTreeCellRenderer) tree.getCellRenderer()).getDefaultClosedIcon());
 		JTreeUIUtilities.expandTree(tree, true);
 		treeComboBox = new TreeComboBox(tree);
 		treeComboBox.setPopupMenuPreferredHeight(450);

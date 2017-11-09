@@ -10,8 +10,8 @@ import com.supermap.desktop.controls.property.datasource.DatasourcePropertyContr
 import com.supermap.desktop.controls.property.workspace.WorkspacePropertyControl;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.controls.utilities.NodeDataTypeUtilities;
-import com.supermap.desktop.ui.controls.NodeDataType;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.NodeDataType;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 
 import java.util.ArrayList;
 

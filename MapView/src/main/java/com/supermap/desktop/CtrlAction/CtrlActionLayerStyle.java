@@ -7,8 +7,8 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.LayersTree;
-import com.supermap.desktop.ui.controls.TreeNodeData;
+import com.supermap.desktop.ui.trees.LayersTree;
+import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.mapping.Layer;
 
 import javax.swing.tree.DefaultMutableTreeNode;

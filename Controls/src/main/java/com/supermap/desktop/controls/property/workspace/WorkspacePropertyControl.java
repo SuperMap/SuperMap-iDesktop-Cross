@@ -220,8 +220,8 @@ public class WorkspacePropertyControl extends AbstractPropertyControl {
 		this.labelVersion.setText(ControlsProperties.getString("String_LabelFileVersion"));
 		this.labelDescription.setText(ControlsProperties.getString("String_LabelFileDescription"));
 		this.buttonChangePassword.setText(ControlsProperties.getString("String_ButtonChangePassword"));
-		this.buttonApply.setText(CoreProperties.getString("String_Button_Apply"));
-		this.buttonReset.setText(CoreProperties.getString("String_Button_Reset"));
+		this.buttonApply.setText(CoreProperties.getString("String_Apply"));
+		this.buttonReset.setText(CoreProperties.getString("String_Reset"));
 	}
 
 	private void fillComponents() {
