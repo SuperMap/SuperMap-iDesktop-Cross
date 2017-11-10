@@ -118,7 +118,6 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 	};
 
 	private void setImportAsPointWKT() {
-		//todo 设置后有崩溃问题，暂时屏蔽
 		if (null != comboBoxWKT.getSelectedItem()) {
 			((ImportSettingCSV) importSetting).setIndexAsGeometry((Integer) ((ItemNode) comboBoxWKT.getSelectedItem()).getNodeInfo());
 		}
@@ -226,20 +225,29 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 		this.comboBoxY = new SteppedComboBox(temp);
 		this.comboBoxZ = new SteppedComboBox(temp);
 		temp = null;
+		resetViewInfo("GBK");
+	}
+
+	public void resetViewInfo(String charsetName) {
 		if (!(this.importSetting instanceof ImportSettingExcel)) {
-			String[][] data = XlsUtilities.getData(importSetting.getSourceFilePath());
+			String[][] data = XlsUtilities.getData(importSetting.getSourceFilePath(), charsetName);
 			if (null != data) {
 				String[] tempValues = data[0];
+				ArrayList<String> resultList = new ArrayList<>();
 				for (int i = 0, tempLength = tempValues.length; i < tempLength; i++) {
-					tempValues[i] = tempValues[i].replace("\"", "");
+					String result = tempValues[i] = tempValues[i].replace("\"", "");
+					if (!StringUtilities.isNullOrEmpty(result)) {
+						resultList.add(result);
+					}
 				}
-				String[] indexX = tempValues;
-				int length = XlsUtilities.getData(importSetting.getSourceFilePath()).length;
+				String[] tableTitle = tempValues;
+				String[] indexX = resultList.toArray(new String[resultList.size()]);
+				int length = data.length;
 				String[][] tableValues = new String[length - 1][];
 				for (int i = 1; i < length; i++) {
 					tableValues[i - 1] = data[i];
 				}
-				DefaultTableModel model = new DefaultTableModel(tableValues, indexX);
+				DefaultTableModel model = new DefaultTableModel(tableValues, tableTitle);
 				this.tablePreviewCSV.setModel(model);
 				this.tablePreviewCSV.setRowHeight(23);
 				//设置表头宽度
@@ -257,7 +265,6 @@ public class PanelTransformForMicrosoft extends PanelTransform {
 						break;
 					}
 				}
-
 				if (hasGeometry) {
 					this.comboBoxWKT.addItem(itemNode);
 				}

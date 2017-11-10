@@ -40,7 +40,6 @@ public class CharsetProperties extends Properties {
 	public static final String THAI = "String_THAI";
 	public static final String TURKISH = "String_TURKISH";
 	public static final String UNICODE = "String_UNICODE";
-	public static final String UTF32 = "String_UTF32";
 	public static final String UTF7 = "String_UTF7";
 	public static final String UTF8 = "String_UTF8";
 	public static final String VIETNAMESE = "String_VIETNAMESE";

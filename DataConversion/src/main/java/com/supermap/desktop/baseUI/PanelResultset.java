@@ -151,9 +151,9 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(0);
 						} else if (datasetType.equalsIgnoreCase(ControlsProperties.getString("string_comboboxitem_sample"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(1);
-						} else if (datasetType.equalsIgnoreCase(ControlsProperties.getString("String_ImageProperty"))) {
+						} else if (datasetType.equalsIgnoreCase(CoreProperties.getString("String_DatasetType_Image"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(0);
-						} else if (datasetType.equalsIgnoreCase(ControlsProperties.getString("String_Grid"))) {
+						} else if (datasetType.equalsIgnoreCase(CoreProperties.getString("String_DatasetType_Grid"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(1);
 						} else if (datasetType.equals(ControlsProperties.getString("String_datasetType2D"))) {
 							tempPanelImport.getResultset().getComboBoxDatasetType().setSelectedIndex(0);
@@ -202,7 +202,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 						} else if (importSetting instanceof ImportSettingGeoJson) {
 							((ImportSettingGeoJson) importSetting).setImportingAsCAD(false);
 						}
-					} else if (datasetType.equals(ControlsProperties.getString("String_ImageProperty"))) {
+					} else if (datasetType.equals(CoreProperties.getString("String_DatasetType_Image"))) {
 						if (importSetting instanceof ImportSettingJPG) {
 							((ImportSettingJPG) importSetting).setImportingAsGrid(false);
 						} else if (importSetting instanceof ImportSettingJP2) {
@@ -222,7 +222,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 						} else if (importSetting instanceof ImportSettingECW) {
 							((ImportSettingECW) importSetting).setImportingAsGrid(false);
 						}
-					} else if (datasetType.equals(ControlsProperties.getString("String_Grid"))) {
+					} else if (datasetType.equals(CoreProperties.getString("String_DatasetType_Grid"))) {
 						if (importSetting instanceof ImportSettingJPG) {
 							((ImportSettingJPG) importSetting).setImportingAsGrid(true);
 						} else if (importSetting instanceof ImportSettingJP2) {
@@ -260,12 +260,12 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		} else {
 			newdatasetType = comboBoxDatasetType.getSelectedItem().toString();
 		}
-		if (newdatasetType.equalsIgnoreCase(ControlsProperties.getString("String_ImageProperty"))) {
+		if (newdatasetType.equalsIgnoreCase(CoreProperties.getString("String_DatasetType_Image"))) {
 			if (owner.getTransform() instanceof PanelTransformForImage) {
 				((PanelTransformForImage) owner.getTransform()).getComboBoxBandImportModel().setModel(new DefaultComboBoxModel(new String[]{CoreProperties.getString("String_MultiBand_SingleBand"),
 						CoreProperties.getString("String_MultiBand_MultiBand"), CoreProperties.getString("String_MultiBand_Composite")}));
 			}
-		} else if (newdatasetType.equalsIgnoreCase(ControlsProperties.getString("String_Grid"))) {
+		} else if (newdatasetType.equalsIgnoreCase(CoreProperties.getString("String_DatasetType_Grid"))) {
 			if (owner.getTransform() instanceof PanelTransformForImage) {
 				((PanelTransformForImage) owner.getTransform()).getComboBoxBandImportModel().setModel(new DefaultComboBoxModel(new String[]{CoreProperties.getString("String_MultiBand_SingleBand"),
 						CoreProperties.getString("String_MultiBand_MultiBand")}));
@@ -387,7 +387,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			initDefaultLayout();
 			this.remove(labelDatasetName);
 			this.remove(textFieldDatasetName);
-			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{ControlsProperties.getString("String_ImageProperty"), ControlsProperties.getString("String_Grid")});
+			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
 			this.add(this.labelDatasetType, new GridBagConstraintsHelper(4, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 10).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 			this.add(this.comboBoxDatasetType, new GridBagConstraintsHelper(6, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(5, 0, 5, 10).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 			this.comboBoxDatasource.setPreferredSize(PackageInfo.defaultSize);
@@ -751,7 +751,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 				this.comboBoxEncodeType.insertItemAt("SGL", 2);
 			}
 			setDefaultImportSettingEncode();
-			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{ControlsProperties.getString("String_ImageProperty"), ControlsProperties.getString("String_Grid")});
+			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
 			setDefaultLayout();
 			panelCheckBox.remove(this.checkBoxFieldIndex);
 			panelCheckBox.remove(this.checkBoxSpatialIndex);

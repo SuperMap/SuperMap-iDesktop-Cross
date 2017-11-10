@@ -89,8 +89,9 @@ public class ImportParameterCreator implements IImportParameterCreator {
 						parameterImportIndexData.setEnabled(false);
 
 						String path = (String) evt.getNewValue();
-						if (new File(path).exists() && XlsUtilities.getData(path) != null) {
-							String[][] data = XlsUtilities.getData(path);
+						//默认
+						String[][] data = XlsUtilities.getData(path, "GBK");
+						if (new File(path).exists() && data != null) {
 							String[] tempValues = data[0];
 							for (int i = 0, tempLength = tempValues.length; i < tempLength; i++) {
 								tempValues[i] = tempValues[i].replace("\"", "");
