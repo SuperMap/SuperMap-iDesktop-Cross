@@ -76,8 +76,8 @@ public class DialogCachePlayerSetting extends SmDialog {
         labelEffectsInterval.setText(MapViewProperties.getString("String_Label_EffectsInterval"));
         checkBoxShowBar.setText(MapViewProperties.getString("String_ShowBar"));
         checkBoxEffectsEnable.setText(MapViewProperties.getString("String_EffectsEnable"));
-        buttonOK.setText(CoreProperties.getString("String_Button_OK"));
-        buttonCancel.setText(CoreProperties.getString("String_Button_Cancel"));
+        buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
+        buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
     }
 
     private void registerListener() {
@@ -123,7 +123,7 @@ public class DialogCachePlayerSetting extends SmDialog {
 
     private void initTable() {
         table = new SmSortTable();
-        table.setModel(new CachePlayerSettingTableModel(cachePlayerBar.getPlayList()));
+        table.setModel(new CachePlayerSettingTableModel(cachePlayerBar.getLayerCaches(), cachePlayerBar.getPlayList()));
         table.getColumnModel().getColumn(0).setMaxWidth(100);
         table.setDefaultRenderer(LayerCache.class, new DefaultTableCellRenderer() {
             @Override
@@ -143,11 +143,12 @@ public class DialogCachePlayerSetting extends SmDialog {
         cachePlayerBar.setEffectsTime(Integer.parseInt(textFieldEffectsInterval.getText()));
         cachePlayerBar.setEffects(checkBoxEffectsEnable.isSelected());
         cachePlayerBar.setVisible(checkBoxShowBar.isSelected());
+        ArrayList<TableData> tableDatas = ((CachePlayerSettingTableModel) table.getModel()).getTableDatas();
         ArrayList<CacheWithVersion> playList = cachePlayerBar.getPlayList();
         playList.clear();
-        for (TableData tableData : ((CachePlayerSettingTableModel) table.getModel()).getTableDatas()) {
+        for (TableData tableData : tableDatas) {
             if (tableData.isPlay) {
-                playList.add(new CacheWithVersion(tableData.layerCache, tableData.version));
+                playList.add(tableData.cacheWithVersion);
             }
         }
         cachePlayerBar.getProgressBar().setProgress(0);
@@ -161,10 +162,22 @@ public class DialogCachePlayerSetting extends SmDialog {
         };
         private ArrayList<TableData> tableDatas = new ArrayList<>();
 
-        public CachePlayerSettingTableModel(ArrayList<CacheWithVersion> cacheWithVersions) {
-            tableDatas.clear();
-            for (CacheWithVersion cacheWithVersion : cacheWithVersions) {
-                tableDatas.add(new TableData(cacheWithVersion.getVersion(), cacheWithVersion.getLayerCache()));
+        public CachePlayerSettingTableModel(ArrayList<LayerCache> layerCaches, ArrayList<CacheWithVersion> cacheWithVersions) {
+            for (LayerCache layerCache : layerCaches) {
+                for (int i = 0; i < layerCache.getVersions().size(); i++) {
+                    CacheWithVersion cacheWithVersion = new CacheWithVersion(layerCache, layerCache.getVersions().get(i), layerCache.getDescriptions().get(i));
+                    tableDatas.add(new TableData(cacheWithVersion));
+                }
+            }
+            for (TableData tableData : tableDatas) {
+                CacheWithVersion tableDataVersion = tableData.cacheWithVersion;
+                for (CacheWithVersion cacheWithVersion : cacheWithVersions) {
+                    if (cacheWithVersion.getLayerCache().equals(tableDataVersion.getLayerCache()) &&
+                            cacheWithVersion.getDescription().equals(tableDataVersion.getDescription())) {
+                        tableData.isPlay = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -205,9 +218,9 @@ public class DialogCachePlayerSetting extends SmDialog {
                 case 0:
                     return tableDatas.get(row).isPlay;
                 case 1:
-                    return tableDatas.get(row).version;
+                    return tableDatas.get(row).cacheWithVersion.getDescription();
                 case 2:
-                    return tableDatas.get(row).layerCache;
+                    return tableDatas.get(row).cacheWithVersion.getLayerCache();
             }
             return null;
         }
@@ -226,14 +239,12 @@ public class DialogCachePlayerSetting extends SmDialog {
     }
 
     private class TableData {
+        CacheWithVersion cacheWithVersion;
         boolean isPlay;
-        String version;
-        LayerCache layerCache;
 
-        public TableData(String version, LayerCache layerCache) {
-            this.isPlay = true;
-            this.version = version;
-            this.layerCache = layerCache;
+        public TableData(CacheWithVersion cacheWithVersion) {
+            this.cacheWithVersion = cacheWithVersion;
+            this.isPlay = false;
         }
     }
 }

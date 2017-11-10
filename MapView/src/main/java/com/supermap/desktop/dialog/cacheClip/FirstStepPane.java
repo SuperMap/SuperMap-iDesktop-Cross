@@ -118,13 +118,13 @@ public class FirstStepPane extends JPanel implements IState {
 	private JLabel labelConfirmPassword;
 	private JLabel labelServerName;
 	private JLabel labelDatabaseName;
-	private JLabel labelMutiTenseVersion;
+	private JLabel labelMultiTenseVersion;
 	private WarningOrHelpProvider helpProviderForDatabaseName;
 	private WarningOrHelpProvider warningProviderPasswordNotSame;
 	public JCheckBox checkBoxFilterSelectionObjectInLayer;
 	public JComboBox<String> comboBoxSaveType;
-	public JComboBox comboBoxDatabaseName;
-	private JComboBox comboBoxMutiTenseVersion;
+	public JComboBox<String> comboBoxDatabaseName;
+	private JComboBox<String> comboBoxMultiTenseVersion;
 	public JTextField textFieldUserName;
 	public JPasswordField textFieldUserPassword;
 	private JPasswordField textFieldConfirmPassword;
@@ -143,6 +143,7 @@ public class FirstStepPane extends JPanel implements IState {
 	public JFileChooserControl fileChooserControlFileCache;
 	private Map currentMap;
 	private DialogMapCacheClipBuilder parent;
+
 	//region Listener
 	private ActionListener addScaleListener = new ActionListener() {
 		@Override
@@ -372,13 +373,14 @@ public class FirstStepPane extends JPanel implements IState {
 		storeType.add(this.textFieldUserName, new GridBagConstraintsHelper(2, 3, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelUserPassword, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		storeType.add(this.textFieldUserPassword, new GridBagConstraintsHelper(2, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10));
-		storeType.add(this.labelMutiTenseVersion, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10).setWeight(1, 0));
-		storeType.add(this.comboBoxMutiTenseVersion, new GridBagConstraintsHelper(2, 5, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
+		storeType.add(this.labelMultiTenseVersion, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10).setWeight(1, 0));
+		storeType.add(this.comboBoxMultiTenseVersion, new GridBagConstraintsHelper(2, 5, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.labelConfirmPassword, new GridBagConstraintsHelper(0, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		storeType.add(this.warningProviderPasswordNotSame, new GridBagConstraintsHelper(1, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 0, 5, 10));
 		storeType.add(this.textFieldConfirmPassword, new GridBagConstraintsHelper(2, 6, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 0, 5, 10).setWeight(1, 0));
 		storeType.add(this.checkBoxFilterSelectionObjectInLayer, new GridBagConstraintsHelper(0, 7, 4, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(0, 10, 5, 10));
 		this.comboBoxDatabaseName.setEditable(true);
+		this.comboBoxMultiTenseVersion.setEditable(true);
 		JPanel panelRight = new JPanel();
 		panelRight.setLayout(new GridBagLayout());
 		panelRight.add(outputSetting, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(5).setWeight(1, 0));
@@ -535,8 +537,8 @@ public class FirstStepPane extends JPanel implements IState {
 			this.comboBoxDatabaseName.setVisible(false);
 			this.labelUserName.setVisible(false);
 			this.textFieldUserName.setVisible(false);
-			this.labelMutiTenseVersion.setVisible(false);
-			this.comboBoxMutiTenseVersion.setVisible(false);
+			this.labelMultiTenseVersion.setVisible(false);
+			this.comboBoxMultiTenseVersion.setVisible(false);
 
 			this.labelUserPassword.setVisible(true);
 			this.labelConfirmPassword.setVisible(true);
@@ -590,12 +592,12 @@ public class FirstStepPane extends JPanel implements IState {
 			this.textFieldConfirmPassword.setVisible(false);
 
 			if (currentShowItem.equals(MONGODB_MULTI)) {
-				this.labelMutiTenseVersion.setVisible(true);
-				this.comboBoxMutiTenseVersion.setVisible(true);
-				this.comboBoxMutiTenseVersion.removeAllItems();
+				this.labelMultiTenseVersion.setVisible(true);
+				this.comboBoxMultiTenseVersion.setVisible(true);
+				this.comboBoxMultiTenseVersion.removeAllItems();
 			} else {
-				this.labelMutiTenseVersion.setVisible(false);
-				this.comboBoxMutiTenseVersion.setVisible(false);
+				this.labelMultiTenseVersion.setVisible(false);
+				this.comboBoxMultiTenseVersion.setVisible(false);
 				this.mapCacheBuilder.setStorageType(StorageType.MongoDB);
 			}
 			mongoDBConnectSate = isDBValidate();
@@ -883,7 +885,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelConfirmPassword.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
 		this.labelServerName.setText(ControlsProperties.getString("String_Label_ServersName"));
 		this.labelDatabaseName.setText(ControlsProperties.getString("String_Label_DatabaseName"));
-		this.labelMutiTenseVersion.setText(MapViewProperties.getString("String_Label_VersionName"));
+		this.labelMultiTenseVersion.setText(MapViewProperties.getString("String_Label_VersionName"));
 		this.checkBoxFilterSelectionObjectInLayer.setText(MapViewProperties.getString("MapCache_FilterSelectObjectInLayer"));
 	}
 
@@ -925,14 +927,14 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelConfirmPassword = new JLabel();
 		this.labelServerName = new JLabel();
 		this.labelDatabaseName = new JLabel();
-		this.labelMutiTenseVersion = new JLabel();
+		this.labelMultiTenseVersion = new JLabel();
 		this.helpProviderForDatabaseName = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_DatabaseNameHelp"), false);
 		this.warningProviderPasswordNotSame = new WarningOrHelpProvider(CoreProperties.getString("String_ErrorProvider_Password_Confirm"), true);
 		this.checkBoxFilterSelectionObjectInLayer = new JCheckBox();
 		this.checkBoxFilterSelectionObjectInLayer.setEnabled(false);
 		this.comboBoxSaveType = new JComboBox();
 		this.comboBoxDatabaseName = new JComboBox();
-		this.comboBoxMutiTenseVersion = new JComboBox();
+		this.comboBoxMultiTenseVersion = new JComboBox();
 		this.textFieldUserName = new JTextField();
 		this.textFieldUserPassword = new JPasswordField();
 		this.textFieldConfirmPassword = new JPasswordField();
@@ -1050,7 +1052,7 @@ public class FirstStepPane extends JPanel implements IState {
 		}
 		this.mapCacheBuilder.setMap(MapUtilities.getActiveMap() == null ? CacheUtilities.getWorkspaceSelectedMap() : MapUtilities.getActiveMap());
 		this.globalSplitScale = this.mapCacheBuilder.globalLevelToScale(levels);
-		double avaliableScale = getAvaliableScale();
+		double avaliableScale = getAvailableScale();
 
 		double dValue = Double.MAX_VALUE;
 		String avaliableLevel = "0";
@@ -1112,7 +1114,7 @@ public class FirstStepPane extends JPanel implements IState {
 		}
 	}
 
-	private double getAvaliableScale() {
+	private double getAvailableScale() {
 		try {
 			if (null != this.currentMap) {
 				return getScale(this.currentMap);
@@ -1613,7 +1615,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.fileChooserControlFileCache.setEnabled(enabled);
 		this.comboBoxSaveType.setEnabled(enabled);
 		this.comboBoxDatabaseName.setEnabled(enabled);
-		this.comboBoxMutiTenseVersion.setEnabled(enabled);
+		this.comboBoxMultiTenseVersion.setEnabled(enabled);
 		this.textFieldUserName.setEnabled(enabled);
 		this.textFieldUserPassword.setEnabled(enabled);
 		this.textFieldConfirmPassword.setEnabled(enabled);
