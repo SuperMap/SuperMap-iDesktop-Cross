@@ -2,13 +2,16 @@ package com.supermap.desktop.dialog;
 
 import com.supermap.data.Toolkit;
 import com.supermap.desktop.Application;
+import com.supermap.desktop.FormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.StringUtilities;
+import com.supermap.mapping.LayerCache;
 import com.supermap.mapping.Map;
 import com.supermap.tilestorage.*;
 
@@ -19,7 +22,7 @@ import java.awt.event.*;
 /**
  * Created by ChenS on 2017/10/30 0030.
  */
-public class DialogMangoDBCacheLoaded extends SmDialog {
+public class DialogMongoDBCacheLoaded extends SmDialog {
     //region Field
     private JLabel labelServer;
     private JTextField textFieldServer;
@@ -36,7 +39,7 @@ public class DialogMangoDBCacheLoaded extends SmDialog {
     private SmButton buttonCancel;
     private SmButton buttonOK;
 
-    private Map map;
+    private FormMap formMap;
     private boolean isDatabaseNeedRefresh = true;
     private boolean isCacheNeedRefresh = false;
     private boolean isVersionNeedRefresh = false;
@@ -58,8 +61,8 @@ public class DialogMangoDBCacheLoaded extends SmDialog {
     };
     //endregion
 
-    public DialogMangoDBCacheLoaded(Map map) {
-        this.map = map;
+    public DialogMongoDBCacheLoaded(FormMap formMap) {
+        this.formMap = formMap;
         initFrame();
         initComponent();
         initLayout();
@@ -101,7 +104,7 @@ public class DialogMangoDBCacheLoaded extends SmDialog {
     private void initComponent() {
         labelServer = new JLabel(ControlsProperties.getString("String_Label_ServersName"));
         labelDatabase = new JLabel(ControlsProperties.getString("String_Label_DatabaseName"));
-        labelCache = new JLabel(ControlsProperties.getString("MapCache_Label_CacheName"));
+        labelCache = new JLabel(ControlsProperties.getString("String_CacheName"));
         labelClient = new JLabel(CoreProperties.getString("String_Label_DataUser"));
         labelPassword = new JLabel(ControlsProperties.getString("String_Label_UserPassword"));
         labelVersion = new JLabel(ControlsProperties.getString("String_Label_CurrentVersion"));
@@ -182,9 +185,13 @@ public class DialogMangoDBCacheLoaded extends SmDialog {
             public void actionPerformed(ActionEvent e) {
                 setDialogResult(DialogResult.OK);
                 try {
-                    map.getLayers().AddCache(textFieldServer.getText(), comboBoxDatabase.getSelectedItem().toString(),
+                    Map map = formMap.getMapControl().getMap();
+                    LayerCache layerCache = map.getLayers().AddCache(textFieldServer.getText(), comboBoxDatabase.getSelectedItem().toString(),
                             comboBoxCache.getSelectedItem().toString(), true);
+                    layerCache.setCurrentVersion(comboBoxVersion.getSelectedItem().toString());
                     map.refresh();
+                    formMap.setActiveLayers(layerCache);
+                    UICommonToolkit.getLayersManager().setMap(map);
                 } catch (Exception e1) {
                     Application.getActiveApplication().getOutput().output(e1);
                 }

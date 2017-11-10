@@ -1,10 +1,11 @@
 package com.supermap.desktop.CtrlAction;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.dialog.DialogMangoDBCacheLoaded;
+import com.supermap.desktop.dialog.DialogMongoDBCacheLoaded;
 import com.supermap.desktop.implement.CtrlAction;
 
 /**
@@ -17,8 +18,8 @@ public class CtrlActionMongoDBCache extends CtrlAction {
 
     @Override
     protected void run() {
-        DialogMangoDBCacheLoaded dialogMangoDBCacheLoaded = new DialogMangoDBCacheLoaded(
-                ((IFormMap) Application.getActiveApplication().getActiveForm()).getMapControl().getMap());
-        dialogMangoDBCacheLoaded.showDialog();
+        DialogMongoDBCacheLoaded dialogMongoDBCacheLoaded = new DialogMongoDBCacheLoaded(
+                (FormMap) ((IFormMap) Application.getActiveApplication().getActiveForm()));
+        dialogMongoDBCacheLoaded.showDialog();
     }
 }

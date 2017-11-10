@@ -401,12 +401,14 @@ public class LayersTree extends JTree {
 		} else if (theme == null) {
 			if (dataset == null) {
 				// 分组图层节点、快照分组节点的构建  fix by lixiaoyao 2017/11/01
-				if (layer instanceof LayerGroup) {
-					result = getGroupNodeByLayer(layer);
-				} else {
-					result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER));
-				}
-			} else {
+                if (layer instanceof LayerGroup) {
+                    result = getGroupNodeByLayer(layer);
+                } else if (layer instanceof LayerCache) {
+                    result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER_CACHE));
+                } else {
+                    result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER));
+                }
+            } else {
 				if (dataset.getType().equals(DatasetType.IMAGE)) {
 					result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER_IMAGE));
 				} else if (dataset.getType().equals(DatasetType.GRID)) {
