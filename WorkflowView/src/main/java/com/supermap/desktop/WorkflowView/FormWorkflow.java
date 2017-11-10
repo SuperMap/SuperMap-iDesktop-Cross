@@ -23,6 +23,7 @@ import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.core.Workflow;
 import com.supermap.desktop.process.events.*;
 import com.supermap.desktop.process.tasks.TasksManager;
+import com.supermap.desktop.process.virtual.DatasManager;
 import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -43,6 +44,7 @@ public class FormWorkflow extends FormBaseChild implements IFormWorkflow {
 
 	private Workflow workflow;
 	private TasksManager tasksManager;
+	private DatasManager datasManager;
 	private WorkflowCanvas canvas;
 	private boolean isNeedSave = true;
 
