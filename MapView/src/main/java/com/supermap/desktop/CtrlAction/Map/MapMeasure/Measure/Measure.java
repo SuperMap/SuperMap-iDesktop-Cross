@@ -10,22 +10,11 @@ import com.supermap.desktop.enums.LengthUnit;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.mapping.TrackingLayer;
 import com.supermap.ui.Action;
-import com.supermap.ui.ActionChangedEvent;
-import com.supermap.ui.ActionChangedListener;
-import com.supermap.ui.MapControl;
-import com.supermap.ui.TrackMode;
-import com.supermap.ui.TrackedListener;
-import com.supermap.ui.TrackingListener;
-import com.supermap.ui.UndoneListener;
+import com.supermap.ui.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.EventObject;
@@ -206,15 +195,6 @@ public abstract class Measure implements IMeasureAble {
 		// 获取焦点响应按键
 		mapControl.requestFocusInWindow();
 	}
-
-//	private void getMapControl() {
-//		IForm activeForm = Application.getActiveApplication().getActiveForm();
-//		if (activeForm instanceof FormMap) {
-//			formMap = (FormMap) activeForm;
-//			this.mapControl = formMap.getMapControl();
-//			initTextBoxs();
-//		}
-//	}
 
 	private void addTextBoxsToMapControl() {
 		try {

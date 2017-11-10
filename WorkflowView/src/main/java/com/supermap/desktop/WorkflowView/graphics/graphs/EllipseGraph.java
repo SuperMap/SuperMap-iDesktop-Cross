@@ -12,7 +12,7 @@ import java.awt.geom.Ellipse2D;
 public class EllipseGraph extends AbstractGraph implements IConnectable {
 
 	public EllipseGraph(GraphCanvas canvas) {
-		super(canvas, new Ellipse2D.Double(0, 0, 160, 60));
+		super(canvas, new Ellipse2D.Double(0, 0, 140, 50));
 	}
 
 	@Override

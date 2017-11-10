@@ -17,6 +17,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CacheProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
@@ -59,7 +60,11 @@ import java.util.List;
  * Panel for clipping cache(first step)
  */
 public class FirstStepPane extends JPanel implements IState {
-
+	private final static String MONGODB = MapViewProperties.getString("MapCache_SaveType_MongoDB");
+	private final static String MONGODB_MULTI = MapViewProperties.getString("MapCache_SaveType_MongoDBMuti");
+	private final static String ORIGIN = MapViewProperties.getString("MapCache_SaveType_Origin");
+	private final static String COMPACT = MapViewProperties.getString("MapCache_SaveType_Compact");
+	private final static String GEOPACKAGE = MapViewProperties.getString("MapCache_SaveType_GeoPackage");
 	private int cmdType;
 	private final String urlStr = "/coreresources/ToolBar/";
 	public MapCacheBuilder mapCacheBuilder;
@@ -77,6 +82,7 @@ public class FirstStepPane extends JPanel implements IState {
 	private boolean textFieldServerNameGetFocus = false;
 	private Vector<EnabledListener> enabledListeners;
 
+	//region Component
 	private JToolBar toolBar;
 	public ComponentDropDown addScaleDropDown;
 	private ComponentDropDown importDropDown;
@@ -98,8 +104,8 @@ public class FirstStepPane extends JPanel implements IState {
 	private JLabel labelSplitMode;
 	private JLabel labelConfig;
 	public JLabel labelConfigValue;
-	private JComboBox comboboxVersion;
-	private JComboBox comboBoxSplitMode;
+	private JComboBox<String> comboboxVersion;
+	private JComboBox<String> comboBoxSplitMode;
 	private JLabel labelCacheName;
 	private JLabel labelCachePath;
 	private WarningOrHelpProvider warningProviderCacheNameIllegal;
@@ -116,7 +122,7 @@ public class FirstStepPane extends JPanel implements IState {
 	private WarningOrHelpProvider helpProviderForDatabaseName;
 	private WarningOrHelpProvider warningProviderPasswordNotSame;
 	public JCheckBox checkBoxFilterSelectionObjectInLayer;
-	public JComboBox comboBoxSaveType;
+	public JComboBox<String> comboBoxSaveType;
 	public JComboBox comboBoxDatabaseName;
 	private JComboBox comboBoxMutiTenseVersion;
 	public JTextField textFieldUserName;
@@ -125,6 +131,7 @@ public class FirstStepPane extends JPanel implements IState {
 	public JTextField textFieldServerName;
 	private JButton buttonGetServer;
 	private String sciPath;
+	//endregion
 
 	private double originMapCacheScale[];
 
@@ -136,6 +143,7 @@ public class FirstStepPane extends JPanel implements IState {
 	public JFileChooserControl fileChooserControlFileCache;
 	private Map currentMap;
 	private DialogMapCacheClipBuilder parent;
+	//region Listener
 	private ActionListener addScaleListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -261,15 +269,6 @@ public class FirstStepPane extends JPanel implements IState {
 		}
 	};
 
-	public FirstStepPane(MapCacheBuilder mapCacheBuilder, DialogMapCacheClipBuilder parent, int cmdType) {
-		super();
-		this.parent = parent;
-		this.mapCacheBuilder = mapCacheBuilder;
-		this.currentMap = mapCacheBuilder.getMap();
-		this.cmdType = cmdType;
-		init();
-	}
-
 	private ItemListener comboboxSplitModeItemListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -317,6 +316,16 @@ public class FirstStepPane extends JPanel implements IState {
 			fireEnabled(enabled());
 		}
 	};
+	//endregion
+
+	public FirstStepPane(MapCacheBuilder mapCacheBuilder, DialogMapCacheClipBuilder parent, int cmdType) {
+		super();
+		this.parent = parent;
+		this.mapCacheBuilder = mapCacheBuilder;
+		this.currentMap = mapCacheBuilder.getMap();
+		this.cmdType = cmdType;
+		init();
+	}
 
 	private void init() {
 		initComponents();
@@ -419,20 +428,21 @@ public class FirstStepPane extends JPanel implements IState {
 	}
 
 	private void initBasicSettingPanelValue() {
-		this.comboBoxSaveType.addItem(MapViewProperties.getString("MapCache_SaveType_Compact"));
-		this.comboBoxSaveType.addItem(MapViewProperties.getString("MapCache_SaveType_Origin"));
-		this.comboBoxSaveType.addItem(MapViewProperties.getString("MapCache_SaveType_MongoDB"));
-		this.comboBoxSaveType.setSelectedItem(MapViewProperties.getString("MapCache_SaveType_Origin"));
+		this.comboBoxSaveType.addItem(COMPACT);
+		this.comboBoxSaveType.addItem(ORIGIN);
+		this.comboBoxSaveType.addItem(MONGODB);
+		this.comboBoxSaveType.addItem(MONGODB_MULTI);
+		this.comboBoxSaveType.setSelectedItem(ORIGIN);
 		StorageType storageType = this.mapCacheBuilder.getStorageType();
 		String storageStr = null;
 		if (storageType == StorageType.Original) {
-			storageStr = MapViewProperties.getString("MapCache_SaveType_Origin");
+			storageStr = ORIGIN;
 		} else if (storageType == StorageType.Compact) {
-			storageStr = MapViewProperties.getString("MapCache_SaveType_Compact");
+			storageStr = COMPACT;
 		} else if (storageType == StorageType.MongoDB) {
-			storageStr = MapViewProperties.getString("MapCache_SaveType_MongoDB");
+			storageStr = MONGODB;
 		} else {
-			storageStr = MapViewProperties.getString("MapCache_SaveType_GeoPackage");
+			storageStr = GEOPACKAGE;
 		}
 		initPanelImageSaveOutputDisplay(storageStr);
 
@@ -514,9 +524,9 @@ public class FirstStepPane extends JPanel implements IState {
 	}
 
 	private void initPanelImageSaveOutputDisplay(String currentShowItem) {
-		if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_Compact"))
-				|| currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_Origin"))
-				|| currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_GeoPackage"))) {
+		if (currentShowItem.equals(COMPACT)
+				|| currentShowItem.equals(ORIGIN)
+				|| currentShowItem.equals(GEOPACKAGE)) {
 			this.labelServerName.setVisible(false);
 			this.textFieldServerName.setVisible(false);
 			this.buttonGetServer.setVisible(false);
@@ -536,21 +546,21 @@ public class FirstStepPane extends JPanel implements IState {
 			this.textFieldConfirmPassword.setVisible(true);
 			this.textFieldUserPassword.setText("");
 			this.textFieldConfirmPassword.setText("");
-			if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_Compact"))) {
+			if (currentShowItem.equals(COMPACT)) {
 				this.textFieldUserPassword.setEnabled(true);
 				this.textFieldConfirmPassword.setEnabled(true);
 				this.mapCacheBuilder.setStorageType(StorageType.Compact);
 			} else {
 				this.textFieldUserPassword.setEnabled(false);
 				this.textFieldConfirmPassword.setEnabled(false);
-				if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_Origin"))) {
+				if (currentShowItem.equals(ORIGIN)) {
 					this.mapCacheBuilder.setStorageType(StorageType.Original);
-				} else if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_GeoPackage"))) {
+				} else if (currentShowItem.equals(GEOPACKAGE)) {
 					this.mapCacheBuilder.setStorageType(StorageType.GPKG);
 				}
 			}
 
-		} else if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDB")) || currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
+		} else if (currentShowItem.equals(MONGODB) || currentShowItem.equals(MONGODB_MULTI)) {
 			this.labelServerName.setVisible(true);
 			this.textFieldServerName.setVisible(true);
 			if (StringUtilities.isNullOrEmpty(textFieldServerName.getText())) {
@@ -579,7 +589,7 @@ public class FirstStepPane extends JPanel implements IState {
 			this.warningProviderPasswordNotSame.setVisible(false);
 			this.textFieldConfirmPassword.setVisible(false);
 
-			if (currentShowItem.equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
+			if (currentShowItem.equals(MONGODB_MULTI)) {
 				this.labelMutiTenseVersion.setVisible(true);
 				this.comboBoxMutiTenseVersion.setVisible(true);
 				this.comboBoxMutiTenseVersion.removeAllItems();
@@ -589,7 +599,6 @@ public class FirstStepPane extends JPanel implements IState {
 				this.mapCacheBuilder.setStorageType(StorageType.MongoDB);
 			}
 			mongoDBConnectSate = isDBValidate();
-//			updateDBNames();
 		}
 	}
 
@@ -785,17 +794,19 @@ public class FirstStepPane extends JPanel implements IState {
 	//Validate save type is right
 	private boolean isAllRightSaveTypeSetting() {
 		boolean result = true;
-		if (this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_Compact"))) {
+		if (this.comboBoxSaveType.getSelectedItem().toString().equals(COMPACT)) {
 			result = isPasswordSame();
-		} else if (this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_Origin")) || this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_GeoPackage"))) {
+		} else {
+			if (this.comboBoxSaveType.getSelectedItem().toString().equals(ORIGIN) || this.comboBoxSaveType.getSelectedItem().toString().equals(GEOPACKAGE)) {
 
-		} else if (this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_MongoDB")) || this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
-			if (this.comboBoxSaveType.getSelectedItem().toString().equals(MapViewProperties.getString("MapCache_SaveType_MongoDB"))) {
-				if (textFieldServerNameGetFocus || !this.isDBValidate() || this.comboBoxDatabaseName.getEditor().getItem().toString().isEmpty()) {
+			} else if (this.comboBoxSaveType.getSelectedItem().toString().equals(MONGODB) || this.comboBoxSaveType.getSelectedItem().toString().equals(MONGODB_MULTI)) {
+				if (this.comboBoxSaveType.getSelectedItem().toString().equals(MONGODB)) {
+					if (textFieldServerNameGetFocus || !this.isDBValidate() || this.comboBoxDatabaseName.getEditor().getItem().toString().isEmpty()) {
+						result = false;
+					}
+				} else {
 					result = false;
 				}
-			} else {
-				result = false;
 			}
 		}
 		return result;
@@ -865,14 +876,14 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelConfig.setText(MapViewProperties.getString("MapCache_LabelConfig"));
 		this.labelConfigValue.setText(MapViewProperties.getString("MapCache_LabelConfigValue"));
 		this.labelCacheName.setText(ControlsProperties.getString("String_CacheName"));
-		this.labelCachePath.setText(ControlsProperties.getString("MapCache_LabelCachePath"));
+		this.labelCachePath.setText(CacheProperties.getString("MapCache_LabelCachePath"));
 		this.labelSaveType.setText(ControlsProperties.getString("String_DatabaseType"));
 		this.labelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
 		this.labelUserPassword.setText(ControlsProperties.getString("String_Label_UserPassword"));
 		this.labelConfirmPassword.setText(ControlsProperties.getString("String_Label_ConfirmPassword"));
 		this.labelServerName.setText(ControlsProperties.getString("String_Label_ServersName"));
 		this.labelDatabaseName.setText(ControlsProperties.getString("String_Label_DatabaseName"));
-		this.labelMutiTenseVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
+		this.labelMutiTenseVersion.setText(MapViewProperties.getString("String_Label_VersionName"));
 		this.checkBoxFilterSelectionObjectInLayer.setText(MapViewProperties.getString("MapCache_FilterSelectObjectInLayer"));
 	}
 
@@ -1396,13 +1407,13 @@ public class FirstStepPane extends JPanel implements IState {
 		labelConfigValue.setText(this.mapCacheBuilder.getCacheName());
 		textFieldCacheName.setText(mapCacheBuilder.getCacheName());
 		if (mapCacheBuilder.getStorageType() == StorageType.Compact) {
-			comboBoxSaveType.setSelectedItem(MapViewProperties.getString("MapCache_SaveType_Compact"));
+			comboBoxSaveType.setSelectedItem(COMPACT);
 			textFieldUserPassword.setText(mapCacheBuilder.getPassword());
 			textFieldConfirmPassword.setText(mapCacheBuilder.getPassword());
 		} else if (mapCacheBuilder.getStorageType() == StorageType.Original) {
-			comboBoxSaveType.setSelectedItem(MapViewProperties.getString("MapCache_SaveType_Origin"));
+			comboBoxSaveType.setSelectedItem(ORIGIN);
 		} else if (mapCacheBuilder.getStorageType() == StorageType.MongoDB) {
-			comboBoxSaveType.setSelectedItem(MapViewProperties.getString("MapCache_SaveType_MongoDB"));
+			comboBoxSaveType.setSelectedItem(MONGODB);
 			CacheWriter cacheFile = new CacheWriter();
 			cacheFile.FromConfigFile(sciPath);
 			String[] mongoInfo = cacheFile.getMongoConnectionInfo();
@@ -1417,7 +1428,7 @@ public class FirstStepPane extends JPanel implements IState {
 				}
 			}
 		} else if (mapCacheBuilder.getStorageType() == StorageType.GPKG) {
-			comboBoxSaveType.setSelectedItem(MapViewProperties.getString("MapCache_SaveType_GeoPackage"));
+			comboBoxSaveType.setSelectedItem(GEOPACKAGE);
 		}
 	}
 
