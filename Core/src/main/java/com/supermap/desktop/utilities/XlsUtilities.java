@@ -40,12 +40,16 @@ public class XlsUtilities {
 	 * @param file csv文件(路径+文件)
 	 * @return
 	 */
-	private static ArrayList<String> readCsv(File file) {
+	private static ArrayList<String> readCsv(File file, String charsetName) {
 		ArrayList<String> result = new ArrayList<>();
 		BufferedReader br = null;
 		try {
 			FileInputStream in = new FileInputStream(file);
-			br = new BufferedReader(new InputStreamReader(in, "GBK"));
+			if (charsetName.equalsIgnoreCase("UTF-8")) {
+				br = new BufferedReader(new InputStreamReader(in, charsetName));
+			} else {
+				br = new BufferedReader(new InputStreamReader(in, "GBK"));
+			}
 			String line = "";
 			for (int i = 5; ((line = br.readLine()) != null) && (i >= 0); i--) {
 				result.add(line);
@@ -65,10 +69,10 @@ public class XlsUtilities {
 		return result;
 	}
 
-	public static String[][] getData(String filePath) {
+	public static String[][] getData(String filePath, String charsetName) {
 		String[][] result = null;
 		try {
-			ArrayList<String> list = readCsv(new File(filePath));
+			ArrayList<String> list = readCsv(new File(filePath), charsetName);
 			if (list.size() > 0) {
 				result = new String[list.size()][];
 			}

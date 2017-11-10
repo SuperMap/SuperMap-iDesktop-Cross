@@ -35,7 +35,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
     private JLabel labelPassword;
     private JTextField textFieldPassword;
     private JLabel labelVersion;
-    private JComboBox<String> comboBoxVersion;
+    private JComboBox<TileVersion> comboBoxVersion;
     private SmButton buttonCancel;
     private SmButton buttonOK;
 
@@ -57,6 +57,24 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
                 updateCacheName();
             }
             isCacheNeedRefresh = false;
+        }
+    };
+    private ActionListener applyListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setDialogResult(DialogResult.OK);
+            try {
+                Map map = formMap.getMapControl().getMap();
+                LayerCache layerCache = map.getLayers().AddCache(textFieldServer.getText(), comboBoxDatabase.getSelectedItem().toString(),
+                        comboBoxCache.getSelectedItem().toString(), true);
+                layerCache.setCurrentVersion(((TileVersion) comboBoxVersion.getSelectedItem()).name);
+                map.refresh();
+                formMap.setActiveLayers(layerCache);
+                UICommonToolkit.getLayersManager().setMap(map);
+            } catch (Exception e1) {
+                Application.getActiveApplication().getOutput().output(e1);
+            }
+            dispose();
         }
     };
     //endregion
@@ -120,6 +138,24 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
         textFieldServer.setText("localhost:27017");
         comboBoxDatabase.setEditable(true);
         comboBoxCache.setEditable(true);
+        comboBoxVersion.setRenderer(new ListCellRenderer<TileVersion>() {
+            @Override
+            public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = new JLabel("");
+                if (value != null) {
+                    label = new JLabel(value.GetVersionDesc());
+                }
+                label.setOpaque(true);
+                if (isSelected) {
+                    label.setBackground(list.getSelectionBackground());
+                    label.setForeground(list.getSelectionForeground());
+                } else {
+                    label.setBackground(list.getBackground());
+                }
+                return label;
+            }
+        });
+
         checkButtonEnable();
     }
 
@@ -180,24 +216,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
         textFieldPassword.addFocusListener(focusAdapter);
         textFieldPassword.addKeyListener(keyAdapter);
 
-        buttonOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setDialogResult(DialogResult.OK);
-                try {
-                    Map map = formMap.getMapControl().getMap();
-                    LayerCache layerCache = map.getLayers().AddCache(textFieldServer.getText(), comboBoxDatabase.getSelectedItem().toString(),
-                            comboBoxCache.getSelectedItem().toString(), true);
-                    layerCache.setCurrentVersion(comboBoxVersion.getSelectedItem().toString());
-                    map.refresh();
-                    formMap.setActiveLayers(layerCache);
-                    UICommonToolkit.getLayersManager().setMap(map);
-                } catch (Exception e1) {
-                    Application.getActiveApplication().getOutput().output(e1);
-                }
-                dispose();
-            }
-        });
+        buttonOK.addActionListener(applyListener);
         buttonCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -259,7 +278,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
                 tileStorageManager.open(tileStorageConnection);
                 TileVersion[] versions = tileStorageManager.getVersions();
                 for (TileVersion version : versions) {
-                    comboBoxVersion.addItem(version.GetVersionName());
+                    comboBoxVersion.addItem(version);
                 }
                 comboBoxVersion.setSelectedIndex(comboBoxVersion.getItemCount() > 0 ? 0 : -1);
             }

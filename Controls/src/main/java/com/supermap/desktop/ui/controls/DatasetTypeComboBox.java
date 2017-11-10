@@ -97,15 +97,15 @@ public class DatasetTypeComboBox extends JComboBox<DataCell> {
 	 */
 	public DatasetTypeComboBox(String[] supportedDatasetTypesName) {
 		//对传进的字符参数进行筛选
-		List<DatasetType> DatasetTypesNames = new LinkedList<>();
+		List<DatasetType> datasetTypesNames = new LinkedList<>();
 		for (String allDatasetTypesName : supportedDatasetTypesName) {
 			if (CommonToolkit.DatasetTypeWrap.findType(allDatasetTypesName) instanceof DatasetType) {
-				DatasetTypesNames.add(CommonToolkit.DatasetTypeWrap.findType(allDatasetTypesName));
+				datasetTypesNames.add(CommonToolkit.DatasetTypeWrap.findType(allDatasetTypesName));
 			}
 		}
-		DatasetType[] datasetTypes = new DatasetType[DatasetTypesNames.size()];
-		for (int i = 0; i < DatasetTypesNames.size(); i++) {
-			datasetTypes[i] = DatasetTypesNames.get(i);
+		DatasetType[] datasetTypes = new DatasetType[datasetTypesNames.size()];
+		for (int i = 0; i < datasetTypesNames.size(); i++) {
+			datasetTypes[i] = datasetTypesNames.get(i);
 		}
 
 		//当输入的字符串无法构建ComboBox时，构建默认值的ComboBox
