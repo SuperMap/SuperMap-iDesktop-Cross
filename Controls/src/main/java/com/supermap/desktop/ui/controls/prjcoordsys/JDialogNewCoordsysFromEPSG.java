@@ -74,7 +74,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 	private void initializeResources() {
 		this.setTitle(ControlsProperties.getString("String_Button_NewCoordSysFormEPSG"));
 		this.coordsysNameLabel.setText(ControlsProperties.getString("String_Message_CoordSysName"));
-		this.codeLabel.setText(ControlsProperties.getString("String_PrjCoordSys_EPSG_Code") + ":");
+		this.codeLabel.setText(ControlsProperties.getString("String_Label_EPSG_Code"));
 		this.useDefaultNameCheck.setText(ControlsProperties.getString("String_UseCoordsysDefaultName"));
 	}
 

@@ -99,7 +99,7 @@ public class PanelReferSysTransSettings extends JPanel {
 
 	private void initializeResources() {
 		this.labelMethod.setText(ControlsProperties.getString("String_Label_CoordSysTranslatorMethod"));
-		this.labelPrjTransParameterset.setText(ControlsProperties.getString("String_Label_CoordSysTranslatorParam"));
+		this.labelPrjTransParameterset.setText(ControlsProperties.getString("String_Label_ProjectionTranslatorParameter"));
 		this.buttonSet.setText(ControlsProperties.getString("String_Button_Setting"));
 	}
 

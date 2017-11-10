@@ -83,7 +83,7 @@
                 <process key="ExportGrid" name="导出栅格数据集"/>
                 <process key="ExportVector" name="导出矢量数据集"/>
             </process>
-            <process name="投影设置">
+            <process name="坐标系设置">
                 <process key="SetProjection" name="重设坐标系"/>
                 <process key="Projection" name="投影转换"/>
                 <!--<process key="UserDefineProjection" name="自定义投影"/>-->

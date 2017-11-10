@@ -103,7 +103,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			ControlsProperties.getString("String_GeoCoordSys")).setFolderNode(true);
 	// 自定义坐标系集合
 	private transient CoordSysDefine customCoordinate = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, null,
-			ControlsProperties.getString("String_Customize")).setFolderNode(true);
+			ControlsProperties.getString("String_Custom")).setFolderNode(true);
 	// 收藏夹坐标系集合
 	private transient CoordSysDefine favoriteCoordinate = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, null,
 			ControlsProperties.getString("String_Favorite")).setFolderNode(true);
@@ -240,7 +240,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						}
 					}
 					successedExportNum = 0;
-					buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
+					if (coordSysDefineExportList.size() == 1 && !coordSysDefineExportList.get(0).getIsFolderNode()) {
+						exportCoordsys(coordSysDefineExportList.get(0), prjFileExportFileChoose.getFilePath().replace("\\" + prjFileExportFileChoose.getFileName(), ""));
+					} else {
+						buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
+					}
 					if (successedExportNum > 0) {
 						Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum));
 					} else {
@@ -1286,16 +1290,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	}
 
 	private boolean isNewGeoCoordsysEnable() {
-		return this.currentDefine != null &&
-				!this.currentDefine.getIsFolderNode() &&
-				this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE;
+		return true;
 
 	}
 
 	private boolean isNewPrjCoordsysEnable() {
-		return this.currentDefine != null &&
-				!this.currentDefine.getIsFolderNode() &&
-				this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM;
+		return true;
 
 	}
 
@@ -1390,7 +1390,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	private void newGeoCoordsys() {
 		JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
-		geography.setGeOCoordSys(PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine));
+		if (!this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+			geography.setGeOCoordSys(PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine));
+		}
 		if (geography.showDialog() == DialogResult.OK) {
 			GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
@@ -1402,7 +1404,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
-				String grantParentName = ControlsProperties.getString("String_Customize");
+				String grantParentName = ControlsProperties.getString("String_Custom");
 				addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
 				addToTree(result, userDefineGeoParentName, userDefine, grantParentName);
 			}
@@ -1417,7 +1419,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void newPrjCoordsys() {
 		JDialogUserDefinePrjProjection dialogUserDefinePrjProjection = new JDialogUserDefinePrjProjection();
-		dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine));
+		if (!this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+			dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine));
+		}
 		if (dialogUserDefinePrjProjection.showDialog() == DialogResult.OK) {
 			PrjCoordSys prjCoordSys = dialogUserDefinePrjProjection.getPrjCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
@@ -1429,7 +1433,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName).setFolderNode(true);
 			}
 			if (userDefine.add(result)) {
-				String grantParentName = ControlsProperties.getString("String_Customize");
+				String grantParentName = ControlsProperties.getString("String_Custom");
 				addProjToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
 				addToTree(result, userDefinePrjParentName, userDefine, grantParentName);
 			}
@@ -1460,7 +1464,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
 					}
 					if (userDefine.add(result)) {
-						String grantParentName = ControlsProperties.getString("String_Customize");
+						String grantParentName = ControlsProperties.getString("String_Custom");
 						addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
 						addToTree(result, userCoordsysFromEPSGParentName, userDefine, grantParentName);
 					}
@@ -1478,7 +1482,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
 					}
 					if (userDefine.add(result)) {
-						String grantParentName = ControlsProperties.getString("String_Customize");
+						String grantParentName = ControlsProperties.getString("String_Custom");
 						addProjToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
 						addToTree(result, userCoordsysFromEPSGParentName, userDefine, grantParentName);
 					}
@@ -1538,7 +1542,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				} else if (result.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 					addProjToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
 				}
-				String grantParentName = ControlsProperties.getString("String_Customize");
+				String grantParentName = ControlsProperties.getString("String_Custom");
 				addToTree(result, userImportCoordsysParentName, userDefine, grantParentName);
 			}
 		}

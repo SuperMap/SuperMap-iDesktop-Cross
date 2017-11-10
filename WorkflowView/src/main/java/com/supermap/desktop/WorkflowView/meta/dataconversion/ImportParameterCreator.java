@@ -640,7 +640,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		setPrjCoordSys.methodName = "setTargetPrjCoordSys";
 		ParameterRadioButton parameterRadioButton = new ParameterRadioButton();
 		parameterRadioButton.setLayout(ParameterRadioButton.VATICAL);
-		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_SetProjection_Caption"), true), new ParameterDataNode(ControlsProperties.getString("String_ImportPrjFile"), false)};
+		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_SetCoordsys"), true), new ParameterDataNode(ControlsProperties.getString("String_ImportPrjFile"), false)};
 		parameterRadioButton.setItems(parameterDataNodes);
 		parameterRadioButton.setSelectedItem(parameterDataNodes[0]);
 		ReflectInfo chooseFile = new ReflectInfo();
@@ -669,7 +669,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		final ParameterTextArea parameterTextArea = new ParameterTextArea();
 		textArea.parameter = parameterTextArea;
 		ParameterCombine parameterCombineProjectSet = new ParameterCombine();
-		parameterCombineProjectSet.setDescribe(ControlsProperties.getString("String_SetProjection_Caption"));
+		parameterCombineProjectSet.setDescribe(ControlsProperties.getString("String_SetCoordsys"));
 		parameterFilePrjChoose.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
