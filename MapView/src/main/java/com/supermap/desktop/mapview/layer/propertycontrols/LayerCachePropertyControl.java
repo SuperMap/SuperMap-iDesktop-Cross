@@ -17,7 +17,7 @@ import java.awt.event.ItemListener;
  */
 public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
     private JLabel label;
-    private JComboBox<String> comboBox;
+    private JComboBox<Version> comboBox;
 
     private ItemListener itemListener = new ItemListener() {
         @Override
@@ -49,6 +49,23 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
         label = new JLabel(ControlsProperties.getString("String_Label_CurrentVersion"));
         comboBox = new JComboBox<>();
         setLayout(new GridBagLayout());
+        comboBox.setRenderer(new ListCellRenderer<Version>() {
+            @Override
+            public Component getListCellRendererComponent(JList<? extends Version> list, Version value, int index, boolean isSelected, boolean cellHasFocus) {
+                JLabel label = new JLabel("");
+                if (value != null) {
+                    label = new JLabel(value.description);
+                }
+                label.setOpaque(true);
+                if (isSelected) {
+                    label.setBackground(list.getSelectionBackground());
+                    label.setForeground(list.getSelectionForeground());
+                } else {
+                    label.setBackground(list.getBackground());
+                }
+                return label;
+            }
+        });
         this.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(10, 5, 10, 10));
         this.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 0, 10, 5));
     }
@@ -71,8 +88,8 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
     @Override
     protected void fillComponents() {
         try {
-            for (String version : getLayerPropertyModel().getVersions()) {
-                comboBox.addItem(version);
+            for (int i = 0; i < getLayerPropertyModel().getVersions().size(); i++) {
+                comboBox.addItem(new Version(getLayerPropertyModel().getVersions().get(i), getLayerPropertyModel().getDescriptions().get(i)));
             }
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);
@@ -81,8 +98,18 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
 
     @Override
     protected void setControlEnabled(String propertyName, boolean enabled) {
-        if (propertyName.equals(LayerCachePropertyModel.CURRENT_VERSION)) {
+        if (propertyName.equals(LayerCachePropertyModel.CURRENT_DESCRIPTION)) {
             this.comboBox.setEnabled(enabled);
+        }
+    }
+
+    private class Version {
+        String name;
+        String description;
+
+        public Version(String name, String description) {
+            this.name = name;
+            this.description = description;
         }
     }
 }

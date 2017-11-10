@@ -37,7 +37,7 @@ public class JDialogUserDefinePrjGeography extends SmDialog {
 	}
 
 	private void initComponents() {
-		this.setSize(500, 550);
+		this.setSize(500, 310);
 		this.setLocationRelativeTo(null);
 		this.setTitle(ControlsProperties.getString("String_UserDefined_GeoCoordSys"));
 	}

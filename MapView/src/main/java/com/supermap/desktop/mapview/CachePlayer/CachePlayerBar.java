@@ -152,8 +152,8 @@ public class CachePlayerBar extends JToolBar {
             if (layers.get(i) instanceof LayerCache) {
                 LayerCache layerCache = (LayerCache) layers.get(i);
                 layerCaches.add(layerCache);
-                for (String version : layerCache.getVersions()) {
-                    playList.add(new CacheWithVersion(layerCache, version));
+                for (int j = 0; j < layerCache.getVersions().size(); j++) {
+                    playList.add(new CacheWithVersion(layerCache, layerCache.getVersions().get(j), layerCache.getDescriptions().get(j)));
                 }
             }
         }
@@ -166,8 +166,8 @@ public class CachePlayerBar extends JToolBar {
             LayerCache layerCache = (LayerCache) layer;
             if (isAdd) {
                 layerCaches.add(layerCache);
-                for (String version : layerCache.getVersions()) {
-                    playList.add(new CacheWithVersion(layerCache, version));
+                for (int j = 0; j < layerCache.getVersions().size(); j++) {
+                    playList.add(new CacheWithVersion(layerCache, layerCache.getVersions().get(j), layerCache.getDescriptions().get(j)));
                 }
             } else {
                 layerCaches.remove(layer);
@@ -249,5 +249,8 @@ public class CachePlayerBar extends JToolBar {
         return progressBar;
     }
 
+    public ArrayList<LayerCache> getLayerCaches() {
+        return layerCaches;
+    }
     //endregion
 }

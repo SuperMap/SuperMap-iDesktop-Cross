@@ -37,7 +37,7 @@ public class PrjCoordSysUtilities {
 			} else {
 				String[] earthFrameOfReferenceinfos = new String[]{
 						// 增加EPSG code-yuanR2017.9.25
-						CoreProperties.getString("String_PrjCoordSys_EPSG_Code"),
+						CoreProperties.getString("String_EPSG_Code"),
 						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
 						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"), CoreProperties.getString("String_GeoSpheroid_Axis"),
 						CoreProperties.getString("String_GeoSpheroid_Flatten")};
@@ -86,7 +86,7 @@ public class PrjCoordSysUtilities {
 					 */
 					// @formatter:on
 					text += String.format("%-10s\t", info);
-					if (info.equals(CoreProperties.getString("String_PrjCoordSys_EPSG_Code"))) {
+					if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
 						text += Integer.toString(prj.getEPSGCode());
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();

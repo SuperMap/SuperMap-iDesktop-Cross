@@ -19,7 +19,7 @@ import com.supermap.desktop.utilities.PropertyManagerUtilities;
 import java.text.MessageFormat;
 
 /**
- * 投影设置
+ * 坐标系设置
  *
  * @author XiaJT
  */
