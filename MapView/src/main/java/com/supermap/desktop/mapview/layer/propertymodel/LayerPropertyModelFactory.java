@@ -74,9 +74,9 @@ public class LayerPropertyModelFactory {
 			models.add(new LayerGridParamPropertyModel(layers, formMap));
         } else if (layerType == LAYER_GROUP) {
             models.add(new LayerBasePropertyModel(layers, formMap));
-            models.add(new LayerCachePropertyModel(layers, formMap));
         } else if (layerType == LAYER_CACHE) {
             models.add(new LayerBasePropertyModel(layers, formMap));
+            models.add(new LayerCachePropertyModel(layers, formMap));
             //TODO
         } else if (layerType == LAYER_HEATMAP) {
             models.add(new LayerBasePropertyModel(layers, formMap));
