@@ -74,7 +74,7 @@ public class ProcessTree extends JTree implements SearchItemValueGetter<DefaultM
 					jLabel.setForeground(Color.WHITE);
 					jLabel.setBackground(new Color(150, 185, 255));
 				} else {
-					jLabel.setBackground(Color.WHITE);
+					jLabel.setBackground(tree.getBackground());
 				}
 
 				return jLabel;

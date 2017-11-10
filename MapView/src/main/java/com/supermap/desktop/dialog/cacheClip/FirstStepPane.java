@@ -17,6 +17,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.SmOptionPane;
 import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
+import com.supermap.desktop.properties.CacheProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
@@ -875,7 +876,7 @@ public class FirstStepPane extends JPanel implements IState {
 		this.labelConfig.setText(MapViewProperties.getString("MapCache_LabelConfig"));
 		this.labelConfigValue.setText(MapViewProperties.getString("MapCache_LabelConfigValue"));
 		this.labelCacheName.setText(ControlsProperties.getString("String_CacheName"));
-		this.labelCachePath.setText(MapViewProperties.getString("MapCache_LabelCachePath"));
+		this.labelCachePath.setText(CacheProperties.getString("MapCache_LabelCachePath"));
 		this.labelSaveType.setText(ControlsProperties.getString("String_DatabaseType"));
 		this.labelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
 		this.labelUserPassword.setText(ControlsProperties.getString("String_Label_UserPassword"));

@@ -551,11 +551,8 @@ public class SmFileChoose extends JFileChooser {
 	public JTextField getTextField() {
 		if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.WINDOWS_FILE_CHOOSE_UI)) {
 			return ((JTextField) ((JPanel) ((JPanel) ((JPanel) this.getComponent(2)).getComponent(2)).getComponent(2)).getComponent(1));
-		} else if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.GTK_FILE_CHOOSE_UI)) {
-			//((JPanel) prjFileExportFileChoose.getComponent(1)).getComponent(0).setEnabled(false);
-			return null;
-		} else if (this.getUI().getClass().getName().equals(DatasourceOpenFileUtilties.MEYAL_FILE_CHOOSE_UI)) {
-			//((JPanel) prjFileExportFileChoose.getComponent(2)).getComponent(0).setEnabled(false);
+		} else if (this.getUI().getClass().getName().equals("org.pushingpixels.substance.internal.ui.SubstanceFileChooserUI")) {
+			// 没有找到textField
 			return null;
 		} else {
 			return null;
