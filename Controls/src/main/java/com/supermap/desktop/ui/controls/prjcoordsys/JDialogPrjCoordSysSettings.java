@@ -234,14 +234,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						coordSysDefineExportList.add(model.getRowData(selectedRows[i]));
 					}
 					// 当table中没有选中任何对象，此时焦点估计在tree中，并且currentDefine已设置为tree中选择的对象
-					successedExportNum = 0;
-					if (coordSysDefineExportList.size() <= 1) {
-						if (currentDefine != null) {
-							exportCoordsys(currentDefine, prjFileExportFileChoose.getFilePath().replace(("\\" + prjFileExportFileChoose.getFileName()), ""));
+					if (coordSysDefineExportList.size() <= 0 && currentDefine != null && currentDefine.getIsFolderNode()) {
+						for (int i = 0; i < currentDefine.size(); i++) {
+							coordSysDefineExportList.add(currentDefine.get(i));
 						}
-					} else {
-						buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
 					}
+					successedExportNum = 0;
+					buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
 					if (successedExportNum > 0) {
 						Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum));
 					} else {
