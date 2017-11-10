@@ -9,7 +9,6 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.ipls.*;
-import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import java.lang.reflect.Method;
@@ -85,15 +84,9 @@ public class ImportSettingSetter {
 								//特殊导入为cad/简单数据集/模型数据集的设置
 								arg = false;
 								Object datasetType = selectItem;
-								if (datasetType instanceof DatasetType) {
-									if (datasetType.equals(DatasetType.CAD) || datasetType.equals(DatasetType.GRID)) {
-										arg = true;
-									}
-								} else {
-									String type = datasetType.toString();
-									if (type.equals(ControlsProperties.getString("String_datasetType3D"))
-											|| type.equals(CoreProperties.getString("String_DatasetType_CAD"))
-											|| type.equals(CoreProperties.getString("String_DatasetType_Grid"))) {
+								if (datasetType instanceof DatasetType[]) {
+									DatasetType[] tempDataset = (DatasetType[]) datasetType;
+									if (null != tempDataset[0] && (tempDataset[0].equals(DatasetType.CAD) || tempDataset[0].equals(DatasetType.GRID))) {
 										arg = true;
 									}
 								}
