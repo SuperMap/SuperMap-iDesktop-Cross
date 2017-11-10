@@ -4,6 +4,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerCachePropertyModel;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -25,11 +26,11 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
                 getLayerPropertyModel().setCurrentVersion(comboBox.getSelectedItem().toString());
                 checkChanged();
             }
-
         }
     };
 
     public LayerCachePropertyControl() {
+
     }
 
     @Override
@@ -44,16 +45,17 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
 
     @Override
     protected void initializeComponents() {
+        this.setBorder(BorderFactory.createTitledBorder("VersionControl"));
         label = new JLabel(ControlsProperties.getString("String_Label_CurrentVersion"));
         comboBox = new JComboBox<>();
-        setLayout(new BorderLayout());
-        this.add(label, BorderLayout.WEST);
-        this.add(comboBox, BorderLayout.CENTER);
+        setLayout(new GridBagLayout());
+        this.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(10, 5, 10, 10));
+        this.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 0, 10, 5));
     }
 
     @Override
     protected void initializeResources() {
-        ((TitledBorder) this.getBorder()).setTitle(MapViewProperties.getString("String_MapProperty_VersionControl"));
+        ((TitledBorder) this.getBorder()).setTitle(MapViewProperties.getString("String_LayerProperty_Version"));
     }
 
     @Override
