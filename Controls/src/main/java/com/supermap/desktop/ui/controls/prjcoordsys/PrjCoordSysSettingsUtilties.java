@@ -33,14 +33,18 @@ public class PrjCoordSysSettingsUtilties {
 			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED && define.getCoordSysCode() != -1) {
 					PrjCoordSysType type = (PrjCoordSysType) Enum.parse(PrjCoordSysType.class, define.getCoordSysCode());
-					result = new PrjCoordSys(type);
-					result.setName(define.getCaption());
+					if (type != null) {
+						result = new PrjCoordSys(type);
+						result.setName(define.getCaption());
+					}
 				} else {
 					result = define.getPrjCoordSys();
 				}
 			}
 		} catch (Exception e) {
-			Application.getActiveApplication().getOutput().output(e);
+			//Enum值错误 不抛异常
+			Application.getActiveApplication().getOutput().output(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
