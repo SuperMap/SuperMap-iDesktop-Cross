@@ -142,22 +142,19 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	private ItemListener comboBoxNameListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			if (lock) {
-				return;
-			}
-			if (e.getStateChange() == ItemEvent.SELECTED) {
+			if (e.getStateChange() == ItemEvent.SELECTED && comboBoxName.getSelectedItem() != null) {
+				if (lock) {
+					return;
+				}
 				Object selectedItem = comboBoxName.getSelectedItem();
-				if (selectedItem != null && !(selectedItem instanceof String) && selectedItem != PrjCoordSysType.PCS_USER_DEFINED) {
-					String describe = PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name());
+				if (selectedItem instanceof PrjCoordSysType && selectedItem != PrjCoordSysType.PCS_USER_DEFINED) {
 					prjCoordSys.setType((PrjCoordSysType) selectedItem);
 					lock = true;
-					comboBoxCoordType.setSelectedItem(prjCoordSys.getProjection().getType());
 					panelGeoCoordSys.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
-					comboBoxCoordSysUnit.setSelectedItem(prjCoordSys.getCoordUnit());
-					resetProjectionTypeValues();
+					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
 					prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
-					prjCoordSys.setName(describe);
-					comboBoxName.setSelectedItem(describe);
+					prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+					resetProjectionTypeValues();
 					lock = false;
 				} else {
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
@@ -204,31 +201,30 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		buttonGroup.add(radioButtonAngle);
 
 		// region 名称
-		Enum[] enums = Enum.getEnums(PrjCoordSysType.class);
 		SearchItemValueGetter<Enum> searchItemValueGetter = PrjCoordSysSettingsUtilties.getSearchItemValueGetter();
 		comboBoxName.setSearchItemValueGetter(searchItemValueGetter);
+		Enum[] enums = Enum.getEnums(PrjCoordSysType.class);
+
 		Arrays.sort(enums, 0, enums.length, new EnumComparator());
 		for (Enum anEnum : enums) {
 			if (anEnum instanceof PrjCoordSysType && anEnum != PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE && anEnum != PrjCoordSysType.PCS_NON_EARTH && anEnum != PrjCoordSysType.PCS_USER_DEFINED) {
 				comboBoxName.addItem((PrjCoordSysType) anEnum);
 			}
 		}
-
 		comboBoxName.setRenderer(new MyEnumCellRender(comboBoxName));
-		comboBoxName.setEditable(true);
 		// endregion
 
 		// region 投影方式
-		Enum[] enums1 = Enum.getEnums(ProjectionType.class);
 		comboBoxCoordType.setSearchItemValueGetter(searchItemValueGetter);
+		Enum[] enums1 = Enum.getEnums(ProjectionType.class);
 		Arrays.sort(enums1, 0, enums1.length, new EnumComparator());
 		for (Enum anEnum : enums1) {
-			if (anEnum instanceof ProjectionType && anEnum != PrjCoordSysType.PCS_USER_DEFINED) {
+			if (anEnum instanceof ProjectionType) {
 				comboBoxCoordType.addItem((ProjectionType) anEnum);
 			}
 		}
 
-		comboBoxCoordType.setRenderer(new MyEnumCellRender(comboBoxCoordType));
+		//comboBoxCoordType.setRenderer(new MyEnumCellRender(comboBoxCoordType));
 
 		// endregion
 
@@ -301,6 +297,8 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 				return backUpValue;
 			}
 		});
+
+		//panelGeoCoordSys.setPanelEditable(false);
 	}
 
 	// region 初始化布局
@@ -493,9 +491,9 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		this.prjCoordSys.setName(prjCoordSys.getName());
 		panelGeoCoordSys.setGeoCoordSys(this.prjCoordSys.getGeoCoordSys());
 		lock = true;
-		comboBoxName.setSelectedItem(prjCoordSys.getName());
-		comboBoxCoordSysUnit.setSelectedItem(prjCoordSys.getCoordUnit());
-		comboBoxCoordType.setSelectedItem(prjCoordSys.getProjection().getType());
+		comboBoxName.setSelectedItem(this.prjCoordSys.getName());
+		comboBoxCoordSysUnit.setSelectedItem(this.prjCoordSys.getCoordUnit());
+		comboBoxCoordType.setSelectedItem(this.prjCoordSys.getProjection().getType());
 		resetProjectionTypeValues();
 		lock = false;
 	}

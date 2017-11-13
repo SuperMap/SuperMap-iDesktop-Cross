@@ -62,7 +62,7 @@ public class JPanelGeoCoordSys extends JPanel {
 					return;
 				}
 				Object selectedItem = comboBoxName.getSelectedItem();
-				if (selectedItem instanceof GeoCoordSysType) {
+				if (selectedItem instanceof GeoCoordSysType && selectedItem != GeoCoordSysType.GCS_USER_DEFINE) {
 					geoCoordSys.setType((GeoCoordSysType) selectedItem);
 					lock = true;
 					comboBoxGeoDatumPlane.setSelectedItem(geoCoordSys.getGeoDatum().getType());
@@ -187,6 +187,7 @@ public class JPanelGeoCoordSys extends JPanel {
 		initLayout();
 		initResources();
 		initComponentStates();
+		//setPanelEditable(false);
 	}
 
 	private void initComponents() {
@@ -202,12 +203,6 @@ public class JPanelGeoCoordSys extends JPanel {
 			}
 		}
 		comboBoxName.setRenderer(new MyEnumCellRender(comboBoxName));
-		// endregion
-
-		comboBoxName.setEditable(true);
-		comboBoxGeoDatumPlane.setEditable(true);
-		comboBoxReferenceSpheroid.setEditable(true);
-		comboBoxCentralMeridianType.setEditable(true);
 
 		// region 大地参考系类型
 		Enum[] enumsGeoDatum = Enum.getEnums(GeoDatumType.class);
@@ -472,6 +467,18 @@ public class JPanelGeoCoordSys extends JPanel {
 		this.geoCoordSys = geoCoordSys.clone();
 		initComponentStates();
 	}
+
+	///**
+	// * 设置面板控件是否只能选择不能编辑
+	// *
+	// * @param isEditable
+	// */
+	//public void setPanelEditable(Boolean isEditable) {
+	//	this.comboBoxName.setEditable(isEditable);
+	//	this.comboBoxGeoDatumPlane.setEditable(isEditable);
+	//	this.comboBoxReferenceSpheroid.setEditable(isEditable);
+	//	this.comboBoxCentralMeridianType.setEditable(isEditable);
+	//}
 
 	public void dispose() {
 		removeListeners();

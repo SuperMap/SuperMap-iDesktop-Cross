@@ -1445,7 +1445,34 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 通过EPSG新建坐标系
 	 */
 	private void newCoordsysFromEPSG() {
+
 		JDialogNewCoordsysFromEPSG dialogNewCoordsysFromEPSG = new JDialogNewCoordsysFromEPSG();
+		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE || this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM)) {
+
+			PrjCoordSys prjCoordSys = null;
+			if (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+				GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
+				prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
+				prjCoordSys.setGeoCoordSys(geoCoordSys);
+			} else if (this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+				prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine);
+			}
+
+			if (prjCoordSys != null) {
+				int code = 3857;
+				code = prjCoordSys.getEPSGCode();
+				if (code <= 0) {
+					code = prjCoordSys.toEPSGCode();
+				}
+
+				if (code <= 0) {
+					code = 3857;
+				}
+				dialogNewCoordsysFromEPSG.setCode(code);
+				dialogNewCoordsysFromEPSG.getCodeTextField().setText(String.valueOf(code));
+			}
+		}
+
 		if (dialogNewCoordsysFromEPSG.showDialog() == DialogResult.OK) {
 			try {
 				PrjCoordSys prjCoordSys = new PrjCoordSys();
@@ -1459,14 +1486,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					} else {
 						result.setCaption(dialogNewCoordsysFromEPSG.getNameTextField().getText());
 					}
-					CoordSysDefine userDefine = customCoordinate.getChildByCaption(userCoordsysFromEPSGParentName);
+					CoordSysDefine userDefine = this.customCoordinate.getChildByCaption(this.userCoordsysFromEPSGParentName);
 					if (userDefine == null) {
-						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
+						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, this.customCoordinate, this.userCoordsysFromEPSGParentName).setFolderNode(true);
 					}
 					if (userDefine.add(result)) {
 						String grantParentName = ControlsProperties.getString("String_Custom");
-						addGeoCoorSysToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
-						addToTree(result, userCoordsysFromEPSGParentName, userDefine, grantParentName);
+						addGeoCoorSysToDocument(result, this.customProjectionDoc, this.customProjectionConfigPath, true);
+						addToTree(result, this.userCoordsysFromEPSGParentName, userDefine, grantParentName);
 					}
 				} else {
 					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
@@ -1477,14 +1504,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					} else {
 						result.setCaption(dialogNewCoordsysFromEPSG.getNameTextField().getText());
 					}
-					CoordSysDefine userDefine = customCoordinate.getChildByCaption(userCoordsysFromEPSGParentName);
+					CoordSysDefine userDefine = this.customCoordinate.getChildByCaption(this.userCoordsysFromEPSGParentName);
 					if (userDefine == null) {
-						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
+						userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, this.customCoordinate, this.userCoordsysFromEPSGParentName).setFolderNode(true);
 					}
 					if (userDefine.add(result)) {
 						String grantParentName = ControlsProperties.getString("String_Custom");
-						addProjToDocument(result, customProjectionDoc, customProjectionConfigPath, true);
-						addToTree(result, userCoordsysFromEPSGParentName, userDefine, grantParentName);
+						addProjToDocument(result, this.customProjectionDoc, this.customProjectionConfigPath, true);
+						addToTree(result, this.userCoordsysFromEPSGParentName, userDefine, grantParentName);
 					}
 				}
 			} catch (Exception ex) {

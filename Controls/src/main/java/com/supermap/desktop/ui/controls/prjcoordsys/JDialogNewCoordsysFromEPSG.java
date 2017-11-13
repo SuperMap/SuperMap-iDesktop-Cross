@@ -26,17 +26,19 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 	private JLabel codeLabel;
 
 	private JTextField nameTextField;
+
 	private WaringTextField codeTextField;
 
 	private JCheckBox useDefaultNameCheck;
 	private PanelButton panelButton;
 
-	private int code;
+	// 默认epsg值
+	private int code = 3857;
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource().equals(panelButton.getButtonOk())) {
-				code = Integer.valueOf(codeTextField.getText());
+				setCode(Integer.valueOf(codeTextField.getText()));
 				dialogResult = DialogResult.OK;
 				dispose();
 			} else if (e.getSource().equals(panelButton.getButtonCancel())) {
@@ -49,7 +51,6 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 	};
 
 	public JDialogNewCoordsysFromEPSG() {
-
 		initializeComponents();
 		initializeResources();
 		initializeLayout();
@@ -64,7 +65,8 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		this.coordsysNameLabel = new JLabel();
 		this.codeLabel = new JLabel();
 		this.nameTextField = new JTextField();
-		this.codeTextField = new WaringTextField("4311");
+		this.codeTextField = new WaringTextField(String.valueOf(getCode()));
+
 		this.codeTextField.setInitInfo(1, 999999999, WaringTextField.INTEGER_TYPE, "null");
 		this.useDefaultNameCheck = new JCheckBox();
 
@@ -90,7 +92,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup()
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.coordsysNameLabel)
-						.addGap(14)
+						.addGap(27)
 						.addComponent(this.nameTextField))
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.codeLabel)
@@ -116,9 +118,6 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 
 	private void initStates() {
 		this.nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
-		this.code = 4311;
-
-
 	}
 
 	private void initListener() {
@@ -172,5 +171,9 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public WaringTextField getCodeTextField() {
+		return codeTextField;
 	}
 }
