@@ -202,6 +202,10 @@ public abstract class AbstractRibbonBand<T extends AbstractBandControlPanel>
 		updateUI();
 	}
 
+	public void setIcon(ResizableIcon icon) {
+		this.icon = icon;
+	}
+
 	/**
 	 * Returns a clone of this ribbon band.
 	 *
@@ -272,6 +276,8 @@ public abstract class AbstractRibbonBand<T extends AbstractBandControlPanel>
 	public ResizableIcon getIcon() {
 		return this.icon;
 	}
+
+
 
 	/**
 	 * Changes the title of this ribbon band. Fires a <code>title</code>

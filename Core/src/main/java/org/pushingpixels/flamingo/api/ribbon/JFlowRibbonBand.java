@@ -44,14 +44,17 @@ import java.awt.event.ActionListener;
  * @author Kirill Grouchnikov
  */
 public class JFlowRibbonBand extends AbstractRibbonBand<JFlowBandControlPanel> {
+
+	private int rowCount;
+
 	/**
 	 * Creates a new flow ribbon band.
 	 *
 	 * @param title Band title.
 	 * @param icon  Associated icon (for collapsed state).
 	 */
-	public JFlowRibbonBand(String title, ResizableIcon icon) {
-		this(title, icon, null);
+	public JFlowRibbonBand(String title, ResizableIcon icon, int rowCount) {
+		this(title, icon, null,rowCount);
 	}
 
 	/**
@@ -62,10 +65,11 @@ public class JFlowRibbonBand extends AbstractRibbonBand<JFlowBandControlPanel> {
 	 * @param expandActionListener Expand action listener (can be <code>null</code>).
 	 */
 	public JFlowRibbonBand(String title, ResizableIcon icon,
-	                       ActionListener expandActionListener) {
+	                       ActionListener expandActionListener,int rowCount) {
 		super(title, icon, expandActionListener, new JFlowBandControlPanel());
 		this.resizePolicies = CoreRibbonResizePolicies
-				.getCoreFlowPoliciesRestrictive(this, 3);
+				.getCoreFlowPoliciesRestrictive(this, rowCount);
+		this.rowCount = rowCount;
 		updateUI();
 	}
 
@@ -80,13 +84,13 @@ public class JFlowRibbonBand extends AbstractRibbonBand<JFlowBandControlPanel> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.jvnet.flamingo.ribbon.AbstractRibbonBand#cloneBand()
 	 */
 	@Override
 	public AbstractRibbonBand<JFlowBandControlPanel> cloneBand() {
 		AbstractRibbonBand<JFlowBandControlPanel> result = new JFlowRibbonBand(
-				this.getTitle(), this.getIcon(), this.getExpandActionListener());
+				this.getTitle(), this.getIcon(), this.getExpandActionListener(),rowCount);
 		result.applyComponentOrientation(this.getComponentOrientation());
 		return result;
 	}
