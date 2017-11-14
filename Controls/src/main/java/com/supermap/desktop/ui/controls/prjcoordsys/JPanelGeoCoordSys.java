@@ -46,9 +46,9 @@ public class JPanelGeoCoordSys extends JPanel {
 	private JLabel labelCentralMeridianType = new JLabel();
 	private JSearchComboBox<GeoPrimeMeridianType> comboBoxCentralMeridianType = new JSearchComboBox<>();
 	//中央子午线
-	private JLabel labelCentralMeridian = new JLabel();
+	private JLabel labelCentralBasisMeridian = new JLabel();
 	// 用度分秒控件替换
-	JPanelFormat panelCentralMeridian = new JPanelFormat();
+	JPanelFormat panelCentralBasisMeridian = new JPanelFormat();
 	//private SmTextFieldLegit textFieldCentralMeridian = new SmTextFieldLegit();
 
 	private GeoCoordSys geoCoordSys = new GeoCoordSys();
@@ -165,7 +165,7 @@ public class JPanelGeoCoordSys extends JPanel {
 					}
 					geoCoordSys.getGeoPrimeMeridian().setType((GeoPrimeMeridianType) selectedItem);
 					lockCenter = true;
-					panelCentralMeridian.setValue(geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
+					panelCentralBasisMeridian.setValue(geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
 					comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoPrimeMeridianType) selectedItem).name()));
 					geoCoordSys.getGeoPrimeMeridian().setType(GeoPrimeMeridianType.PRIMEMERIDIAN_USER_DEFINED);
 					geoCoordSys.getGeoPrimeMeridian().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoPrimeMeridianType) selectedItem).name()));
@@ -352,7 +352,7 @@ public class JPanelGeoCoordSys extends JPanel {
 								.addComponent(this.labelGeoSpheroidAxis)
 								.addComponent(this.labelGeoSpheroidFlatten)
 								.addComponent(this.labelCentralMeridianType)
-								.addComponent(this.labelCentralMeridian))
+								.addComponent(this.labelCentralBasisMeridian))
 						.addGroup(groupLayout.createParallelGroup()
 								.addComponent(this.comboBoxName)
 								//.addComponent(this.textFieldEPSG)
@@ -361,7 +361,7 @@ public class JPanelGeoCoordSys extends JPanel {
 								.addComponent(this.textFieldGeoSpheroidAxis)
 								.addComponent(this.textFieldGeoSpheroidFlatten)
 								.addComponent(this.comboBoxCentralMeridianType)
-								.addComponent(this.panelCentralMeridian))));
+								.addComponent(this.panelCentralBasisMeridian))));
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addGroup(groupLayout.createSequentialGroup()
 						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
@@ -386,8 +386,8 @@ public class JPanelGeoCoordSys extends JPanel {
 								.addComponent(this.labelCentralMeridianType)
 								.addComponent(this.comboBoxCentralMeridianType, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-								.addComponent(this.labelCentralMeridian)
-								.addComponent(this.panelCentralMeridian, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))));
+								.addComponent(this.labelCentralBasisMeridian)
+								.addComponent(this.panelCentralBasisMeridian, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))));
 		//@formatter:on
 	}
 
@@ -398,8 +398,8 @@ public class JPanelGeoCoordSys extends JPanel {
 		labelReferenceSpheroid.setText(CoreProperties.getString("String_Label_GeoCoordSys_ReferenceSpheroid"));
 		labelGeoSpheroidAxis.setText(CoreProperties.getString("String_Label_GeoSpheroid_Axis"));
 		labelGeoSpheroidFlatten.setText(CoreProperties.getString("String_Label_GeoSpheroid_Flatten"));
-		labelCentralMeridianType.setText(ControlsProperties.getString("String_CentralMeridian"));
-		labelCentralMeridian.setText(ControlsProperties.getString("String_CentralMeridian"));
+		labelCentralMeridianType.setText(ControlsProperties.getString("String_Label_CentralBasisMeridian"));
+		labelCentralBasisMeridian.setText(ControlsProperties.getString("String_Label_CentralBasisMeridian"));
 	}
 
 	private void initComponentStates() {
@@ -414,7 +414,7 @@ public class JPanelGeoCoordSys extends JPanel {
 		textFieldGeoSpheroidFlatten.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
 
 		comboBoxCentralMeridianType.setSelectedItem(this.geoCoordSys.getGeoPrimeMeridian().getName());
-		panelCentralMeridian.setValue(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
+		panelCentralBasisMeridian.setValue(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
 		//textFieldCentralMeridian.setText(String.valueOf(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue()));
 
 		//lock = false;

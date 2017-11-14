@@ -36,36 +36,37 @@ public class PrjCoordSysUtilities {
 				result = CoreProperties.getString("String_NoProjectionParameter") + "----" + prjCoordSys.getCoordUnit().toString();
 			} else {
 				String[] earthFrameOfReferenceinfos = new String[]{
-						// 增加EPSG code-yuanR2017.9.25
 						CoreProperties.getString("String_EPSG_Code"),
 						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
 						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"),
 						CoreProperties.getString("String_GeoSpheroid_Axis"),
-						CoreProperties.getString("String_GeoSpheroid_Flatten")};
+						CoreProperties.getString("String_GeoSpheroid_Flatten"),
+						CoreProperties.getString("String_CenterBasisMeridian")};
 				ArrayList<String> infoLabels = new ArrayList<String>();
 				if (prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
 					for (String string : earthFrameOfReferenceinfos) {
 						infoLabels.add(string);
 					}
 				} else {
-					String[] prjInfo = new String[]{CoreProperties.getString("String_Projection_ProjectionType"),
-							CoreProperties.getString("String_PrjParameter_CenterMeridian"),
-							CoreProperties.getString("String_PrjParameter_CentralParallel"),
-							CoreProperties.getString("String_PrjParameter_StandardParallel1"),
-							CoreProperties.getString("String_PrjParameter_StandardParallel2"),
-							CoreProperties.getString("String_PrjParameter_FalseEasting"),
-							CoreProperties.getString("String_PrjParameter_FalseNorthing"),
-							CoreProperties.getString("String_PrjParameter_ScaleFactor"),
-							CoreProperties.getString("String_PrjParameter_Azimuth"),
-							CoreProperties.getString("String_PrjParameter_FirstPointLongitude"),
-							CoreProperties.getString("String_PrjParameter_SecondPointLongitude"),
+					String[] prjInfo = new String[]{
+							CoreProperties.getString("String_Projection_ProjectionType"),
+							CoreProperties.getString("String_CenterMeridian"),
+							CoreProperties.getString("String_CentralParallel"),
+							CoreProperties.getString("String_StandardParallel1"),
+							CoreProperties.getString("String_StandardParallel2"),
+							CoreProperties.getString("String_FalseEasting"),
+							CoreProperties.getString("String_FalseNorthing"),
+							CoreProperties.getString("String_ScaleFactor"),
+							CoreProperties.getString("String_Azimuth"),
+							CoreProperties.getString("String_FirstPointLongitude"),
+							CoreProperties.getString("String_SecondPointLongitude"),
 							CoreProperties.getString("String_GeoCoordSys_Name")};
 
-					for (String string : prjInfo) {
+					for (String string : earthFrameOfReferenceinfos) {
 						infoLabels.add(string);
 					}
-
-					for (String string : earthFrameOfReferenceinfos) {
+					infoLabels.add("---------------------");
+					for (String string : prjInfo) {
 						infoLabels.add(string);
 					}
 				}
@@ -102,27 +103,29 @@ public class PrjCoordSysUtilities {
 						text += Double.toString(prj.getGeoCoordSys().getGeoDatum().getGeoSpheroid().getAxis());
 					} else if (info.equals(CoreProperties.getString("String_GeoSpheroid_Flatten"))) {
 						text += Double.toString(prj.getGeoCoordSys().getGeoDatum().getGeoSpheroid().getFlatten());
+					} else if (info.equals(CoreProperties.getString("String_CenterBasisMeridian"))) {
+						text += Double.toString(prj.getGeoCoordSys().getGeoPrimeMeridian().getLongitudeValue());
 					} else if (info.equals(CoreProperties.getString("String_Projection_ProjectionType"))) {
 						text += prj.getProjection().getType().toString();
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_CenterMeridian"))) {
+					} else if (info.equals(CoreProperties.getString("String_CenterMeridian"))) {
 						text += Double.toString(prj.getPrjParameter().getCentralMeridian());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_CentralParallel"))) {
+					} else if (info.equals(CoreProperties.getString("String_CentralParallel"))) {
 						text += Double.toString(prj.getPrjParameter().getCentralParallel());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_StandardParallel1"))) {
+					} else if (info.equals(CoreProperties.getString("String_StandardParallel1"))) {
 						text += Double.toString(prj.getPrjParameter().getStandardParallel1());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_StandardParallel2"))) {
+					} else if (info.equals(CoreProperties.getString("String_StandardParallel2"))) {
 						text += Double.toString(prj.getPrjParameter().getStandardParallel2());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_FalseEasting"))) {
+					} else if (info.equals(CoreProperties.getString("String_FalseEasting"))) {
 						text += Double.toString(prj.getPrjParameter().getFalseEasting());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_FalseNorthing"))) {
+					} else if (info.equals(CoreProperties.getString("String_FalseNorthing"))) {
 						text += Double.toString(prj.getPrjParameter().getFalseNorthing());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_ScaleFactor"))) {
+					} else if (info.equals(CoreProperties.getString("String_ScaleFactor"))) {
 						text += Double.toString(prj.getPrjParameter().getScaleFactor());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_Azimuth"))) {
+					} else if (info.equals(CoreProperties.getString("String_Azimuth"))) {
 						text += Double.toString(prj.getPrjParameter().getAzimuth());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_FirstPointLongitude"))) {
+					} else if (info.equals(CoreProperties.getString("String_FirstPointLongitude"))) {
 						text += Double.toString(prj.getPrjParameter().getFirstPointLongitude());
-					} else if (info.equals(CoreProperties.getString("String_PrjParameter_SecondPointLongitude"))) {
+					} else if (info.equals(CoreProperties.getString("String_SecondPointLongitude"))) {
 						text += Double.toString(prj.getPrjParameter().getSecondPointLongitude());
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_Name"))) {
 						text += prj.getGeoCoordSys().getName();
