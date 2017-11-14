@@ -24,7 +24,6 @@ public class PanelImport extends JPanel implements IPanelImport {
 	private IImportSettingResultset resultset;
 	private IImportSettingSourceInfo sourceInfo;
 	private IImportSetttingTransform transform;
-	private JDialog owner;
 	private ImportInfo importInfo;
 	private int panelImportType;
 
@@ -46,8 +45,7 @@ public class PanelImport extends JPanel implements IPanelImport {
 		transform = null;
 	}
 
-	public PanelImport(JDialog owner, ImportInfo importInfo) {
-		this.owner = owner;
+	public PanelImport(ImportInfo importInfo) {
 		this.importInfo = importInfo;
 		initComponents();
 		initLayerout();
@@ -70,14 +68,13 @@ public class PanelImport extends JPanel implements IPanelImport {
 			}
 			this.transform = transformFactory.createPanelTransform(importSetting);
 			this.resultset = new PanelResultset(PanelImport.this, importInfo);
-			this.sourceInfo = new PanelSourceInfo(owner, importSetting);
+			this.sourceInfo = new PanelSourceInfo(PanelImport.this,importSetting);
 		} else if (null != this.panelImports) {
 			panelImportType = transformFactory.getImportSettingsType(panelImports);
 			this.transform = transformFactory.createPanelTransform(panelImports);
 			this.resultset = new PanelResultset(PanelImport.this, panelImports, panelImportType);
-			this.sourceInfo = new PanelSourceInfo(panelImports, panelImportType);
+			this.sourceInfo = new PanelSourceInfo(PanelImport.this,panelImports, panelImportType);
 		}
-		ComponentUIUtilities.setName(this.owner, "PanelImport_owner");
 	}
 
 	@Override

@@ -45,17 +45,17 @@ public class MetaProcessSetProjection extends MetaProcess {
 
 	@Override
 	protected String getCOMPLETED_MESSAGE() {
-		return ProcessProperties.getString("String_setProjectionSuccessed");
+		return ProcessProperties.getString("String_setCoordsysSuccessed");
 	}
 
 	@Override
 	protected String getFAILED_MESSAGE() {
-		return ProcessProperties.getString("String_setProjectionFailed");
+		return ProcessProperties.getString("String_setCoordsysFailed");
 	}
 
 
 	public MetaProcessSetProjection() {
-		setTitle(ProcessProperties.getString("String_SetProjection"));
+		setTitle(ProcessProperties.getString("String_resetCoordsys"));
 		initParameters();
 		initComponentState();
 		registerEvents();

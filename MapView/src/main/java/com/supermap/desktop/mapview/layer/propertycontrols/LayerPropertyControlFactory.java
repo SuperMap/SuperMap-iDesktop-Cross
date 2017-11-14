@@ -72,7 +72,7 @@ public class LayerPropertyControlFactory {
 			ComponentUIUtilities.setName(this.gridAggregationPropertyControl, "LayerPropertyControlFactory_gridAggregationPropertyControl");
 			return gridAggregationPropertyControl;
         } else if (model instanceof LayerCachePropertyModel) {
-            if (cachePropertyControl != null) {
+            if (cachePropertyControl == null) {
                 cachePropertyControl = new LayerCachePropertyControl();
             }
             cachePropertyControl.setLayerPropertyModel(model);

@@ -11,9 +11,13 @@ import java.util.List;
  */
 public class LayerCachePropertyModel extends LayerPropertyModel {
     public static String CURRENT_VERSION = "currentVersion";
+    public static String CURRENT_DESCRIPTION = "currentDescription";
     public static String VERSIONS = "versions";
+    public static String DESCRIPTIONS = "descriptions";
+    private String currentDescription;
     private String currentVersion;
     private List<String> versions;
+    private List<String> descriptions;
 
     public LayerCachePropertyModel() {
     }
@@ -31,21 +35,37 @@ public class LayerCachePropertyModel extends LayerPropertyModel {
             if (layer == null || layer.isDisposed()) {
                 break;
             }
-            this.versions = ComplexPropertyUtilties.union(this.versions, ((LayerCache) layer).getVersions());
-            this.currentVersion = ComplexPropertyUtilties.union(this.currentVersion, ((LayerCache) layer).getCurrentVersion());
+            LayerCache layerCache = (LayerCache) layer;
+            this.versions = ComplexPropertyUtilties.union(this.versions, layerCache.getVersions());
+            this.descriptions = ComplexPropertyUtilties.union(this.descriptions, layerCache.getDescriptions());
+            this.currentVersion = ComplexPropertyUtilties.union(this.currentVersion, layerCache.getCurrentVersion());
+            for (int i = 0; i < layerCache.getVersions().size(); i++) {
+                if (layerCache.getVersions().get(i).equals(currentVersion)) {
+                    this.currentDescription = ComplexPropertyUtilties.union(this.currentDescription, layerCache.getDescriptions().get(i));
+                }
+            }
         }
     }
 
     private void initializeEnabledMap() {
         this.propertyEnabled.put(VERSIONS, true);
         this.propertyEnabled.put(CURRENT_VERSION, true);
+        this.propertyEnabled.put(CURRENT_DESCRIPTION, true);
+        this.propertyEnabled.put(DESCRIPTIONS, true);
     }
 
     private void resetProperties() {
         this.currentVersion = null;
         if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
-            this.currentVersion = ((LayerCache) getLayers()[0]).getCurrentVersion();
-            this.versions = ((LayerCache) getLayers()[0]).getVersions();
+            LayerCache layerCache = (LayerCache) getLayers()[0];
+            this.currentVersion = (layerCache).getCurrentVersion();
+            this.versions = (layerCache).getVersions();
+            this.descriptions = (layerCache).getDescriptions();
+            for (int i = 0; i < (layerCache).getVersions().size(); i++) {
+                if (layerCache.getVersions().get(i).equals(currentVersion)) {
+                    this.currentDescription = layerCache.getDescriptions().get(i);
+                }
+            }
         }
     }
 
@@ -62,6 +82,8 @@ public class LayerCachePropertyModel extends LayerPropertyModel {
         if (cachePropertyModel != null) {
             this.currentVersion = cachePropertyModel.getCurrentVersion();
             this.versions = cachePropertyModel.getVersions();
+            this.descriptions = cachePropertyModel.getDescriptions();
+            this.currentDescription = cachePropertyModel.getCurrentDescription();
         } else {
             throw new IllegalArgumentException();
         }
@@ -81,5 +103,21 @@ public class LayerCachePropertyModel extends LayerPropertyModel {
 
     public void setVersions(List<String> versions) {
         this.versions = versions;
+    }
+
+    public String getCurrentDescription() {
+        return currentDescription;
+    }
+
+    public void setCurrentDescription(String currentDescription) {
+        this.currentDescription = currentDescription;
+    }
+
+    public List<String> getDescriptions() {
+        return descriptions;
+    }
+
+    public void setDescriptions(List<String> descriptions) {
+        this.descriptions = descriptions;
     }
 }

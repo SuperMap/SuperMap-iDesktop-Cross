@@ -123,7 +123,7 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 	@Override
 	protected void initializeResources() {
 		this.checkBoxIsDynamicProjection.setText(MapViewProperties.getString("String_CheckBox_DynamicProjection"));
-		this.buttonProjectionSetting.setText(ControlsProperties.getString("String_Button_ProjectionSetting"));
+		this.buttonProjectionSetting.setText(ControlsProperties.getString("String_ProjectionSetting"));
 		this.labelCoordName.setText(ControlsProperties.getString("String_Message_CoordSysName"));
 		this.labelCoordUnit.setText(MapViewProperties.getString("String_Label_PrjCoordSysUnit"));
 	}

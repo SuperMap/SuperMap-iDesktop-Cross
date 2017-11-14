@@ -408,7 +408,7 @@ public class PanelTransformFor3D extends PanelTransform {
 		this.labelPositionZ.setText(CoreProperties.getString("string_elevation"));
 		this.checkBoxSplitForMore.setText(DataConversionProperties.getString("string_splitForMore"));
 		this.radioButtonImportPrjFile.setText(ControlsProperties.getString("String_ImportPrjFile"));
-		this.radioButtonPrjSet.setText(ControlsProperties.getString("String_SetProjection_Caption"));
+		this.radioButtonPrjSet.setText(ControlsProperties.getString("String_SetCoordsys"));
 		this.buttonPrjSet.setText(ControlsProperties.getString("String_Button_Setting"));
 	}
 

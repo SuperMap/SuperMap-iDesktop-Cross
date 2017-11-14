@@ -14,7 +14,7 @@ public class ImportPanelFactory implements IImportPanelFactory {
 
 	@Override
 	public IPanelImport createPanelImport(JDialog owner, ImportInfo importInfo) {
-		return new PanelImport(owner, importInfo);
+		return new PanelImport(importInfo);
 	}
 
 	public IPanelImport createPanelImport(ArrayList<PanelImport> panelImports) {

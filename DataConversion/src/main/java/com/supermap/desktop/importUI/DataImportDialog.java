@@ -389,7 +389,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		this.setFocusTraversalPolicy(this.policy);
 		this.getRootPane().setDefaultButton(this.buttonImport);
 		this.setLocationRelativeTo(null);
-		this.setSize(new Dimension(960, 540));
+		this.setSize(new Dimension(960, 548));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(Math.abs(screenSize.width - 864) / 2, Math.abs(screenSize.height - 486) / 2);
 		setComponentName();
@@ -708,7 +708,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 					int selectRow = table.getSelectedRow();
 					panelImports.remove(selectRow);
 					panelImports.add(selectRow, panelImport);
-					CommonUtilities.replace(panelImportInfo,panelImport);
+					CommonUtilities.replace(panelImportInfo, panelImport);
 				}
 			};
 			this.steppedComboBox.addItemListener(this.aListener);
