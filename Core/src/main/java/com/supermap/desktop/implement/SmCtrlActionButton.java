@@ -21,6 +21,7 @@ public class SmCtrlActionButton extends JButton implements IBaseItem {
 	private final Dimension preferredSize = new Dimension(31, 31);
 	private transient IForm formClass = null;
 	private transient XMLCommand xmlCommand = null;
+	private boolean isIgnoreEvent;
 
 	public SmCtrlActionButton(IForm formClass, XMLCommand xmlCommand, JComponent parent) {
 		super.setToolTipText(xmlCommand.getTooltip());
@@ -140,6 +141,16 @@ public class SmCtrlActionButton extends JButton implements IBaseItem {
 	@Override
 	public String getText() {
 		return super.getText();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 
 	@Override

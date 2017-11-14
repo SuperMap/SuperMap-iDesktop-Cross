@@ -73,6 +73,7 @@ public class SmToolbar extends JToolBar implements IToolbar {
 
 		}
 	};
+	private boolean isIgnoreEvent;
 
 	public SmToolbar(XMLToolbar xmlToolbar) {
 		if (xmlToolbar != null) {
@@ -567,5 +568,15 @@ public class SmToolbar extends JToolBar implements IToolbar {
 	@Override
 	public String getText() {
 		return xmlToolbar.getLabel();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

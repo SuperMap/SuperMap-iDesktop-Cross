@@ -25,6 +25,7 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 	private XMLRibbonButton xmlRibbonButton;
 	private ICtrlAction ctrlAction = null;
 	private JCommandPopupMenu menu;
+	private boolean isIgnoreEvent;
 
 	public SmXmlRibbonButton(XMLRibbonButton ribbonButton) {
 		super(ribbonButton.getLabel());
@@ -152,5 +153,15 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

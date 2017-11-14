@@ -29,4 +29,12 @@ public class CtrlActionWorkspaceManager extends CtrlAction {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	@Override
+	public boolean check() {
+		IFormMain formMain = Application.getActiveApplication().getMainFrame();
+		IDockbar workspaceTreeDockbar = ((DockbarManager) formMain
+				.getDockbarManager()).getWorkspaceComponentManager();
+		return workspaceTreeDockbar.isVisible();
+	}
 }

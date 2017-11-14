@@ -857,7 +857,7 @@ public class CoreRibbonResizePolicies {
 			List<JComponent> flowComponents = controlPanel.getFlowComponents();
 			for (JComponent flowComp : flowComponents) {
 				Dimension preferredSize = flowComp.getPreferredSize();
-				if ((flowComp instanceof AbstractCommandButton && ((AbstractCommandButton) flowComp).getDisplayState() == CommandButtonDisplayState.BIG )||
+				if ((flowComp instanceof AbstractCommandButton && ((AbstractCommandButton) flowComp).getDisplayState() == CommandButtonDisplayState.BIG) ||
 						preferredSize.height << 1 > availableHeight) {
 					maxWidth = maxWidth + gap + preferredSize.width + tempWidth;
 				} else if (tempWidth == 0) {
@@ -895,9 +895,69 @@ public class CoreRibbonResizePolicies {
 
 		@Override
 		public int getPreferredWidth(int availableHeight, int gap) {
+			int result = 0;
+			int row = 3;
+			int maxComponentHeight = (availableHeight - (row - 1) * gap) / row;
+			ArrayList<JComponent> components = new ArrayList<>();
+			int currentUsedRow = 0;
+			for (JComponent flowComp : controlPanel.getFlowComponents()) {
+				if (flowComp instanceof AbstractCommandButton && ((AbstractCommandButton) flowComp).getDisplayState() == CommandButtonDisplayState.BIG) {
+					if (currentUsedRow > 0) {
+						int maxWidth = 0;
+						for (JComponent component : components) {
+							maxWidth = Math.max(maxWidth, component.getPreferredSize().width);
+						}
+						components.clear();
+						result += maxWidth + gap;
+						currentUsedRow = 0;
+					}
+					result += flowComp.getPreferredSize().width + gap;
+				} else {
+					Dimension preferredSize = flowComp.getPreferredSize();
+					int componentRow = preferredSize.height / maxComponentHeight + 1;
+					if (componentRow + currentUsedRow == row) {
+						components.add(flowComp);
+						int maxWidth = 0;
+						for (JComponent component : components) {
+							maxWidth = Math.max(maxWidth, component.getPreferredSize().width);
+						}
+						result += maxWidth == 0 ? 0 : maxWidth + gap;
+						components.clear();
+						currentUsedRow = 0;
+					} else if (componentRow + currentUsedRow > row) {
+						int maxWidth = 0;
+						for (JComponent component : components) {
+							maxWidth = Math.max(maxWidth, component.getPreferredSize().width);
+						}
+						components.clear();
+						result += maxWidth == 0 ? 0 : maxWidth + gap;
+						if (componentRow > row) {
+							// 大象？
+							result += preferredSize.width + gap;
+							currentUsedRow = 0;
+						} else {
+							components.add(flowComp);
+							currentUsedRow = componentRow;
+						}
+					}else {
+						components.add(flowComp);
+						currentUsedRow += componentRow;
+					}
+				}
+			}
+			if (components.size()>0) {
+				int maxWidth=0;
+				for (JComponent component : components) {
+					maxWidth = Math.max(maxWidth, component.getPreferredSize().width);
+				}
+				result += maxWidth + gap;
+			}
+			return result;
+		}
+
+		private int getOldPreferredWidth(int availableHeight, int gap) {
 			int compCount = controlPanel.getFlowComponents().size();
 			int[] widths = new int[compCount];
-			int[] heights = new int[compCount];
 			int index = 0;
 			int currBestResult = 0;
 			for (JComponent flowComp : controlPanel.getFlowComponents()) {
@@ -949,10 +1009,8 @@ public class CoreRibbonResizePolicies {
 			JFlowRibbonBand ribbonBand, int rowCount) {
 		List<RibbonBandResizePolicy> result = new ArrayList<>();
 		if (rowCount == 2) {
-
 			result.add(new FlowTwoRows(ribbonBand.getControlPanel()));
 		} else if (rowCount == 3) {
-
 			result.add(new FlowThreeRows(ribbonBand.getControlPanel()));
 		}
 
