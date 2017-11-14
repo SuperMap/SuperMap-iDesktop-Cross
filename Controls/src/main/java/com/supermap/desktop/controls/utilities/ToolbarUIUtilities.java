@@ -69,11 +69,14 @@ public class ToolbarUIUtilities {
 						if (((IBaseItem) component).getCtrlAction() != null) {
 							try {
 								component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
+								((IBaseItem) component).setIgnoreEvent(true);
 								if (component instanceof AbstractButton) {
 									((AbstractButton) component).setSelected(((IBaseItem) component).getCtrlAction().check());
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
+							}finally {
+								((IBaseItem) component).setIgnoreEvent(false);
 							}
 						}
 					} else if (component instanceof JRibbonGallery) {

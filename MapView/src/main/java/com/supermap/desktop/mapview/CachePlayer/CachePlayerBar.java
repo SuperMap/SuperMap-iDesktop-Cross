@@ -171,9 +171,14 @@ public class CachePlayerBar extends JToolBar {
                 }
             } else {
                 layerCaches.remove(layer);
-                for (CacheWithVersion cacheWithVersion : playList) {
-                    if (cacheWithVersion.getLayerCache().equals(layerCache)) {
-                        playList.remove(cacheWithVersion);
+                Layers layers = formMap.getMapControl().getMap().getLayers();
+                for (int i = 0; i < layers.getCount(); i++) {
+                    if (layers.get(i) instanceof LayerCache) {
+                        LayerCache cache = (LayerCache) layers.get(i);
+                        layerCaches.add(cache);
+                        for (int j = 0; j < cache.getVersions().size(); j++) {
+                            playList.add(new CacheWithVersion(cache, cache.getVersions().get(j), cache.getDescriptions().get(j)));
+                        }
                     }
                 }
             }

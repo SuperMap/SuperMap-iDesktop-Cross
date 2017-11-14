@@ -29,4 +29,12 @@ public class CtrlActionLayersManager extends CtrlAction {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	@Override
+	public boolean check() {
+		IFormMain formMain = Application.getActiveApplication().getMainFrame();
+		IDockbar layersTreeDockBar = ((DockbarManager) formMain
+				.getDockbarManager()).getLayersComponentManager();
+		return layersTreeDockBar.isVisible();
+	}
 }

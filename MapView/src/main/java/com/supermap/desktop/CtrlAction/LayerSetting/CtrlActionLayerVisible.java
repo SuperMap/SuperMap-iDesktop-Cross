@@ -7,6 +7,7 @@ import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.mapping.Layer;
+import com.supermap.mapping.LayerCache;
 import com.supermap.mapping.LayerGroup;
 
 import javax.swing.*;
@@ -51,8 +52,8 @@ public class CtrlActionLayerVisible extends CtrlAction {
 				enable = true;
 
 				for (Layer layer : formMap.getActiveLayers()) {
-					if (layer.getDataset() == null && !(layer instanceof LayerGroup)) {
-						enable = false;
+                    if (layer.getDataset() == null && !(layer instanceof LayerGroup) && !(layer instanceof LayerCache)) {
+                        enable = false;
 						break;
 					}
 				}

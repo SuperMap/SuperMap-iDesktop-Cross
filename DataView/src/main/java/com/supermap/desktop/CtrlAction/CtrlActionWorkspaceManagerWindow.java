@@ -1,14 +1,11 @@
 package com.supermap.desktop.CtrlAction;
 
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.CtrlAction.SQLQuery.components.PanelSaveSearchResult;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormManager;
-import com.supermap.desktop.ui.FormBaseChild;
-import com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindow;
 import com.supermap.desktop.implement.CtrlAction;
+import com.supermap.desktop.workspacemanagerwindow.WorkspaceManagerWindow;
 
 /**
  * @author YuanR
@@ -20,12 +17,11 @@ public class CtrlActionWorkspaceManagerWindow extends CtrlAction {
 		super(caller, formClass);
 	}
 
-	FormBaseChild workspaceManagerWindow;
-	IFormManager formManager;
+	private WorkspaceManagerWindow workspaceManagerWindow ;
 
 	public void run() {
 		try {
-			formManager = Application.getActiveApplication().getMainFrame().getFormManager();
+			IFormManager formManager = Application.getActiveApplication().getMainFrame().getFormManager();
 			if (workspaceManagerWindow == null) {
 				workspaceManagerWindow = new WorkspaceManagerWindow();
 				formManager.showChildForm(workspaceManagerWindow);
@@ -45,5 +41,14 @@ public class CtrlActionWorkspaceManagerWindow extends CtrlAction {
 	public boolean enable() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean check() {
+		if (workspaceManagerWindow == null) {
+			return false;
+		}
+		IFormManager formManager = Application.getActiveApplication().getMainFrame().getFormManager();
+		return formManager.isContain(workspaceManagerWindow);
 	}
 }
