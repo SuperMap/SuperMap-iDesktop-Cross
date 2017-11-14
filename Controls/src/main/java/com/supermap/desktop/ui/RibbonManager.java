@@ -72,7 +72,7 @@ public class RibbonManager implements IRibbonManager {
 
 		RibbonTask test = new RibbonTask("test", jRibbonBand);
 		
-		ribbon.addTask(test);
+//		ribbon.addTask(test);
 	}
 
 	private WindowType getWindowType(String controlClass) {
