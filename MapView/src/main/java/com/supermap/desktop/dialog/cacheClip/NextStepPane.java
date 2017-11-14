@@ -160,9 +160,9 @@ public class NextStepPane extends JPanel implements IState {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
-				boolean isGridTileType = comboBoxTileType.getSelectedIndex() == 1 ? true : false;
-				if (true != isGridTileType) {
-					//没有暂时不处理,原本应该为PDF矢量瓦片类型,只是为了界面展示
+                boolean isGridTileType = comboBoxTileType.getSelectedIndex() == 1;
+                if (!isGridTileType) {
+                    //没有暂时不处理,原本应该为PDF矢量瓦片类型,只是为了界面展示
 					mapCacheBuilder.setTileFormat(TileFormat.JPG);
 				}
 				comboBoxImageType.setEnabled(isGridTileType);
@@ -206,11 +206,11 @@ public class NextStepPane extends JPanel implements IState {
 	private ItemListener comboboxImageTypeListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			boolean isGridTileType = comboBoxTileType.getSelectedIndex() == 1 ? true : false;
-			if (e.getItem().toString().equals("PNG") || e.getItem().toString().equals("DXTZ") || e.getItem().toString().equals("PNG8") || e.getItem().toString().equals("GIF")) {
-				checkBoxBackgroundTransparency.setSelected(false && isGridTileType);
-				checkBoxBackgroundTransparency.setEnabled(true && isGridTileType);
-				if (e.getItem().toString().equals("PNG")) {
+            boolean isGridTileType = comboBoxTileType.getSelectedIndex() == 1;
+            if (e.getItem().toString().equals("PNG") || e.getItem().toString().equals("DXTZ") || e.getItem().toString().equals("PNG8") || e.getItem().toString().equals("GIF")) {
+                checkBoxBackgroundTransparency.setSelected(false);
+                checkBoxBackgroundTransparency.setEnabled(isGridTileType);
+                if (e.getItem().toString().equals("PNG")) {
 					mapCacheBuilder.setTileFormat(TileFormat.PNG);
 				} else if (e.getItem().toString().equals("DXTZ")) {
 					mapCacheBuilder.setTileFormat(TileFormat.DXTZ);
@@ -220,13 +220,13 @@ public class NextStepPane extends JPanel implements IState {
 					mapCacheBuilder.setTileFormat(TileFormat.GIF);
 				}
 			} else if (e.getItem().toString().equals("JPG")) {
-				checkBoxBackgroundTransparency.setSelected(false && isGridTileType);
-				checkBoxBackgroundTransparency.setEnabled(false && isGridTileType);
-				mapCacheBuilder.setTileFormat(TileFormat.JPG);
+                checkBoxBackgroundTransparency.setSelected(false);
+                checkBoxBackgroundTransparency.setEnabled(false);
+                mapCacheBuilder.setTileFormat(TileFormat.JPG);
 			} else if (e.getItem().toString().equals("JPG_PNG")) {
-				checkBoxBackgroundTransparency.setSelected(true && isGridTileType);
-				checkBoxBackgroundTransparency.setEnabled(false && isGridTileType);
-				mapCacheBuilder.setTileFormat(TileFormat.JPG_PNG);
+                checkBoxBackgroundTransparency.setSelected(isGridTileType);
+                checkBoxBackgroundTransparency.setEnabled(false);
+                mapCacheBuilder.setTileFormat(TileFormat.JPG_PNG);
 			}
 		}
 	};

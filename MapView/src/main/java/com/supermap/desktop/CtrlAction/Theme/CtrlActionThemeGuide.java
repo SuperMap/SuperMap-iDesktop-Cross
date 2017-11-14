@@ -52,8 +52,8 @@ public class CtrlActionThemeGuide extends CtrlAction {
 			Layer[] layers = formMap.getActiveLayers();
 			if (layers.length > 1 || layers.length == 0) {
 				enable = false;
-			} else if (layers.length == 1 && null != layers[0].getDataset()) {
-				// 当前活动的图层不能创建专题图
+            } else if (null != layers[0].getDataset()) {
+                // 当前活动的图层不能创建专题图
 				for (int i = 0; i < enableDatasetTypes.size(); i++) {
 					if (layers[0].getDataset().getType() == enableDatasetTypes.get(i)) {
 						enable = true;
