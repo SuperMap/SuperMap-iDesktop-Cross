@@ -654,8 +654,8 @@ public class FirstStepPane extends JPanel implements IState {
             } else {
                 this.labelMultiTenseVersion.setVisible(false);
                 this.comboBoxMultiTenseVersion.setVisible(false);
-                this.mapCacheBuilder.setStorageType(StorageType.MongoDB);
             }
+            this.mapCacheBuilder.setStorageType(StorageType.MongoDB);
             mongoDBConnectSate = isDBValidate();
         }
     }

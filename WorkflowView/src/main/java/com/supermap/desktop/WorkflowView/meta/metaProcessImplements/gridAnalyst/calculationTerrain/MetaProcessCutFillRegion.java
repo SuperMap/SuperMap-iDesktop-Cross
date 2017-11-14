@@ -68,8 +68,6 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
             datasetParameter.setSelectedItem(defaultDataset);
             comboBoxType.setEnabled(!defaultDataset.getType().equals(DatasetType.REGION));
             numberRadius.setEnabled(!defaultDataset.getType().equals(DatasetType.REGION));
-            Rectangle2D bounds = defaultDataset.getBounds();
-            numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
         }
         comboBoxType.setItems(new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferFlat"), false),
                 new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferRound"), true));
@@ -85,15 +83,6 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetVector) {
                     comboBoxType.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
                     numberRadius.setEnabled(!datasetParameter.getSelectedItem().getType().equals(DatasetType.REGION));
-                }
-            }
-        });
-        sourceDataset.addPropertyListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetGrid) {
-                    Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
-                    numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
                 }
             }
         });
