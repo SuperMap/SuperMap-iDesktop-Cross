@@ -18,6 +18,7 @@ public class _XMLTag {
 	public static final String g_NodeStatusbar = "statusbar";
 	public static final String g_NodeStatusbars = "statusbars";
 	public static final String g_NodeGroup = "group";
+	public static final String g_NodeFlowGroup = "flowGroup";
 	public static final String g_NodeFrameMenus = "frameMenus";
 	public static final String g_NodeFrameMenu = "frameMenu";
 	public static final String g_NodeContextMenu = "contextMenu";
@@ -62,6 +63,7 @@ public class _XMLTag {
 	public static final String g_ControlLabel = "label";
 	public static final String g_ControlSeparator = "separator";
 	public static final String g_ControlCheckbox = "checkBox";
+	public static final String USER_DEFINE_COMPONENT = "userDefine";
 
 	public static final String g_AttributionTitle = "title";
 	public static final String g_AttributionName = "name";

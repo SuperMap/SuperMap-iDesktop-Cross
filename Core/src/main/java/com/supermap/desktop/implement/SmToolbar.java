@@ -12,7 +12,7 @@ import com.supermap.desktop.ui.XMLComboBox;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.ui.XMLLabel;
 import com.supermap.desktop.ui.XMLSeparator;
-import com.supermap.desktop.ui.XMLTextbox;
+import com.supermap.desktop.ui.XMLTextField;
 import com.supermap.desktop.ui.XMLToolbar;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.CoreResources;
@@ -393,7 +393,7 @@ public class SmToolbar extends JToolBar implements IToolbar {
 						item = new SmButtonDropdown(null, xmlItem, this);
 					} else if (xmlItem instanceof XMLLabel) {
 						item = new SmLabel(null, xmlItem, this);
-					} else if (xmlItem instanceof XMLTextbox) {
+					} else if (xmlItem instanceof XMLTextField) {
 						item = new SmTextField(null, xmlItem, this);
 					} else if (xmlItem instanceof XMLComboBox) {
 						item = new SmComboBox(null, xmlItem, this);

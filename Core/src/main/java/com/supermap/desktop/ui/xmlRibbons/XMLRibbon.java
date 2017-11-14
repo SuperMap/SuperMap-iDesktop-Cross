@@ -94,6 +94,8 @@ public class XMLRibbon extends XMLCommand {
 		XMLCommand xmlCommand = null;
 		if (nodeName.equals(g_NodeGroup)) {
 			xmlCommand = new XMLRibbonBand(getPluginInfo(), this);
+		} else if (nodeName.equals(g_NodeFlowGroup)) {
+			xmlCommand = new XMLFlowBand(getPluginInfo(), this);
 		}
 		if (xmlCommand != null) {
 			xmlCommand.initialize(item);

@@ -5,7 +5,7 @@ import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.enums.XMLCommandType;
 import org.w3c.dom.Element;
 
-public class XMLTextbox extends XMLCommand {
+public class XMLTextField extends XMLCommand {
 
 	private XMLCommand parentTemp;
 
@@ -18,7 +18,7 @@ public class XMLTextbox extends XMLCommand {
 		this.parentTemp = parent;
 	}
 
-	public XMLTextbox(PluginInfo pluginInfo, XMLCommand parent) {
+	public XMLTextField(PluginInfo pluginInfo, XMLCommand parent) {
 		super(pluginInfo);
 		this.parentTemp = parent;
 		this.commandType = XMLCommandType.TEXTBOX;
@@ -43,9 +43,9 @@ public class XMLTextbox extends XMLCommand {
 
 	@Override
 	public XMLCommandBase clone(XMLCommandBase parent) {
-		XMLTextbox result = null;
+		XMLTextField result = null;
 		try {
-			result = (XMLTextbox) super.clone(parent);
+			result = (XMLTextField) super.clone(parent);
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
@@ -55,9 +55,9 @@ public class XMLTextbox extends XMLCommand {
 
 	@Override
 	public XMLCommandBase saveToPluginInfo(PluginInfo pluginInfo, XMLCommandBase parent) {
-		XMLTextbox result = null;
+		XMLTextField result = null;
 		try {
-			result = (XMLTextbox) super.saveToPluginInfo(pluginInfo, parent);
+			result = (XMLTextField) super.saveToPluginInfo(pluginInfo, parent);
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}

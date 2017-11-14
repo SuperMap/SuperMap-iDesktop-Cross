@@ -819,8 +819,7 @@ public class CoreRibbonResizePolicies {
 			super(controlPanel);
 		}
 
-		@Override
-		public int getPreferredWidth(int availableHeight, int gap) {
+		private int oldPreferredWidth(int availableHeight, int gap) {
 			int compCount = controlPanel.getFlowComponents().size();
 			int[] widths = new int[compCount];
 			int index = 0;
@@ -852,6 +851,27 @@ public class CoreRibbonResizePolicies {
 		}
 
 		@Override
+		public int getPreferredWidth(int availableHeight, int gap) {
+			int maxWidth = 0;
+			int tempWidth = 0;
+			List<JComponent> flowComponents = controlPanel.getFlowComponents();
+			for (JComponent flowComp : flowComponents) {
+				Dimension preferredSize = flowComp.getPreferredSize();
+				if ((flowComp instanceof AbstractCommandButton && ((AbstractCommandButton) flowComp).getDisplayState() == CommandButtonDisplayState.BIG )||
+						preferredSize.height << 1 > availableHeight) {
+					maxWidth = maxWidth + gap + preferredSize.width + tempWidth;
+				} else if (tempWidth == 0) {
+					tempWidth = preferredSize.width + gap;
+				} else {
+					maxWidth += Math.max(tempWidth, preferredSize.width + gap);
+					tempWidth = 0;
+				}
+			}
+			maxWidth += tempWidth;
+			return maxWidth;
+		}
+
+		@Override
 		public void install(int availableHeight, int gap) {
 		}
 	}
@@ -877,6 +897,7 @@ public class CoreRibbonResizePolicies {
 		public int getPreferredWidth(int availableHeight, int gap) {
 			int compCount = controlPanel.getFlowComponents().size();
 			int[] widths = new int[compCount];
+			int[] heights = new int[compCount];
 			int index = 0;
 			int currBestResult = 0;
 			for (JComponent flowComp : controlPanel.getFlowComponents()) {
@@ -921,24 +942,21 @@ public class CoreRibbonResizePolicies {
 	 * {@link FlowThreeRows} resize policy. The last entry is the
 	 * {@link IconRibbonBandResizePolicy}.
 	 *
-	 * @param ribbonBand    Ribbon band.
-	 * @param stepsToRepeat The number of times each one of the {@link FlowTwoRows} /
-	 *                      {@link FlowThreeRows} should appear consecutively in the
-	 *                      returned list.
+	 * @param ribbonBand Ribbon band.
 	 * @return The restrictive list of core ribbon band resize policies.
 	 */
 	public static List<RibbonBandResizePolicy> getCoreFlowPoliciesRestrictive(
-			JFlowRibbonBand ribbonBand, int stepsToRepeat) {
-		List<RibbonBandResizePolicy> result = new ArrayList<RibbonBandResizePolicy>();
-		for (int i = 0; i < stepsToRepeat; i++) {
+			JFlowRibbonBand ribbonBand, int rowCount) {
+		List<RibbonBandResizePolicy> result = new ArrayList<>();
+		if (rowCount == 2) {
+
 			result.add(new FlowTwoRows(ribbonBand.getControlPanel()));
-		}
-		for (int i = 0; i < stepsToRepeat; i++) {
+		} else if (rowCount == 3) {
+
 			result.add(new FlowThreeRows(ribbonBand.getControlPanel()));
 		}
-		result
-				.add(new IconRibbonBandResizePolicy(ribbonBand
-						.getControlPanel()));
+
+		result.add(new IconRibbonBandResizePolicy(ribbonBand.getControlPanel()));
 		return result;
 	}
 
