@@ -111,9 +111,9 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 datasetVectorParameter = (DatasetVector) datasetParameter.getSelectedDataset();
             }
             CutFillResult result;
-            String resultName = parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName());
+            String resultName = parameterSaveDataset.getDatasetName();
             recordset = datasetVectorParameter.getRecordset(false, CursorType.DYNAMIC);
-            while (!recordset.isEOF()) {
+            while (!recordset.isEOF() && !isSuccessful) {
                 if (datasetVectorParameter.getType().equals(DatasetType.REGION)) {
                     GeoRegion geometry = (GeoRegion) recordset.getGeometry();
                     double height = Double.parseDouble(numberHeight.getSelectedItem());
