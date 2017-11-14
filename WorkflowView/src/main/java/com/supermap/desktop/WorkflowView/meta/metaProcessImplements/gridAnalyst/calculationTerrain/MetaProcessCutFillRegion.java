@@ -68,8 +68,6 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
             datasetParameter.setSelectedItem(defaultDataset);
             comboBoxType.setEnabled(!defaultDataset.getType().equals(DatasetType.REGION));
             numberRadius.setEnabled(!defaultDataset.getType().equals(DatasetType.REGION));
-            Rectangle2D bounds = defaultDataset.getBounds();
-            numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
         }
         comboBoxType.setItems(new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferFlat"), false),
                 new ParameterDataNode(ControlsProperties.getString("String_CheckBox_BufferRound"), true));
@@ -88,15 +86,6 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 }
             }
         });
-        sourceDataset.addPropertyListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if (sourceDataset.getSelectedItem() != null && evt.getNewValue() instanceof DatasetGrid) {
-                    Rectangle2D bounds = sourceDataset.getSelectedItem().getBounds();
-                    numberRadius.setMaxValue(Math.round(bounds.getWidth() > bounds.getHeight() ? bounds.getHeight() : bounds.getWidth()) / 2);
-                }
-            }
-        });
     }
 
     @Override
@@ -111,9 +100,9 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
                 datasetVectorParameter = (DatasetVector) datasetParameter.getSelectedDataset();
             }
             CutFillResult result;
-            String resultName = parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName());
+            String resultName = parameterSaveDataset.getDatasetName();
             recordset = datasetVectorParameter.getRecordset(false, CursorType.DYNAMIC);
-            while (!recordset.isEOF()) {
+            while (!recordset.isEOF() && !isSuccessful) {
                 if (datasetVectorParameter.getType().equals(DatasetType.REGION)) {
                     GeoRegion geometry = (GeoRegion) recordset.getGeometry();
                     double height = Double.parseDouble(numberHeight.getSelectedItem());

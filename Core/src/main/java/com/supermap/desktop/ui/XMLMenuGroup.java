@@ -170,7 +170,7 @@ public class XMLMenuGroup extends XMLCommand {
 		} else if (xmlNodeCommand.getNodeName().equalsIgnoreCase(g_ControlLabel)) {
 			xmlCommand = new XMLLabel(this.getPluginInfo(), this);
 		} else if (xmlNodeCommand.getNodeName().equalsIgnoreCase(g_ControlEditBox)) {
-			xmlCommand = new XMLTextbox(this.getPluginInfo(), this);
+			xmlCommand = new XMLTextField(this.getPluginInfo(), this);
 		} else if (xmlNodeCommand.getNodeName().equalsIgnoreCase(g_ControlComboBox)) {
 			xmlCommand = new XMLComboBox(this.getPluginInfo(), this);
 		} else if (xmlNodeCommand.getNodeName().equalsIgnoreCase(g_ControlSeparator)) {

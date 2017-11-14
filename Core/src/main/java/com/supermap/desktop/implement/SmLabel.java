@@ -11,6 +11,7 @@ import java.awt.*;
 public class SmLabel extends JLabel implements IBaseItem {
 	private static final long serialVersionUID = 1L;
 	private transient IForm formClass = null;
+	private boolean isIgnoreEvent;
 
 	public IForm getFormClass() {
 		return formClass;
@@ -87,6 +88,16 @@ public class SmLabel extends JLabel implements IBaseItem {
 	@Override
 	public String getText() {
 		return super.getText();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 
 	@Override

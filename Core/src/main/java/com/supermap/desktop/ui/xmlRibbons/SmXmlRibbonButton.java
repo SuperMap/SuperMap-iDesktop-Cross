@@ -22,11 +22,12 @@ import java.util.List;
 
 public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 
-	private XmlRibbonButton xmlRibbonButton;
+	private XMLRibbonButton xmlRibbonButton;
 	private ICtrlAction ctrlAction = null;
 	private JCommandPopupMenu menu;
+	private boolean isIgnoreEvent;
 
-	public SmXmlRibbonButton(XmlRibbonButton ribbonButton) {
+	public SmXmlRibbonButton(XMLRibbonButton ribbonButton) {
 		super(ribbonButton.getLabel());
 		this.xmlRibbonButton = ribbonButton;
 		initCommandButton();
@@ -107,7 +108,15 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 		ribbonBand.addCommandButton(this, getRibbonElementPriority());
 	}
 
-	protected RibbonElementPriority getRibbonElementPriority() {
+	public RibbonElementPriority getRibbonElementPriority() {
+		String style = xmlRibbonButton.getStyle();
+		if (style.equalsIgnoreCase("BIG")) {
+			return RibbonElementPriority.TOP;
+		} else if (style.equalsIgnoreCase("MEDIUM")) {
+			return RibbonElementPriority.MEDIUM;
+		} else if (style.equalsIgnoreCase("SMALL")) {
+			return RibbonElementPriority.LOW;
+		}
 		return RibbonElementPriority.TOP;
 	}
 
@@ -144,5 +153,15 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

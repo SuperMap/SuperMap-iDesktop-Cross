@@ -20,6 +20,7 @@ public class SmPopupMenu extends JPopupMenu implements IPopupMenu {
 	private boolean buildFinished = false;
 	private transient XMLMenu xmlMenu;
 	private boolean smVisible;
+	private boolean isIgnoreEvent;
 
 	public SmPopupMenu() {
 		// do nothing
@@ -59,6 +60,16 @@ public class SmPopupMenu extends JPopupMenu implements IPopupMenu {
 
 	public String getText() {
 		return super.getLabel();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 
 	public void setText(String text) {

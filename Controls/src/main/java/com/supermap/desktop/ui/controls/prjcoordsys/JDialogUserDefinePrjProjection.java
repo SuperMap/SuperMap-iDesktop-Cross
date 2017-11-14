@@ -402,9 +402,9 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		labelParameterFormat.setText(ControlsProperties.getString("String_ParameterFormat"));
 		radioButtonAngle.setText(ControlsProperties.getString("String_angle"));
 		radioButtonAMS.setText(ControlsProperties.getString("String_DMSFormat"));
-		labelCentralMeridian.setText(ControlsProperties.getString("String_CentralMeridian"));
+		labelCentralMeridian.setText(ControlsProperties.getString("String_Label_CentralMeridian"));
 		labelFalseEasting.setText(ControlsProperties.getString("String_FalseEasting"));
-		labelCentralParallel.setText(ControlsProperties.getString("String_CentralParallel"));
+		labelCentralParallel.setText(ControlsProperties.getString("String_Label_CentralParallel"));
 		labelFalseNorthing.setText(ControlsProperties.getString("String_FalseNorthing"));
 
 		labelScaleFactor.setText(ControlsProperties.getString("String_ScaleFactor"));

@@ -43,4 +43,11 @@ public interface IBaseItem {
 	void setCtrlAction(ICtrlAction ctrlAction);
 
 	String getText();
+
+	/**
+	 * 改变状态又不想触发事件时使用
+	 */
+	boolean isIgnoreEvent();
+
+	void setIgnoreEvent(boolean isIgnoreEvent);
 }

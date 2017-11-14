@@ -227,8 +227,8 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 				result = new XMLButton(this.getPluginInfo(), (XMLCommand) parent);
 			} else if (this instanceof XMLLabel) {
 				result = new XMLLabel(this.getPluginInfo(), (XMLCommand) parent);
-			} else if (this instanceof XMLTextbox) {
-				result = new XMLTextbox(this.getPluginInfo(), (XMLCommand) parent);
+			} else if (this instanceof XMLTextField) {
+				result = new XMLTextField(this.getPluginInfo(), (XMLCommand) parent);
 			} else if (this instanceof XMLComboBox) {
 				result = new XMLComboBox(this.getPluginInfo(), (XMLCommand) parent);
 			} else if (this instanceof XMLSeparator) {

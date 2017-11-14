@@ -24,6 +24,7 @@ public class SmMenu extends JMenu implements IMenu {
 	private static final long serialVersionUID = 1L;
 	private boolean buildFinished = false;
 	private transient XMLMenu xmlMenu;
+	private boolean isIgnoreEvent;
 
 	public SmMenu(XMLMenu xmlMenu) {
 		if (xmlMenu != null) {
@@ -71,6 +72,16 @@ public class SmMenu extends JMenu implements IMenu {
 	@Override
 	public String getText() {
 		return super.getText();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 
 	@Override

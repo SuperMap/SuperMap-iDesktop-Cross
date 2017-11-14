@@ -85,7 +85,7 @@ public abstract class MetaProcessCalTerrain extends MetaProcess {
 		}
 		try {
 			// 运行之前，确保结果数据集名称正确-yuanR2017.9.7
-			this.parameterSaveDataset.setSelectedItem(datasetGrid.getDatasource().getDatasets().getAvailableDatasetName(this.parameterSaveDataset.getDatasetName()));
+			this.parameterSaveDataset.setSelectedItem(parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(this.parameterSaveDataset.getDatasetName()));
 			isSuccessful = doWork(datasetGrid);
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e.getMessage());

@@ -90,4 +90,14 @@ public class SmSeparator extends JSeparator implements IBaseItem {
 	public String getText() {
 		return xmlCommand.getLabel();
 	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return false;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+
+	}
 }
