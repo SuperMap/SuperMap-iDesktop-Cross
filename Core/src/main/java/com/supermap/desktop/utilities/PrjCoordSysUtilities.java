@@ -39,7 +39,8 @@ public class PrjCoordSysUtilities {
 						// 增加EPSG code-yuanR2017.9.25
 						CoreProperties.getString("String_EPSG_Code"),
 						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
-						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"), CoreProperties.getString("String_GeoSpheroid_Axis"),
+						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"),
+						CoreProperties.getString("String_GeoSpheroid_Axis"),
 						CoreProperties.getString("String_GeoSpheroid_Flatten")};
 				ArrayList<String> infoLabels = new ArrayList<String>();
 				if (prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
@@ -48,12 +49,17 @@ public class PrjCoordSysUtilities {
 					}
 				} else {
 					String[] prjInfo = new String[]{CoreProperties.getString("String_Projection_ProjectionType"),
-							CoreProperties.getString("String_PrjParameter_CenterMeridian"), CoreProperties.getString("String_PrjParameter_CentralParallel"),
+							CoreProperties.getString("String_PrjParameter_CenterMeridian"),
+							CoreProperties.getString("String_PrjParameter_CentralParallel"),
 							CoreProperties.getString("String_PrjParameter_StandardParallel1"),
-							CoreProperties.getString("String_PrjParameter_StandardParallel2"), CoreProperties.getString("String_PrjParameter_FalseEasting"),
-							CoreProperties.getString("String_PrjParameter_FalseNorthing"), CoreProperties.getString("String_PrjParameter_ScaleFactor"),
-							CoreProperties.getString("String_PrjParameter_Azimuth"), CoreProperties.getString("String_PrjParameter_FirstPointLongitude"),
-							CoreProperties.getString("String_PrjParameter_SecondPointLongitude"), CoreProperties.getString("String_GeoCoordSys_Name")};
+							CoreProperties.getString("String_PrjParameter_StandardParallel2"),
+							CoreProperties.getString("String_PrjParameter_FalseEasting"),
+							CoreProperties.getString("String_PrjParameter_FalseNorthing"),
+							CoreProperties.getString("String_PrjParameter_ScaleFactor"),
+							CoreProperties.getString("String_PrjParameter_Azimuth"),
+							CoreProperties.getString("String_PrjParameter_FirstPointLongitude"),
+							CoreProperties.getString("String_PrjParameter_SecondPointLongitude"),
+							CoreProperties.getString("String_GeoCoordSys_Name")};
 
 					for (String string : prjInfo) {
 						infoLabels.add(string);
