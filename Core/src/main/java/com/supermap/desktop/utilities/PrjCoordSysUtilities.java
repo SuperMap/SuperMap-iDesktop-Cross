@@ -94,7 +94,7 @@ public class PrjCoordSysUtilities {
 					// @formatter:on
 					text += String.format("%-10s\t", info);
 					if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
-						text += Integer.toString(prj.getEPSGCode());
+						text += Integer.toString(prj.toEPSGCode());
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"))) {
