@@ -1,7 +1,13 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.*;
+import com.supermap.data.GeoCoordSys;
+import com.supermap.data.GeoCoordSysType;
+import com.supermap.data.PrjCoordSys;
+import com.supermap.data.PrjCoordSysType;
+import com.supermap.data.PrjFileType;
+import com.supermap.data.PrjFileVersion;
+import com.supermap.data.Unit;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
@@ -17,7 +23,11 @@ import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.Abs
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.CoordSysDefine;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.PrjCoordSysTableModel;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels.DefaultCoordsysTreeCellRenderer;
-import com.supermap.desktop.utilities.*;
+import com.supermap.desktop.utilities.CoreResources;
+import com.supermap.desktop.utilities.FileUtilities;
+import com.supermap.desktop.utilities.PathUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
+import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -25,10 +35,25 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.*;
-import javax.swing.tree.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.InputStream;
 import java.text.MessageFormat;
@@ -224,7 +249,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				String moduleName = "ExportPrjFile";
 				if (!SmFileChoose.isModuleExist(moduleName)) {
 					// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
-					String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "NOEXIST");
+					String fileFilters = SmFileChoose.createFileFilter("", "NOEXIST");
 					SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
 							ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
 				}
@@ -334,10 +359,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			setSize(new Dimension(1100, 600));
 			setLocationRelativeTo(null);
 			selectRootNode();
-			this.componentList.add(buttonApply);
-			this.componentList.add(buttonClose);
-			this.setFocusTraversalPolicy(policy);
-			this.getRootPane().setDefaultButton(buttonClose);
+//			this.componentList.add(buttonApply);
+//			this.componentList.add(buttonClose);
+//			this.setFocusTraversalPolicy(policy);
+//			this.getRootPane().setDefaultButton(buttonClose);
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
@@ -392,9 +417,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void treeMouseRightClicked(MouseEvent e) {
 		this.treePrjCoordSys.setSelectionPath(null);
-		TreePath path = this.treePrjCoordSys.getPathForLocation(e.getX(), e.getY());
+		// 确保当点击tree之前的展开按钮时也可以获得选中的位置
+		TreePath path = this.treePrjCoordSys.getPathForLocation(e.getX() + 20, e.getY());
 		this.treePrjCoordSys.setSelectionPath(path);
-
 		if (currentDefine != null) {
 			getPopupmenu().show(treePrjCoordSys, e.getX(), e.getY());
 		}
@@ -408,7 +433,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 */
 	private void treeMouseLeftClicked(MouseEvent e) {
 		this.treePrjCoordSys.setSelectionPath(null);
-		TreePath path = this.treePrjCoordSys.getPathForLocation(e.getX(), e.getY());
+		// 确保当点击tree之前的展开按钮时也可以获得选中的位置
+		TreePath path = this.treePrjCoordSys.getPathForLocation(e.getX() + 20, e.getY());
 		this.treePrjCoordSys.setSelectionPath(path);
 	}
 
