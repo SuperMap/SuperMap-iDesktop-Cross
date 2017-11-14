@@ -14,6 +14,7 @@ public class SmCommandMenuButton extends JCommandMenuButton implements IBaseItem
 
 	private XmlRibbonCommandMenuButton xmlCommand;
 	private ICtrlAction ctrlAction;
+	private boolean isIgnoreEvent;
 
 	public SmCommandMenuButton(XmlRibbonCommandMenuButton xmlCommand) {
 		super(xmlCommand.getLabel(), null);
@@ -93,5 +94,15 @@ public class SmCommandMenuButton extends JCommandMenuButton implements IBaseItem
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

@@ -16,6 +16,7 @@ public class SmXMlGalleryButton extends JCommandToggleButton implements IBaseIte
 
 	private XMLRibbonGalleryButton button;
 	private ICtrlAction ctrlAction = null;
+	private boolean isIgnoreEvent;
 
 	public SmXMlGalleryButton(XMLRibbonGalleryButton button) {
 		super(button.getLabel());
@@ -97,5 +98,15 @@ public class SmXMlGalleryButton extends JCommandToggleButton implements IBaseIte
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

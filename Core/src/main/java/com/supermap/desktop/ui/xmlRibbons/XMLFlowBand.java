@@ -100,8 +100,8 @@ public class XMLFlowBand extends XMLCommand {
 
 	@Override
 	public void merge(XMLCommand otherCommand) {
-		if (otherCommand instanceof XMLRibbonBand) {
-			XMLRibbonBand otherCommandBand = (XMLRibbonBand) otherCommand;
+		if (otherCommand instanceof XMLFlowBand) {
+			XMLFlowBand otherCommandBand = (XMLFlowBand) otherCommand;
 			for (int i = 0; i < otherCommandBand.getLength(); i++) {
 				XMLCommand mergeCommand = otherCommandBand.getCommandAtIndex(i);
 				boolean isContain = false;
@@ -136,7 +136,7 @@ public class XMLFlowBand extends XMLCommand {
 	protected XMLCommandBase createNew(XMLCommandBase parent) {
 		XMLFlowBand xmlFlowBand = new XMLFlowBand(getPluginInfo(), parent);
 		xmlFlowBand.commands = commands;
-
+		xmlFlowBand.rowCount = rowCount;
 		return xmlFlowBand;
 	}
 
