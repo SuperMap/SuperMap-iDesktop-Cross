@@ -48,6 +48,9 @@ import static com.supermap.desktop.ui.controls.prjcoordsys.XMLProjectionTag.GEOC
  * @author highsad
  * 优化：支持树节点的定制-yuanR2017.10.18
  * 功能丰富：依照.net，对投影设置面板进行重构-yuanR2017.10.24
+ *
+ *尝试修改投影的管理方式，依照。net的实现方式。通过文件夹的形式管理“自定义”和“收藏夹”节点中的内容
+ * “自定义”和“收藏夹”节点反映文件夹中的内容
  */
 // @formatter:on
 public class JDialogPrjCoordSysSettings extends SmDialog {
@@ -1177,11 +1180,17 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private void search(String pattern) {
 		SearchResultModel searchModel = new SearchResultModel();
 		// 如果当前选中的投影不为空，就搜索当前选中的投影，否则就搜索所有
-		searchDefine(pattern, this.noneEarth, searchModel);
-		searchDefine(pattern, this.geographyCoordinate, searchModel);
-		searchDefine(pattern, this.projectionSystem, searchModel);
-		searchDefine(pattern, this.customCoordinate, searchModel);
-		searchDefine(pattern, this.favoriteCoordinate, searchModel);
+		if (this.currentDefine != null) {
+			searchDefine(pattern, this.currentDefine, searchModel);
+		}
+		if (searchModel.getRowCount() <= 0) {
+			searchDefine(pattern, this.noneEarth, searchModel);
+			searchDefine(pattern, this.geographyCoordinate, searchModel);
+			searchDefine(pattern, this.projectionSystem, searchModel);
+			searchDefine(pattern, this.customCoordinate, searchModel);
+			searchDefine(pattern, this.favoriteCoordinate, searchModel);
+		}
+
 		this.tablePrjCoordSys.setModel(searchModel);
 	}
 
@@ -1370,7 +1379,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 							DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) ((DefaultMutableTreeNode) root).getChildAt(i);
 							if (treeNode.getUserObject().equals(this.favoriteCoordinate)) {
 								JTreeUIUtilities.locateNode(this.treePrjCoordSys, treeNode);
-
 								break;
 							}
 						}
