@@ -54,7 +54,7 @@ public class XMLRibbonBand extends XMLCommand {
 		String nodeName = item.getNodeName();
 		XMLCommand command = null;
 		if (nodeName.equals(g_ControlButton)) {
-			command = new XmlRibbonButton(getPluginInfo(), this);
+			command = new XMLRibbonButton(getPluginInfo(), this);
 		} else if (nodeName.equals(g_Gallery)) {
 			command = new XMLGallery(getPluginInfo(), this);
 		}

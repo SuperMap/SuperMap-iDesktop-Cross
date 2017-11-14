@@ -20,7 +20,7 @@ public class XMLCommandFactory {
 				} else if (element.getNodeName().equalsIgnoreCase(_XMLTag.g_ControlLabel)) {
 					command = new XMLLabel(pluginInfo, parent);
 				} else if (element.getNodeName().equalsIgnoreCase(_XMLTag.g_ControlEditBox)) {
-					command = new XMLTextbox(pluginInfo, parent);
+					command = new XMLTextField(pluginInfo, parent);
 				} else if (element.getNodeName().equalsIgnoreCase(_XMLTag.g_ControlComboBox)) {
 					command = new XMLComboBox(pluginInfo, parent);
 				} else if (element.getNodeName().equalsIgnoreCase(_XMLTag.g_ControlSeparator)) {

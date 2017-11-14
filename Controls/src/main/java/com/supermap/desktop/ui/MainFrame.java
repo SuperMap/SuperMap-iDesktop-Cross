@@ -2,11 +2,14 @@ package com.supermap.desktop.ui;
 
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.controls.utilities.SystemUIUtilities;
+import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.utilities.PathUtilities;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +50,12 @@ public class MainFrame extends FormBase implements WindowListener {
 		this.setIconImages(images);
 		this.addWindowListener(this);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.getRibbon().addPropertyChangeListener("selectedTask", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				ToolbarUIUtilities.updataToolbarsState();
+			}
+		});
 //		SwingUtilities.invokeLater(new Runnable() {
 //			@Override
 //			public void run() {

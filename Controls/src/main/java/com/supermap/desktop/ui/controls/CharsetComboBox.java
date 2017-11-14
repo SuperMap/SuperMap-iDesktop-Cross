@@ -27,7 +27,6 @@ public class CharsetComboBox extends JComboBox<Object> {
                 CharsetProperties.getString(CharsetProperties.UNICODE),
                 CharsetProperties.getString(CharsetProperties.UTF7),
                 CharsetProperties.getString(CharsetProperties.UTF8),
-                CharsetProperties.getString(CharsetProperties.UTF32),
                 CharsetProperties.getString(CharsetProperties.WINDOWS1252),
                 CharsetProperties.getString(CharsetProperties.ARABIC),
                 CharsetProperties.getString(CharsetProperties.BALTIC),

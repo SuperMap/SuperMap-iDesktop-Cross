@@ -13,12 +13,13 @@ import java.util.ArrayList;
 /**
  * @author XiaJT
  */
-public class XmlRibbonButton extends XMLCommand {
+public class XMLRibbonButton extends XMLCommand {
 
 	private ArrayList<XMLCommand> menuItems = new ArrayList<>();
 	private ArrayList<XmlRibbonGallery> galleries = new ArrayList<>();
+	private String style;
 
-	public XmlRibbonButton(PluginInfo pluginInfo, XMLCommandBase parent) {
+	public XMLRibbonButton(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo, parent);
 		canMerge = true;
 	}
@@ -27,6 +28,12 @@ public class XmlRibbonButton extends XMLCommand {
 	public boolean initialize(Element xmlNodeCommand) {
 		super.initialize(xmlNodeCommand);
 		NodeList childNodes = xmlNodeCommand.getChildNodes();
+		try {
+			this.style = xmlNodeCommand.getAttribute("style");
+		} catch (Exception e) {
+			// ignore
+		}
+
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node item = childNodes.item(i);
 			if (item.getNodeType() == Node.ELEMENT_NODE) {
@@ -94,8 +101,8 @@ public class XmlRibbonButton extends XMLCommand {
 
 	@Override
 	public void merge(XMLCommand otherCommand) {
-		if (otherCommand instanceof XmlRibbonButton) {
-			XmlRibbonButton otherRibbonButton = (XmlRibbonButton) otherCommand;
+		if (otherCommand instanceof XMLRibbonButton) {
+			XMLRibbonButton otherRibbonButton = (XMLRibbonButton) otherCommand;
 			if (otherCommand.getCtrlActionClass() != null) {
 				this.setCtrlActionClass(otherCommand.getCtrlActionClass());
 				this.setPluginInfo(otherCommand.getPluginInfo());
@@ -105,6 +112,8 @@ public class XmlRibbonButton extends XMLCommand {
 			}
 			if (StringUtilities.isNullOrEmpty(this.getTooltip())) {
 				this.setTooltip(otherCommand.getTooltip());
+			}if (StringUtilities.isNullOrEmpty(this.style)) {
+				this.style = ((XMLRibbonButton) otherCommand).style;
 			}
 			if (StringUtilities.isNullOrEmpty(this.getDescription())) {
 				this.setDescription(otherCommand.getDescription());
@@ -128,9 +137,14 @@ public class XmlRibbonButton extends XMLCommand {
 
 	@Override
 	protected XMLCommandBase createNew(XMLCommandBase parent) {
-		XmlRibbonButton xmlRibbonButton = new XmlRibbonButton(getPluginInfo(), getParent());
+		XMLRibbonButton xmlRibbonButton = new XMLRibbonButton(getPluginInfo(), getParent());
 		xmlRibbonButton.menuItems = menuItems;
 		xmlRibbonButton.galleries = galleries;
+		xmlRibbonButton.style = style;
 		return xmlRibbonButton;
+	}
+
+	public String getStyle() {
+		return style;
 	}
 }

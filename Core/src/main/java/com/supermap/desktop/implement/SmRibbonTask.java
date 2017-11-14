@@ -1,10 +1,24 @@
 package com.supermap.desktop.implement;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.ui.IUserDefineComponent;
 import com.supermap.desktop.ui.XMLCommand;
-import com.supermap.desktop.ui.xmlRibbons.*;
+import com.supermap.desktop.ui.xmlRibbons.SmXMLFlowBand;
+import com.supermap.desktop.ui.xmlRibbons.SmXMLGallery;
+import com.supermap.desktop.ui.xmlRibbons.SmXMLRibbonBand;
+import com.supermap.desktop.ui.xmlRibbons.SmXmlRibbonButton;
+import com.supermap.desktop.ui.xmlRibbons.XMLFlowBand;
+import com.supermap.desktop.ui.xmlRibbons.XMLGallery;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbon;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbonBand;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbonButton;
+import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
+import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
+import org.pushingpixels.flamingo.api.ribbon.RibbonElementPriority;
 import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
+
+import javax.swing.*;
 
 /**
  * @author XiaJT
@@ -30,23 +44,62 @@ public class SmRibbonTask extends RibbonTask {
 
 	private void load() {
 		for (int i = 0; i < xmlRibbon.getLength(); i++) {
-			XMLRibbonBand group = ((XMLRibbonBand) this.xmlRibbon.getCommandAtIndex(i));
+			XMLCommand group = this.xmlRibbon.getCommandAtIndex(i);
 			if (SystemPropertyUtilities.isSupportPlatform(group.getPlatform())) {
-				loadMenuGroup(group, this);
+				if (group instanceof XMLRibbonBand) {
+					loadBandGroup(((XMLRibbonBand) group), this);
+				} else if (group instanceof XMLFlowBand) {
+					loadBandGroup(((XMLFlowBand) group), this);
+				}
 			}
 		}
 	}
 
-	private void loadMenuGroup(XMLRibbonBand group, SmRibbonTask parent) {
+	private void loadBandGroup(XMLFlowBand group, SmRibbonTask parent) {
+		if (group.getVisible() && group.getLength() > 0) {
+			SmXMLFlowBand smXMLFlowBand = new SmXMLFlowBand(group);
+			int count = 0;
+			for (int i = 0; i < group.getLength(); i++) {
+				XMLCommand commandAtIndex = group.getCommandAtIndex(i);
+				if (commandAtIndex instanceof XMLRibbonButton) {
+					SmXmlRibbonButton button = new SmXmlRibbonButton(((XMLRibbonButton) commandAtIndex));
+					if (!StringUtilities.isNullOrEmpty(((XMLRibbonButton) commandAtIndex).getStyle())) {
+						if (button.getRibbonElementPriority() == RibbonElementPriority.TOP) {
+							button.setDisplayState(CommandButtonDisplayState.BIG);
+						} else if (button.getRibbonElementPriority() == RibbonElementPriority.MEDIUM) {
+							button.setDisplayState(CommandButtonDisplayState.MEDIUM);
+						} else if (button.getRibbonElementPriority() == RibbonElementPriority.LOW) {
+							button.setDisplayState(CommandButtonDisplayState.SMALL);
+						}
+					} else {
+						button.setDisplayState(CommandButtonDisplayState.MEDIUM);
+					}
+					smXMLFlowBand.addFlowComponent(button);
+					count++;
+				} else if (!(commandAtIndex instanceof IUserDefineComponent)) {
+					smXMLFlowBand.addFlowComponent((JComponent) SmComponentFactory.create(commandAtIndex, smXMLFlowBand));
+					count++;
+				} else {
+					smXMLFlowBand.addFlowComponent(((IUserDefineComponent) commandAtIndex).getComponent(smXMLFlowBand));
+					count++;
+				}
+			}
+			if (count > 0) {
+				parent.addBands(smXMLFlowBand);
+			}
+		}
+	}
+
+	private void loadBandGroup(XMLRibbonBand group, SmRibbonTask parent) {
 		try {
 			if (group.getVisible() && group.getLength() > 0 && !"RecentFile".equals(group.getID())) {
 				SmXMLRibbonBand smXMLRibbonBand = new SmXMLRibbonBand(group);
 				int count = 0;
 				for (int i = 0; i < group.getLength(); i++) {
 					XMLCommand commandAtIndex = group.getCommandAtIndex(i);
-					if (commandAtIndex instanceof XmlRibbonButton) {
+					if (commandAtIndex instanceof XMLRibbonButton) {
 						count++;
-						SmXmlRibbonButton commandButton = new SmXmlRibbonButton((XmlRibbonButton) commandAtIndex);
+						SmXmlRibbonButton commandButton = new SmXmlRibbonButton((XMLRibbonButton) commandAtIndex);
 						commandButton.putInBand(smXMLRibbonBand);
 					} else if (commandAtIndex instanceof XMLGallery) {
 						count++;
@@ -57,26 +110,6 @@ public class SmRibbonTask extends RibbonTask {
 				if (count > 0) {
 					parent.addBands(smXMLRibbonBand);
 				}
-
-
-//					ArrayList<JCommandToggleButton> jCommandToggleButtons = new ArrayList<>();
-//					for (XMLCommand xmlCommand : xmlCommandsList) {
-//						Image image = XmlCommandUtilities.getXmlCommandImage(xmlCommand);
-//						ImageWrapperResizableIcon icon = image == null ? null : ImageWrapperResizableIcon.getIcon(image, new Dimension(23, 23));
-//						jCommandToggleButtons.add(new JCommandToggleButton(xmlCommand.getLabel(), icon));
-//					}
-//					Map<RibbonElementPriority, Integer> prefers = new HashMap<>();
-//					prefers.put(RibbonElementPriority.LOW, 2);
-//					prefers.put(RibbonElementPriority.MEDIUM, 3);
-//					prefers.put(RibbonElementPriority.TOP, 3);
-//					StringValuePair<List<JCommandToggleButton>> listStringValuePair = new StringValuePair<List<JCommandToggleButton>>(group.getLabel() + "1", jCommandToggleButtons);
-//					List<StringValuePair<List<JCommandToggleButton>>> svps = new ArrayList<>();
-//					svps.add(listStringValuePair);
-//					String label = group.getLabel();
-//					jRibbonBand.addRibbonGallery(label, svps, prefers, 5, 3, RibbonElementPriority.TOP);
-
-
-
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
