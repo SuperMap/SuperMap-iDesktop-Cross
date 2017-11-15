@@ -216,7 +216,7 @@ public class JDialogDatasetPrjTranslator extends SmDialog {
 		this.labelDataset.setText(ControlsProperties.getString("String_Label_Dataset"));
 		this.panelSourceData.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SourceDataset")));
 		this.panelReferSysTransSettings.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_CoordSysTranslatorSetting")));
-		this.panelTargetCoordSys.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_TarCoorSys")));
+		this.panelTargetCoordSys.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_TarCoorSys")));
 	}
 
 	private void initializeLayout() {

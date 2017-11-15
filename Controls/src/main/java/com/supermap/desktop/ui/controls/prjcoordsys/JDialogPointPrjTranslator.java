@@ -153,7 +153,7 @@ public class JDialogPointPrjTranslator extends SmDialog {
 		this.panelPointCoordSysTranslatorSource.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SrcPoint")));
 		this.panelPointCoordSysTranslatorResult.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_TarPoint")));
 		this.panelTargetCoordSysSource.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SrcCoordSys")));
-		this.panelTargetCoordSysResult.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_TarCoorSys")));
+		this.panelTargetCoordSysResult.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_TarCoorSys")));
 		this.panelReferSysTransSettings.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_CoordSysTranslatorSetting")));
 		this.panelButton.getButtonOk().setText(ControlsProperties.getString("String_Button_Conversion"));
 	}

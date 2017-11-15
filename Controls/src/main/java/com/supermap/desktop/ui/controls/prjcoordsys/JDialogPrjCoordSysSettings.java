@@ -1442,17 +1442,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCaption(getSingletonName(currentDefine.getCaption(), hasNames));
 				if (this.favoriteCoordinate.add(result)) {
 					exportCoordsys(result, this.favoriteProjectionConfigPath);
-					// tree节点指向收藏夹,table高亮显示
-					Object root = this.treePrjCoordSys.getModel().getRoot();
-					if (root != null && root instanceof DefaultMutableTreeNode) {
-						for (int i = 0; i < ((DefaultMutableTreeNode) root).getChildCount(); i++) {
-							DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) ((DefaultMutableTreeNode) root).getChildAt(i);
-							if (treeNode.getUserObject().equals(this.favoriteCoordinate)) {
-								JTreeUIUtilities.locateNode(this.treePrjCoordSys, treeNode);
-								break;
-							}
-						}
-					}
+					addToTree(result, this.favoriteCoordinate.getCaption(), this.favoriteCoordinate, this.favoriteCoordinate.getCaption());
 				}
 
 			} else if (this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
@@ -1470,17 +1460,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCaption(getSingletonName(currentDefine.getCaption(), hasNames));
 				if (this.favoriteCoordinate.add(result)) {
 					exportCoordsys(result, this.favoriteProjectionConfigPath);
-					// tree节点指向收藏夹
-					Object root = this.treePrjCoordSys.getModel().getRoot();
-					if (root != null && root instanceof DefaultMutableTreeNode) {
-						for (int i = 0; i < ((DefaultMutableTreeNode) root).getChildCount(); i++) {
-							DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) ((DefaultMutableTreeNode) root).getChildAt(i);
-							if (treeNode.getUserObject().equals(this.favoriteCoordinate)) {
-								JTreeUIUtilities.locateNode(this.treePrjCoordSys, treeNode);
-								break;
-							}
-						}
-					}
+					addToTree(result, this.favoriteCoordinate.getCaption(), this.favoriteCoordinate, this.favoriteCoordinate.getCaption());
 				}
 			}
 		}
@@ -1898,22 +1878,27 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			DefaultMutableTreeNode parentNode = null;
 			for (int i = 0; i < ((DefaultMutableTreeNode) root).getChildCount(); i++) {
 				DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) ((DefaultMutableTreeNode) root).getChildAt(i);
-
 				if (((CoordSysDefine) treeNode.getUserObject()).getCaption().equals(grantParentName)) {
 					grandParentNode = treeNode;
-					for (int j = 0; j < treeNode.getChildCount(); j++) {
-						DefaultMutableTreeNode node = (DefaultMutableTreeNode) treeNode.getChildAt(j);
-						if (node != null && ((CoordSysDefine) node.getUserObject()).getCaption().equals(parentName)) {
-							parentNode = node;
-							break;
+					// 当父节点和爷爷节点相同时，即表示没有爷爷节点
+					if (parentName.equals(grantParentName)) {
+						parentNode = grandParentNode;
+					} else {
+						for (int j = 0; j < treeNode.getChildCount(); j++) {
+							DefaultMutableTreeNode node = (DefaultMutableTreeNode) treeNode.getChildAt(j);
+							if (node != null && ((CoordSysDefine) node.getUserObject()).getCaption().equals(parentName)) {
+								parentNode = node;
+								break;
+							}
 						}
 					}
 				}
 			}
-			if (parentNode == null) {
+			if (parentNode == null && !parentName.equals(grantParentName)) {
 				parentNode = createNode(parentValue);
 				((DefaultTreeModel) treePrjCoordSys.getModel()).insertNodeInto(parentNode, grandParentNode, grandParentNode.getChildCount());
 			}
+			treePrjCoordSys.setSelectionPath(null);
 			JTreeUIUtilities.locateNode(treePrjCoordSys, parentNode);
 			//tree已定位到选中数据的父节点上，再定位table
 			AbstractPrjTableModel model = (AbstractPrjTableModel) this.tablePrjCoordSys.getModel();
@@ -2026,24 +2011,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		}
 	}
 
+
 	/**
-	 * 外部去除节点，定制
-	 * 未完成
-	 * yuanR2017.10.18
-	 *
-	 * @param num
+	 * 移除平面坐标系文件节点
 	 */
-	public void removeRoot(int[] num) {
-		for (int aNum : num) {
-			switch (aNum) {
-				case CoordSysDefine.NONE_ERRTH:
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) getNodeByDefine((DefaultMutableTreeNode) this.treePrjCoordSys.getModel().getRoot(), currentDefine.getParent());
-					// HOW TO DO 隐藏节点？
-				case CoordSysDefine.PROJECTION_SYSTEM:
-
-				case CoordSysDefine.GEOGRAPHY_COORDINATE:
-
-			}
-		}
+	public void removeNONERRTHRoot() {
+		removeFormTree(this.noneEarth);
+		// 当移除平面坐标系节点后，默认选中下一个节点
+		this.treePrjCoordSys.setSelectionRow(0);
 	}
 }

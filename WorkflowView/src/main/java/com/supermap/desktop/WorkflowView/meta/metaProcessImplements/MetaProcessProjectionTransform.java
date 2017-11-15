@@ -83,7 +83,7 @@ public class MetaProcessProjectionTransform extends MetaProcess {
 		parameterCombineTargetCoordSys.addParameters(this.parameterTargetCoordSys);
 		ParameterCombine parameterCombineSetting = new ParameterCombine();
 		parameterCombineSetting.setDescribe(SETTING_PANEL_DESCRIPTION);
-		parameterCombineSetting.addParameters(parameterCombine, new ParameterLabel().setDescribe(ControlsProperties.getString("String_GroupBox_TarCoorSys") + ":"), parameterCombineTargetCoordSys);
+		parameterCombineSetting.addParameters(parameterCombine, new ParameterLabel().setDescribe(ControlsProperties.getString("String_Label_TarCoorSys")), parameterCombineTargetCoordSys);
 
 		this.parameterSaveDataset = new ParameterSaveDataset();
 		this.parameterSaveDataset.setDefaultDatasetName("result_prjTransform");
