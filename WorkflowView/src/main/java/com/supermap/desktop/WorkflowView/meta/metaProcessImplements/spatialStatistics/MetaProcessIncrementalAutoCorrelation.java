@@ -150,12 +150,12 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 				double distance = 0.0;
 
 				String result = "";
-				result += ProcessProperties.getString("String_Column_IncrementalDistance") + "    "
-						+ ProcessProperties.getString("String_Column_Morans") + "       "
-						+ ProcessProperties.getString("String_Column_Expectation") + "       "
-						+ CoreProperties.getString("String_Evariance") + "        "
-						+ ProcessProperties.getString("String_Column_ZScor") + "        "
-						+ ProcessProperties.getString("String_Column_PValue") + "\n";
+				result += ProcessProperties.getString("String_Column_IncrementalDistance") + "      "
+						+ ProcessProperties.getString("String_Morans") + "         "
+						+ ProcessProperties.getString("String_Expectation") + "         "
+						+ CoreProperties.getString("String_Evariance") + "          "
+						+ ProcessProperties.getString("String_ZScor") + "          "
+						+ ProcessProperties.getString("String_PValue") + "\n";
 				for (int i = 0; i < incrementalResults.length; i++) {
 					// 在循环输出值的时候，筛选出最大峰值
 					result += dcmFmtDistance.format(incrementalResults[i].getDistance()) + "     "
