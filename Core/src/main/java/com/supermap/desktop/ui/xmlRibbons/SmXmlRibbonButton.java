@@ -7,6 +7,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.XmlCommandUtilities;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
 import org.pushingpixels.flamingo.api.common.RichTooltip;
@@ -50,7 +51,11 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 		}
 		if (ctrlAction != null) {
 			setCtrlAction(ctrlAction);
-			this.setActionRichTooltip(new RichTooltip(xmlRibbonButton.getLabel(), xmlRibbonButton.getTooltip()));
+			RichTooltip richTooltip = new RichTooltip(xmlRibbonButton.getLabel(), xmlRibbonButton.getTooltip());
+			if (!StringUtilities.isNullOrEmpty(xmlRibbonButton.getTooltipImageFile())) {
+				richTooltip.setMainImage(XmlCommandUtilities.getICon(XmlCommandUtilities.getXmlCommandToolTipImage(xmlRibbonButton)));
+			}
+			this.setActionRichTooltip(richTooltip);
 		}
 		this.addActionListener(new java.awt.event.ActionListener() {
 			@Override

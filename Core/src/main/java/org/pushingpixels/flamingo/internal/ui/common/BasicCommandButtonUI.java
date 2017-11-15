@@ -1046,7 +1046,7 @@ public class BasicCommandButtonUI extends CommandButtonUI {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					if ((commandButton == null) || (popupPanel == null))
+					if (commandButton == null)
 						return;
 
 					if (!commandButton.isShowing())

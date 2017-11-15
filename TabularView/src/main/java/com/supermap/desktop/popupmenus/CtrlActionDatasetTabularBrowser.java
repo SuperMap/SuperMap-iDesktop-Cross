@@ -6,12 +6,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
-import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.WorkspaceComponentManager;
-import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.desktop.utilities.TabularUtilities;
-
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class CtrlActionDatasetTabularBrowser extends CtrlAction {
 
@@ -22,15 +17,10 @@ public class CtrlActionDatasetTabularBrowser extends CtrlAction {
 	@Override
 	public void run() {
 		try {
-			WorkspaceComponentManager workspaceManager = UICommonToolkit.getWorkspaceManager();
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) workspaceManager.getWorkspaceTree().getLastSelectedPathComponent();
-			if (selectedNode != null) {
-				TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-				if (selectedNodeData.getData() instanceof Dataset) {
-					DatasetVector dataset = (DatasetVector) selectedNodeData.getData();
-					if (dataset != null) {
-						TabularUtilities.openDatasetVectorFormTabular(dataset);
-					}
+			Dataset[] activeDatasets = Application.getActiveApplication().getActiveDatasets();
+			for (Dataset activeDataset : activeDatasets) {
+				if (activeDataset instanceof DatasetVector) {
+					TabularUtilities.openDatasetVectorFormTabular(activeDataset);
 				}
 			}
 		} catch (Exception ex) {
@@ -40,7 +30,13 @@ public class CtrlActionDatasetTabularBrowser extends CtrlAction {
 
 	@Override
 	public boolean enable() {
-		return true;
+		Dataset[] activeDatasets = Application.getActiveApplication().getActiveDatasets();
+		for (Dataset activeDataset : activeDatasets) {
+			if (activeDataset instanceof DatasetVector) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

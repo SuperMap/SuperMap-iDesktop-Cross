@@ -16,6 +16,7 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 	private boolean enable = true;
 	private String ctrlActionClass = "";
 	private ICtrlAction ctrlAction = null;
+	private String tooltipImageFile;
 
 	public XMLCommand(PluginInfo pluginInfo) {
 		super(pluginInfo);
@@ -81,6 +82,12 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 		// 图片信息
 		try {
 			this.setImageFile(xmlNodeCommand.getAttribute(g_AttributionImage));
+		} catch (Exception ex) {
+			// do nothing
+		}
+		// 图片信息
+		try {
+			this.setTooltipImageFile(xmlNodeCommand.getAttribute(g_AttributionScreenTipImage));
 		} catch (Exception ex) {
 			// do nothing
 		}
@@ -285,6 +292,7 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 			result.setDescription(this.getDescription());
 			result.setCustomProperty(this.getCustomProperty());
 			result.setPlatform(getPlatform());
+			result.setTooltipImageFile(getTooltipImageFile());
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
@@ -317,5 +325,13 @@ public class XMLCommand extends XMLCommandBase implements Comparator<XMLCommand>
 
 	public void setBaseContainer(XMLCommandBase baseContainer) {
 		this.baseContainer = baseContainer;
+	}
+
+	public void setTooltipImageFile(String tooltipImageFile) {
+		this.tooltipImageFile = tooltipImageFile;
+	}
+
+	public String getTooltipImageFile() {
+		return tooltipImageFile;
 	}
 }

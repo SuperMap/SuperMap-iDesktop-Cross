@@ -349,12 +349,17 @@ public class RichTooltip {
 	 *
 	 * @return An unmodifiable list of footer sections of this tooltip.
 	 * @see #addFooterSection(String)
-	 * @see #getFooterImage()
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getFooterSections() {
 		if (this.footerSections == null)
 			return Collections.EMPTY_LIST;
 		return Collections.unmodifiableList(this.footerSections);
+	}
+
+	public void setMainImage(ResizableIcon iCon) {
+		if (iCon != null) {
+			setMainImage(iCon, new Dimension(iCon.getIconWidth(), iCon.getIconHeight()));
+		}
 	}
 }
