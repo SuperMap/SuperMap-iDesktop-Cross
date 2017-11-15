@@ -141,9 +141,12 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
         comboBoxVersion.setRenderer(new ListCellRenderer<TileVersion>() {
             @Override
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
-                JLabel label = new JLabel("");
+                JLabel label;
                 if (value != null) {
-                    label = new JLabel(value.GetVersionDesc());
+                    //组件设置描述的缺陷没改完之前，先用name代替
+                    label = new JLabel(value.name);
+                } else {
+                    label = new JLabel("");
                 }
                 label.setOpaque(true);
                 if (isSelected) {
