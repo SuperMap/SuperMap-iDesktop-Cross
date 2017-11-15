@@ -19,9 +19,9 @@ import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.process.types.Type;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;

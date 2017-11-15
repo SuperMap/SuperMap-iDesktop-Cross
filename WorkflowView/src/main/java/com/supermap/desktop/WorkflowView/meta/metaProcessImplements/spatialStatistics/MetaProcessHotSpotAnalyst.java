@@ -8,10 +8,10 @@ import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 
 /**

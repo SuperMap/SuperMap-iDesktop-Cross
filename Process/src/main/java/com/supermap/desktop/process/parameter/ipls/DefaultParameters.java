@@ -11,7 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.*;
 import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.Outputs;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.process.util.ParameterUtil;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;

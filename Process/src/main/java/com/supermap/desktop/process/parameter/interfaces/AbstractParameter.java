@@ -4,7 +4,7 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.parameter.events.*;
 import com.supermap.desktop.process.parameter.interfaces.datas.Irequisite;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.event.EventListenerList;

@@ -1,4 +1,4 @@
-package com.supermap.desktop.process.virtual;
+package com.supermap.desktop.process.types;
 
 /**
  * Created by highsad on 2017/11/14.
@@ -37,9 +37,14 @@ public class DatasetTypes {
 
 	public final static Type SIMPLE_VECTOR = Type.instance("SimpleVector").and(POINT).and(LINE).and(REGION);
 	public final static Type SIMPLE_VECTOR_AND_GRID = Type.instance("SimpleVectorAndGrid").and(SIMPLE_VECTOR).and(GRID);
-	public final static Type VECTOR = Type.instance("vector").and(SIMPLE_VECTOR).and(TABULAR).and(TEXT).and(CAD);
+	public final static Type VECTOR = Type.instance("Vector").and(SIMPLE_VECTOR).and(TABULAR).and(TEXT).and(CAD);
 	public final static Type ALL_RASTER = Type.instance("AllRaster").and(IMAGE).and(GRID);
-	public final static Type DATASET = Type.instance("dataset").and(VECTOR).and(ALL_RASTER);
+	public final static Type LINE_POLYGON_VECTOR = Type.instance("LinePolygon").and(LINE).and(REGION);
+
+	public final static Type DATASET = Type.instance("dataset").and(POINT).and(LINE).and(REGION).and(TEXT).and(CAD).and(LINKTABLE)
+			.and(NETWORK).and(NETWORK3D).and(LINEM).and(PARAMETRICLINE).and(PARAMETRICREGION).and(GRIDCOLLECTION)
+			.and(IMAGECOLLECTION).and(MODEL).and(TEXTURE).and(IMAGE).and(WMS).and(WCS).and(GRID).and(VOLUME).and(TOPOLOGY)
+			.and(POINT3D).and(LINE3D).and(REGION3D).and(DEM).and(POINTEPS).and(LINEEPS).and(REGIONEPS).and(TEXTEPS).and(TABULAR);
 
 	public static void main(String[] args) {
 		Type t1 = SIMPLE_VECTOR;

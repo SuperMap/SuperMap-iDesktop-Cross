@@ -13,7 +13,6 @@ import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.messageBus.NewMessageBus;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
 import com.supermap.desktop.utilities.CursorUtilities;
@@ -74,7 +73,7 @@ public class MetaProcessGridRegionAggregation extends MetaProcess {
 				parameterInputDataType,
 				parameterCombineSetting
 		);
-		parameters.getOutputs().addData("GridRegionAggregationResult", ProcessOutputResultProperties.getString("String_NetworkRegionAnalysisResult"), Type.UNKOWN);
+		parameters.getOutputs().addData("GridRegionAggregationResult", ProcessOutputResultProperties.getString("String_NetworkRegionAnalysisResult"), null);
 	}
 
 	@Override

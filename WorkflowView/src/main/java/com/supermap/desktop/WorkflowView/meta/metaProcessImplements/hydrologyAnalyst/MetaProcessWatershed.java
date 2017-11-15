@@ -9,8 +9,9 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.awt.*;
@@ -96,7 +97,7 @@ public class MetaProcessWatershed extends MetaProcessHydrology {
 		});
 
 		parameters.setParameters(sourceCombine, weightCombine, settingCombine, resultCombine);
-		parameters.addInputParameters(POUR_POINTS_DATA, new DatasetTypes("", DatasetTypes.GRID.getValue() | DatasetTypes.POINT.getValue()), weightCombine);
+		parameters.addInputParameters(POUR_POINTS_DATA, Type.instance("").and(DatasetTypes.GRID).and(DatasetTypes.POINT), weightCombine);
 	}
 
 	@Override

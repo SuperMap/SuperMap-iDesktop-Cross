@@ -1,6 +1,4 @@
-package com.supermap.desktop.process.virtual;
-
-import org.apache.commons.lang.NullArgumentException;
+package com.supermap.desktop.process.types;
 
 import java.util.HashMap;
 import java.util.Map;

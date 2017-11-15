@@ -13,8 +13,9 @@ import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
@@ -97,7 +98,7 @@ public class MetaProcessKernelDensityOffline extends MetaProcess {
 		resultCombine.addParameters(resultDataset);
 
 		parameters.setParameters(sourceCombine, settingCombine, resultCombine);
-		this.parameters.addInputParameters(INPUT_DATA, new DatasetTypes("", DatasetTypes.POINT.getValue() | DatasetTypes.LINE.getValue()), sourceCombine);
+		this.parameters.addInputParameters(INPUT_DATA, Type.instance("").and(DatasetTypes.POINT).and(DatasetTypes.LINE), sourceCombine);
 		this.parameters.addOutputParameters(OUTPUT_DATA,
 				ProcessOutputResultProperties.getString("String_KernelsDensityAnalysisResult"),
 				DatasetTypes.GRID, resultCombine);

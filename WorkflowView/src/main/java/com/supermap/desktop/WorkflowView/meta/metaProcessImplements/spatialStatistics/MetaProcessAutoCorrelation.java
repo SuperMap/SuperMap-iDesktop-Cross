@@ -7,7 +7,7 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
+import com.supermap.desktop.process.types.BasicTypes;
 import com.supermap.desktop.ui.OutputFrame;
 
 /**

@@ -1,7 +1,6 @@
 package com.supermap.desktop.WorkflowView.graphics.graphs;
 
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
-import com.supermap.desktop.WorkflowView.graphics.graphs.EllipseGraph;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.FontUtilities;

@@ -16,9 +16,9 @@ import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Outputs;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.process.types.BasicTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.StringUtilities;
 

@@ -1,6 +1,5 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
-import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
 import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
@@ -14,8 +13,6 @@ import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstraine
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceUtilities;
-
-import java.util.ArrayList;
 
 /**
  * Created by xie on 2017/11/2.

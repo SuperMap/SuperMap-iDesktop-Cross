@@ -1,4 +1,4 @@
-package com.supermap.desktop.process.virtual;
+package com.supermap.desktop.process.types;
 
 /**
  * Created by highsad on 2017/11/14.

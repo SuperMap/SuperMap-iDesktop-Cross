@@ -10,7 +10,6 @@ import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.tasks.TasksManager;
 
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**

@@ -2,11 +2,11 @@ package com.supermap.desktop.WorkflowView;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
+import com.supermap.desktop.WorkflowView.graphics.graphs.ProcessGraph;
 import com.supermap.desktop.event.ActiveFormChangedEvent;
 import com.supermap.desktop.event.ActiveFormChangedListener;
 import com.supermap.desktop.process.core.IProcess;
-import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.ProcessGraph;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
 import javax.swing.*;

@@ -2,10 +2,11 @@ package com.supermap.desktop.WorkflowView.meta.metaProcessImplements.typeConvers
 
 import com.supermap.data.*;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +50,7 @@ public abstract class MetaProcessTypeConversion extends MetaProcess {
 	 * @param type
 	 * @return
 	 */
-	protected DatasetTypes datasetTypeToTypes(DatasetType type) {
+	protected Type datasetTypeToTypes(DatasetType type) {
 		if (type.equals(DatasetType.POINT)) {
 			return DatasetTypes.POINT;
 		} else if (type.equals(DatasetType.LINE)) {

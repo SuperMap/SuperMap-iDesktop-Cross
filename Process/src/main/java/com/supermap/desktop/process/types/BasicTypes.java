@@ -1,4 +1,4 @@
-package com.supermap.desktop.process.virtual;
+package com.supermap.desktop.process.types;
 
 /**
  * Created by highsad on 2017/11/14.
@@ -16,4 +16,6 @@ public class BasicTypes {
 
 	public final static Type ALL_INTEGER = Type.instance("AllInteger").and(Byte).and(SHORT).and(INTEGER).and(LONG);
 	public final static Type NUMBER = Type.instance("number").and(ALL_INTEGER).and(FLOAT).and(DOUBLE);
+	public final static Type BASICTYPES = Type.instance("allBasicTypes").and(Byte).and(SHORT).and(INTEGER)
+			.and(LONG).and(FLOAT).and(DOUBLE).and(STRING).and(BOOLEAN).and(CHAR);
 }
