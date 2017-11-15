@@ -763,15 +763,22 @@ public class DialogMapCacheClipBuilder extends SmDialog {
             }
             if (saveType.equals(MapViewProperties.getString("MapCache_SaveType_MongoDBMuti"))) {
                 if (firstStepPane.comboBoxMultiTenseVersion.getSelectedItem() != null) {
-                    TileVersion tileVersion = new TileVersion();
-                    if (firstStepPane.comboBoxMultiTenseVersion.getSelectedIndex() >= 0) {
-                        tileVersion = (TileVersion) firstStepPane.comboBoxMultiTenseVersion.getSelectedItem();
-                        mapCacheBuilder.setVersionInfo(tileVersion);
-                    } else {
-                        tileVersion.desc = firstStepPane.comboBoxMultiTenseVersion.getSelectedItem().toString();
+                    String text = ((JTextField) firstStepPane.comboBoxMultiTenseVersion.getEditor().getEditorComponent()).getText();
+                    boolean isExist = false;
+                    for (int i = 0; i < firstStepPane.comboBoxMultiTenseVersion.getItemCount(); i++) {
+                        if (firstStepPane.comboBoxMultiTenseVersion.getItemAt(i).desc.equals(text)) {
+                            mapCacheBuilder.setVersionInfo((TileVersion) firstStepPane.comboBoxMultiTenseVersion.getSelectedItem());
+                            isExist = true;
+                            break;
+                        }
                     }
-                    mapCacheBuilder.setOutputFolder(firstStepPane.fileChooserControlFileCache.getPath() + "\\" + tileVersion.desc);
-                    mapCacheBuilder.setVersionInfo(tileVersion);
+                    if (!isExist) {
+                        TileVersion tileVersion = new TileVersion();
+                        tileVersion.desc = text;
+                        mapCacheBuilder.setOutputFolder(firstStepPane.fileChooserControlFileCache.getPath() + "\\" + tileVersion.desc);
+                        mapCacheBuilder.setVersionInfo(tileVersion);
+                        System.out.println("nnnn");
+                    }
                 }
             }
         } catch (Exception ex) {

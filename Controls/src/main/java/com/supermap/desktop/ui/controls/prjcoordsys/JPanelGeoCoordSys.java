@@ -229,6 +229,7 @@ public class JPanelGeoCoordSys extends JPanel {
 			}
 		}
 		comboBoxReferenceSpheroid.setRenderer(new MyEnumCellRender(comboBoxReferenceSpheroid));
+		comboBoxReferenceSpheroid.setEnabled(false);
 		// endregion
 
 		// region 赤道半径
@@ -251,6 +252,7 @@ public class JPanelGeoCoordSys extends JPanel {
 				return backUpValue;
 			}
 		});
+		textFieldGeoSpheroidAxis.setEditable(false);
 		// endregion
 
 		// region 扁率
@@ -273,16 +275,17 @@ public class JPanelGeoCoordSys extends JPanel {
 				return backUpValue;
 			}
 		});
+		textFieldGeoSpheroidFlatten.setEditable(false);
 		// endregion
 		// region 中央经线
 		Enum[] enumsCenter = Enum.getEnums(GeoPrimeMeridianType.class);
 		comboBoxCentralMeridianType.setSearchItemValueGetter(searchItemValueGetter);
 		for (Enum anEnum : enumsCenter) {
-			if (anEnum instanceof GeoPrimeMeridianType && anEnum != GeoPrimeMeridianType.PRIMEMERIDIAN_USER_DEFINED)
+			if (anEnum instanceof GeoPrimeMeridianType)
 				comboBoxCentralMeridianType.addItem((GeoPrimeMeridianType) anEnum);
 		}
 		comboBoxCentralMeridianType.setRenderer(new MyEnumCellRender(comboBoxCentralMeridianType));
-
+		panelCentralBasisMeridian.setTextFieldEditable(false);
 		geoCoordSys.setName(DEFAULT_NAME);
 
 	}
