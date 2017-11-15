@@ -4,7 +4,6 @@ import com.supermap.data.Enum;
 import com.supermap.data.*;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.enums.LengthUnit;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
@@ -169,7 +168,11 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
-				prjCoordSys.getProjection().setType((ProjectionType) comboBoxCoordType.getSelectedItem());
+				Object selectedItem = comboBoxCoordType.getSelectedItem();
+				if (selectedItem instanceof ProjectionType) {
+					prjCoordSys.getProjection().setType((ProjectionType) selectedItem);
+					comboBoxCoordType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((ProjectionType) selectedItem).name()));
+				}
 			}
 		}
 	};
@@ -223,9 +226,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 				comboBoxCoordType.addItem((ProjectionType) anEnum);
 			}
 		}
-
-		//comboBoxCoordType.setRenderer(new MyEnumCellRender(comboBoxCoordType));
-
+		comboBoxCoordType.setRenderer(new MyEnumCellRender(comboBoxCoordType));
 		// endregion
 
 		// region 单位
@@ -233,21 +234,6 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		for (Unit unit : units) {
 			comboBoxCoordSysUnit.addItem(unit);
 		}
-		comboBoxCoordSysUnit.setRenderer(new ListCellRenderer<Unit>() {
-			@Override
-			public Component getListCellRendererComponent(JList<? extends Unit> list, Unit value, int index, boolean isSelected, boolean cellHasFocus) {
-				JLabel jLabel = new JLabel();
-				jLabel.setOpaque(true);
-				jLabel.setPreferredSize(labelPreferredSize);
-				jLabel.setText(LengthUnit.convertForm(value).toString());
-				if (isSelected) {
-					jLabel.setBackground(list.getSelectionBackground());
-				} else {
-					jLabel.setBackground(list.getBackground());
-				}
-				return jLabel;
-			}
-		});
 		comboBoxCoordSysUnit.setMaximumRowCount(units.length);
 		// endregion
 
@@ -297,8 +283,8 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 				return backUpValue;
 			}
 		});
-
-		//panelGeoCoordSys.setPanelEditable(false);
+		// 设置控件不可编辑
+		setComponentEditable(false);
 	}
 
 	// region 初始化布局
@@ -458,7 +444,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		//增加初始化设置项
 		comboBoxName.setSelectedItem("New_Projected_Coordinate_System");
 		comboBoxCoordSysUnit.setSelectedItem(Unit.METER);
-		comboBoxCoordType.setSelectedItem(ProjectionType.PRJ_NONPROJECTION);
+		comboBoxCoordType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(ProjectionType.PRJ_NONPROJECTION.name()));
 		textFieldFalseEasting.setText("0");
 		textFieldFalseNorthing.setText("0");
 		textFieldScaleFactor.setText("0");
@@ -493,7 +479,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		lock = true;
 		comboBoxName.setSelectedItem(this.prjCoordSys.getName());
 		comboBoxCoordSysUnit.setSelectedItem(this.prjCoordSys.getCoordUnit());
-		comboBoxCoordType.setSelectedItem(this.prjCoordSys.getProjection().getType());
+		comboBoxCoordType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.prjCoordSys.getProjection().getType().name()));
 		resetProjectionTypeValues();
 		lock = false;
 	}
@@ -504,6 +490,24 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		if (this.prjCoordSys != null) {
 			this.prjCoordSys.dispose();
 		}
+	}
+
+	/**
+	 * @param isEditable
+	 */
+	public void setComponentEditable(Boolean isEditable) {
+		//comboBoxCoordSysUnit.setEnabled(isEditable);
+		panelCentralMeridian.setTextFieldEditable(isEditable);
+		textFieldFalseEasting.setEditable(isEditable);
+		panelCentralParallel.setTextFieldEditable(isEditable);
+		textFieldFalseNorthing.setEditable(isEditable);
+		textFieldScaleFactor.setEditable(isEditable);
+		panelStandardParallel1.setTextFieldEditable(isEditable);
+		panelStandardParallel2.setTextFieldEditable(isEditable);
+		panelFirstPointLongitude.setTextFieldEditable(isEditable);
+		panelSecondPointLongitude.setTextFieldEditable(isEditable);
+		panelAzimuth.setTextFieldEditable(isEditable);
+
 	}
 
 }

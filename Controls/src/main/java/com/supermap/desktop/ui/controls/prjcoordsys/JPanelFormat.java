@@ -272,6 +272,13 @@ public class JPanelFormat extends JPanel {
 		initValue();
 	}
 
+	public void setTextFieldEditable(Boolean isEditable) {
+		this.smTextFieldAngle.setEditable(isEditable);
+		this.smTextFieldA.setEditable(isEditable);
+		this.smTextFieldM.setEditable(isEditable);
+		this.smTextFieldS.setEditable(isEditable);
+	}
+
 	@Override
 	public String toString() {
 		String value = "";

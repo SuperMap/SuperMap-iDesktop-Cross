@@ -24,10 +24,10 @@ public class ControlsProperties extends Properties {
 	// ----------------------------------------------------------------------------------------
 	public static final String BundleName = "ui_resources";
 	public static final String DatasourcesNodeName = "String_Datasource";
-	public static final String MapsNodeName = "MapsNodeName";
-	public static final String ScenesNodeName = "ScenesNodeName";
-	public static final String LayoutsNodeName = "LayoutsNodeName";
-	public static final String ResourcesNodeName = "ResourcesNodeName";
+	public static final String MapsNodeName = "String_Maps";
+	public static final String ScenesNodeName = "String_Scenes";
+	public static final String LayoutsNodeName = "String_Layouts";
+	public static final String ResourcesNodeName = "String_Resources";
 	public static final String SymbolMarkerLibNodeName = "SymbolMarkerLibNodeName";
 	public static final String SymbolLineLibNodeName = "SymbolLineLibNodeName";
 	public static final String SymbolFillLibNodeName = "SymbolFillLibNodeName";

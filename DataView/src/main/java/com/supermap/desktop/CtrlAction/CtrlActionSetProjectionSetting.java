@@ -34,20 +34,24 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 		Dataset[] datasets = Application.getActiveApplication().getActiveDatasets();
 		Datasource[] datasources = Application.getActiveApplication().getActiveDatasources();
 		PrjCoordSys prjCoordSys = null;
+		// 实现对话框title说明坐标系的来源-yuanR2017.11.15
+		String titleName = "";
 		// 数据集
 		if (datasets.length > 0) {
 			for (Dataset dataset : datasets) {
 				if (dataset.getType() != DatasetType.TABULAR) {
 					prjCoordSys = dataset.getPrjCoordSys();
+					titleName = ControlsProperties.getString("String_Label_Dataset") + dataset.getName() + "@" + dataset.getDatasource().getAlias();
 					break;
 				}
 			}
 		} else {
 			// 数据源
 			prjCoordSys = datasources[0].getPrjCoordSys();
+			titleName = ControlsProperties.getString("String_Label_Datasource") + datasources[0].getAlias();
 		}
 
-		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
+		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
 		if (prjCoordSys != null) {
 			dialogPrjCoordSysSettings.setPrjCoordSys(prjCoordSys);
 		}

@@ -113,7 +113,7 @@ public class MapPropertyContainer extends JPanel {
 			propertyControls = new ArrayList<>();
 			propertyControls.add(new MapBasePropertyControl());
 			propertyControls.add(new MapBoundsPropertyControl());
-			propertyControls.add(new MapPrjCoordSysControl());
+			propertyControls.add(new MapPrjCoordSysControl(formMap));
 			for (AbstractPropertyControl abstractPropertyControl : propertyControls) {
 				this.tabbledPane.addTab(abstractPropertyControl.getPropertyTitle(), new JScrollPane(abstractPropertyControl));
 				abstractPropertyControl.addChangedListener(this.propertyChangedListener);
