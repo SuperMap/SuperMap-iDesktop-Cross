@@ -94,7 +94,6 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 	private RibbonManager ribbonManager;
 
 	public FormBase() {
-
 		DockingManager.setApplicationWindow(this);
 		this.formManager = new FormManager();
 		this.frameMenuManager = new FrameMenuManager();
@@ -107,6 +106,7 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 //        this.propertyManager = new JDialogDataPropertyContainer(this);
 //		RibbonApplicationMenu ram = new RibbonApplicationMenu();
 //		getRibbon().setApplicationMenu(ram);
+
 //		JMenu menu = new JMenu("loading");
 //		this.jMenuBarMain.add(menu);
 		jMenuBarMain.setMinimumSize(new Dimension(20, 23));

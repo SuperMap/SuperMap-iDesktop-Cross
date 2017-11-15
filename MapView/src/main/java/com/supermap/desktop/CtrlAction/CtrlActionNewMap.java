@@ -32,7 +32,7 @@ public class CtrlActionNewMap extends CtrlAction {
 			if (formMap == null) {
 				formMap = (IFormMap) CommonToolkit.FormWrap.fireNewWindowEvent(WindowType.MAP);
 			}
-			if (formMap != null) {
+			if (formMap != null && Application.getActiveApplication().getWorkspace().getDatasources().getCount()>0) {
 				JFrame frame = (JFrame) Application.getActiveApplication().getMainFrame();
 				DatasetType[] datasetTypes = new DatasetType[]{
 						DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.TEXT, DatasetType.CAD, DatasetType.NETWORK,
@@ -50,16 +50,6 @@ public class CtrlActionNewMap extends CtrlAction {
 
 	@Override
 	public boolean enable() {
-
-		boolean enable = false;
-
-		try {
-			if (Application.getActiveApplication().getWorkspace().getDatasources().getCount() > 0) {
-				enable = true;
-			}
-		} catch (Exception ex) {
-			Application.getActiveApplication().getOutput().output(ex);
-		}
-		return enable;
+		return true;
 	}
 }

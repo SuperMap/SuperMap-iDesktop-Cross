@@ -78,8 +78,6 @@ public class BasicCommandPopupMenuUI extends BasicPopupPanelUI {
 				protected float getIconTextGapFactor() {
 					return 2.0f;
 				}
-
-				;
 			};
 		}
 	};
@@ -307,6 +305,8 @@ public class BasicCommandPopupMenuUI extends BasicPopupPanelUI {
 
 		final JPanel menuPanel = this.createMenuPanel();
 		menuPanel.setLayout(new LayoutManager() {
+			private int addHeight = 5;
+
 			@Override
 			public void addLayoutComponent(String name, Component comp) {
 			}
@@ -320,8 +320,9 @@ public class BasicCommandPopupMenuUI extends BasicPopupPanelUI {
 				int height = 0;
 				int width = 0;
 				for (int i = 0; i < parent.getComponentCount(); i++) {
-					Dimension pref = parent.getComponent(i).getPreferredSize();
-					height += pref.height;
+					Component component = parent.getComponent(i);
+					Dimension pref = component.getPreferredSize();
+					height += pref.height + (component instanceof JPopupMenu.Separator?0: addHeight);
 					width = Math.max(width, pref.width);
 				}
 
@@ -342,9 +343,10 @@ public class BasicCommandPopupMenuUI extends BasicPopupPanelUI {
 				for (int i = 0; i < parent.getComponentCount(); i++) {
 					Component comp = parent.getComponent(i);
 					Dimension pref = comp.getPreferredSize();
+					int height = pref.height + (comp instanceof JPopupMenu.Separator?0: addHeight);
 					comp.setBounds(ins.left, topY, parent.getWidth() - ins.left - ins.right,
-							pref.height);
-					topY += pref.height;
+							height);
+					topY += height;
 				}
 			}
 		});
@@ -521,7 +523,7 @@ public class BasicCommandPopupMenuUI extends BasicPopupPanelUI {
 		public Dimension preferredLayoutSize(Container parent) {
 			int height = 0;
 			int width = 0;
-
+// 获取ribbon下拉菜单的大小
 			if (commandButtonPanel != null) {
 				width = commandButtonPanel.getPreferredSize().width;
 				height = commandButtonPanel.getPreferredSize().height;

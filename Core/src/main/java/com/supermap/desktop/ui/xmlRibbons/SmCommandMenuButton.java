@@ -19,7 +19,7 @@ public class SmCommandMenuButton extends JCommandMenuButton implements IBaseItem
 	public SmCommandMenuButton(XmlRibbonCommandMenuButton xmlCommand) {
 		super(xmlCommand.getLabel(), null);
 		this.setIcon(XmlCommandUtilities.getICon(XmlCommandUtilities.getXmlCommandImage(xmlCommand)));
-		this.xmlCommand = xmlCommand;
+		this.xmlCommand = xmlCommand;;
 		init();
 	}
 
