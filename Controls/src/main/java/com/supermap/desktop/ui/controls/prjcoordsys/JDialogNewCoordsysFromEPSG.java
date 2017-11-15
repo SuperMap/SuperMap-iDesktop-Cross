@@ -29,7 +29,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 
 	private WaringTextField codeTextField;
 
-	private JCheckBox useDefaultNameCheck;
+	//private JCheckBox useDefaultNameCheck;
 	private PanelButton panelButton;
 
 	// 默认epsg值
@@ -44,9 +44,10 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 			} else if (e.getSource().equals(panelButton.getButtonCancel())) {
 				dialogResult = DialogResult.CANCEL;
 				dispose();
-			} else if (e.getSource().equals(useDefaultNameCheck)) {
-				nameTextField.setEnabled(!useDefaultNameCheck.isSelected());
 			}
+			//else if (e.getSource().equals(useDefaultNameCheck)) {
+			//	initNameStates();
+			//}
 		}
 	};
 
@@ -54,10 +55,10 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		initializeComponents();
 		initializeResources();
 		initializeLayout();
-		initStates();
+		initNameStates();
 		initListener();
 
-		setSize(300, 165);
+		setSize(300, 145);
 		setLocationRelativeTo(null);
 	}
 
@@ -68,7 +69,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		this.codeTextField = new WaringTextField(String.valueOf(getCode()));
 
 		this.codeTextField.setInitInfo(1, 999999999, WaringTextField.INTEGER_TYPE, "null");
-		this.useDefaultNameCheck = new JCheckBox();
+		//this.useDefaultNameCheck = new JCheckBox();
 
 		this.panelButton = new PanelButton();
 	}
@@ -77,7 +78,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		this.setTitle(ControlsProperties.getString("String_Button_NewCoordSysFormEPSG"));
 		this.coordsysNameLabel.setText(ControlsProperties.getString("String_Message_CoordSysName"));
 		this.codeLabel.setText(ControlsProperties.getString("String_Label_EPSG_Code"));
-		this.useDefaultNameCheck.setText(ControlsProperties.getString("String_UseCoordsysDefaultName"));
+		//this.useDefaultNameCheck.setText(ControlsProperties.getString("String_UseCoordsysDefaultName"));
 	}
 
 	private void initializeLayout() {
@@ -96,18 +97,18 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 						.addComponent(this.nameTextField))
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.codeLabel)
-						.addComponent(this.codeTextField))
-				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(this.useDefaultNameCheck)));
+						.addComponent(this.codeTextField)));
+		//.addGroup(groupLayout.createSequentialGroup()
+		//.addComponent(this.useDefaultNameCheck)));
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
 						.addComponent(this.coordsysNameLabel)
 						.addComponent(this.nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
 						.addComponent(this.codeLabel)
-						.addComponent(this.codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.useDefaultNameCheck)));
+						.addComponent(this.codeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)));
+		//.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+		//		.addComponent(this.useDefaultNameCheck)));
 		//@formatter:on
 
 		this.getContentPane().setLayout(new BorderLayout());
@@ -116,8 +117,16 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 
 	}
 
-	private void initStates() {
-		this.nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
+	private void initNameStates() {
+		//if (useDefaultNameCheck.isSelected()) {
+		//	PrjCoordSys prjCoordSys = new PrjCoordSys();
+		//	prjCoordSys.fromEPSGCode(Integer.valueOf(codeTextField.getText()));
+		//
+		//	nameTextField.setText(prjCoordSys.getName());
+		//} else {
+		nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
+		//}
+
 	}
 
 	private void initListener() {
@@ -130,7 +139,7 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (StringUtilities.isNullOrEmpty(nameTextField.getText())) {
-					nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
+					initNameStates();
 				}
 			}
 		});
@@ -138,32 +147,41 @@ public class JDialogNewCoordsysFromEPSG extends SmDialog {
 		this.codeTextField.getTextField().addCaretListener(new CaretListener() {
 			@Override
 			public void caretUpdate(CaretEvent e) {
+
 				try {
 					Integer value = Integer.valueOf(codeTextField.getText());
 					if (value < 1 || value > 999999999) {
 						panelButton.getButtonOk().setEnabled(false);
+						//useDefaultNameCheck.setEnabled(false);
+						//useDefaultNameCheck.setSelected(false);
+						//nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
 					} else {
-
 						panelButton.getButtonOk().setEnabled(true);
+						//useDefaultNameCheck.setEnabled(true);
+						//initNameStates();
 					}
 				} catch (Exception ex) {
 					panelButton.getButtonOk().setEnabled(false);
+					//useDefaultNameCheck.setEnabled(false);
+					//useDefaultNameCheck.setSelected(false);
+					//nameTextField.setText(ControlsProperties.getString("String_NewCoorSys"));
+
 				}
 			}
 		});
 
 		this.panelButton.getButtonOk().addActionListener(this.actionListener);
 		this.panelButton.getButtonCancel().addActionListener(this.actionListener);
-		this.useDefaultNameCheck.addActionListener(this.actionListener);
+		//this.useDefaultNameCheck.addActionListener(this.actionListener);
 	}
 
 	public JTextField getNameTextField() {
 		return nameTextField;
 	}
 
-	public JCheckBox getUseDefaultNameCheck() {
-		return this.useDefaultNameCheck;
-	}
+	//public JCheckBox getUseDefaultNameCheck() {
+	//	//return this.useDefaultNameCheck;
+	//}
 
 	public int getCode() {
 		return this.code;

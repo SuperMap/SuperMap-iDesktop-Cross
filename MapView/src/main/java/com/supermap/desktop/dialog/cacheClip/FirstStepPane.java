@@ -325,6 +325,10 @@ public class FirstStepPane extends JPanel implements IState {
     private MouseAdapter versionUpdateListener = new MouseAdapter() {
         @Override
         public void mouseReleased(MouseEvent e) {
+            String string = "";
+            if (comboBoxMultiTenseVersion.getSelectedItem() != null) {
+                string = comboBoxMultiTenseVersion.getSelectedItem().toString();
+            }
             comboBoxMultiTenseVersion.removeAllItems();
             try {
                 if (comboBoxDatabaseName.getSelectedItem() != null && !StringUtilities.isNullOrEmpty(textFieldServerName.getText()) && textFieldCacheName.getText() != null) {
@@ -342,12 +346,20 @@ public class FirstStepPane extends JPanel implements IState {
                     for (TileVersion version : versions) {
                         comboBoxMultiTenseVersion.addItem(version);
                     }
-                    comboBoxMultiTenseVersion.setSelectedIndex(-1);
+                    comboBoxMultiTenseVersion.setSelectedItem(string);
                 }
             } catch (Exception exp) {
                 Application.getActiveApplication().getOutput().output(exp);
             }
             fireEnabled(enabled());
+        }
+    };
+    private ItemListener multiItemListener = new ItemListener() {
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if (e.getStateChange() == ItemEvent.SELECTED && e.getItem() instanceof TileVersion) {
+                comboBoxMultiTenseVersion.setSelectedItem(((TileVersion) e.getItem()).desc);
+            }
         }
     };
     //endregion
@@ -465,9 +477,11 @@ public class FirstStepPane extends JPanel implements IState {
         comboBoxMultiTenseVersion.setRenderer(new ListCellRenderer<TileVersion>() {
             @Override
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
-                JLabel label = new JLabel("");
+                JLabel label;
                 if (value != null) {
                     label = new JLabel(value.GetVersionDesc());
+                } else {
+                    label = new JLabel(" ");
                 }
                 label.setOpaque(true);
                 if (isSelected) {
@@ -551,6 +565,7 @@ public class FirstStepPane extends JPanel implements IState {
         this.textFieldUserPassword.getDocument().addDocumentListener(this.passwordChangeListener);
         this.textFieldConfirmPassword.getDocument().addDocumentListener(this.passwordChangeListener);
         this.comboBoxMultiTenseVersion.getComponent(0).addMouseListener(this.versionUpdateListener);
+        this.comboBoxMultiTenseVersion.addItemListener(multiItemListener);
     }
 
     public void removeEvents() {
@@ -579,6 +594,7 @@ public class FirstStepPane extends JPanel implements IState {
         this.textFieldUserName.getDocument().removeDocumentListener(this.passwordChangeListener);
         this.textFieldUserPassword.getDocument().removeDocumentListener(this.passwordChangeListener);
         this.textFieldConfirmPassword.getDocument().removeDocumentListener(this.passwordChangeListener);
+        this.comboBoxMultiTenseVersion.removeItemListener(multiItemListener);
     }
 
     private void initPanelImageSaveOutputDisplay(String currentShowItem) {
@@ -957,8 +973,8 @@ public class FirstStepPane extends JPanel implements IState {
         this.labelSplitMode = new JLabel();
         this.labelConfig = new JLabel();
         this.labelConfigValue = new JLabel();
-        this.comboboxVersion = new JComboBox();
-        this.comboBoxSplitMode = new JComboBox();
+        this.comboboxVersion = new JComboBox<>();
+        this.comboBoxSplitMode = new JComboBox<>();
         this.labelCacheName = new JLabel();
         this.labelCachePath = new JLabel();
         this.warningProviderCacheNameIllegal = new WarningOrHelpProvider(MapViewProperties.getString("MapCache_WarningCacheNameIsEmpty"), true);
@@ -986,9 +1002,9 @@ public class FirstStepPane extends JPanel implements IState {
         this.warningProviderPasswordNotSame = new WarningOrHelpProvider(CoreProperties.getString("String_ErrorProvider_Password_Confirm"), true);
         this.checkBoxFilterSelectionObjectInLayer = new JCheckBox();
         this.checkBoxFilterSelectionObjectInLayer.setEnabled(false);
-        this.comboBoxSaveType = new JComboBox();
-        this.comboBoxDatabaseName = new JComboBox();
-        this.comboBoxMultiTenseVersion = new JComboBox();
+        this.comboBoxSaveType = new JComboBox<>();
+        this.comboBoxDatabaseName = new JComboBox<>();
+        this.comboBoxMultiTenseVersion = new JComboBox<>();
         this.textFieldUserName = new JTextField();
         this.textFieldUserPassword = new JPasswordField();
         this.textFieldConfirmPassword = new JPasswordField();

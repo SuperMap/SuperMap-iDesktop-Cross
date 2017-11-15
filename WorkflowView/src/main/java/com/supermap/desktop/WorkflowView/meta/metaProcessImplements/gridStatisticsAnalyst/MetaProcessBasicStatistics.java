@@ -105,7 +105,7 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 					ControlsProperties.getString("String_LabelMinValue") + min + "\n" +
 					CoreProperties.getString("String_Mean") + mean + "\n" +
 					ProcessProperties.getString("String_Result_StandardDeviation") + std + "\n" +
-					ControlsProperties.getString("String_Variance") + var);
+					ControlsProperties.getString("String_Label_Variance") + var);
 			StatisticsCollection statisticsCollection = new StatisticsCollection(max, min, mean, std, var);
 			if (histogram.isCreate()) {
 				histogram.setSelectedItem(StatisticsAnalyst.createHistogram(src, histogram.getGroupCount(), histogram.getFunctionType()));

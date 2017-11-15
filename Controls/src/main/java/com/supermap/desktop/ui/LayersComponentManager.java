@@ -43,6 +43,7 @@ public class LayersComponentManager extends JComponent {
 	private Boolean isContextMenuBuilded = false;
 	private JPopupMenu layerWMSPopupMenu;
 	private ArrayList<TreePath> legalPaths;
+	private String currentMapName=""; //  用来判断进行了切换地图窗口的操作
 
 	/**
 	 * Create the panel.
@@ -96,11 +97,19 @@ public class LayersComponentManager extends JComponent {
 	private void layersTreeSelectedLegalPath(TreeSelectionEvent e) {
 		TreePath[] selectionPaths = layersTree.getSelectionPaths();
 		if (selectionPaths != null) {
-			if (selectionPaths.length > 1) {
-				layersTree.setSelectionPaths(getLegalPaths());
-			} else {
+			if (this.currentMapName.equals("") ||this.currentMapName.equals(layersTree.getMap().getName())) {
+				if (selectionPaths.length > 1 &&legalPaths.size()>0) {
+					layersTree.setSelectionPaths(getLegalPaths());
+				} else {
+					legalPaths = new ArrayList<>();
+					legalPaths.add(selectionPaths[0]);
+				}
+				if (this.currentMapName.equals("")){
+					this.currentMapName=layersTree.getMap().getName();
+				}
+			}else {
 				legalPaths = new ArrayList<>();
-				legalPaths.add(selectionPaths[0]);
+				this.currentMapName=layersTree.getMap().getName();
 			}
 		}
 	}

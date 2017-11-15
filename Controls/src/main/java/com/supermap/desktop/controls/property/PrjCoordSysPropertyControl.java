@@ -1,11 +1,16 @@
 package com.supermap.desktop.controls.property;
 
+import com.supermap.data.Dataset;
+import com.supermap.data.DatasetType;
+import com.supermap.data.Datasource;
 import com.supermap.data.PrjCoordSysType;
+import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.enums.PropertyType;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogBatchPrjTranslator;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogDatasetPrjTranslator;
@@ -221,7 +226,23 @@ public class PrjCoordSysPropertyControl extends AbstractPropertyControl {
 	}
 
 	private void buttonSetClicked() {
-		JDialogPrjCoordSysSettings prjSettings = new JDialogPrjCoordSysSettings();
+		// 实现对话框title说明坐标系的来源-yuanR2017.11.15
+		Dataset[] datasets = Application.getActiveApplication().getActiveDatasets();
+		Datasource[] datasources = Application.getActiveApplication().getActiveDatasources();
+		String titleName = "";
+		// 数据集
+		if (datasets.length > 0) {
+			for (Dataset dataset : datasets) {
+				if (dataset.getType() != DatasetType.TABULAR) {
+					titleName = ControlsProperties.getString("String_Label_Dataset") + dataset.getName() + "@" + dataset.getDatasource().getAlias();
+					break;
+				}
+			}
+		} else {
+			// 数据源
+			titleName = ControlsProperties.getString("String_Label_Datasource") + datasources[0].getAlias();
+		}
+		JDialogPrjCoordSysSettings prjSettings = new JDialogPrjCoordSysSettings(titleName);
 		prjSettings.setPrjCoordSys(prjHandle.getPrj());
 		if (prjSettings.showDialog() == DialogResult.OK) {
 			prjHandle.change(prjSettings.getPrjCoordSys());

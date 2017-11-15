@@ -433,14 +433,14 @@ class WorkspaceTreeCellEditor extends DefaultTreeCellEditor {
 		 * (instanceDatasetType.equals(DatasetType.WCS)) { // editingIcon = InternalImageIconFactory.DT_WCS; stringTextField = tempDataset.getName(); } else if
 		 * (instanceDatasetType.equals(DatasetType.WMS)) { // editingIcon = InternalImageIconFactory.DT_WMS; stringTextField = tempDataset.getName(); } } else
 		 * if (data instanceof Maps) { // editingIcon = InternalImageIconFactory.MAPS; stringTextField =
-		 * ControlsProperties.getString(ControlsProperties.MapsNodeName); } else if (tempNodeData.getType().equals(NodeDataType.MAP_NAME)) { // editingIcon =
+		 * ControlsProperties.getString(ControlsProperties.String_Maps); } else if (tempNodeData.getType().equals(NodeDataType.MAP_NAME)) { // editingIcon =
 		 * InternalImageIconFactory.MAP; stringTextField = tempNodeData.getData().toString().trim(); } else if (data instanceof Scenes) { // editingIcon =
-		 * InternalImageIconFactory.SCENES; stringTextField = ControlsProperties.getString(ControlsProperties.ScenesNodeName); } else if
+		 * InternalImageIconFactory.SCENES; stringTextField = ControlsProperties.getString(ControlsProperties.String_Scenes); } else if
 		 * (tempNodeData.getType().equals(NodeDataType.SCENE_NAME)) { // editingIcon = InternalImageIconFactory.SCENE; stringTextField =
 		 * tempNodeData.getData().toString().trim(); } else if (data instanceof Layouts) { // editingIcon = InternalImageIconFactory.LAYOUTS; stringTextField =
-		 * ControlsProperties.getString(ControlsProperties.LayoutsNodeName); } else if (tempNodeData.getType().equals(NodeDataType.LAYOUT_NAME)) { //
+		 * ControlsProperties.getString(ControlsProperties.String_Layouts); } else if (tempNodeData.getType().equals(NodeDataType.LAYOUT_NAME)) { //
 		 * editingIcon = InternalImageIconFactory.LAYOUT; stringTextField = tempNodeData.getData().toString().trim(); } else if (data instanceof Resources) { //
-		 * editingIcon = InternalImageIconFactory.RESOURCES; stringTextField = ControlsProperties.getString(ControlsProperties.ResourcesNodeName); } else if
+		 * editingIcon = InternalImageIconFactory.RESOURCES; stringTextField = ControlsProperties.getString(ControlsProperties.String_Resources); } else if
 		 * (data instanceof SymbolMarkerLibrary) { // editingIcon = InternalImageIconFactory.SYMBOLMARKERLIB; stringTextField =
 		 * ControlsProperties.getString(ControlsProperties.SymbolMarkerLibNodeName); } else if (data instanceof SymbolLineLibrary) { // editingIcon =
 		 * InternalImageIconFactory.SYMBOLLINELIB; stringTextField = ControlsProperties.getString(ControlsProperties.SymbolLineLibNodeName); } else if (data

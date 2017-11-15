@@ -29,11 +29,12 @@
  */
 package org.pushingpixels.flamingo.internal.ui.ribbon.appmenu;
 
+import com.supermap.desktop.utilities.PathUtilities;
+import com.supermap.desktop.utilities.XmlCommandUtilities;
 import org.pushingpixels.flamingo.api.common.AbstractCommandButton;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.CommandButtonLayoutManager;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
-import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
 import org.pushingpixels.flamingo.api.common.icon.ResizableIcon;
 import org.pushingpixels.flamingo.api.ribbon.JRibbon;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
@@ -109,7 +110,19 @@ public class JRibbonApplicationMenuButton extends JCommandButton {
 	 * Creates a new application menu button.
 	 */
 	public JRibbonApplicationMenuButton(JRibbon ribbon) {
-		super("", new EmptyResizableIcon(16));
+		super("", null);
+		String path = PathUtilities.getRootPathName();
+		String[] paths = new String[2];
+		paths[0] = path;
+		paths[1] = "../Resources/Frame";
+		path = PathUtilities.combinePath(paths, true);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.createImage(path + "iDesktop_Cross_128.png");
+		this.setIcon(XmlCommandUtilities.getICon(image));
+
+//		if (ribbon != null && ribbon.getRibbonFrame()!=null) {
+//			this.setIcon(XmlCommandUtilities.getICon(ribbon.getRibbonFrame().getIconImages().get(0)));
+//		}
 		this.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
 		this.setDisplayState(APP_MENU_BUTTON_STATE);
 		this.ribbon = ribbon;
