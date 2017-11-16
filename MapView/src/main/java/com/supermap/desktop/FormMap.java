@@ -29,11 +29,11 @@ import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.LayersComponentManager;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.scrollPanel.SmMapControlScrollPanel;
 import com.supermap.desktop.ui.trees.LayersTree;
 import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.trees.TreeNodeData;
-import com.supermap.desktop.ui.controls.scrollPanel.SmMapControlScrollPanel;
 import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.*;
 import com.supermap.ui.Action;
@@ -130,6 +130,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
     private LengthUnit lengthUnit = LengthUnit.METER;
     private AreaUnit areaUnit = AreaUnit.METER;
     private AngleUnit angleUnit = AngleUnit.DEGREE;
+    private VolumeUnit volumeUnit = VolumeUnit.METER;
 
     private Layer[] rememberActiveLayers = null;
     // Created by lixiaoyao 2017-11-16   When formmap switches, rememberExpandLayerGroups temporarily stores the expanded LayerGroup
@@ -1681,8 +1682,12 @@ public class FormMap extends FormBaseChild implements IFormMap {
         this.lengthUnit = lengthUnit;
     }
 
-    public void setCachePlayerBar(CachePlayerBar cachePlayerBar) {
-        this.cachePlayerBar = cachePlayerBar;
+    public VolumeUnit getVolumeUnit() {
+        return volumeUnit;
+    }
+
+    public void setVolumeUnit(VolumeUnit volumeUnit) {
+        this.volumeUnit = volumeUnit;
     }
 
     public CachePlayerBar getCachePlayerBar() {

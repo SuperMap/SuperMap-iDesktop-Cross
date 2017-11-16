@@ -8,9 +8,9 @@ import com.supermap.desktop.properties.CoreProperties;
 
 public enum AreaUnit {
 	// @formatter:off
-	MILIMETER(UnitValue.MILLIMETER * UnitValue.MILLIMETER),
-	CENTIMETER(UnitValue.CENTIMETER * UnitValue.CENTIMETER),
-	DECIMETER(UnitValue.DECIMETER * UnitValue.DECIMETER),
+    MILLIMETER(UnitValue.MILLIMETER * UnitValue.MILLIMETER),
+    CENTIMETER(UnitValue.CENTIMETER * UnitValue.CENTIMETER),
+    DECIMETER(UnitValue.DECIMETER * UnitValue.DECIMETER),
 	METER(UnitValue.METER * UnitValue.METER),
 	//改为long型，因为10000000的平方使用int装不下会产生溢出的错误
 	KILOMETER((long) UnitValue.KILOMETER * UnitValue.KILOMETER),
@@ -46,9 +46,9 @@ public enum AreaUnit {
 		} else if (unit == Unit.MILE) {
 			areaUnit = AreaUnit.MILE;
 		} else if (unit == Unit.MILIMETER) {
-			areaUnit = AreaUnit.MILIMETER;
-		} else if (unit == Unit.YARD) {
-			areaUnit = AreaUnit.YARD;
+            areaUnit = AreaUnit.MILLIMETER;
+        } else if (unit == Unit.YARD) {
+            areaUnit = AreaUnit.YARD;
 		} else {
 			areaUnit = AreaUnit.METER;
 		}
@@ -72,9 +72,9 @@ public enum AreaUnit {
 			unit = Unit.METER;
 		} else if (this == MILE) {
 			unit = Unit.MILE;
-		} else if (this == MILIMETER) {
-			unit = Unit.MILIMETER;
-		} else if (this == YARD) {
+        } else if (this == MILLIMETER) {
+            unit = Unit.MILIMETER;
+        } else if (this == YARD) {
 			unit = Unit.YARD;
 		} else {
 			unit = Unit.METER;
@@ -90,9 +90,9 @@ public enum AreaUnit {
 	public String toString() {
 		String result = "";
 
-		if (this == AreaUnit.MILIMETER) {
-			result = CoreProperties.getString("String_AreaUnit_Millimeter");
-		} else if (this == AreaUnit.CENTIMETER) {
+        if (this == AreaUnit.MILLIMETER) {
+            result = CoreProperties.getString("String_AreaUnit_Millimeter");
+        } else if (this == AreaUnit.CENTIMETER) {
 			result = CoreProperties.getString("String_AreaUnit_Centimeter");
 		} else if (this == AreaUnit.DECIMETER) {
 			result = CoreProperties.getString("String_AreaUnit_Decimeter");
@@ -119,9 +119,9 @@ public enum AreaUnit {
 	public static AreaUnit getValueOf(String name) {
 		AreaUnit result = AreaUnit.METER;
 		if (name.equals(CoreProperties.getString("String_AreaUnit_Millimeter"))) {
-			result = AreaUnit.MILIMETER;
-		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Centimeter"))) {
-			result = AreaUnit.CENTIMETER;
+            result = AreaUnit.MILLIMETER;
+        } else if (name.equals(CoreProperties.getString("String_AreaUnit_Centimeter"))) {
+            result = AreaUnit.CENTIMETER;
 		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Decimeter"))) {
 			result = AreaUnit.DECIMETER;
 		} else if (name.equals(CoreProperties.getString("String_AreaUnit_Meter"))) {
