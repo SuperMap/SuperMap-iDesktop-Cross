@@ -151,6 +151,10 @@ public class MetaProcessAverageNearestNeighbor extends MetaProcess {
 						+ confidenceCoefficient + "\n";
 				result += resultDescription + "\n";
 
+				result += "-----------------------------------------" + "\n"
+						+ "How to Use?" + "\n"
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html?SpatialStatisticalAnalysis,AnalyzingPatterns1";
+
 				// 不显示时间-yuanR2017.9.6
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(result);

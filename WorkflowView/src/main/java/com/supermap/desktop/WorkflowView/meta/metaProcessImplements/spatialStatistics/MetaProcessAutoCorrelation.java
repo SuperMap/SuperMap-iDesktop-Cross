@@ -95,6 +95,9 @@ public class MetaProcessAutoCorrelation extends MetaProcessAnalyzingPatterns {
 						+ confidenceCoefficient + "\n";
 				result += resultDescription + "\n";
 
+				result += "-----------------------------------------" + "\n"
+						+ "How to Use?" + "\n"
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html?SpatialStatisticalAnalysis,AnalyzingPatterns1";
 
 				// 不显示时间-yuanR2017.9.6
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);

@@ -187,6 +187,11 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 					}
 				}
 				result += ProcessProperties.getString("String_Max_Peak") + dcmFmtDistance.format(distance) + "," + dcmFmtOthers.format(z) + "\n";
+				result += "-----------------------------------------" + "\n"
+						+ "How to Use?" + "\n"
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html?SpatialStatisticalAnalysis,AnalyzingPatterns1";
+
+
 				// 不显示时间-yuanR2017.9.6
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(result);
