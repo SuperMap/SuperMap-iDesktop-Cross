@@ -4,6 +4,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.utilities.SkinUtilties;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
 import org.pushingpixels.flamingo.api.common.JCommandMenuButton;
 import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
@@ -63,7 +64,7 @@ public class CtrlActionSkin extends CtrlAction {
 	@Override
 	protected void run() {
 		skinTest();
-		ribbonTest();
+//		ribbonTest();
 	}
 
 	private void skinTest() {
@@ -95,12 +96,18 @@ public class CtrlActionSkin extends CtrlAction {
 				new SaharaSkin(),
 		};
 
-		JComboBox<SubstanceSkin> objectJComboBox = new JComboBox<>();
+		final JComboBox<SubstanceSkin> objectJComboBox = new JComboBox<>();
 		for (SubstanceSkin skin : skins) {
 			objectJComboBox.addItem(skin);
 		}
 
 		JButton jButton = new JButton("apply");
+		jButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SkinUtilties.setSkin(((SubstanceSkin) objectJComboBox.getSelectedItem()));
+			}
+		});
 		Container contentPane = jDialog.getContentPane();
 		contentPane.setLayout(new GridBagLayout());
 		contentPane.add(objectJComboBox, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(1, 1).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 10, 10, 0));
