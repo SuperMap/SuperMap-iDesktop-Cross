@@ -16,7 +16,7 @@ import com.supermap.desktop.ui.OutputFrame;
 
 /**
  * @author XiaJT
- *         聚类和异常值分析
+ * 聚类和异常值分析
  */
 public class MetaProcessClusterOutlierAnalyst extends MetaProcessAnalyzingPatterns {
 
@@ -56,8 +56,7 @@ public class MetaProcessClusterOutlierAnalyst extends MetaProcessAnalyzingPatter
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = result != null;
 			if (isSuccessful) {
-				String message = "-----------------------------------------" + "\n"
-						+ "How to Use?" + "\n"
+				String message = "How to Use?" + "\n"
 						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html?SpatialStatisticalAnalysis,Clusters1,SpatialRelationshipModeling1,AnalyzingPatterns1";
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(message);

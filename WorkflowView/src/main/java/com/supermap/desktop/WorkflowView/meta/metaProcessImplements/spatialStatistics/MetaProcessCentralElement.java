@@ -39,8 +39,7 @@ public class MetaProcessCentralElement extends MetaProcessSpatialMeasure {
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = result != null;
 			if (isSuccessful) {
-				String message = "-----------------------------------------" + "\n"
-						+ "How to Use?" + "\n"
+				String message = "How to Use?" + "\n"
 						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html?SpatialStatisticalAnalysis,MeasureGeographicDistr,Clusters1,SpatialRelationshipModeling1,AnalyzingPatterns1";
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(message);
