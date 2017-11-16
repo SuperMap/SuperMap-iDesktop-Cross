@@ -1,8 +1,8 @@
 package com.supermap.desktop.CtrlAction.Map.MapMeasure.Measure;
 
 import com.supermap.analyst.spatialanalyst.CalculationTerrain;
-import com.supermap.data.DatasetGrid;
-import com.supermap.data.GeoRegion;
+import com.supermap.data.*;
+import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.enums.MeasureType;
 import com.supermap.desktop.enums.VolumeUnit;
@@ -13,15 +13,14 @@ import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.TextFields.NumTextFieldLegit;
 import com.supermap.desktop.ui.controls.button.SmButton;
+import com.supermap.desktop.utilities.FontUtilities;
 import com.supermap.mapping.TrackingLayer;
 import com.supermap.ui.TrackedEvent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.text.MessageFormat;
 
 /**
  * Created by ChenS on 2017/11/10 0010.
@@ -47,6 +46,25 @@ public class MeasureSurfaceVolume extends MeasureSurfaceArea {
             TrackingLayer trackingLayer = mapControl.getMap().getTrackingLayer();
             trackingLayer.remove(trackingLayer.getCount() - 1);
             mapControl.getMap().refreshTrackingLayer();
+        }
+    }
+
+    @Override
+    protected void showResult(String s, double result, Point2D point2D, String unitString) {
+        String info = MessageFormat.format(s, decimalFormat.format(result), unitString);
+
+        TextPart part = new TextPart(info, point2D);
+        GeoText geotext = new GeoText(part);
+
+        TextStyle textStyle = geotext.getTextStyle();
+        textStyle.setFontHeight(FontUtilities.fontSizeToMapHeight(textFontHeight,
+                mapControl.getMap(), textStyle.isSizeFixed()));
+        mapControl.getMap().getTrackingLayer().add(geotext, textTagTitle + "FinishedMeasure");
+        if (result > 0) {
+
+            Application.getActiveApplication().getOutput().output(MessageFormat.format(s, decimalFormat.format(result), unitString));
+        } else {
+            Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_Warning_MeasureVolumeFailed"));
         }
     }
 
@@ -103,7 +121,18 @@ public class MeasureSurfaceVolume extends MeasureSurfaceArea {
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
+                    dialogResult = DialogResult.CANCEL;
                     ParaOptionPane.this.dispose();
+                }
+            });
+
+            this.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if (e.getKeyCode() == 27) {
+                        dialogResult = DialogResult.CANCEL;
+                        ParaOptionPane.this.dispose();
+                    }
                 }
             });
         }

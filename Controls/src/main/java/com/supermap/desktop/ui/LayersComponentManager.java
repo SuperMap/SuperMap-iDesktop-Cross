@@ -1,16 +1,22 @@
 package com.supermap.desktop.ui;
 
+import com.supermap.data.Dataset;
 import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IContextMenuManager;
+import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
+import com.supermap.desktop.ui.controls.ComponentDropDown;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
 import com.supermap.desktop.ui.trees.Layer3DsTree;
 import com.supermap.desktop.ui.trees.LayersTree;
 import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.trees.TreeNodeData;
+import com.supermap.desktop.utilities.CoreResources;
 import com.supermap.mapping.*;
 import com.supermap.realspace.Scene;
 
@@ -36,10 +42,13 @@ public class LayersComponentManager extends JComponent {
 	private JToolBar toolBar;
 	private final String urlStr = "/coreresources/ToolBar/";
 	private ComponentDropDown addLayerGroup;
-	private JMenuItem jMenuItemAddLayerRootGroup;
+    private ComponentDropDown addData;
+    private JMenuItem jMenuItemAddLayerRootGroup;
 	private JMenuItem jMenuItemAddLayerGroup;
 	private JMenuItem jMenuItemAddLayerSnapshot;
-	// 临时的变量，现在还没有自动加载Dockbar，所以暂时用这个变量测试
+    private JMenuItem jMenuItemAddData;
+    private JMenuItem jMenuItemMongoDB;
+    // 临时的变量，现在还没有自动加载Dockbar，所以暂时用这个变量测试
 	private Boolean isContextMenuBuilded = false;
 	private JPopupMenu layerWMSPopupMenu;
 	private ArrayList<TreePath> legalPaths;
@@ -141,16 +150,26 @@ public class LayersComponentManager extends JComponent {
 		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
 		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/controlsImage/Image_Layer_LayerSnapshot.png"));
-		this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
-		JPopupMenu popupMenuLayerGroup = new JPopupMenu();
+        this.jMenuItemAddData = new JMenuItem(ControlsProperties.getString("String_AddData"), CoreResources.getIcon("coreresources/ThemeToolBar/Image_ToolButton_AddItem_16.png"));
+        this.jMenuItemMongoDB = new JMenuItem(ControlsProperties.getString("String_LoadMongoDB"), null);
+        this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
+        this.addData = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
+        JPopupMenu popupMenuLayerGroup = new JPopupMenu();
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerRootGroup);
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerGroup);
 		popupMenuLayerGroup.add(this.jMenuItemAddLayerSnapshot);
-		this.addLayerGroup.setPopupMenu(popupMenuLayerGroup);
+        JPopupMenu popupMenuAddData = new JPopupMenu();
+        popupMenuAddData.add(this.jMenuItemAddData);
+        popupMenuAddData.add(this.jMenuItemMongoDB);
+        this.addLayerGroup.setPopupMenu(popupMenuLayerGroup);
 		this.addLayerGroup.setToolTip(ControlsProperties.getString("String_Button_NewRootGroup"));
 		this.addLayerGroup.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
-		this.toolBar.add(this.addLayerGroup);
-		this.toolBar.setFloatable(false);
+        this.addData.setPopupMenu(popupMenuAddData);
+        this.addData.setToolTip(ControlsProperties.getString("String_AddData"));
+        this.addData.setIcon(CoreResources.getIcon("coreresources/ThemeToolBar/Image_ToolButton_AddItem_16.png"));
+        this.toolBar.add(this.addLayerGroup);
+        this.toolBar.add(this.addData);
+        this.toolBar.setFloatable(false);
 		this.toolBar.setVisible(false);
 		registerEvents();
 	}
@@ -166,20 +185,29 @@ public class LayersComponentManager extends JComponent {
 		this.jMenuItemAddLayerRootGroup.addActionListener(this.addLayerRootGroupListener);
 		this.jMenuItemAddLayerGroup.addActionListener(this.addLayerGroupListener);
 		this.jMenuItemAddLayerSnapshot.addActionListener(this.addLayerSnapshotListener);
-	}
 
-	private ActionListener addLayerRootGroupListener=new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (layersTree!=null && layersTree.getMap()!= null) {
-				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
-				layersTree.getMap().getLayers().addGroup(layerGroupName);
-				int selectRow = layersTree.getRowCount() - 1;
-				layersTree.clearSelection();
-				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
-			}
-		}
-	};
+        this.addData.getDisplayButton().removeActionListener(addDataListener);
+        this.jMenuItemAddData.removeActionListener(addDataListener);
+        this.jMenuItemMongoDB.removeActionListener(loadMongoDBListener);
+        this.addData.getDisplayButton().addActionListener(addDataListener);
+        this.jMenuItemAddData.addActionListener(addDataListener);
+        this.jMenuItemMongoDB.addActionListener(loadMongoDBListener);
+
+    }
+
+    //region Listener
+    private ActionListener addLayerRootGroupListener=new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (layersTree!=null && layersTree.getMap()!= null) {
+                String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
+                layersTree.getMap().getLayers().addGroup(layerGroupName);
+                int selectRow = layersTree.getRowCount() - 1;
+                layersTree.clearSelection();
+                layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
+            }
+        }
+    };
 
 	private ActionListener addLayerGroupListener=new ActionListener() {
 		@Override
@@ -231,6 +259,43 @@ public class LayersComponentManager extends JComponent {
 			}
 		}
 	};
+
+    private ActionListener addDataListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+                if (formMap != null) {
+                    DatasetType[] datasetTypes = new DatasetType[]{
+                            DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.TEXT, DatasetType.CAD, DatasetType.NETWORK,
+                            DatasetType.LINEM, DatasetType.GRID, DatasetType.IMAGE, DatasetType.POINT3D, DatasetType.LINE3D, DatasetType.REGION3D,
+                            DatasetType.GRIDCOLLECTION, DatasetType.IMAGECOLLECTION, DatasetType.PARAMETRICLINE, DatasetType.PARAMETRICREGION,
+                            DatasetType.NETWORK3D
+                    };
+                    DatasetChooser datasetChooser = new DatasetChooser();
+                    datasetChooser.setSupportDatasetTypes(datasetTypes);
+                    if (datasetChooser.showDialog() == DialogResult.OK) {
+                        java.util.List<Dataset> datasetsToMap = datasetChooser.getSelectedDatasets();
+                        Layer[] addedLayers = MapViewUIUtilities.addDatasetsToMap(formMap.getMapControl().getMap(), datasetsToMap.toArray(new Dataset[datasetsToMap.size()]), true);
+
+                        if (addedLayers != null && addedLayers.length > 0) {
+                            formMap.setActiveLayers(addedLayers);
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                Application.getActiveApplication().getOutput().output(ex);
+            }
+        }
+    };
+
+    private ActionListener loadMongoDBListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    };
+    //endregion
 
 	private void initializeResources() {
 		// 默认实现，后续进行初始化操作
