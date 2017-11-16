@@ -25,7 +25,7 @@ public class CtrlActionMeasureAngle extends CtrlActionMeasureArea {
 	public void run() {
 		IForm activeForm = Application.getActiveApplication().getActiveForm();
 		if (activeForm instanceof FormMap) {
-			MeasureUtilties.startMeasure((FormMap) activeForm, MeasureType.Angle);
+			MeasureUtilties.startMeasure((FormMap) activeForm, MeasureType.Angle, null);
 		}
 	}
 

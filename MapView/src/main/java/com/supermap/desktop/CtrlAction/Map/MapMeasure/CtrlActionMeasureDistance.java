@@ -27,9 +27,9 @@ public class CtrlActionMeasureDistance extends CtrlAction {
 	public void run() {
 		IForm activeForm = Application.getActiveApplication().getActiveForm();
 		if (activeForm instanceof FormMap) {
-			MeasureUtilties.startMeasure((FormMap) activeForm, MeasureType.Distance);
-		}
-	}
+            MeasureUtilties.startMeasure((FormMap) activeForm, MeasureType.Distance, null);
+        }
+    }
 
 
 	@Override

@@ -479,7 +479,7 @@ public class FirstStepPane extends JPanel implements IState {
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label;
                 if (value != null) {
-                    label = new JLabel(value.GetVersionDesc());
+                    label = new JLabel(value.desc);
                 } else {
                     label = new JLabel(" ");
                 }
