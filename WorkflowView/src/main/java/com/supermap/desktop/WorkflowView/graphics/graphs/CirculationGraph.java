@@ -1,6 +1,7 @@
 package com.supermap.desktop.WorkflowView.graphics.graphs;
 
-import com.supermap.desktop.WorkflowView.circulation.CirculationType;
+import com.supermap.desktop.WorkflowView.circulation.CirculationDialog;
+import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
@@ -16,6 +17,7 @@ import java.awt.*;
 public class CirculationGraph extends RectangleGraph {
 	private CirculationType circulationType;
 	private OutputData outputData;
+	private CirculationDialog circulationDialog;
 
 	public CirculationGraph(GraphCanvas canvas, CirculationType circulationType) {
 		super(canvas, 0, 0);
@@ -58,6 +60,13 @@ public class CirculationGraph extends RectangleGraph {
 		double width = getWidth();
 		double height = getHeight();
 		g.drawString(title, DoubleUtilities.intValue(location.getX() + (width - fontWidth) / 2), DoubleUtilities.intValue(location.getY() + height / 2 + fontHeight / 2 - fontDescent));
+	}
 
+	public CirculationDialog getCirculationDialog() {
+		return circulationDialog;
+	}
+
+	public void setCirculationDialog(CirculationDialog circulationDialog) {
+		this.circulationDialog = circulationDialog;
 	}
 }

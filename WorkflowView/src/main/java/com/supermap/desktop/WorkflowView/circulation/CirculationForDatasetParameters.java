@@ -6,6 +6,7 @@ import com.supermap.data.Datasource;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetTypeConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasetType;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
@@ -17,7 +18,7 @@ import com.supermap.desktop.utilities.DatasourceUtilities;
 /**
  * Created by xie on 2017/11/2.
  */
-public class CirculationForDatasetParameters extends AbstractCirculationParameters{
+public class CirculationForDatasetParameters extends AbstractCirculationParameters {
 	private ParameterDatasourceConstrained datasourceConstrained;
 	private ParameterSingleDataset dataset;
 	private ParameterDatasetType datasetType;

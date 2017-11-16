@@ -2,6 +2,7 @@ package com.supermap.desktop.WorkflowView.circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
 import com.supermap.desktop.utilities.StringUtilities;

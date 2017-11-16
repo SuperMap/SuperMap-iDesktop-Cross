@@ -63,9 +63,9 @@ public class MdiGroupUI extends ComponentUI {
 	@Override
 	public void uninstallUI(JComponent c) {
 		c.setLayout(null);
-		this.group = null;
 		uninstallIcons();
 		uninstallEvents();
+		this.group = null;
 	}
 
 	private void uninstallIcons() {
@@ -73,9 +73,11 @@ public class MdiGroupUI extends ComponentUI {
 	}
 
 	private void uninstallEvents() {
-		this.group.removeMouseListener(this.mouseHandler);
-		this.group.removeMouseMotionListener(this.mouseMotionHandler);
-		this.group.removeKeyListener(this.keyHandler);
+		if (group != null) {
+			this.group.removeMouseListener(this.mouseHandler);
+			this.group.removeMouseMotionListener(this.mouseMotionHandler);
+			this.group.removeKeyListener(this.keyHandler);
+		}
 		this.mouseHandler = null;
 		this.mouseMotionHandler = null;
 		this.keyHandler = null;
