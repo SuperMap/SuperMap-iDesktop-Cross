@@ -436,6 +436,9 @@ public class SubstanceRibbonFrameTitlePane extends SubstanceTitlePane {
 			super.layoutContainer(c);
 
 			JRibbon ribbon = getRibbon();
+			if (ribbon == null) {
+				return;
+			}
 			boolean ltr = ribbon.getComponentOrientation().isLeftToRight();
 			RibbonUI ribbonUI = ribbon.getUI();
 

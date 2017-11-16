@@ -267,11 +267,23 @@ public class ColorSelectionPanel extends JPanel {
 			int y = 0;
 			// 渐变色填充按钮
 			for (int j = 0; j < m_hashMapStand.size(); j++) {
-				final JButton button = new JButton("");
+				final JButton button = new JButton(""){
+					@Override
+					public void setBounds(int x, int y, int width, int height) {
+						super.setBounds(x, y, width, height);
+					}
+
+					@Override
+					protected void paintComponent(Graphics g) {
+						g.setColor(this.getBackground());
+						g.fillRect(0,0,this.getWidth(),this.getHeight());
+//						super.paintComponent(g);
+					}
+				};
 				// 依据步进决定是横排还是竖排
+				button.setBorder(null);
 				if (m_depth > 1) {
 					y++;
-					button.setBorder(null);
 				} else {
 					x++;
 				}
@@ -311,7 +323,7 @@ public class ColorSelectionPanel extends JPanel {
 				constr.gridy = y;
 				constr.gridx = x;
 				button.setPreferredSize(new Dimension(13, 13));
-				button.setContentAreaFilled(false);
+//				button.setContentAreaFilled(false);
 				button.setOpaque(true);
 				button.setBackground(m_hashMapStand.get(j));
 				gridbagLayout.setConstraints(button, constr);

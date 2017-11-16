@@ -367,7 +367,7 @@ public class BasicCommandButtonUI extends CommandButtonUI {
 		this.disposePopupsActionListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean toDismiss = !Boolean.TRUE
+				boolean toDismiss = commandButton!=null &&!Boolean.TRUE
 						.equals(commandButton.getClientProperty(DONT_DISPOSE_POPUPS));
 				if (toDismiss) {
 					JCommandPopupMenu menu = (JCommandPopupMenu) SwingUtilities
