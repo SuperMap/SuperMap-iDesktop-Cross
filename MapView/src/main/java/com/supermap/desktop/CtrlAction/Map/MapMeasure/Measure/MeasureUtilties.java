@@ -1,5 +1,6 @@
 package com.supermap.desktop.CtrlAction.Map.MapMeasure.Measure;
 
+import com.supermap.data.DatasetGrid;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.enums.MeasureType;
 import com.supermap.desktop.event.FormClosedEvent;
@@ -37,9 +38,9 @@ public class MeasureUtilties {
 
 	private static List<IMeasureAble> measureAbleLists = new ArrayList<>();
 
-	public static void startMeasure(FormMap formMap, MeasureType measureType) {
-		if (formMap == null || formMap.getMapControl() == null) {
-			return;
+    public static void startMeasure(FormMap formMap, MeasureType measureType, DatasetGrid datasetGrid) {
+        if (formMap == null || formMap.getMapControl() == null) {
+            return;
 		}
 		addListener(formMap);
 		MapControl mapControl = formMap.getMapControl();
@@ -68,9 +69,14 @@ public class MeasureUtilties {
 		}
 
 		// 不存在空闲对象，创建新对象
-		IMeasureAble measureInstance = MeasureFactory.getMeasureInstance(measureType);
-		if (measureInstance != null) {
-			measureAbleLists.add(measureInstance);
+        IMeasureAble measureInstance;
+        if (datasetGrid != null) {
+            measureInstance = MeasureFactory.getMeasureInstance(measureType, datasetGrid);
+        } else {
+            measureInstance = MeasureFactory.getMeasureInstance(measureType);
+        }
+        if (measureInstance != null) {
+            measureAbleLists.add(measureInstance);
 			measureInstance.setMapControl(mapControl);
 			measureInstance.startMeasure();
 		} else {

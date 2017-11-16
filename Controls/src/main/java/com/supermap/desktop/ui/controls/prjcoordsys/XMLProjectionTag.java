@@ -9,8 +9,10 @@ public class XMLProjectionTag {
 	public static final String PROJECTION = "projection";
 	public static final String DEFAULT = "default";
 	public static final String PROJECTION_XML = "../Templates/Projection/Projection.xml";
-	public static final String CUSTOMPROJECTION_XML = "../Templates/Projection/CustomProjection.xml";
-	public static final String FAVORITEPROJECTION_XML = "../Templates/Projection/FavoriteProjection.xml";
+	//public static final String CUSTOMPROJECTION_XML = "../Templates/Projection/CustomProjection.xml";
+	//public static final String FAVORITEPROJECTION_XML = "../Templates/Projection/FavoriteProjection.xml";
+	public static final String CUSTOMPROJECTION_FOLDER = "../Templates/Projection/Customize";
+	public static final String FAVORITEPROJECTION_FOLDER = "../Templates/Projection/Favorite";
 
 	public static final String NAMESPACEURL = "http://www.supermap.com/sml";
 	// 1

@@ -8,11 +8,11 @@ import com.supermap.desktop.WorkflowView.meta.MetaProcess;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -84,11 +84,11 @@ public abstract class MetaProcessSpatialMeasure extends MetaProcess {
 	}
 
 	private void initComponentState() {
-		DatasetVector datasetVector=null;
+		DatasetVector datasetVector = null;
 		if (getKey().equals(MetaKeys.LINEAR_DIRECTIONAL_MEAN)) {
 			datasetVector = (DatasetVector) DatasetUtilities.getDefaultDataset(DatasetType.LINE);
-		}else {
-			datasetVector = (DatasetVector) DatasetUtilities.getDefaultDataset(DatasetType.POINT,DatasetType.LINE,DatasetType.REGION);
+		} else {
+			datasetVector = (DatasetVector) DatasetUtilities.getDefaultDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 		}
 		if (datasetVector != null) {
 			datasource.setSelectedItem(datasetVector.getDatasource());

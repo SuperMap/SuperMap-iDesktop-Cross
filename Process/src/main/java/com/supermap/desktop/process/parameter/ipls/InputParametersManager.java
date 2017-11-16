@@ -14,9 +14,9 @@ import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -140,7 +140,7 @@ public class InputParametersManager {
 	public void add(final String name, Type type, final IParameter... parameter) {
 		InputParameterDataNode inputParameterDataNode;
 		// 可根据inputParametre的参数类型，设置各种形式的工作流连接-yuanR2017.9.22
-		if (type instanceof BasicTypes) {
+		if (BasicTypes.BASICTYPES.contains(type)) {
 			inputParameterDataNode = new InputParameterDataNode(name, type, null, parameter);
 		} else {
 			ParameterSwitch parameterSwitch = new ParameterSwitch();
@@ -189,6 +189,7 @@ public class InputParametersManager {
 
 	/**
 	 * 增加：inputParameterDataNode.getType() instanceof BasicTypes-yuanR2017.9.22
+	 *
 	 * @param toInput
 	 * @param fromOutput
 	 */
@@ -197,9 +198,9 @@ public class InputParametersManager {
 			isSelecting = true;
 			for (InputParameterDataNode inputParameterDataNode : list) {
 				if (inputParameterDataNode.getName().equals(toInput.getName())) {
-					if (inputParameterDataNode.getType() instanceof BasicTypes) {
+					if (BasicTypes.BASICTYPES.contains(inputParameterDataNode.getType())) {
 						((ISelectionParameter) inputParameterDataNode.getParameter()[0]).setSelectedItem(((ISelectionParameter) fromOutput.getParameters().get(0)).getSelectedItem());
-					} else if (inputParameterDataNode.getType() instanceof DatasetTypes) {
+					} else if (DatasetTypes.DATASET.contains(inputParameterDataNode.getType())) {
 						ParameterComboBox parameterComboBox = (ParameterComboBox) ((ParameterCombine) inputParameterDataNode.getParameterSwitch().getParameterByTag("1")).getParameterList().get(0);
 						inputParameterDataNode.getParameterSwitch().switchParameter("1");
 

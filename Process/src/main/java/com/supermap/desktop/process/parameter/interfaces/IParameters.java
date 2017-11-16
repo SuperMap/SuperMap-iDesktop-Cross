@@ -5,7 +5,7 @@ import com.supermap.desktop.process.core.Workflow;
 import com.supermap.desktop.process.parameter.events.ParameterPropertyChangedListener;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.Outputs;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 
 import java.util.ArrayList;
 

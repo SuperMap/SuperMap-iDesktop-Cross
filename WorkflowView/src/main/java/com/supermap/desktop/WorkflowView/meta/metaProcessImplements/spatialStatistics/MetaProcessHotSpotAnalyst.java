@@ -8,11 +8,12 @@ import com.supermap.desktop.WorkflowView.ProcessOutputResultProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSaveDataset;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.OutputFrame;
 
 /**
  * @author XiaJT
@@ -54,6 +55,13 @@ public class MetaProcessHotSpotAnalyst extends MetaProcessAnalyzingPatterns {
 			DatasetVector result = ClusteringDistributions.hotSpotAnalyst(datasetVector, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName()), parameterPatternsParameter.getPatternParameter());
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = result != null;
+			if (isSuccessful) {
+				String message = "How to Use?" + "\n"
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html?SpatialStatisticalAnalysis,Clusters1,SpatialRelationshipModeling1,AnalyzingPatterns1";
+				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
+				Application.getActiveApplication().getOutput().output(message);
+				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(true);
+			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e.getMessage());
 			e.printStackTrace();

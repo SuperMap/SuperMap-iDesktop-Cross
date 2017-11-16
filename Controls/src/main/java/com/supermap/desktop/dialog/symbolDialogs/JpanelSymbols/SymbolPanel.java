@@ -89,7 +89,7 @@ public abstract class SymbolPanel extends JPanel {
     private String getFitText(Font font) {
         int line = 1;
         String result = symbolName;
-        if (FontUtilities.getStringWidth(symbolName, font) > fontSize) {
+//        if (FontUtilities.getStringWidth(symbolName, font) > fontSize) {
             StringBuilder builder = new StringBuilder();
             int fontCount = 0;
             builder.append("<html>");
@@ -110,7 +110,7 @@ public abstract class SymbolPanel extends JPanel {
             }
             builder.append("</html>");
             result = builder.toString();
-        }
+//        }
 	    Dimension preferredSize = new Dimension(fontSize + 20, (int) (labelDimension.getHeight() + line * (FontUtilities.getStringHeight(CoreProperties.getString(CoreProperties.OK), font) + 5)));
 	    this.setMinimumSize(preferredSize);
         this.setPreferredSize(preferredSize);

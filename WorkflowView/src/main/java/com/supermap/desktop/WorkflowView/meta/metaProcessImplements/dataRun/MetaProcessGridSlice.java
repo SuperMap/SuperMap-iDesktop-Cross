@@ -12,8 +12,8 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -23,7 +23,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Created by lixiaoyao on 2017/10/18.
  */
-public class MetaProcessGridSlice extends MetaProcess{
+public class MetaProcessGridSlice extends MetaProcess {
 	private final static String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
 	private final static String OUTPUT_DATA = "SliceResult";
 
@@ -47,9 +47,9 @@ public class MetaProcessGridSlice extends MetaProcess{
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
 		this.sourceDataset.setRequisite(true);
-		this.numberSeries=new ParameterNumber(ProcessProperties.getString("String_SeriesNumber"));
+		this.numberSeries = new ParameterNumber(ProcessProperties.getString("String_SeriesNumber"));
 		this.numberSeries.setRequisite(true);
-		this.numberMinValue=new ParameterNumber(ControlsProperties.getString("String_LabelMinValue"));
+		this.numberMinValue = new ParameterNumber(ControlsProperties.getString("String_LabelMinValue"));
 		this.numberMinValue.setRequisite(true);
 		this.numberMinValue.setTipButtonMessage(ProcessProperties.getString("String_SeriesTip"));
 		this.resultDataset = new ParameterSaveDataset();
@@ -64,7 +64,7 @@ public class MetaProcessGridSlice extends MetaProcess{
 		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.resultDataset);
 
-		this.parameters.setParameters(sourceData, parameterSetting,targetData);
+		this.parameters.setParameters(sourceData, parameterSetting, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.GRID, sourceData);
 		this.parameters.addOutputParameters(OUTPUT_DATA, ProcessOutputResultProperties.getString("String_SliceResult"), DatasetTypes.GRID, targetData);
 	}
@@ -81,7 +81,7 @@ public class MetaProcessGridSlice extends MetaProcess{
 		this.numberSeries.setMinValue(1);
 		this.numberSeries.setIsIncludeMin(true);
 		this.numberMinValue.setSelectedItem(0);
-		DatasetGrid dataset = (DatasetGrid)DatasetUtilities.getDefaultDataset(DatasetType.GRID);
+		DatasetGrid dataset = (DatasetGrid) DatasetUtilities.getDefaultDataset(DatasetType.GRID);
 		if (dataset != null) {
 			this.sourceDatasource.setSelectedItem(dataset.getDatasource());
 			this.sourceDataset.setSelectedItem(dataset);
@@ -102,10 +102,10 @@ public class MetaProcessGridSlice extends MetaProcess{
 		});
 	}
 
-	private void changeDataset(DatasetGrid datasetGrid){
-		if (Double.compare(datasetGrid.getMinValue(),datasetGrid.getMaxValue())==0){
+	private void changeDataset(DatasetGrid datasetGrid) {
+		if (Double.compare(datasetGrid.getMinValue(), datasetGrid.getMaxValue()) == 0) {
 			this.numberSeries.setSelectedItem(1);
-		}else{
+		} else {
 			this.numberSeries.setSelectedItem(10);
 		}
 		this.numberMinValue.setSelectedItem(datasetGrid.getMinValue());
@@ -125,15 +125,15 @@ public class MetaProcessGridSlice extends MetaProcess{
 			}
 
 			GeneralizeAnalyst.addSteppedListener(steppedListener);
-			DatasetGrid result= GeneralizeAnalyst.slice(src,this.resultDataset.getResultDatasource(),datasetName,
+			DatasetGrid result = GeneralizeAnalyst.slice(src, this.resultDataset.getResultDatasource(), datasetName,
 					Integer.valueOf(this.numberSeries.getSelectedItem().toString()),
-							Integer.valueOf(this.numberMinValue.getSelectedItem().toString()));
+					Integer.valueOf(this.numberMinValue.getSelectedItem().toString()));
 			this.getParameters().getOutputs().getData(OUTPUT_DATA).setValue(result);
 			isSuccessful = result != null;
-		}catch (Exception e){
+		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e.getMessage());
 			e.printStackTrace();
-		}finally {
+		} finally {
 			GeneralizeAnalyst.removeSteppedListener(steppedListener);
 		}
 		return isSuccessful;

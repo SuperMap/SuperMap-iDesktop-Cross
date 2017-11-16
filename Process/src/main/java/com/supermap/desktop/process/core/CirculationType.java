@@ -1,9 +1,10 @@
 package com.supermap.desktop.process.core;
 
 import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.CommonTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 
 /**
  * Created by xie on 2017/10/25.
@@ -80,7 +81,7 @@ public enum CirculationType {
 				result = BasicTypes.STRING;
 				break;
 			case forDatasetType:
-				result = CommonTypes.DATASET;
+				result = DatasetTypes.DATASET;
 				break;
 			case forObjectType:
 				result = BasicTypes.STRING;

@@ -8,8 +8,11 @@ import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmToolbar;
 import com.supermap.desktop.ui.ToolbarManager;
 import org.pushingpixels.flamingo.api.common.JCommandToggleButton;
-import org.pushingpixels.flamingo.api.ribbon.*;
-import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import org.pushingpixels.flamingo.api.ribbon.AbstractRibbonBand;
+import org.pushingpixels.flamingo.api.ribbon.JRibbon;
+import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
+import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
+import org.pushingpixels.flamingo.internal.ui.ribbon.AbstractBandControlPanel;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JRibbonGallery;
 
 import javax.swing.*;
@@ -28,7 +31,101 @@ public class ToolbarUIUtilities {
 	 */
 	public static void updataToolbarsState() {
 		updateRibbonState();
+//		updateToolbar();
+	}
 
+	private static void updateRibbonState() {
+		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
+		if (mainFrame instanceof JRibbonFrame) {
+			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
+			updateRibbonTaskState(ribbon.getSelectedTask());
+//			for (int i = 0; i < ribbon.getTaskCount(); i++) {
+//				RibbonTask task = ribbon.getTask(i);
+//				updateRibbonTaskState(task);
+//			}
+//			for (int i = 0; i < ribbon.getContextualTaskGroupCount(); i++) {
+//				RibbonContextualTaskGroup contextualTaskGroup = ribbon.getContextualTaskGroup(i);
+//				if (ribbon.isVisible(contextualTaskGroup)) {
+//					for (int j = 0; j < contextualTaskGroup.getTaskCount(); j++) {
+//						updateRibbonTaskState(contextualTaskGroup.getTask(j));
+//					}
+//				}
+//			}
+		}
+	}
+
+	private static void updateRibbonTaskState(RibbonTask task) {
+		for (AbstractRibbonBand<?> abstractRibbonBand : task.getBands()) {
+			updateRibbonBandTask(abstractRibbonBand);
+		}
+	}
+
+	private static void updateRibbonBandTask(AbstractRibbonBand<?> abstractRibbonBand) {
+		AbstractBandControlPanel controlPanel = abstractRibbonBand.getControlPanel();
+			if (controlPanel != null) {
+				for (int i = 0; i < controlPanel.getComponentCount(); i++) {
+					Component component = controlPanel.getComponent(i);
+					if (component instanceof IBaseItem) {
+						if (((IBaseItem) component).getCtrlAction() != null) {
+							try {
+								component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
+								((IBaseItem) component).setIgnoreEvent(true);
+								if (component instanceof AbstractButton) {
+									((AbstractButton) component).setSelected(((IBaseItem) component).getCtrlAction().check());
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}finally {
+								((IBaseItem) component).setIgnoreEvent(false);
+							}
+						}
+					} else if (component instanceof JRibbonGallery) {
+						JRibbonGallery ribbonGallery = (JRibbonGallery) component;
+						for (int j = 0; j < ribbonGallery.getButtonCount(); j++) {
+							JCommandToggleButton button = ribbonGallery.getButtonAt(j);
+							if (button instanceof IBaseItem) {
+								if (((IBaseItem) button).getCtrlAction() != null) {
+									try {
+										button.setEnabled(((IBaseItem) button).getCtrlAction().enable());
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+	}
+
+	public static JToolBar.Separator getVerticalSeparator() {
+		JToolBar.Separator separator = new JToolBar.Separator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		return separator;
+	}
+
+	public static SmToolbar getSmToolbarAtPoint(Point point) {
+		Component deepestComponent = SwingUtilities.getDeepestComponentAt(Application.getActiveApplication().getMainFrame().getToolbarManager().getToolbarsContainer(), point.x, point.y);
+		if (deepestComponent != null) {
+			return getParentToolBar(deepestComponent);
+		}
+		return null;
+	}
+
+	public static SmToolbar getParentToolBar(Component component) {
+		if (component == null) {
+			return null;
+		}
+		if (component instanceof SmToolbar) {
+			return ((SmToolbar) component);
+		}
+		return getParentToolBar(component.getParent());
+	}
+
+	/**
+	 * 刷新工具条的代码
+	 */
+	private static void updateToolbar() {
 		if (Application.getActiveApplication() == null || Application.getActiveApplication().getMainFrame() == null
 				|| Application.getActiveApplication().getMainFrame().getToolbarManager() == null) {
 			return;
@@ -70,89 +167,5 @@ public class ToolbarUIUtilities {
 
 			}
 		}
-	}
-
-	private static void updateRibbonState() {
-		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
-		if (mainFrame instanceof JRibbonFrame) {
-			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
-			for (int i = 0; i < ribbon.getTaskCount(); i++) {
-				RibbonTask task = ribbon.getTask(i);
-				updateRibbonTaskState(task);
-			}
-			for (int i = 0; i < ribbon.getContextualTaskGroupCount(); i++) {
-				RibbonContextualTaskGroup contextualTaskGroup = ribbon.getContextualTaskGroup(i);
-				if (ribbon.isVisible(contextualTaskGroup)) {
-					for (int j = 0; j < contextualTaskGroup.getTaskCount(); j++) {
-						updateRibbonTaskState(contextualTaskGroup.getTask(j));
-					}
-				}
-			}
-		}
-	}
-
-	private static void updateRibbonTaskState(RibbonTask task) {
-		for (AbstractRibbonBand<?> abstractRibbonBand : task.getBands()) {
-			updateRibbonBandTask(abstractRibbonBand);
-		}
-	}
-
-	private static void updateRibbonBandTask(AbstractRibbonBand<?> abstractRibbonBand) {
-		if (abstractRibbonBand instanceof JRibbonBand) {
-			JBandControlPanel controlPanel = ((JRibbonBand) abstractRibbonBand).getControlPanel();
-			if (controlPanel != null) {
-
-				for (int i = 0; i < controlPanel.getComponentCount(); i++) {
-					Component component = controlPanel.getComponent(i);
-					if (component instanceof IBaseItem) {
-						if (((IBaseItem) component).getCtrlAction() != null) {
-							try {
-								component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					} else if (component instanceof JRibbonGallery) {
-						JRibbonGallery ribbonGallery = (JRibbonGallery) component;
-						for (int j = 0; j < ribbonGallery.getButtonCount(); j++) {
-							JCommandToggleButton button = ribbonGallery.getButtonAt(j);
-							if (button instanceof IBaseItem) {
-								if (((IBaseItem) button).getCtrlAction() != null) {
-									try {
-										button.setEnabled(((IBaseItem) button).getCtrlAction().enable());
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public static JToolBar.Separator getVerticalSeparator() {
-		JToolBar.Separator separator = new JToolBar.Separator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		return separator;
-	}
-
-	public static SmToolbar getSmToolbarAtPoint(Point point) {
-		Component deepestComponent = SwingUtilities.getDeepestComponentAt(Application.getActiveApplication().getMainFrame().getToolbarManager().getToolbarsContainer(), point.x, point.y);
-		if (deepestComponent != null) {
-			return getParentToolBar(deepestComponent);
-		}
-		return null;
-	}
-
-	public static SmToolbar getParentToolBar(Component component) {
-		if (component == null) {
-			return null;
-		}
-		if (component instanceof SmToolbar) {
-			return ((SmToolbar) component);
-		}
-		return getParentToolBar(component.getParent());
 	}
 }

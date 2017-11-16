@@ -19,6 +19,7 @@ import java.awt.event.ItemListener;
 public class SmCheckBox extends JCheckBox implements IBaseItem {
 	private static final long serialVersionUID = 1L;
 	private transient IForm formClass = null;
+	private boolean isIgnoreEvent;
 
 	public IForm getFormClass() {
 		return formClass;
@@ -32,6 +33,7 @@ public class SmCheckBox extends JCheckBox implements IBaseItem {
 
 	public SmCheckBox(IForm formClass, XMLCommand xmlCommand, JComponent parent) {
 		super();
+		this.setOpaque(false);
 		this.setText(xmlCommand.getLabel());
 		this.formClass = formClass;
 		this.xmlCommand = xmlCommand;
@@ -50,7 +52,9 @@ public class SmCheckBox extends JCheckBox implements IBaseItem {
 		this.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				item_ActionPerformed();
+				if (!isIgnoreEvent()) {
+					item_ActionPerformed();
+				}
 			}
 		});
 	}
@@ -122,5 +126,15 @@ public class SmCheckBox extends JCheckBox implements IBaseItem {
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.xmlCommand.setCtrlAction(ctrlAction);
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

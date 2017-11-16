@@ -5,6 +5,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.ICtrlAction;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.XmlCommandUtilities;
 import org.pushingpixels.flamingo.api.common.JCommandToggleButton;
 import org.pushingpixels.flamingo.api.common.RichTooltip;
@@ -16,6 +17,7 @@ public class SmXMlGalleryButton extends JCommandToggleButton implements IBaseIte
 
 	private XMLRibbonGalleryButton button;
 	private ICtrlAction ctrlAction = null;
+	private boolean isIgnoreEvent;
 
 	public SmXMlGalleryButton(XMLRibbonGalleryButton button) {
 		super(button.getLabel());
@@ -40,7 +42,11 @@ public class SmXMlGalleryButton extends JCommandToggleButton implements IBaseIte
 		}
 		if (ctrlAction != null) {
 			setCtrlAction(ctrlAction);
-			this.setActionRichTooltip(new RichTooltip(button.getLabel(), button.getTooltip()));
+			RichTooltip richTooltip = new RichTooltip(button.getLabel(), button.getTooltip());
+			if (!StringUtilities.isNullOrEmpty(button.getTooltipImageFile())) {
+				richTooltip.setMainImage(XmlCommandUtilities.getICon(XmlCommandUtilities.getXmlCommandToolTipImage(button)));
+			}
+			this.setActionRichTooltip(richTooltip);
 		}
 		this.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -97,5 +103,15 @@ public class SmXMlGalleryButton extends JCommandToggleButton implements IBaseIte
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

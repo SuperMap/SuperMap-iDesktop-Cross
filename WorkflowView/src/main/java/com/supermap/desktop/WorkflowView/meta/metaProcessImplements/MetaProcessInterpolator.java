@@ -16,8 +16,8 @@ import com.supermap.desktop.process.loader.IProcessLoader;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.ParameterSearchModeInfo;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.properties.PixelFormatProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
@@ -375,7 +375,7 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 		Recordset recordset = datasetVector.getRecordset(false, CursorType.DYNAMIC);
 		while (!recordset.isEOF()) {
 			if (recordset.getObject(field) != null) {
-				mean +=Double.valueOf(recordset.getObject(field).toString());
+				mean += Double.valueOf(recordset.getObject(field).toString());
 			}
 			recordset.moveNext();
 		}

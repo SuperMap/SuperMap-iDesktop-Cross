@@ -12,6 +12,7 @@ public class SmComboBox extends JComboBox implements IBaseItem {
 
 	private static final long serialVersionUID = 1L;
 	private transient IForm formClass = null;
+	private boolean isIgnoreEvent;
 
 	public IForm getFormClass() {
 		return formClass;
@@ -102,5 +103,15 @@ public class SmComboBox extends JComboBox implements IBaseItem {
 	@Override
 	public String getText() {
 		return xmlCommand.getLabel();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

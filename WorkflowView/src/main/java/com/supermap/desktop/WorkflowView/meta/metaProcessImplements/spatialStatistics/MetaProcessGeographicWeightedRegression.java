@@ -13,8 +13,8 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
@@ -199,8 +199,8 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 						+ ProcessProperties.getString("String_Edf") + gwrSummary.getEdf() + "\n"
 						+ ProcessProperties.getString("String_EffectiveNumber") + gwrSummary.getEffectiveNumber() + "\n"
 						+ ProcessProperties.getString("String_KNeighbors") + gwrSummary.getNeighbors() + "\n"
-						+ ProcessProperties.getString("String_R2") + gwrSummary.getR2() + "\n"
-						+ ProcessProperties.getString("String_R2Adjusted") + gwrSummary.getR2Adjusted() + "\n"
+						+ ProcessProperties.getString("String_R²") + gwrSummary.getR2() + "\n"
+						+ ProcessProperties.getString("String_R²Adjusted") + gwrSummary.getR2Adjusted() + "\n"
 						+ ProcessProperties.getString("String_ResidualSquares") + gwrSummary.getResidualSquares() + "\n"
 						+ ProcessProperties.getString("String_Sigma") + gwrSummary.getSigma() + "\n"
 						// 输出窗口增加"how to use"链接信息-yuanR2017.9.5

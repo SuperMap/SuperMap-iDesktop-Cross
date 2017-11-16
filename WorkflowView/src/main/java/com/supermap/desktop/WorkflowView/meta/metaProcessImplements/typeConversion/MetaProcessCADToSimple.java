@@ -9,8 +9,9 @@ import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
@@ -37,7 +38,7 @@ public class MetaProcessCADToSimple extends MetaProcessTypeConversion {
 		inputDataset = new ParameterSingleDataset(DatasetType.CAD);
 		saveDatasetTable = new ParameterSaveDatasetTable();
 
-		ArrayList<DatasetTypes> datasetTypes = new ArrayList<>();
+		ArrayList<Type> datasetTypes = new ArrayList<>();
 		Dataset dataset = DatasetUtilities.getDefaultDataset(DatasetType.CAD);
 		if (dataset != null) {
 			inputDatasource.setSelectedItem(dataset.getDatasource());
@@ -177,7 +178,7 @@ public class MetaProcessCADToSimple extends MetaProcessTypeConversion {
 		return isConvert;
 	}
 
-	private ArrayList<DatasetTypes> initDatasetTypesByQuery(DatasetVector datasetVector) {
+	private ArrayList<Type> initDatasetTypesByQuery(DatasetVector datasetVector) {
 		ArrayList<GeometryType> geometryTypes = new ArrayList<>();
 		try {
 			QueryParameter queryParameter = new QueryParameter();
@@ -240,8 +241,8 @@ public class MetaProcessCADToSimple extends MetaProcessTypeConversion {
 		return null;
 	}
 
-	private ArrayList<DatasetTypes> addDatasetType(ArrayList<GeometryType> geometryTypes) {
-		ArrayList<DatasetTypes> datasetTypes = new ArrayList<>();
+	private ArrayList<Type> addDatasetType(ArrayList<GeometryType> geometryTypes) {
+		ArrayList<Type> datasetTypes = new ArrayList<>();
 		DatasetType datasetType = DatasetType.CAD;
 		for (GeometryType geometryType : geometryTypes) {
 			if (geometryType.equals(GeometryType.GEOLINEM) || geometryType.equals(GeometryType.GEOLINE)

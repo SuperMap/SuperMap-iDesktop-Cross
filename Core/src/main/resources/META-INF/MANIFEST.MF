@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1510211683976
+Bnd-LastModified: 1510738307574
 Build-Jdk: 1.7.0_80
 Built-By: highsad
 Bundle-Activator: com.supermap.desktop.core.CoreActivator
@@ -167,8 +167,8 @@ Export-Package: com.supermap.desktop;version="1.0.0";uses:="com.supermap
  om.supermap.desktop.implement,com.supermap.desktop.implement.UserDefine
  Type,com.supermap.desktop.ui,com.supermap.mapping,com.supermap.ui,org.p
  ushingpixels.flamingo.api.common.icon,org.pushingpixels.substance.api",
- com.supermap.desktop.utilities.fieldTypeConverted;uses:="com.supermap.d
- ata";version="1.0.0",org.pushingpixels.flamingo.api.bcb;version="1.0.0"
+ com.supermap.desktop.utilities.fieldTypeConverted;version="1.0.0";uses:
+ ="com.supermap.data",org.pushingpixels.flamingo.api.bcb;version="1.0.0"
  ;uses:="org.pushingpixels.flamingo.api.common,org.pushingpixels.flaming
  o.internal.ui.bcb",org.pushingpixels.flamingo.api.bcb.core;version="1.0
  .0";uses:="org.pushingpixels.flamingo.api.bcb,org.pushingpixels.flaming

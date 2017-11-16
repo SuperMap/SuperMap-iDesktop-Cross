@@ -13,6 +13,8 @@ import com.supermap.mapping.LayerGroup;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 /**
@@ -21,6 +23,7 @@ import java.util.Enumeration;
 public class CtrlActionCreateLayerGroup extends CtrlAction {
 
 	private TreeNodeData selectedNodeData = null;
+	private ArrayList<TreeNode> allTreeNode=new ArrayList<>();
 
 	public CtrlActionCreateLayerGroup(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
@@ -32,17 +35,52 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 		if (this.selectedNodeData != null && this.selectedNodeData.getData() instanceof LayerGroup &&
 				iForm != null && iForm instanceof FormMap) {
 			FormMap formMap = (FormMap) iForm;
+			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			String layerGroupName = formMap.getMapControl().getMap().getLayers().getAvailableCaption("LayerGroup");
 			LayerGroup layerGroup = (LayerGroup) this.selectedNodeData.getData();
+			LayerGroup[] oldExpandLayerGroup =layersTree.getExpandLayerGroup(formMap);
+			LayerGroup[] newExpandLayerGroup=new LayerGroup[1];
+			boolean isNeedAddExpandLayerGroup =true;
+			if (oldExpandLayerGroup.length!=0){
+				for (LayerGroup layerGroup1: oldExpandLayerGroup){
+					if (layerGroup1.equals(layerGroup)){
+						isNeedAddExpandLayerGroup =false;
+						break;
+					}
+				}
+			}
+			if (isNeedAddExpandLayerGroup){
+				if (oldExpandLayerGroup.length!=0){
+					newExpandLayerGroup=new LayerGroup[oldExpandLayerGroup.length+1];
+					for (int i = 0; i <oldExpandLayerGroup.length ; i++) {
+						newExpandLayerGroup[i]=oldExpandLayerGroup[i];
+					}
+					newExpandLayerGroup[oldExpandLayerGroup.length]=layerGroup;
+				}else {
+					newExpandLayerGroup[0] = layerGroup;
+				}
+			}
 			layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
-			formMap.getMapControl().getMap().refresh();
-			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
-			layersTree.reload();
-//			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
-//			layersTree.expandPath(new TreePath(((DefaultTreeModel)layersTree.getModel()).getPathToRoot(selectedNode)));
+//			formMap.getMapControl().getMap().refresh();
+			if (!isNeedAddExpandLayerGroup) {
+				layersTree.reload();
+			}else{
+				layersTree.reload(newExpandLayerGroup);
+			}
+			this.allTreeNode.clear();
+			initAllNodes((TreeNode) layersTree.getModel().getRoot());
+			TreePath newLayerGroupTreePath=null;
+			for (int j=0;j<this.allTreeNode.size();j++){
+				DefaultMutableTreeNode node=(DefaultMutableTreeNode)this.allTreeNode.get(j);
+				TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
+
+				if (nodeData.getData() == layerGroup.get(layerGroup.getCount()-1)) {
+					newLayerGroupTreePath=new TreePath(node.getPath());
+					break;
+				}
+			}
 //			layersTree.clearSelection();
-//			layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
-//			layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+			layersTree.startEditingAtPath(newLayerGroupTreePath);
 		}
 	}
 
@@ -65,11 +103,12 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 	}
 
 	// 获取节点下面的所有节点，包括子节点和子节点的子节点
-	public void visitAllNodes(TreeNode node) {
+	private void initAllNodes(TreeNode node) {
 		if (node.getChildCount() >= 0) {//判断是否有子节点
 			for (Enumeration e = node.children(); e.hasMoreElements(); ) {
 				TreeNode n = (TreeNode) e.nextElement();
-				visitAllNodes(n);//若有子节点则再次查找
+				this.allTreeNode.add(n);
+				initAllNodes(n);//若有子节点则再次查找
 			}
 		}
 	}

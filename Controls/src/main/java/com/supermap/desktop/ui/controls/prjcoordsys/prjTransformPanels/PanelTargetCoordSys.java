@@ -88,10 +88,9 @@ public class PanelTargetCoordSys extends JPanel {
 				// 点击单选框，
 				setPrjCoordSysInfo(targetPrjCoordSys);
 			} else if (e.getSource().equals(buttonPrjSetting)) {
-				// 当点击了投影设置，并且设置了投影
+				// 当点击了坐标系设置，并且设置了坐标系
 				JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
-				// TODO 如何隐藏tree中节点-yuanR2017.10.18
-				//dialogPrjCoordSysSettings.removeRoot(new int[]{JDialogPrjCoordSysSettings.CoordSysDefine.NONE_ERRTH});
+				dialogPrjCoordSysSettings.removeNONERRTHRoot();
 				if (dialogPrjCoordSysSettings.showDialog() == DialogResult.OK) {
 					if (dialogPrjCoordSysSettings.getPrjCoordSys().getType() != PrjCoordSysType.PCS_NON_EARTH) {
 						buttonSetPrjCoordSys = dialogPrjCoordSysSettings.getPrjCoordSys();
@@ -197,7 +196,7 @@ public class PanelTargetCoordSys extends JPanel {
 	private void initializeResources() {
 		this.radioButtonFromDatasource.setText(ControlsProperties.getString("String_Label_FromDatasource"));
 		this.radioButtonFromDataset.setText(ControlsProperties.getString("String_Label_FromDataset"));
-		this.radioButtonPrjSetting.setText(ControlsProperties.getString("String_Label_CustomPrjCoordSysSetting"));
+		this.radioButtonPrjSetting.setText(ControlsProperties.getString("String_Label_ProjectionSetting"));
 		this.radioButtonImportPrjFile.setText(ControlsProperties.getString("String_Label_ImportPrjCoordSysFile"));
 		this.buttonPrjSetting.setText(ControlsProperties.getString("String_Button_Setting"));
 	}
@@ -221,7 +220,6 @@ public class PanelTargetCoordSys extends JPanel {
 								.addComponent(this.buttonPrjSetting, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(this.fileChooser)))
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(5)
 						.addComponent(this.panelCoordSysInfo)));
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)

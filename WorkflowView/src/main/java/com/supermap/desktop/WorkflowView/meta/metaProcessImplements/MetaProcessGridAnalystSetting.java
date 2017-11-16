@@ -4,8 +4,8 @@ import com.supermap.desktop.WorkflowView.WorkflowViewProperties;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;
 import com.supermap.desktop.process.ProcessProperties;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.ParameterGridAnalystSetting;
+import com.supermap.desktop.process.types.Type;
 
 /**
  * @author XiaJT
@@ -18,13 +18,14 @@ public class MetaProcessGridAnalystSetting extends MetaProcess {
 	public MetaProcessGridAnalystSetting() {
 		parameterGridAnalystSetting = new ParameterGridAnalystSetting();
 		getParameters().addParameters(parameterGridAnalystSetting);
-		getParameters().addOutputParameters("GridAnalystSetting", ProcessProperties.getString("String_GridAnalystSetting"), Type.UNKOWN, parameterGridAnalystSetting);
+		getParameters().addOutputParameters("GridAnalystSetting", ProcessProperties.getString("String_GridAnalystSetting"), null, parameterGridAnalystSetting);
 	}
 
 	@Override
 	protected String getCOMPLETED_MESSAGE() {
 		return WorkflowViewProperties.getString("String_SetGridAnalystSetSuccess");
 	}
+
 	@Override
 	public String getTitle() {
 		return ProcessProperties.getString("String_Setting_Title");

@@ -2,11 +2,15 @@ package com.supermap.desktop.ui;
 
 import com.supermap.desktop.GlobalParameters;
 import com.supermap.desktop.controls.utilities.SystemUIUtilities;
+import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.utilities.PathUtilities;
+import com.supermap.desktop.utilities.XmlCommandUtilities;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -45,8 +49,15 @@ public class MainFrame extends FormBase implements WindowListener {
 		images.add(toolkit.createImage(path + "iDesktop_Cross_256.png"));
 		images.add(toolkit.createImage(path + "iDesktop Cross.ico"));
 		this.setIconImages(images);
+		this.setApplicationIcon(XmlCommandUtilities.getICon(images.get(0)));
 		this.addWindowListener(this);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.getRibbon().addPropertyChangeListener("selectedTask", new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				ToolbarUIUtilities.updataToolbarsState();
+			}
+		});
 //		SwingUtilities.invokeLater(new Runnable() {
 //			@Override
 //			public void run() {

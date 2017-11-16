@@ -26,6 +26,17 @@ public class XmlCommandUtilities {
 		}
 		return image;
 	}
+	public static Image getXmlCommandToolTipImage(XMLCommand xmlCommand) {
+        String imagePath = xmlCommand.getTooltipImageFile().replace("\\", "/");
+        String[] pathPrams = new String[]{PathUtilities.getRootPathName(), imagePath};
+        String path = PathUtilities.combinePath(pathPrams, false);
+		File file = new File(path);
+		Image image = null;
+		if (file.exists()) {
+			image = new ImageIcon(path).getImage();
+		}
+		return image;
+	}
 
 	public static Dimension getDefaultIconSize() {
 		return DEFAULT_ICON_SIZE;

@@ -4,6 +4,7 @@ import com.supermap.data.PrjCoordSys;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.implement.SmTextField;
 import com.supermap.desktop.mapview.MapViewProperties;
@@ -37,6 +38,8 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 
 	private int PRJCOORSYS = 5;
 
+	// 获得此时激活的地图
+	private Map activeMap;
 	private PrjCoordSys currentPrjCoorSys;
 	private boolean isDynamicProjection = false;
 
@@ -59,8 +62,11 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 	/**
 	 * Create the panel.
 	 */
-	public MapPrjCoordSysControl() {
+	public MapPrjCoordSysControl(IFormMap formMap) {
 		super(ControlsProperties.getString("String_TabPage_ProjectionSetting"));
+		if (formMap != null && formMap.getMapControl() != null && formMap.getMapControl().getMap() != null) {
+			activeMap = formMap.getMapControl().getMap();
+		}
 	}
 
 	@Override
@@ -123,7 +129,7 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 	@Override
 	protected void initializeResources() {
 		this.checkBoxIsDynamicProjection.setText(MapViewProperties.getString("String_CheckBox_DynamicProjection"));
-		this.buttonProjectionSetting.setText(ControlsProperties.getString("String_Button_ProjectionSetting"));
+		this.buttonProjectionSetting.setText(ControlsProperties.getString("String_SetCoordsys"));
 		this.labelCoordName.setText(ControlsProperties.getString("String_Message_CoordSysName"));
 		this.labelCoordUnit.setText(MapViewProperties.getString("String_Label_PrjCoordSysUnit"));
 	}
@@ -180,7 +186,12 @@ public class MapPrjCoordSysControl extends AbstractPropertyControl {
 
 	private void ButtonProjectionSettingClicked() {
 		try {
-			JDialogPrjCoordSysSettings prjSettings = new JDialogPrjCoordSysSettings();
+			// 实现对话框title说明坐标系的来源-yuanR2017.11.15
+			String titleName = "";
+			if (activeMap != null) {
+				titleName = ControlsProperties.getString("String_Label_Maps") + activeMap.getName();
+			}
+			JDialogPrjCoordSysSettings prjSettings = new JDialogPrjCoordSysSettings(titleName);
 			prjSettings.setPrjCoordSys(currentPrjCoorSys);
 			if (prjSettings.showDialog() == DialogResult.OK) {
 				this.currentPrjCoorSys = prjSettings.getPrjCoordSys();

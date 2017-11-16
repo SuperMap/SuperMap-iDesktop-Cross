@@ -4,7 +4,7 @@ import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.parameter.events.ValueProviderBindEvent;
 import com.supermap.desktop.process.parameter.events.ValueProviderBindListener;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import java.util.ArrayList;

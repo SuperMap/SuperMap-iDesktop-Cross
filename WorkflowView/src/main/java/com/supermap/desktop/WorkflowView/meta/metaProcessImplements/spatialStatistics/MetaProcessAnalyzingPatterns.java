@@ -7,10 +7,10 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -41,7 +41,7 @@ public abstract class MetaProcessAnalyzingPatterns extends MetaProcess {
 		parameterCombine.addParameters(datasource, dataset);
 		parameters.setParameters(parameterCombine, parameterPatternsParameter);
 		parameterCombine.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
-		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.VECTOR, parameterCombine);
+		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.SIMPLE_VECTOR, parameterCombine);
 	}
 
 	private void initParameterConstraint() {

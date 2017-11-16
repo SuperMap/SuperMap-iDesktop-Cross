@@ -133,9 +133,11 @@ public class LazyResettableHashMap<T> {
 	 */
 	public static void reset() {
 		if (all != null) {
-			for (LazyResettableHashMap<?> map : all) {
+			for (int i = all.size() - 1; i >= 0; i--) {
+				LazyResettableHashMap<?> map = all.get(i);
 				if (map.cache != null)
 					map.cache.clear();
+
 			}
 		}
 	}

@@ -17,6 +17,7 @@ public class SmTextField extends JTextField implements IBaseItem {
 	private static final long serialVersionUID = 1L;
 	private transient IForm formClass = null;
 	private transient XMLCommand xmlCommand = null;
+	private boolean isIgnoreEvent;
 
 	public SmTextField(IForm formClass, XMLCommand xmlCommand, JComponent parent) {
 		super(xmlCommand.getLabel());
@@ -138,6 +139,16 @@ public class SmTextField extends JTextField implements IBaseItem {
 	@Override
 	public String getText() {
 		return super.getText();
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 
 	@Override

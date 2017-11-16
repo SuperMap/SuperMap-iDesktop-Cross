@@ -70,4 +70,14 @@ public class SmMenuSeparator extends JSeparator implements IBaseItem {
 	public String getText() {
 		return "";
 	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return false;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+
+	}
 }

@@ -516,6 +516,14 @@ public class WorkflowCanvas extends GraphCanvas
 		}
 	}
 
+	public Map<OutputData, ConnectionLineGraph> getOutputLinesMap() {
+		return outputLinesMap;
+	}
+
+	public Map<OutputData, IGraph> getOutputMap() {
+		return outputMap;
+	}
+
 	public CirculationIterator getIterator() {
 		return iterator;
 	}

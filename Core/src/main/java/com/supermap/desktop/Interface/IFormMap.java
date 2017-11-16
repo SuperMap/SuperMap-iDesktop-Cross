@@ -4,6 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.TextStyle;
 import com.supermap.desktop.event.ActiveLayersChangedListener;
 import com.supermap.mapping.Layer;
+import com.supermap.mapping.LayerGroup;
 import com.supermap.ui.MapControl;
 
 public interface IFormMap extends IForm {

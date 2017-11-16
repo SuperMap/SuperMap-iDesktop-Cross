@@ -2,15 +2,35 @@ package com.supermap.desktop.ui;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GlobalParameters;
-import com.supermap.desktop.Interface.*;
+import com.supermap.desktop.Interface.IForm;
+import com.supermap.desktop.Interface.IFormLayout;
+import com.supermap.desktop.Interface.IFormManager;
+import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.Interface.IFormScene;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.dialog.DialogSaveChildForms;
 import com.supermap.desktop.enums.WindowType;
-import com.supermap.desktop.event.*;
+import com.supermap.desktop.event.ActiveFormChangedEvent;
+import com.supermap.desktop.event.ActiveFormChangedListener;
+import com.supermap.desktop.event.FormClosedEvent;
+import com.supermap.desktop.event.FormClosedListener;
+import com.supermap.desktop.event.FormClosingEvent;
+import com.supermap.desktop.event.FormClosingListener;
+import com.supermap.desktop.event.FormEventHelper;
+import com.supermap.desktop.event.FormShownEvent;
+import com.supermap.desktop.event.FormShownListener;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.mdi.MdiPage;
 import com.supermap.desktop.ui.mdi.MdiPane;
-import com.supermap.desktop.ui.mdi.events.*;
+import com.supermap.desktop.ui.mdi.events.Operation;
+import com.supermap.desktop.ui.mdi.events.PageActivatedEvent;
+import com.supermap.desktop.ui.mdi.events.PageActivatedListener;
+import com.supermap.desktop.ui.mdi.events.PageAddedEvent;
+import com.supermap.desktop.ui.mdi.events.PageAddedListener;
+import com.supermap.desktop.ui.mdi.events.PageClosedEvent;
+import com.supermap.desktop.ui.mdi.events.PageClosedListener;
+import com.supermap.desktop.ui.mdi.events.PageClosingEvent;
+import com.supermap.desktop.ui.mdi.events.PageClosingListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -76,6 +96,9 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormClosedEvent event = new FormClosedEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formClosed(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormClosed(event);
+				if (e.getPage().getComponent() instanceof IFormMap){
+					UICommonToolkit.getLayersManager().getLayersTree().removeIFormMap((IFormMap)e.getPage().getComponent());
+				}
 				FormManager.this.eventHelper.fireFormClosed(event);
 			}
 
@@ -92,6 +115,9 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormShownEvent event = new FormShownEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formShown(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormShown(event);
+				if (e.getPage().getComponent() instanceof IFormMap){
+					UICommonToolkit.getLayersManager().getLayersTree().addIFormMap((IFormMap)e.getPage().getComponent());
+				}
 				FormManager.this.eventHelper.fireFormShown(event);
 			}
 		}
@@ -135,6 +161,7 @@ public class FormManager extends MdiPane implements IFormManager {
 
 		return null;
 	}
+
 
 	@Override
 	public void add(IForm form) {

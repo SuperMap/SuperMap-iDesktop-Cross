@@ -1,8 +1,8 @@
 package com.supermap.desktop.WorkflowView.graphics.events;
 
-import com.supermap.desktop.event.CancellationEvent;
 import com.supermap.desktop.WorkflowView.graphics.connection.IGraphConnection;
 import com.supermap.desktop.WorkflowView.graphics.storage.IConnectionManager;
+import com.supermap.desktop.event.CancellationEvent;
 
 /**
  * Created by highsad on 2017/5/8.

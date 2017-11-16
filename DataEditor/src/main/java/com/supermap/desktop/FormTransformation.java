@@ -768,6 +768,7 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	public void setDefaultTextStyle(TextStyle tempTextStyle){
 
 	}
+
 	@Override
 	public TextStyle getDefaultTextStyle(){
 		return null;
@@ -777,6 +778,7 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	public void setDefaultTextRotationAngle(double tempRotationAngle){
 
 	}
+
 	@Override
 	public double getDefaultTextRotationAngle(){
 		return 0;

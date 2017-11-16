@@ -13,8 +13,8 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
@@ -45,17 +45,17 @@ public class MetaProcessSetProjection extends MetaProcess {
 
 	@Override
 	protected String getCOMPLETED_MESSAGE() {
-		return ProcessProperties.getString("String_setProjectionSuccessed");
+		return ProcessProperties.getString("String_setCoordsysSuccessed");
 	}
 
 	@Override
 	protected String getFAILED_MESSAGE() {
-		return ProcessProperties.getString("String_setProjectionFailed");
+		return ProcessProperties.getString("String_setCoordsysFailed");
 	}
 
 
 	public MetaProcessSetProjection() {
-		setTitle(ProcessProperties.getString("String_SetProjection"));
+		setTitle(ProcessProperties.getString("String_resetCoordsys"));
 		initParameters();
 		initComponentState();
 		registerEvents();

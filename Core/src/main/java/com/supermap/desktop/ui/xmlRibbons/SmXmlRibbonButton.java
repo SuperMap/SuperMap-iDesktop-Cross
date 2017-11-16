@@ -7,6 +7,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.utilities.CtrlActionUtilities;
 import com.supermap.desktop.utilities.JOptionPaneUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.XmlCommandUtilities;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
 import org.pushingpixels.flamingo.api.common.RichTooltip;
@@ -22,11 +23,12 @@ import java.util.List;
 
 public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 
-	private XmlRibbonButton xmlRibbonButton;
+	private XMLRibbonButton xmlRibbonButton;
 	private ICtrlAction ctrlAction = null;
 	private JCommandPopupMenu menu;
+	private boolean isIgnoreEvent;
 
-	public SmXmlRibbonButton(XmlRibbonButton ribbonButton) {
+	public SmXmlRibbonButton(XMLRibbonButton ribbonButton) {
 		super(ribbonButton.getLabel());
 		this.xmlRibbonButton = ribbonButton;
 		initCommandButton();
@@ -49,7 +51,11 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 		}
 		if (ctrlAction != null) {
 			setCtrlAction(ctrlAction);
-			this.setActionRichTooltip(new RichTooltip(xmlRibbonButton.getLabel(), xmlRibbonButton.getTooltip()));
+			RichTooltip richTooltip = new RichTooltip(xmlRibbonButton.getLabel(), xmlRibbonButton.getTooltip());
+			if (!StringUtilities.isNullOrEmpty(xmlRibbonButton.getTooltipImageFile())) {
+				richTooltip.setMainImage(XmlCommandUtilities.getICon(XmlCommandUtilities.getXmlCommandToolTipImage(xmlRibbonButton)));
+			}
+			this.setActionRichTooltip(richTooltip);
 		}
 		this.addActionListener(new java.awt.event.ActionListener() {
 			@Override
@@ -107,7 +113,15 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 		ribbonBand.addCommandButton(this, getRibbonElementPriority());
 	}
 
-	protected RibbonElementPriority getRibbonElementPriority() {
+	public RibbonElementPriority getRibbonElementPriority() {
+		String style = xmlRibbonButton.getStyle();
+		if (style.equalsIgnoreCase("BIG")) {
+			return RibbonElementPriority.TOP;
+		} else if (style.equalsIgnoreCase("MEDIUM")) {
+			return RibbonElementPriority.MEDIUM;
+		} else if (style.equalsIgnoreCase("SMALL")) {
+			return RibbonElementPriority.LOW;
+		}
 		return RibbonElementPriority.TOP;
 	}
 
@@ -144,5 +158,15 @@ public class SmXmlRibbonButton extends JCommandButton implements IBaseItem {
 	@Override
 	public void setCtrlAction(ICtrlAction ctrlAction) {
 		this.ctrlAction = ctrlAction;
+	}
+
+	@Override
+	public boolean isIgnoreEvent() {
+		return isIgnoreEvent;
+	}
+
+	@Override
+	public void setIgnoreEvent(boolean isIgnoreEvent) {
+		this.isIgnoreEvent = isIgnoreEvent;
 	}
 }

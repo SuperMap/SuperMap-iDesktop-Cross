@@ -22,9 +22,10 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.loader.IProcessLoader;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.trees.WorkspaceTree;
@@ -97,7 +98,7 @@ public class MetaProcessImport extends MetaProcess {
 
 	private void addOutPutParameters() {
 		// TODO: 2017/6/16
-		DatasetTypes types = DatasetTypes.DATASET;
+		Type types = DatasetTypes.DATASET;
 		if (importSetting instanceof ImportSettingSHP || importSetting instanceof ImportSettingE00
 				|| importSetting instanceof ImportSettingDWG || importSetting instanceof ImportSettingDXF
 				|| importSetting instanceof ImportSettingTAB || importSetting instanceof ImportSettingMIF

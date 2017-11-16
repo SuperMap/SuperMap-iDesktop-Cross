@@ -29,11 +29,11 @@ import com.supermap.desktop.ui.FormBaseChild;
 import com.supermap.desktop.ui.LayersComponentManager;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.scrollPanel.SmMapControlScrollPanel;
 import com.supermap.desktop.ui.trees.LayersTree;
 import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.trees.TreeNodeData;
-import com.supermap.desktop.ui.controls.scrollPanel.SmMapControlScrollPanel;
 import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.*;
 import com.supermap.ui.Action;
@@ -42,6 +42,7 @@ import com.supermap.ui.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -54,6 +55,7 @@ import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.EventObject;
 
 public class FormMap extends FormBaseChild implements IFormMap {
@@ -109,6 +111,8 @@ public class FormMap extends FormBaseChild implements IFormMap {
     private LayersTree layersTree = null;
     private transient EventListenerList eventListenerList = new EventListenerList();
     private ArrayList<Layer> activeLayersList = new ArrayList<>();
+    private ArrayList<LayerGroup> expandLayerGroupsList = new ArrayList<>();
+    private ArrayList<TreeNode> allTreeNode = new ArrayList<>();
     private SmComboBox scaleBox;
     private SmTextField pointXField;
     private SmTextField pointYField;
@@ -126,8 +130,11 @@ public class FormMap extends FormBaseChild implements IFormMap {
     private LengthUnit lengthUnit = LengthUnit.METER;
     private AreaUnit areaUnit = AreaUnit.METER;
     private AngleUnit angleUnit = AngleUnit.DEGREE;
+    private VolumeUnit volumeUnit = VolumeUnit.METER;
 
     private Layer[] rememberActiveLayers = null;
+    // Created by lixiaoyao 2017-11-16   When formmap switches, rememberExpandLayerGroups temporarily stores the expanded LayerGroup
+    private LayerGroup[] rememberExpandLayerGroups = null;
 
     // 地图窗口右键菜单
 
@@ -221,7 +228,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
                 Point2D mousePosition = FormMap.this.mapControl.getMap().pixelToMap(e.getPoint());
 
                 if (mousePosition.getX() > 180 || mousePosition.getX() < -180 || mousePosition.getY() > 90 || mousePosition.getY() < -90) {
-	                Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ExceedBounds"));
+                    Application.getActiveApplication().getOutput().output(CoreProperties.getString("String_ExceedBounds"));
                 }
             }
         }
@@ -910,26 +917,24 @@ public class FormMap extends FormBaseChild implements IFormMap {
         if (activeLayers != null && activeLayers.length > 0) {
             this.activeLayersList.clear();
             ArrayList<TreePath> paths = new ArrayList<TreePath>();
+            this.allTreeNode.clear();
+            initAllNodes((TreeNode) this.layersTree.getModel().getRoot());
 
             for (Layer layer : activeLayers) {
                 try {
-                    if (this.mapControl.getMap().getLayers().contains(layer.getName())) {
-                        this.activeLayersList.add(layer);
+                    this.activeLayersList.add(layer);
 
-                        DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.layersTree.getModel().getRoot();
-                        for (int i = 0; i < root.getChildCount(); i++) {
-                            DefaultMutableTreeNode node = (DefaultMutableTreeNode) root.getChildAt(i);
-                            TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
+                    for (int j = 0; j < this.allTreeNode.size(); j++) {
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.allTreeNode.get(j);
+                        TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
 
-                            if (isNodeLayer(nodeData.getType()) && nodeData.getData() == layer) {
-                                paths.add(new TreePath(node.getPath()));
-                                break;
-                            }
+                        if (isNodeLayer(nodeData.getType()) && nodeData.getData() == layer) {
+                            paths.add(new TreePath(node.getPath()));
+                            break;
                         }
                     }
                 } catch (Exception e) {
                     // 有可能图层被删除但引用还存在，这种情况用layer==null判断不出来，用try catch做处理吧。
-
                     continue;
                 }
             }
@@ -1135,6 +1140,17 @@ public class FormMap extends FormBaseChild implements IFormMap {
         return this.currentTextRotationAngle;
     }
 
+    // 获取节点下面的所有节点，包括子节点和子节点的子节点
+    private void initAllNodes(TreeNode node) {
+        if (node.getChildCount() >= 0) {//判断是否有子节点
+            for (Enumeration e = node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode) e.nextElement();
+                this.allTreeNode.add(n);
+                initAllNodes(n);//若有子节点则再次查找
+            }
+        }
+    }
+
     @Override
     public void refresh() {
         if (this.mapControl != null && this.mapControl.getMap() != null) {
@@ -1192,7 +1208,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
     private boolean isNodeLayer(NodeDataType nodeDataType) {
         return nodeDataType == NodeDataType.LAYER || nodeDataType == NodeDataType.LAYER_IMAGE || nodeDataType == NodeDataType.LAYER_THEME
                 || nodeDataType == NodeDataType.LAYER_GRID || nodeDataType == NodeDataType.THEME_UNIQUE || nodeDataType == NodeDataType.THEME_RANGE
-                || nodeDataType == NodeDataType.THEME_LABEL_ITEM || nodeDataType == NodeDataType.THEME_UNIQUE_ITEM
+                || nodeDataType == NodeDataType.THEME_LABEL_ITEM || nodeDataType == NodeDataType.THEME_UNIQUE_ITEM || nodeDataType == NodeDataType.LAYER_SNAPSHOT
                 || nodeDataType == NodeDataType.THEME_RANGE_ITEM || nodeDataType == NodeDataType.LAYER_GROUP || nodeDataType == NodeDataType.LAYER_CACHE
                 || nodeDataType == NodeDataType.DATASET_IMAGE_COLLECTION || nodeDataType == NodeDataType.DATASET_GRID_COLLECTION
                 || nodeDataType == NodeDataType.THEME_CUSTOM || nodeDataType == NodeDataType.HEAT_MAP || nodeDataType == NodeDataType.GRID_AGGREGATION;
@@ -1256,6 +1272,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
                 if (exist) {
                     layersComponentManager.setMap(this.getMapControl().getMap());
+                    this.layersTree.setExpandLayerGroup(FormMap.this,rememberExpandLayerGroups);
                     setActiveLayers(rememberActiveLayers);
                 } else {
                     layersComponentManager.setMap(null);
@@ -1277,6 +1294,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
         try {
             unRegisterEvents();
 
+            this.rememberExpandLayerGroups = this.layersTree.getExpandLayerGroup(FormMap.this);
             this.rememberActiveLayers = getActiveLayers();
 
             if (this.layersTree != null) {
@@ -1629,6 +1647,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
                         Map map = formMap.getMapControl().getMap();
                         MapViewUIUtilities.addDatasetsToMap(map, datasets, true);
+                        layersTree.setExpandLayerGroup(FormMap.this,layersTree.getExpandLayerGroup(FormMap.this));
                     }
                 }
             } catch (Exception e) {
@@ -1663,8 +1682,12 @@ public class FormMap extends FormBaseChild implements IFormMap {
         this.lengthUnit = lengthUnit;
     }
 
-    public void setCachePlayerBar(CachePlayerBar cachePlayerBar) {
-        this.cachePlayerBar = cachePlayerBar;
+    public VolumeUnit getVolumeUnit() {
+        return volumeUnit;
+    }
+
+    public void setVolumeUnit(VolumeUnit volumeUnit) {
+        this.volumeUnit = volumeUnit;
     }
 
     public CachePlayerBar getCachePlayerBar() {

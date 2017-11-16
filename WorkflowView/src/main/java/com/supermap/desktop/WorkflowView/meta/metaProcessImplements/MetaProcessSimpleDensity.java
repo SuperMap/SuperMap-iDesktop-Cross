@@ -13,7 +13,6 @@ import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.messageBus.NewMessageBus;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
 import com.supermap.desktop.properties.CoreProperties;
@@ -97,7 +96,7 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 				parameterInputDataType,
 				parameterCombineAlaysis
 		);
-		parameters.getOutputs().addData("SimpleDensityResult", ProcessOutputResultProperties.getString("String_SimpleDensityAnalysisResult"), Type.UNKOWN);
+		parameters.getOutputs().addData("SimpleDensityResult", ProcessOutputResultProperties.getString("String_SimpleDensityAnalysisResult"), null);
 	}
 
 	@Override

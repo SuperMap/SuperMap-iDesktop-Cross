@@ -12,9 +12,9 @@ import com.supermap.desktop.process.parameter.events.ParameterValueLegalEvent;
 import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener;
 import com.supermap.desktop.process.parameter.events.ParameterValueSelectedEvent;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.BasicTypes;
+import com.supermap.desktop.process.types.CommonTypes;
 import com.supermap.desktop.process.util.EnumParser;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.DialogResult;
@@ -641,7 +641,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		setPrjCoordSys.methodName = "setTargetPrjCoordSys";
 		ParameterRadioButton parameterRadioButton = new ParameterRadioButton();
 		parameterRadioButton.setLayout(ParameterRadioButton.VATICAL);
-		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_SetProjection_Caption"), true), new ParameterDataNode(ControlsProperties.getString("String_ImportPrjFile"), false)};
+		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_SetCoordsys"), true), new ParameterDataNode(ControlsProperties.getString("String_ImportPrjFile"), false)};
 		parameterRadioButton.setItems(parameterDataNodes);
 		parameterRadioButton.setSelectedItem(parameterDataNodes[0]);
 		ReflectInfo chooseFile = new ReflectInfo();
@@ -670,7 +670,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		final ParameterTextArea parameterTextArea = new ParameterTextArea();
 		textArea.parameter = parameterTextArea;
 		ParameterCombine parameterCombineProjectSet = new ParameterCombine();
-		parameterCombineProjectSet.setDescribe(ControlsProperties.getString("String_SetProjection_Caption"));
+		parameterCombineProjectSet.setDescribe(ControlsProperties.getString("String_SetCoordsys"));
 		parameterFilePrjChoose.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
