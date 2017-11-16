@@ -1,5 +1,6 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameters.ParameterPanels.Circulation.ParameterForObjectCirculation;
 

@@ -6,7 +6,7 @@ import com.supermap.desktop.Interface.IDataEntry;
 import com.supermap.desktop.Interface.IFormManager;
 import com.supermap.desktop.Interface.IFormWorkflow;
 import com.supermap.desktop.Interface.IWorkflow;
-import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
+import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.WorkflowView.graphics.ScrollGraphCanvas;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphSelectChangedListener;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphSelectedChangedEvent;
@@ -189,6 +189,7 @@ public class FormWorkflow extends FormBaseChild implements IFormWorkflow {
 
 		if (uiConfig != null) {
 			formWorkflow.getCanvas().loadUIConfig(uiConfig);
+			formWorkflow.getCanvas().loadIteratorGraphLocation(uiConfigNode);
 		}
 		return formWorkflow;
 	}
@@ -332,6 +333,7 @@ public class FormWorkflow extends FormBaseChild implements IFormWorkflow {
 
 	@Override
 	public void formClosed(FormClosedEvent e) {
+		canvas.removeIterator();
 
 	}
 

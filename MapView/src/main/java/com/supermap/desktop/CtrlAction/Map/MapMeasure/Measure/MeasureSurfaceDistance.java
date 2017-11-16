@@ -51,6 +51,7 @@ public class MeasureSurfaceDistance extends MeasureDistance {
     protected void outputMeasure(double length) {
         Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_Map_MeasureSurfaceDistance"),
                 decimalFormat.format(totalLength), getLengthUnit().toString()));
+        totalLength = 0;
     }
 
     @Override

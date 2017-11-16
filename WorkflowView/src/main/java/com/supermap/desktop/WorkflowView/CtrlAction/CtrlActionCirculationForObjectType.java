@@ -5,7 +5,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
 import com.supermap.desktop.WorkflowView.circulation.CirculationGraphFactory;
-import com.supermap.desktop.WorkflowView.circulation.CirculationType;
+import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.implement.CtrlAction;
 
 /**

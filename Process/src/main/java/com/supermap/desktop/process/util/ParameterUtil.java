@@ -1,9 +1,15 @@
 package com.supermap.desktop.process.util;
 
 import com.supermap.desktop.Application;
+import com.supermap.desktop.process.core.IProcess;
+import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
+import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterClassBundleNode;
+import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
+import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.process.types.Type;
 import org.osgi.framework.Bundle;
 
 import java.awt.*;
@@ -77,5 +83,41 @@ public class ParameterUtil {
 		}
 
 		return classes;
+	}
+
+	public static ArrayList<IParameter> getSameTypeParameters(IProcess process, Type startGraphType) {
+		ArrayList<IParameter> types = new ArrayList<>();
+		ArrayList<IParameter> parameters = process.getParameters().getParameters();
+		for (int i = 0, size = parameters.size(); i < size; i++) {
+			getSameTypeParameter(types, parameters.get(i), startGraphType);
+		}
+		return types;
+	}
+
+	private static void getSameTypeParameter(ArrayList<IParameter> valueTypes, IParameter parameter, Type startGraphType) {
+		if (parameter instanceof ParameterCombine) {
+			ArrayList<IParameter> parameterList = ((ParameterCombine) parameter).getParameterList();
+			for (int j = 0; j < parameterList.size(); j++) {
+				if (parameterList.get(j) instanceof ParameterCombine) {
+					getSameTypeParameter(valueTypes, parameterList.get(j), startGraphType);
+				} else if (parameterList.get(j) instanceof ParameterSwitch) {
+					int count = ((ParameterSwitch) parameterList.get(j)).getCount();
+					for (int i = 0; i < count; i++) {
+						getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
+					}
+				} else if (null != ((AbstractParameter) parameterList.get(j)).getValueType()
+						&& ((AbstractParameter) parameterList.get(j)).getValueType().equals(startGraphType)) {
+					valueTypes.add(parameterList.get(j));
+				}
+			}
+		} else if (parameter instanceof ParameterSwitch) {
+			int count = ((ParameterSwitch) parameter).getCount();
+			for (int i = 0; i < count; i++) {
+				getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
+			}
+		} else if (null != ((AbstractParameter) parameter).getValueType()
+				&& ((AbstractParameter) parameter).getValueType().equals(startGraphType)) {
+			valueTypes.add((AbstractParameter) parameter);
+		}
 	}
 }
