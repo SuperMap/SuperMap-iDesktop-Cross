@@ -785,16 +785,6 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	}
 
 	@Override
-	public LayerGroup[] getExpandLayerGroup(){
-		return currentForceWindow.getExpandLayerGroup();
-	}
-
-	@Override
-	public void setExpandLayerGroup(LayerGroup... expandLayerGroup){
-		currentForceWindow.setExpandLayerGroup(expandLayerGroup);
-	}
-
-	@Override
 	public void refresh() {
 
 	}

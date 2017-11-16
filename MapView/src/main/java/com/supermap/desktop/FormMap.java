@@ -132,6 +132,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
     private AngleUnit angleUnit = AngleUnit.DEGREE;
 
     private Layer[] rememberActiveLayers = null;
+    // Created by lixiaoyao 2017-11-16   When formmap switches, rememberExpandLayerGroups temporarily stores the expanded LayerGroup
     private LayerGroup[] rememberExpandLayerGroups = null;
 
     // 地图窗口右键菜单
@@ -296,7 +297,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
         }
     };
     private transient LayersTreeSelectionListener layersTreeSelectionListener = new LayersTreeSelectionListener();
-    private transient LayersTreeExpansionListener layersTreeExpansionListener = new LayersTreeExpansionListener();
 
     private GeometrySelectChangedListener geometrySelectChangedListener = new GeometrySelectChangedListener() {
 
@@ -611,7 +611,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
             this.pointYField.getDocument().addDocumentListener(this.pointDocumentListener);
 
             this.layersTree.addTreeSelectionListener(this.layersTreeSelectionListener);
-            this.layersTree.addTreeExpansionListener(this.layersTreeExpansionListener);
 
             ((JTextField) this.scaleBox.getEditor().getEditorComponent()).getDocument().addDocumentListener(scaleBoxListener);
         }
@@ -649,7 +648,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
         if (null != layersTree) {
             this.layersTree.removeTreeSelectionListener(this.layersTreeSelectionListener);
-            this.layersTree.removeTreeExpansionListener(this.layersTreeExpansionListener);
             // this.layersTree.removeMouseListener(this.layersTreeMouseAdapter);
 
         }
@@ -923,7 +921,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
             for (Layer layer : activeLayers) {
                 try {
-//                    if (this.mapControl.getMap().getLayers().contains(layer.getName())) {
                     this.activeLayersList.add(layer);
 
                     for (int j = 0; j < this.allTreeNode.size(); j++) {
@@ -935,21 +932,8 @@ public class FormMap extends FormBaseChild implements IFormMap {
                             break;
                         }
                     }
-
-//                        DefaultMutableTreeNode root = (DefaultMutableTreeNode) this.layersTree.getModel().getRoot();
-//                        for (int i = 0; i < root.getChildCount(); i++) {
-//                            DefaultMutableTreeNode node = (DefaultMutableTreeNode) root.getChildAt(i);
-//                            TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
-//
-//                            if (isNodeLayer(nodeData.getType()) && nodeData.getData() == layer) {
-//                                paths.add(new TreePath(node.getPath()));
-//                                break;
-//                            }
-//                        }
-//                    }
                 } catch (Exception e) {
                     // 有可能图层被删除但引用还存在，这种情况用layer==null判断不出来，用try catch做处理吧。
-
                     continue;
                 }
             }
@@ -1155,51 +1139,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
         return this.currentTextRotationAngle;
     }
 
-    @Override
-    public LayerGroup[] getExpandLayerGroup() {
-        LayerGroup[] layerGroups = new LayerGroup[this.expandLayerGroupsList.size()];
-        this.expandLayerGroupsList.toArray(layerGroups);
-        return layerGroups;
-    }
-
-    @Override
-    public void setExpandLayerGroup(LayerGroup... expandLayerGroup) {
-//        LayerGroup[] oldLayerGroups = getExpandLayerGroup();
-
-        if (expandLayerGroup != null && expandLayerGroup.length > 0) {
-            this.expandLayerGroupsList.clear();
-            this.allTreeNode.clear();
-            initAllNodes((TreeNode) this.layersTree.getModel().getRoot());
-
-
-            for (LayerGroup layerGroup : expandLayerGroup) {
-                try {
-                    this.expandLayerGroupsList.add(layerGroup);
-                    for (int j = 0; j < this.allTreeNode.size(); j++) {
-                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.allTreeNode.get(j);
-                        TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
-
-                        if (isNodeLayer(nodeData.getType()) && nodeData.getData() == layerGroup) {
-                            this.layersTree.expandPath(new TreePath(node.getPath()));// ?/??????????????????这样可行？》
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    continue;
-                }
-            }
-
-//            this.layersTree.setSelectionPaths(paths.toArray(new TreePath[paths.size()]));
-        } else {
-//            this.layersTree.c();
-            this.expandLayerGroupsList.clear();
-        }
-
-//        if (oldLayerGroups != null && oldLayerGroups.length > 0 && !this.activeLayersList.isEmpty()) {
-//            fireActiveLayersChanged(new ActiveLayersChangedEvent(this, oldLayerGroups, getActiveLayers()));
-//        }
-    }
-
     // 获取节点下面的所有节点，包括子节点和子节点的子节点
     private void initAllNodes(TreeNode node) {
         if (node.getChildCount() >= 0) {//判断是否有子节点
@@ -1263,25 +1202,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
         } else if (oldActiveLayers != null) {
             fireActiveLayersChanged(new ActiveLayersChangedEvent(this, oldActiveLayers, null));
         }
-    }
-
-    private void setLayersTreeExpansionChanged(TreeExpansionEvent event, boolean isExpand) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) event.getPath().getLastPathComponent();
-        if (node != null) {
-            TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
-            if (isNodeLayer(nodeData.getType()) && nodeData.getData() instanceof LayerGroup) {
-                if (isExpand) {
-                    if (!this.expandLayerGroupsList.contains((LayerGroup) nodeData.getData())) {
-                        this.expandLayerGroupsList.add((LayerGroup) nodeData.getData());
-                    }
-                } else {
-                    if (this.expandLayerGroupsList.contains((LayerGroup) nodeData.getData())) {
-                        this.expandLayerGroupsList.remove((LayerGroup) nodeData.getData());
-                    }
-                }
-            }
-        }
-
     }
 
     private boolean isNodeLayer(NodeDataType nodeDataType) {
@@ -1351,7 +1271,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
                 if (exist) {
                     layersComponentManager.setMap(this.getMapControl().getMap());
-                    setExpandLayerGroup(rememberExpandLayerGroups);
+                    this.layersTree.setExpandLayerGroup(FormMap.this,rememberExpandLayerGroups);
                     setActiveLayers(rememberActiveLayers);
                 } else {
                     layersComponentManager.setMap(null);
@@ -1373,7 +1293,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
         try {
             unRegisterEvents();
 
-            this.rememberExpandLayerGroups = getExpandLayerGroup();
+            this.rememberExpandLayerGroups = this.layersTree.getExpandLayerGroup(FormMap.this);
             this.rememberActiveLayers = getActiveLayers();
 
             if (this.layersTree != null) {
@@ -1661,18 +1581,6 @@ public class FormMap extends FormBaseChild implements IFormMap {
         }
     }
 
-    private class LayersTreeExpansionListener implements TreeExpansionListener {
-
-        @Override
-        public void treeExpanded(TreeExpansionEvent event) {
-            setLayersTreeExpansionChanged(event, true);
-        }
-
-        public void treeCollapsed(TreeExpansionEvent event) {
-            setLayersTreeExpansionChanged(event, false);
-        }
-    }
-
     /**
      * Ctrl + Z / Ctrl + Y 等操作需要刷新操作数据已打开的属性表
      */
@@ -1738,7 +1646,7 @@ public class FormMap extends FormBaseChild implements IFormMap {
 
                         Map map = formMap.getMapControl().getMap();
                         MapViewUIUtilities.addDatasetsToMap(map, datasets, true);
-                        setExpandLayerGroup(getExpandLayerGroup());
+                        layersTree.setExpandLayerGroup(FormMap.this,layersTree.getExpandLayerGroup(FormMap.this));
                     }
                 }
             } catch (Exception e) {
