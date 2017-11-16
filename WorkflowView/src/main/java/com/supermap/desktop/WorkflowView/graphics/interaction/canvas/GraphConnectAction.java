@@ -13,13 +13,12 @@ import com.supermap.desktop.process.core.DataMatch;
 import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedListener;
-import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.process.util.ParameterUtil;
 
 import javax.swing.*;

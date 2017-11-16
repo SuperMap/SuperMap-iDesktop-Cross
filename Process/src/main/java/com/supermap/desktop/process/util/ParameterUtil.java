@@ -6,10 +6,10 @@ import com.supermap.desktop.process.parameter.interfaces.AbstractParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.ParameterClassBundleNode;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.process.types.Type;
 import org.osgi.framework.Bundle;
 
 import java.awt.*;
