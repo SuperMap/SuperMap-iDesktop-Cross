@@ -244,8 +244,7 @@ public class SubstanceButtonUI extends BasicButtonUI implements
 	protected void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);
 
-		b.setBorder((Border) b
-				.getClientProperty(SubstanceButtonUI.BORDER_ORIGINAL));
+		b.setBorder((Border) b.getClientProperty(SubstanceButtonUI.BORDER_ORIGINAL));
 		b.setOpaque((Boolean) b
 				.getClientProperty(SubstanceButtonUI.OPACITY_ORIGINAL));
 		Icon origIcon = (Icon) b
