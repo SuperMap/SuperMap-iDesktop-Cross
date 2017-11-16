@@ -4,7 +4,7 @@ import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedListener;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
+import com.supermap.desktop.process.types.Type;
 
 import java.util.ArrayList;
 import java.util.Collections;

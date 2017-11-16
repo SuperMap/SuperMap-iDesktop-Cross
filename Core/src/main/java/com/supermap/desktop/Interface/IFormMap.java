@@ -4,6 +4,7 @@ import com.supermap.data.Dataset;
 import com.supermap.data.TextStyle;
 import com.supermap.desktop.event.ActiveLayersChangedListener;
 import com.supermap.mapping.Layer;
+import com.supermap.mapping.LayerGroup;
 import com.supermap.ui.MapControl;
 
 public interface IFormMap extends IForm {
@@ -64,6 +65,13 @@ public interface IFormMap extends IForm {
 	void setDefaultTextRotationAngle(double tempRotationAngle);
 
 	double getDefaultTextRotationAngle();
+
+	/**
+	 * 图层树中节点对应展开的LayerGroup
+	 */
+	LayerGroup [] getExpandLayerGroup();
+
+	void setExpandLayerGroup(LayerGroup... expandLayerGroup);
 
 	/**
 	 * 刷新地图，以及与地图相关的需要刷新的内容

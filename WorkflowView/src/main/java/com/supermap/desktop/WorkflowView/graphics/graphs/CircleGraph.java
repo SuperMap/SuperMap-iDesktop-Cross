@@ -5,7 +5,6 @@ import com.supermap.desktop.WorkflowView.graphics.connection.IConnectable;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 
 /**
  * Created by xie on 2017/10/18.

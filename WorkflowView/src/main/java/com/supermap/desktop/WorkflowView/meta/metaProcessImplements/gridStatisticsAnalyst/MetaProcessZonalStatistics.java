@@ -16,8 +16,9 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.GridStatisticsModeUtilities;
@@ -81,7 +82,7 @@ public class MetaProcessZonalStatistics extends MetaProcess {
 		resultCombine.addParameters(resultDatasource, resultDatasetGrid, resultTable);
 		parameters.setParameters(valueCombine, zonalCombine, settingCombine, resultCombine);
 		this.parameters.addInputParameters(VALUE_DATA, DatasetTypes.GRID, valueCombine);
-		this.parameters.addInputParameters(ZONAL_DATA, new DatasetTypes("", DatasetTypes.GRID.getValue() | DatasetTypes.REGION.getValue()), zonalCombine);
+		this.parameters.addInputParameters(ZONAL_DATA, Type.instance("").and(DatasetTypes.GRID).and(DatasetTypes.REGION), zonalCombine);
 		this.parameters.addOutputParameters(OUTPUT_DATA_GRID, ProcessOutputResultProperties.getString("String_Result_ZonalGrid"), DatasetTypes.GRID, resultDatasetGrid);
 		this.parameters.addOutputParameters(OUTPUT_DATA_TABLE, ProcessOutputResultProperties.getString("String_Result_ZonalTable"), DatasetTypes.TABULAR, resultTable);
 	}

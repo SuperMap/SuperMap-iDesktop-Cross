@@ -13,9 +13,9 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.definedClass.StatisticsCollection;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.CommonTypes;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.CommonTypes;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -64,7 +64,7 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 			sourceDatasource.setSelectedItem(datasetGrid.getDatasource());
 			sourceDataset.setSelectedItem(datasetGrid);
 		}
-		((JTextArea)((JScrollPane)((JPanel)textAreaResult.getParameterPanel().getPanel()).getComponent(0)).getViewport().getView()).setEditable(false);
+		((JTextArea) ((JScrollPane) ((JPanel) textAreaResult.getParameterPanel().getPanel()).getComponent(0)).getViewport().getView()).setEditable(false);
 	}
 
 	private void initParameterConstraint() {
@@ -105,7 +105,7 @@ public class MetaProcessBasicStatistics extends MetaProcess {
 					ControlsProperties.getString("String_LabelMinValue") + min + "\n" +
 					CoreProperties.getString("String_Mean") + mean + "\n" +
 					ProcessProperties.getString("String_Result_StandardDeviation") + std + "\n" +
-					ControlsProperties.getString("String_Variance") + var);
+					ControlsProperties.getString("String_Label_Variance") + var);
 			StatisticsCollection statisticsCollection = new StatisticsCollection(max, min, mean, std, var);
 			if (histogram.isCreate()) {
 				histogram.setSelectedItem(StatisticsAnalyst.createHistogram(src, histogram.getGroupCount(), histogram.getFunctionType()));

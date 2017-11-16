@@ -768,6 +768,7 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	public void setDefaultTextStyle(TextStyle tempTextStyle){
 
 	}
+
 	@Override
 	public TextStyle getDefaultTextStyle(){
 		return null;
@@ -777,9 +778,20 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	public void setDefaultTextRotationAngle(double tempRotationAngle){
 
 	}
+
 	@Override
 	public double getDefaultTextRotationAngle(){
 		return 0;
+	}
+
+	@Override
+	public LayerGroup[] getExpandLayerGroup(){
+		return currentForceWindow.getExpandLayerGroup();
+	}
+
+	@Override
+	public void setExpandLayerGroup(LayerGroup... expandLayerGroup){
+		currentForceWindow.setExpandLayerGroup(expandLayerGroup);
 	}
 
 	@Override

@@ -1,10 +1,8 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
-import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
-import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 
 /**

@@ -13,7 +13,6 @@ import com.supermap.desktop.process.events.RunningEvent;
 import com.supermap.desktop.process.messageBus.NewMessageBus;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.parameters.ParameterPanels.DefaultOpenServerMap;
 import com.supermap.desktop.utilities.CursorUtilities;
@@ -63,7 +62,7 @@ public class MetaProcessPolygonAggregation extends MetaProcess {
 				parameterInputDataType,
 				parameterCombineSetting
 		);
-		parameters.getOutputs().addData("PolygonAggregationResult", ProcessOutputResultProperties.getString("String_PolygonAnalysisResult"), Type.UNKOWN);
+		parameters.getOutputs().addData("PolygonAggregationResult", ProcessOutputResultProperties.getString("String_PolygonAnalysisResult"), null);
 	}
 
 	private void initComponentState() {

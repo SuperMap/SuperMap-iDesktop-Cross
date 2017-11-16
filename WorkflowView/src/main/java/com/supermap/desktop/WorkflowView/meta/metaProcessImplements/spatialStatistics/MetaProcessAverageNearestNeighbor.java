@@ -12,15 +12,17 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
+import java.text.DecimalFormat;
+
 /**
  * @author XiaJT
- *         平均最近邻分析
+ * 平均最近邻分析
  */
 public class MetaProcessAverageNearestNeighbor extends MetaProcess {
 	private final static String INPUT_SOURCE_DATASET = "SourceDataset";
@@ -93,12 +95,33 @@ public class MetaProcessAverageNearestNeighbor extends MetaProcess {
 			isSuccessful = analyzingPatternsResult != null;
 			// 如果分析成功，进行结果数据的展示--yuanR
 			if (isSuccessful) {
+				// 计算置信度
+				double z = analyzingPatternsResult.getZScore();
+				double p = analyzingPatternsResult.getPValue();
+				String confidenceCoefficient = "99%";
+				if (p < 0.05 && (-2.58 > z || 2.58 < z)) {
+					confidenceCoefficient = "99%";
+				} else if (p < 0.05 && (-1.96 > z || 1.96 < z)) {
+					confidenceCoefficient = "95%";
+				} else if (p < 0.1 && (-1.65 > z || 1.65 < z)) {
+					confidenceCoefficient = "90%";
+				}
+
+				DecimalFormat decimalFormat = new DecimalFormat("0.0000");
 				String result = "";
-				result += ProcessProperties.getString("String_Nearest_Neighbor_Ratio") + " " + analyzingPatternsResult.getIndex() + "\n";
-				result += ProcessProperties.getString("String_Expected_Mean_Distance") + " " + analyzingPatternsResult.getExpectation() + "\n";
-				result += ProcessProperties.getString("String_Observed_Mean_Distance") + " " + analyzingPatternsResult.getVariance() + "\n";
-				result += ProcessProperties.getString("String_ZScor") + " " + analyzingPatternsResult.getZScore() + "\n";
-				result += ProcessProperties.getString("String_PValue") + " " + analyzingPatternsResult.getPValue() + "\n";
+				result += ProcessProperties.getString("String_Nearest_Neighbor_Ratio") + " "
+						+ decimalFormat.format(analyzingPatternsResult.getIndex()) + "\n";
+				result += ProcessProperties.getString("String_Expected_Mean_Distance") + " "
+						+ decimalFormat.format(analyzingPatternsResult.getExpectation()) + "\n";
+				result += ProcessProperties.getString("String_Observed_Mean_Distance") + " "
+						+ decimalFormat.format(analyzingPatternsResult.getVariance()) + "\n";
+				result += ProcessProperties.getString("String_Label_ZScor") + " "
+						+ decimalFormat.format(analyzingPatternsResult.getZScore()) + "\n";
+				result += ProcessProperties.getString("String_Label_PValue") + " "
+						+ decimalFormat.format(analyzingPatternsResult.getPValue()) + "\n";
+				result += ProcessProperties.getString("String_Label_ConfidenceCoefficient") + " "
+						+ confidenceCoefficient + "\n";
+
 				// 不显示时间-yuanR2017.9.6
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(result);

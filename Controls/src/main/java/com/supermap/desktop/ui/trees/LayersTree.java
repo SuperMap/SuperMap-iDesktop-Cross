@@ -170,6 +170,16 @@ public class LayersTree extends JTree {
 	public void reload() {
 		if (currentMap != null) {
 			this.setModel(getTreeModel());
+			IFormMap iFormMap=(IFormMap) Application.getActiveApplication().getActiveForm();
+			iFormMap.setExpandLayerGroup(iFormMap.getExpandLayerGroup());
+		}
+	}
+
+	public void reload(LayerGroup... expandLayerGroup) {
+		if (currentMap != null) {
+			this.setModel(getTreeModel());
+			IFormMap iFormMap=(IFormMap) Application.getActiveApplication().getActiveForm();
+			iFormMap.setExpandLayerGroup(expandLayerGroup);
 		}
 	}
 
@@ -1712,53 +1722,6 @@ public class LayersTree extends JTree {
 		}
 	}
 
-	private void moveRowOld() {
-		if (dropTargetNodeIndex == -1) {
-			return;
-		}
-		DefaultMutableTreeNode parent = (DefaultMutableTreeNode) getModel().getRoot();
-		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
-		Layer layerGroupTarget = (Layer) dropTargetNodeData.getData();
-		int[] selectionRows = getSelectionRows();
-		Integer[] integers = new Integer[selectionRows.length];
-		for (int i = 0; i < selectionRows.length; i++) {
-			integers[i] = selectionRows[i];
-		}
-		SortUIUtilities.sortList(integers);
-		int count = 0; // 记录有多少图层移动到本图层之前
-		int lowerCount = 0;// 记录有多少图层本来在目标图层之前
-		for (int i = selectionRows.length - 1; i >= 0; i--) {
-			int currentIndex = integers[i];
-			int tempTargetRow = LayersTree.this.dropTargetNodeIndex;
-			if (currentIndex >= tempTargetRow) {
-				currentIndex += count;
-			} else {
-				if (i != selectionRows.length - 1) {
-					tempTargetRow -= lowerCount;
-				}
-				lowerCount++;
-			}
-			count++;
-//			draggedNode = (DefaultMutableTreeNode) parent.getChildAt(currentIndex);
-			draggedNode = (DefaultMutableTreeNode) this.getPathForRow(currentIndex).getLastPathComponent();
-			if (layerGroupTarget.getParentGroup() != null) {
-				TreeNodeData draggedNodeData = (TreeNodeData) draggedNode.getUserObject();
-				Layer layerDragged = (Layer) draggedNodeData.getData();
-				layerGroupTarget.getParentGroup().insert(layerGroupTarget.getParentGroup().indexOf(layerGroupTarget) + count, layerDragged);
-			} else {
-				((DefaultTreeModel) getModel()).removeNodeFromParent(draggedNode);
-				((DefaultTreeModel) getModel()).insertNodeInto(draggedNode, parent, tempTargetRow);
-				currentMap.getLayers().moveTo(currentIndex, tempTargetRow);
-			}
-		}
-		if (isUp) {
-			lowerCount++;
-		}
-		setSelectionInterval(dropTargetNodeIndex - lowerCount + 1, dropTargetNodeIndex + selectionRows.length - lowerCount);
-		currentMap.refresh();
-		dropTargetNodeIndex = -1;
-	}
-
 	private void moveRow() {
 		if (dropTargetNodeIndex == -1) {
 			return;
@@ -1901,11 +1864,18 @@ public class LayersTree extends JTree {
 		this.currentMap.refresh();
 		dropTargetNodeIndex = -1;
 		this.reload();
+		IFormMap formMap=(IFormMap)Application.getActiveApplication().getActiveForm();
+		Layer[] layers = new Layer[selectedLayer.size()];
+		selectedLayer.toArray(layers);
+		// 饶一下，layersComponentManager类中的legalPath判断超过一个的实现不是很好，给限制了，但目前还没想好一个好的解决办法。暂且先这样
+		formMap.setActiveLayers(layers[0]);//先激活legalPath判定基本对象
+		if (layers.length>1){
+			formMap.setActiveLayers(layers);
+		}
 	}
 
-	// 理论上来说moveRow 可以替换moveLayerForLayerGroup，但是有问题，等组件那边那个问题盖完之后再看具体能不能替换
 	private void moveLayerForLayerGroup() {
-		if (!this.isMoveLayerToLayerGroup || this.dropTargetNode == null) {
+		if (!this.isMoveLayerToLayerGroup || this.dropTargetNode == null ||this.dropTargetNodeIndex==-1) {
 			return;
 		}
 
@@ -1932,94 +1902,54 @@ public class LayersTree extends JTree {
 					moveLayerGroup(layerGroupTarget, (LayerGroup) tempLayer);
 				}
 			} else {
-				int selectRowIndex = 0;
 				if (layer.getParentGroup() != null || layer.getParentSnapshot() != null) {
 					if (layerGroupTarget.indexOf(layer) == -1) {
 						layerGroupTarget.add(layer);
 					}
 				} else {
-//					if (layerGroupTarget instanceof LayerSnapshot) {
-//						((LayerSnapshot) layerGroupTarget).add(layer);
-//					} else {
 					layerGroupTarget.add(layer);
-//					}
 					this.currentMap.getLayers().remove(layer);
-//					selectRowIndex = layerGroupTarget.getCount();
 				}
-//				lowerCount++;
-//				this.expandRow(this.dropTargetNodeIndex - count);
 			}
 			this.currentMap.refresh();
 		}
 		dropTargetNodeIndex = -1;
-//		TreePath visiblePath = new TreePath(getTreeModel().getPathToRoot(this.dropTargetNode));
-//		this.expandPath(visiblePath);
 		this.reload();
+		IFormMap formMap=(IFormMap)Application.getActiveApplication().getActiveForm();
+		LayerGroup[] oldExpandLayerGroup =formMap.getExpandLayerGroup();
+		LayerGroup[] newExpandLayerGroup=new LayerGroup[1];
+		boolean isNeedAddExpandLayerGroup =true;
+		if (oldExpandLayerGroup.length!=0){
+			for (LayerGroup layerGroup1: oldExpandLayerGroup){
+				if (layerGroup1.equals(layerGroupTarget)){
+					isNeedAddExpandLayerGroup =false;
+					break;
+				}
+			}
+		}
+		if (isNeedAddExpandLayerGroup){
+			if (oldExpandLayerGroup.length!=0){
+				newExpandLayerGroup=new LayerGroup[oldExpandLayerGroup.length+1];
+				for (int i = 0; i <oldExpandLayerGroup.length ; i++) {
+					newExpandLayerGroup[i]=oldExpandLayerGroup[i];
+				}
+				newExpandLayerGroup[oldExpandLayerGroup.length]=layerGroupTarget;
+			}else {
+				newExpandLayerGroup[0] = layerGroupTarget;
+			}
+		}
+		if (!isNeedAddExpandLayerGroup) {
+			this.reload();
+		}else{
+			this.reload(newExpandLayerGroup);
+		}
+		Layer[] layers = new Layer[selectedLayer.size()];
+		selectedLayer.toArray(layers);
+		formMap.setActiveLayers(layers[0]);
+		if (layers.length>1){
+			formMap.setActiveLayers(layers);
+		}
 	}
-
-//	private void moveLayerForLayerGroup(int t) {
-//		if (!this.isMoveLayerToLayerGroup) {
-//			return;
-//		}
-//
-//		int[] selectionRows = getSelectionRows();
-//		Integer[] integers = new Integer[selectionRows.length];
-//		for (int i = 0; i < selectionRows.length; i++) {
-//			integers[i] = selectionRows[i];
-//		}
-//		Arrays.sort(integers);
-//		TreeNodeData dropTargetNodeData = (TreeNodeData) this.dropTargetNode.getUserObject();
-//		LayerGroup layerGroupTarget = (LayerGroup) dropTargetNodeData.getData();
-//		int count = 0; // 记录有多少图层移动到本图层之前
-//		int lowerCount = 0;
-//		for (int i = 0; i < selectionRows.length; i++) {
-//			int currentIndex = integers[i];
-//			int tempTargetRow = this.dropTargetNodeIndex;
-//			if (currentIndex < tempTargetRow) {
-//				currentIndex -= count;
-//				count++;
-//			}
-//			this.draggedNode = (DefaultMutableTreeNode) this.getPathForRow(currentIndex).getLastPathComponent();
-//			TreeNodeData draggedNodeData = (TreeNodeData) this.draggedNode.getUserObject();
-//			Layer layer = (Layer) draggedNodeData.getData();
-//			if (layer instanceof LayerGroup) {
-//				if (!isHaveLayerGroup(layerGroupTarget, (LayerGroup) layer)) {
-//					// Copy a new map, otherwise the layerGroup of the current map cannot be moved to targetLayerGroup after deleting
-//					Map copyMap = new Map(this.currentMap.getWorkspace());
-//					copyMap.fromXML(this.currentMap.toXML());
-//					Layer tempLayer = MapUtilities.findLayerByName(copyMap, layer.getName());
-//					MapUtilities.removeLayer(this.currentMap, layer.getName());
-//					moveLayerGroup(layerGroupTarget, (LayerGroup) tempLayer);
-////				TreePath visiblePath = new TreePath(getTreeModel().getPathToRoot(this.dropTargetNode));
-////				this.expandPath(visiblePath);
-//				}
-//			} else {
-//				DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) this.draggedNode.getParent();
-//				TreeNodeData parentNodeData = (TreeNodeData) parentNode.getUserObject();
-//				int selectRowIndex = 0;
-//				if (parentNodeData != null && parentNodeData.getType() == NodeDataType.LAYER_GROUP) {
-//					if (layerGroupTarget.indexOf(layer) == -1) {
-//						layerGroupTarget.insert(lowerCount, layer);
-////					layerGroupTarget.add(layer);
-//						selectRowIndex = i + 1;
-//					}
-//				} else {
-//					layerGroupTarget.insert(lowerCount, layer);
-//					this.currentMap.getLayers().remove(layer);
-//					selectRowIndex = layerGroupTarget.getCount();
-//				}
-//				lowerCount++;
-//				this.expandRow(this.dropTargetNodeIndex - count);
-////				System.out.println(this.getRowCount());
-////				System.out.println("22222222222222222222222222222222");
-////				this.getTreeModel().reload();
-////				System.out.println(this.getRowCount());
-////				this.setSelectionRow(this.dropTargetNodeIndex - count+selectRowIndex);
-//			}
-//			this.currentMap.refresh();
-//		}
-//		this.updateUI();
-//	}
 
 	// Create by lixiaoyao  2017/10/24
 	// When moving is the whole LayerGroup, copy layerGroup to layerTargetGroup

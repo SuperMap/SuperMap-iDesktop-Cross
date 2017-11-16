@@ -10,11 +10,12 @@ import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasource;
 import com.supermap.desktop.process.parameter.ipls.ParameterDatasourceConstrained;
 import com.supermap.desktop.process.parameter.ipls.ParameterSingleDataset;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -57,7 +58,7 @@ public class MetaProcessFillSink extends MetaProcessHydrology {
 		sinkCombine.addParameters(sinkDatasource, sinkDataset);
 
 		parameters.setParameters(sourceCombine, sinkCombine, resultCombine);
-		parameters.addInputParameters(SINK_DATA, new DatasetTypes("", DatasetTypes.POINT.getValue() | DatasetTypes.REGION.getValue()), sinkCombine);
+		parameters.addInputParameters(SINK_DATA, Type.instance("").and(DatasetTypes.POINT).and(DatasetTypes.REGION), sinkCombine);
 	}
 
 	@Override

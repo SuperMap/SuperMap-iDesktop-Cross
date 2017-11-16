@@ -3,7 +3,6 @@ package com.supermap.desktop.WorkflowView.meta.dataconversion;
 import com.supermap.desktop.process.parameter.interfaces.IParameter;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by xie on 2017/3/31.

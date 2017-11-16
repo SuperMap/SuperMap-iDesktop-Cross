@@ -1,11 +1,6 @@
 package com.supermap.desktop.WorkflowView.meta.metaProcessImplements;
 
-import com.supermap.analyst.spatialanalyst.CalculationTerrain;
-import com.supermap.analyst.spatialanalyst.ConversionAnalyst;
-import com.supermap.analyst.spatialanalyst.DistanceAnalyst;
-import com.supermap.analyst.spatialanalyst.GridAnalystSetting;
-import com.supermap.analyst.spatialanalyst.MathAnalyst;
-import com.supermap.analyst.spatialanalyst.TerrainAnalystSetting;
+import com.supermap.analyst.spatialanalyst.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.GridAnalystSettingInstance;
 import com.supermap.desktop.WorkflowView.meta.MetaProcess;

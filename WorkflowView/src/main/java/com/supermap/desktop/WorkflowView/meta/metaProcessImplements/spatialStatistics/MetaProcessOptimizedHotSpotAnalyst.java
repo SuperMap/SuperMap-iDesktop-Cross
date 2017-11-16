@@ -15,8 +15,8 @@ import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -26,10 +26,10 @@ import java.beans.PropertyChangeListener;
 
 /**
  * @author XiaJT
- * 重构界面yuanR2017.9.15
- * 1、根据需选择的数据集类型，对界面进行选择：当是线和面数据集时，所需控件只要字段选择界面
- * 2、当聚合方式虚选择网络时，范围数据集可以为空
- * 3、根据数据集类型重写执行
+ *         重构界面yuanR2017.9.15
+ *         1、根据需选择的数据集类型，对界面进行选择：当是线和面数据集时，所需控件只要字段选择界面
+ *         2、当聚合方式虚选择网络时，范围数据集可以为空
+ *         3、根据数据集类型重写执行
  */
 public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");

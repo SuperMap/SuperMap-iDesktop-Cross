@@ -16,8 +16,8 @@ import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -32,35 +32,35 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 	private final static String INPUT_DATA = SOURCE_PANEL_DESCRIPTION;
 	private final static String OUTPUT_DATA = "CommonStatisticsResult";
 
-    private final static int NUMBER = 0;
-    private final static int TABLE = 1;
+	private final static int NUMBER = 0;
+	private final static int TABLE = 1;
 
 	private ParameterDatasourceConstrained sourceDatasource;
 	private ParameterSingleDataset sourceDataset;
 	private ParameterSaveDataset resultDataset;
 	private ParameterComboBox comboBoxCompareType;
 	private ParameterCheckBox checkBoxIgnore;
-    private ParameterRadioButton radioButton;
-    private ParameterNumber number;
-    private ParameterDatasetChooseTable chooseTable;
-    private ParameterSwitch parameterSwitch;
+	private ParameterRadioButton radioButton;
+	private ParameterNumber number;
+	private ParameterDatasetChooseTable chooseTable;
+	private ParameterSwitch parameterSwitch;
 
-    public MetaProcessCommonStatistics() {
-        setTitle(ControlsProperties.getString("String_Title_CommonStatistics"));
-        initParameters();
-        initParameterConstraint();
-        initParametersState();
-        registerListener();
-    }
+	public MetaProcessCommonStatistics() {
+		setTitle(ControlsProperties.getString("String_Title_CommonStatistics"));
+		initParameters();
+		initParameterConstraint();
+		initParametersState();
+		registerListener();
+	}
 
-    private void registerListener() {
-        radioButton.addPropertyListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                parameterSwitch.switchParameter(((ParameterDataNode) radioButton.getSelectedItem()).getData().equals(NUMBER) ? "0" : "1");
-            }
-        });
-    }
+	private void registerListener() {
+		radioButton.addPropertyListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				parameterSwitch.switchParameter(((ParameterDataNode) radioButton.getSelectedItem()).getData().equals(NUMBER) ? "0" : "1");
+			}
+		});
+	}
 
 	private void initParameters() {
 		sourceDatasource = new ParameterDatasourceConstrained();
@@ -68,21 +68,21 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 		resultDataset = new ParameterSaveDataset();
 		comboBoxCompareType = new ParameterComboBox(ControlsProperties.getString("String_CompareType"));
 		checkBoxIgnore = new ParameterCheckBox(ControlsProperties.getString("String_IgnoreNoValue"));
-        radioButton = new ParameterRadioButton();
-        number = new ParameterNumber(ProcessProperties.getString("String_Label_CommonStatisticType_Single"));
-        chooseTable = new ParameterDatasetChooseTable();
-        parameterSwitch = new ParameterSwitch();
+		radioButton = new ParameterRadioButton();
+		number = new ParameterNumber(ProcessProperties.getString("String_Label_CommonStatisticType_Single"));
+		chooseTable = new ParameterDatasetChooseTable();
+		parameterSwitch = new ParameterSwitch();
 
-        parameterSwitch.add("0", number);
-        parameterSwitch.add("1", chooseTable);
+		parameterSwitch.add("0", number);
+		parameterSwitch.add("1", chooseTable);
 
 		ParameterCombine sourceCombine = new ParameterCombine();
 		sourceCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceCombine.addParameters(sourceDatasource, sourceDataset);
 		ParameterCombine settingCombine = new ParameterCombine();
 		settingCombine.setDescribe(ProcessProperties.getString("String_setParameter"));
-        settingCombine.addParameters(comboBoxCompareType, radioButton, parameterSwitch, checkBoxIgnore);
-        ParameterCombine resultCombine = new ParameterCombine();
+		settingCombine.addParameters(comboBoxCompareType, radioButton, parameterSwitch, checkBoxIgnore);
+		ParameterCombine resultCombine = new ParameterCombine();
 		resultCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultCombine.addParameters(resultDataset);
 
@@ -99,8 +99,8 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 		constraintSource.constrained(sourceDataset, ParameterSingleDataset.DATASOURCE_FIELD_NAME);
 		EqualDatasetConstraint datasetConstraint = new EqualDatasetConstraint();
 		datasetConstraint.constrained(sourceDataset, ParameterSingleDataset.DATASET_FIELD_NAME);
-        datasetConstraint.constrained(chooseTable, ParameterDatasetChooseTable.DATASET_FIELD_NAME);
-        DatasourceConstraint.getInstance().constrained(resultDataset, ParameterSaveDataset.DATASOURCE_FIELD_NAME);
+		datasetConstraint.constrained(chooseTable, ParameterDatasetChooseTable.DATASET_FIELD_NAME);
+		DatasourceConstraint.getInstance().constrained(resultDataset, ParameterSaveDataset.DATASOURCE_FIELD_NAME);
 	}
 
 	private void initParametersState() {
@@ -108,14 +108,14 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 		if (datasetGrid != null) {
 			sourceDatasource.setSelectedItem(datasetGrid.getDatasource());
 			sourceDataset.setSelectedItem(datasetGrid);
-            chooseTable.setDataset(datasetGrid);
-        }
+			chooseTable.setDataset(datasetGrid);
+		}
 		resultDataset.setDefaultDatasetName("result_commonStatistics");
 		checkBoxIgnore.setSelectedItem(true);
-        radioButton.setItems(new ParameterDataNode[]{
-                new ParameterDataNode(ProcessProperties.getString("String_RadioButton_CommonStatisticType_Single"), NUMBER),
-                new ParameterDataNode(CoreProperties.getString("String_DatasetType_Grid"), TABLE)});
-        comboBoxCompareType.setItems(new ParameterDataNode("<", StatisticsCompareType.LESS),
+		radioButton.setItems(new ParameterDataNode[]{
+				new ParameterDataNode(ProcessProperties.getString("String_RadioButton_CommonStatisticType_Single"), NUMBER),
+				new ParameterDataNode(CoreProperties.getString("String_DatasetType_Grid"), TABLE)});
+		comboBoxCompareType.setItems(new ParameterDataNode("<", StatisticsCompareType.LESS),
 				new ParameterDataNode("<=", StatisticsCompareType.LESS_OR_EQUAL),
 				new ParameterDataNode("==", StatisticsCompareType.EQUAL),
 				new ParameterDataNode(">=", StatisticsCompareType.GREATER_OR_EQUAL),
@@ -148,12 +148,12 @@ public class MetaProcessCommonStatistics extends MetaProcess {
 			datasetName = resultDataset.getResultDatasource().getDatasets().getAvailableDatasetName(datasetName);
 			StatisticsAnalyst.addSteppedListener(steppedListener);
 			DatasetGrid result = null;
-            if (((ParameterDataNode) radioButton.getSelectedItem()).getData().equals(NUMBER)) {
-                double value = Double.parseDouble(number.getSelectedItem());
-                result = StatisticsAnalyst.commonStatistics(src, value, type, isIgnore, resultDataset.getResultDatasource(), datasetName);
+			if (((ParameterDataNode) radioButton.getSelectedItem()).getData().equals(NUMBER)) {
+				double value = Double.parseDouble(number.getSelectedItem());
+				result = StatisticsAnalyst.commonStatistics(src, value, type, isIgnore, resultDataset.getResultDatasource(), datasetName);
 			} else {
-                ArrayList<Dataset> datasetArrayList = (ArrayList<Dataset>) chooseTable.getSelectedItem();
-                DatasetGrid[] datasetGrids = new DatasetGrid[datasetArrayList.size()];
+				ArrayList<Dataset> datasetArrayList = (ArrayList<Dataset>) chooseTable.getSelectedItem();
+				DatasetGrid[] datasetGrids = new DatasetGrid[datasetArrayList.size()];
 				for (int i = 0; i < datasetArrayList.size(); i++) {
 					datasetGrids[i] = (DatasetGrid) datasetArrayList.get(i);
 				}

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1510211721076
+Bnd-LastModified: 1510738343451
 Build-Jdk: 1.7.0_80
 Built-By: highsad
 Bundle-Activator: com.supermap.desktop.WorkflowView.WorkflowViewActivato
@@ -12,8 +12,8 @@ Created-By: Apache Maven Bundle Plugin
 Embed-Dependency: *;scope=compile|system
 Embed-Directory: lib
 Embed-Transitive: true
-Export-Package: com.supermap.desktop.WorkflowView.arithmetic;uses:="com.
- supermap.desktop.WorkflowView.graphics.graphs";version="1.0.0",com.supe
+Export-Package: com.supermap.desktop.WorkflowView.arithmetic;version="1.
+ 0.0";uses:="com.supermap.desktop.WorkflowView.graphics.graphs",com.supe
  rmap.desktop.WorkflowView.circulation;version="1.0.0",com.supermap.desk
  top.WorkflowView.CtrlAction;version="1.0.0",com.supermap.desktop.Workfl
  owView;version="1.0.0";uses:="com.supermap.desktop.WorkflowView.circula

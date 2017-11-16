@@ -50,6 +50,7 @@ public abstract class TransformationBase implements IFormMap {
 	private transient EventListenerList eventListenerList = new EventListenerList();
 	private transient FormEventHelper formEventHelper = new FormEventHelper();
 	private ArrayList<Layer> activeLayersList = new ArrayList<Layer>();
+	private ArrayList<LayerGroup> expandLayersList = new ArrayList<>();
 	private int isShowPopupMenu = 0;
 	private List<String> lastSelectedGeometry = new ArrayList<>();
 	private FormTransformation formTransformation;
@@ -462,6 +463,18 @@ public abstract class TransformationBase implements IFormMap {
 	@Override
 	public double getDefaultTextRotationAngle() {
 		return 0;
+	}
+
+	@Override
+	public LayerGroup[] getExpandLayerGroup(){
+		LayerGroup[] layerGroups = new LayerGroup[this.expandLayersList.size()];
+		this.expandLayersList.toArray(layerGroups);
+		return layerGroups;
+	}
+
+	@Override
+	public void setExpandLayerGroup(LayerGroup... expandLayerGroup){
+
 	}
 
 	@Override

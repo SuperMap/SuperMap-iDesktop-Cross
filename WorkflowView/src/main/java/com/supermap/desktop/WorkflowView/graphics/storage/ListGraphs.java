@@ -1,12 +1,7 @@
 package com.supermap.desktop.WorkflowView.graphics.storage;
 
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphBoundsChangedEvent;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphBoundsChangedListener;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphCreatedEvent;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphCreatingEvent;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovedEvent;
-import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingEvent;
+import com.supermap.desktop.WorkflowView.graphics.events.*;
 import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
 
 import java.awt.*;

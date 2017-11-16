@@ -9,8 +9,9 @@ import com.supermap.desktop.process.constraint.ipls.DatasourceConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
+import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
@@ -58,12 +59,8 @@ public class MetaProcessTabularToPoint extends MetaProcessTypeConversion {
 		outputCombine.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		outputCombine.addParameters(outputData);
 
-		DatasetTypes datasetTypes = new DatasetTypes("", DatasetTypes.POINT.getValue() |
-				DatasetTypes.LINE.getValue() | DatasetTypes.REGION.getValue() |
-				DatasetTypes.TEXT.getValue() | DatasetTypes.TABULAR.getValue() |
-				DatasetTypes.POINT3D.getValue() | DatasetTypes.LINE3D.getValue() |
-				DatasetTypes.REGION3D.getValue() | DatasetTypes.CAD.getValue());
-
+		Type datasetTypes = Type.instance("").and(DatasetTypes.POINT).and(DatasetTypes.LINE).and(DatasetTypes.REGION).and(DatasetTypes.TEXT)
+				.and(DatasetTypes.TABULAR).and(DatasetTypes.POINT3D).and(DatasetTypes.LINE3D).and(DatasetTypes.REGION3D).and(DatasetTypes.CAD);
 		parameters.setParameters(inputCombine, settingCombine, outputCombine);
 		parameters.addInputParameters(INPUT_DATA, datasetTypes, inputCombine);
 		parameters.addOutputParameters(OUTPUT_DATA, CoreProperties.getString("String_DatasetType_Point"), DatasetTypes.POINT, outputCombine);

@@ -11,8 +11,8 @@ import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameters;
-import com.supermap.desktop.process.parameter.interfaces.datas.types.DatasetTypes;
 import com.supermap.desktop.process.parameter.ipls.*;
+import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
@@ -90,7 +90,7 @@ public class MetaProcessIntegrate extends MetaProcess {
 			this.sourceDatasource.setSelectedItem(dataset.getDatasource());
 			this.sourceDataset.setSelectedItem(dataset);
 			this.numberTolerance.setSelectedItem(DatasetUtilities.getDefaultTolerance((DatasetVector) dataset).getNodeSnap());
-			changeUnit((DatasetVector)dataset);
+			changeUnit((DatasetVector) dataset);
 		}
 		this.numberTolerance.setMinValue(0);
 		this.numberTolerance.setIsIncludeMin(false);
@@ -108,18 +108,18 @@ public class MetaProcessIntegrate extends MetaProcess {
 		});
 	}
 
-	private void changeUnit(DatasetVector datasetVector){
+	private void changeUnit(DatasetVector datasetVector) {
 		this.comboBoxUnit.removeAllItems();
-		if (datasetVector==null ||datasetVector.getPrjCoordSys().getType()== PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE){
+		if (datasetVector == null || datasetVector.getPrjCoordSys().getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
 			this.comboBoxUnit.setItems(this.dataNodeMiliMeter, this.dataNodeCentiMeter, this.dataNodeDeciMeter,
 					this.dataNodeMeter, this.dataNodeKiloMeter, this.dataNodeInch, this.dataNodeFoot,
-					this.dataNodeYard, this.dataNodeMile,this.dataNodeSecond,this.dataNodeMinute,this.dataNodeDegree,this.dataNodeRadian);
-		}else if (datasetVector.getPrjCoordSys().getType()!= PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE){
+					this.dataNodeYard, this.dataNodeMile, this.dataNodeSecond, this.dataNodeMinute, this.dataNodeDegree, this.dataNodeRadian);
+		} else if (datasetVector.getPrjCoordSys().getType() != PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
 			this.comboBoxUnit.setItems(this.dataNodeMiliMeter, this.dataNodeCentiMeter, this.dataNodeDeciMeter,
 					this.dataNodeMeter, this.dataNodeKiloMeter, this.dataNodeInch, this.dataNodeFoot,
 					this.dataNodeYard, this.dataNodeMile);
 		}
-		if (datasetVector!=null){
+		if (datasetVector != null) {
 			this.comboBoxUnit.setSelectedItem(datasetVector.getPrjCoordSys().getCoordUnit());
 		}
 	}

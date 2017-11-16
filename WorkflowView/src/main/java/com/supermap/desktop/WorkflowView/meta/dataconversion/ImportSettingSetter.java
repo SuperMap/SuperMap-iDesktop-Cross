@@ -5,7 +5,6 @@ import com.supermap.data.Datasource;
 import com.supermap.data.Point3D;
 import com.supermap.data.conversion.DataImport;
 import com.supermap.data.conversion.ImportSetting;
-import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.ipls.*;

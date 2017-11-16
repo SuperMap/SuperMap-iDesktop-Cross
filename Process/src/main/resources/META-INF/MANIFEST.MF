@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1510211685663
+Bnd-LastModified: 1510738309268
 Build-Jdk: 1.7.0_80
 Built-By: highsad
 Bundle-Activator: com.supermap.desktop.process.ProcessActivator
@@ -32,32 +32,32 @@ Export-Package: com.supermap.desktop.process.constraint.annotation;versi
  ap.desktop.process.parameter.interfaces;version="1.0.0";uses:="com.supe
  rmap.desktop.process.core,com.supermap.desktop.process.parameter,com.su
  permap.desktop.process.parameter.events,com.supermap.desktop.process.pa
- rameter.interfaces.datas,com.supermap.desktop.process.parameter.interfa
- ces.datas.types",com.supermap.desktop.process.parameter.interfaces.data
- s;version="1.0.0";uses:="com.supermap.desktop.process.core,com.supermap
- .desktop.process.parameter.events,com.supermap.desktop.process.paramete
- r.interfaces,com.supermap.desktop.process.parameter.interfaces.datas.ty
- pes",com.supermap.desktop.process.parameter.interfaces.datas.types;vers
- ion="1.0.0",com.supermap.desktop.process.parameter.ipls;version="1.0.0"
- ;uses:="com.supermap.desktop.process.constraint.annotation,com.supermap
- .desktop.process.core,com.supermap.desktop.process.parameter,com.superm
- ap.desktop.process.parameter.events,com.supermap.desktop.process.parame
- ter.interfaces,com.supermap.desktop.process.parameter.interfaces.datas,
- com.supermap.desktop.process.parameter.interfaces.datas.types,com.super
- map.desktop.process.util",com.supermap.desktop.process.parameter;versio
- n="1.0.0";uses:="com.supermap.desktop.process.parameter.interfaces",com
- .supermap.desktop.process;version="1.0.0";uses:="com.supermap.desktop.p
- rocess.loader,com.supermap.desktop.process.parameter.ipls,org.osgi.fram
- ework",com.supermap.desktop.process.readyChecker;version="1.0.0";uses:=
- "com.supermap.desktop.process.core",com.supermap.desktop.process.tasks;
- version="1.0.0";uses:="com.supermap.desktop.process.core,com.supermap.d
- esktop.process.tasks.events",com.supermap.desktop.process.tasks.events;
- version="1.0.0";uses:="com.supermap.desktop.process.tasks",com.supermap
- .desktop.process.tasks.taskStates;version="1.0.0";uses:="com.supermap.d
- esktop.process.core,com.supermap.desktop.process.tasks,com.supermap.des
- ktop.process.tasks.events",com.supermap.desktop.process.util;version="1
- .0.0";uses:="com.supermap.desktop.process.core,com.supermap.desktop.pro
- cess.loader,com.supermap.desktop.process.parameter.ipls"
+ rameter.interfaces.datas,com.supermap.desktop.process.types",com.superm
+ ap.desktop.process.parameter.interfaces.datas;version="1.0.0";uses:="co
+ m.supermap.desktop.process.core,com.supermap.desktop.process.parameter.
+ events,com.supermap.desktop.process.parameter.interfaces,com.supermap.d
+ esktop.process.types",com.supermap.desktop.process.parameter.ipls;versi
+ on="1.0.0";uses:="com.supermap.desktop.process.constraint.annotation,co
+ m.supermap.desktop.process.core,com.supermap.desktop.process.parameter,
+ com.supermap.desktop.process.parameter.events,com.supermap.desktop.proc
+ ess.parameter.interfaces,com.supermap.desktop.process.parameter.interfa
+ ces.datas,com.supermap.desktop.process.types,com.supermap.desktop.proce
+ ss.util",com.supermap.desktop.process.parameter;version="1.0.0";uses:="
+ com.supermap.desktop.process.parameter.interfaces",com.supermap.desktop
+ .process;version="1.0.0";uses:="com.supermap.desktop.process.loader,com
+ .supermap.desktop.process.parameter.ipls,org.osgi.framework",com.superm
+ ap.desktop.process.readyChecker;version="1.0.0";uses:="com.supermap.des
+ ktop.process.core",com.supermap.desktop.process.tasks;version="1.0.0";u
+ ses:="com.supermap.desktop.process.core,com.supermap.desktop.process.ta
+ sks.events",com.supermap.desktop.process.tasks.events;version="1.0.0";u
+ ses:="com.supermap.desktop.process.tasks",com.supermap.desktop.process.
+ tasks.taskStates;version="1.0.0";uses:="com.supermap.desktop.process.co
+ re,com.supermap.desktop.process.tasks,com.supermap.desktop.process.task
+ s.events",com.supermap.desktop.process.types;version="1.0.0",com.superm
+ ap.desktop.process.util;version="1.0.0";uses:="com.supermap.desktop.pro
+ cess.core,com.supermap.desktop.process.loader,com.supermap.desktop.proc
+ ess.parameter.ipls",com.supermap.desktop.process.virtual;uses:="com.sup
+ ermap.desktop.process.core";version="1.0.0"
 Import-Package: org.osgi.framework;version="[1.8,2)",org.osgi.util.track
  er;version="[1.5,2)"
 Originally-Created-By: Apache Maven Bundle Plugin
