@@ -5,6 +5,7 @@ import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 /**
@@ -37,6 +38,13 @@ public class MetaProcessCentralElement extends MetaProcessSpatialMeasure {
 					measureParameter.getMeasureParameter());
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = result != null;
+			if (isSuccessful) {
+				String message = "How to Use?" + "\n"
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html?SpatialStatisticalAnalysis,MeasureGeographicDistr,Clusters1,SpatialRelationshipModeling1,AnalyzingPatterns1";
+				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
+				Application.getActiveApplication().getOutput().output(message);
+				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(true);
+			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e.getMessage());
 			e.printStackTrace();

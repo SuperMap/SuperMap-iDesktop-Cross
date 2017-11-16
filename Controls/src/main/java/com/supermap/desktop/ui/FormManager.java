@@ -96,6 +96,9 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormClosedEvent event = new FormClosedEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formClosed(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormClosed(event);
+				if (e.getPage().getComponent() instanceof IFormMap){
+					UICommonToolkit.getLayersManager().getLayersTree().removeIFormMap((IFormMap)e.getPage().getComponent());
+				}
 				FormManager.this.eventHelper.fireFormClosed(event);
 			}
 
@@ -112,6 +115,9 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormShownEvent event = new FormShownEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formShown(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormShown(event);
+				if (e.getPage().getComponent() instanceof IFormMap){
+					UICommonToolkit.getLayersManager().getLayersTree().addIFormMap((IFormMap)e.getPage().getComponent());
+				}
 				FormManager.this.eventHelper.fireFormShown(event);
 			}
 		}

@@ -35,9 +35,10 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 		if (this.selectedNodeData != null && this.selectedNodeData.getData() instanceof LayerGroup &&
 				iForm != null && iForm instanceof FormMap) {
 			FormMap formMap = (FormMap) iForm;
+			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			String layerGroupName = formMap.getMapControl().getMap().getLayers().getAvailableCaption("LayerGroup");
 			LayerGroup layerGroup = (LayerGroup) this.selectedNodeData.getData();
-			LayerGroup[] oldExpandLayerGroup =formMap.getExpandLayerGroup();
+			LayerGroup[] oldExpandLayerGroup =layersTree.getExpandLayerGroup(formMap);
 			LayerGroup[] newExpandLayerGroup=new LayerGroup[1];
 			boolean isNeedAddExpandLayerGroup =true;
 			if (oldExpandLayerGroup.length!=0){
@@ -61,7 +62,6 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 			}
 			layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
 //			formMap.getMapControl().getMap().refresh();
-			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			if (!isNeedAddExpandLayerGroup) {
 				layersTree.reload();
 			}else{

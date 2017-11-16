@@ -67,13 +67,6 @@ public interface IFormMap extends IForm {
 	double getDefaultTextRotationAngle();
 
 	/**
-	 * 图层树中节点对应展开的LayerGroup
-	 */
-	LayerGroup [] getExpandLayerGroup();
-
-	void setExpandLayerGroup(LayerGroup... expandLayerGroup);
-
-	/**
 	 * 刷新地图，以及与地图相关的需要刷新的内容
 	 */
 	void refresh();
