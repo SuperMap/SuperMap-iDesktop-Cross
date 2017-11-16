@@ -77,7 +77,8 @@ public class BuildCache {
 
 						CopyOnWriteArrayList<String> doingSciNames = new CopyOnWriteArrayList<>();
 						//Now give mergeSciCount sci files to every process if sciLength>mergeSciCount
-						int mergeSciCount = 3;
+						//fixme 暂时改为1个，xie
+						int mergeSciCount = 1;
 
 						if (sciLength > mergeSciCount) {
 							//First step:Move mergeSciCount sci to doing directory

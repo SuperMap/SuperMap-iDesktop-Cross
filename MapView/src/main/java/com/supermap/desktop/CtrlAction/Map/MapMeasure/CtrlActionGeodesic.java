@@ -33,7 +33,10 @@ public class CtrlActionGeodesic extends CtrlAction {
     @Override
     public boolean enable() {
         IForm activeForm = Application.getActiveApplication().getActiveForm();
-        return activeForm instanceof FormMap && ((FormMap) activeForm).getMapControl().getMap().getPrjCoordSys().getType()
-                == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE;
+        if (activeForm instanceof FormMap) {
+            PrjCoordSysType type = ((FormMap) activeForm).getMapControl().getMap().getPrjCoordSys().getType();
+            return type != PrjCoordSysType.PCS_NON_EARTH;
+        }
+        return false;
     }
 }

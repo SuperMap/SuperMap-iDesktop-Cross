@@ -12,7 +12,8 @@ public class LogWriter {
 
 	private File logFile;
 	private OutputStreamWriter writer;
-	public static SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd_HH_mm");
+	public static SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+	public static SimpleDateFormat dFormat1 = new SimpleDateFormat("yyyy-MM-dd_HH_mm");
 	private static LogWriter gInstance;
 	public static String BUILD_CACHE = "BuildCache";
 	public static String CHECK_CACEH = "CheckCache";
@@ -44,7 +45,7 @@ public class LogWriter {
 	private LogWriter(String type) {
 		if (logFile == null) {
 			File logFolder = getLogDirectory();
-			String logName = dFormat.format(new Date()) + "_" + type + "_" + getPID() + ".log";
+			String logName = dFormat1.format(new Date()) + "_" + type + "_" + getPID() + ".log";
 			logFile = new File(CacheUtilities.replacePath(logFolder.getAbsolutePath(), logName));
 		}
 		try {
@@ -70,7 +71,7 @@ public class LogWriter {
 
 	public void writelog(String line) {
 		synchronized (this) {
-			line = dFormat.format(new Date()) + "," + line + "\n";
+			line = "["+dFormat.format(new Date())+"]" + line + "\n";
 			//line = line + "\n";	
 			try {
 				if (writer != null) {

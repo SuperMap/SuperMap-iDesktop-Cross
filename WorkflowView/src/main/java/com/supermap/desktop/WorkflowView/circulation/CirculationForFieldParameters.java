@@ -6,6 +6,7 @@ import com.supermap.data.FieldInfos;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasetTypeConstraint;
 import com.supermap.desktop.process.constraint.ipls.EqualDatasourceConstraint;
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CoreProperties;
@@ -19,7 +20,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Created by xie on 2017/11/8.
  */
-public class CirculationForFieldParameters extends AbstractCirculationParameters{
+public class CirculationForFieldParameters extends AbstractCirculationParameters {
 	private ParameterDatasourceConstrained datasource;
 	private ParameterDatasetType datasetType;
 	private ParameterSingleDataset dataset;

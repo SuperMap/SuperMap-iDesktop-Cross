@@ -79,8 +79,8 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
     };
     //endregion
 
-    public DialogMongoDBCacheLoaded(FormMap formMap) {
-        this.formMap = formMap;
+    public DialogMongoDBCacheLoaded() {
+        this.formMap = ((FormMap) Application.getActiveApplication().getActiveForm());
         initFrame();
         initComponent();
         initLayout();

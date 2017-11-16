@@ -1,5 +1,6 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedListener;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;

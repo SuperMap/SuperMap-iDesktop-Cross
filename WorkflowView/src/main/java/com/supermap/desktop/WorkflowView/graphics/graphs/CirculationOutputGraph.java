@@ -1,5 +1,6 @@
 package com.supermap.desktop.WorkflowView.graphics.graphs;
 
+import com.supermap.desktop.WorkflowView.circulation.CirculationDialog;
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.utilities.DoubleUtilities;
@@ -13,6 +14,7 @@ import java.awt.*;
  */
 public class CirculationOutputGraph extends EllipseGraph {
 	private OutputData outputData;
+	private CirculationDialog circulationDialog;
 
 	public CirculationOutputGraph(GraphCanvas canvas, OutputData outputData) {
 		super(canvas);
@@ -44,5 +46,13 @@ public class CirculationOutputGraph extends EllipseGraph {
 		double width = getWidth();
 		double height = getHeight();
 		g.drawString(text, DoubleUtilities.intValue(location.getX() + (width - fontWidth) / 2), DoubleUtilities.intValue(location.getY() + height / 2 + fontHeight / 2 - fontDescent));
+	}
+
+	public CirculationDialog getCirculationDialog() {
+		return circulationDialog;
+	}
+
+	public void setCirculationDialog(CirculationDialog circulationDialog) {
+		this.circulationDialog = circulationDialog;
 	}
 }

@@ -11,7 +11,9 @@ import com.supermap.desktop.icloud.commontypes.ApplyTrialLicenseResponse;
 import com.supermap.desktop.icloud.commontypes.LicenseId;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.LogUtilities;
+import com.supermap.desktop.utilities.SkinUtilties;
 import com.supermap.desktop.utilities.SplashScreenUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -28,6 +30,9 @@ public class CoreActivator implements BundleActivator {
 		GlobalParameters.initResource();
 		try {
 			javax.swing.UIManager.setLookAndFeel(new SubstanceOfficeBlue2007LookAndFeel());
+			if (!StringUtilities.isNullOrEmpty(GlobalParameters.getSkin())) {
+				SkinUtilties.setSkin(GlobalParameters.getSkin());
+			}
 			JFrame.setDefaultLookAndFeelDecorated(true); //windows功能失效
 //			JDialog.setDefaultLookAndFeelDecorated(true); //Dialog功能失效
 		} catch (Exception e) {

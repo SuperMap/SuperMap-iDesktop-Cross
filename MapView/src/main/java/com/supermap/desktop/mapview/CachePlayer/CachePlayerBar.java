@@ -6,11 +6,13 @@ import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.dialog.DialogCachePlayerSetting;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.ui.controls.progress.RoundProgressBar;
+import com.supermap.desktop.utilities.CoreResources;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerCache;
 import com.supermap.mapping.Layers;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -123,12 +125,16 @@ public class CachePlayerBar extends JToolBar {
         buttonPrevious.setIcon(ControlsResources.getIcon("/controlsresources/CachePlayerBar/Image_Back.png"));
         buttonNext.setIcon(ControlsResources.getIcon("/controlsresources/CachePlayerBar/Image_ForWard.png"));
         buttonPlay.setIcon(ICON_PLAY);
-        buttonSetting.setIcon(ControlsResources.getIcon("/controlsresources/CachePlayerBar/Image_Setting.png"));
+        buttonSetting.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
 
         buttonPrevious.setToolTipText(MapViewProperties.getString("String_Previous"));
         buttonNext.setToolTipText(MapViewProperties.getString("String_Next"));
         buttonPlay.setToolTipText(MapViewProperties.getString("String_Play"));
         buttonSetting.setToolTipText(ControlsProperties.getString("String_Button_Setting"));
+
+        progressBar.setPreferredSize(new Dimension(formMap.getPreferredSize().width / 2, 30));
+        progressBar.setMinimumSize(new Dimension(formMap.getPreferredSize().width / 2, 30));
+        progressBar.setMaximumSize(new Dimension(formMap.getPreferredSize().width / 2, 30));
 
         this.add(buttonPrevious);
         this.add(progressBar);

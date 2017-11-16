@@ -1,5 +1,7 @@
 package com.supermap.desktop.WorkflowView.circulation;
 
+import com.supermap.desktop.process.core.AbstractCirculationParameters;
+import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 
 /**
@@ -53,6 +55,7 @@ public class CirculationParametersFactory {
 			default:
 				break;
 		}
+		circulationParameters.setCirculationType(type);
 		return circulationParameters;
 	}
 }

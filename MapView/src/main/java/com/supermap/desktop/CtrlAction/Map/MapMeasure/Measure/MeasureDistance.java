@@ -258,11 +258,20 @@ public class MeasureDistance extends Measure {
     }
 
     protected double computeDistance(Point2D pntA, Point2D pntB, Unit unit) {
-        Double x = pntB.getX() - pntA.getX();
-        Double y = pntB.getY() - pntA.getY();
-        double distance = Math.sqrt(x * x + y * y);
+        double distance;
+        if (mapControl.getMap().getPrjCoordSys().getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
+            GeoSpheroid geoSpheroid = mapControl.getMap().getPrjCoordSys().getGeoCoordSys().getGeoDatum().getGeoSpheroid();
+            distance = Geometrist.computeGeodesicDistance(new Point2Ds(new Point2D[]{pntA, pntB}), geoSpheroid.getAxis(),
+                    geoSpheroid.getFlatten());
+            distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
+        } else {
+            Double x = pntB.getX() - pntA.getX();
+            Double y = pntB.getY() - pntA.getY();
+            distance = Math.sqrt(x * x + y * y);
 
-        return LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
+            distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
+        }
+        return distance;
     }
 
     protected double computeDistance(TrackingEvent event, Unit unit, boolean isTotal) {

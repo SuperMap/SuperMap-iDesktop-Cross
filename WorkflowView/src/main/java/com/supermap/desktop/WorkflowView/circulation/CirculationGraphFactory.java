@@ -3,6 +3,9 @@ package com.supermap.desktop.WorkflowView.circulation;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
+import com.supermap.desktop.process.core.CirculationType;
+
+import java.awt.*;
 
 /**
  * Created by xie on 2017/11/9.
