@@ -8,7 +8,6 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.controls.utilities.SortUIUtilities;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
 import com.supermap.desktop.dialog.symbolDialogs.ISymbolApply;
 import com.supermap.desktop.dialog.symbolDialogs.SymbolDialog;
@@ -19,7 +18,6 @@ import com.supermap.desktop.ui.controls.JDialogSymbolsChange;
 import com.supermap.desktop.utilities.CursorUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.mapping.*;
-import com.supermap.mapping.Map;
 
 import javax.swing.*;
 import javax.swing.event.TreeExpansionEvent;
@@ -39,7 +37,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
 
 /**
  * 图层管理树控件
@@ -80,10 +81,11 @@ public class LayersTree extends JTree {
     private boolean isHitTestInfo = false;
     private HashMap<IFormMap, ArrayList<LayerGroup>> expandLayerGroups = new HashMap<>();
     private ArrayList<TreeNode> allTreeNode = new ArrayList<>();
-    private static final Color MOVE_COLOR = (new JTable()).getSelectionBackground();
+    private static final Color MOVE_COLOR = Color.red;
 
     private static DataFlavor localObjectFlavor;
     private static DataFlavor[] supportedFlavors = {localObjectFlavor};
+    private GroupLayerAddedListener groupLayerAddedListener = null;
 
     static {
         try {
@@ -92,6 +94,8 @@ public class LayersTree extends JTree {
             Application.getActiveApplication().getOutput().output(cnfe);
         }
     }
+
+    private GroupLayerRemovedListener grouplayerRemovedListener = null;
 
     public LayersTree() {
         super();
@@ -169,7 +173,7 @@ public class LayersTree extends JTree {
         if (currentMap != null) {
             this.setModel(getTreeModel());
             IFormMap iFormMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-            this.setExpandLayerGroup(iFormMap,this.getExpandLayerGroup(iFormMap));
+            this.setExpandLayerGroup(iFormMap, this.getExpandLayerGroup(iFormMap));
 //            iFormMap.setExpandLayerGroup(iFormMap.getExpandLayerGroup());
         }
     }
@@ -178,7 +182,7 @@ public class LayersTree extends JTree {
         if (currentMap != null) {
             this.setModel(getTreeModel());
             IFormMap iFormMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-            this.setExpandLayerGroup(iFormMap,expandLayerGroup);
+            this.setExpandLayerGroup(iFormMap, expandLayerGroup);
 //            iFormMap.setExpandLayerGroup(expandLayerGroup);
         }
     }
@@ -216,7 +220,7 @@ public class LayersTree extends JTree {
 
             int offset = x - this.getUI().getPathBounds(this, path).x;
             /*
-			 * 修改为使用Render来计算点击的Icon类型 modified by gouyu 2010-12-24
+             * 修改为使用Render来计算点击的Icon类型 modified by gouyu 2010-12-24
 			 */
             result = ((LayersTreeCellRenderer) this.getCellRenderer()).getHitTestIconType(node, offset);
         }
@@ -400,9 +404,10 @@ public class LayersTree extends JTree {
      */
     protected DefaultMutableTreeNode getNodeByLayer(Layer layer) {
         DefaultMutableTreeNode result = null;
-
+        if (null != layer.getDataset()) {
+            return new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER));
+        }
         Dataset dataset = layer.getDataset();
-
         Theme theme = layer.getTheme();
         if (layer instanceof LayerHeatmap) {
             result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.HEAT_MAP));
@@ -447,7 +452,7 @@ public class LayersTree extends JTree {
             int type = theme.getType().value();
 
 				/*
-				 * 如果是1(ThemeUnique)、2(ThemeRange)、8(ThemeCustom)就使用自己的构造 以在专题图的基础上增加编辑功能 modified by gouyu 2010-12-23
+                 * 如果是1(ThemeUnique)、2(ThemeRange)、8(ThemeCustom)就使用自己的构造 以在专题图的基础上增加编辑功能 modified by gouyu 2010-12-23
 				 */
             if (type != 1 && type != 2 && type != 8) {
                 result = new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER_THEME));
@@ -579,10 +584,11 @@ public class LayersTree extends JTree {
         if (groupNodeMap == null) {
             groupNodeMap = new HashMap<LayerGroup, DefaultMutableTreeNode>();
         }
-
         LayerGroup group = (LayerGroup) layer;
-        group.addLayerAddedListener(new GroupLayerAddedListener());
-        group.addLayerRemovedListener(new GroupLayerRemovedListener());
+        group.removeLayerAddedListener(getGroupLayerAddedListener());
+        group.removeLayerRemovedListener(getGroupLayerRemovedListener());
+        group.addLayerAddedListener(getGroupLayerAddedListener());
+        group.addLayerRemovedListener(getGroupLayerRemovedListener());
 
         DefaultMutableTreeNode result = null;
         if (layer instanceof LayerSnapshot) {
@@ -755,6 +761,20 @@ public class LayersTree extends JTree {
         }
     }
 
+    private GroupLayerAddedListener getGroupLayerAddedListener() {
+        if (groupLayerAddedListener == null) {
+            groupLayerAddedListener = new GroupLayerAddedListener();
+        }
+        return groupLayerAddedListener;
+    }
+
+    private GroupLayerRemovedListener getGroupLayerRemovedListener() {
+        if (grouplayerRemovedListener == null) {
+            grouplayerRemovedListener = new GroupLayerRemovedListener();
+        }
+        return grouplayerRemovedListener;
+    }
+
     private LayerAddedListener getLayerAddedListener() {
         if (layerAddedListener == null) {
             layerAddedListener = new TreeLayerAddedListener();
@@ -914,9 +934,9 @@ public class LayersTree extends JTree {
         return keyAdapter;
     }
 
-    private LayersTreeExpansionListener getLayersTreeExpansionListener(){
-        if (layersTreeExpansionListener==null){
-            layersTreeExpansionListener=new LayersTreeExpansionListener();
+    private LayersTreeExpansionListener getLayersTreeExpansionListener() {
+        if (layersTreeExpansionListener == null) {
+            layersTreeExpansionListener = new LayersTreeExpansionListener();
         }
         return layersTreeExpansionListener;
     }
@@ -1616,8 +1636,8 @@ public class LayersTree extends JTree {
 
                 // Make sure we aren't already scrolled all the way down
                 if (tree.getHeight() - treeVisibleRectangle.y != vp.getHeight()) {
-				    /*
-				     * Get Y coordinate for scrolling down
+                    /*
+                     * Get Y coordinate for scrolling down
 					 */
                     if (vp.getHeight() - vpMousePosition.y < 30 && vp.getHeight() - vpMousePosition.y > 0) {
                         newY = treeVisibleRectangle.y + (30 + vpMousePosition.y - vp.getHeight()) * 2;
@@ -1626,8 +1646,8 @@ public class LayersTree extends JTree {
 
                 // Make sure we aren't already scrolled all the way up
                 if (newY == null && treeVisibleRectangle.y != 0) {
-				    /*
-					 * Get Y coordinate for scrolling up
+                    /*
+                     * Get Y coordinate for scrolling up
 					 */
                     if (30 > vpMousePosition.y && vpMousePosition.y > 0) {
                         newY = treeVisibleRectangle.y - (30 - vpMousePosition.y) * 2;
@@ -1746,7 +1766,10 @@ public class LayersTree extends JTree {
             TreeNodeData draggedNodeData = (TreeNodeData) selectedTreeNode.getUserObject();
             selectedLayer.add((Layer) draggedNodeData.getData());
         }
-
+        if (selectedLayer.size() <= 0) {
+            dropTargetNodeIndex = -1;
+            return;
+        }
         int startIndex = -1;
         if (layerTarget.getParentGroup() != null) {
             startIndex = layerTarget.getParentGroup().indexOf(layerTarget);
@@ -2066,20 +2089,20 @@ public class LayersTree extends JTree {
         return layerGroups;
     }
 
-    public void addIFormMap(IFormMap iFormMap){
-        if (!this.expandLayerGroups.containsKey(iFormMap)){
-            this.expandLayerGroups.put(iFormMap,new ArrayList<LayerGroup>());
+    public void addIFormMap(IFormMap iFormMap) {
+        if (!this.expandLayerGroups.containsKey(iFormMap)) {
+            this.expandLayerGroups.put(iFormMap, new ArrayList<LayerGroup>());
         }
     }
 
-    public void removeIFormMap(IFormMap iFormMap){
-        if (this.expandLayerGroups.containsKey(iFormMap)){
+    public void removeIFormMap(IFormMap iFormMap) {
+        if (this.expandLayerGroups.containsKey(iFormMap)) {
             this.expandLayerGroups.remove(iFormMap);
         }
     }
 
-    public void setExpandLayerGroup(IFormMap iFormMap,LayerGroup... expandLayerGroup) {
-        ArrayList<LayerGroup> expandLayerGroupsList =this.expandLayerGroups.get(iFormMap);
+    public void setExpandLayerGroup(IFormMap iFormMap, LayerGroup... expandLayerGroup) {
+        ArrayList<LayerGroup> expandLayerGroupsList = this.expandLayerGroups.get(iFormMap);
         expandLayerGroupsList.clear();
 
         if (expandLayerGroup != null && expandLayerGroup.length > 0) {
