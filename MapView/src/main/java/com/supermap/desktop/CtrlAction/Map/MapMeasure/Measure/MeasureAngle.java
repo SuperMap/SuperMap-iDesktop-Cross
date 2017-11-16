@@ -1,16 +1,6 @@
 package com.supermap.desktop.CtrlAction.Map.MapMeasure.Measure;
 
-import com.supermap.data.GeoArc;
-import com.supermap.data.GeoCompound;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.GeoText;
-import com.supermap.data.Geometry;
-import com.supermap.data.Point2D;
-import com.supermap.data.Point2Ds;
-import com.supermap.data.TextAlignment;
-import com.supermap.data.TextPart;
-import com.supermap.data.TextStyle;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.enums.AngleUnit;
 import com.supermap.desktop.enums.MeasureType;
@@ -18,10 +8,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.FontUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.ui.Action;
-import com.supermap.ui.TrackedEvent;
-import com.supermap.ui.TrackedListener;
-import com.supermap.ui.TrackingEvent;
-import com.supermap.ui.TrackingListener;
+import com.supermap.ui.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +23,7 @@ import java.util.Stack;
  * Created by Administrator on 2016/1/28.
  */
 public class MeasureAngle extends Measure {
-	private static final String measureAngleTag = TRAKCING_OBJECT_NAME + "measureAngleTag";
+	private static final String measureAngleTag = TRACKING_OBJECT_NAME + "measureAngleTag";
 	private AngleUnit beforeUnit;
 	private ArrayList<Double> angleList;
 	private int beforePointsCount;
@@ -178,7 +165,7 @@ public class MeasureAngle extends Measure {
 					Point2Ds pnts = geoLine.getPart(0);
 					if (pnts.getCount() < 3) {
 						//只需要清除当前正在绘制的，不需要清除以前绘制好的
-						int index = mapControl.getMap().getTrackingLayer().indexOf(TRAKCING_OBJECT_NAME);
+						int index = mapControl.getMap().getTrackingLayer().indexOf(TRACKING_OBJECT_NAME);
 						if (index > -1) {
 							mapControl.getMap().getTrackingLayer().remove(index);
 						}
@@ -187,7 +174,7 @@ public class MeasureAngle extends Measure {
 						drawAngleText(pnts, false);
 					}
 				}
-				cancleEdit();
+				cancelEdit();
 				refreshTrackingLayer();
 			}
 		};
@@ -284,7 +271,7 @@ public class MeasureAngle extends Measure {
 			if (indexRecorder >= 0) {
 				mapControl.getMap().getTrackingLayer().set(indexRecorder, geoCompound);
 			} else {
-				mapControl.getMap().getTrackingLayer().add(geoCompound, TRAKCING_OBJECT_NAME);
+				mapControl.getMap().getTrackingLayer().add(geoCompound, TRACKING_OBJECT_NAME);
 			}
 
 			if (refreshTrackingLayer) {

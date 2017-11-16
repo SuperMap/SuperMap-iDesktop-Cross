@@ -29,9 +29,9 @@ public class CtrlActionMeasureClear extends CtrlAction {
 			formMap.getMapControl().setTrackMode(TrackMode.TRACK);
 			TrackingLayer trackingLayer = formMap.getMapControl().getMap().getTrackingLayer();
 			for (int i = trackingLayer.getCount() - 1; i >= 0; i--) {
-				if (trackingLayer.getTag(i).startsWith(Measure.TRAKCING_OBJECT_NAME)) {
-					trackingLayer.remove(i);
-				}
+                if (trackingLayer.getTag(i).startsWith(Measure.TRACKING_OBJECT_NAME)) {
+                    trackingLayer.remove(i);
+                }
 			}
 			formMap.getMapControl().setAction(Action.SELECT2);
 			formMap.getMapControl().getMap().refreshTrackingLayer();

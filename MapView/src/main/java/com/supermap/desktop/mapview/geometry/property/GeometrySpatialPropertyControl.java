@@ -1,27 +1,6 @@
 package com.supermap.desktop.mapview.geometry.property;
 
-import com.supermap.data.GeoBSpline;
-import com.supermap.data.GeoCardinal;
-import com.supermap.data.GeoChord;
-import com.supermap.data.GeoCircle;
-import com.supermap.data.GeoCurve;
-import com.supermap.data.GeoEllipse;
-import com.supermap.data.GeoEllipticArc;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoLine3D;
-import com.supermap.data.GeoLineM;
-import com.supermap.data.GeoParametricLineCompound;
-import com.supermap.data.GeoParametricRegionCompound;
-import com.supermap.data.GeoPie;
-import com.supermap.data.GeoRectangle;
-import com.supermap.data.GeoRegion;
-import com.supermap.data.GeoRegion3D;
-import com.supermap.data.GeoRoundRectangle;
-import com.supermap.data.Geometry;
-import com.supermap.data.GeometryType;
-import com.supermap.data.PrjCoordSys;
-import com.supermap.data.PrjCoordSysType;
-import com.supermap.data.Unit;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlDefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
@@ -772,9 +751,9 @@ public class GeometrySpatialPropertyControl extends AbstractPropertyControl {
 	private JComboBox<AreaUnit> createComboBoxAreaUnit() {
 		JComboBox<AreaUnit> comboBox = new JComboBox<AreaUnit>();
 
-		comboBox.addItem(AreaUnit.MILIMETER);
-		comboBox.addItem(AreaUnit.CENTIMETER);
-		comboBox.addItem(AreaUnit.DECIMETER);
+        comboBox.addItem(AreaUnit.MILLIMETER);
+        comboBox.addItem(AreaUnit.CENTIMETER);
+        comboBox.addItem(AreaUnit.DECIMETER);
 		comboBox.addItem(AreaUnit.METER);
 		comboBox.addItem(AreaUnit.KILOMETER);
 		comboBox.addItem(AreaUnit.INCH);

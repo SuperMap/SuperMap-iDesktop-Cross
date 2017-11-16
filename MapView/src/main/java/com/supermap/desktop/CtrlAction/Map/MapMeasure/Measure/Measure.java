@@ -7,6 +7,7 @@ import com.supermap.desktop.FormMap;
 import com.supermap.desktop.enums.AngleUnit;
 import com.supermap.desktop.enums.AreaUnit;
 import com.supermap.desktop.enums.LengthUnit;
+import com.supermap.desktop.enums.VolumeUnit;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import com.supermap.mapping.TrackingLayer;
 import com.supermap.ui.Action;
@@ -25,9 +26,9 @@ import java.util.EventObject;
 public abstract class Measure implements IMeasureAble {
 
 
-	public static final String TRAKCING_OBJECT_NAME = "MapMeasureTrackingObject";
-	// 距离量算相关参数
-	/**
+    public static final String TRACKING_OBJECT_NAME = "MapMeasureTrackingObject";
+    // 距离量算相关参数
+    /**
 	 * 辅助线距离量算线的距离，以像素为单位
 	 */
 	protected static int assistantLineInterval = 50;
@@ -88,9 +89,9 @@ public abstract class Measure implements IMeasureAble {
 	 * 存放已添加的tags
 	 */
 	protected java.util.List<String> addedTags = new ArrayList<>();
-	protected String textTagTitle = TRAKCING_OBJECT_NAME;
-	/**
-	 * 防止在编辑时把整个屏幕清除了
+    protected String textTagTitle = TRACKING_OBJECT_NAME;
+    /**
+     * 防止在编辑时把整个屏幕清除了
 	 */
 	protected static boolean isEditing = false;
 	private ActionChangedListener actionChangedListener = new ActionChangedListener() {
@@ -174,6 +175,12 @@ public abstract class Measure implements IMeasureAble {
 
 	}
 
+    protected VolumeUnit getVolumeUnit() {
+        return ((FormMap) Application.getActiveApplication().getActiveForm()).getVolumeUnit();
+
+    }
+
+
 	/**
 	 * 开始量算入口
 	 */
@@ -184,9 +191,9 @@ public abstract class Measure implements IMeasureAble {
 		isMeasureAble = false;
 		mapControl.setWaitCursorEnabled(false);
 //		removeListeners();
-//		cancleEdit();
-		this.mapControl.setTrackMode(TrackMode.TRACK);
-		this.mapControl.setLayout(null);
+//		cancelEdit();
+        this.mapControl.setTrackMode(TrackMode.TRACK);
+        this.mapControl.setLayout(null);
 		// 添加编辑框到地图空间中
 		addTextBoxsToMapControl();
 		setMapAction();
@@ -398,9 +405,9 @@ public abstract class Measure implements IMeasureAble {
 		int indexOfTrackingObject = -1;
 		if (mapControl != null) {
 			try {
-				indexOfTrackingObject = this.mapControl.getMap().getTrackingLayer().indexOf(TRAKCING_OBJECT_NAME);
-			} catch (Exception ex) {
-				Application.getActiveApplication().getOutput().output(ex);
+                indexOfTrackingObject = this.mapControl.getMap().getTrackingLayer().indexOf(TRACKING_OBJECT_NAME);
+            } catch (Exception ex) {
+                Application.getActiveApplication().getOutput().output(ex);
 			}
 		}
 		return indexOfTrackingObject;
@@ -422,9 +429,9 @@ public abstract class Measure implements IMeasureAble {
 	}
 
 
-	protected void cancleEdit() {
-		setTextBoxVisible(false);
-		endMeasure(false);
+    protected void cancelEdit() {
+        setTextBoxVisible(false);
+        endMeasure(false);
 	}
 
 	/**
@@ -434,9 +441,9 @@ public abstract class Measure implements IMeasureAble {
 		if (mapControl != null) {
 			TrackingLayer trackingLayer = mapControl.getMap().getTrackingLayer();
 			for (int i = trackingLayer.getCount() - 1; i >= 0; i--) {
-				if (trackingLayer.getTag(i).equals(TRAKCING_OBJECT_NAME)) {
-					trackingLayer.remove(i);
-				}
+                if (trackingLayer.getTag(i).equals(TRACKING_OBJECT_NAME)) {
+                    trackingLayer.remove(i);
+                }
 			}
 			mapControl.getMap().refreshTrackingLayer();
 		}
@@ -472,9 +479,9 @@ public abstract class Measure implements IMeasureAble {
 					setMapAction();
 					actionTempGeometry(false);
 				} else {
-					cancleEdit();
-				}
-			} else if (e.getButton() == MouseEvent.BUTTON1) {
+                    cancelEdit();
+                }
+            } else if (e.getButton() == MouseEvent.BUTTON1) {
 				isMouseDown = true;
 			}
 		}
@@ -484,9 +491,9 @@ public abstract class Measure implements IMeasureAble {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if (!e.isConsumed() && e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-				cancleEdit();
-				e.consume();
-			}
+                cancelEdit();
+                e.consume();
+            }
 		}
 	};
 
@@ -500,9 +507,9 @@ public abstract class Measure implements IMeasureAble {
 					e.consume();
 				}
 				for (int i = trackingLayer.getCount() - 1; i >= 0; i--) {
-					if (trackingLayer.getTag(i).startsWith(TRAKCING_OBJECT_NAME)) {
-						trackingLayer.remove(i);
-					}
+                    if (trackingLayer.getTag(i).startsWith(TRACKING_OBJECT_NAME)) {
+                        trackingLayer.remove(i);
+                    }
 				}
 				mapControl.getMap().refreshTrackingLayer();
 				mapControl.removeKeyListener(this);
