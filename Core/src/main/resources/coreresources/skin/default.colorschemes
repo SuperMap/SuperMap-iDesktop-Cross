@@ -1,8 +1,8 @@
 Cerulean Active {
     kind=Light
-    colorUltraLight=#F6F8FA
-    colorExtraLight=#DFE6ED
-    colorLight=#C1D6E9
+    colorUltraLight=#FBFBFC
+    colorExtraLight=#FBFBFC
+    colorLight=#FBFBFC
     colorMid=#A3B8CB
     colorDark=#62778A
     colorUltraDark=#42576A
@@ -121,13 +121,13 @@ Cerulean Rollover Unselected {
 
 Cerulean Mark {
     kind=Light
-    colorUltraLight=#92A2AC
-    colorExtraLight=#8D9EA9
-    colorLight=#8A98A3
+    colorUltraLight=#F0F0F0
+    colorExtraLight=#F0F0F0
+    colorLight=#F0F0F0
     colorMid=#88929C
     colorDark=#7D8289
     colorUltraDark=#7E8186
-    colorForeground=#24272E
+    colorForeground=#666666
 }
 
 Cerulean Active Header {
@@ -143,11 +143,11 @@ Cerulean Active Header {
 
 Cerulean Header {
     kind=Dark
-    colorUltraLight=#8FA9C0
-    colorExtraLight=#7695B2
-    colorLight=#5B89B4
-    colorMid=#33628C
-    colorDark=#1C3851
+    colorUltraLight=#0173C7
+    colorExtraLight=#0173C7
+    colorLight=#0173C7
+    colorMid=#0173C7
+    colorDark=#0173C7
     colorUltraDark=#7695B2
     colorForeground=#FFFFFF
 }
@@ -160,16 +160,28 @@ Cerulean Header Disabled {
     colorMid=#4B698A
     colorDark=#414D5D
     colorUltraDark=#7891A9
-    colorForeground=#F6F6F6
+    colorForeground=#FFFFFF
 }
 
 Cerulean Footer {
     kind=Light
-    colorUltraLight=#F9FAFA
-    colorExtraLight=#EAEBED
-    colorLight=#DFE4E9
-    colorMid=#C1C6CB
+    colorUltraLight=#F0F0F0
+    colorExtraLight=#F0F0F0
+    colorLight=#F0F0F0
+    colorMid=#F0F0F0
     colorDark=#80858A
     colorUltraDark=#60656A
     colorForeground=#000000
 }
+
+Moderate Highlight {
+    kind=Light
+    colorUltraLight=#BEDBF9
+    colorExtraLight=#BEDBF9
+    colorLight=#BEDBF9
+    colorMid=#BEDBF9
+    colorDark=#BEDBF9
+    colorUltraDark=#BEDBF9
+    colorForeground=#000000
+}
+

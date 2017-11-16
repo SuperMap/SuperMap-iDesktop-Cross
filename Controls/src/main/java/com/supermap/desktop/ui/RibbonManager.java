@@ -52,7 +52,7 @@ public class RibbonManager implements IRibbonManager {
 
 		for (WindowType windowType : childFrameMenus.keySet()) {
 			ArrayList<SmRibbonTask> smRibbonTasks = childFrameMenus.get(windowType);
-			RibbonContextualTaskGroup ribbonContextualTaskGroup = new RibbonContextualTaskGroup(smRibbonTasks.get(0).getTitle(), new Color(200, 40, 150), smRibbonTasks.toArray(new RibbonTask[smRibbonTasks.size()]));
+			RibbonContextualTaskGroup ribbonContextualTaskGroup = new RibbonContextualTaskGroup(smRibbonTasks.get(0).getTitle(), new Color(0x011E3C), smRibbonTasks.toArray(new RibbonTask[smRibbonTasks.size()]));
 			childTaskGroups.put(windowType, ribbonContextualTaskGroup);
 			ribbon.addContextualTaskGroup(ribbonContextualTaskGroup);
 			ribbon.setVisible(ribbonContextualTaskGroup, false);
