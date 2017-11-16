@@ -1,9 +1,10 @@
 package com.supermap.desktop.ui.mdi.util;
 
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.ImageIcon;
 
 public class MdiResource {
 
@@ -145,11 +146,15 @@ public class MdiResource {
 	 * 重置 MdiResource 为默认
 	 */
 	public static void resetDefaults() {
+		ArrayList<String> names = new ArrayList<>();
 		for (String name : iconMap.keySet()) {
 			if (!defaultIconMap.containsKey(name)) {
-				iconMap.remove(name);
-				iconSizeMap.remove(name);
+				names.add(name);
 			}
+		}
+		for (String name : names) {
+			iconMap.remove(name);
+			iconSizeMap.remove(name);
 		}
 		resetSizeDefaults();
 	}

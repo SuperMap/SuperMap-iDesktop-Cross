@@ -53,6 +53,7 @@ public class GlobalParameters {
 	private static String startupXml;
 	private static final String startupFileName = "SuperMap.Desktop.Startup.xml";
 	private static ArrayList<GlobalParametersChangedListener> globalParametersChangedListeners = new ArrayList<>();
+	private static String skin =null;
 
 	private GlobalParameters() {
 		// do nothing
@@ -600,6 +601,7 @@ public class GlobalParameters {
 		initEdit();
 		initTabular();
 		initLaunchUserExperiencePlan();
+		initSkin();
 		// TODO: 2016/3/29 新增节点在此初始化
 	}
 
@@ -1141,7 +1143,6 @@ public class GlobalParameters {
 			Element startup = emptyDocument.createElement("startup");
 			emptyDocument.appendChild(startup);
 
-
 			startup.appendChild(emptyDocument.createComment(CoreProperties.getString("String_WorkspaceComment")));
 			Element workspace = emptyDocument.createElement("workspace");
 			workspace.setAttribute("closenotify", String.valueOf(isWorkspaceCloseNotify));
@@ -1211,6 +1212,11 @@ public class GlobalParameters {
 			tabular.setAttribute("isSystemHidden", String.valueOf(isTabularHiddenSystemField));
 //			tabular.setAttribute("isHeadClickedSelectedColumn", String.valueOf(isHeadClickedSelectedColumn));
 			startup.appendChild(tabular);
+
+			Element view = emptyDocument.createElement("view");
+			view.setAttribute("skin", skin);
+			startup.appendChild(view);
+
 			XmlUtilities.saveXml(startupXml, emptyDocument, "UTF-8");
 
 		}
@@ -1232,5 +1238,19 @@ public class GlobalParameters {
 		globalParametersChangedListeners.remove(globalParametersChangedListener);
 	}
 
+	private static void initSkin() {
+		String value = getValue("_startup_view", "skin");
+		if (value != null) {
+			setSkin(value);
+		}
+	}
 
+
+	public static void setSkin(String skin) {
+		GlobalParameters.skin = skin;
+	}
+
+	public static String getSkin() {
+		return skin;
+	}
 }
