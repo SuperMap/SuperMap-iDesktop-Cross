@@ -5,12 +5,11 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
-import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
+import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.tasks.TasksManager;
 
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**

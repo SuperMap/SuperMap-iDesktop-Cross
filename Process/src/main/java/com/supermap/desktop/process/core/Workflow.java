@@ -33,11 +33,20 @@ public class Workflow implements IWorkflow {
 	private MatrixEventHandler handler = new MatrixEventHandler();
 	private ArrayList<IReadyChecker<Workflow>> readyCheckers = new ArrayList<>();
 	private ReentrantLock lock = new ReentrantLock();
+	private CirculationIterator iterator;
 
 	public Workflow(String name) {
 		this.name = name;
 		this.processMatrix = new NodeMatrix<>();
 		registerEvents();
+	}
+
+	public CirculationIterator getIterator() {
+		return iterator;
+	}
+
+	public void setIterator(CirculationIterator iterator) {
+		this.iterator = iterator;
 	}
 
 	public void setMatrix(NodeMatrix<IProcess> matrix) {
@@ -82,7 +91,7 @@ public class Workflow implements IWorkflow {
 		Element workflowNode = doc.createElement("Workflow");
 		workflowNode.setAttribute("Name", this.name);
 		doc.appendChild(workflowNode);
-
+		createIteratorNode(doc, workflowNode);
 		// 处理 processes
 		Element processesNode = doc.createElement("Processes");
 		Vector<IProcess> processes = this.processMatrix.getNodes();
@@ -123,7 +132,7 @@ public class Workflow implements IWorkflow {
 
 		// 设置 workflow 的属性
 		workflowNode.setAttribute("Name", this.name);
-
+		createIteratorNode(doc, workflowNode);
 		// 处理 processes
 		Element processesNode = doc.createElement("Processes");
 		Vector<IProcess> processes = this.processMatrix.getNodes();
@@ -160,6 +169,27 @@ public class Workflow implements IWorkflow {
 		workflowNode.appendChild(relationsNode);
 	}
 
+	private void createIteratorNode(Document doc, Element workflowNode) {
+		if (null != this.iterator) {
+			Element iteratorNode = doc.createElement("Iterator");
+			iteratorNode.setAttribute("CirculationType", iterator.getCirculationType().toString());
+//			ArrayList<Object> infoList = this.iterator.getInfoList();
+//			for (int i = 0; i < infoList.size(); i++) {
+//				Element infoNode = doc.createElement("info");
+//				infoNode.setAttribute("Value", String.valueOf(infoList.get(i)));
+//				iteratorNode.appendChild(infoNode);
+//			}
+			Element bindProcessNode = doc.createElement("bindProcess");
+			bindProcessNode.setAttribute("Key", iterator.getBindProcess().getKey());
+			bindProcessNode.setAttribute("SerialID", String.valueOf(iterator.getBindProcess().getSerialID()));
+			iteratorNode.appendChild(bindProcessNode);
+			Element bindParameterNode = doc.createElement("bindParameter");
+			bindParameterNode.setAttribute("Description", iterator.getBindParameterDescription());
+			iteratorNode.appendChild(bindParameterNode);
+			workflowNode.appendChild(iteratorNode);
+		}
+	}
+
 	public void serializeFrom(Element workflowNode) {
 
 		// 处理 workflow 的属性
@@ -183,7 +213,24 @@ public class Workflow implements IWorkflow {
 			process.setSerialID(serialID);
 			addProcess(process);
 		}
-
+		Element iteratorNode = XmlUtilities.getChildElementNodeByName(workflowNode, "Iterator");
+		if (null != iteratorNode) {
+			CirculationIterator currentIterator = new AbstractCirculationParameters();
+			currentIterator.setCirculationType(CirculationType.getCirculationType(iteratorNode.getAttribute("CirculationType")));
+//			Element[] infoNodes = XmlUtilities.getChildElementNodesByName(iteratorNode,"info");
+//			ArrayList infoList = new ArrayList();
+//			for (Element infoNode : infoNodes) {
+//				infoList.add(infoNode.getAttribute("info"));
+//			}
+			Element bindProcessNode = XmlUtilities.getChildElementNodeByName(iteratorNode, "bindProcess");
+			String key = bindProcessNode.getAttribute("Key");
+			int serialID = Integer.valueOf(bindProcessNode.getAttribute("SerialID"));
+			IProcess process = getProcess(key, serialID);
+			currentIterator.setBindProcess(process);
+			Element bindParameterNode = XmlUtilities.getChildElementNodeByName(iteratorNode, "bindParameter");
+			currentIterator.setBindParameterDescription(bindParameterNode.getAttribute("Description"));
+			this.setIterator(currentIterator);
+		}
 		// 处理 Relation
 		Element relationsNode = XmlUtilities.getChildElementNodeByName(workflowNode, "Relations");
 		Element[] relationNodes = XmlUtilities.getChildElementNodesByName(relationsNode, "Relation");

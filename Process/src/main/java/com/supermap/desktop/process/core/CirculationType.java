@@ -1,4 +1,4 @@
-package com.supermap.desktop.WorkflowView.circulation;
+package com.supermap.desktop.process.core;
 
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.BasicTypes;
@@ -19,6 +19,25 @@ public enum CirculationType {
 
 	CirculationType(String description) {
 		this.description = description;
+	}
+
+	public static CirculationType getCirculationType(String description) {
+		if (description.equals(forType.toString())) {
+			return forType;
+		}
+		if (description.equals(forFieldType.toString())) {
+			return forFieldType;
+		}
+		if (description.equals(forObjectType.toString())) {
+			return forObjectType;
+		}
+		if (description.equals(forDatasetType.toString())) {
+			return forDatasetType;
+		}
+		if (description.equals(forDatasourceType.toString())) {
+			return forDatasourceType;
+		}
+		return null;
 	}
 
 	@Override

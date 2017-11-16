@@ -1,6 +1,9 @@
-package com.supermap.desktop.WorkflowView.circulation;
+package com.supermap.desktop.process.core;
 
+import com.supermap.desktop.process.core.CirculationIterator;
+import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.process.core.IProcess;
+import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.DefaultParameters;
 
@@ -13,6 +16,9 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 	protected ArrayList<T> infoList = new ArrayList<>();
 	protected int count = 0;
 	protected OutputData outputData;
+	protected CirculationType circulationType;
+	protected IProcess process;
+	protected String parameterDescription;
 
 	public AbstractCirculationParameters(IProcess process) {
 		super(process);
@@ -23,7 +29,7 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 	}
 
 	/**
-	 * //提供给子类覆盖,用于数据的初始化
+	 * 提供给子类覆盖,用于数据的初始化
 	 */
 	@Override
 	public void reset() {
@@ -58,4 +64,43 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 	public void setOutputData(OutputData outputData) {
 		this.outputData = outputData;
 	}
+
+	public ArrayList<T> getInfoList() {
+		return infoList;
+	}
+
+	public void setInfoList(ArrayList infoList) {
+		this.infoList = infoList;
+	}
+
+	@Override
+	public CirculationType getCirculationType() {
+		return this.circulationType;
+	}
+
+	@Override
+	public void setCirculationType(CirculationType circulationType) {
+		this.circulationType = circulationType;
+	}
+
+	@Override
+	public void setBindProcess(IProcess process) {
+		this.process = process;
+	}
+
+	@Override
+	public IProcess getBindProcess() {
+		return this.process;
+	}
+
+	@Override
+	public void setBindParameterDescription(String parameterDescription) {
+		this.parameterDescription = parameterDescription;
+	}
+
+	@Override
+	public String getBindParameterDescription() {
+		return this.parameterDescription;
+	}
+
 }

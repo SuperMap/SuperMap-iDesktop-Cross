@@ -20,8 +20,7 @@ import com.supermap.desktop.process.parameter.interfaces.datas.InputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.Inputs;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.interfaces.datas.types.Type;
-import com.supermap.desktop.process.parameter.ipls.ParameterCombine;
-import com.supermap.desktop.process.parameter.ipls.ParameterSwitch;
+import com.supermap.desktop.process.util.ParameterUtil;
 
 import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
@@ -120,9 +119,8 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		final ProcessGraph endGraph = this.endGraph;
 
 		JMenuItem item;
-		final ArrayList<AbstractParameter> parameters = getSameTypeParameters(endGraph.getProcess());
+		final ArrayList<IParameter> parameters = ParameterUtil.getSameTypeParameters(endGraph.getProcess(), ((CirculationOutputGraph) this.startGraph).getOutputData().getType());
 		final IGraph fromGraph = startGraph;
-		final IGraph toGraph = endGraph;
 		final OutputData fromData = ((CirculationOutputGraph) startGraph).getOutputData();
 		final Object selectValue = fromData.getValue();
 		fromData.addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
@@ -149,8 +147,10 @@ public class GraphConnectAction extends CanvasActionAdapter {
 							if (null != selectValue) {
 								((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(selectValue);
 							}
-							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, toGraph);
+							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, endGraph);
 							canvas.addGraph(connectionLineGraph);
+							canvas.getIterator().setBindProcess(endGraph.getProcess());
+							canvas.getIterator().setBindParameterDescription(parameters.get(selectedItemIndex).getDescribe());
 							canvas.repaint();
 							inputsMenu.setVisible(false);
 						}
@@ -309,46 +309,9 @@ public class GraphConnectAction extends CanvasActionAdapter {
 			ret = true;
 //			}
 		} else if (this.startGraph instanceof CirculationOutputGraph) {
-			ret = getSameTypeParameters(process).size() == 0 ? false : true;
+			ret = ParameterUtil.getSameTypeParameters(process, ((CirculationOutputGraph) this.startGraph).getOutputData().getType()).size() == 0 ? false : true;
 		}
 		return ret;
-	}
-
-	private ArrayList<AbstractParameter> getSameTypeParameters(IProcess process) {
-		ArrayList<AbstractParameter> types = new ArrayList<>();
-		Type startGraphType = ((CirculationOutputGraph) this.startGraph).getOutputData().getType();
-		ArrayList<IParameter> parameters = process.getParameters().getParameters();
-		for (int i = 0, size = parameters.size(); i < size; i++) {
-			getSameTypeParameter(types, parameters.get(i), startGraphType);
-		}
-		return types;
-	}
-
-	private void getSameTypeParameter(ArrayList<AbstractParameter> valueTypes, IParameter parameter, Type startGraphType) {
-		if (parameter instanceof ParameterCombine) {
-			ArrayList<IParameter> parameterList = ((ParameterCombine) parameter).getParameterList();
-			for (int j = 0; j < parameterList.size(); j++) {
-				if (parameterList.get(j) instanceof ParameterCombine) {
-					getSameTypeParameter(valueTypes, parameterList.get(j), startGraphType);
-				} else if (parameterList.get(j) instanceof ParameterSwitch) {
-					int count = ((ParameterSwitch) parameterList.get(j)).getCount();
-					for (int i = 0; i < count; i++) {
-						getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
-					}
-				} else if (null != ((AbstractParameter) parameterList.get(j)).getValueType()
-						&& ((AbstractParameter) parameterList.get(j)).getValueType().equals(startGraphType)) {
-					valueTypes.add((AbstractParameter) parameterList.get(j));
-				}
-			}
-		} else if (parameter instanceof ParameterSwitch) {
-			int count = ((ParameterSwitch) parameter).getCount();
-			for (int i = 0; i < count; i++) {
-				getSameTypeParameter(valueTypes, ((ParameterSwitch) parameter).getParameterByIndex(i), startGraphType);
-			}
-		} else if (null != ((AbstractParameter) parameter).getValueType()
-				&& ((AbstractParameter) parameter).getValueType().equals(startGraphType)) {
-			valueTypes.add((AbstractParameter) parameter);
-		}
 	}
 
 	private boolean isConnected(IGraph from, IGraph to) {

@@ -1,28 +1,28 @@
 package com.supermap.desktop.WorkflowView;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.WorkflowView.circulation.CirculationIterator;
+import com.supermap.desktop.WorkflowView.circulation.CirculationDialog;
 import com.supermap.desktop.WorkflowView.graphics.GraphCanvas;
 import com.supermap.desktop.WorkflowView.graphics.connection.ConnectionLineGraph;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingEvent;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingListener;
-import com.supermap.desktop.WorkflowView.graphics.graphs.CirculationGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.IGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.OutputGraph;
-import com.supermap.desktop.WorkflowView.graphics.graphs.ProcessGraph;
+import com.supermap.desktop.WorkflowView.graphics.graphs.*;
 import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.*;
 import com.supermap.desktop.process.ProcessManager;
-import com.supermap.desktop.process.core.DataMatch;
-import com.supermap.desktop.process.core.IProcess;
-import com.supermap.desktop.process.core.IRelation;
-import com.supermap.desktop.process.core.Workflow;
+import com.supermap.desktop.process.core.*;
 import com.supermap.desktop.process.events.RelationAddedEvent;
 import com.supermap.desktop.process.events.RelationAddedListener;
 import com.supermap.desktop.process.events.RelationRemovingEvent;
 import com.supermap.desktop.process.events.RelationRemovingListener;
 import com.supermap.desktop.process.loader.IProcessLoader;
+import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
+import com.supermap.desktop.process.parameter.events.OutputDataValueChangedListener;
+import com.supermap.desktop.process.parameter.interfaces.IParameter;
+import com.supermap.desktop.process.parameter.interfaces.ISelectionParameter;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
+import com.supermap.desktop.process.util.ParameterUtil;
 import com.supermap.desktop.utilities.StringUtilities;
+import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -32,7 +32,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +55,8 @@ public class WorkflowCanvas extends GraphCanvas
 	private ParametersSettingAction parametersSetting = new ParametersSettingAction(this);
 	private CirculationIterator iterator;
 	private CirculationGraph circulationGraph;
+	private CirculationOutputGraph circulationGraphOutputGraph;
+
 
 	public WorkflowCanvas(Workflow workflow) {
 		loadWorkflow(workflow);
@@ -94,12 +96,19 @@ public class WorkflowCanvas extends GraphCanvas
 		}
 
 		this.workflow = workflow;
-
+		if (null != this.workflow.getIterator()) {
+			loadIterator(this.workflow.getIterator());
+		}
 		if (this.workflow.getProcessCount() > 0) {
 			loadProcesses(this.workflow.getProcesses());
 			loadRelations(this.workflow.getRelations());
 		}
 
+	}
+
+	private void loadIterator(CirculationIterator iterator) {
+		this.iterator = this.workflow.getIterator();
+		addCirculationGraph(iterator.getCirculationType(), new Point(0, 0), new Point(0, 0));
 	}
 
 	private void loadProcesses(Vector<IProcess> processes) {
@@ -245,9 +254,80 @@ public class WorkflowCanvas extends GraphCanvas
 		}
 	}
 
+	public void addCirculationGraph(CirculationType circulationType, Point point, Point outputPoint) {
+		if (null == circulationGraph) {
+			this.circulationGraph = new CirculationGraph(this, circulationType);
+			OutputData outputData = circulationGraph.getOutputData();
+			CirculationDialog circulationDialog = new CirculationDialog(circulationType, false, outputData);
+			this.circulationGraph.setCirculationDialog(circulationDialog);
+			if (null == this.iterator) {
+				this.setIterator(circulationDialog.iterator());
+			}
+			Point canvasLocation = this.getCoordinateTransform().inverse(point);
+			this.setCirculationGraph(this.circulationGraph);
+			this.circulationGraph.setLocation(canvasLocation);
+			this.addGraph(this.circulationGraph);
+			this.circulationGraphOutputGraph = new CirculationOutputGraph(this, outputData);
+			this.circulationGraphOutputGraph.setLocation(outputPoint);
+			this.circulationGraphOutputGraph.setCirculationDialog(new CirculationDialog(circulationType, true, outputData));
+			this.outputMap.put(outputData, circulationGraphOutputGraph);
+			this.addGraph(this.circulationGraphOutputGraph);
+			// 添加 process 和 output 之间的连接线
+			ConnectionLineGraph lineGraph = new ConnectionLineGraph(this, circulationGraph, circulationGraphOutputGraph);
+			this.outputLinesMap.put(outputData, lineGraph);
+			this.addGraph(lineGraph);
+			this.repaint();
+		}
+	}
+
+	public void loadIteratorGraphLocation(Element uiConfigNode) {
+		if (null != iterator) {
+			final Element iteratorLocationNode = XmlUtilities.getChildElementNodeByName(uiConfigNode, "iterator");
+			Point point = new Point(Integer.valueOf(iteratorLocationNode.getAttribute("LocationX")), Integer.valueOf(iteratorLocationNode.getAttribute("LocationY")));
+			this.circulationGraph.setLocation(point);
+			Element outputLocationNode = XmlUtilities.getChildElementNodeByName(iteratorLocationNode, "Output");
+			String key = outputLocationNode.getAttribute("Key");
+			Point outputPoint = new Point(Integer.valueOf(outputLocationNode.getAttribute("LocationX")), Integer.valueOf(outputLocationNode.getAttribute("LocationY")));
+			if (circulationGraphOutputGraph.getOutputData().getName().equals(key)) {
+				circulationGraphOutputGraph.setLocation(outputPoint);
+			}
+			final IGraph endGraph = this.processMap.get(iterator.getBindProcess());
+			ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(this, circulationGraphOutputGraph, endGraph);
+			this.outputLinesMap.put(circulationGraphOutputGraph.getOutputData(), connectionLineGraph);
+			this.addGraph(connectionLineGraph);
+			final ArrayList<IParameter> parameters = ParameterUtil.getSameTypeParameters(iterator.getBindProcess(), iterator.getCirculationType().getType());
+			//数据变化时同步数据
+			circulationGraphOutputGraph.getOutputData().addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
+				@Override
+				public void updateDataValue(OutputDataValueChangedEvent e) {
+
+					for (IParameter parameter : parameters) {
+						if (parameter instanceof ISelectionParameter && parameter.isEnabled() && parameter.getDescribe().equals(iterator.getBindParameterDescription())) {
+							((ISelectionParameter) parameter).setSelectedItem(e.getNewValue());
+						}
+					}
+				}
+			});
+		}
+	}
+
 	public void serializeTo(Element locationsNode) {
 		Document doc = locationsNode.getOwnerDocument();
-
+		if (null != iterator) {
+			Element iteratorNode = doc.createElement("iterator");
+			iteratorNode.setAttribute("CirculationType", iterator.getCirculationType().toString());
+			iteratorNode.setAttribute("LocationX", String.valueOf(getCirculationGraph().getLocation().x));
+			iteratorNode.setAttribute("LocationY", String.valueOf(getCirculationGraph().getLocation().y));
+			OutputData outputData = getCirculationGraph().getOutputData();
+			if (this.outputMap.containsKey(outputData)) {
+				Element outputLocNode = doc.createElement("Output");
+				outputLocNode.setAttribute("Key", outputData.getName());
+				outputLocNode.setAttribute("LocationX", String.valueOf(this.outputMap.get(outputData).getLocation().x));
+				outputLocNode.setAttribute("LocationY", String.valueOf(this.outputMap.get(outputData).getLocation().y));
+				iteratorNode.appendChild(outputLocNode);
+			}
+			locationsNode.appendChild(iteratorNode);
+		}
 		// 处理 process
 		for (IProcess process :
 				this.processMap.keySet()) {
@@ -387,6 +467,16 @@ public class WorkflowCanvas extends GraphCanvas
 		}
 	}
 
+	public void removeIterator() {
+		if (null != this.circulationGraph) {
+			this.outputLinesMap.remove(this.outputLinesMap.get(this.circulationGraph.getOutputData()));
+			this.circulationGraphOutputGraph = null;
+			this.circulationGraph = null;
+			this.iterator = null;
+		}
+	}
+
+
 	private class ProcessDropTargetHandler extends DropTargetAdapter {
 		@Override
 		public void drop(DropTargetDropEvent dtde) {
@@ -426,20 +516,13 @@ public class WorkflowCanvas extends GraphCanvas
 		}
 	}
 
-	public Map<OutputData, ConnectionLineGraph> getOutputLinesMap() {
-		return outputLinesMap;
-	}
-
-	public Map<OutputData, IGraph> getOutputMap() {
-		return outputMap;
-	}
-
 	public CirculationIterator getIterator() {
 		return iterator;
 	}
 
 	public void setIterator(CirculationIterator iterator) {
 		this.iterator = iterator;
+		this.workflow.setIterator(iterator);
 	}
 
 	public CirculationGraph getCirculationGraph() {
