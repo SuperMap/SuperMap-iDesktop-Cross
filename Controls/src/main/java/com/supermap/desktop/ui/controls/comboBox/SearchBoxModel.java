@@ -168,16 +168,20 @@ public class SearchBoxModel<T> extends AbstractListModel<T>
 	}
 
 	public int getSelectedIndex() {
-		if (!comboBox.isPopupVisible() && !isKeyReleased) {
-			resetSearchData();
-			fireContentsChanged(this, 0, searchData.size());
-		}
-		String str = comboBoxEditor.getItem().toString();
-		for (int i = 0; i < searchData.size(); i++) {
-			String searchString = searchItemValueGetter.getSearchString(searchData.get(i));
-			if (!StringUtilities.isNullOrEmpty(searchString) && searchString.equals(str)) {
-				return i;
+		try {
+			if (!comboBox.isPopupVisible() && !isKeyReleased) {
+				resetSearchData();
+				fireContentsChanged(this, 0, searchData.size());
 			}
+			String str = comboBoxEditor.getItem().toString();
+			for (int i = 0; i < searchData.size(); i++) {
+				String searchString = searchItemValueGetter.getSearchString(searchData.get(i));
+				if (!StringUtilities.isNullOrEmpty(searchString) && searchString.equals(str)) {
+					return i;
+				}
+			}
+		} catch (Exception e) {
+			return -1;
 		}
 		return -1;
 	}
