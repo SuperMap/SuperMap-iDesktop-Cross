@@ -31,6 +31,9 @@ public class ActionPrePage extends AbstractAction {
 		}
 
 		MdiGroup group = page.getGroup();
+		if (group == null) {
+			return false;
+		}
 		MdiGroupFeature groupFeature = (MdiGroupFeature) group.getUI().getGroupFeature();
 		return groupFeature.getTabsFeature().canForward();
 	}
