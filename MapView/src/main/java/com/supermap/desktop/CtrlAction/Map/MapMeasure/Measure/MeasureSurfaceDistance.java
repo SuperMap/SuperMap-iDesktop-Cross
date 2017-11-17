@@ -29,8 +29,8 @@ public class MeasureSurfaceDistance extends MeasureDistance {
         point2Ds.add(pntA);
         point2Ds.add(pntB);
         distance = CalculationTerrain.computeSurfaceDistance(datasetGrid, new GeoLine(point2Ds));
-        distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
         totalLength += distance;
+        distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
 
         return distance;
     }
@@ -44,6 +44,7 @@ public class MeasureSurfaceDistance extends MeasureDistance {
 
     @Override
     protected void outputMeasure(double length) {
+        totalLength = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), getLengthUnit().getUnit(), totalLength);
         Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_Map_MeasureSurfaceDistance"),
                 decimalFormat.format(totalLength), getLengthUnit().toString()));
         totalLength = 0;

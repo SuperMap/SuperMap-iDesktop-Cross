@@ -24,13 +24,14 @@ public class MeasureGeodesic extends MeasureDistance {
         GeoSpheroid geoSpheroid = mapControl.getMap().getPrjCoordSys().getGeoCoordSys().getGeoDatum().getGeoSpheroid();
         double distance = Geometrist.computeGeodesicDistance(new Point2Ds(new Point2D[]{pntA, pntB}), geoSpheroid.getAxis(),
                 geoSpheroid.getFlatten());
-        distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
         totalLength += distance;
+        distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
         return distance;
     }
 
     @Override
     protected void outputMeasure(double length) {
+        totalLength = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), getLengthUnit().getUnit(), totalLength);
         Application.getActiveApplication().getOutput().output(MessageFormat.format(CoreProperties.getString("String_Map_MeasureGeodesicDistance"),
                 decimalFormat.format(totalLength), getLengthUnit().toString()));
         totalLength = 0;
