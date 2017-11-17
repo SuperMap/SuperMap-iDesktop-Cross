@@ -1429,8 +1429,8 @@ public class FormTransformation extends FormBaseChild implements IFormTransforma
 	}
 
 	@Override
-	public void removeLayers(Layer[] activeLayers) {
-		currentForceWindow.removeLayers(activeLayers);
+	public boolean removeLayers(Layer[] activeLayers) {
+		return currentForceWindow.removeLayers(activeLayers);
 	}
 
 	@Override

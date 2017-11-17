@@ -260,7 +260,8 @@ public abstract class TransformationBase implements IFormMap {
 		return false;
 	}
 
-	public void removeLayers(Layer[] layers) {
+	public boolean removeLayers(Layer[] layers) {
+		boolean isRemoved=true;
 		try {
 			if (layers != null && layers.length > 0) {
 				ArrayList<String> removingLayers = new ArrayList<String>();
@@ -314,10 +315,14 @@ public abstract class TransformationBase implements IFormMap {
 					}
 
 					this.getMapControl().getMap().refresh();
+				}else{
+					isRemoved=false;
 				}
 			}
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
+		}finally {
+			return isRemoved;
 		}
 	}
 

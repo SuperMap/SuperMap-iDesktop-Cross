@@ -53,7 +53,7 @@ public interface IFormMap extends IForm {
 
 	int getSelectedCount();
 
-	void removeLayers(Layer[] activeLayers);
+	boolean removeLayers(Layer[] activeLayers);
 
 	void setVisibleScalesEnabled(boolean isVisibleScalesEnabled);
 
