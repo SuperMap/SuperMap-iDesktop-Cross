@@ -90,10 +90,9 @@ public class PanelTargetCoordSys extends JPanel {
 	private ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
 			// 当点击了坐标系设置，并且设置了坐标系
 			JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
-			dialogPrjCoordSysSettings.removeNONERRTHRoot();
+			dialogPrjCoordSysSettings.removeNONEARTHRoot();
 			if (dialogPrjCoordSysSettings.showDialog() == DialogResult.OK) {
 				if (dialogPrjCoordSysSettings.getPrjCoordSys().getType() != PrjCoordSysType.PCS_NON_EARTH) {
 					buttonSetPrjCoordSys = dialogPrjCoordSysSettings.getPrjCoordSys();

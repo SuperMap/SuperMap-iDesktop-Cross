@@ -37,23 +37,11 @@ import java.util.List;
 
 import static com.supermap.desktop.ui.controls.prjcoordsys.XMLProjectionTag.GEOCOORDSYS_CAPTION;
 
-// @formatter:off
 
 /**
- * 先不做自定义投影 投影描述的文件是从 iDesktop .NET 迁移过来的，而 Java版的实现与投影描述文件的结构略有不同。
- * 在配置文件中，分组信息是以 GroupCaption 子节点的形式写在了每一个定义里，它们是同级平行关系，
- * 而在本类的实现中， 分组与子项是上下层级关系。
- *
- * @author highsad
- * 优化：支持树节点的定制-yuanR2017.10.18
- * 功能丰富：依照.net，对投影设置面板进行重构-yuanR2017.10.24
- * <p>
- * 尝试修改投影的管理方式，依照。net的实现方式。通过文件夹的形式管理“自定义”和“收藏夹”节点中的内容
- * “自定义”和“收藏夹”节点反映文件夹中的内容
- * <p>
- * 对实现代码进行优化-yuanR2017.11.16
- */
-// @formatter:on
+ * @author yuanR2017.11.17
+ * 坐标系设置
+ **/
 public class JDialogPrjCoordSysSettings extends SmDialog {
 
 	/**
@@ -97,7 +85,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private SmButton buttonClose;
 
 	// 平面坐标系定义集合
-	private transient CoordSysDefine noneEarth = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, null,
+	private transient CoordSysDefine noneEarth = new CoordSysDefine(CoordSysDefine.NONE_EARTH, null,
 			ControlsProperties.getString("String_NoneEarth")).setFolderNode(true);
 	// 投影坐标系统定义集合
 	private transient CoordSysDefine projectionSystem = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM, null,
@@ -809,7 +797,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 		for (Enum unit1 : units) {
 			Unit unit = (Unit) unit1;
-			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_ERRTH, this.noneEarth, unit.toString()).setFolderNode(false);
+			CoordSysDefine coordSysDefine = new CoordSysDefine(CoordSysDefine.NONE_EARTH, this.noneEarth, unit.toString()).setFolderNode(false);
 			coordSysDefine.setCoordSysCode(unit.value());
 		}
 	}
@@ -1111,7 +1099,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 应用选中的投影
 	 */
 	private void applyPrjCoordSys() {
-		if (this.currentDefine.getCoordSysType() == CoordSysDefine.NONE_ERRTH) {
+		if (this.currentDefine.getCoordSysType() == CoordSysDefine.NONE_EARTH) {
 			this.prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_NON_EARTH);
 			this.prjCoordSys.setCoordUnit((Unit) Enum.parse(Unit.class, this.currentDefine.getCoordSysCode()));
 		} else if (this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
@@ -1300,7 +1288,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 
 	private boolean isExportEnable() {
-		return this.currentDefine != null && this.currentDefine.getCoordSysType() != CoordSysDefine.NONE_ERRTH &&
+		return this.currentDefine != null && this.currentDefine.getCoordSysType() != CoordSysDefine.NONE_EARTH &&
 				(!this.currentDefine.getIsFolderNode() || this.currentDefine.size() > 0);
 	}
 
@@ -1308,7 +1296,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		return this.currentDefine != null &&
 				!this.currentDefine.getIsFolderNode() &&
 				this.currentDefine.getParent().getCoordSysType() != CoordSysDefine.FAVORITE_COORDINATE &&
-				this.currentDefine.getParent().getCoordSysType() != CoordSysDefine.NONE_ERRTH;
+				this.currentDefine.getParent().getCoordSysType() != CoordSysDefine.NONE_EARTH;
 	}
 
 	private boolean isButtonApplyEnable() {
@@ -1973,7 +1961,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	/**
 	 * 移除平面坐标系文件节点
 	 */
-	public void removeNONERRTHRoot() {
+	public void removeNONEARTHRoot() {
 		removeFormTree(this.noneEarth);
 		selectRootNode();
 	}
