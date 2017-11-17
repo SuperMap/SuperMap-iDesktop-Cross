@@ -212,7 +212,7 @@ public class JPanelGeoCoordSys extends JPanel {
 		Arrays.sort(enumsGeoDatum, 0, enumsGeoDatum.length, new EnumComparator());
 
 		for (Enum anEnum : enumsGeoDatum) {
-			if (anEnum instanceof GeoDatumType && anEnum != GeoDatumType.DATUM_USER_DEFINED) {
+			if (anEnum instanceof GeoDatumType) {
 				comboBoxGeoDatumPlane.addItem((GeoDatumType) anEnum);
 			}
 		}

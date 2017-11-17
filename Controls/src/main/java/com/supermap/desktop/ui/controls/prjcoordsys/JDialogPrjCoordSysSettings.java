@@ -1321,22 +1321,31 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 导出按钮响应事件
 	 */
 	private void exportActive() {
-		String moduleName = "ExportPrjFile";
-		if (!SmFileChoose.isModuleExist(moduleName)) {
-			// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
-			String fileFilters = SmFileChoose.createFileFilter("", "NOEXIST");
-			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-					ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
-		}
-		SmFileChoose prjFileExportFileChoose = new SmFileChoose(moduleName);
-		if (prjFileExportFileChoose.getTextField() != null) {
-			prjFileExportFileChoose.getTextField().setEnabled(false);
-		}
 		// 设置导出功能文本对话框，文件名称，根据是否为多选进行设置
-		if (tablePrjCoordSys.getSelectedRowCount() > 1) {
+		SmFileChoose prjFileExportFileChoose;
+		if (tablePrjCoordSys.getSelectedRowCount() > 1 || currentDefine.getIsFolderNode()) {
+			String moduleName = "ExportPrjFolder";
+			if (!SmFileChoose.isModuleExist(moduleName)) {
+				// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
+				String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_PrjFile"), "NOEXIST");
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
+						ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
+			}
+			prjFileExportFileChoose = new SmFileChoose(moduleName);
 			prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getParent().getCaption()));
 		} else {
+			String moduleName = "ExportPrjFile";
+			if (!SmFileChoose.isModuleExist(moduleName)) {
+				// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
+				String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "NOEXIST");
+				SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
+						ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
+			}
+			prjFileExportFileChoose = new SmFileChoose(moduleName);
 			prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
+		}
+		if (prjFileExportFileChoose.getTextField() != null) {
+			prjFileExportFileChoose.getTextField().setEnabled(false);
 		}
 
 		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {

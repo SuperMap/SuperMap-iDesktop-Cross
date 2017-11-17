@@ -57,12 +57,19 @@ public class PanelTargetCoordSys extends JPanel {
 				fileChooser.setEnabled(radioButtonImportPrjFile.isSelected());
 				// 坐标系来自数据源
 				if (e.getSource().equals(radioButtonFromDatasource)) {
+					resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
 					if (datasource.getSelectedDatasource() != null) {
 						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
 					} else {
 						targetPrjCoordSys = null;
 					}
 				} else if (e.getSource().equals(radioButtonFromDataset)) {
+					// 当选择了来源于数据集，此时对数据源不做限制
+					if (datasource.getSelectedDatasource() != null) {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
+					} else {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
+					}
 					if (datasetComboBox.getSelectedDataset() != null) {
 						targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 					} else {

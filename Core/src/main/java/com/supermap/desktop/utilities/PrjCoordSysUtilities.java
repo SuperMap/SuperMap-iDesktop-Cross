@@ -106,7 +106,7 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CenterBasisMeridian"))) {
 						text += Double.toString(prj.getGeoCoordSys().getGeoPrimeMeridian().getLongitudeValue());
 					} else if (info.equals(CoreProperties.getString("String_Projection_ProjectionType"))) {
-						text += prj.getProjection().getType().toString();
+						text += PrjCoordSysTypeUtilities.getDescribe(prj.getProjection().getType().toString());
 					} else if (info.equals(CoreProperties.getString("String_CenterMeridian"))) {
 						text += Double.toString(prj.getPrjParameter().getCentralMeridian());
 					} else if (info.equals(CoreProperties.getString("String_CentralParallel"))) {
