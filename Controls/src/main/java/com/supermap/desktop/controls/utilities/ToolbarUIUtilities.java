@@ -55,6 +55,9 @@ public class ToolbarUIUtilities {
 	}
 
 	private static void updateRibbonTaskState(RibbonTask task) {
+		if (task == null || task.getBands() == null || task.getBands().size() <= 0) {
+			return;
+		}
 		for (AbstractRibbonBand<?> abstractRibbonBand : task.getBands()) {
 			updateRibbonBandTask(abstractRibbonBand);
 		}

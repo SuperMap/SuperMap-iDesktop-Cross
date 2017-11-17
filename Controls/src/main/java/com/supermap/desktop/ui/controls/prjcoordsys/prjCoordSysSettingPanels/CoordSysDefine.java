@@ -241,4 +241,27 @@ public class CoordSysDefine {
 		this.isFolderNode = isFolderNode;
 		return this;
 	}
+
+	//public CoordSysDefine clone() {
+	//	CoordSysDefine coordSysDefine;
+	//	if (!this.getIsFolderNode()) {
+	//		if (this.getCoordSysType() == GEOGRAPHY_COORDINATE) {
+	//			coordSysDefine = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
+	//			coordSysDefine.setGeoCoordSys(this.getGeoCoordSys());
+	//			coordSysDefine.setCoordSysCode(this.getCoordSysCode());
+	//			coordSysDefine.setCaption(this.getCaption());
+	//		} else if (this.getCoordSysType() == PROJECTION_SYSTEM) {
+	//			coordSysDefine = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
+	//			coordSysDefine.setPrjCoordSys(this.getPrjCoordSys());
+	//			coordSysDefine.setCoordSysCode(this.getCoordSysCode());
+	//			coordSysDefine.setCaption(this.getCaption());
+	//		} else {
+	//			coordSysDefine = null;
+	//		}
+	//	} else {
+	//		coordSysDefine = null;
+	//	}
+	//	return coordSysDefine;
+	//
+	//}
 }
