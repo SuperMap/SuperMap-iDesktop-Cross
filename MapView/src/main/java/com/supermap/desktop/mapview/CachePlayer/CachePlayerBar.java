@@ -67,7 +67,7 @@ public class CachePlayerBar extends JToolBar {
         public void actionPerformed(ActionEvent e) {
             if (buttonPlay.getIcon().equals(ICON_PLAY)) {
                 index--;
-                if (index == 0) {
+                if (index <= 0) {
                     index = playList.size() - 1;
                 }
                 CacheWithVersion cacheWithVersion = playList.get(index);
@@ -197,7 +197,11 @@ public class CachePlayerBar extends JToolBar {
         index = 0;
         progressBar.setProgress(0);
         buttonPlay.setIcon(ICON_PLAY);
-        playList.get(0).getLayerCache().setCurrentVersion(playList.get(0).getVersion());
+        if (playList.size() > 0) {
+            playList.get(0).getLayerCache().setCurrentVersion(playList.get(0).getVersion());
+        } else {
+            layerCaches.get(0).setCurrentVersion(layerCaches.get(0).getVersions().get(0));
+        }
         formMap.getMapControl().getMap().refresh();
     }
 
@@ -208,7 +212,7 @@ public class CachePlayerBar extends JToolBar {
             @Override
             public void run() {
                 index = index + 1;
-                if (index < playList.size()) {
+                if (playList.size() > 0 && index < playList.size()) {
                     CacheWithVersion cacheWithVersion = playList.get(index);
                     cacheWithVersion.getLayerCache().setCurrentVersion(cacheWithVersion.getVersion());
                     formMap.getMapControl().getMap().refresh();

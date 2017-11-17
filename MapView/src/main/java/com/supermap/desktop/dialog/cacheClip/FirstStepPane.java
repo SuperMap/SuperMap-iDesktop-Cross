@@ -19,6 +19,7 @@ import com.supermap.desktop.dialog.cacheClip.cache.CacheUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.properties.CacheProperties;
 import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxItem;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableHeaderCellRenderer;
 import com.supermap.desktop.ui.controls.ChooseTable.MultipleCheckboxTableRenderer;
@@ -302,6 +303,9 @@ public class FirstStepPane extends JPanel implements IState {
         public void actionPerformed(ActionEvent e) {
             mongoDBConnectSate = isDBValidate();
             updateDBNames();
+            if (comboBoxDatabaseName.getItemCount() > 0) {
+                UICommonToolkit.showMessageDialog(MapViewProperties.getString("String_ServerAvailable"));
+            }
         }
     };
 
@@ -941,7 +945,7 @@ public class FirstStepPane extends JPanel implements IState {
         this.buttonSelectInverse.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
         this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
         this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
-        this.buttonGetServer.setText(CoreProperties.getString("String_Label_VersionCheck"));
+        this.buttonGetServer.setText(CoreProperties.getString("String_Check"));
 
         this.labelVersion.setText(MapViewProperties.getString("MapCache_LabelVersion"));
         this.labelSplitMode.setText(MapViewProperties.getString("MapCache_LabelSplitMode"));

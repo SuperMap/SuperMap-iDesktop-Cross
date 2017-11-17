@@ -127,7 +127,6 @@ public class MeasureDistance extends Measure {
             public void tracked(TrackedEvent e) {
                 try {
                     if (e.getGeometry() != null) {
-                        outputMeasure(e.getLength());
                         GeoStyle geoStyle = e.getGeometry().getStyle();
                         if (geoStyle == null) {
                             geoStyle = new GeoStyle();
@@ -144,6 +143,7 @@ public class MeasureDistance extends Measure {
                         Point2Ds points = geoLine.getPart(0);
 
                         drawDistanceText(points, unitString, 0, false);
+                        outputMeasure(e.getLength());
                     }
                     cancelEdit();
                     refreshTrackingLayer();
