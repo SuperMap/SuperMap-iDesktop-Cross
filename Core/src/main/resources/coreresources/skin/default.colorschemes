@@ -1,8 +1,8 @@
 Cerulean Active {
     kind=Light
-    colorUltraLight=#FBFBFC
-    colorExtraLight=#FBFBFC
-    colorLight=#FBFBFC
+    colorUltraLight=#ABBCD6
+    colorExtraLight=#ABBCD6
+    colorLight=#ABBCD6
     colorMid=#A3B8CB
     colorDark=#62778A
     colorUltraDark=#42576A
