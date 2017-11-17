@@ -1026,9 +1026,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			// 即将设置选中的节点
 			DefaultMutableTreeNode toSelectedNode = (DefaultMutableTreeNode) getNodeByDefine(selectedNode, clickedPrjDefine);
 			if (toSelectedNode != null) {
-				TreePath nodePath = new TreePath(toSelectedNode.getPath());
-				this.treePrjCoordSys.setSelectionPath(nodePath);
-				this.treePrjCoordSys.expandPath(nodePath);
+				JTreeUIUtilities.locateNode(this.treePrjCoordSys, toSelectedNode);
+				this.treePrjCoordSys.scrollRectToVisible(new Rectangle(0, treePrjCoordSys.getVisibleRect().y, treePrjCoordSys.getVisibleRect().width, treePrjCoordSys.getVisibleRect().height));
 			}
 		} else { // 如果双击的项没有子项，那么就是具体的投影定义，提示选择应用
 			if (clickedPrjDefine.getCoordSysType() != CoordSysDefine.CUSTOM_COORDINATE
@@ -1853,8 +1852,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				parentNode = createNode(parentValue);
 				((DefaultTreeModel) treePrjCoordSys.getModel()).insertNodeInto(parentNode, grandParentNode, grandParentNode.getChildCount());
 			}
-			treePrjCoordSys.setSelectionPath(null);
 			JTreeUIUtilities.locateNode(treePrjCoordSys, parentNode);
+			this.treePrjCoordSys.scrollRectToVisible(new Rectangle(0, treePrjCoordSys.getVisibleRect().y, treePrjCoordSys.getVisibleRect().width, treePrjCoordSys.getVisibleRect().height));
 			//tree已定位到选中数据的父节点上，再定位table
 			AbstractPrjTableModel model = (AbstractPrjTableModel) this.tablePrjCoordSys.getModel();
 			for (int i = 0; i < model.getRowCount(); i++) {
