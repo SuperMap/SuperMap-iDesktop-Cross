@@ -94,7 +94,7 @@ Cerulean Selected {
     colorMid=#C3D5E7
     colorDark=#BDC8DA
     colorUltraDark=#BEC8D8
-    colorForeground=#2A2E36
+    colorForeground=#000000
 }
 
 Cerulean Rollover Selected {
@@ -116,7 +116,7 @@ Cerulean Rollover Unselected {
     colorMid=#C0D0DE
     colorDark=#B6C0CB
     colorUltraDark=#B7BEC8
-    colorForeground=#626366
+    colorForeground=#000000
 }
 
 Cerulean Mark {
