@@ -27,7 +27,7 @@ public class CtrlActionCreateLayerSnapshot extends CtrlAction {
 			LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
 			int selectRow=layersTree.getRowCount()-1;
 //			layersTree.setSelectionRow(selectRow);
-			layersTree.clearSelection();
+			formMap.setActiveLayers(formMap.getMapControl().getMap().getLayers().get(layerSnapshotName));
 			layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 		}
 	}
