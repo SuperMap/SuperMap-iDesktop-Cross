@@ -4,7 +4,6 @@ import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.dialog.DialogMongoDBCacheLoaded;
 import com.supermap.desktop.implement.CtrlAction;
 
@@ -18,8 +17,14 @@ public class CtrlActionMongoDBCache extends CtrlAction {
 
     @Override
     protected void run() {
-        DialogMongoDBCacheLoaded dialogMongoDBCacheLoaded = new DialogMongoDBCacheLoaded(
-                (FormMap) ((IFormMap) Application.getActiveApplication().getActiveForm()));
-        dialogMongoDBCacheLoaded.showDialog();
+        if (Application.getActiveApplication().getActiveForm() instanceof FormMap) {
+            DialogMongoDBCacheLoaded dialogMongoDBCacheLoaded = new DialogMongoDBCacheLoaded();
+            dialogMongoDBCacheLoaded.showDialog();
+        }
+    }
+
+    @Override
+    public boolean enable() {
+        return Application.getActiveApplication().getActiveForm() instanceof FormMap;
     }
 }

@@ -34,6 +34,10 @@ public class Type {
 		currentSection = 1;
 	}
 
+	private Type() {
+		this("");
+	}
+
 	private Type(String name) {
 		this.name = name;
 	}
@@ -158,6 +162,11 @@ public class Type {
 			}
 		}
 		return equals;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 
 	public static Type instance(String name) {
