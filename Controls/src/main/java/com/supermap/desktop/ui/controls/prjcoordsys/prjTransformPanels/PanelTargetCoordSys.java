@@ -56,32 +56,22 @@ public class PanelTargetCoordSys extends JPanel {
 				buttonPrjSetting.setEnabled(radioButtonPrjSetting.isSelected());
 				fileChooser.setEnabled(radioButtonImportPrjFile.isSelected());
 				// 坐标系来自数据源
-				if (radioButtonFromDatasource.isSelected()) {
-					resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
+				if (e.getSource().equals(radioButtonFromDatasource)) {
 					if (datasource.getSelectedDatasource() != null) {
 						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
 					} else {
 						targetPrjCoordSys = null;
 					}
-				} else if (radioButtonFromDataset.isSelected()) {
-					// 当选择了来源于数据集，此时对数据源不做限制
-					if (datasource.getSelectedDatasource() != null) {
-						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
-					} else {
-						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
-					}
+				} else if (e.getSource().equals(radioButtonFromDataset)) {
 					if (datasetComboBox.getSelectedDataset() != null) {
 						targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 					} else {
 						targetPrjCoordSys = null;
 					}
-				} else if (radioButtonImportPrjFile.isSelected()) {
+				} else if (e.getSource().equals(radioButtonPrjSetting)) {
 					// 坐标系来自设置，当设置过一次后用buttonSetprjCoordSys记录上次设置的坐标系
 					targetPrjCoordSys = buttonSetPrjCoordSys;
-				} else if (radioButtonPrjSetting.isSelected()) {
-					// 坐标系来自设置，当设置过一次后用buttonSetprjCoordSys记录上次设置的坐标系
-					targetPrjCoordSys = buttonSetPrjCoordSys;
-				} else if (radioButtonImportPrjFile.isSelected()) {
+				} else if (e.getSource().equals(radioButtonImportPrjFile)) {
 					// 坐标系来自导入的文件
 					targetPrjCoordSys = importFilePrjCoordSys;
 				}
@@ -120,7 +110,8 @@ public class PanelTargetCoordSys extends JPanel {
 						}
 					}
 				} else {
-					targetPrjCoordSys = null;
+					datasetComboBox.removeAllItems();
+					datasetComboBox.setSelectedIndex(-1);
 				}
 			} else if (e.getSource() == datasetComboBox) {
 
@@ -217,7 +208,7 @@ public class PanelTargetCoordSys extends JPanel {
 						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(this.datasource)
 								.addComponent(this.datasetComboBox)
-								.addComponent(this.buttonPrjSetting, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(this.buttonPrjSetting, 0, 0, Short.MAX_VALUE)
 								.addComponent(this.fileChooser)))
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.panelCoordSysInfo)));
@@ -333,15 +324,18 @@ public class PanelTargetCoordSys extends JPanel {
 	protected void resetDatasourceComboBox(Datasources datasources, Datasource selectedDatasource) {
 		// 获得有投影坐标系的数据源
 		ArrayList<Datasource> datasourceArray = new ArrayList<>();
-		if (null != datasources) {
+		if (datasources.getCount() > 0) {
 			for (int i = 0; i < datasources.getCount(); i++) {
 				if (!datasources.get(i).getPrjCoordSys().getType().equals(PrjCoordSysType.PCS_NON_EARTH)) {
 					datasourceArray.add(datasources.get(i));
 				}
 			}
 		}
-		if (null != datasource) {
+		if (null != datasource && datasourceArray.size() > 0) {
 			datasource.resetComboBox(datasourceArray, selectedDatasource);
+		} else {
+			datasource.removeAllItems();
+			datasource.setSelectedIndex(-1);
 		}
 	}
 

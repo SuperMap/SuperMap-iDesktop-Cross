@@ -1413,25 +1413,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * yuanR2017.10.25
 	 */
 	private void addCoordsysToFavorites() {
-		//if (this.currentDefine != null && !this.currentDefine.getIsFolderNode()) {
-		//	CoordSysDefine coordSysDefine = this.currentDefine.clone();
-		//	if (coordSysDefine != null) {
-		//		List<String> hasNames = new ArrayList<>();
-		//		for (int i = 0; i < favoriteCoordinate.getAllLeaves().length; i++) {
-		//			if (!(favoriteCoordinate.getAllLeaves().length == 1 && favoriteCoordinate.getAllLeaves()[0].equals(favoriteCoordinate))) {
-		//				hasNames.add(favoriteCoordinate.get(i).getCaption());
-		//			}
-		//		}
-		//		coordSysDefine.setCaption(getSingletonName(coordSysDefine.getCaption(), hasNames));
-		//		if (exportPrjCoordSys(coordSysDefine, favoriteProjectionConfigPath)) {
-		//			CoordSysDefine result = addToCoordSysDefine(getPrjCoordSysFromImportFile(favoriteProjectionConfigPath + "\\" + coordSysDefine.getCaption() + ".xml"), favoriteCoordinate);
-		//			if (result != null) {
-		//				// 当增加成功，在tree中显示
-		//				addToTree(result, favoriteCoordinate.getCaption(), favoriteCoordinate, favoriteCoordinate.getCaption());
-		//			}
-		//		}
-		//	}
-		//}
 		CoordSysDefine result = null;
 		if (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 			result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
@@ -1458,7 +1439,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	/**
 	 * 新建地理坐标系
 	 */
-
 	private void newGeoCoordsys() {
 		JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
@@ -1482,15 +1462,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 			result.setCaption(getSingletonName(geoCoordSys.getName(), hasNames));
 			if (customCoordinate.add(result)) {
-				String grantParentName = ControlsProperties.getString("String_Custom");
+				//String grantParentName = ControlsProperties.getString("String_Custom");
 				if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-					addToTree(result, customCoordinate.getCaption(), customCoordinate, grantParentName);
+					addToTree(result, customCoordinate.getCaption(), customCoordinate, customCoordinate.getCaption());
 				}
 
 			}
 		}
 		geography.clean();
-
 	}
 
 
@@ -1517,9 +1496,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			}
 			result.setCaption(getSingletonName(prjCoordSys.getName(), hasNames));
 			if (customCoordinate.add(result)) {
-				String grantParentName = ControlsProperties.getString("String_Custom");
+				//String grantParentName = ControlsProperties.getString("String_Custom");
 				if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-					addToTree(result, customCoordinate.getCaption(), customCoordinate, grantParentName);
+					addToTree(result, customCoordinate.getCaption(), customCoordinate, customCoordinate.getCaption());
 				}
 
 			}
@@ -1550,7 +1529,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				if (code <= 0) {
 					code = prjCoordSys.toEPSGCode();
 				}
-
 				if (code <= 0) {
 					code = 3857;
 				}
@@ -1563,57 +1541,32 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			try {
 				PrjCoordSys prjCoordSys = new PrjCoordSys();
 				prjCoordSys.fromEPSGCode(dialogNewCoordsysFromEPSG.getCode());
+				CoordSysDefine result;
 				if (prjCoordSys.getType().equals(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE)) {
-					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-					result.setCoordSysCode(-1);
+					result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
 					result.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
-					//CoordSysDefine userDefine = this.customCoordinate.getChildByCaption(this.userCoordsysFromEPSGParentName);
-					//if (userDefine == null) {
-					//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, this.customCoordinate, this.userCoordsysFromEPSGParentName).setFolderNode(true);
-					//}
-					// 对名字进行去重处理
-					List<String> hasNames = new ArrayList<>();
-					for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
-						if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
-							hasNames.add(customCoordinate.get(i).getCaption());
-						}
-					}
-					result.setCaption(getSingletonName(dialogNewCoordsysFromEPSG.getNameTextField().getText(), hasNames));
-					if (customCoordinate.add(result)) {
-						String grantParentName = ControlsProperties.getString("String_Custom");
-						if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-							addToTree(result, this.customCoordinate.getCaption(), customCoordinate, grantParentName);
-						}
-
-					}
 				} else {
-					CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
-					result.setCoordSysCode(-1);
+					result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 					result.setPrjCoordSys(prjCoordSys);
-					//CoordSysDefine userDefine = this.customCoordinate.getChildByCaption(this.userCoordsysFromEPSGParentName);
-					//if (userDefine == null) {
-					//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, this.customCoordinate, this.userCoordsysFromEPSGParentName).setFolderNode(true);
-					//}
-					// 对名字进行去重处理
-					List<String> hasNames = new ArrayList<>();
-					for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
-						if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
-							hasNames.add(customCoordinate.get(i).getCaption());
-						}
+				}
+				result.setCoordSysCode(-1);
+				// 对名字进行去重处理
+				List<String> hasNames = new ArrayList<>();
+				for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
+					if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
+						hasNames.add(customCoordinate.get(i).getCaption());
 					}
-					result.setCaption(getSingletonName(dialogNewCoordsysFromEPSG.getNameTextField().getText(), hasNames));
-					if (customCoordinate.add(result)) {
-						String grantParentName = ControlsProperties.getString("String_Custom");
-						if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-							addToTree(result, this.customCoordinate.getCaption(), customCoordinate, grantParentName);
-						}
+				}
+				result.setCaption(getSingletonName(dialogNewCoordsysFromEPSG.getNameTextField().getText(), hasNames));
+				if (customCoordinate.add(result)) {
+					if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
+						addToTree(result, this.customCoordinate.getCaption(), customCoordinate, this.customCoordinate.getCaption());
 					}
 				}
 			} catch (Exception ignored) {
 			}
 		}
 	}
-
 
 	private String getSingletonName(String caption, List<String> names) {
 		for (int i = 0; true; i++) {

@@ -53,9 +53,8 @@ public class PanelCoordSysInfo extends JPanel {
 	 */
 	public void setCoordInfo(String text) {
 		this.coordInfo = text;
-		textAreaCoordInfo.setText(coordInfo);
+		this.textAreaCoordInfo.setText(coordInfo);
 		// 滚动条自动滚动到顶端
-		textAreaCoordInfo.setCaretPosition(0);
-
+		this.textAreaCoordInfo.setCaretPosition(0);
 	}
 }

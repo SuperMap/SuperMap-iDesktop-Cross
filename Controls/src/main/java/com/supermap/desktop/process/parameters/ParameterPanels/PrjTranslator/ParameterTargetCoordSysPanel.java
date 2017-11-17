@@ -50,12 +50,8 @@ public class ParameterTargetCoordSysPanel extends PanelTargetCoordSys implements
 		@Override
 		public void datasourceClosed(DatasourceClosedEvent datasourceClosedEvent) {
 			boolean isDeleteSelectedDatasource = datasourceClosedEvent.getDatasource() == datasource.getSelectedDatasource();
-			resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
 			if (isDeleteSelectedDatasource) {
-				datasource.setSelectedIndex(-1);
-				if (datasource.getItemCount() > 0) {
-					datasource.setSelectedIndex(0);
-				}
+				resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
 			}
 		}
 	};
