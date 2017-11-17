@@ -1331,7 +1331,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
 			}
 			prjFileExportFileChoose = new SmFileChoose(moduleName);
-			prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getParent().getCaption()));
+			if (currentDefine.getIsFolderNode() && tablePrjCoordSys.getSelectedRowCount() <= 1) {
+				prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
+			} else {
+				prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getParent().getCaption()));
+			}
 		} else {
 			String moduleName = "ExportPrjFile";
 			if (!SmFileChoose.isModuleExist(moduleName)) {
@@ -1343,6 +1347,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			prjFileExportFileChoose = new SmFileChoose(moduleName);
 			prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
 		}
+
+
 		if (prjFileExportFileChoose.getTextField() != null) {
 			prjFileExportFileChoose.getTextField().setEnabled(false);
 		}
