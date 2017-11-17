@@ -262,6 +262,12 @@ public class WorkflowCanvas extends GraphCanvas
 			this.circulationGraph.setCirculationDialog(circulationDialog);
 			if (null == this.iterator) {
 				this.setIterator(circulationDialog.iterator());
+			} else {
+				circulationDialog.iterator().setCirculationType(this.iterator.getCirculationType());
+				circulationDialog.iterator().setBindProcess(this.iterator.getBindProcess());
+				circulationDialog.iterator().setBindParameterDescription(this.iterator.getBindParameterDescription());
+				this.iterator = null;
+				this.setIterator(circulationDialog.iterator());
 			}
 			Point canvasLocation = this.getCoordinateTransform().inverse(point);
 			this.setCirculationGraph(this.circulationGraph);
