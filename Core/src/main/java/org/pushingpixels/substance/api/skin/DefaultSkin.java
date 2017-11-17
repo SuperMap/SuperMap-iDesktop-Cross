@@ -11,7 +11,6 @@ import org.pushingpixels.substance.api.painter.border.GlassBorderPainter;
 import org.pushingpixels.substance.api.painter.decoration.ArcDecorationPainter;
 import org.pushingpixels.substance.api.painter.fill.ClassicFillPainter;
 import org.pushingpixels.substance.api.painter.highlight.GlassHighlightPainter;
-import org.pushingpixels.substance.api.painter.overlay.TopShadowOverlayPainter;
 import org.pushingpixels.substance.api.shaper.ClassicButtonShaper;
 
 /**
@@ -53,7 +52,7 @@ public class DefaultSkin extends SubstanceSkin {
 
 		defaultSchemeBundle.registerColorScheme(defaultColorSchemes.get("Cerulean Mark"),
 				ColorSchemeAssociationKind.MARK, ComponentState.getActiveStates());
-		defaultSchemeBundle.registerColorScheme(defaultColorSchemes.get("Cerulean Border"),
+		defaultSchemeBundle.registerColorScheme(defaultColorSchemes.get("Cerulean Border"),// ribbon按钮 checkbox 的边框
 				ColorSchemeAssociationKind.BORDER, ComponentState.getActiveStates());
 
 		// for progress bars
@@ -115,7 +114,7 @@ public class DefaultSkin extends SubstanceSkin {
 
 		// add an overlay painter to paint a drop shadow along the top
 		// edge of toolbars
-		this.addOverlayPainter(TopShadowOverlayPainter.getInstance(), DecorationAreaType.TOOLBAR);
+//		this.addOverlayPainter(TopShadowOverlayPainter.getInstance(), DecorationAreaType.TOOLBAR);
 
 		this.buttonShaper = new ClassicButtonShaper();
 		this.fillPainter = new ClassicFillPainter();

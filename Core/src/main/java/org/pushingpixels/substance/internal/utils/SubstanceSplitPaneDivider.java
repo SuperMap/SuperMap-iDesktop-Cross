@@ -174,7 +174,8 @@ public class SubstanceSplitPaneDivider extends BasicSplitPaneDivider implements 
 		Map<ComponentState, StateTransitionTracker.StateContributionInfo> activeStates = modelStateInfo
 				.getStateContributionMap();
 
-		float alpha = SubstanceColorSchemeUtilities.getAlpha(this.splitPane, currState);
+//		float alpha = SubstanceColorSchemeUtilities.getAlpha(this.splitPane, currState);
+		float alpha = 0f;
 
 		// compute the grip handle dimension
 		int minSizeForGripPresence = SubstanceSizeUtils
@@ -258,6 +259,11 @@ public class SubstanceSplitPaneDivider extends BasicSplitPaneDivider implements 
 			@Override
 			public boolean isFocusable() {
 				return false;
+			}
+
+			@Override
+			public void paint(Graphics g) {
+				super.paint(g);
 			}
 		};
 		Icon verticalSplit = new TransitionAwareIcon(oneTouchButton,
