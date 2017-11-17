@@ -12,11 +12,6 @@ import org.pushingpixels.substance.api.painter.decoration.ArcDecorationPainter;
 import org.pushingpixels.substance.api.painter.fill.ClassicFillPainter;
 import org.pushingpixels.substance.api.painter.highlight.GlassHighlightPainter;
 import org.pushingpixels.substance.api.shaper.ClassicButtonShaper;
-import org.pushingpixels.substance.internal.utils.SubstanceColorSchemeUtilities;
-
-import java.awt.*;
-import java.io.File;
-import java.net.MalformedURLException;
 
 /**
  * @author XiaJT
@@ -28,13 +23,13 @@ public class DefaultSkin extends SubstanceSkin {
 	public DefaultSkin() {
 		super();
 		ColorSchemes defaultColorSchemes = null;
-		try {
-			new Color(1, 1, 1);
-			defaultColorSchemes = SubstanceColorSchemeUtilities.getColorSchemes(new File("F:/history/SuperMap-iDesktop-Cross/Core/src/main/resources/coreresources/skin/default.colorschemes").toURL());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-//		defaultColorSchemes = SubstanceSkin.getColorSchemes("/coreresources/skin/default.colorschemes");
+//		try {
+//			new Color(1, 1, 1);
+//			defaultColorSchemes = SubstanceColorSchemeUtilities.getColorSchemes(new File("F:/history/SuperMap-iDesktop-Cross/Core/src/main/resources/coreresources/skin/default.colorschemes").toURL());
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		}
+		defaultColorSchemes = SubstanceSkin.getColorSchemes("/coreresources/skin/default.colorschemes");
 		SubstanceColorScheme activeScheme = defaultColorSchemes.get("Cerulean Active");// 滚动条
 		SubstanceColorScheme enabledScheme = defaultColorSchemes.get("Cerulean Enabled");// 背景色
 		SubstanceColorScheme rolloverSelectedScheme = defaultColorSchemes
