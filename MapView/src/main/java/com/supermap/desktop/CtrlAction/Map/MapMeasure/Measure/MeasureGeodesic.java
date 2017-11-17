@@ -41,7 +41,7 @@ public class MeasureGeodesic extends MeasureDistance {
         GeoSpheroid geoSpheroid = mapControl.getMap().getPrjCoordSys().getGeoCoordSys().getGeoDatum().getGeoSpheroid();
         GeoLine line = (GeoLine) event.getGeometry();
         double distance = Geometrist.computeGeodesicDistance(line.getPart(0), geoSpheroid.getAxis(), geoSpheroid.getFlatten());
-        return LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, isTotal ? totalLength + distance : distance);
+        return LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, isTotal ? distance : distance - totalLength);
     }
 
     @Override

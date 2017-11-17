@@ -60,6 +60,8 @@ public class DialogCachePlayerSetting extends SmDialog {
 
         textFieldEffectsInterval.setMinValue(0);
         textFieldPlayInterval.setMinValue(0);
+        textFieldPlayInterval.setIncludeMin(false);
+        textFieldEffectsInterval.setIncludeMin(false);
         textFieldEffectsInterval.setBit(-1);
         textFieldEffectsInterval.setText(cachePlayerBar.getEffectsInterval() + "");
         textFieldPlayInterval.setBit(-1);
@@ -105,11 +107,13 @@ public class DialogCachePlayerSetting extends SmDialog {
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);
         scrollPane.setPreferredSize(new Dimension(480, 200));
-        panel.add(scrollPane, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setInsets(5, 10, 5, 10));
+        panel.add(scrollPane, new GridBagConstraintsHelper(0, 0, 3, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setInsets(5, 10, 5, 10));
         panel.add(labelPlayInterval, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10));
-        panel.add(textFieldPlayInterval, new GridBagConstraintsHelper(1, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(5, 0, 5, 10));
+        panel.add(textFieldPlayInterval, new GridBagConstraintsHelper(1, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(5, 0, 5, 5));
+        panel.add(new JLabel("s"), new GridBagConstraintsHelper(2, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 0, 5, 10));
         panel.add(labelEffectsInterval, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10));
-        panel.add(textFieldEffectsInterval, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(5, 0, 5, 10));
+        panel.add(textFieldEffectsInterval, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(5, 0, 5, 5));
+        panel.add(new JLabel("s"), new GridBagConstraintsHelper(2, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 0, 5, 10));
         panel.add(checkBoxShowBar, new GridBagConstraintsHelper(0, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10));
         panel.add(checkBoxEffectsEnable, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(5, 10, 5, 10));
         JPanel panelButton = new JPanel();

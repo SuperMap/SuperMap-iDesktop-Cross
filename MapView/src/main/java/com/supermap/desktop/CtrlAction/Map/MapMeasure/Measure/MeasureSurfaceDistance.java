@@ -39,12 +39,7 @@ public class MeasureSurfaceDistance extends MeasureDistance {
     protected double computeDistance(TrackingEvent event, Unit unit, boolean isTotal) {
         GeoLine line = (GeoLine) event.getGeometry();
         double distance = CalculationTerrain.computeSurfaceDistance(datasetGrid, line);
-        distance = LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, distance);
-
-        if (isTotal) {
-            distance += totalLength;
-        }
-        return distance;
+        return LengthUnit.ConvertDistance(mapControl.getMap().getPrjCoordSys(), unit, isTotal ? distance : distance - totalLength);
     }
 
     @Override
