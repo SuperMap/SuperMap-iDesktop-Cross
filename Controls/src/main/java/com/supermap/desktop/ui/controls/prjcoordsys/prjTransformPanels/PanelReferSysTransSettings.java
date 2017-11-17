@@ -104,9 +104,9 @@ public class PanelReferSysTransSettings extends JPanel {
 	}
 
 	private void initLayout(String layoutModel) {
-		this.comboBoxMethod.setPreferredSize(new Dimension(85, 23));
-		this.buttonSet.setPreferredSize(new Dimension(50, 23));
 		if (layoutModel.equals(LAYOUTMODEL)) {
+			this.comboBoxMethod.setPreferredSize(new Dimension(85, 23));
+			this.buttonSet.setPreferredSize(new Dimension(50, 23));
 			GroupLayout groupLayout = new GroupLayout(this);
 			groupLayout.setAutoCreateContainerGaps(true);
 			groupLayout.setAutoCreateGaps(true);
@@ -115,10 +115,10 @@ public class PanelReferSysTransSettings extends JPanel {
 			// @formatter:off
 			groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
 					.addComponent(this.labelMethod)
-					.addComponent(this.comboBoxMethod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(this.comboBoxMethod)
 					.addGap(40)
 					.addComponent(this.labelPrjTransParameterset)
-					.addComponent(this.buttonSet, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+					.addComponent(this.buttonSet, 0, 0, Short.MAX_VALUE));
 			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
 					.addComponent(this.labelMethod)
 					.addComponent(this.comboBoxMethod, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -138,7 +138,7 @@ public class PanelReferSysTransSettings extends JPanel {
 							.addComponent(this.labelPrjTransParameterset))
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 							.addComponent(this.comboBoxMethod)
-							.addComponent(this.buttonSet, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+							.addComponent(this.buttonSet, 0, 0, Short.MAX_VALUE)));
 
 			groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)

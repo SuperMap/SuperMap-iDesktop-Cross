@@ -2,7 +2,10 @@ package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.*;
 import com.supermap.desktop.controls.ControlsProperties;
-import com.supermap.desktop.ui.controls.*;
+import com.supermap.desktop.ui.controls.DatasetComboBox;
+import com.supermap.desktop.ui.controls.DatasourceComboBox;
+import com.supermap.desktop.ui.controls.DialogResult;
+import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.borderPanel.PanelButton;
 import com.supermap.desktop.ui.controls.borderPanel.PanelResultDataset;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels.DoSome;
@@ -215,6 +218,7 @@ public class JDialogDatasetPrjTranslator extends SmDialog {
 		this.labelDatasource.setText(ControlsProperties.getString("String_Label_Datasource"));
 		this.labelDataset.setText(ControlsProperties.getString("String_Label_Dataset"));
 		this.panelSourceData.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SourceDataset")));
+		this.panelCoordSysInfo.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SrcCoordSys")));
 		this.panelReferSysTransSettings.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_CoordSysTranslatorSetting")));
 		this.panelTargetCoordSys.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_TarCoorSys")));
 	}
@@ -244,24 +248,58 @@ public class JDialogDatasetPrjTranslator extends SmDialog {
 						.addComponent(this.dataset, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)));
 		// @formatter:on
 
-		// 调整布局之用
-		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(ControlsProperties.getString("String_GroupBox_SrcCoordSys")));
-		panel.setLayout(new GridBagLayout());
-		panel.add(this.panelCoordSysInfo, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setInsets(10, 10, 10, 10).setWeight(1, 1));
+		JPanel panelBasicLeft = new JPanel();
+		GroupLayout panelBasicLeftLayout = new GroupLayout(panelBasicLeft);
+		panelBasicLeftLayout.setAutoCreateGaps(true);
+		panelBasicLeft.setLayout(panelBasicLeftLayout);
+
+		//@formatter:off
+		panelBasicLeftLayout.setHorizontalGroup(panelBasicLeftLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(this.panelSourceData)
+				.addComponent(this.panelCoordSysInfo)
+				.addComponent(this.panelReferSysTransSettings));
+		panelBasicLeftLayout.setVerticalGroup(panelBasicLeftLayout.createSequentialGroup()
+				.addComponent(this.panelSourceData)
+				.addComponent(this.panelCoordSysInfo)
+				.addComponent(this.panelReferSysTransSettings));
+		//@formatter:on
+
+
+		JPanel panelBasicRight = new JPanel();
+		GroupLayout panelBasicRightLayout = new GroupLayout(panelBasicRight);
+		panelBasicRightLayout.setAutoCreateGaps(true);
+		panelBasicRight.setLayout(panelBasicRightLayout);
+		//@formatter:off
+		panelBasicRightLayout.setHorizontalGroup(panelBasicRightLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(this.panelResultDataset.getPanel())
+				.addComponent(this.panelTargetCoordSys));
+		panelBasicRightLayout.setVerticalGroup(panelBasicRightLayout.createSequentialGroup()
+				.addComponent(this.panelResultDataset.getPanel(), GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addComponent(this.panelTargetCoordSys));
+		//@formatter:on
+
 
 		// 主面板布局
 		JPanel mianPanel = new JPanel();
-		mianPanel.setLayout(new GridBagLayout());
-		mianPanel.add(this.panelSourceData, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 0).setWeight(1, 0));
-		mianPanel.add(panel, new GridBagConstraintsHelper(0, 1, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setInsets(0, 5, 0, 0).setWeight(1, 1));
-		mianPanel.add(this.panelReferSysTransSettings, new GridBagConstraintsHelper(0, 2, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(0, 5, 0, 0).setWeight(1, 0));
-		mianPanel.add(this.panelResultDataset.getPanel(), new GridBagConstraintsHelper(1, 0, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setIpad(100, 0).setInsets(5, 0, 0, 5).setWeight(1, 0));
-		mianPanel.add(this.panelTargetCoordSys, new GridBagConstraintsHelper(1, 1, 1, 2).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setIpad(100, 0).setInsets(0, 0, 0, 5).setWeight(1, 1));
+		GroupLayout panelBasicLayout = new GroupLayout(mianPanel);
+		panelBasicLayout.setAutoCreateContainerGaps(true);
+		panelBasicLayout.setAutoCreateGaps(true);
+		mianPanel.setLayout(panelBasicLayout);
 
-		this.setLayout(new GridBagLayout());
-		this.add(mianPanel, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.BOTH).setAnchor(GridBagConstraints.CENTER).setWeight(1, 1));
-		this.add(this.panelButton, new GridBagConstraintsHelper(0, 1, 1, 1).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.EAST).setWeight(1, 0));
+		//@formatter:off
+		panelBasicLayout.setHorizontalGroup(panelBasicLayout.createSequentialGroup()
+				.addComponent(panelBasicLeft, 0, 0, Short.MAX_VALUE)
+				.addComponent(panelBasicRight, 0, 0, Short.MAX_VALUE));
+		panelBasicLayout.setVerticalGroup(panelBasicLayout.createSequentialGroup()
+				.addGroup(panelBasicLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(panelBasicLeft)
+						.addComponent(panelBasicRight)));
+		//@formatter:on
+
+		this.setLayout(new BorderLayout());
+		this.add(mianPanel, BorderLayout.CENTER);
+		this.add(this.panelButton, BorderLayout.SOUTH);
+
 	}
 
 	///**
