@@ -62,9 +62,9 @@ public class DialogCachePlayerSetting extends SmDialog {
         textFieldPlayInterval.setMinValue(0);
         textFieldPlayInterval.setIncludeMin(false);
         textFieldEffectsInterval.setIncludeMin(false);
-        textFieldEffectsInterval.setBit(-1);
+        textFieldEffectsInterval.setBit(0);
         textFieldEffectsInterval.setText(cachePlayerBar.getEffectsInterval() + "");
-        textFieldPlayInterval.setBit(-1);
+        textFieldPlayInterval.setBit(0);
         textFieldPlayInterval.setText(cachePlayerBar.getInterval() + "");
         checkBoxEffectsEnable.setSelected(cachePlayerBar.isEffects());
         checkBoxShowBar.setSelected(true);

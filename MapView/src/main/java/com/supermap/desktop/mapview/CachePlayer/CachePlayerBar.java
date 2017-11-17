@@ -1,5 +1,6 @@
 package com.supermap.desktop.mapview.CachePlayer;
 
+import com.supermap.desktop.Application;
 import com.supermap.desktop.FormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
@@ -197,12 +198,16 @@ public class CachePlayerBar extends JToolBar {
         index = 0;
         progressBar.setProgress(0);
         buttonPlay.setIcon(ICON_PLAY);
-        if (playList.size() > 0) {
-            playList.get(0).getLayerCache().setCurrentVersion(playList.get(0).getVersion());
-        } else {
-            layerCaches.get(0).setCurrentVersion(layerCaches.get(0).getVersions().get(0));
+        try {
+            if (playList.size() > 0) {
+                playList.get(0).getLayerCache().setCurrentVersion(playList.get(0).getVersion());
+            } else {
+                layerCaches.get(0).setCurrentVersion(layerCaches.get(0).getVersions().get(0));
+            }
+            formMap.getMapControl().getMap().refresh();
+        } catch (Exception e) {
+            Application.getActiveApplication().getOutput().output(e);
         }
-        formMap.getMapControl().getMap().refresh();
     }
 
     private void play() {
