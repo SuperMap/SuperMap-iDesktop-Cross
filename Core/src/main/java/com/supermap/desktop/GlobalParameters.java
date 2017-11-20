@@ -53,7 +53,7 @@ public class GlobalParameters {
 	private static String startupXml;
 	private static final String startupFileName = "SuperMap.Desktop.Startup.xml";
 	private static ArrayList<GlobalParametersChangedListener> globalParametersChangedListeners = new ArrayList<>();
-	private static String skin =null;
+	private static String skin ="org.pushingpixels.substance.api.skin.DefaultSkin";
 
 	private GlobalParameters() {
 		// do nothing
