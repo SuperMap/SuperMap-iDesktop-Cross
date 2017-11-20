@@ -45,7 +45,7 @@ public class DefaultCoordsysTreeCellRenderer extends DefaultTreeCellRenderer {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/geoCoordsys.png"));
 			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_NoneEarth"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/noneEarthCoordsys.png"));
-			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Custom"))) {
+			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Customize"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/folder.png"));
 			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Favorite"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/favorite.png"));

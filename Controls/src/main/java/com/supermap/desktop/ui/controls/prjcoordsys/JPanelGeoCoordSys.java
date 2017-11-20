@@ -209,8 +209,6 @@ public class JPanelGeoCoordSys extends JPanel {
 		// region 大地参考系类型
 		Enum[] enumsGeoDatum = Enum.getEnums(GeoDatumType.class);
 		comboBoxGeoDatumPlane.setSearchItemValueGetter(searchItemValueGetter);
-		Arrays.sort(enumsGeoDatum, 0, enumsGeoDatum.length, new EnumComparator());
-
 		for (Enum anEnum : enumsGeoDatum) {
 			if (anEnum instanceof GeoDatumType) {
 				comboBoxGeoDatumPlane.addItem((GeoDatumType) anEnum);
@@ -222,9 +220,8 @@ public class JPanelGeoCoordSys extends JPanel {
 		// region 椭球参数类型
 		Enum[] enumsGeoSpheroid = Enum.getEnums(GeoSpheroidType.class);
 		comboBoxReferenceSpheroid.setSearchItemValueGetter(searchItemValueGetter);
-		Arrays.sort(enumsGeoSpheroid, 0, enumsGeoSpheroid.length, new EnumComparator());
 		for (Enum anEnum : enumsGeoSpheroid) {
-			if (anEnum instanceof GeoSpheroidType && anEnum != GeoSpheroidType.SPHEROID_USER_DEFINED) {
+			if (anEnum instanceof GeoSpheroidType) {
 				comboBoxReferenceSpheroid.addItem((GeoSpheroidType) anEnum);
 			}
 		}
