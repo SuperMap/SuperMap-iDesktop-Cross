@@ -22,7 +22,7 @@ public class CoordSysDefine {
 
 	public static final int USER_DEFINED = -1; // 用户自定义
 	public static final int PROJECTION_SYSTEM = -2; // 投影坐标系统
-	public static final int NONE_ERRTH = -3; // 平面坐标系
+	public static final int NONE_EARTH = -3; // 平面坐标系
 	public static final int GEOGRAPHY_COORDINATE = -4; // 地理坐标系
 	public static final int FAVORITE_COORDINATE = -5; // 收藏夹
 	public static final int CUSTOM_COORDINATE = -6; // 自定义
@@ -169,7 +169,7 @@ public class CoordSysDefine {
 		String result = "";
 		if (this.coordSysType == PROJECTION_SYSTEM) {
 			result = ControlsProperties.getString("String_PrjCoorSys");
-		} else if (this.coordSysType == NONE_ERRTH) {
+		} else if (this.coordSysType == NONE_EARTH) {
 			result = ControlsProperties.getString("String_NoneEarth");
 		} else if (this.coordSysType == GEOGRAPHY_COORDINATE) {
 			result = ControlsProperties.getString("String_GeoCoordSys");

@@ -46,9 +46,9 @@ public class PanelTargetCoordSys extends JPanel {
 	protected DoSome doSome;
 
 
-	private ActionListener actionListener = new ActionListener() {
+	private ItemListener radioButtonItemListener = new ItemListener() {
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void itemStateChanged(ItemEvent e) {
 			if (e.getSource().equals(radioButtonFromDatasource) || e.getSource().equals(radioButtonFromDataset)
 					|| e.getSource().equals(radioButtonPrjSetting) || e.getSource().equals(radioButtonImportPrjFile)) {
 				datasource.setEnabled(radioButtonFromDatasource.isSelected() || radioButtonFromDataset.isSelected());
@@ -57,12 +57,19 @@ public class PanelTargetCoordSys extends JPanel {
 				fileChooser.setEnabled(radioButtonImportPrjFile.isSelected());
 				// 坐标系来自数据源
 				if (e.getSource().equals(radioButtonFromDatasource)) {
+					resetDatasourceComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
 					if (datasource.getSelectedDatasource() != null) {
 						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
 					} else {
 						targetPrjCoordSys = null;
 					}
 				} else if (e.getSource().equals(radioButtonFromDataset)) {
+					// 当选择了来源于数据集，此时对数据源不做限制
+					if (datasource.getSelectedDatasource() != null) {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), datasource.getSelectedDatasource());
+					} else {
+						datasource.resetComboBox(Application.getActiveApplication().getWorkspace().getDatasources(), null);
+					}
 					if (datasetComboBox.getSelectedDataset() != null) {
 						targetPrjCoordSys = datasetComboBox.getSelectedDataset().getPrjCoordSys();
 					} else {
@@ -77,29 +84,33 @@ public class PanelTargetCoordSys extends JPanel {
 				}
 				// 点击单选框，
 				setPrjCoordSysInfo(targetPrjCoordSys);
-			} else if (e.getSource().equals(buttonPrjSetting)) {
-				// 当点击了坐标系设置，并且设置了坐标系
-				JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
-				dialogPrjCoordSysSettings.removeNONERRTHRoot();
-				if (dialogPrjCoordSysSettings.showDialog() == DialogResult.OK) {
-					if (dialogPrjCoordSysSettings.getPrjCoordSys().getType() != PrjCoordSysType.PCS_NON_EARTH) {
-						buttonSetPrjCoordSys = dialogPrjCoordSysSettings.getPrjCoordSys();
-						setPrjCoordSysInfo(buttonSetPrjCoordSys);
-					}
+			}
+		}
+	};
+	private ActionListener actionListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// 当点击了坐标系设置，并且设置了坐标系
+			JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
+			dialogPrjCoordSysSettings.removeNONEARTHRoot();
+			if (dialogPrjCoordSysSettings.showDialog() == DialogResult.OK) {
+				if (dialogPrjCoordSysSettings.getPrjCoordSys().getType() != PrjCoordSysType.PCS_NON_EARTH) {
+					buttonSetPrjCoordSys = dialogPrjCoordSysSettings.getPrjCoordSys();
+					setPrjCoordSysInfo(buttonSetPrjCoordSys);
 				}
 			}
 		}
 	};
 
-	private ItemListener itemListener = new ItemListener() {
+	private ItemListener comboBoxItemListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
 			if (e.getSource() == datasource) {
 
 				if (datasource.getSelectedDatasource() != null) {
-					datasetComboBox.removeItemListener(itemListener);
+					datasetComboBox.removeItemListener(comboBoxItemListener);
 					resetDatasetComboBox(datasource.getSelectedDatasource(), null);
-					datasetComboBox.addItemListener(itemListener);
+					datasetComboBox.addItemListener(comboBoxItemListener);
 					if (radioButtonFromDatasource.isSelected()) {
 						targetPrjCoordSys = datasource.getSelectedDatasource().getPrjCoordSys();
 					} else {
@@ -231,23 +242,23 @@ public class PanelTargetCoordSys extends JPanel {
 
 	private void initListener() {
 		removeListener();
-		this.datasource.addItemListener(this.itemListener);
-		this.datasetComboBox.addItemListener(this.itemListener);
-		this.radioButtonFromDatasource.addActionListener(this.actionListener);
-		this.radioButtonFromDataset.addActionListener(this.actionListener);
-		this.radioButtonPrjSetting.addActionListener(this.actionListener);
-		this.radioButtonImportPrjFile.addActionListener(this.actionListener);
+		this.datasource.addItemListener(this.comboBoxItemListener);
+		this.datasetComboBox.addItemListener(this.comboBoxItemListener);
+		this.radioButtonFromDatasource.addItemListener(this.radioButtonItemListener);
+		this.radioButtonFromDataset.addItemListener(this.radioButtonItemListener);
+		this.radioButtonPrjSetting.addItemListener(this.radioButtonItemListener);
+		this.radioButtonImportPrjFile.addItemListener(this.radioButtonItemListener);
 		this.buttonPrjSetting.addActionListener(this.actionListener);
 		this.fileChooser.addFileChangedListener(this.exportPathDocumentListener);
 	}
 
 	private void removeListener() {
-		this.datasource.removeItemListener(this.itemListener);
-		this.datasetComboBox.removeItemListener(this.itemListener);
-		this.radioButtonFromDatasource.removeActionListener(this.actionListener);
-		this.radioButtonFromDataset.removeActionListener(this.actionListener);
-		this.radioButtonPrjSetting.removeActionListener(this.actionListener);
-		this.radioButtonImportPrjFile.removeActionListener(this.actionListener);
+		this.datasource.removeItemListener(this.comboBoxItemListener);
+		this.datasetComboBox.removeItemListener(this.comboBoxItemListener);
+		this.radioButtonFromDatasource.removeItemListener(this.radioButtonItemListener);
+		this.radioButtonFromDataset.removeItemListener(this.radioButtonItemListener);
+		this.radioButtonPrjSetting.removeItemListener(this.radioButtonItemListener);
+		this.radioButtonImportPrjFile.removeItemListener(this.radioButtonItemListener);
 		this.buttonPrjSetting.removeActionListener(this.actionListener);
 		this.fileChooser.removePathChangedListener(this.exportPathDocumentListener);
 

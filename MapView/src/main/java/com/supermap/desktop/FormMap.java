@@ -1341,7 +1341,14 @@ public class FormMap extends FormBaseChild implements IFormMap {
         clean();
     }
 
-    public void removeLayers(Layer[] layers) {
+    /**
+     * modify by lixiaoyao 2017.11.17
+     * @param layers
+     * @return If you want to remove the layer, return true, otherwise false,
+     * and don't be sure that the cancel will change the selection of the layer tree
+     */
+    public boolean removeLayers(Layer[] layers) {
+        boolean isRemoved=true;
         try {
             if (layers != null && layers.length > 0) {
                 ArrayList<String> removingLayers = new ArrayList<String>();
@@ -1395,10 +1402,14 @@ public class FormMap extends FormBaseChild implements IFormMap {
                     }
 
                     this.getMapControl().getMap().refresh();
+                }else{
+                    isRemoved=false;
                 }
             }
         } catch (Exception ex) {
             Application.getActiveApplication().getOutput().output(ex);
+        }finally {
+            return isRemoved;
         }
     }
 

@@ -88,7 +88,7 @@ public class PrjCoordSysSettingsUtilties {
 				if (define.size() == 0) {
 					// 如果当前选中的投影定义没有子项，那么就是具体的投影
 					PrjCoordSys prjCoordSys = null;
-					if (define.getCoordSysType() == CoordSysDefine.NONE_ERRTH) {
+					if (define.getCoordSysType() == CoordSysDefine.NONE_EARTH) {
 						prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_NON_EARTH);
 						prjCoordSys.setCoordUnit((Unit) Enum.parse(Unit.class, define.getCoordSysCode()));
 					} else if (define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {

@@ -36,7 +36,7 @@ public class DefaultCoordsysTreeCellRenderer extends DefaultTreeCellRenderer {
 			} else if (((CoordSysDefine) node.getUserObject()).getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM && !((CoordSysDefine) node.getUserObject()).getIsFolderNode()) {
 				// 设置节点显示为投影坐标系的节点
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/prjCoordsysFile.png"));
-			} else if (((CoordSysDefine) node.getUserObject()).getCoordSysType() == CoordSysDefine.NONE_ERRTH && !((CoordSysDefine) node.getUserObject()).getIsFolderNode()) {
+			} else if (((CoordSysDefine) node.getUserObject()).getCoordSysType() == CoordSysDefine.NONE_EARTH && !((CoordSysDefine) node.getUserObject()).getIsFolderNode()) {
 				// 设置节点显示为平面坐标系的节点
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/noneEarthFile.png"));
 			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_PrjCoorSys"))) {
@@ -45,7 +45,7 @@ public class DefaultCoordsysTreeCellRenderer extends DefaultTreeCellRenderer {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/geoCoordsys.png"));
 			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_NoneEarth"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/noneEarthCoordsys.png"));
-			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Custom"))) {
+			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Customize"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/folder.png"));
 			} else if (((CoordSysDefine) node.getUserObject()).getIsFolderNode() && ((CoordSysDefine) node.getUserObject()).getCaption().equals(ControlsProperties.getString("String_Favorite"))) {
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Projection/favorite.png"));

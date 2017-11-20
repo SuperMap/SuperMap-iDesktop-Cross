@@ -404,9 +404,9 @@ public class LayersTree extends JTree {
      */
     protected DefaultMutableTreeNode getNodeByLayer(Layer layer) {
         DefaultMutableTreeNode result = null;
-        if (null != layer.getDataset()) {
-            return new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER));
-        }
+//        if (null != layer.getDataset()) {
+//            return new DefaultMutableTreeNode(new TreeNodeData(layer, NodeDataType.LAYER));
+//        }
         Dataset dataset = layer.getDataset();
         Theme theme = layer.getTheme();
         if (layer instanceof LayerHeatmap) {
@@ -1608,18 +1608,18 @@ public class LayersTree extends JTree {
                 // 拖进来的奇奇怪怪的东西屏蔽掉。以后在这里做判断拖工作空间树的东西进来的时候增加图层。
                 return;
             }
-            oldRow = getRowForPath(getSelectionPath());
-            try {
-                if (oldRow == -1 || draggedNodeIndex == dropTargetNodeIndex || dropTargetNode == null)
-                    return;
-                if (isMoveLayerToLayerGroup) {
-                    moveLayerForLayerGroup();
-                } else {
-                    moveRow();
-                }
-            } catch (Exception e) {
-                Application.getActiveApplication().getOutput().output(e);
-            }
+//            oldRow = getRowForPath(getSelectionPath());
+//            try {
+//                if (oldRow == -1 || draggedNodeIndex == dropTargetNodeIndex || dropTargetNode == null)
+//                    return;
+//                if (isMoveLayerToLayerGroup) {
+//                    moveLayerForLayerGroup();
+//                } else {
+//                    moveRow();
+//                }
+//            } catch (Exception e) {
+//                Application.getActiveApplication().getOutput().output(e);
+//            }
         }
 
         @Override
@@ -1839,6 +1839,11 @@ public class LayersTree extends JTree {
             Layer layer = selectedLayer.get(i);
             if (layerTarget.getParentGroup() != null) {
                 if (layer instanceof LayerGroup) {
+                    if (isHaveLayerGroup(layerTarget.getParentGroup(), (LayerGroup) layer) || layerTarget.getParentGroup().equals(layer)) {
+                        if (layer.getParentGroup()==null || !layer.getParentGroup().equals(layerTarget.getParentGroup())) {
+                            continue;
+                        }
+                    }
                     this.reload();
                 }
                 try {
@@ -1857,6 +1862,11 @@ public class LayersTree extends JTree {
                 }
             } else if (layerTarget.getParentSnapshot() != null) {
                 if (layer instanceof LayerGroup) {
+                    if (isHaveLayerGroup(layerTarget.getParentGroup(), (LayerGroup) layer) || layerTarget.getParentGroup().equals(layer)) {
+                        if (layer.getParentGroup()==null || !layer.getParentGroup().equals(layerTarget.getParentGroup())) {
+                            continue;
+                        }
+                    }
                     this.reload();
                 }
                 try {
@@ -1946,7 +1956,6 @@ public class LayersTree extends JTree {
             this.currentMap.refresh();
         }
         dropTargetNodeIndex = -1;
-        this.reload();
         IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
         LayerGroup[] oldExpandLayerGroup = this.getExpandLayerGroup(formMap);
         LayerGroup[] newExpandLayerGroup = new LayerGroup[1];
@@ -2008,7 +2017,7 @@ public class LayersTree extends JTree {
         }
     }
 
-    //Craete by lixiaoyao 2017/10/25
+    //Create by lixiaoyao 2017/10/25
     // The child node is forbidden to move to the parent node or the parent node moves to the child node
     private boolean isHaveLayerGroup(LayerGroup layerTargetGroup, LayerGroup layerGroup) {
         boolean result = false;

@@ -36,6 +36,8 @@ public class PrjCoordSysUtilities {
 				result = CoreProperties.getString("String_NoProjectionParameter") + "----" + prjCoordSys.getCoordUnit().toString();
 			} else {
 				String[] earthFrameOfReferenceinfos = new String[]{
+						CoreProperties.getString("String_CoordSysName"),
+						CoreProperties.getString("String_CoordSysUnit"),
 						CoreProperties.getString("String_EPSG_Code"),
 						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
 						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"),
@@ -93,7 +95,11 @@ public class PrjCoordSysUtilities {
 					 */
 					// @formatter:on
 					text += String.format("%-10s\t", info);
-					if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
+					if (info.equals(CoreProperties.getString("String_CoordSysName"))) {
+						text += prj.getName();
+					} else if (info.equals(CoreProperties.getString("String_CoordSysUnit"))) {
+						text += prj.getCoordUnit();
+					} else if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
 						text += Integer.toString(prj.toEPSGCode());
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
@@ -106,7 +112,7 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CenterBasisMeridian"))) {
 						text += Double.toString(prj.getGeoCoordSys().getGeoPrimeMeridian().getLongitudeValue());
 					} else if (info.equals(CoreProperties.getString("String_Projection_ProjectionType"))) {
-						text += prj.getProjection().getType().toString();
+						text += PrjCoordSysTypeUtilities.getDescribe(prj.getProjection().getType().toString());
 					} else if (info.equals(CoreProperties.getString("String_CenterMeridian"))) {
 						text += Double.toString(prj.getPrjParameter().getCentralMeridian());
 					} else if (info.equals(CoreProperties.getString("String_CentralParallel"))) {

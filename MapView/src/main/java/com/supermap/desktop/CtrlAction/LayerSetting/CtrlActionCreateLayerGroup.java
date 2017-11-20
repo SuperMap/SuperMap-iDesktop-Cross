@@ -61,7 +61,6 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 				}
 			}
 			layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
-//			formMap.getMapControl().getMap().refresh();
 			if (!isNeedAddExpandLayerGroup) {
 				layersTree.reload();
 			}else{
@@ -79,7 +78,7 @@ public class CtrlActionCreateLayerGroup extends CtrlAction {
 					break;
 				}
 			}
-//			layersTree.clearSelection();
+			formMap.setActiveLayers(layerGroup.get(layerGroup.getCount()-1));
 			layersTree.startEditingAtPath(newLayerGroupTreePath);
 		}
 	}
