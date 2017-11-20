@@ -1360,6 +1360,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				CursorUtilities.setWaitCursor(tablePrjCoordSys);
 				CursorUtilities.setWaitCursor(treePrjCoordSys);
 				if (coordSysDefineExportList.size() == 1 && !coordSysDefineExportList.get(0).getIsFolderNode()) {
+					// 导出单个投影文件，确保文件名称可修改
+					coordSysDefineExportList.get(0).setCaption(prjFileExportFileChoose.getFileName().replace(".NOEXIST", ""));
 					exportPrjCoordSys(coordSysDefineExportList.get(0), prjFileExportFileChoose.getFilePath().replace("\\" + prjFileExportFileChoose.getFileName(), ""));
 				} else {
 					buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
@@ -1693,17 +1695,18 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(anAllCoordSysDefine).clone();
 						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-						exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+						exportPrjCoordSys.setName(coordSysDefine.getCaption());
 						exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
 					} else if (anAllCoordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						try {
 							exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(anAllCoordSysDefine).clone();
-							exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
+							exportPrjCoordSys.setName(coordSysDefine.getCaption());
+							exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 						} catch (Exception ex) {
 							continue;
 						}
 					}
-					if (export(exportPrjCoordSys, folderName + "\\" + exportPrjCoordSys.getName() + ".xml")) {
+					if (export(exportPrjCoordSys, folderName + "\\" + coordSysDefine.getCaption() + ".xml")) {
 						this.successedExportNum++;
 						return true;
 					} else {
@@ -1725,7 +1728,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				exportPrjCoordSys.setName(coordSysDefine.getCaption());
 				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			}
-			if (export(exportPrjCoordSys, path + "//" + exportPrjCoordSys.getName() + ".xml")) {
+			if (export(exportPrjCoordSys, path + "//" + coordSysDefine.getCaption() + ".xml")) {
 				this.successedExportNum++;
 				return true;
 			} else {
