@@ -328,11 +328,11 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 	private boolean precisionControl(double d1,double d2){
 		boolean isEqual =false;
 		if (Double.compare(d1,d2)==-1){
-			isEqual= DoubleUtilities.equals(d2,d1);
+			isEqual= DoubleUtilities.equals(d2,d1,8);
 		}else if (Double.compare(d1,d2)==0){
 			isEqual =true;
 		}else{
-			isEqual= DoubleUtilities.equals(d1,d2);
+			isEqual= DoubleUtilities.equals(d1,d2,8);
 		}
 		return isEqual;
 	}
@@ -353,6 +353,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					if (!precisionControl(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) &&Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
 							|| Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
 						this.minScaleError.hideWarning();
+						this.maxScaleError.hideWarning();
 					} else {
 						this.minScaleError.showWarning();
 						this.maxScaleError.hideWarning();
@@ -395,6 +396,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					isChanged = true;
 					if (!precisionControl(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale())&& Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
 						this.maxScaleError.hideWarning();
+						this.minScaleError.hideWarning();
 					} else {
 						this.maxScaleError.showWarning();
 						this.minScaleError.hideWarning();
