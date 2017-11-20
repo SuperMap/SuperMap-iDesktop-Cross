@@ -103,7 +103,13 @@ public class JPanelGeoCoordSys extends JPanel {
 					}
 					geoCoordSys.getGeoDatum().setType((GeoDatumType) selectedItem);
 					lockGeo = true;
-					comboBoxReferenceSpheroid.setSelectedItem(geoCoordSys.getGeoDatum().getGeoSpheroid().getType());
+					// 当选择为defined时，支持设置：参考椭球体
+					if (selectedItem.equals(GeoDatumType.DATUM_USER_DEFINED)) {
+						comboBoxReferenceSpheroid.setEnabled(true);
+					} else {
+						comboBoxReferenceSpheroid.setEnabled(false);
+						comboBoxReferenceSpheroid.setSelectedItem(geoCoordSys.getGeoDatum().getGeoSpheroid().getType());
+					}
 					comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					geoCoordSys.getGeoDatum().setType(GeoDatumType.DATUM_USER_DEFINED);
 					geoCoordSys.getGeoDatum().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
