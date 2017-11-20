@@ -9,7 +9,6 @@ import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IFormTabular;
 import com.supermap.desktop.enums.WindowType;
-import com.supermap.desktop.implement.SmMenuItem;
 import com.supermap.desktop.ui.FormManager;
 
 import javax.swing.*;
@@ -57,10 +56,10 @@ public class BindUtilties {
 	 * @param caller
 	 */
 	public static void showPopumenu(IBaseItem caller) {
-		Point point = ((SmMenuItem) caller).getParent().getLocation();
-		int x = (int) point.getX() + 46;
+		Point point = ((JComponent) caller).getLocationOnScreen();
+		int x = (int) point.getX();
 		final JPopupMenuBind popupMenuBind = JPopupMenuBind.instance();
-		int y = (int) point.getY() + 52;
+		int y = (int) point.getY() + ((JComponent) caller).getHeight();
 		JFrame mainFrame = (JFrame) Application.getActiveApplication().getMainFrame();
 		popupMenuBind.init();
 		popupMenuBind.show(mainFrame, x, y);
