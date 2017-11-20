@@ -68,8 +68,8 @@ public class JPanelGeoCoordSys extends JPanel {
 				if (selectedItem instanceof GeoCoordSysType && selectedItem != GeoCoordSysType.GCS_USER_DEFINE) {
 					geoCoordSys.setType((GeoCoordSysType) selectedItem);
 					lock = true;
-					comboBoxGeoDatumPlane.setSelectedItem(geoCoordSys.getGeoDatum().getType());
-					comboBoxCentralMeridianType.setSelectedItem(geoCoordSys.getGeoPrimeMeridian().getType());
+					//comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoDatum().getType().name()));
+					//comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoPrimeMeridian().getType().name()));
 					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
 					geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
 					geoCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
@@ -108,7 +108,7 @@ public class JPanelGeoCoordSys extends JPanel {
 						comboBoxReferenceSpheroid.setEnabled(true);
 					} else {
 						comboBoxReferenceSpheroid.setEnabled(false);
-						comboBoxReferenceSpheroid.setSelectedItem(geoCoordSys.getGeoDatum().getGeoSpheroid().getType());
+						comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe((geoCoordSys.getGeoDatum().getGeoSpheroid().getType().name())));
 					}
 					comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					geoCoordSys.getGeoDatum().setType(GeoDatumType.DATUM_USER_DEFINED);
@@ -414,8 +414,8 @@ public class JPanelGeoCoordSys extends JPanel {
 		lockAxis = true;
 		lockCenter = true;
 		comboBoxName.setSelectedItem(this.geoCoordSys.getName());
-		comboBoxGeoDatumPlane.setSelectedItem(this.geoCoordSys.getGeoDatum().getType());
-		comboBoxReferenceSpheroid.setSelectedItem(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getName());
+		comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getType().name()));
+		comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getName()));
 		textFieldGeoSpheroidAxis.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
 		textFieldGeoSpheroidFlatten.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
 

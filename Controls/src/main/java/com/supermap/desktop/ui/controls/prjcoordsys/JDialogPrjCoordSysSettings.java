@@ -1849,9 +1849,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				parentNode = createNode(parentValue);
 				((DefaultTreeModel) treePrjCoordSys.getModel()).insertNodeInto(parentNode, grandParentNode, grandParentNode.getChildCount());
 			}
+			this.treePrjCoordSys.setSelectionPath(null);
 			JTreeUIUtilities.locateNode(treePrjCoordSys, parentNode);
 			this.treePrjCoordSys.scrollRectToVisible(new Rectangle(0, treePrjCoordSys.getVisibleRect().y, treePrjCoordSys.getVisibleRect().width, treePrjCoordSys.getVisibleRect().height));
 			//tree已定位到选中数据的父节点上，再定位table
+			// 防止此时的model是搜索的model
+			treeSelectionChange();
 			AbstractPrjTableModel model = (AbstractPrjTableModel) this.tablePrjCoordSys.getModel();
 			for (int i = 0; i < model.getRowCount(); i++) {
 				if (value.equals(model.getRowData(i))) {
