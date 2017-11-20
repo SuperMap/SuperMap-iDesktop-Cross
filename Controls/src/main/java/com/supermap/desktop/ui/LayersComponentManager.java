@@ -24,12 +24,14 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 public class LayersComponentManager extends JComponent {
 	/**
@@ -53,6 +55,7 @@ public class LayersComponentManager extends JComponent {
 	private JPopupMenu layerWMSPopupMenu;
 	private ArrayList<TreePath> legalPaths;
 	private String currentMapName=""; //  用来判断进行了切换地图窗口的操作
+	private ArrayList<TreeNode> allTreeNode=new ArrayList<>();
 
 	/**
 	 * Create the panel.
@@ -203,7 +206,7 @@ public class LayersComponentManager extends JComponent {
                 String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
                 layersTree.getMap().getLayers().addGroup(layerGroupName);
                 int selectRow = layersTree.getRowCount() - 1;
-                layersTree.clearSelection();
+                layersTree.setSelectionRow(selectRow);
                 layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
             }
         }
@@ -217,13 +220,52 @@ public class LayersComponentManager extends JComponent {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
 				selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
 				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP || selectedNodeData.getType()==NodeDataType.LAYER_SNAPSHOT) {
-					String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
+					IFormMap formMap=(IFormMap)Application.getActiveApplication().getActiveForm();
+					LayersTree layersTree = UICommonToolkit.getLayersManager().getLayersTree();
+					String layerGroupName = formMap.getMapControl().getMap().getLayers().getAvailableCaption("LayerGroup");
 					LayerGroup layerGroup = (LayerGroup) selectedNodeData.getData();
+					LayerGroup[] oldExpandLayerGroup =layersTree.getExpandLayerGroup(formMap);
+					LayerGroup[] newExpandLayerGroup=new LayerGroup[1];
+					boolean isNeedAddExpandLayerGroup =true;
+					if (oldExpandLayerGroup.length!=0){
+						for (LayerGroup layerGroup1: oldExpandLayerGroup){
+							if (layerGroup1.equals(layerGroup)){
+								isNeedAddExpandLayerGroup =false;
+								break;
+							}
+						}
+					}
+					if (isNeedAddExpandLayerGroup){
+						if (oldExpandLayerGroup.length!=0){
+							newExpandLayerGroup=new LayerGroup[oldExpandLayerGroup.length+1];
+							for (int i = 0; i <oldExpandLayerGroup.length ; i++) {
+								newExpandLayerGroup[i]=oldExpandLayerGroup[i];
+							}
+							newExpandLayerGroup[oldExpandLayerGroup.length]=layerGroup;
+						}else {
+							newExpandLayerGroup[0] = layerGroup;
+						}
+					}
 					layerGroup.insertGroup(layerGroup.getCount(),layerGroupName);
-					layersTree.getMap().refresh();
-					layersTree.reload();
-//					layersTree.setSelectionPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
-//					layersTree.startEditingAtPath(layersTree.getSelectionPath().pathByAddingChild(selectedNode.getLastChild()));
+					if (!isNeedAddExpandLayerGroup) {
+						layersTree.reload();
+					}else{
+						layersTree.reload(newExpandLayerGroup);
+					}
+					allTreeNode.clear();
+					initAllNodes((TreeNode) layersTree.getModel().getRoot());
+					TreePath newLayerGroupTreePath=null;
+					for (int j=0;j<allTreeNode.size();j++){
+						DefaultMutableTreeNode node=(DefaultMutableTreeNode)allTreeNode.get(j);
+						TreeNodeData nodeData = (TreeNodeData) node.getUserObject();
+
+						if (nodeData.getData() == layerGroup.get(layerGroup.getCount()-1)) {
+							newLayerGroupTreePath=new TreePath(node.getPath());
+							break;
+						}
+					}
+					formMap.setActiveLayers(layerGroup.get(layerGroup.getCount()-1));
+					layersTree.startEditingAtPath(newLayerGroupTreePath);
 				}
 			}
 		}
@@ -237,6 +279,7 @@ public class LayersComponentManager extends JComponent {
 				layersTree.getMap().getLayers().insertLayerSnapshot(layersTree.getMap().getLayers().getCount(),layerGroupName);
 				int selectRow = layersTree.getRowCount() - 1;
 				layersTree.clearSelection();
+				layersTree.setSelectionRow(selectRow);
 				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
 			}
 		}
@@ -256,6 +299,15 @@ public class LayersComponentManager extends JComponent {
 				}
 			}else{
 				jMenuItemAddLayerGroup.setEnabled(false);
+				jMenuItemAddLayerRootGroup.setEnabled(false);
+				jMenuItemAddLayerSnapshot.setEnabled(false);
+			}
+			if (layersTree != null && layersTree.getMap()!= null && layersTree.getMap().getLayers().getCount() > 0){
+				jMenuItemAddLayerRootGroup.setEnabled(true);
+				jMenuItemAddLayerSnapshot.setEnabled(true);
+			}else{
+				jMenuItemAddLayerRootGroup.setEnabled(false);
+				jMenuItemAddLayerSnapshot.setEnabled(false);
 			}
 		}
 	};
@@ -488,6 +540,14 @@ public class LayersComponentManager extends JComponent {
 			}
 		});
 
+	}
+
+	/**
+	 * When you close all the formmap, hide the layer tree toolbar automatically
+	 * @param isVisible
+	 */
+	public void setToolBarVisible(boolean isVisible){
+		this.toolBar.setVisible(isVisible);
 	}
 
 	public Scene getScene() {
@@ -885,6 +945,17 @@ public class LayersComponentManager extends JComponent {
 			}
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
+		}
+	}
+
+	// 获取节点下面的所有节点，包括子节点和子节点的子节点
+	private void initAllNodes(TreeNode node) {
+		if (node.getChildCount() >= 0) {//判断是否有子节点
+			for (Enumeration e = node.children(); e.hasMoreElements(); ) {
+				TreeNode n = (TreeNode) e.nextElement();
+				this.allTreeNode.add(n);
+				initAllNodes(n);//若有子节点则再次查找
+			}
 		}
 	}
 }
