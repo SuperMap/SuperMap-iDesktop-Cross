@@ -20,6 +20,7 @@ import java.text.MessageFormat;
  * 文件选择器
  *
  * @author XiaJT
+ * 给文件选择器增加获得其中控件的方法-yuanR2017.11.21
  */
 public class SmFileChoose extends JFileChooser {
 
@@ -557,5 +558,53 @@ public class SmFileChoose extends JFileChooser {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * 通过key找到文件选择器当中的控件
+	 * yuanR2017.11.21
+	 *
+	 * @param key
+	 * @return
+	 */
+	public Component getLabelForInChooser(String key) {
+		java.util.Locale l = this.getLocale();
+		String s = UIManager.getString(key, l);
+
+		javax.swing.plaf.FileChooserUI ui = this.getUI();
+		int count = ui.getAccessibleChildrenCount(this);
+		for (int i = 0; i < count; i++) {
+			javax.accessibility.Accessible a = ui.getAccessibleChild(this, i);
+			JLabel label = findLabel((JComponent) a, s);
+			if (label != null) {
+				return label.getLabelFor();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @param comp
+	 * @param s
+	 * @return
+	 */
+	private static JLabel findLabel(JComponent comp, String s) {
+		JLabel label = null;
+		if (comp instanceof JLabel) {
+			if (((JLabel) comp).getText().equals(s)) {
+				label = (JLabel) comp;
+			}
+		} else if (comp instanceof JComponent) {
+			Component[] comps = comp.getComponents();
+			for (int i = 0; i < comps.length; i++) {
+				if (comps[i] instanceof JComponent) {
+					label = findLabel((JComponent) comps[i], s);
+					if (label != null) {
+						break;
+					}
+				}
+			}
+		}
+		return label;
 	}
 }

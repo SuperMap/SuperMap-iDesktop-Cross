@@ -1335,10 +1335,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
 		}
 
-
-		if (prjFileExportFileChoose.getTextField() != null) {
-			prjFileExportFileChoose.getTextField().setEnabled(false);
-		}
+		// 获得文件选择器当中的TextField控件，设置为不可用
+		//Component comp = prjFileExportFileChoose.getLabelForInChooser("FileChooser.fileNameLabelText");
+		//if (comp instanceof JTextField) {
+		//	JTextField field = ((JTextField) comp);
+		//	field.setEnabled(false);
+		//}
 
 		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
 			ArrayList<CoordSysDefine> coordSysDefineExportList = new ArrayList<>();
@@ -1695,12 +1697,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(anAllCoordSysDefine).clone();
 						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-						exportPrjCoordSys.setName(coordSysDefine.getCaption());
+						//exportPrjCoordSys.setName(coordSysDefine.getCaption());
 						exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
 					} else if (anAllCoordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						try {
 							exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(anAllCoordSysDefine).clone();
-							exportPrjCoordSys.setName(coordSysDefine.getCaption());
+							//exportPrjCoordSys.setName(coordSysDefine.getCaption());
 							exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 						} catch (Exception ex) {
 							continue;
@@ -1721,11 +1723,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(coordSysDefine).clone();
 				exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 				exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-				exportPrjCoordSys.setName(coordSysDefine.getCaption());
+				//exportPrjCoordSys.setName(coordSysDefine.getCaption());
 				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			} else if (coordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 				exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(coordSysDefine).clone();
-				exportPrjCoordSys.setName(coordSysDefine.getCaption());
+				//exportPrjCoordSys.setName(coordSysDefine.getCaption());
 				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			}
 			if (export(exportPrjCoordSys, path + "//" + coordSysDefine.getCaption() + ".xml")) {
