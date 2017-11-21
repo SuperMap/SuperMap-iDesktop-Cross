@@ -200,7 +200,7 @@ public class LayerGridParamPropertyModel extends LayerPropertyModel {
 		this.specialValueColor = Color.WHITE;
 		this.isSpecialValueTransparent = false;
 
-		if (getLayers() != null && getLayers().length > 0) {
+		if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
 			this.layerGridBrightness = ((LayerSettingGrid) getLayers()[0].getAdditionalSetting()).getBrightness();
 			this.layerGridContrast = ((LayerSettingGrid) getLayers()[0].getAdditionalSetting()).getContrast();
 			this.layerGridSpecialValue = ((LayerSettingGrid) getLayers()[0].getAdditionalSetting()).getSpecialValue();

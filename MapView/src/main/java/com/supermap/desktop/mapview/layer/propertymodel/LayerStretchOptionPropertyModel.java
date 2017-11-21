@@ -158,7 +158,7 @@ public class LayerStretchOptionPropertyModel extends LayerPropertyModel {
 		this.gaussianStretchRatioFactor = 0.0;
 		this.isGaussianStretchMiddleFactor = true;
 
-		if (getLayers() != null && getLayers().length > 0) {
+		if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
 			this.stretchType = ((LayerSettingImage) getLayers()[0].getAdditionalSetting()).getImageStretchOption().getStretchType();
 			this.standardDeviationStretchFactor = ((LayerSettingImage) getLayers()[0].getAdditionalSetting()).getImageStretchOption()
 					.getStandardDeviationStretchFactor();

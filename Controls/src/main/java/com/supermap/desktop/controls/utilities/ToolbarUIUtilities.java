@@ -3,10 +3,13 @@ package com.supermap.desktop.controls.utilities;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IFormMain;
+import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.Interface.IToolbar;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmToolbar;
+import com.supermap.desktop.ui.LayersComponentManager;
 import com.supermap.desktop.ui.ToolbarManager;
+import com.supermap.desktop.ui.UICommonToolkit;
 import org.pushingpixels.flamingo.api.common.JCommandToggleButton;
 import org.pushingpixels.flamingo.api.ribbon.AbstractRibbonBand;
 import org.pushingpixels.flamingo.api.ribbon.JRibbon;
@@ -31,7 +34,19 @@ public class ToolbarUIUtilities {
 	 */
 	public static void updataToolbarsState() {
 		updateRibbonState();
+		updateLayersTreeToolbar();
 //		updateToolbar();
+	}
+
+	public static void updateLayersTreeToolbar(){
+		if (Application.getActiveApplication().getActiveForm() instanceof IFormMap){
+			UICommonToolkit.getLayersManager().setToolBarVisible(true);
+		}else{
+			LayersComponentManager layersComponentManager = UICommonToolkit.getLayersManager();
+			if (layersComponentManager != null) {
+				layersComponentManager.setToolBarVisible(false);
+			}
+		}
 	}
 
 	private static void updateRibbonState() {

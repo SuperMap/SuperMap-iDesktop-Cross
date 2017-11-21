@@ -179,7 +179,7 @@ public class LayerImageParamPropertyModel extends LayerPropertyModel {
 		this.transparentColorTolerance = 0;
 		this.displayColorSpace = ColorSpaceType.RGB;
 
-		if (getLayers() != null && getLayers().length > 0) {
+		if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
 			this.layerImageBrightness = ((LayerSettingImage) getLayers()[0].getAdditionalSetting()).getBrightness();
 			this.layerImageContrast = ((LayerSettingImage) getLayers()[0].getAdditionalSetting()).getContrast();
 			this.isTransparent = ((LayerSettingImage) getLayers()[0].getAdditionalSetting()).isTransparent();

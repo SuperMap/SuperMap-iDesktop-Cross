@@ -274,7 +274,7 @@ public class LayerVectorParamPropertyModel extends LayerPropertyModel {
         this.minVisibleGeometrySize = 0.0;
         this.displayOrderField = "";
 
-        if (getLayers() != null && getLayers().length > 0) {
+        if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
             this.isCompleteLineSymbolDisplayed = getLayers()[0].isCompleteLineSymbolDisplayed();
             this.isCrossroadOptimized = getLayers()[0].isCrossroadOptimized();
             this.isSymbolScalable = getLayers()[0].isSymbolScalable();

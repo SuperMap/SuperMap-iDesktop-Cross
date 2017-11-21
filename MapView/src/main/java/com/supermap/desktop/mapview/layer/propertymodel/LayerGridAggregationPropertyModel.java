@@ -251,7 +251,7 @@ public class LayerGridAggregationPropertyModel extends LayerPropertyModel {
 		this.textStyle = new TextStyle();
 		this.fieldInfos = null;
 
-		if (getLayers() != null && getLayers().length > 0) {
+		if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
 			this.gridField = ((LayerGridAggregation) getLayers()[0]).getWeightField();
 			this.layerGridAggregationType = ((LayerGridAggregation) getLayers()[0]).getGridAggregationType();
 			this.length = ((LayerGridAggregation) getLayers()[0]).getGridwidth();
