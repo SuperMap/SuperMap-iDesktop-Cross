@@ -267,7 +267,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
                         result = showError(cachePath);
                     } else {
                         for (int i = 0; i < firstStepPane.comboBoxMultiTenseVersion.getItemCount(); i++) {
-                            if (firstStepPane.comboBoxMultiTenseVersion.getItemAt(i).desc.equals(editorComponent.getText())) {
+                            if (firstStepPane.comboBoxMultiTenseVersion.getItemAt(i).getDesc().equals(editorComponent.getText())) {
                                 result = showError(firstStepPane.textFieldCacheName.getText(), editorComponent.getText());
                                 break;
                             }
@@ -766,7 +766,7 @@ public class DialogMapCacheClipBuilder extends SmDialog {
                     String text = ((JTextField) firstStepPane.comboBoxMultiTenseVersion.getEditor().getEditorComponent()).getText();
                     boolean isExist = false;
                     for (int i = 0; i < firstStepPane.comboBoxMultiTenseVersion.getItemCount(); i++) {
-                        if (firstStepPane.comboBoxMultiTenseVersion.getItemAt(i).desc.equals(text)) {
+                        if (firstStepPane.comboBoxMultiTenseVersion.getItemAt(i).getDesc().equals(text)) {
                             mapCacheBuilder.setVersionInfo((TileVersion) firstStepPane.comboBoxMultiTenseVersion.getSelectedItem());
                             isExist = true;
                             break;
@@ -774,10 +774,9 @@ public class DialogMapCacheClipBuilder extends SmDialog {
                     }
                     if (!isExist) {
                         TileVersion tileVersion = new TileVersion();
-                        tileVersion.desc = text;
-                        mapCacheBuilder.setOutputFolder(firstStepPane.fileChooserControlFileCache.getPath() + "\\" + tileVersion.desc);
+                        mapCacheBuilder.setOutputFolder(firstStepPane.fileChooserControlFileCache.getPath() + "\\" + text);
                         mapCacheBuilder.setVersionInfo(tileVersion);
-                        System.out.println("nnnn");
+                        mapCacheBuilder.getVersionInfo().setDesc(text);
                     }
                 }
             }

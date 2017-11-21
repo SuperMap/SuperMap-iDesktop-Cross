@@ -16,6 +16,7 @@ import java.awt.event.ItemListener;
  * Created by ChenS on 2017/11/8 0008.
  */
 public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
+    private static final long serialVersionUID = 1L;
     private JLabel label;
     private JComboBox<Version> comboBox;
 
@@ -23,7 +24,8 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
         @Override
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED && comboBox.getSelectedItem() != null) {
-                getLayerPropertyModel().setCurrentVersion(comboBox.getSelectedItem().toString());
+                getModifiedLayerPropertyModel().setCurrentDescription(((Version) comboBox.getSelectedItem()).description);
+                getModifiedLayerPropertyModel().setCurrentVersion(((Version) comboBox.getSelectedItem()).name);
                 checkChanged();
             }
         }
@@ -67,7 +69,7 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
             }
         });
         this.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setInsets(10, 5, 10, 10));
-        this.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 0, 10, 5));
+        this.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(10, 0, 10, 5));
     }
 
     @Override
@@ -88,9 +90,14 @@ public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
     @Override
     protected void fillComponents() {
         try {
+            comboBox.removeAllItems();
             for (int i = 0; i < getLayerPropertyModel().getVersions().size(); i++) {
                 comboBox.addItem(new Version(getLayerPropertyModel().getVersions().get(i), getLayerPropertyModel().getDescriptions().get(i)));
+                if (getLayerPropertyModel().getDescriptions().get(i).equals(getLayerPropertyModel().getCurrentDescription())) {
+                    comboBox.setSelectedIndex(i);
+                }
             }
+
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);
         }

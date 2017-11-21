@@ -68,6 +68,7 @@ public class DialogCachePlayerSetting extends SmDialog {
         textFieldPlayInterval.setText(cachePlayerBar.getInterval() + "");
         checkBoxEffectsEnable.setSelected(cachePlayerBar.isEffects());
         checkBoxShowBar.setSelected(true);
+        checkBoxEffectsEnable.setSelected(true);
 
         initResources();
     }
@@ -80,6 +81,7 @@ public class DialogCachePlayerSetting extends SmDialog {
         checkBoxEffectsEnable.setText(MapViewProperties.getString("String_EffectsEnable"));
         buttonOK.setText(CoreProperties.getString(CoreProperties.OK));
         buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
+        checkBoxShowBar.setToolTipText(MapViewProperties.getString("String_Tip_YouCanSetPlayerBarVisibleAgainInPopMenu"));
     }
 
     private void registerListener() {

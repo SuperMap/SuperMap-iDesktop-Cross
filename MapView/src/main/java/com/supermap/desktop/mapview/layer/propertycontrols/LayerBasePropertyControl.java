@@ -13,6 +13,7 @@ import com.supermap.desktop.ui.StateChangeEvent;
 import com.supermap.desktop.ui.StateChangeListener;
 import com.supermap.desktop.ui.TristateCheckBox;
 import com.supermap.desktop.ui.controls.ProviderLabel.WarningOrHelpProvider;
+import com.supermap.desktop.utilities.DoubleUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -324,6 +325,18 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		checkChanged();
 	}
 
+	private boolean precisionControl(double d1,double d2){
+		boolean isEqual =false;
+		if (Double.compare(d1,d2)==-1){
+			isEqual= DoubleUtilities.equals(d2,d1,8);
+		}else if (Double.compare(d1,d2)==0){
+			isEqual =true;
+		}else{
+			isEqual= DoubleUtilities.equals(d1,d2,8);
+		}
+		return isEqual;
+	}
+
 	private void comboBoxMinVisibleScaleSelectedItemChanged(ItemEvent e) {
 		try {
 			if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -337,26 +350,25 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					getModifiedLayerPropertyModel().setMinVisibleScale(selectedScale);
 					this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 					isChanged = true;
-					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
+					if (!precisionControl(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) &&Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
 							|| Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
 						this.minScaleError.hideWarning();
+						this.maxScaleError.hideWarning();
 					} else {
 						this.minScaleError.showWarning();
-//						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMinVisibleScale()));
-					}
-					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0 || Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
 						this.maxScaleError.hideWarning();
 					}
+//					if (Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0 || Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
+//						this.maxScaleError.hideWarning();
+//					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
-					if (isChanged
-							&& this.comboBoxMinVisibleScale.getSelectedItem().toString()
-							.equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
+                    if (this.comboBoxMinVisibleScale.getSelectedItem().toString()
+                            .equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
 						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
-					} else if (isChanged
-							&& this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
-						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
+                    } else if (this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
+                        this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(ScaleModel.NONE_SCALE));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
 					}
@@ -380,15 +392,16 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					getModifiedLayerPropertyModel().setMaxVisibleScale(selectedScale);
 					this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 					isChanged = true;
-					if (Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
+					if (!precisionControl(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale())&& Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
 						this.maxScaleError.hideWarning();
+						this.minScaleError.hideWarning();
 					} else {
 						this.maxScaleError.showWarning();
-//						this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(getModifiedLayerPropertyModel().getMaxVisibleScale()));
-					}
-					if (Double.compare(selectedScale,getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
 						this.minScaleError.hideWarning();
 					}
+//					if (Double.compare(selectedScale,getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
+//						this.minScaleError.hideWarning();
+//					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
 					if (isChanged
 							&& this.comboBoxMaxVisibleScale.getSelectedItem().toString()

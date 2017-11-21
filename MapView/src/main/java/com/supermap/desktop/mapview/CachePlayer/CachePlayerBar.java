@@ -54,6 +54,7 @@ public class CachePlayerBar extends JToolBar {
                 CacheWithVersion cacheWithVersion = playList.get(index);
                 cacheWithVersion.getLayerCache().setCurrentVersion(cacheWithVersion.getVersion());
                 formMap.getMapControl().getMap().refresh();
+                formMap.setActiveLayers(cacheWithVersion.getLayerCache());
                 progressBar.setProgress(index);
             } else {
                 if (index < playList.size()) {
@@ -68,12 +69,13 @@ public class CachePlayerBar extends JToolBar {
         public void actionPerformed(ActionEvent e) {
             if (buttonPlay.getIcon().equals(ICON_PLAY)) {
                 index--;
-                if (index <= 0) {
+                if (index < 0) {
                     index = playList.size() - 1;
                 }
                 CacheWithVersion cacheWithVersion = playList.get(index);
                 cacheWithVersion.getLayerCache().setCurrentVersion(cacheWithVersion.getVersion());
                 formMap.getMapControl().getMap().refresh();
+                formMap.setActiveLayers(cacheWithVersion.getLayerCache());
                 progressBar.setProgress(index);
             } else {
                 if (index > 0) {
@@ -199,12 +201,15 @@ public class CachePlayerBar extends JToolBar {
         progressBar.setProgress(0);
         buttonPlay.setIcon(ICON_PLAY);
         try {
+            LayerCache layerCache;
             if (playList.size() > 0) {
-                playList.get(0).getLayerCache().setCurrentVersion(playList.get(0).getVersion());
+                layerCache = playList.get(0).getLayerCache();
             } else {
-                layerCaches.get(0).setCurrentVersion(layerCaches.get(0).getVersions().get(0));
+                layerCache = layerCaches.get(0);
             }
+            layerCache.setCurrentVersion(layerCaches.get(0).getVersions().get(0));
             formMap.getMapControl().getMap().refresh();
+            formMap.setActiveLayers(layerCache);
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);
         }
@@ -221,6 +226,7 @@ public class CachePlayerBar extends JToolBar {
                     CacheWithVersion cacheWithVersion = playList.get(index);
                     cacheWithVersion.getLayerCache().setCurrentVersion(cacheWithVersion.getVersion());
                     formMap.getMapControl().getMap().refresh();
+                    formMap.setActiveLayers(cacheWithVersion.getLayerCache());
                     progressBar.setProgress(index);
                 } else {
                     cancel();

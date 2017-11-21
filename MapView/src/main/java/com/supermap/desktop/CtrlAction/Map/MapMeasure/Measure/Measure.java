@@ -324,19 +324,23 @@ public abstract class Measure implements IMeasureAble {
 			TrackingLayer trackingLayer = mapControl.getMap().getTrackingLayer();
 			int index = trackingLayer.indexOf(tempTag);
 			if (isAdd) {
-				if (currentGeometry != null) {
-					if (index > -1) {
-						trackingLayer.set(index, currentGeometry);
-					} else {
-						trackingLayer.add(currentGeometry, tempTag);
-					}
-				}
+                try {
+                    //当只在编辑状态而未绘制任何对象的情况下，currentGeometry会出现对象已释放异常--ChenS，2017/11/7
+                    if (currentGeometry != null) {
+                        if (index > -1) {
+                            trackingLayer.set(index, currentGeometry);
+                        } else {
+                            trackingLayer.add(currentGeometry, tempTag);
+                        }
+                    }
+                } catch (Exception e) {
+                    Application.getActiveApplication().getOutput().output(e.getMessage());
+                }
 			} else {
 				if (index > -1) {
 					trackingLayer.remove(index);
 				}
 			}
-//			mapControl.getMap().refreshTrackingLayer();
 		}
 	}
 

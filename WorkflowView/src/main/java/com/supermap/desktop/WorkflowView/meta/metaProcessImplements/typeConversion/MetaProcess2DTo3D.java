@@ -11,6 +11,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.FieldTypeUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
 
 import java.util.Map;
@@ -61,10 +62,10 @@ public class MetaProcess2DTo3D extends MetaProcessTypeConversion {
 			comboBoxFrom.setFieldName((DatasetVector) dataset);
 			comboBoxTo.setFieldName((DatasetVector) dataset);
 		}
-		comboBoxZ.setFieldType(fieldType);
-		comboBoxFrom.setFieldType(fieldType);
-		comboBoxTo.setFieldType(fieldType);
-		comboBoxZ.setRequisite(true);
+        comboBoxZ.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxFrom.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxTo.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxZ.setRequisite(true);
 		comboBoxFrom.setRequisite(true);
 		comboBoxTo.setRequisite(true);
 

@@ -19,6 +19,7 @@ import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.FieldTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import java.beans.PropertyChangeEvent;
@@ -100,10 +101,10 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		parameterSaveDataset = new ParameterSaveDataset();
 
 		parameterFieldComboBoxNotPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField"));
-		parameterFieldComboBoxNotPoint.setFieldType(fieldType);
+        parameterFieldComboBoxNotPoint.setFieldType(FieldTypeUtilities.getNumericFieldType());
 
 		parameterFieldComboBoxPoint = new ParameterFieldComboBox(ProcessProperties.getString("String_AssessmentField")).setShowNullValue(true);
-		parameterFieldComboBoxPoint.setFieldType(fieldType);
+        parameterFieldComboBoxPoint.setFieldType(FieldTypeUtilities.getNumericFieldType());
 
 		parameterComboBoxAggregationMethod = new ParameterComboBox(ProcessProperties.getString("String_AggregationMethod"));
 		parameterComboBoxAggregationMethod.addItem(new ParameterDataNode(ProcessProperties.getString("String_AGGREGATION"), AggregationMethod.AGGREGATIONPOLYGONS));

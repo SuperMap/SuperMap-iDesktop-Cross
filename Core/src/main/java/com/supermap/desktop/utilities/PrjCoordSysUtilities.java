@@ -100,7 +100,11 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CoordSysUnit"))) {
 						text += prj.getCoordUnit();
 					} else if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
-						text += Integer.toString(prj.toEPSGCode());
+						if (prj.toEPSGCode() < 0) {
+							text += "0";
+						} else {
+							text += Integer.toString(prj.toEPSGCode());
+						}
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"))) {

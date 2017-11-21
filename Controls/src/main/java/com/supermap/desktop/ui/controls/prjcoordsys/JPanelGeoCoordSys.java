@@ -13,8 +13,7 @@ import com.supermap.desktop.utilities.PrjCoordSysTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.Arrays;
 
 /**
@@ -68,11 +67,11 @@ public class JPanelGeoCoordSys extends JPanel {
 				if (selectedItem instanceof GeoCoordSysType && selectedItem != GeoCoordSysType.GCS_USER_DEFINE) {
 					geoCoordSys.setType((GeoCoordSysType) selectedItem);
 					lock = true;
-					comboBoxGeoDatumPlane.setSelectedItem(geoCoordSys.getGeoDatum().getType());
-					comboBoxCentralMeridianType.setSelectedItem(geoCoordSys.getGeoPrimeMeridian().getType());
-					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
-					geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
+					geoCoordSys.setType((GeoCoordSysType) selectedItem);
 					geoCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
+					//comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoDatum().getType().name()));
+					//comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoPrimeMeridian().getType().name()));
+					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
 					lock = false;
 				} else {
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
@@ -83,10 +82,12 @@ public class JPanelGeoCoordSys extends JPanel {
 						geoCoordSys.setName((String) selectedItem);
 					}
 				}
-				firePropertyChange("GeoCoordSysType", "", "");
+				//firePropertyChange("GeoCoordSysType", "", "");
 			}
 		}
 	};
+
+
 	private boolean lockGeo = false;
 	private final ItemListener comboBoxGeoDatumTypeListener = new ItemListener() {
 		@Override
@@ -104,15 +105,16 @@ public class JPanelGeoCoordSys extends JPanel {
 					geoCoordSys.getGeoDatum().setType((GeoDatumType) selectedItem);
 					lockGeo = true;
 					// 当选择为defined时，支持设置：参考椭球体
+					// todo
+					geoCoordSys.getGeoDatum().setType(GeoDatumType.DATUM_USER_DEFINED);
+					geoCoordSys.getGeoDatum().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					if (selectedItem.equals(GeoDatumType.DATUM_USER_DEFINED)) {
 						comboBoxReferenceSpheroid.setEnabled(true);
 					} else {
 						comboBoxReferenceSpheroid.setEnabled(false);
-						comboBoxReferenceSpheroid.setSelectedItem(geoCoordSys.getGeoDatum().getGeoSpheroid().getType());
+						comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe((geoCoordSys.getGeoDatum().getGeoSpheroid().getType().name())));
 					}
 					comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
-					geoCoordSys.getGeoDatum().setType(GeoDatumType.DATUM_USER_DEFINED);
-					geoCoordSys.getGeoDatum().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					lockGeo = false;
 				} else {
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
@@ -138,11 +140,19 @@ public class JPanelGeoCoordSys extends JPanel {
 				if (selectedItem instanceof GeoSpheroidType) {
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setType((GeoSpheroidType) selectedItem);
 					lockAxis = true;
-					textFieldGeoSpheroidAxis.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
-					textFieldGeoSpheroidFlatten.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
-					comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoSpheroidType) selectedItem).name()));
+					// todo
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setType(GeoSpheroidType.SPHEROID_USER_DEFINED);
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoSpheroidType) selectedItem).name()));
+					if (!selectedItem.equals(GeoSpheroidType.SPHEROID_USER_DEFINED)) {
+						textFieldGeoSpheroidAxis.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
+						textFieldGeoSpheroidFlatten.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
+						textFieldGeoSpheroidAxis.setEnabled(false);
+						textFieldGeoSpheroidFlatten.setEnabled(false);
+					} else {
+						textFieldGeoSpheroidAxis.setEnabled(true);
+						textFieldGeoSpheroidFlatten.setEnabled(true);
+					}
+					comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoSpheroidType) selectedItem).name()));
 					lockAxis = false;
 				} else {
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
@@ -213,8 +223,9 @@ public class JPanelGeoCoordSys extends JPanel {
 		comboBoxName.setRenderer(new MyEnumCellRender(comboBoxName));
 
 		// region 大地参考系类型
-		Enum[] enumsGeoDatum = Enum.getEnums(GeoDatumType.class);
 		comboBoxGeoDatumPlane.setSearchItemValueGetter(searchItemValueGetter);
+		Enum[] enumsGeoDatum = Enum.getEnums(GeoDatumType.class);
+		//Arrays.sort(enumsGeoDatum, 0, enumsGeoDatum.length, new EnumComparator());
 		for (Enum anEnum : enumsGeoDatum) {
 			if (anEnum instanceof GeoDatumType) {
 				comboBoxGeoDatumPlane.addItem((GeoDatumType) anEnum);
@@ -224,8 +235,9 @@ public class JPanelGeoCoordSys extends JPanel {
 		// endregion
 
 		// region 椭球参数类型
-		Enum[] enumsGeoSpheroid = Enum.getEnums(GeoSpheroidType.class);
 		comboBoxReferenceSpheroid.setSearchItemValueGetter(searchItemValueGetter);
+		Enum[] enumsGeoSpheroid = Enum.getEnums(GeoSpheroidType.class);
+		//Arrays.sort(enumsGeoSpheroid, 0, enumsGeoSpheroid.length, new EnumComparator());
 		for (Enum anEnum : enumsGeoSpheroid) {
 			if (anEnum instanceof GeoSpheroidType) {
 				comboBoxReferenceSpheroid.addItem((GeoSpheroidType) anEnum);
@@ -281,14 +293,17 @@ public class JPanelGeoCoordSys extends JPanel {
 		textFieldGeoSpheroidFlatten.setEditable(false);
 		// endregion
 		// region 中央经线
-		Enum[] enumsCenter = Enum.getEnums(GeoPrimeMeridianType.class);
 		comboBoxCentralMeridianType.setSearchItemValueGetter(searchItemValueGetter);
+		Enum[] enumsCenter = Enum.getEnums(GeoPrimeMeridianType.class);
+		//Arrays.sort(enumsCenter, 0, enumsCenter.length, new EnumComparator());
 		for (Enum anEnum : enumsCenter) {
-			if (anEnum instanceof GeoPrimeMeridianType)
+			if (anEnum instanceof GeoPrimeMeridianType) {
 				comboBoxCentralMeridianType.addItem((GeoPrimeMeridianType) anEnum);
+			}
 		}
 		comboBoxCentralMeridianType.setRenderer(new MyEnumCellRender(comboBoxCentralMeridianType));
 		panelCentralBasisMeridian.setTextFieldEditable(false);
+
 		geoCoordSys.setName(DEFAULT_NAME);
 
 	}
@@ -414,12 +429,12 @@ public class JPanelGeoCoordSys extends JPanel {
 		lockAxis = true;
 		lockCenter = true;
 		comboBoxName.setSelectedItem(this.geoCoordSys.getName());
-		comboBoxGeoDatumPlane.setSelectedItem(this.geoCoordSys.getGeoDatum().getType());
-		comboBoxReferenceSpheroid.setSelectedItem(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getName());
+		comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getType().name()));
+		comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getType().name()));
 		textFieldGeoSpheroidAxis.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
 		textFieldGeoSpheroidFlatten.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
 
-		comboBoxCentralMeridianType.setSelectedItem(this.geoCoordSys.getGeoPrimeMeridian().getName());
+		comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoPrimeMeridian().getType().name()));
 		panelCentralBasisMeridian.setValue(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
 		//textFieldCentralMeridian.setText(String.valueOf(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue()));
 

@@ -34,6 +34,10 @@ public class CtrlActionCreateLayerSnapshot extends CtrlAction {
 
 	@Override
 	public boolean enable() {
-		return true;
+		if(UICommonToolkit.getLayersManager().getLayersTree().getMap().getLayers().getCount()>0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

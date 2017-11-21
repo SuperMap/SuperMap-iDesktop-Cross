@@ -94,6 +94,10 @@ public class FieldTypeUtilities {
 		return type;
 	}
 
+    public static FieldType[] getNumericFieldType() {
+        return new FieldType[]{FieldType.INT16, FieldType.INT32, FieldType.INT64, FieldType.SINGLE, FieldType.DOUBLE};
+    }
+
 	/**
 	 * 判断字段是否数值型
 	 * 
