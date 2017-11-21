@@ -19,6 +19,7 @@ import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
+import com.supermap.desktop.utilities.FieldTypeUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -128,8 +129,8 @@ public class MetaProcessKernelDensityOffline extends MetaProcess {
 			comboBoxField.setFieldName((DatasetVector) dataset);
 			updateBound(dataset);
 		}
-		comboBoxField.setFieldType(fieldType);
-		comboBoxField.setShowSystemField(true);
+        comboBoxField.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxField.setShowSystemField(true);
 		comboBoxField.setSelectedItem("SmID");
 		resultDataset.setDefaultDatasetName("result_kernelDensity");
 		numberRight.setMinValue(Double.parseDouble(numberLeft.getSelectedItem()));

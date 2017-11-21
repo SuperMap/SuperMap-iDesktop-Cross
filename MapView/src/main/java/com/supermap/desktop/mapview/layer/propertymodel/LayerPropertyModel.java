@@ -197,8 +197,8 @@ public abstract class LayerPropertyModel implements Cloneable {
 
 		for (int i = listeners.length - 2; i >= 0; i -= 2) {
 			if (listeners[i] == PropertyEnabledChangeListener.class) {
-				((PropertyEnabledChangeListener) listeners[i + 1]).propertyEnabeldChange(e);
-			}
+                ((PropertyEnabledChangeListener) listeners[i + 1]).propertyEnabledChange(e);
+            }
 		}
 	}
 

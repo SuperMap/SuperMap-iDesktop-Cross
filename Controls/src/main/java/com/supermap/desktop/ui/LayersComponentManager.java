@@ -206,6 +206,10 @@ public class LayersComponentManager extends JComponent {
                 String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("LayerGroup");
                 layersTree.getMap().getLayers().addGroup(layerGroupName);
                 int selectRow = layersTree.getRowCount() - 1;
+                if (selectRow<0){
+                    selectRow=0;
+                    layersTree.reload();
+                }
                 layersTree.setSelectionRow(selectRow);
                 layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
             }
@@ -271,46 +275,48 @@ public class LayersComponentManager extends JComponent {
 		}
 	};
 
-	private ActionListener addLayerSnapshotListener=new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (layersTree!=null && layersTree.getMap()!= null) {
-				String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("SnapshotLayer");
-				layersTree.getMap().getLayers().insertLayerSnapshot(layersTree.getMap().getLayers().getCount(),layerGroupName);
-				int selectRow = layersTree.getRowCount() - 1;
-				layersTree.clearSelection();
-				layersTree.setSelectionRow(selectRow);
-				layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
-			}
-		}
-	};
+    private ActionListener addLayerSnapshotListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (layersTree != null && layersTree.getMap() != null) {
+                String layerGroupName = layersTree.getMap().getLayers().getAvailableCaption("SnapshotLayer");
+                layersTree.getMap().getLayers().insertLayerSnapshot(layersTree.getMap().getLayers().getCount(), layerGroupName);
+                int selectRow = layersTree.getRowCount() - 1;
+                if (selectRow<0){
+                    selectRow=0;
+                    layersTree.reload();
+                }
+                layersTree.clearSelection();
+                layersTree.setSelectionRow(selectRow);
+                layersTree.startEditingAtPath(layersTree.getPathForRow(selectRow));
+            }
+        }
+    };
 
-	private ActionListener arrawButtonListener=new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			TreeNodeData selectedNodeData = null;
-			if (layersTree != null && layersTree.getMap()!= null && layersTree.getSelectionCount() == 1) {
-				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
-				selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-				if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP || selectedNodeData.getType() == NodeDataType.LAYER_SNAPSHOT) {
-					jMenuItemAddLayerGroup.setEnabled(true);
-				}else{
-					jMenuItemAddLayerGroup.setEnabled(false);
-				}
-			}else{
-				jMenuItemAddLayerGroup.setEnabled(false);
-				jMenuItemAddLayerRootGroup.setEnabled(false);
-				jMenuItemAddLayerSnapshot.setEnabled(false);
-			}
-			if (layersTree != null && layersTree.getMap()!= null && layersTree.getMap().getLayers().getCount() > 0){
-				jMenuItemAddLayerRootGroup.setEnabled(true);
-				jMenuItemAddLayerSnapshot.setEnabled(true);
-			}else{
-				jMenuItemAddLayerRootGroup.setEnabled(false);
-				jMenuItemAddLayerSnapshot.setEnabled(false);
-			}
-		}
-	};
+    private ActionListener arrawButtonListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TreeNodeData selectedNodeData = null;
+            if (layersTree != null && layersTree.getMap() != null && layersTree.getSelectionCount() == 1) {
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) layersTree.getLastSelectedPathComponent();
+                selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
+                if (selectedNodeData.getType() == NodeDataType.LAYER_GROUP || selectedNodeData.getType() == NodeDataType.LAYER_SNAPSHOT) {
+                    jMenuItemAddLayerGroup.setEnabled(true);
+                } else {
+                    jMenuItemAddLayerGroup.setEnabled(false);
+                }
+            } else {
+                jMenuItemAddLayerGroup.setEnabled(false);
+            }
+//			if (layersTree != null && layersTree.getMap()!= null && layersTree.getMap().getLayers().getCount() > 0){
+//				jMenuItemAddLayerRootGroup.setEnabled(true);
+//				jMenuItemAddLayerSnapshot.setEnabled(true);
+//			}else{
+//				jMenuItemAddLayerRootGroup.setEnabled(false);
+//				jMenuItemAddLayerSnapshot.setEnabled(false);
+//			}
+        }
+    };
 
     private ActionListener addDataListener = new ActionListener() {
         @Override
@@ -349,146 +355,146 @@ public class LayersComponentManager extends JComponent {
     };
     //endregion
 
-	private void initializeResources() {
-		// 默认实现，后续进行初始化操作
-	}
+    private void initializeResources() {
+        // 默认实现，后续进行初始化操作
+    }
 
-	//  Create by lixiaoyao 2017/10/10
-	// 当点击鼠标右键时，当坐标超出图层树当前显示的高度时那么不需要改变图层树当前选择的对象，
-	// 如果没超过那么就需要改变图层树中当前选择的对象，效果类似于工作空间树
-	private void layersTreeSelectDataChange(MouseEvent e) {
-		if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1) {
-			TreePath closestPathForLocation = this.layersTree.getClosestPathForLocation(e.getX(), e.getY());
-			if (closestPathForLocation != null) {
-				Rectangle pathBounds = layersTree.getPathBounds(closestPathForLocation);
-				if (pathBounds != null && e.getY() >= pathBounds.y && e.getY() < (pathBounds.y + pathBounds.height)
-						&& closestPathForLocation.getPath().length > 0 && !this.layersTree.isPathSelected(closestPathForLocation)) {
-					this.layersTree.setSelectionPath(closestPathForLocation);
-				}
-			}
-		}
+    //  Create by lixiaoyao 2017/10/10
+    // 当点击鼠标右键时，当坐标超出图层树当前显示的高度时那么不需要改变图层树当前选择的对象，
+    // 如果没超过那么就需要改变图层树中当前选择的对象，效果类似于工作空间树
+    private void layersTreeSelectDataChange(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 1) {
+            TreePath closestPathForLocation = this.layersTree.getClosestPathForLocation(e.getX(), e.getY());
+            if (closestPathForLocation != null) {
+                Rectangle pathBounds = layersTree.getPathBounds(closestPathForLocation);
+                if (pathBounds != null && e.getY() >= pathBounds.y && e.getY() < (pathBounds.y + pathBounds.height)
+                        && closestPathForLocation.getPath().length > 0 && !this.layersTree.isPathSelected(closestPathForLocation)) {
+                    this.layersTree.setSelectionPath(closestPathForLocation);
+                }
+            }
+        }
 //		else if (e.getButton() == MouseEvent.BUTTON1) {
 //			if (this.layersTree.getPathForLocation(e.getX(), e.getY()) == null) {
 //				layersTree.clearSelection();
 //			}
 //		}
-	}
+    }
 
-	private void layersTreeMousePressed(java.awt.event.MouseEvent evt) {
-		try {
-			int buttonType = evt.getButton();
-			int clickCount = evt.getClickCount();
+    private void layersTreeMousePressed(java.awt.event.MouseEvent evt) {
+        try {
+            int buttonType = evt.getButton();
+            int clickCount = evt.getClickCount();
 //			if (selectedNode != null) {
-				if (buttonType == MouseEvent.BUTTON3 && clickCount == 1) {
+            if (buttonType == MouseEvent.BUTTON3 && clickCount == 1) {
 
-					if (!this.isContextMenuBuilded) {
-						this.buildContextMenu();
-					}
-					JPopupMenu popupMenu = null;
-					DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layersTree.getLastSelectedPathComponent();
-					if (selectedNode !=null && evt.getY() <= this.layersTree.getRowCount() * this.layersTree.getRowHeight()) {
-						TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-						popupMenu = this.getPopupMenu(selectedNodeData);
-					} else if (evt.getY() > this.layersTree.getRowCount() * this.layersTree.getRowHeight()){// fix by lixiaoyao 2017/10/11 当点击的鼠标Y大于树当前显示的高度时，显示图层树的右键菜单
-						popupMenu = this.layersTreeToolBarPopupMenu;
-					}
-					if (popupMenu != null) {
-						popupMenu.show(this.layersTree, evt.getX(), evt.getY());
-					}
-				}
+                if (!this.isContextMenuBuilded) {
+                    this.buildContextMenu();
+                }
+                JPopupMenu popupMenu = null;
+                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layersTree.getLastSelectedPathComponent();
+                if (selectedNode != null && evt.getY() <= this.layersTree.getRowCount() * this.layersTree.getRowHeight()) {
+                    TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
+                    popupMenu = this.getPopupMenu(selectedNodeData);
+                } else if (evt.getY() > this.layersTree.getRowCount() * this.layersTree.getRowHeight()) {// fix by lixiaoyao 2017/10/11 当点击的鼠标Y大于树当前显示的高度时，显示图层树的右键菜单
+                    popupMenu = this.layersTreeToolBarPopupMenu;
+                }
+                if (popupMenu != null) {
+                    popupMenu.show(this.layersTree, evt.getX(), evt.getY());
+                }
+            }
 //			}
-		} catch (Exception ex) {
-			Application.getActiveApplication().getOutput().output(ex);
-		}
-	}
+        } catch (Exception ex) {
+            Application.getActiveApplication().getOutput().output(ex);
+        }
+    }
 
-	private void layer3DsTreeMousePressed(java.awt.event.MouseEvent evt) {
-		try {
-			int buttonType = evt.getButton();
-			int clickCount = evt.getClickCount();
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layer3DsTree.getLastSelectedPathComponent();
-			if (selectedNode != null) {
-				TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
-				if (buttonType == MouseEvent.BUTTON3 && clickCount == 1 && this.layer3DsTree.getLastSelectedPathComponent() != null) {
+    private void layer3DsTreeMousePressed(java.awt.event.MouseEvent evt) {
+        try {
+            int buttonType = evt.getButton();
+            int clickCount = evt.getClickCount();
+            DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) this.layer3DsTree.getLastSelectedPathComponent();
+            if (selectedNode != null) {
+                TreeNodeData selectedNodeData = (TreeNodeData) selectedNode.getUserObject();
+                if (buttonType == MouseEvent.BUTTON3 && clickCount == 1 && this.layer3DsTree.getLastSelectedPathComponent() != null) {
 
-					if (!this.isContextMenuBuilded) {
-						this.buildContextMenu();
-					}
+                    if (!this.isContextMenuBuilded) {
+                        this.buildContextMenu();
+                    }
 
-					JPopupMenu popupMenu = this.getPopupMenu(selectedNodeData);
-					if (popupMenu != null) {
-						popupMenu.show(this.layer3DsTree, evt.getX(), evt.getY());
-					}
-				}
-			}
-		} catch (Exception ex) {
-			Application.getActiveApplication().getOutput().output(ex);
-		}
-	}
+                    JPopupMenu popupMenu = this.getPopupMenu(selectedNodeData);
+                    if (popupMenu != null) {
+                        popupMenu.show(this.layer3DsTree, evt.getX(), evt.getY());
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Application.getActiveApplication().getOutput().output(ex);
+        }
+    }
 
-	private JPopupMenu getPopupMenu(TreeNodeData nodeData) {
-		JPopupMenu popupMenu = null;
-		try {
-			NodeDataType type = nodeData.getType();
+    private JPopupMenu getPopupMenu(TreeNodeData nodeData) {
+        JPopupMenu popupMenu = null;
+        try {
+            NodeDataType type = nodeData.getType();
 
-			if (type == NodeDataType.LAYER) {
-				popupMenu = this.layerPopupMenu;
-			} else if (type == NodeDataType.FEATURE3D) {
-				popupMenu = this.feature3DPopupMenu;
-			} else if (type == NodeDataType.FEATURE3DS) {
-				popupMenu = this.feature3DsPopupMenu;
-			} else if (type == NodeDataType.LAYER3DS) {
-				popupMenu = this.generalLayersPopupMenu;
-			} else if (type == NodeDataType.LAYER3D_DATASET) {
-				popupMenu = this.layer3DDatasetPopupMenu;
-			} else if (type == NodeDataType.LAYER3D_KML) {
-				popupMenu = this.layer3DKMLPopupMenu;
-			} else if (type == NodeDataType.LAYER_IMAGE || type == NodeDataType.LAYER_GRID) {
-				popupMenu = this.layer3DImagePopupMenu;
-			} else if (type == NodeDataType.SCREENLAYER3D_GEOMETRY_TAG) {
-				popupMenu = this.screenLayer3DPopupMenu;
-			} else if (type == NodeDataType.TERRAIN_LAYER) {
-				popupMenu = this.terrainLayerPopupMenu;
-			} else if (type == NodeDataType.TERRAIN_LAYERS) {
-				popupMenu = this.terrainLayersPopupMenu;
-			} else if (type == NodeDataType.LAYER3D_MAP) {
-				popupMenu = this.layer3DMapPopupMenu;
-			}
+            if (type == NodeDataType.LAYER) {
+                popupMenu = this.layerPopupMenu;
+            } else if (type == NodeDataType.FEATURE3D) {
+                popupMenu = this.feature3DPopupMenu;
+            } else if (type == NodeDataType.FEATURE3DS) {
+                popupMenu = this.feature3DsPopupMenu;
+            } else if (type == NodeDataType.LAYER3DS) {
+                popupMenu = this.generalLayersPopupMenu;
+            } else if (type == NodeDataType.LAYER3D_DATASET) {
+                popupMenu = this.layer3DDatasetPopupMenu;
+            } else if (type == NodeDataType.LAYER3D_KML) {
+                popupMenu = this.layer3DKMLPopupMenu;
+            } else if (type == NodeDataType.LAYER_IMAGE || type == NodeDataType.LAYER_GRID) {
+                popupMenu = this.layer3DImagePopupMenu;
+            } else if (type == NodeDataType.SCREENLAYER3D_GEOMETRY_TAG) {
+                popupMenu = this.screenLayer3DPopupMenu;
+            } else if (type == NodeDataType.TERRAIN_LAYER) {
+                popupMenu = this.terrainLayerPopupMenu;
+            } else if (type == NodeDataType.TERRAIN_LAYERS) {
+                popupMenu = this.terrainLayersPopupMenu;
+            } else if (type == NodeDataType.LAYER3D_MAP) {
+                popupMenu = this.layer3DMapPopupMenu;
+            }
 
-			if (nodeData.getData() != null && nodeData.getData() instanceof Layer) {
-				Layer layer = (Layer) nodeData.getData();
+            if (nodeData.getData() != null && nodeData.getData() instanceof Layer) {
+                Layer layer = (Layer) nodeData.getData();
 
-				if (layer.getTheme() != null) {
-					if ((layer.getTheme() instanceof ThemeUnique) || (layer.getTheme() instanceof ThemeRange) || (layer.getTheme() instanceof ThemeCustom)) {
-						popupMenu = this.layerVectorThemeUniqueAndRangePopupMenu;
-					} else if ((layer.getTheme() instanceof ThemeGridRange) || (layer.getTheme() instanceof ThemeGridUnique)) {
-						popupMenu = this.layerGridThemePopupMenu;
-					} else {
-						popupMenu = this.layerVectorThemeOtherPopupMenu;
-					}
-				} else if (layer.getDataset() != null) {
-					if (layer instanceof LayerHeatmap || layer instanceof LayerGridAggregation) {
-						popupMenu = this.layerHeatmapAndAggregationPopupMenu;
-					} else if (layer.getDataset().getType() == DatasetType.CAD) {
-						popupMenu = this.layerVectorCADPopupMenu;
-					} else if (layer.getDataset().getType() == DatasetType.TEXT) {
-						popupMenu = this.layerTextPopupMenu;
-					} else if (layer.getDataset() instanceof DatasetVector) {
-						popupMenu = this.layerVectorPopupMenu;
-					} else if (layer.getDataset().getType() == DatasetType.IMAGE || layer.getDataset().getType() == DatasetType.IMAGECOLLECTION) {
-						popupMenu = this.layerImagePopupMenu;
-					} else if (layer.getDataset().getType() == DatasetType.GRID || layer.getDataset().getType() == DatasetType.GRIDCOLLECTION) {
-						popupMenu = this.layerGridPopupMenu;
-					} else if (layer.getDataset().getType() == DatasetType.WMS) {
-						popupMenu = layerWMSPopupMenu;
-					} else {
-						popupMenu = this.layerPopupMenu;
-					}
-				} else if (layer instanceof LayerGroup) {
-					popupMenu = this.layerGroupPopupMenu;
-				} else {
-					popupMenu = this.layerPopupMenu;
-				}
+                if (layer.getTheme() != null) {
+                    if ((layer.getTheme() instanceof ThemeUnique) || (layer.getTheme() instanceof ThemeRange) || (layer.getTheme() instanceof ThemeCustom)) {
+                        popupMenu = this.layerVectorThemeUniqueAndRangePopupMenu;
+                    } else if ((layer.getTheme() instanceof ThemeGridRange) || (layer.getTheme() instanceof ThemeGridUnique)) {
+                        popupMenu = this.layerGridThemePopupMenu;
+                    } else {
+                        popupMenu = this.layerVectorThemeOtherPopupMenu;
+                    }
+                } else if (layer.getDataset() != null) {
+                    if (layer instanceof LayerHeatmap || layer instanceof LayerGridAggregation) {
+                        popupMenu = this.layerHeatmapAndAggregationPopupMenu;
+                    } else if (layer.getDataset().getType() == DatasetType.CAD) {
+                        popupMenu = this.layerVectorCADPopupMenu;
+                    } else if (layer.getDataset().getType() == DatasetType.TEXT) {
+                        popupMenu = this.layerTextPopupMenu;
+                    } else if (layer.getDataset() instanceof DatasetVector) {
+                        popupMenu = this.layerVectorPopupMenu;
+                    } else if (layer.getDataset().getType() == DatasetType.IMAGE || layer.getDataset().getType() == DatasetType.IMAGECOLLECTION) {
+                        popupMenu = this.layerImagePopupMenu;
+                    } else if (layer.getDataset().getType() == DatasetType.GRID || layer.getDataset().getType() == DatasetType.GRIDCOLLECTION) {
+                        popupMenu = this.layerGridPopupMenu;
+                    } else if (layer.getDataset().getType() == DatasetType.WMS) {
+                        popupMenu = layerWMSPopupMenu;
+                    } else {
+                        popupMenu = this.layerPopupMenu;
+                    }
+                } else if (layer instanceof LayerGroup) {
+                    popupMenu = this.layerGroupPopupMenu;
+                } else {
+                    popupMenu = this.layerPopupMenu;
+                }
 
 				if (popupMenu != null) {
 					// 默认实现，后续进行初始化操作
@@ -519,26 +525,23 @@ public class LayersComponentManager extends JComponent {
 		return this.layersTree.getMap();
 	}
 
-	public void setMap(Map map) {
-		if (!this.toolBar.isVisible()){
-			this.toolBar.setVisible(true);
-		}
-		this.jScrollPane.setViewportView(this.layersTree);
+    public void setMap(Map map) {
+        this.jScrollPane.setViewportView(this.layersTree);
 
-		// 这里先这么绕一下，保证每次设置 map 都会生效，绕过相同地图不处理的问题。
-		if (map != null) {
-			this.layersTree.setMap(null);
-		}
-		this.layersTree.setMap(map);
-		if (map != null && map.getLayers() != null && map.getLayers().getCount() > 0) {
-			layersTree.setSelectionRow(0);
-		}
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				layersTree.updateUI();
-			}
-		});
+        // 这里先这么绕一下，保证每次设置 map 都会生效，绕过相同地图不处理的问题。
+        if (map != null) {
+            this.layersTree.setMap(null);
+        }
+        this.layersTree.setMap(map);
+        if (map != null && map.getLayers() != null && map.getLayers().getCount() > 0) {
+            layersTree.setSelectionRow(0);
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                layersTree.updateUI();
+            }
+        });
 
 	}
 
@@ -676,6 +679,17 @@ public class LayersComponentManager extends JComponent {
 	 */
 	public JPopupMenu getLayerGroupPopupMenu() {
 		return this.layerGroupPopupMenu;
+	}
+
+	private JPopupMenu layerCachePopupMenu = null;
+
+	/**
+	 * 获取图层分组右键菜单
+	 *
+	 * @return
+	 */
+	public JPopupMenu getLayerCachePopupMenu() {
+		return this.layerCachePopupMenu;
 	}
 
 	private JPopupMenu themeItemUniqueAndRangePopupMenu = null;
@@ -913,6 +927,7 @@ public class LayersComponentManager extends JComponent {
 
 				this.layerVectorPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerVectorContextMenu");
 				this.layerVectorCADPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerVectorCADContextMenu");
+				this.layerCachePopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerCacheContextMenu");
 				this.layerTextPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerTextContextMenu");
 				this.layerGridPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerGridContextMenu");
 				this.layerImagePopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerImageContextMenu");

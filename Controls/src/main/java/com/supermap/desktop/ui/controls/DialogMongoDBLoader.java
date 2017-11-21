@@ -1,14 +1,11 @@
-package com.supermap.desktop.dialog;
+package com.supermap.desktop.ui.controls;
 
 import com.supermap.data.Toolkit;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.FormMap;
+import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
-import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.ui.controls.SmDialog;
 import com.supermap.desktop.ui.controls.button.SmButton;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.mapping.LayerCache;
@@ -20,9 +17,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Created by ChenS on 2017/10/30 0030.
+ * Created by ChenS on 2017/11/20 0020.
  */
-public class DialogMongoDBCacheLoaded extends SmDialog {
+public class DialogMongoDBLoader extends SmDialog {
+
     //region Field
     private JLabel labelServer;
     private JTextField textFieldServer;
@@ -39,7 +37,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
     private SmButton buttonCancel;
     private SmButton buttonOK;
 
-    private FormMap formMap;
+    private IFormMap formMap;
     private boolean isDatabaseNeedRefresh = true;
     private boolean isCacheNeedRefresh = false;
     private boolean isVersionNeedRefresh = false;
@@ -79,8 +77,8 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
     };
     //endregion
 
-    public DialogMongoDBCacheLoaded() {
-        this.formMap = ((FormMap) Application.getActiveApplication().getActiveForm());
+    public DialogMongoDBLoader() {
+        this.formMap = ((IFormMap) Application.getActiveApplication().getActiveForm());
         initFrame();
         initComponent();
         initLayout();
@@ -132,8 +130,8 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
         comboBoxDatabase = new JComboBox<>();
         comboBoxCache = new JComboBox<>();
         comboBoxVersion = new JComboBox<>();
-	    buttonCancel = new SmButton(CoreProperties.getString("String_Cancel"));
-	    buttonOK = new SmButton(CoreProperties.getString("String_OK"));
+        buttonCancel = new SmButton(CoreProperties.getString("String_Cancel"));
+        buttonOK = new SmButton(CoreProperties.getString("String_OK"));
 
         textFieldServer.setText("localhost:27017");
         comboBoxDatabase.setEditable(true);
@@ -143,8 +141,7 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label;
                 if (value != null) {
-                    //组件设置描述的缺陷没改完之前，先用name代替
-                    label = new JLabel(value.name);
+                    label = new JLabel(value.desc);
                 } else {
                     label = new JLabel("");
                 }
@@ -297,4 +294,5 @@ public class DialogMongoDBCacheLoaded extends SmDialog {
                 comboBoxCache.getSelectedItem() != null &&
                 comboBoxVersion.getSelectedItem() != null);
     }
+
 }

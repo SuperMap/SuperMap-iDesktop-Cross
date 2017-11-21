@@ -86,8 +86,8 @@ public class CtrlActionRemoveLayer extends CtrlAction {
                         formMap.setActiveLayers(parentGroup.get(parentGroup.getCount() - 1));
                     }
                 }
-//                LayersTree tree = UICommonToolkit.getLayersManager().getLayersTree();
-//                tree.firePropertyChangeWithLayerSelect();
+                LayersTree tree = UICommonToolkit.getLayersManager().getLayersTree();
+                tree.firePropertyChangeWithLayerSelect();
             }
         } catch (Exception ex) {
             Application.getActiveApplication().getOutput().output(ex);

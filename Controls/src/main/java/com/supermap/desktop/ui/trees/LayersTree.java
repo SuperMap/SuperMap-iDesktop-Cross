@@ -2109,9 +2109,6 @@ public class LayersTree extends JTree {
         if (this.expandLayerGroups.containsKey(iFormMap)) {
             this.expandLayerGroups.remove(iFormMap);
         }
-        if(this.expandLayerGroups.size()==0) {
-            UICommonToolkit.getLayersManager().setToolBarVisible(false);
-        }
     }
 
     public void setExpandLayerGroup(IFormMap iFormMap, LayerGroup... expandLayerGroup) {

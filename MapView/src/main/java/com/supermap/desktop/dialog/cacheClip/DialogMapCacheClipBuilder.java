@@ -777,7 +777,6 @@ public class DialogMapCacheClipBuilder extends SmDialog {
                         tileVersion.desc = text;
                         mapCacheBuilder.setOutputFolder(firstStepPane.fileChooserControlFileCache.getPath() + "\\" + tileVersion.desc);
                         mapCacheBuilder.setVersionInfo(tileVersion);
-                        System.out.println("nnnn");
                     }
                 }
             }

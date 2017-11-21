@@ -1069,7 +1069,6 @@ public class BasicRibbonUI extends RibbonUI {
 		/**
 		 * Returns the outline of this taskbar panel.
 		 *
-		 * @param insets Insets.
 		 * @return The outline of this taskbar panel.
 		 */
 		protected Shape getOutline(TaskbarPanel taskbarPanel) {
@@ -1589,8 +1588,10 @@ public class BasicRibbonUI extends RibbonUI {
 			List<RibbonTask> visibleTasks = getCurrentlyShownRibbonTasks();
 			for (RibbonTask task : visibleTasks) {
 				JRibbonTaskToggleButton tabButton = taskToggleButtons.get(task);
-				int pw = tabButton.getMinimumSize().width;
-				totalTaskButtonsWidth += (pw + tabButtonGap);
+				if (tabButton != null) {
+					int pw = tabButton.getMinimumSize().width;
+					totalTaskButtonsWidth += (pw + tabButtonGap);
+				}
 			}
 
 			return new Dimension(totalTaskButtonsWidth, taskToggleButtonHeight);
@@ -1613,12 +1614,14 @@ public class BasicRibbonUI extends RibbonUI {
 			int totalDiff = 0;
 			for (RibbonTask task : visibleTasks) {
 				JRibbonTaskToggleButton tabButton = taskToggleButtons.get(task);
-				int pw = tabButton.getPreferredSize().width;
-				int mw = tabButton.getMinimumSize().width;
-				diffMap.put(tabButton, pw - mw);
-				totalDiff += (pw - mw);
-				totalPrefWidth += pw;
-				totalMinWidth += mw;
+				if (tabButton != null) {
+					int pw = tabButton.getPreferredSize().width;
+					int mw = tabButton.getMinimumSize().width;
+					diffMap.put(tabButton, pw - mw);
+					totalDiff += (pw - mw);
+					totalPrefWidth += pw;
+					totalMinWidth += mw;
+				}
 			}
 			totalPrefWidth += tabButtonGap * visibleTasks.size();
 			totalMinWidth += tabButtonGap * visibleTasks.size();
@@ -1631,15 +1634,17 @@ public class BasicRibbonUI extends RibbonUI {
 				int x = ltr ? 0 : c.getWidth();
 				for (RibbonTask task : visibleTasks) {
 					JRibbonTaskToggleButton tabButton = taskToggleButtons.get(task);
-					int pw = tabButton.getPreferredSize().width;
-					if (ltr) {
-						tabButton.setBounds(x, y + 1, pw, taskToggleButtonHeight - 1);
-						x += (pw + tabButtonGap);
-					} else {
-						tabButton.setBounds(x - pw, y + 1, pw, taskToggleButtonHeight - 1);
-						x -= (pw + tabButtonGap);
+					if (tabButton != null) {
+						int pw = tabButton.getPreferredSize().width;
+						if (ltr) {
+							tabButton.setBounds(x, y + 1, pw, taskToggleButtonHeight - 1);
+							x += (pw + tabButtonGap);
+						} else {
+							tabButton.setBounds(x - pw, y + 1, pw, taskToggleButtonHeight - 1);
+							x -= (pw + tabButtonGap);
+						}
+						tabButton.setActionRichTooltip(null);
 					}
-					tabButton.setActionRichTooltip(null);
 				}
 				((JComponent) c).putClientProperty(TaskToggleButtonsHostPanel.IS_SQUISHED, null);
 			} else {

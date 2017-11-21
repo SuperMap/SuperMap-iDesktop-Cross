@@ -400,7 +400,7 @@ public class LayerHeatmapPropertyModel extends LayerPropertyModel {
 		this.isCurrentView = false;
 		this.maximumState = -1;
 
-		if (getLayers() != null && getLayers().length > 0) {
+		if (getLayers() != null && getLayers().length > 0 && getLayers()[0] != null && !getLayers()[0].isDisposed()) {
 			this.kernelRadius = ((LayerHeatmap) getLayers()[0]).getKernelRadius();
 			this.weightField = ((LayerHeatmap) getLayers()[0]).getWeightField();
 			this.maxColor = ((LayerHeatmap) getLayers()[0]).getMaxColor();

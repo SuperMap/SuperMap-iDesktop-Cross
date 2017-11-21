@@ -128,7 +128,7 @@ public class ThemeMainContainer extends JPanel {
                     Object obj = node.getUserObject();
                     TreeNodeData controlNodeData = (TreeNodeData) obj;
                     Object itemObj = controlNodeData.getData();
-                    if (itemObj instanceof Layer) {
+                    if (itemObj instanceof Layer && !((Layer) itemObj).isDisposed()) {
                         textFieldThemeLayer.setText(((Layer) itemObj).getCaption());
                     }
                 }

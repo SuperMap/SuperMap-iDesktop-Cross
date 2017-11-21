@@ -38,7 +38,7 @@ public abstract class AbstractLayerPropertyControl extends JPanel implements ILa
 	private transient PropertyEnabledChangeListener enabledChangeListener = new PropertyEnabledChangeListener() {
 
 		@Override
-		public void propertyEnabeldChange(PropertyEnabledChangeEvent e) {
+		public void propertyEnabledChange(PropertyEnabledChangeEvent e) {
 			setControlEnabled(e.getPropertyName(), e.getEnabled());
 		}
 	};

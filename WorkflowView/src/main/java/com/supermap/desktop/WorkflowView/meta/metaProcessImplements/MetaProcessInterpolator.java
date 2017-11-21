@@ -22,6 +22,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.properties.PixelFormatProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DoubleUtilities;
+import com.supermap.desktop.utilities.FieldTypeUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -235,8 +236,8 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 			parameterDataset.setSelectedItem(datasetVector);
 			parameterInterpolatorFields.setFieldName((DatasetVector) datasetVector);
 			searchMode.setDataset(datasetVector);
-			parameterInterpolatorFields.setFieldType(fieldType);
-			parameterInterpolatorFields.setShowSystemField(true);
+            parameterInterpolatorFields.setFieldType(FieldTypeUtilities.getNumericFieldType());
+            parameterInterpolatorFields.setShowSystemField(true);
 			parameterInterpolatorFields.setSelectedItem("SmID");
 			parameterMean.setSelectedItem(updateMean((DatasetVector) datasetVector));
 

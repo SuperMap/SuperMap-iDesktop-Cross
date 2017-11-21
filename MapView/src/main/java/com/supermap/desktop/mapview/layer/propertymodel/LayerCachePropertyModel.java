@@ -89,6 +89,14 @@ public class LayerCachePropertyModel extends LayerPropertyModel {
         }
     }
 
+    @Override
+    public boolean equals(LayerPropertyModel model) {
+        LayerCachePropertyModel layerCachePropertyModel = (LayerCachePropertyModel) model;
+        return super.equals(layerCachePropertyModel) && this.versions.equals(layerCachePropertyModel.getVersions())
+                && this.currentDescription.equals(layerCachePropertyModel.getCurrentVersion());
+    }
+
+    //region Getter&Setter
     public String getCurrentVersion() {
         return currentVersion;
     }
@@ -120,4 +128,5 @@ public class LayerCachePropertyModel extends LayerPropertyModel {
     public void setDescriptions(List<String> descriptions) {
         this.descriptions = descriptions;
     }
+    //endregion
 }
