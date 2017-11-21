@@ -362,7 +362,7 @@ public class FirstStepPane extends JPanel implements IState {
         @Override
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED && e.getItem() instanceof TileVersion) {
-                comboBoxMultiTenseVersion.setSelectedItem(((TileVersion) e.getItem()).desc);
+                comboBoxMultiTenseVersion.setSelectedItem(((TileVersion) e.getItem()).getDesc());
             }
         }
     };
@@ -483,7 +483,7 @@ public class FirstStepPane extends JPanel implements IState {
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label;
                 if (value != null) {
-                    label = new JLabel(value.desc);
+                    label = new JLabel(value.getDesc());
                 } else {
                     label = new JLabel(" ");
                 }

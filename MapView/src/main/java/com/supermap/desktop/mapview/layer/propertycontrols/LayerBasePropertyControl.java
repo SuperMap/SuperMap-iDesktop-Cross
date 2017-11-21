@@ -362,15 +362,13 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 //						this.maxScaleError.hideWarning();
 //					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
-					if (isChanged
-							&& this.comboBoxMinVisibleScale.getSelectedItem().toString()
-							.equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
+                    if (this.comboBoxMinVisibleScale.getSelectedItem().toString()
+                            .equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
 						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
-					} else if (isChanged
-							&& this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
-						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
+                    } else if (this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
+                        this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(ScaleModel.NONE_SCALE));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
 					}

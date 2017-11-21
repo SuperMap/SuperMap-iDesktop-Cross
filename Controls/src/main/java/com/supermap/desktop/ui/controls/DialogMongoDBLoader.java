@@ -65,7 +65,7 @@ public class DialogMongoDBLoader extends SmDialog {
                 Map map = formMap.getMapControl().getMap();
                 LayerCache layerCache = map.getLayers().AddCache(textFieldServer.getText(), comboBoxDatabase.getSelectedItem().toString(),
                         comboBoxCache.getSelectedItem().toString(), true);
-                layerCache.setCurrentVersion(((TileVersion) comboBoxVersion.getSelectedItem()).name);
+                layerCache.setCurrentVersion(((TileVersion) comboBoxVersion.getSelectedItem()).getName());
                 map.refresh();
                 formMap.setActiveLayers(layerCache);
                 UICommonToolkit.getLayersManager().setMap(map);
@@ -141,7 +141,7 @@ public class DialogMongoDBLoader extends SmDialog {
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label;
                 if (value != null) {
-                    label = new JLabel(value.desc);
+                    label = new JLabel(value.getDesc());
                 } else {
                     label = new JLabel("");
                 }
