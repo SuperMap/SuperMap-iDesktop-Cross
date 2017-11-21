@@ -753,6 +753,10 @@ public class SubstanceRibbonFrameTitlePane extends SubstanceTitlePane {
 	 * @param taskbarPanel Taskbar panel.
 	 */
 	private void paintTaskBarPanelOutline(Graphics g, TaskbarPanel taskbarPanel) {
+		if (true) {
+			// 使背景色与标题一致
+			return;
+		}
 		Shape contour = taskbarPanel.getOutline(true);
 		Shape contourInner = taskbarPanel.getOutline(false);
 
@@ -796,4 +800,5 @@ public class SubstanceRibbonFrameTitlePane extends SubstanceTitlePane {
 
 		g2d.dispose();
 	}
+
 }

@@ -17,6 +17,7 @@ import org.pushingpixels.flamingo.internal.ui.ribbon.JRibbonGallery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/10.
@@ -35,6 +36,7 @@ public class ToolbarUIUtilities {
 	}
 
 	private static void updateRibbonState() {
+		updateTaskBar();
 		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
 		if (mainFrame instanceof JRibbonFrame) {
 			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
@@ -51,6 +53,19 @@ public class ToolbarUIUtilities {
 //					}
 //				}
 //			}
+		}
+	}
+
+	private static void updateTaskBar() {
+		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
+		if (mainFrame instanceof JRibbonFrame) {
+			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
+			List<Component> taskbarComponents = ribbon.getTaskbarComponents();
+			for (Component taskbarComponent : taskbarComponents) {
+				if (taskbarComponent instanceof IBaseItem) {
+					taskbarComponent.setEnabled(((IBaseItem) taskbarComponent).getCtrlAction().enable());
+				}
+			}
 		}
 	}
 
