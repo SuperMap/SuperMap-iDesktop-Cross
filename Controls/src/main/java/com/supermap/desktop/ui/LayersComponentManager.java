@@ -78,8 +78,8 @@ public class LayersComponentManager extends JComponent {
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(this.toolBar,50,50,50)
-				.addComponent(this.jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
+                .addComponent(this.toolBar, 100, 100, 100)
+                .addComponent(this.jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createSequentialGroup()
 				.addComponent(this.toolBar,23, 23, 23)
 				.addComponent(this.jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE));
@@ -153,7 +153,7 @@ public class LayersComponentManager extends JComponent {
 		this.jMenuItemAddLayerRootGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewRootGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewRootGroup.png"));
 		this.jMenuItemAddLayerGroup = new JMenuItem(ControlsProperties.getString("String_Button_NewGroup"), ControlsResources.getIcon("/controlsresources/ToolBar/Image_NewGroup.png"));
 		this.jMenuItemAddLayerSnapshot=new JMenuItem(ControlsProperties.getString("String_CreateLayerSnapshot"),ControlsResources.getIcon("/controlsresources/controlsImage/Image_Layer_LayerSnapshot.png"));
-        this.jMenuItemAddData = new JMenuItem(ControlsProperties.getString("String_AddData"), CoreResources.getIcon("coreresources/ThemeToolBar/Image_ToolButton_AddItem_16.png"));
+        this.jMenuItemAddData = new JMenuItem(ControlsProperties.getString("String_AddData"), ControlsResources.getIcon("controlsresources/ToolBar/Image_ToolButton_AddItem_16.png"));
         this.jMenuItemMongoDB = new JMenuItem(ControlsProperties.getString("String_LoadMongoDB"), null);
         this.addLayerGroup = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);
         this.addData = new ComponentDropDown(ComponentDropDown.IMAGE_TYPE);

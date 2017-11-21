@@ -76,7 +76,7 @@ public class LayerPropertyControlFactory {
                 cachePropertyControl = new LayerCachePropertyControl();
             }
             cachePropertyControl.setLayerPropertyModel(model);
-            ComponentUIUtilities.setName(this.cachePropertyControl, "");
+            ComponentUIUtilities.setName(this.cachePropertyControl, "LayerPropertyControlFactory_cachePropertyControl");
             return cachePropertyControl;
         } else {
             return null;

@@ -16,6 +16,7 @@ import java.awt.event.ItemListener;
  * Created by ChenS on 2017/11/8 0008.
  */
 public class LayerCachePropertyControl extends AbstractLayerPropertyControl {
+    private static final long serialVersionUID = 1L;
     private JLabel label;
     private JComboBox<Version> comboBox;
 
