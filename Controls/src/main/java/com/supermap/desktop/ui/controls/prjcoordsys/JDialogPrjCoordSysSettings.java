@@ -94,8 +94,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private transient CoordSysDefine geographyCoordinate = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE, null,
 			ControlsProperties.getString("String_GeoCoordSys")).setFolderNode(true);
 	// 自定义坐标系集合
-	private transient CoordSysDefine customCoordinate = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, null,
-			ControlsProperties.getString("String_Custom")).setFolderNode(true);
+	private transient CoordSysDefine customizeCoordinate = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, null,
+			ControlsProperties.getString("String_Customize")).setFolderNode(true);
 	// 收藏夹坐标系集合
 	private transient CoordSysDefine favoriteCoordinate = new CoordSysDefine(CoordSysDefine.FAVORITE_COORDINATE, null,
 			ControlsProperties.getString("String_Favorite")).setFolderNode(true);
@@ -271,7 +271,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		rootDefine.add(noneEarth);
 		rootDefine.add(projectionSystem);
 		rootDefine.add(geographyCoordinate);
-		rootDefine.add(customCoordinate);
+		rootDefine.add(customizeCoordinate);
 		rootDefine.add(favoriteCoordinate);
 	}
 
@@ -356,7 +356,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 				if (this.currentDefine == null) {
-					this.currentDefine = this.customCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
@@ -366,7 +366,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
 				if (this.currentDefine == null) {
-					this.currentDefine = this.customCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.projectionSystem.getChildByCoordSysCode(this.prjCoordSys.getType().value());
@@ -677,9 +677,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//if (StringUtilities.isNullOrEmpty(this.userGeoCoordsysFolderPath)) {
 		//	this.userGeoCoordsysFolderPath = PathUtilities.getFullPathName(XMLProjectionTag.CUSTOMPROJECTION_FOLDER + "\\" + "UserGeoCoordsys", true);
 		//}
-		//CoordSysDefine userGeoParentDefine = customCoordinate.getChildByCaption(userDefineGeoParentName);
+		//CoordSysDefine userGeoParentDefine = customizeCoordinate.getChildByCaption(userDefineGeoParentName);
 		//if (userGeoParentDefine == null) {
-		//	userGeoParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName).setFolderNode(true);
+		//	userGeoParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userDefineGeoParentName).setFolderNode(true);
 		//}
 		//reloadCoordSysFromFolderPath(userGeoCoordsysFolderPath, userGeoParentDefine);
 		//
@@ -687,9 +687,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//if (StringUtilities.isNullOrEmpty(this.userPrjCoordsysFolderPath)) {
 		//	this.userPrjCoordsysFolderPath = PathUtilities.getFullPathName(XMLProjectionTag.CUSTOMPROJECTION_FOLDER + "\\" + "UserPrjCoordsys", true);
 		//}
-		//CoordSysDefine userPrjParentDefine = customCoordinate.getChildByCaption(userDefinePrjParentName);
+		//CoordSysDefine userPrjParentDefine = customizeCoordinate.getChildByCaption(userDefinePrjParentName);
 		//if (userPrjParentDefine == null) {
-		//	userPrjParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefinePrjParentName).setFolderNode(true);
+		//	userPrjParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userDefinePrjParentName).setFolderNode(true);
 		//}
 		//reloadCoordSysFromFolderPath(userPrjCoordsysFolderPath, userPrjParentDefine);
 		//
@@ -697,9 +697,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//if (StringUtilities.isNullOrEmpty(this.userCoordsysFromEPSGFolderPath)) {
 		//	this.userCoordsysFromEPSGFolderPath = PathUtilities.getFullPathName(XMLProjectionTag.CUSTOMPROJECTION_FOLDER + "\\" + "UserCoordsysFromEPSG", true);
 		//}
-		//CoordSysDefine userCoordsysFromEPSGParentDefine = customCoordinate.getChildByCaption(userCoordsysFromEPSGParentName);
+		//CoordSysDefine userCoordsysFromEPSGParentDefine = customizeCoordinate.getChildByCaption(userCoordsysFromEPSGParentName);
 		//if (userCoordsysFromEPSGParentDefine == null) {
-		//	userCoordsysFromEPSGParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
+		//	userCoordsysFromEPSGParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userCoordsysFromEPSGParentName).setFolderNode(true);
 		//}
 		//reloadCoordSysFromFolderPath(userCoordsysFromEPSGFolderPath, userCoordsysFromEPSGParentDefine);
 		//
@@ -707,15 +707,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//if (StringUtilities.isNullOrEmpty(this.userImportCoordsysFolderPath)) {
 		//	this.userImportCoordsysFolderPath = PathUtilities.getFullPathName(XMLProjectionTag.CUSTOMPROJECTION_FOLDER + "\\" + "UserImportCoordsys", true);
 		//}
-		//CoordSysDefine userImportCoordsysParentDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
+		//CoordSysDefine userImportCoordsysParentDefine = customizeCoordinate.getChildByCaption(userImportCoordsysParentName);
 		//if (userImportCoordsysParentDefine == null) {
-		//	userImportCoordsysParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName).setFolderNode(true);
+		//	userImportCoordsysParentDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userImportCoordsysParentName).setFolderNode(true);
 		//}
 		//reloadCoordSysFromFolderPath(userImportCoordsysFolderPath, userImportCoordsysParentDefine);
 		if (StringUtilities.isNullOrEmpty(this.customizeProjectionConfigPath)) {
 			this.customizeProjectionConfigPath = PathUtilities.getFullPathName(XMLProjectionTag.CUSTOMPROJECTION_FOLDER, true);
 		}
-		reloadCoordSysFromFolderPath(customizeProjectionConfigPath, customCoordinate);
+		reloadCoordSysFromFolderPath(customizeProjectionConfigPath, customizeCoordinate);
 	}
 
 	/**
@@ -735,16 +735,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private void reloadCoordSysFromFolderPath(String path, CoordSysDefine coordSysDefine) {
 		try {
 			if (!FileUtilities.exists(path)) {
-				// 当文件夹不存在时，也不新建文件夹
-				//File file = new File(path);
-				//file.mkdirs();
-			} else {
-				ArrayList<String> fileList;
-				fileList = getFileDirectory(new File(path));
-				// 先不考虑层级问题，默认收藏夹中不存在文件夹只有投影文件
-				for (String aFileList : fileList) {
-					addToCoordSysDefine(getPrjCoordSysFromImportFile(aFileList), coordSysDefine);
-				}
+				//当文件夹不存在时， 新建文件夹
+				File file = new File(path);
+				file.mkdirs();
+			}
+			ArrayList<String> fileList;
+			fileList = getFileDirectory(new File(path));
+			// 先不考虑层级问题，默认收藏夹中不存在文件夹只有投影文件
+			for (String aFileList : fileList) {
+				addToCoordSysDefine(getPrjCoordSysFromImportFile(aFileList), coordSysDefine);
 			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
@@ -932,7 +931,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		rootNode.add(createNode(this.noneEarth));
 		rootNode.add(createNode(this.projectionSystem));
 		rootNode.add(createNode(this.geographyCoordinate));
-		rootNode.add(createNode(this.customCoordinate));
+		rootNode.add(createNode(this.customizeCoordinate));
 		rootNode.add(createNode(this.favoriteCoordinate));
 		this.treePrjCoordSys.expandPath(new TreePath(rootNode.getPath()));
 	}
@@ -1154,7 +1153,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			searchDefine(pattern, this.noneEarth, searchModel);
 			searchDefine(pattern, this.geographyCoordinate, searchModel);
 			searchDefine(pattern, this.projectionSystem, searchModel);
-			searchDefine(pattern, this.customCoordinate, searchModel);
+			searchDefine(pattern, this.customizeCoordinate, searchModel);
 			searchDefine(pattern, this.favoriteCoordinate, searchModel);
 		}
 
@@ -1361,6 +1360,8 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				CursorUtilities.setWaitCursor(tablePrjCoordSys);
 				CursorUtilities.setWaitCursor(treePrjCoordSys);
 				if (coordSysDefineExportList.size() == 1 && !coordSysDefineExportList.get(0).getIsFolderNode()) {
+					// 导出单个投影文件，确保文件名称可修改
+					coordSysDefineExportList.get(0).setCaption(prjFileExportFileChoose.getFileName().replace(".NOEXIST", ""));
 					exportPrjCoordSys(coordSysDefineExportList.get(0), prjFileExportFileChoose.getFilePath().replace("\\" + prjFileExportFileChoose.getFileName(), ""));
 				} else {
 					buildExportRootFile(coordSysDefineExportList, prjFileExportFileChoose.getFilePath());
@@ -1398,14 +1399,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		if (prjFileImportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
 			// 导入文件需要增加到自定义节点下userImportCoordsysParentName目录当中
 			File file = prjFileImportFileChoose.getSelectedFile();
-			//CoordSysDefine userDefine = customCoordinate.getChildByCaption(userImportCoordsysParentName);
+			//CoordSysDefine userDefine = customizeCoordinate.getChildByCaption(userImportCoordsysParentName);
 			//if (userDefine == null) {
-			//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userImportCoordsysParentName).setFolderNode(true);
+			//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userImportCoordsysParentName).setFolderNode(true);
 			//}
-			CoordSysDefine result = addToCoordSysDefine(getPrjCoordSysFromImportFile(file.getPath()), customCoordinate);
+			CoordSysDefine result = addToCoordSysDefine(getPrjCoordSysFromImportFile(file.getPath()), customizeCoordinate);
 			if (result != null && exportPrjCoordSys(result, customizeProjectionConfigPath)) {
 				// 当增加成功，在tree中显示
-				addToTree(result, customCoordinate.getCaption(), customCoordinate, customCoordinate.getCaption());
+				addToTree(result, customizeCoordinate.getCaption(), customizeCoordinate, customizeCoordinate.getCaption());
 			}
 		}
 	}
@@ -1451,22 +1452,22 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
 			result.setCoordSysCode(-1);
 			result.setGeoCoordSys(geoCoordSys);
-			//CoordSysDefine userDefine = customCoordinate.getChildByCaption(userDefineGeoParentName);
+			//CoordSysDefine userDefine = customizeCoordinate.getChildByCaption(userDefineGeoParentName);
 			//if (userDefine == null) {
-			//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customCoordinate, userDefineGeoParentName).setFolderNode(true);
+			//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userDefineGeoParentName).setFolderNode(true);
 			//}
 			// 对名字进行去重处理
 			List<String> hasNames = new ArrayList<>();
-			for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
-				if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
-					hasNames.add(customCoordinate.get(i).getCaption());
+			for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
+				if (!(customizeCoordinate.getAllLeaves().length == 1 && customizeCoordinate.getAllLeaves()[0].equals(customizeCoordinate))) {
+					hasNames.add(customizeCoordinate.get(i).getCaption());
 				}
 			}
 			result.setCaption(getSingletonName(geoCoordSys.getName(), hasNames));
-			if (customCoordinate.add(result)) {
-				//String grantParentName = ControlsProperties.getString("String_Custom");
+			if (customizeCoordinate.add(result)) {
+				//String grantParentName = ControlsProperties.getString("String_Customize");
 				if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-					addToTree(result, customCoordinate.getCaption(), customCoordinate, customCoordinate.getCaption());
+					addToTree(result, customizeCoordinate.getCaption(), customizeCoordinate, customizeCoordinate.getCaption());
 				}
 
 			}
@@ -1486,21 +1487,21 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		if (dialogUserDefinePrjProjection.showDialog() == DialogResult.OK) {
 			PrjCoordSys prjCoordSys = dialogUserDefinePrjProjection.getPrjCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
-			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
+			result.setCoordSysCode(-1);
 			result.setPrjCoordSys(prjCoordSys);
 
 			// 对名字进行去重处理
 			List<String> hasNames = new ArrayList<>();
-			for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
-				if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
-					hasNames.add(customCoordinate.get(i).getCaption());
+			for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
+				if (!(customizeCoordinate.getAllLeaves().length == 1 && customizeCoordinate.getAllLeaves()[0].equals(customizeCoordinate))) {
+					hasNames.add(customizeCoordinate.get(i).getCaption());
 				}
 			}
 			result.setCaption(getSingletonName(prjCoordSys.getName(), hasNames));
-			if (customCoordinate.add(result)) {
-				//String grantParentName = ControlsProperties.getString("String_Custom");
+			if (customizeCoordinate.add(result)) {
+				//String grantParentName = ControlsProperties.getString("String_Customize");
 				if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-					addToTree(result, customCoordinate.getCaption(), customCoordinate, customCoordinate.getCaption());
+					addToTree(result, customizeCoordinate.getCaption(), customizeCoordinate, customizeCoordinate.getCaption());
 				}
 
 			}
@@ -1554,15 +1555,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result.setCoordSysCode(-1);
 				// 对名字进行去重处理
 				List<String> hasNames = new ArrayList<>();
-				for (int i = 0; i < customCoordinate.getAllLeaves().length; i++) {
-					if (!(customCoordinate.getAllLeaves().length == 1 && customCoordinate.getAllLeaves()[0].equals(customCoordinate))) {
-						hasNames.add(customCoordinate.get(i).getCaption());
+				for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
+					if (!(customizeCoordinate.getAllLeaves().length == 1 && customizeCoordinate.getAllLeaves()[0].equals(customizeCoordinate))) {
+						hasNames.add(customizeCoordinate.get(i).getCaption());
 					}
 				}
 				result.setCaption(getSingletonName(dialogNewCoordsysFromEPSG.getNameTextField().getText(), hasNames));
-				if (customCoordinate.add(result)) {
+				if (customizeCoordinate.add(result)) {
 					if (exportPrjCoordSys(result, this.customizeProjectionConfigPath)) {
-						addToTree(result, this.customCoordinate.getCaption(), customCoordinate, this.customCoordinate.getCaption());
+						addToTree(result, this.customizeCoordinate.getCaption(), customizeCoordinate, this.customizeCoordinate.getCaption());
 					}
 				}
 			} catch (Exception ignored) {
@@ -1638,7 +1639,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 				result.setPrjCoordSys(prjCoordSys);
 			}
-			result.setCoordSysCode(CoordSysDefine.USER_DEFINED);
+			result.setCoordSysCode(prjCoordSys.getEPSGCode());
 			// 对名字进行去重处理
 			List<String> hasNames = new ArrayList<>();
 			for (int i = 0; i < targetDefine.getAllLeaves().length; i++) {
@@ -1694,15 +1695,18 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(anAllCoordSysDefine).clone();
 						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-						exportPrjCoordSys.setName(exportGeoCoordSys.getName());
+						exportPrjCoordSys.setName(coordSysDefine.getCaption());
+						exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
 					} else if (anAllCoordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						try {
 							exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(anAllCoordSysDefine).clone();
+							exportPrjCoordSys.setName(coordSysDefine.getCaption());
+							exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 						} catch (Exception ex) {
 							continue;
 						}
 					}
-					if (export(exportPrjCoordSys, folderName + "\\" + exportPrjCoordSys.getName() + ".xml")) {
+					if (export(exportPrjCoordSys, folderName + "\\" + coordSysDefine.getCaption() + ".xml")) {
 						this.successedExportNum++;
 						return true;
 					} else {
@@ -1718,11 +1722,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 				exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
 				exportPrjCoordSys.setName(coordSysDefine.getCaption());
+				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			} else if (coordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 				exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(coordSysDefine).clone();
 				exportPrjCoordSys.setName(coordSysDefine.getCaption());
+				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			}
-			if (export(exportPrjCoordSys, path + "//" + exportPrjCoordSys.getName() + ".xml")) {
+			if (export(exportPrjCoordSys, path + "//" + coordSysDefine.getCaption() + ".xml")) {
 				this.successedExportNum++;
 				return true;
 			} else {
@@ -1846,9 +1852,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				parentNode = createNode(parentValue);
 				((DefaultTreeModel) treePrjCoordSys.getModel()).insertNodeInto(parentNode, grandParentNode, grandParentNode.getChildCount());
 			}
+			this.treePrjCoordSys.setSelectionPath(null);
 			JTreeUIUtilities.locateNode(treePrjCoordSys, parentNode);
 			this.treePrjCoordSys.scrollRectToVisible(new Rectangle(0, treePrjCoordSys.getVisibleRect().y, treePrjCoordSys.getVisibleRect().width, treePrjCoordSys.getVisibleRect().height));
 			//tree已定位到选中数据的父节点上，再定位table
+			// 防止此时的model是搜索的model
+			treeSelectionChange();
 			AbstractPrjTableModel model = (AbstractPrjTableModel) this.tablePrjCoordSys.getModel();
 			for (int i = 0; i < model.getRowCount(); i++) {
 				if (value.equals(model.getRowData(i))) {
