@@ -155,7 +155,7 @@ public class MetaProcessDEMBuild extends MetaProcess {
 			eraseDataset.setDatasource(datasetVector.getDatasource());
 			comboBoxSourceField.setFieldName((DatasetVector) datasetVector);
 		}
-		comboBoxSourceField.setFieldType(fieldType);
+        comboBoxSourceField.setFieldType(FieldTypeUtilities.getNumericFieldType());
 
 		comboBoxInterpolateType.setItems(new ParameterDataNode(TerrainInterpolateTypeUtilities.toString(TerrainInterpolateType.TIN), TerrainInterpolateType.TIN),
 				new ParameterDataNode(TerrainInterpolateTypeUtilities.toString(TerrainInterpolateType.KRIGING), TerrainInterpolateType.KRIGING),
@@ -212,8 +212,8 @@ public class MetaProcessDEMBuild extends MetaProcess {
 				new ParameterDataNode(PixelFormatUtilities.toString(PixelFormat.UBIT32), PixelFormat.UBIT32)
 		);
 
-		comboBoxLakeField.setFieldType(fieldType);
-		comboBoxLakeField.setShowNullValue(true);
+        comboBoxLakeField.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxLakeField.setShowNullValue(true);
 	}
 
 	private void initParameterConstraint() {

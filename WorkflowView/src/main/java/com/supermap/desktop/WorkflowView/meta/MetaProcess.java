@@ -1,6 +1,5 @@
 package com.supermap.desktop.WorkflowView.meta;
 
-import com.supermap.data.FieldType;
 import com.supermap.data.SteppedEvent;
 import com.supermap.data.SteppedListener;
 import com.supermap.desktop.process.ProcessResources;
@@ -26,7 +25,6 @@ public abstract class MetaProcess extends AbstractProcess {
 	protected static final String SETTING_PANEL_DESCRIPTION = CoreProperties.getString("String_FormEdgeCount_Text");
 	protected static final String RESULT_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_ResultData");
 
-	protected static FieldType[] fieldType = {FieldType.INT16, FieldType.INT32, FieldType.INT64, FieldType.SINGLE, FieldType.DOUBLE};
 	private final ParameterPropertyChangedListener parameterPropertyChangedListener;
 
 	protected IParameters parameters = new DefaultParameters(this);

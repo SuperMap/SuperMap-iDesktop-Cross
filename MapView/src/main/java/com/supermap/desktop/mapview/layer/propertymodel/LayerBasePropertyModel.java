@@ -42,7 +42,7 @@ public class LayerBasePropertyModel extends LayerPropertyModel {
 
     public void setVisible(Boolean isVisible) {
         this.isVisible = isVisible;
-        checkPropertyEnbled();
+        checkPropertyEnabled();
     }
 
     public Boolean isEditable() {
@@ -218,7 +218,7 @@ public class LayerBasePropertyModel extends LayerPropertyModel {
             }
         }
 
-        checkPropertyEnbled();
+        checkPropertyEnabled();
     }
 
     /**
@@ -279,7 +279,7 @@ public class LayerBasePropertyModel extends LayerPropertyModel {
      * 时候值改变导致属性可用状态变成了 false，在之后的操作中，不论怎么改，都无法再可用了。
      */
     // @formatter:on
-    private void checkPropertyEnbled() {
+    private void checkPropertyEnabled() {
         try {
             if (getLayers() != null && getFormMap() != null && getLayers().length > 0) {
                 if (getLayers().length > 1) {
@@ -323,7 +323,7 @@ public class LayerBasePropertyModel extends LayerPropertyModel {
                     isEditableEnabled = isEditableEnabled && isVisibleSettingsValue && isDatasetVector && !isReadOnly && !isCanEditLayer && !isInvalidThemeLayer;
                     isSelectableEnabled = isSelectableEnabled && isVisibleSettingsValue && isDatasetVector && !isInvalidThemeLayer && !isHeatmap && !isAggregation;
                     isSnapableEnabled = isSnapableEnabled && isVisibleSettingsValue && isDatasetVector && !isInvalidThemeLayer && !isHeatmap && !isAggregation;
-                    transparenceEnabled = transparenceEnabled && !(layer instanceof LayerGroup);
+                    transparenceEnabled = transparenceEnabled && !(layer instanceof LayerGroup || layer instanceof LayerCache);
                 }
 
                 checkPropertyEnabled(IS_EDITABLE, isEditableEnabled);

@@ -14,6 +14,7 @@ import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.FieldTypeUtilities;
 import com.supermap.desktop.utilities.RecordsetUtilities;
 
 import java.util.Map;
@@ -45,9 +46,9 @@ public class MetaProcessTabularToPoint extends MetaProcessTypeConversion {
 			comboBoxY.setFieldName(datasetVector);
 			comboBoxX.setFieldName(datasetVector);
 		}
-		comboBoxX.setFieldType(fieldType);
-		comboBoxY.setFieldType(fieldType);
-		outputData.setDefaultDatasetName("result_tabularToPoint");
+        comboBoxX.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        comboBoxY.setFieldType(FieldTypeUtilities.getNumericFieldType());
+        outputData.setDefaultDatasetName("result_tabularToPoint");
 
 		ParameterCombine inputCombine = new ParameterCombine();
 		inputCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));

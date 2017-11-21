@@ -76,7 +76,6 @@ public class LayerPropertyControlFactory {
                 cachePropertyControl = new LayerCachePropertyControl();
             }
             cachePropertyControl.setLayerPropertyModel(model);
-            //TODO
             ComponentUIUtilities.setName(this.cachePropertyControl, "");
             return cachePropertyControl;
         } else {

@@ -10,6 +10,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
+import com.supermap.desktop.ui.controls.DialogMongoDBLoader;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
 import com.supermap.desktop.ui.trees.Layer3DsTree;
@@ -192,7 +193,6 @@ public class LayersComponentManager extends JComponent {
         this.addData.getDisplayButton().addActionListener(addDataListener);
         this.jMenuItemAddData.addActionListener(addDataListener);
         this.jMenuItemMongoDB.addActionListener(loadMongoDBListener);
-
     }
 
     //region Listener
@@ -284,17 +284,18 @@ public class LayersComponentManager extends JComponent {
                     }
                 }
             } catch (Exception ex) {
-                Application.getActiveApplication().getOutput().output(ex);
-            }
+				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+			}
         }
     };
 
     private ActionListener loadMongoDBListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-        }
-    };
+			DialogMongoDBLoader dialogMongoDBLoader = new DialogMongoDBLoader();
+			dialogMongoDBLoader.showDialog();
+		}
+	};
     //endregion
 
 	private void initializeResources() {
@@ -434,6 +435,8 @@ public class LayersComponentManager extends JComponent {
 					}
 				} else if (layer instanceof LayerGroup) {
 					popupMenu = this.layerGroupPopupMenu;
+				} else if (layer instanceof LayerCache) {
+					popupMenu = this.layerCachePopupMenu;
 				} else {
 					popupMenu = this.layerPopupMenu;
 				}
@@ -616,6 +619,17 @@ public class LayersComponentManager extends JComponent {
 	 */
 	public JPopupMenu getLayerGroupPopupMenu() {
 		return this.layerGroupPopupMenu;
+	}
+
+	private JPopupMenu layerCachePopupMenu = null;
+
+	/**
+	 * 获取图层分组右键菜单
+	 *
+	 * @return
+	 */
+	public JPopupMenu getLayerCachePopupMenu() {
+		return this.layerCachePopupMenu;
 	}
 
 	private JPopupMenu themeItemUniqueAndRangePopupMenu = null;
@@ -853,6 +867,7 @@ public class LayersComponentManager extends JComponent {
 
 				this.layerVectorPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerVectorContextMenu");
 				this.layerVectorCADPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerVectorCADContextMenu");
+				this.layerCachePopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerCacheContextMenu");
 				this.layerTextPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerTextContextMenu");
 				this.layerGridPopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerGridContextMenu");
 				this.layerImagePopupMenu = (JPopupMenu) manager.get("SuperMap.Desktop.UI.LayersControlManager.LayerImageContextMenu");
