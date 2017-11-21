@@ -159,7 +159,11 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
 						return;
 					}
-					prjCoordSys.setName(selectedItem instanceof String ? (String) selectedItem : ((PrjCoordSysType) selectedItem).name());
+					if (selectedItem instanceof String) {
+						prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
+						prjCoordSys.setName((String) selectedItem);
+					}
+					//prjCoordSys.setName(selectedItem instanceof String ? (String) selectedItem : ((PrjCoordSysType) selectedItem).name());
 				}
 			}
 		}
@@ -327,7 +331,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 		panelPrjCoordSysParameters.add(labelCoordType, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setIpad(36, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
 		panelPrjCoordSysParameters.add(comboBoxCoordType, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 10));
-		panelPrjCoordSysParameters.add(labelCoordSysUnit, new GridBagConstraintsHelper(2, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
+		panelPrjCoordSysParameters.add(labelCoordSysUnit, new GridBagConstraintsHelper(2, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
 		panelPrjCoordSysParameters.add(comboBoxCoordSysUnit, new GridBagConstraintsHelper(3, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 10));
 
 		panelPrjCoordSysParameters.add(labelCentralMeridian, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
