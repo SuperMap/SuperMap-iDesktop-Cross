@@ -176,11 +176,7 @@ public class MetaProcessDissolve extends MetaProcess {
 			dissolveParameter.setDissolveType((DissolveType) this.comboBoxDissolveMode.getSelectedData());
             dissolveParameter.setTolerance(Double.valueOf(this.numberDissolveTolerance.getSelectedItem()));
             dissolveParameter.setFilterString(this.textAreaSQLExpression.getSelectedItem());
-            if (this.checkBoxIsNullValue.getSelectedItem().equals("false")) {
-                dissolveParameter.setNullValue(false);
-			} else if (this.checkBoxIsNullValue.getSelectedItem().equals("true")) {
-				dissolveParameter.setNullValue(true);
-			}
+			dissolveParameter.setNullValue(Boolean.parseBoolean(checkBoxIsNullValue.getSelectedItem()));
 			StatisticsType[] statisticsTypes = this.statisticsFieldGroup.getSelectedStatisticsType();
 			String[] statisticsFieldNames = getFieldName(this.statisticsFieldGroup.getSelectedFields());
 			String[] fieldNames = getFieldName(this.fieldsDissolve.getSelectedFields());
