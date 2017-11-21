@@ -68,8 +68,8 @@ public class JDialogUserDefinePrjGeography extends SmDialog {
 		return panelGeoCoordSys.getGeoCoordSys();
 	}
 
-	public void setGeOCoordSys(GeoCoordSys geOCoordSys) {
-		panelGeoCoordSys.setGeoCoordSys(geOCoordSys);
+	public void setGeOCoordSys(GeoCoordSys geoCoordSys) {
+		panelGeoCoordSys.setGeoCoordSys(geoCoordSys);
 	}
 
 	//region 初始化布局

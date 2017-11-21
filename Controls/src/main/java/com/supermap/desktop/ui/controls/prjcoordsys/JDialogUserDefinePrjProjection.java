@@ -1,7 +1,10 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.*;
+import com.supermap.data.PrjCoordSys;
+import com.supermap.data.PrjCoordSysType;
+import com.supermap.data.ProjectionType;
+import com.supermap.data.Unit;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -141,18 +144,18 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	private ItemListener comboBoxNameListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			if (e.getStateChange() == ItemEvent.SELECTED && comboBoxName.getSelectedItem() != null) {
-				if (lock) {
-					return;
-				}
+			if (lock) {
+				return;
+			}
+			if (e.getStateChange() == ItemEvent.SELECTED) {
 				Object selectedItem = comboBoxName.getSelectedItem();
 				if (selectedItem instanceof PrjCoordSysType && selectedItem != PrjCoordSysType.PCS_USER_DEFINED) {
 					prjCoordSys.setType((PrjCoordSysType) selectedItem);
 					lock = true;
-					panelGeoCoordSys.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
-					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
 					prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
 					prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+					panelGeoCoordSys.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
+					comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
 					resetProjectionTypeValues();
 					lock = false;
 				} else {
@@ -168,6 +171,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 			}
 		}
 	};
+
 	private ItemListener comboBoxCoordTypeListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -211,7 +215,6 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		SearchItemValueGetter<Enum> searchItemValueGetter = PrjCoordSysSettingsUtilties.getSearchItemValueGetter();
 		comboBoxName.setSearchItemValueGetter(searchItemValueGetter);
 		Enum[] enums = Enum.getEnums(PrjCoordSysType.class);
-
 		Arrays.sort(enums, 0, enums.length, new EnumComparator());
 		for (Enum anEnum : enums) {
 			if (anEnum instanceof PrjCoordSysType && anEnum != PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE && anEnum != PrjCoordSysType.PCS_NON_EARTH && anEnum != PrjCoordSysType.PCS_USER_DEFINED) {
@@ -442,16 +445,18 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	 *
 	 */
 	private void initComponentState() {
+		this.prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
+//		this.prjCoordSys.setName("New_Projected_Coordinate_System");
 		radioButtonAngle.setSelected(true);
-		//lock = true;
-		//增加初始化设置项
-		comboBoxName.setSelectedItem("New_Projected_Coordinate_System");
+		lock = true;
+		comboBoxName.setSelectedItem(this.prjCoordSys.getName());
+		lock = false;
+		panelGeoCoordSys.setGeoCoordSys(this.prjCoordSys.getGeoCoordSys());
 		comboBoxCoordSysUnit.setSelectedItem(Unit.METER);
 		comboBoxCoordType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(ProjectionType.PRJ_NONPROJECTION.name()));
 		textFieldFalseEasting.setText("0");
 		textFieldFalseNorthing.setText("0");
 		textFieldScaleFactor.setText("0");
-		//lock = false;
 
 	}
 
@@ -476,15 +481,12 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 			this.prjCoordSys.dispose();
 		}
 		this.prjCoordSys = prjCoordSys.clone();
-		this.prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
-		this.prjCoordSys.setName(prjCoordSys.getName());
+
 		panelGeoCoordSys.setGeoCoordSys(this.prjCoordSys.getGeoCoordSys());
-		lock = true;
-		comboBoxName.setSelectedItem(this.prjCoordSys.getName());
+		comboBoxName.setSelectedItem(this.prjCoordSys.getType());
 		comboBoxCoordSysUnit.setSelectedItem(this.prjCoordSys.getCoordUnit());
 		comboBoxCoordType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.prjCoordSys.getProjection().getType().name()));
 		resetProjectionTypeValues();
-		lock = false;
 	}
 
 	public void clean() {

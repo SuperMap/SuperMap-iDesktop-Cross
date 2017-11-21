@@ -1,7 +1,11 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.*;
+import com.supermap.data.GeoCoordSys;
+import com.supermap.data.GeoCoordSysType;
+import com.supermap.data.GeoDatumType;
+import com.supermap.data.GeoPrimeMeridianType;
+import com.supermap.data.GeoSpheroidType;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -13,7 +17,8 @@ import com.supermap.desktop.utilities.PrjCoordSysTypeUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Arrays;
 
 /**
@@ -97,7 +102,6 @@ public class JPanelGeoCoordSys extends JPanel {
 			}
 			Object selectedItem = comboBoxGeoDatumPlane.getSelectedItem();
 			if (e.getStateChange() == ItemEvent.SELECTED && selectedItem != null) {
-
 				if (selectedItem instanceof GeoDatumType) {
 					if (geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 						geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
@@ -105,7 +109,6 @@ public class JPanelGeoCoordSys extends JPanel {
 					geoCoordSys.getGeoDatum().setType((GeoDatumType) selectedItem);
 					lockGeo = true;
 					// 当选择为defined时，支持设置：参考椭球体
-					// todo
 					geoCoordSys.getGeoDatum().setType(GeoDatumType.DATUM_USER_DEFINED);
 					geoCoordSys.getGeoDatum().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					if (selectedItem.equals(GeoDatumType.DATUM_USER_DEFINED)) {
@@ -117,6 +120,7 @@ public class JPanelGeoCoordSys extends JPanel {
 					comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoDatumType) selectedItem).name()));
 					lockGeo = false;
 				} else {
+					comboBoxReferenceSpheroid.setEnabled(true);
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
 						return;
 					}
@@ -140,21 +144,22 @@ public class JPanelGeoCoordSys extends JPanel {
 				if (selectedItem instanceof GeoSpheroidType) {
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setType((GeoSpheroidType) selectedItem);
 					lockAxis = true;
-					// todo
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setType(GeoSpheroidType.SPHEROID_USER_DEFINED);
 					geoCoordSys.getGeoDatum().getGeoSpheroid().setName(PrjCoordSysTypeUtilities.getDescribe(((GeoSpheroidType) selectedItem).name()));
 					if (!selectedItem.equals(GeoSpheroidType.SPHEROID_USER_DEFINED)) {
 						textFieldGeoSpheroidAxis.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
 						textFieldGeoSpheroidFlatten.setText(String.valueOf(geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
-						textFieldGeoSpheroidAxis.setEnabled(false);
-						textFieldGeoSpheroidFlatten.setEnabled(false);
+						textFieldGeoSpheroidAxis.setEditable(false);
+						textFieldGeoSpheroidFlatten.setEditable(false);
 					} else {
-						textFieldGeoSpheroidAxis.setEnabled(true);
-						textFieldGeoSpheroidFlatten.setEnabled(true);
+						textFieldGeoSpheroidAxis.setEditable(true);
+						textFieldGeoSpheroidFlatten.setEditable(true);
 					}
 					comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoSpheroidType) selectedItem).name()));
 					lockAxis = false;
 				} else {
+					textFieldGeoSpheroidAxis.setEditable(true);
+					textFieldGeoSpheroidFlatten.setEditable(true);
 					if (StringUtilities.isNullOrEmptyString(selectedItem)) {
 						return;
 					}
@@ -303,9 +308,6 @@ public class JPanelGeoCoordSys extends JPanel {
 		}
 		comboBoxCentralMeridianType.setRenderer(new MyEnumCellRender(comboBoxCentralMeridianType));
 		panelCentralBasisMeridian.setTextFieldEditable(false);
-
-		geoCoordSys.setName(DEFAULT_NAME);
-
 	}
 
 	private boolean flattenValueChanged(double value) {
@@ -424,7 +426,10 @@ public class JPanelGeoCoordSys extends JPanel {
 	}
 
 	private void initComponentStates() {
-		//lock = true;
+		this.geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
+//		this.geoCoordSys.setName(DEFAULT_NAME);
+
+		lock = true;
 		lockGeo = true;
 		lockAxis = true;
 		lockCenter = true;
@@ -433,12 +438,9 @@ public class JPanelGeoCoordSys extends JPanel {
 		comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getType().name()));
 		textFieldGeoSpheroidAxis.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
 		textFieldGeoSpheroidFlatten.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
-
 		comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoPrimeMeridian().getType().name()));
 		panelCentralBasisMeridian.setValue(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
-		//textFieldCentralMeridian.setText(String.valueOf(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue()));
-
-		//lock = false;
+		lock = false;
 		lockGeo = false;
 		lockAxis = false;
 		lockCenter = false;
@@ -453,7 +455,21 @@ public class JPanelGeoCoordSys extends JPanel {
 			this.geoCoordSys.dispose();
 		}
 		this.geoCoordSys = geoCoordSys.clone();
-		initComponentStates();
+
+		lockGeo = true;
+		lockAxis = true;
+		lockCenter = true;
+		comboBoxName.setSelectedItem(this.geoCoordSys.getType());
+		comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getType().name()));
+		comboBoxReferenceSpheroid.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getType().name()));
+		textFieldGeoSpheroidAxis.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getAxis()));
+		textFieldGeoSpheroidFlatten.setText(String.valueOf(this.geoCoordSys.getGeoDatum().getGeoSpheroid().getFlatten()));
+		comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(this.geoCoordSys.getGeoPrimeMeridian().getType().name()));
+		panelCentralBasisMeridian.setValue(this.geoCoordSys.getGeoPrimeMeridian().getLongitudeValue());
+		//lock = false;
+		lockGeo = false;
+		lockAxis = false;
+		lockCenter = false;
 	}
 
 	///**
