@@ -402,7 +402,11 @@ public class CheckCache {
 		TileContent content = null;
 		for (int row = top; row <= bottom; row++) {
 			for (int col = left; col <= right; col++) {
-				TileContentInfo info = new TileContentInfo(level, row, col, cacheFile.getVersionSetting());
+				TileContentInfo info = new TileContentInfo();
+				info.setLevel(level);
+				info.setRow(row);
+				info.setColumn(col);
+				info.setTilesetName(cacheFile.getVersionSetting());
 				content = manager.loadTile(info);
 				//content = manager.loadTile(level - 1, row, col);
 				data = null;
