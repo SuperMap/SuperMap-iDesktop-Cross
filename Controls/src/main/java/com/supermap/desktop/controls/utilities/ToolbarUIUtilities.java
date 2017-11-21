@@ -78,7 +78,11 @@ public class ToolbarUIUtilities {
 			List<Component> taskbarComponents = ribbon.getTaskbarComponents();
 			for (Component taskbarComponent : taskbarComponents) {
 				if (taskbarComponent instanceof IBaseItem) {
-					taskbarComponent.setEnabled(((IBaseItem) taskbarComponent).getCtrlAction().enable());
+					if (((IBaseItem) taskbarComponent).getCtrlAction() == null) {
+						taskbarComponent.setEnabled(false);
+					}else {
+						taskbarComponent.setEnabled(((IBaseItem) taskbarComponent).getCtrlAction().enable());
+					}
 				}
 			}
 		}
