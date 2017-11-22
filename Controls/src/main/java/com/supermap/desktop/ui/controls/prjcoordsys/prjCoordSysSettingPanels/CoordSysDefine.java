@@ -151,10 +151,7 @@ public class CoordSysDefine {
 			for (CoordSysDefine coordSysDefine : children) {
 				if (coordSysDefine.getCoordSysCode() == coordSysCode) {
 					result = coordSysDefine;
-				} else {
-					result = coordSysDefine.getChildByCoordSysCode(coordSysCode);
 				}
-
 				if (result != null) {
 					break;
 				}
@@ -172,10 +169,7 @@ public class CoordSysDefine {
 			for (CoordSysDefine coordSysDefine : children) {
 				if (coordSysDefine.getGeoCoordSys() != null && (coordSysDefine.getGeoCoordSys().getType()).equals(geoCoordSys.getType())) {
 					result = coordSysDefine;
-				} else {
-					result = coordSysDefine.getChildByGeoCoordSys(geoCoordSys);
 				}
-
 				if (result != null) {
 					break;
 				}
@@ -193,10 +187,7 @@ public class CoordSysDefine {
 			for (CoordSysDefine coordSysDefine : children) {
 				if (coordSysDefine.getPrjCoordSys() != null && (coordSysDefine.getPrjCoordSys().getType()).equals(prjCoordSys.getType())) {
 					result = coordSysDefine;
-				} else {
-					result = coordSysDefine.getChildByPrjCoordSys(prjCoordSys);
 				}
-
 				if (result != null) {
 					break;
 				}
