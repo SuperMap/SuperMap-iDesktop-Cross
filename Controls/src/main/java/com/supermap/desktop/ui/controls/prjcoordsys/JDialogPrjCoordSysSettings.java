@@ -378,20 +378,20 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				this.currentDefine = this.noneEarth.getChildByCoordSysCode(this.prjCoordSys.getCoordUnit().value());
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 			} else { // 投影坐标系统
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
@@ -1485,12 +1485,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 			GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
+			geoCoordSys.setName(this.currentDefine.getCaption());
 			geography.setGeOCoordSys(geoCoordSys);
 		}
 		if (geography.showDialog() == DialogResult.OK) {
 			GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-			result.setCoordSysCode(-1);
+			result.setCoordSysCode(geoCoordSys.getType().value());
 			result.setGeoCoordSys(geoCoordSys);
 			//CoordSysDefine userDefine = customizeCoordinate.getChildByCaption(userDefineGeoParentName);
 			//if (userDefine == null) {
@@ -1521,12 +1522,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private void newPrjCoordsys() {
 		JDialogUserDefinePrjProjection dialogUserDefinePrjProjection = new JDialogUserDefinePrjProjection();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-			dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine));
+			PrjCoordSys prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine);
+			prjCoordSys.setName(this.currentDefine.getCaption());
+			dialogUserDefinePrjProjection.setPrjCoordSys(prjCoordSys);
 		}
 		if (dialogUserDefinePrjProjection.showDialog() == DialogResult.OK) {
 			PrjCoordSys prjCoordSys = dialogUserDefinePrjProjection.getPrjCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
-			result.setCoordSysCode(-1);
+			result.setCoordSysCode(prjCoordSys.getType().value());
 			result.setPrjCoordSys(prjCoordSys);
 
 			// 对名字进行去重处理
@@ -1591,7 +1594,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 					result.setPrjCoordSys(prjCoordSys);
 				}
-				result.setCoordSysCode(-1);
+				result.setCoordSysCode(prjCoordSys.getType().value());
 				// 对名字进行去重处理
 				List<String> hasNames = new ArrayList<>();
 				for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
