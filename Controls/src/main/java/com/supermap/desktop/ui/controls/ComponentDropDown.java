@@ -1,7 +1,6 @@
 package com.supermap.desktop.ui.controls;
 
 import com.supermap.desktop.Interface.IForm;
-import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.implement.InnerMetaComboBoxIcon;
 import com.supermap.desktop.implement.SmButtonDropdown;
 import com.supermap.desktop.implement.SmPopupMenu;
@@ -115,7 +114,13 @@ public class ComponentDropDown extends SmButtonDropdown {
         this.arrowButton.setIcon(new InnerMetaComboBoxIcon());
         switch (popupType) {
             case COLOR_TYPE:
-                this.panelColorDisplay = new JPanel();
+                this.panelColorDisplay = new JPanel(){
+	                @Override
+	                protected void paintComponent(Graphics g) {
+		                g.setColor(this.getBackground());
+		                g.fillRect(0,0,this.getWidth(),this.getHeight());
+	                }
+                };
                 this.displayButton.setLayout(new GridBagLayout());
                 this.displayButton.add(this.panelColorDisplay, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.BOTH).setWeight(1, 1).setInsets(3));
                 this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
