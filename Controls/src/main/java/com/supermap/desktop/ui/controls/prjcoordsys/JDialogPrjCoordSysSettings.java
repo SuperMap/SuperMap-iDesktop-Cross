@@ -378,24 +378,20 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				this.currentDefine = this.noneEarth.getChildByCoordSysCode(this.prjCoordSys.getCoordUnit().value());
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
-				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					// 对于自定义和收藏夹，查找方式为caption查找
-					this.currentDefine = this.favoriteCoordinate.getChildByGeoCoordSys(geoCoordSys);
+				if (this.currentDefine == null) {
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
-				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					// 对于自定义和收藏夹，查找方式为caption查找
-					this.currentDefine = this.customizeCoordinate.getChildByGeoCoordSys(geoCoordSys);
+				if (this.currentDefine == null) {
+					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 			} else { // 投影坐标系统
-				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					// 对于自定义和收藏夹，查找方式为caption查找
+				if (this.currentDefine == null) {
 					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
-				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					// 对于自定义和收藏夹，查找方式为caption查找
+				if (this.currentDefine == null) {
 					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {

@@ -162,31 +162,28 @@ public class CoordSysDefine {
 		return result;
 	}
 
-	public CoordSysDefine getChildByGeoCoordSys(GeoCoordSys geoCoordSys) {
-		CoordSysDefine result = null;
-
-		try {
-			for (CoordSysDefine coordSysDefine : children) {
-				if (coordSysDefine.getGeoCoordSys() != null && (coordSysDefine.getGeoCoordSys().getType()).equals(geoCoordSys.getType())) {
-					result = coordSysDefine;
-				}
-				if (result != null) {
-					break;
-				}
-			}
-		} catch (Exception e) {
-			result = null;
-		}
-		return result;
-	}
-
+	/**
+	 * 通过code和type属性一同查找
+	 *
+	 * @param prjCoordSys
+	 * @return
+	 */
 	public CoordSysDefine getChildByPrjCoordSys(PrjCoordSys prjCoordSys) {
 		CoordSysDefine result = null;
-
 		try {
 			for (CoordSysDefine coordSysDefine : children) {
-				if (coordSysDefine.getPrjCoordSys() != null && (coordSysDefine.getPrjCoordSys().getType()).equals(prjCoordSys.getType())) {
-					result = coordSysDefine;
+				if (coordSysDefine.getCoordSysType() == GEOGRAPHY_COORDINATE) {
+					if (coordSysDefine.getGeoCoordSys() != null && prjCoordSys.getGeoCoordSys() != null
+							&& (coordSysDefine.getGeoCoordSys().getType()).equals((prjCoordSys.getGeoCoordSys().getType()))
+							&& (coordSysDefine.getGeoCoordSys().getType().value()) == (prjCoordSys.getGeoCoordSys().getType().value())) {
+						result = coordSysDefine;
+					}
+				} else if (coordSysDefine.getCoordSysType() == PROJECTION_SYSTEM) {
+					if (coordSysDefine.getPrjCoordSys() != null && prjCoordSys != null
+							&& (coordSysDefine.getPrjCoordSys().getType()).equals((prjCoordSys.getType()))
+							&& (coordSysDefine.getPrjCoordSys().getType().value()) == (prjCoordSys.getType().value())) {
+						result = coordSysDefine;
+					}
 				}
 				if (result != null) {
 					break;
