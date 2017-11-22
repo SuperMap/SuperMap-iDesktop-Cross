@@ -379,20 +379,24 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+					// 对于自定义和收藏夹，查找方式为caption查找
+					this.currentDefine = this.favoriteCoordinate.getChildByGeoCoordSys(geoCoordSys);
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+					// 对于自定义和收藏夹，查找方式为caption查找
+					this.currentDefine = this.customizeCoordinate.getChildByGeoCoordSys(geoCoordSys);
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 			} else { // 投影坐标系统
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+					// 对于自定义和收藏夹，查找方式为caption查找
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+					// 对于自定义和收藏夹，查找方式为caption查找
+					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.projectionSystem.getChildByCoordSysCode(this.prjCoordSys.getType().value());
@@ -794,7 +798,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 
 	/**
-	 * 获得文件夹下所有xml文件
+	 * 获得文件夹下所有xml文件路径
 	 *
 	 * @param file
 	 * @return
@@ -805,8 +809,29 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		for (File f : flist) {
 			if (!f.isDirectory()) {
 				//这里将列出所有的xml文件
+
 				if ((f.getAbsolutePath().endsWith(".xml"))) {
 					filelist.add(f.getAbsolutePath());
+				}
+			}
+		}
+		return filelist;
+	}
+
+	/**
+	 * 获得路径下所有xml文件
+	 *
+	 * @param file
+	 * @return
+	 */
+	private ArrayList<File> getFiles(File file) {
+		ArrayList<File> filelist = new ArrayList<>();
+		File flist[] = file.listFiles();
+		for (File f : flist) {
+			if (!f.isDirectory()) {
+				//这里将列出所有的xml文件
+				if ((f.getAbsolutePath().endsWith(".xml"))) {
+					filelist.add(f.getAbsoluteFile());
 				}
 			}
 		}
@@ -1379,6 +1404,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		SmFileChoose prjFileExportFileChoose = new SmFileChoose("DataExportFrame_OutPutDirectories");
 		prjFileExportFileChoose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
+		prjFileExportFileChoose.setApproveButtonText(ControlsProperties.getString("String_Ok"));
 		//Component comp = prjFileExportFileChoose.getLabelForInChooser("FileChooser.folderNameLabelText");
 		//if (comp instanceof JTextField) {
 		//	JTextField field = ((JTextField) comp);
@@ -1414,7 +1440,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				}
 			} finally {
 				if (successedExportNum >= 1) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum));
+				} else if (successedExportNum == 1) {
+
+					//Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath() + "\\" + currentDefine.));
 				} else {
 					Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
 				}
@@ -1756,7 +1785,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 							continue;
 						}
 					}
-					if (export(exportPrjCoordSys, folderName + "\\" + anAllCoordSysDefine.getCaption() + ".xml")) {
+					// 对名字进行去重处理
+					ArrayList<File> hasFile = getFiles(new File(folderName));
+					ArrayList<String> hasNames = new ArrayList<>();
+					for (int i = 0; i < hasFile.size(); i++) {
+						hasNames.add(hasFile.get(i).getName().replace(".xml", ""));
+					}
+					String name = getSingletonName(anAllCoordSysDefine.getCaption(), hasNames);
+					if (export(exportPrjCoordSys, folderName + "\\" + name + ".xml")) {
 						this.successedExportNum++;
 					}
 				} else {
@@ -1777,7 +1813,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				exportPrjCoordSys.setName(coordSysDefine.getCaption());
 				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			}
-			if (export(exportPrjCoordSys, path + "//" + coordSysDefine.getCaption() + ".xml")) {
+
+			// 对名字进行去重处理
+			ArrayList<File> hasFile = getFiles(new File(path));
+			ArrayList<String> hasNames = new ArrayList<>();
+			for (int i = 0; i < hasFile.size(); i++) {
+				hasNames.add(hasFile.get(i).getName().replace(".xml", ""));
+			}
+			String name = getSingletonName(coordSysDefine.getCaption(), hasNames);
+			if (export(exportPrjCoordSys, path + "\\" + name + ".xml")) {
 				this.successedExportNum++;
 				return true;
 			} else {

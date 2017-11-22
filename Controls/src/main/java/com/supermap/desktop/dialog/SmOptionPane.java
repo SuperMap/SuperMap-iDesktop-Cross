@@ -152,8 +152,7 @@ public class SmOptionPane extends SmDialog {
 	/**
 	 * 询问
 	 *
-	 * @param message
-	 *            信息
+	 * @param message 信息
 	 * @return 结果
 	 */
 	public int showConfirmDialog(String message) {
@@ -172,8 +171,7 @@ public class SmOptionPane extends SmDialog {
 	/**
 	 * 错误提示
 	 *
-	 * @param message
-	 *            信息
+	 * @param message 信息
 	 * @return 结果
 	 */
 	public int showErrorDialog(String message) {

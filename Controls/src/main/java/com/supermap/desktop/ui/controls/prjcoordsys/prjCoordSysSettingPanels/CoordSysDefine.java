@@ -165,6 +165,48 @@ public class CoordSysDefine {
 		return result;
 	}
 
+	public CoordSysDefine getChildByGeoCoordSys(GeoCoordSys geoCoordSys) {
+		CoordSysDefine result = null;
+
+		try {
+			for (CoordSysDefine coordSysDefine : children) {
+				if (coordSysDefine.getGeoCoordSys() != null && (coordSysDefine.getGeoCoordSys().getType()).equals(geoCoordSys.getType())) {
+					result = coordSysDefine;
+				} else {
+					result = coordSysDefine.getChildByGeoCoordSys(geoCoordSys);
+				}
+
+				if (result != null) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
+
+	public CoordSysDefine getChildByPrjCoordSys(PrjCoordSys prjCoordSys) {
+		CoordSysDefine result = null;
+
+		try {
+			for (CoordSysDefine coordSysDefine : children) {
+				if (coordSysDefine.getPrjCoordSys() != null && (coordSysDefine.getPrjCoordSys().getType()).equals(prjCoordSys.getType())) {
+					result = coordSysDefine;
+				} else {
+					result = coordSysDefine.getChildByPrjCoordSys(prjCoordSys);
+				}
+
+				if (result != null) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
+
 	public String getCoordSysTypeDescription() {
 		String result = "";
 		if (this.coordSysType == PROJECTION_SYSTEM) {
