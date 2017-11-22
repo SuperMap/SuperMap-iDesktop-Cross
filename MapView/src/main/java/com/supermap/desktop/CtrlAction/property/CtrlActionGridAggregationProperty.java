@@ -14,9 +14,6 @@ import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.ColorUtilities;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerGridAggregation;
-import com.supermap.mapping.LayerHeatmap;
-
-import javax.swing.*;
 
 /**
  * Created by lixiaoyao on 2017/7/18.
@@ -27,29 +24,6 @@ public class CtrlActionGridAggregationProperty extends CtrlAction {
 	public CtrlActionGridAggregationProperty(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
 
-	}
-
-	@Override
-	public boolean enable() {
-		boolean result = false;
-		try {
-			if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
-				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-                if (formMap.getActiveLayers().length > 0) {
-                    Layer layer = formMap.getActiveLayers()[0];
-                    if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
-                        if (layer instanceof LayerGridAggregation || layer instanceof LayerHeatmap) {
-
-                        } else {
-                            result = true;
-                        }
-                    }
-				}
-			}
-		} catch (Exception e) {
-			result = false;
-		}
-		return result;
 	}
 
 	@Override
@@ -73,12 +47,12 @@ public class CtrlActionGridAggregationProperty extends CtrlAction {
 			layerGridAggregation.setGridHeight(60);
 			layerGridAggregation.updateData();
 
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					UICommonToolkit.getLayersManager().getLayersTree().updateUI();
-				}
-			});
+//			SwingUtilities.invokeLater(new Runnable() {
+//				@Override
+//				public void run() {
+//					UICommonToolkit.getLayersManager().getLayersTree().updateUI();
+//				}
+//			});
 
 			if (layerGridAggregation != null) {
 				final int selectRow = ((IFormMap) activeForm).getMapControl().getMap().getLayers().indexOf(layerGridAggregation.getName());
@@ -99,5 +73,24 @@ public class CtrlActionGridAggregationProperty extends CtrlAction {
 		} catch (ClassNotFoundException e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
+	}
+
+	@Override
+	public boolean enable() {
+		boolean result = false;
+		try {
+			if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
+				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+				if (formMap.getActiveLayers().length > 0) {
+					Layer layer = formMap.getActiveLayers()[0];
+					if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
+							result = true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
 	}
 }

@@ -14,10 +14,7 @@ import com.supermap.desktop.mapview.layer.propertycontrols.LayerPropertyContaine
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.utilities.ColorUtilities;
 import com.supermap.mapping.Layer;
-import com.supermap.mapping.LayerGridAggregation;
 import com.supermap.mapping.LayerHeatmap;
-
-import javax.swing.*;
 
 
 /**
@@ -28,27 +25,6 @@ public class CtrlActionHeatMapProperty extends CtrlAction {
 
 	public CtrlActionHeatMapProperty(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
-	}
-
-	@Override
-	public boolean enable() {
-		boolean result = false;
-		try {
-			if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
-				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
-				Layer layer = formMap.getActiveLayers()[0];
-				if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
-					if (layer instanceof LayerHeatmap || layer instanceof LayerGridAggregation) {
-
-					} else {
-						result = true;
-					}
-				}
-			}
-		} catch (Exception e) {
-			result = false;
-		}
-		return result;
 	}
 
 	@Override
@@ -67,12 +43,12 @@ public class CtrlActionHeatMapProperty extends CtrlAction {
 			minColor = ColorUtilities.resetColor(minColor, 100);
 			LayerHeatmap layerHeatmap = ((IFormMap) activeForm).getMapControl().getMap().getLayers().AddHeatmap(result.getDataset(), 20, maxColor, minColor);
 
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					UICommonToolkit.getLayersManager().getLayersTree().updateUI();
-				}
-			});
+//			SwingUtilities.invokeLater(new Runnable() {
+//				@Override
+//				public void run() {
+//					UICommonToolkit.getLayersManager().getLayersTree().updateUI();
+//				}
+//			});
 			if (layerHeatmap != null) {
 				final int selectRow = ((IFormMap) activeForm).getMapControl().getMap().getLayers().indexOf(layerHeatmap.getName());
 				UICommonToolkit.getLayersManager().getLayersTree().setSelectionInterval(selectRow, selectRow);
@@ -91,5 +67,22 @@ public class CtrlActionHeatMapProperty extends CtrlAction {
 		} catch (ClassNotFoundException e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
+	}
+
+	@Override
+	public boolean enable() {
+		boolean result = false;
+		try {
+			if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
+				IFormMap formMap = (IFormMap) Application.getActiveApplication().getActiveForm();
+				Layer layer = formMap.getActiveLayers()[0];
+				if (layer.getDataset() != null && layer.getDataset().getType() == DatasetType.POINT) {
+					result = true;
+				}
+			}
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
 	}
 }
