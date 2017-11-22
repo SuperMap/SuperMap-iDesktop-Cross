@@ -11,6 +11,7 @@ import com.supermap.desktop.utilities.FileUtilities;
 import com.supermap.desktop.utilities.PrjCoordSysUtilities;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -204,40 +205,55 @@ public class PanelTargetCoordSys extends JPanel {
 	}
 
 	private void initializeLayout() {
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setAutoCreateContainerGaps(true);
-		groupLayout.setAutoCreateGaps(true);
-		this.setLayout(groupLayout);
-		// @formatter:off
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup()
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.radioButtonFromDatasource)
-								.addComponent(this.radioButtonFromDataset)
-								.addComponent(this.radioButtonPrjSetting)
-								.addComponent(this.radioButtonImportPrjFile))
-						.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(this.datasource)
-								.addComponent(this.datasetComboBox)
-								.addComponent(this.buttonPrjSetting, 0, 0, Short.MAX_VALUE)
-								.addComponent(this.fileChooser)))
-				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(this.panelCoordSysInfo)));
-		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.radioButtonFromDatasource)
-						.addComponent(this.datasource, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.radioButtonFromDataset)
-						.addComponent(this.datasetComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.radioButtonPrjSetting)
-						.addComponent(this.buttonPrjSetting, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.radioButtonImportPrjFile)
-						.addComponent(this.fileChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addComponent(this.panelCoordSysInfo));
-		// @formatter:on
+		//GroupLayout groupLayout = new GroupLayout(this);
+		//groupLayout.setAutoCreateContainerGaps(true);
+		//groupLayout.setAutoCreateGaps(true);
+		//this.setLayout(groupLayout);
+		//// @formatter:off
+		//groupLayout.setHorizontalGroup(groupLayout.createParallelGroup()
+		//		.addGroup(groupLayout.createSequentialGroup()
+		//				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		//						.addComponent(this.radioButtonFromDatasource)
+		//						.addComponent(this.radioButtonFromDataset)
+		//						.addComponent(this.radioButtonPrjSetting)
+		//						.addComponent(this.radioButtonImportPrjFile))
+		//				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		//						.addComponent(this.datasource)
+		//						.addComponent(this.datasetComboBox)
+		//						.addComponent(this.buttonPrjSetting, 0, 0, Short.MAX_VALUE)
+		//						.addComponent(this.fileChooser)))
+		//		.addGroup(groupLayout.createSequentialGroup()
+		//				.addComponent(this.panelCoordSysInfo)));
+		//groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
+		//		.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+		//				.addComponent(this.radioButtonFromDatasource)
+		//				.addComponent(this.datasource, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+		//		.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+		//				.addComponent(this.radioButtonFromDataset)
+		//				.addComponent(this.datasetComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+		//		.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+		//				.addComponent(this.radioButtonPrjSetting)
+		//				.addComponent(this.buttonPrjSetting, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+		//		.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+		//				.addComponent(this.radioButtonImportPrjFile)
+		//				.addComponent(this.fileChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+		//		.addComponent(this.panelCoordSysInfo));
+		////@formatter:on
+
+		this.setLayout(new GridBagLayout());
+		this.add(this.radioButtonFromDatasource, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 0, 0, 0));
+		this.add(this.radioButtonFromDataset, new GridBagConstraintsHelper(0, 1, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 0, 0, 0));
+		this.add(this.radioButtonPrjSetting, new GridBagConstraintsHelper(0, 2, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 0, 0, 0));
+		this.add(this.radioButtonImportPrjFile, new GridBagConstraintsHelper(0, 3, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 0, 0, 0));
+
+		this.add(this.datasource, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setIpad(0, 2).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 2, 0, 0));
+		this.add(this.datasetComboBox, new GridBagConstraintsHelper(1, 1, 1, 1).setWeight(1, 0).setIpad(0, 2).setFill(GridBagConstraints.HORIZONTAL).setInsets(10, 2, 0, 0));
+		this.add(this.buttonPrjSetting, new GridBagConstraintsHelper(1, 2, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.BOTH).setInsets(10, 2, 0, 0));
+		this.add(this.fileChooser, new GridBagConstraintsHelper(1, 3, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.BOTH).setInsets(10, 2, 0, 0));
+
+		this.add(this.panelCoordSysInfo, new GridBagConstraintsHelper(0, 4, 2, 2).setWeight(1, 1).setFill(GridBagConstraints.BOTH).setInsets(10, 0, 0, 0));
+
+
 	}
 
 	private void initListener() {

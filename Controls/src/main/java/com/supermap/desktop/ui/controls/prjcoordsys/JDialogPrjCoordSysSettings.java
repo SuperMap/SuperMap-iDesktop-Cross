@@ -378,20 +378,20 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				this.currentDefine = this.noneEarth.getChildByCoordSysCode(this.prjCoordSys.getCoordUnit().value());
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 			} else { // 投影坐标系统
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
-				if (this.currentDefine == null) {
+				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
@@ -1387,6 +1387,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//}
 
 		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+			// 路径为空时，创建
+			if (!FileUtilities.exists(prjFileExportFileChoose.getFilePath())) {
+				File file = new File(prjFileExportFileChoose.getFilePath());
+				file.mkdir();
+			}
 			// 获得需要导出的CoordSysDefine集合，不论是否为文件夹或者文件本身
 			ArrayList<CoordSysDefine> coordSysDefineExportList = new ArrayList<>();
 			int[] selectedRows = tablePrjCoordSys.getSelectedRows();
@@ -1485,12 +1490,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 			GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
+			geoCoordSys.setName(this.currentDefine.getCaption());
 			geography.setGeOCoordSys(geoCoordSys);
 		}
 		if (geography.showDialog() == DialogResult.OK) {
 			GeoCoordSys geoCoordSys = geography.getGeoCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.GEOGRAPHY_COORDINATE);
-			result.setCoordSysCode(-1);
+			result.setCoordSysCode(geoCoordSys.getType().value());
 			result.setGeoCoordSys(geoCoordSys);
 			//CoordSysDefine userDefine = customizeCoordinate.getChildByCaption(userDefineGeoParentName);
 			//if (userDefine == null) {
@@ -1521,12 +1527,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private void newPrjCoordsys() {
 		JDialogUserDefinePrjProjection dialogUserDefinePrjProjection = new JDialogUserDefinePrjProjection();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-			dialogUserDefinePrjProjection.setPrjCoordSys(PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine));
+			PrjCoordSys prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine);
+			prjCoordSys.setName(this.currentDefine.getCaption());
+			dialogUserDefinePrjProjection.setPrjCoordSys(prjCoordSys);
 		}
 		if (dialogUserDefinePrjProjection.showDialog() == DialogResult.OK) {
 			PrjCoordSys prjCoordSys = dialogUserDefinePrjProjection.getPrjCoordSys();
 			CoordSysDefine result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
-			result.setCoordSysCode(-1);
+			result.setCoordSysCode(prjCoordSys.getType().value());
 			result.setPrjCoordSys(prjCoordSys);
 
 			// 对名字进行去重处理
@@ -1591,7 +1599,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 					result.setPrjCoordSys(prjCoordSys);
 				}
-				result.setCoordSysCode(-1);
+				result.setCoordSysCode(prjCoordSys.getType().value());
 				// 对名字进行去重处理
 				List<String> hasNames = new ArrayList<>();
 				for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
@@ -1721,7 +1729,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private Boolean exportPrjCoordSys(CoordSysDefine coordSysDefine, String path) {
 		// 开始进行投影导出
 		if (coordSysDefine.getIsFolderNode()) {
-			CoordSysDefine[] allCoordSysDefine = coordSysDefine.getAllLeaves().clone();
+			ArrayList<CoordSysDefine> allCoordSysDefine = new ArrayList<>();
+			for (int i = 0; i < coordSysDefine.size(); i++) {
+				allCoordSysDefine.add(coordSysDefine.get(i));
+			}
 			String folderName = path + "\\" + coordSysDefine.getCaption();
 			if (!FileUtilities.exists(folderName)) {
 				File file = new File(folderName);
@@ -1747,10 +1758,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					}
 					if (export(exportPrjCoordSys, folderName + "\\" + anAllCoordSysDefine.getCaption() + ".xml")) {
 						this.successedExportNum++;
-						continue;
-					} else {
-						return false;
 					}
+				} else {
+					exportPrjCoordSys(anAllCoordSysDefine, folderName);
 				}
 			}
 		} else {
@@ -1774,7 +1784,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	/**

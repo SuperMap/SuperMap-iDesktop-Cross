@@ -105,7 +105,7 @@ public class PanelReferSysTransSettings extends JPanel {
 
 	private void initLayout(String layoutModel) {
 		if (layoutModel.equals(LAYOUTMODEL)) {
-			this.comboBoxMethod.setPreferredSize(new Dimension(85, 23));
+			this.comboBoxMethod.setPreferredSize(new Dimension(50, 23));
 			this.buttonSet.setPreferredSize(new Dimension(50, 23));
 			GroupLayout groupLayout = new GroupLayout(this);
 			groupLayout.setAutoCreateContainerGaps(true);
@@ -115,7 +115,7 @@ public class PanelReferSysTransSettings extends JPanel {
 			// @formatter:off
 			groupLayout.setHorizontalGroup(groupLayout.createSequentialGroup()
 					.addComponent(this.labelMethod)
-					.addComponent(this.comboBoxMethod)
+					.addComponent(this.comboBoxMethod, 0, 0, Short.MAX_VALUE)
 					.addGap(40)
 					.addComponent(this.labelPrjTransParameterset)
 					.addComponent(this.buttonSet, 0, 0, Short.MAX_VALUE));
