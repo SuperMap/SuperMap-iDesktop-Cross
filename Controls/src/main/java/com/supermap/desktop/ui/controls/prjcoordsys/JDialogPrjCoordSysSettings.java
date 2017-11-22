@@ -1387,6 +1387,11 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		//}
 
 		if (prjFileExportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
+			// 路径为空时，创建
+			if (!FileUtilities.exists(prjFileExportFileChoose.getFilePath())) {
+				File file = new File(prjFileExportFileChoose.getFilePath());
+				file.mkdir();
+			}
 			// 获得需要导出的CoordSysDefine集合，不论是否为文件夹或者文件本身
 			ArrayList<CoordSysDefine> coordSysDefineExportList = new ArrayList<>();
 			int[] selectedRows = tablePrjCoordSys.getSelectedRows();
@@ -1724,7 +1729,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	private Boolean exportPrjCoordSys(CoordSysDefine coordSysDefine, String path) {
 		// 开始进行投影导出
 		if (coordSysDefine.getIsFolderNode()) {
-			CoordSysDefine[] allCoordSysDefine = coordSysDefine.getAllLeaves().clone();
+			ArrayList<CoordSysDefine> allCoordSysDefine = new ArrayList<>();
+			for (int i = 0; i < coordSysDefine.size(); i++) {
+				allCoordSysDefine.add(coordSysDefine.get(i));
+			}
 			String folderName = path + "\\" + coordSysDefine.getCaption();
 			if (!FileUtilities.exists(folderName)) {
 				File file = new File(folderName);
@@ -1750,10 +1758,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					}
 					if (export(exportPrjCoordSys, folderName + "\\" + anAllCoordSysDefine.getCaption() + ".xml")) {
 						this.successedExportNum++;
-						continue;
-					} else {
-						return false;
 					}
+				} else {
+					exportPrjCoordSys(anAllCoordSysDefine, folderName);
 				}
 			}
 		} else {
@@ -1777,7 +1784,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	/**
