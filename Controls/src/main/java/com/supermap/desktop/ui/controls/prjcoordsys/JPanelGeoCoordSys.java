@@ -47,13 +47,14 @@ public class JPanelGeoCoordSys extends JPanel {
 	private SmTextFieldLegit textFieldCentralMeridian = new SmTextFieldLegit();
 
 	private GeoCoordSys geoCoordSys = new GeoCoordSys();
-	// 加锁防止事件循环触发
 
 	private final static String DEFAULT_NAME = "New_Geographic_Coordinate_System";
 
+	private boolean lock = false;
 	private boolean lockGeo = false;
 	private boolean lockSpheroid = false;
-
+	private boolean lockAxisFlatten = true;
+	private boolean lockCenter = false;
 
 	private final ItemListener comboBoxCentralMeridianTypeListener = new ItemListener() {
 		@Override
@@ -97,45 +98,9 @@ public class JPanelGeoCoordSys extends JPanel {
 			}
 		}
 	};
-	//private JSearchComboBox<GeoCoordSysType> comboBoxName = new JSearchComboBox<>();
-	// EPSG Code
-	//private JLabel labelEPSG = new JLabel();
-	//private SmTextFieldLegit textFieldEPSG = new SmTextFieldLegit();
-	// 大地基准面
+
 	private JLabel labelGeoDatumPlane = new JLabel();
 
-
-	private boolean lock = false;
-	//private final ItemListener comboBoxNameListener = new ItemListener() {
-	//	@Override
-	//	public void itemStateChanged(ItemEvent e) {
-	//		if (e.getStateChange() == ItemEvent.SELECTED && comboBoxName.getSelectedItem() != null) {
-	//			if (lock) {
-	//				return;
-	//			}
-	//			Object selectedItem = comboBoxName.getSelectedItem();
-	//			if (selectedItem instanceof GeoCoordSysType && selectedItem != GeoCoordSysType.GCS_USER_DEFINE) {
-	//				geoCoordSys.setType((GeoCoordSysType) selectedItem);
-	//				lock = true;
-	//				geoCoordSys.setType((GeoCoordSysType) selectedItem);
-	//				geoCoordSys.setName(PrjCoordSysTypeUtilities.getDescription(((GeoCoordSysType) selectedItem).name()));
-	//				//comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(geoCoordSys.getGeoDatum().getType().name()));
-	//				//comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(geoCoordSys.getGeoPrimeMeridian().getType().name()));
-	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(((GeoCoordSysType) selectedItem).name()));
-	//				lock = false;
-	//			} else {
-	//				if (StringUtilities.isNullOrEmptyString(selectedItem)) {
-	//					return;
-	//				}
-	//				if (selectedItem instanceof String) {
-	//					geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
-	//					geoCoordSys.setName((String) selectedItem);
-	//				}
-	//			}
-	//			//firePropertyChange("GeoCoordSysType", "", "");
-	//		}
-	//	}
-	//};
 	private final ItemListener comboBoxGeoDatumTypeListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -181,7 +146,7 @@ public class JPanelGeoCoordSys extends JPanel {
 			}
 		}
 	};
-	private boolean lockAxisFlatten = true;
+
 	private final ItemListener comboBoxGeoSpheroidTypeListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -237,7 +202,6 @@ public class JPanelGeoCoordSys extends JPanel {
 			textFieldNameChanged(e);
 		}
 	};
-	private boolean lockCenter = false;
 
 	private void textFieldNameChanged(DocumentEvent e) {
 		if (this.lock) {
@@ -256,22 +220,9 @@ public class JPanelGeoCoordSys extends JPanel {
 		initLayout();
 		initResources();
 		initComponentStates();
-		//setPanelEditable(false);
 	}
 
 	private void initComponents() {
-		// region 类型
-		//SearchItemValueGetter<Enum> searchItemValueGetter = PrjCoordSysSettingsUtilties.getSearchItemValueGetter();
-		//comboBoxName.setSearchItemValueGetter(searchItemValueGetter);
-		//Enum[] enums = Enum.getEnums(GeoCoordSysType.class);
-		//
-		//Arrays.sort(enums, 0, enums.length, new EnumComparator());
-		//for (Enum anEnum : enums) {
-		//	if (anEnum instanceof GeoCoordSysType && anEnum != GeoCoordSysType.GCS_USER_DEFINE) {
-		//		comboBoxName.addItem((GeoCoordSysType) anEnum);
-		//	}
-		//}
-		//comboBoxName.setRenderer(new MyEnumCellRender(comboBoxName));
 
 		// region 大地参考系类型
 		SearchItemValueGetter<Enum> searchItemValueGetter = PrjCoordSysSettingsUtilties.getSearchItemValueGetter();
@@ -566,18 +517,6 @@ public class JPanelGeoCoordSys extends JPanel {
 		this.textFieldGeoSpheroidFlatten.setEditable((this.comboBoxReferenceSpheroid.getSelectedItem()).equals("UserDefined"));
 		this.textFieldCentralMeridian.setEditable((this.comboBoxCentralMeridianType.getSelectedItem()).equals("UserDefined"));
 	}
-
-	///**
-	// * 设置面板控件是否只能选择不能编辑
-	// *
-	// * @param isEditable
-	// */
-	//public void setPanelEditable(Boolean isEditable) {
-	//	this.comboBoxName.setEditable(isEditable);
-	//	this.comboBoxGeoDatumPlane.setEditable(isEditable);
-	//	this.comboBoxReferenceSpheroid.setEditable(isEditable);
-	//	this.comboBoxCentralMeridianType.setEditable(isEditable);
-	//}
 
 	public void dispose() {
 		removeListeners();
