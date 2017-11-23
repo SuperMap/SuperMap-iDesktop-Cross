@@ -90,7 +90,9 @@ UserConferenceDemo/target/
 /Configuration/SnapSetting.xml
 /log
 /Templates/Projection/Projection.xml
-ResourceTool/src/main/properties
-ResourceTool/src/main/result
-ResourceTool/src/main/system
+Tools/ResourceTool/.idea/
+Tools/ResourceTool/out/
+Tools/ResourceTool/src/main/properties/
+Tools/ResourceTool/src/main/result/
+Tools/ResourceTool/src/main/system/
 
