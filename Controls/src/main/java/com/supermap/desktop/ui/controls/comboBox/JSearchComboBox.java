@@ -33,4 +33,14 @@ public class JSearchComboBox<E> extends JComboBox<E> {
 			}
 		}
 	}
+
+	/**
+	 * 存疑，这里的渲染器只能对comboBox的list起到渲染作用，如何对textField也起到渲染作用？
+	 * yuanR
+	 *
+	 * @param listCellRenderer
+	 */
+	public void setComboBoxRenderer(ListCellRenderer listCellRenderer) {
+		super.setRenderer(listCellRenderer);
+	}
 }
