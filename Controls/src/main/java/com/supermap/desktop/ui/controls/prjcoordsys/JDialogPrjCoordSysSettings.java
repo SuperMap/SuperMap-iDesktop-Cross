@@ -1,13 +1,7 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.GeoCoordSys;
-import com.supermap.data.GeoCoordSysType;
-import com.supermap.data.PrjCoordSys;
-import com.supermap.data.PrjCoordSysType;
-import com.supermap.data.PrjFileType;
-import com.supermap.data.PrjFileVersion;
-import com.supermap.data.Unit;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
@@ -23,12 +17,7 @@ import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.Abs
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.CoordSysDefine;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.PrjCoordSysTableModel;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels.DefaultCoordsysTreeCellRenderer;
-import com.supermap.desktop.utilities.CoreResources;
-import com.supermap.desktop.utilities.CursorUtilities;
-import com.supermap.desktop.utilities.FileUtilities;
-import com.supermap.desktop.utilities.PathUtilities;
-import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.XmlUtilities;
+import com.supermap.desktop.utilities.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,25 +25,10 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import javax.swing.event.*;
+import javax.swing.tree.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.InputStream;
 import java.text.MessageFormat;
@@ -1588,28 +1562,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 		JDialogNewCoordsysFromEPSG dialogNewCoordsysFromEPSG = new JDialogNewCoordsysFromEPSG();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE || this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM)) {
-
-			PrjCoordSys prjCoordSys = null;
-			if (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-				GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
-				prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-				prjCoordSys.setGeoCoordSys(geoCoordSys);
-			} else if (this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-				prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine);
+			int code = currentDefine.getCoordSysCode();
+			if (code <= 0) {
+				code = 3857;
 			}
-
-			if (prjCoordSys != null) {
-				int code;
-				code = prjCoordSys.getEPSGCode();
-				if (code <= 0) {
-					code = prjCoordSys.toEPSGCode();
-				}
-				if (code <= 0) {
-					code = 3857;
-				}
-				dialogNewCoordsysFromEPSG.setCode(code);
-				dialogNewCoordsysFromEPSG.getCodeTextField().setText(String.valueOf(code));
-			}
+			dialogNewCoordsysFromEPSG.setCode(code);
+			dialogNewCoordsysFromEPSG.getCodeTextField().setText(String.valueOf(code));
 		}
 
 		if (dialogNewCoordsysFromEPSG.showDialog() == DialogResult.OK) {
@@ -1624,7 +1582,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 					result.setPrjCoordSys(prjCoordSys);
 				}
-				result.setCoordSysCode(prjCoordSys.getType().value());
+				result.setCoordSysCode(prjCoordSys.getEPSGCode());
 				// 对名字进行去重处理
 				List<String> hasNames = new ArrayList<>();
 				for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
