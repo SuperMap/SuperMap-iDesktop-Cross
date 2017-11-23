@@ -157,6 +157,8 @@ public class DialogMongoDBLoader extends SmDialog {
         });
 
         checkButtonEnable();
+        updateDatabaseName();
+        updateCacheName();
     }
 
     private void registerListener() {
