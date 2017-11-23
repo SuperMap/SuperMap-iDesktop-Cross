@@ -353,7 +353,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
 				if (this.currentDefine == null) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null) {
 					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
@@ -363,7 +363,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				}
 			} else { // 投影坐标系统
 				if (this.currentDefine == null) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null) {
 					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
