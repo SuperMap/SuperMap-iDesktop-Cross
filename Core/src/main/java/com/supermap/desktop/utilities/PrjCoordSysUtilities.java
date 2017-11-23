@@ -100,10 +100,15 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CoordSysUnit"))) {
 						text += prj.getCoordUnit();
 					} else if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
-						if (prj.toEPSGCode() < 0) {
+						if (prj.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
+							prj.setEPSGCode(prj.getGeoCoordSys().getType().value());
+						} else {
+							prj.setEPSGCode(prj.getType().value());
+						}
+						if (prj.getEPSGCode() < 0) {
 							text += "0";
 						} else {
-							text += Integer.toString(prj.toEPSGCode());
+							text += Integer.toString(prj.getEPSGCode());
 						}
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
