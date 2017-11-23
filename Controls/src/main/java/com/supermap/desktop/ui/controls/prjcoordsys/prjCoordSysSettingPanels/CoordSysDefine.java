@@ -151,10 +151,43 @@ public class CoordSysDefine {
 			for (CoordSysDefine coordSysDefine : children) {
 				if (coordSysDefine.getCoordSysCode() == coordSysCode) {
 					result = coordSysDefine;
-				} else {
-					result = coordSysDefine.getChildByCoordSysCode(coordSysCode);
 				}
+				if (result != null) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
 
+	/**
+	 * 通过code、type、name属性一同查找
+	 *
+	 * @param prjCoordSys
+	 * @return
+	 */
+	public CoordSysDefine getChildByPrjCoordSys(PrjCoordSys prjCoordSys) {
+		CoordSysDefine result = null;
+		try {
+			for (CoordSysDefine coordSysDefine : children) {
+				if (coordSysDefine.getCoordSysType() == GEOGRAPHY_COORDINATE) {
+					// 根据类型、code值、caption
+					if (coordSysDefine.getGeoCoordSys() != null && prjCoordSys.getGeoCoordSys() != null
+							&& (coordSysDefine.getGeoCoordSys().getType()).equals((prjCoordSys.getGeoCoordSys().getType()))
+							&& coordSysDefine.getCoordSysCode() == (prjCoordSys.getGeoCoordSys().getType().value())
+							&& coordSysDefine.getCaption().equals(prjCoordSys.getGeoCoordSys().getName())) {
+						result = coordSysDefine;
+					}
+				} else if (coordSysDefine.getCoordSysType() == PROJECTION_SYSTEM) {
+					if (coordSysDefine.getPrjCoordSys() != null && prjCoordSys != null
+							&& (coordSysDefine.getPrjCoordSys().getType()).equals((prjCoordSys.getType()))
+							&& coordSysDefine.getCoordSysCode() == (prjCoordSys.getType().value())
+							&& coordSysDefine.getCaption().equals(prjCoordSys.getName())) {
+						result = coordSysDefine;
+					}
+				}
 				if (result != null) {
 					break;
 				}

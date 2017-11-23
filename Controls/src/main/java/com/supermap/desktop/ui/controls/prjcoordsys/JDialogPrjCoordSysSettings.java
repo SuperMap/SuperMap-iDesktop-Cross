@@ -1,13 +1,7 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
 import com.supermap.data.Enum;
-import com.supermap.data.GeoCoordSys;
-import com.supermap.data.GeoCoordSysType;
-import com.supermap.data.PrjCoordSys;
-import com.supermap.data.PrjCoordSysType;
-import com.supermap.data.PrjFileType;
-import com.supermap.data.PrjFileVersion;
-import com.supermap.data.Unit;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
@@ -23,12 +17,7 @@ import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.Abs
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.CoordSysDefine;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjCoordSysSettingPanels.PrjCoordSysTableModel;
 import com.supermap.desktop.ui.controls.prjcoordsys.prjTransformPanels.DefaultCoordsysTreeCellRenderer;
-import com.supermap.desktop.utilities.CoreResources;
-import com.supermap.desktop.utilities.CursorUtilities;
-import com.supermap.desktop.utilities.FileUtilities;
-import com.supermap.desktop.utilities.PathUtilities;
-import com.supermap.desktop.utilities.StringUtilities;
-import com.supermap.desktop.utilities.XmlUtilities;
+import com.supermap.desktop.utilities.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -36,25 +25,10 @@ import org.w3c.dom.NodeList;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
+import javax.swing.event.*;
+import javax.swing.tree.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.InputStream;
 import java.text.MessageFormat;
@@ -378,21 +352,21 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				this.currentDefine = this.noneEarth.getChildByCoordSysCode(this.prjCoordSys.getCoordUnit().value());
 			} else if (this.prjCoordSys.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) { // 地理坐标系
 				GeoCoordSys geoCoordSys = this.prjCoordSys.getGeoCoordSys();
-				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+				if (this.currentDefine == null) {
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
-				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
-					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
+				if (this.currentDefine == null) {
+					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && geoCoordSys.getType() != GeoCoordSysType.GCS_USER_DEFINE) {
 					this.currentDefine = this.geographyCoordinate.getChildByCoordSysCode(geoCoordSys.getType().value());
 				}
 			} else { // 投影坐标系统
-				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					this.currentDefine = this.favoriteCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+				if (this.currentDefine == null) {
+					this.currentDefine = this.favoriteCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
-				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
-					this.currentDefine = this.customizeCoordinate.getChildByCoordSysCode(this.prjCoordSys.getType().value());
+				if (this.currentDefine == null) {
+					this.currentDefine = this.customizeCoordinate.getChildByPrjCoordSys(this.prjCoordSys);
 				}
 				if (this.currentDefine == null && this.prjCoordSys.getType() != PrjCoordSysType.PCS_USER_DEFINED) {
 					this.currentDefine = this.projectionSystem.getChildByCoordSysCode(this.prjCoordSys.getType().value());
@@ -794,7 +768,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 
 	/**
-	 * 获得文件夹下所有xml文件
+	 * 获得文件夹下所有xml文件路径
 	 *
 	 * @param file
 	 * @return
@@ -805,8 +779,29 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		for (File f : flist) {
 			if (!f.isDirectory()) {
 				//这里将列出所有的xml文件
+
 				if ((f.getAbsolutePath().endsWith(".xml"))) {
 					filelist.add(f.getAbsolutePath());
+				}
+			}
+		}
+		return filelist;
+	}
+
+	/**
+	 * 获得路径下所有xml文件
+	 *
+	 * @param file
+	 * @return
+	 */
+	private ArrayList<File> getFiles(File file) {
+		ArrayList<File> filelist = new ArrayList<>();
+		File flist[] = file.listFiles();
+		for (File f : flist) {
+			if (!f.isDirectory()) {
+				//这里将列出所有的xml文件
+				if ((f.getAbsolutePath().endsWith(".xml"))) {
+					filelist.add(f.getAbsoluteFile());
 				}
 			}
 		}
@@ -1379,6 +1374,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		SmFileChoose prjFileExportFileChoose = new SmFileChoose("DataExportFrame_OutPutDirectories");
 		prjFileExportFileChoose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
+		prjFileExportFileChoose.setApproveButtonText(ControlsProperties.getString("String_Ok"));
 		//Component comp = prjFileExportFileChoose.getLabelForInChooser("FileChooser.folderNameLabelText");
 		//if (comp instanceof JTextField) {
 		//	JTextField field = ((JTextField) comp);
@@ -1414,7 +1410,10 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				}
 			} finally {
 				if (successedExportNum >= 1) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath()));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum));
+				} else if (successedExportNum == 1) {
+
+					//Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath() + "\\" + currentDefine.));
 				} else {
 					Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
 				}
@@ -1563,28 +1562,12 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 
 		JDialogNewCoordsysFromEPSG dialogNewCoordsysFromEPSG = new JDialogNewCoordsysFromEPSG();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE || this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM)) {
-
-			PrjCoordSys prjCoordSys = null;
-			if (this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-				GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
-				prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-				prjCoordSys.setGeoCoordSys(geoCoordSys);
-			} else if (this.currentDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-				prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(this.currentDefine);
+			int code = currentDefine.getCoordSysCode();
+			if (code <= 0) {
+				code = 3857;
 			}
-
-			if (prjCoordSys != null) {
-				int code;
-				code = prjCoordSys.getEPSGCode();
-				if (code <= 0) {
-					code = prjCoordSys.toEPSGCode();
-				}
-				if (code <= 0) {
-					code = 3857;
-				}
-				dialogNewCoordsysFromEPSG.setCode(code);
-				dialogNewCoordsysFromEPSG.getCodeTextField().setText(String.valueOf(code));
-			}
+			dialogNewCoordsysFromEPSG.setCode(code);
+			dialogNewCoordsysFromEPSG.getCodeTextField().setText(String.valueOf(code));
 		}
 
 		if (dialogNewCoordsysFromEPSG.showDialog() == DialogResult.OK) {
@@ -1599,7 +1582,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					result = new CoordSysDefine(CoordSysDefine.PROJECTION_SYSTEM);
 					result.setPrjCoordSys(prjCoordSys);
 				}
-				result.setCoordSysCode(prjCoordSys.getType().value());
+				result.setCoordSysCode(prjCoordSys.getEPSGCode());
 				// 对名字进行去重处理
 				List<String> hasNames = new ArrayList<>();
 				for (int i = 0; i < customizeCoordinate.getAllLeaves().length; i++) {
@@ -1756,7 +1739,14 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 							continue;
 						}
 					}
-					if (export(exportPrjCoordSys, folderName + "\\" + anAllCoordSysDefine.getCaption() + ".xml")) {
+					// 对名字进行去重处理
+					ArrayList<File> hasFile = getFiles(new File(folderName));
+					ArrayList<String> hasNames = new ArrayList<>();
+					for (int i = 0; i < hasFile.size(); i++) {
+						hasNames.add(hasFile.get(i).getName().replace(".xml", ""));
+					}
+					String name = getSingletonName(anAllCoordSysDefine.getCaption(), hasNames);
+					if (export(exportPrjCoordSys, folderName + "\\" + name + ".xml")) {
 						this.successedExportNum++;
 					}
 				} else {
@@ -1777,7 +1767,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				exportPrjCoordSys.setName(coordSysDefine.getCaption());
 				exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
 			}
-			if (export(exportPrjCoordSys, path + "//" + coordSysDefine.getCaption() + ".xml")) {
+
+			// 对名字进行去重处理
+			ArrayList<File> hasFile = getFiles(new File(path));
+			ArrayList<String> hasNames = new ArrayList<>();
+			for (int i = 0; i < hasFile.size(); i++) {
+				hasNames.add(hasFile.get(i).getName().replace(".xml", ""));
+			}
+			String name = getSingletonName(coordSysDefine.getCaption(), hasNames);
+			if (export(exportPrjCoordSys, path + "\\" + name + ".xml")) {
 				this.successedExportNum++;
 				return true;
 			} else {

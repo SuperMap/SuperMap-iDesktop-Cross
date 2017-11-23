@@ -344,8 +344,8 @@ public class JDialogWorkspaceOpenSQL extends SmDialog {
 		if (null == jTextFieldUserTemp || jTextFieldUserTemp.length() <= 0) {
 			flag = true;
 		}
-		if (true == flag) {
-			return;
+        if (flag) {
+            return;
 		}
 	}
 
