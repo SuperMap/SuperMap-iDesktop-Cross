@@ -59,7 +59,7 @@ public class PrjCoordSysSettingsUtilties {
 
 		try {
 			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED) {
+				if (define.getCoordSysType() != CoordSysDefine.USER_DEFINED) {
 					GeoCoordSysType type = (GeoCoordSysType) Enum.parse(GeoCoordSysType.class, define.getCoordSysCode());
 					result = new GeoCoordSys(type, GeoSpatialRefType.SPATIALREF_EARTH_LONGITUDE_LATITUDE);
 				} else {

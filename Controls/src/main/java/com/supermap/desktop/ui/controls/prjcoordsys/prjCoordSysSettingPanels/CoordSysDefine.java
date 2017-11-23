@@ -30,10 +30,6 @@ public class CoordSysDefine {
 	private CoordSysDefine parent;
 	private String caption = "";
 
-	public void setCoordSysType(int coordSysType) {
-		this.coordSysType = coordSysType;
-	}
-
 	private int coordSysType = PROJECTION_SYSTEM; // 坐标系类型
 	private int coordSysCode = -1; // 默认坐标系代码
 	private ArrayList<CoordSysDefine> children = new ArrayList<>();
