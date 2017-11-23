@@ -424,9 +424,7 @@ public class JPanelGeoCoordSys extends JPanel {
 			return false;
 		}
 		if (!this.textFieldGeoSpheroidAxis.getText().equals(this.textFieldGeoSpheroidAxis.getBackUpValue())) {
-			// if (!lockAxis) {
-			// comboBoxReferenceSpheroid.setSelectedItem(GeoSpheroidType.SPHEROID_USER_DEFINED);
-			// }
+
 			if (this.geoCoordSys.getGeoDatum().getGeoSpheroid().getType() != GeoSpheroidType.SPHEROID_USER_DEFINED) {
 				String name = this.geoCoordSys.getGeoDatum().getGeoSpheroid().getName();
 				this.geoCoordSys.getGeoDatum().getGeoSpheroid().setType(GeoSpheroidType.SPHEROID_USER_DEFINED);

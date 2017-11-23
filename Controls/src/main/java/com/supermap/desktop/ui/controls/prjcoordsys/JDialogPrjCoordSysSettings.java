@@ -1410,10 +1410,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 				}
 			} finally {
 				if (successedExportNum >= 1) {
-					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum));
-				} else if (successedExportNum == 1) {
-
-					//Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath() + "\\" + currentDefine.));
+					Application.getActiveApplication().getOutput().output(MessageFormat.format(ControlsProperties.getString("String_ExportPrjFileSuccess"), successedExportNum, prjFileExportFileChoose.getFilePath()));
 				} else {
 					Application.getActiveApplication().getOutput().output(ControlsProperties.getString("String_ExportPrjFileFailed"));
 				}

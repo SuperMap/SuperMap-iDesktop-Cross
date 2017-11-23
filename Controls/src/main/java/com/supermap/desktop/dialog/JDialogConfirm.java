@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 public class JDialogConfirm extends SmDialog {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private SmButton buttonOk;
@@ -94,15 +94,15 @@ public class JDialogConfirm extends SmDialog {
 
 		// @formatter:off
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.CENTER)
-				.addComponent(this.textAreaMessage,400,GroupLayout.PREFERRED_SIZE,Short.MAX_VALUE)
+				.addComponent(this.textAreaMessage, 400, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 						.addComponent(this.checkBoxConfirm)
-						.addGap(10,10,Short.MAX_VALUE)
+						.addGap(10, 10, Short.MAX_VALUE)
 						.addComponent(this.buttonOk)
 						.addComponent(this.buttonCancel)));
-		
+
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-				.addComponent(this.textAreaMessage,GroupLayout.DEFAULT_SIZE,GroupLayout.PREFERRED_SIZE,Short.MAX_VALUE)
+				.addComponent(this.textAreaMessage, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addGroup(groupLayout.createParallelGroup(Alignment.CENTER)
 						.addComponent(this.checkBoxConfirm)
 						.addComponent(this.buttonOk)
@@ -110,9 +110,4 @@ public class JDialogConfirm extends SmDialog {
 		// @formatter:on
 	}
 
-	public DialogResult showDialogWithYesNoOpition() {
-		this.buttonOk.setText(CoreProperties.yes);
-		this.buttonCancel.setText(CoreProperties.no);
-		return super.showDialog();
-	}
 }
