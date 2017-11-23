@@ -229,6 +229,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 			}
 		}
 	};
+
 	public JDialogUserDefinePrjProjection() {
 		super();
 		this.setTitle(ControlsProperties.getString("String_UserDefined_PrjCoordSys"));
@@ -241,12 +242,10 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		if (this.lock) {
 			return;
 		}
-		this.lock = true;
 		if (StringUtilities.isNullOrEmptyString(this.textFieldName.getText())) {
 			return;
 		}
 		this.prjCoordSys.setName(this.textFieldName.getText());
-		this.lock = false;
 	}
 
 	private void init() {
@@ -259,7 +258,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 	private void initComponents() {
 
-		setSize(550, 600);
+		setSize(550, 460);
 		setLocationRelativeTo(null);
 		this.textFieldScaleFactor.setPreferredSize(new Dimension(50, 23));
 		this.textFieldFalseNorthing.setPreferredSize(new Dimension(50, 23));
@@ -393,46 +392,46 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	private void initPanelPrjCoordSysParameters() {
 		this.panelPrjCoordSysParameters.setLayout(new GridBagLayout());
 
-		this.panelPrjCoordSysParameters.add(this.labelCoordType, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setIpad(36, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.comboBoxCoordType, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 10));
-		this.panelPrjCoordSysParameters.add(this.labelCoordSysUnit, new GridBagConstraintsHelper(2, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.comboBoxCoordSysUnit, new GridBagConstraintsHelper(3, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(10, 5, 0, 10));
+		this.panelPrjCoordSysParameters.add(this.labelCoordType, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.comboBoxCoordType, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(6, 5, 0, 6));
+		this.panelPrjCoordSysParameters.add(this.labelCoordSysUnit, new GridBagConstraintsHelper(2, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.comboBoxCoordSysUnit, new GridBagConstraintsHelper(3, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setAnchor(GridBagConstraints.CENTER).setInsets(6, 5, 0, 12));
 
-		this.panelPrjCoordSysParameters.add(this.labelCentralMeridian, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelCentralMeridian, new GridBagConstraintsHelper(1, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(this.labelFalseEasting, new GridBagConstraintsHelper(2, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.textFieldFalseEasting, new GridBagConstraintsHelper(3, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelCentralMeridian, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelCentralMeridian, new GridBagConstraintsHelper(1, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelFalseEasting, new GridBagConstraintsHelper(2, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.textFieldFalseEasting, new GridBagConstraintsHelper(3, 1, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 12).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
 
-		this.panelPrjCoordSysParameters.add(this.labelCentralParallel, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelCentralParallel, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(this.labelFalseNorthing, new GridBagConstraintsHelper(2, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.textFieldFalseNorthing, new GridBagConstraintsHelper(3, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelCentralParallel, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelCentralParallel, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelFalseNorthing, new GridBagConstraintsHelper(2, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.textFieldFalseNorthing, new GridBagConstraintsHelper(3, 2, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 12).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
 
-		this.panelPrjCoordSysParameters.add(this.labelStandardParallel1, new GridBagConstraintsHelper(0, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelStandardParallel1, new GridBagConstraintsHelper(1, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(this.labelScaleFactor, new GridBagConstraintsHelper(2, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.textFieldScaleFactor, new GridBagConstraintsHelper(3, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelStandardParallel1, new GridBagConstraintsHelper(0, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelStandardParallel1, new GridBagConstraintsHelper(1, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(this.labelScaleFactor, new GridBagConstraintsHelper(2, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.textFieldScaleFactor, new GridBagConstraintsHelper(3, 3, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 12).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
 
-		this.panelPrjCoordSysParameters.add(this.labelStandardParallel2, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelStandardParallel2, new GridBagConstraintsHelper(1, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.labelStandardParallel2, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelStandardParallel2, new GridBagConstraintsHelper(1, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 4, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 10).setWeight(1, 0));
 
-		this.panelPrjCoordSysParameters.add(this.labelFirstPointLongitude, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelFirstPointLongitude, new GridBagConstraintsHelper(1, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 5, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.labelFirstPointLongitude, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelFirstPointLongitude, new GridBagConstraintsHelper(1, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 5, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 10).setWeight(1, 0));
 
-		this.panelPrjCoordSysParameters.add(this.labelSecondPointLongitude, new GridBagConstraintsHelper(0, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelSecondPointLongitude, new GridBagConstraintsHelper(1, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 6, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.labelSecondPointLongitude, new GridBagConstraintsHelper(0, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelSecondPointLongitude, new GridBagConstraintsHelper(1, 6, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 6, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 10).setWeight(1, 0));
 
-		this.panelPrjCoordSysParameters.add(this.labelAzimuth, new GridBagConstraintsHelper(0, 7, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.panelAzimuth, new GridBagConstraintsHelper(1, 7, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
-		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 7, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.labelAzimuth, new GridBagConstraintsHelper(0, 7, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.panelAzimuth, new GridBagConstraintsHelper(1, 7, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL));
+		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 7, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 10).setWeight(1, 0));
 
-		this.panelPrjCoordSysParameters.add(this.labelParameterFormat, new GridBagConstraintsHelper(0, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 10, 0, 0));
-		this.panelPrjCoordSysParameters.add(this.radioButtonAngle, new GridBagConstraintsHelper(1, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0).setWeight(1, 0));
-		this.panelPrjCoordSysParameters.add(this.radioButtonAMS, new GridBagConstraintsHelper(2, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 0));
-		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(10, 5, 0, 10).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.labelParameterFormat, new GridBagConstraintsHelper(0, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 15, 0, 0));
+		this.panelPrjCoordSysParameters.add(this.radioButtonAngle, new GridBagConstraintsHelper(1, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0).setWeight(1, 0));
+		this.panelPrjCoordSysParameters.add(this.radioButtonAMS, new GridBagConstraintsHelper(2, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 0));
+		this.panelPrjCoordSysParameters.add(new Panel(), new GridBagConstraintsHelper(3, 8, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(6, 5, 0, 10).setWeight(1, 0));
 
 		this.panelPrjCoordSysParameters.add(new JPanel(), new GridBagConstraintsHelper(0, 9, 4, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(2, 1));
 
