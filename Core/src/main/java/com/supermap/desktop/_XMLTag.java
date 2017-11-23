@@ -25,6 +25,7 @@ public class _XMLTag {
 	public static final String g_NodeContextMenus = "contextMenus";
 	public static final String g_NodeRibbons = "ribbons";
 	public static final String g_NodeRibbon = "ribbon";
+	public static final String g_NodeTaskBar = "taskBar";
 	public static final String g_NodeProcess = "process";
 	public static final String g_NodeProcesses = "processes";
 	public static final String g_NodeProcessGroup = "processGroup";

@@ -4,7 +4,10 @@ import com.supermap.desktop.Interface.IRibbonManager;
 import com.supermap.desktop.WorkEnvironment;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.implement.SmRibbonTask;
+import com.supermap.desktop.ui.xmlRibbons.SmXmlRibbonButton;
 import com.supermap.desktop.ui.xmlRibbons.XMLRibbon;
+import com.supermap.desktop.ui.xmlRibbons.XMLRibbonButton;
+import com.supermap.desktop.ui.xmlRibbons.XMLTaskBar;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
@@ -28,6 +31,14 @@ public class RibbonManager implements IRibbonManager {
 	@Override
 	public void load(JRibbon ribbon, WorkEnvironment workEnvironment) {
 		this.ribbon = ribbon;
+		ArrayList<XMLTaskBar> taskBars = workEnvironment.getPluginInfos().getXmlRibbons().getTaskBars();
+		for (XMLTaskBar taskBar : taskBars) {
+			for (int i = 0; i < taskBar.getLength(); i++) {
+				if (taskBar.getCommandAtIndex(i) instanceof XMLRibbonButton) {
+					ribbon.addTaskbarComponent(new SmXmlRibbonButton((XMLRibbonButton) taskBar.getCommandAtIndex(i)));
+				}
+			}
+		}
 		ArrayList<XMLRibbon> ribbons = workEnvironment.getPluginInfos().getXmlRibbons().getRibbons();
 		EnumMap<WindowType, ArrayList<SmRibbonTask>> childFrameMenus = new EnumMap<>(WindowType.class);
 

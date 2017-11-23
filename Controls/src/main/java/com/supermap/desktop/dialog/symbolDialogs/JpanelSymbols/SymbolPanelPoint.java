@@ -1,6 +1,14 @@
 package com.supermap.desktop.dialog.symbolDialogs.JpanelSymbols;
 
-import com.supermap.data.*;
+import com.supermap.data.GeoPoint;
+import com.supermap.data.Geometry;
+import com.supermap.data.Resources;
+import com.supermap.data.Size2D;
+import com.supermap.data.Symbol;
+import com.supermap.data.SymbolMarker;
+import com.supermap.data.SymbolMarker3D;
+import com.supermap.data.SymbolType;
+import com.supermap.desktop.enums.SymbolMarkerType;
 import com.supermap.desktop.ui.controls.InternalToolkitControl;
 import com.supermap.desktop.ui.controls.UIEnvironment;
 
@@ -42,9 +50,10 @@ public class SymbolPanelPoint extends SymbolPanel {
         geoPoint.setY(y);
         geoPoint.getStyle().setMarkerSymbolID(symbolMarker.getID());
         //Modify by xie,some image marker could not display all,So move this set.
-//		if (SymbolMarkerType.getSymbolMarkerType(symbolMarker) != SymbolMarkerType.Vector) {
-//			geoPoint.getStyle().setMarkerSize(new Size2D(0, 1));
-//		}
+	    // 注释后会导致某些系统符号被拉伸
+		if (SymbolMarkerType.getSymbolMarkerType(symbolMarker) != SymbolMarkerType.Vector) {
+			geoPoint.getStyle().setMarkerSize(new Size2D(0, 1));
+		}
         InternalToolkitControl.internalDraw(geoPoint, resources, bufferedImage.getGraphics());
 
         return bufferedImage;

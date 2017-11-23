@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
 
 public class XMLButton extends XMLCommand {
 
-	private XMLCommand parentTemp;
+	private XMLCommandBase parentTemp;
 
-	public XMLCommand getParentTemp() {
+	public XMLCommandBase getParentTemp() {
 		return parentTemp;
 	}
 
@@ -17,7 +17,7 @@ public class XMLButton extends XMLCommand {
 		this.parentTemp = parentTemp;
 	}
 
-	public XMLButton(PluginInfo pluginInfo, XMLCommand parent) {
+	public XMLButton(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo);
 		this.parentTemp = parent;
 		this.commandType = XMLCommandType.BUTTON;

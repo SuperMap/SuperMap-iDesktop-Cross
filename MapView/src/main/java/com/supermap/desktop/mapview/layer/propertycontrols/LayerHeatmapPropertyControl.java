@@ -303,8 +303,8 @@ public class LayerHeatmapPropertyControl extends AbstractLayerPropertyControl {
 			this.componentDropDownMinColor.setColor(getLayerPropertyModel().getMinColor());
 			this.smSpinnerMaxColorTransparence.setValue(getLayerPropertyModel().getMaxColorTransparence());
 			this.smSpinnerMinColorTransparence.setValue(getLayerPropertyModel().getMinColorTransparence());
-			this.smSpinnerFuzzyDegree.setValue(getLayerPropertyModel().getFuzzyDegree() * 100);
-			this.smSpinnerIntensity.setValue(getLayerPropertyModel().getIntensity() * 100);
+			this.smSpinnerFuzzyDegree.setValue((int) (getLayerPropertyModel().getFuzzyDegree() * 100));
+			this.smSpinnerIntensity.setValue(((int) (getLayerPropertyModel().getIntensity() * 100)));
 			this.labelSystemMaximumLeftCenter.setText(DoubleUtilities.toString(getLayerPropertyModel().getSystemMinValue(), POINT_NUM));
 			this.labelSystemMaximumRightCenter.setText(DoubleUtilities.toString(getLayerPropertyModel().getSystemMaxValue(), POINT_NUM));
 			this.labelCurrentViewMaximumLeftCenter.setText(DoubleUtilities.toString(getLayerPropertyModel().getCurrentViewMinValue(), POINT_NUM));

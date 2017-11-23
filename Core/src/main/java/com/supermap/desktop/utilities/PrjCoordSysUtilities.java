@@ -39,7 +39,7 @@ public class PrjCoordSysUtilities {
 						CoreProperties.getString("String_CoordSysName"),
 						CoreProperties.getString("String_CoordSysUnit"),
 						CoreProperties.getString("String_EPSG_Code"),
-						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
+						CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"),
 						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"),
 						CoreProperties.getString("String_GeoSpheroid_Axis"),
 						CoreProperties.getString("String_GeoSpheroid_Flatten"),
@@ -105,7 +105,7 @@ public class PrjCoordSysUtilities {
 						} else {
 							text += Integer.toString(prj.toEPSGCode());
 						}
-					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
+					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getGeoSpheroid().getName();

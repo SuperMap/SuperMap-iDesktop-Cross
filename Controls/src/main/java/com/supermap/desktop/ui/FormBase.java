@@ -53,6 +53,7 @@ import com.supermap.layout.MapLayout;
 import com.supermap.realspace.Scene;
 import org.flexdock.docking.DockingManager;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenu;
 import org.w3c.dom.Element;
 
 import javax.swing.*;
@@ -104,8 +105,9 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 		ribbonManager = new RibbonManager();
 		this.jMenuBarMain = new JMenuBar();
 //        this.propertyManager = new JDialogDataPropertyContainer(this);
-//		RibbonApplicationMenu ram = new RibbonApplicationMenu();
-//		getRibbon().setApplicationMenu(ram);
+		RibbonApplicationMenu ram = new RibbonApplicationMenu();
+		getRibbon().setApplicationMenu(ram);
+//		ram.addMenuEntry(new RibbonApplicationMenuEntryPrimary());
 
 //		JMenu menu = new JMenu("loading");
 //		this.jMenuBarMain.add(menu);
