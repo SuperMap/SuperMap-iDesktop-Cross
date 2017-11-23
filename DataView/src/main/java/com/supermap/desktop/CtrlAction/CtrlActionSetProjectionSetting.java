@@ -83,7 +83,7 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 							// 提示是否设置到所有数据集
 							JDialogConfirm dialogConfirm = new JDialogConfirm(MessageFormat.format(ControlsProperties.getString("String_ApplyPrjCoordSys"),
 									datasource.getAlias()), true);
-							dialogConfirm.showDialogWithYesNoOpition();
+							dialogConfirm.showDialog();
 							isDontAskSetToAllDatasets = dialogConfirm.isUsedAsDefault();
 							if (dialogConfirm.getDialogResult() == DialogResult.OK) {
 								isSetToAllDatasets = true;
@@ -126,13 +126,12 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 									datasource.getDatasets().get(i).setPrjCoordSys(newPrjCoordSys);
 								}
 							}
+							Application
+									.getActiveApplication()
+									.getOutput()
+									.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
+											newPrjCoordSys.getName()));
 						}
-
-						Application
-								.getActiveApplication()
-								.getOutput()
-								.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
-										newPrjCoordSys.getName()));
 					}
 				}
 			}

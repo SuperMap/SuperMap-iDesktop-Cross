@@ -175,16 +175,21 @@ public class CoordSysDefine {
 				if (coordSysDefine.getCoordSysType() == GEOGRAPHY_COORDINATE) {
 					// 根据类型、code值、caption
 					if (coordSysDefine.getGeoCoordSys() != null && prjCoordSys.getGeoCoordSys() != null
-							&& (coordSysDefine.getGeoCoordSys().getType()).equals((prjCoordSys.getGeoCoordSys().getType()))
-							&& coordSysDefine.getCoordSysCode() == (prjCoordSys.getGeoCoordSys().getType().value())
-							&& coordSysDefine.getCaption().equals(prjCoordSys.getGeoCoordSys().getName())) {
+							&& (coordSysDefine.getGeoCoordSys().getType()).equals(prjCoordSys.getGeoCoordSys().getType())
+							&& (coordSysDefine.getGeoCoordSys().getGeoPrimeMeridian().getType()).equals(prjCoordSys.getGeoCoordSys().getGeoPrimeMeridian().getType())
+							&& (coordSysDefine.getGeoCoordSys().getGeoDatum().getType()).equals(prjCoordSys.getGeoCoordSys().getGeoDatum().getType())
+							&& (coordSysDefine.getGeoCoordSys().getCoordUnit()).equals(prjCoordSys.getGeoCoordSys().getCoordUnit())
+							&& (coordSysDefine.getGeoCoordSys().getGeoSpatialRefType()).equals(prjCoordSys.getGeoCoordSys().getGeoSpatialRefType())
+							) {
 						result = coordSysDefine;
 					}
 				} else if (coordSysDefine.getCoordSysType() == PROJECTION_SYSTEM) {
 					if (coordSysDefine.getPrjCoordSys() != null && prjCoordSys != null
-							&& (coordSysDefine.getPrjCoordSys().getType()).equals((prjCoordSys.getType()))
-							&& coordSysDefine.getCoordSysCode() == (prjCoordSys.getType().value())
-							&& coordSysDefine.getCaption().equals(prjCoordSys.getName())) {
+							&& (coordSysDefine.getPrjCoordSys().getType()).equals(prjCoordSys.getType())
+							&& (coordSysDefine.getPrjCoordSys().getProjection().getType()).equals(prjCoordSys.getProjection().getType())
+							&& (coordSysDefine.getPrjCoordSys().getCoordUnit()).equals(prjCoordSys.getCoordUnit())
+							&& (coordSysDefine.getPrjCoordSys().getDistanceUnit()).equals(prjCoordSys.getDistanceUnit())
+							) {
 						result = coordSysDefine;
 					}
 				}
