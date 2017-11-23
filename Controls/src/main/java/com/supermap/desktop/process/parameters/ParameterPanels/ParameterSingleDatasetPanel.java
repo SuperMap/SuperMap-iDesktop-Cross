@@ -296,7 +296,7 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 	 */
 	private String getDescribe() {
 		String describe = parameterSingleDataset.getDescription();
-		if (parameterSingleDataset.isRequisite()) {
+		if (parameterSingleDataset.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

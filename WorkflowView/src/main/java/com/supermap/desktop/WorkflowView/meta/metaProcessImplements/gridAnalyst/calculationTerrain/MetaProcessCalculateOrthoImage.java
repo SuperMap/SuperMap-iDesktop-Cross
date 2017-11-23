@@ -39,9 +39,9 @@ public class MetaProcessCalculateOrthoImage extends MetaProcessCalTerrain {
 		// 参数设置
 		parameterColorNoColor = new ParameterColor(ControlsProperties.getString("String_Label_NoColor_Color"));
 		parameterColorNoColor.setSelectedItem(Color.WHITE);
-		parameterColorNoColor.setRequisite(true);
+		parameterColorNoColor.setRequired(true);
 		parameterColorsTable = new ParameterColorsTable(ControlsProperties.getString("String_LabelColorScheme"));
-		parameterColorsTable.setRequisite(true);
+		parameterColorsTable.setRequired(true);
 		parameterColorsTable.setSelectedItem(new Colors());
 
 		ParameterCombine parameterCombineSet = new ParameterCombine();

@@ -80,7 +80,7 @@ public class ParameterColorPanel extends SwingPanel implements IParameterPanel {
 	 */
 	private String getDescribe() {
 		String describe = parameterColor.getDescription();
-		if (parameterColor.isRequisite()) {
+		if (parameterColor.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

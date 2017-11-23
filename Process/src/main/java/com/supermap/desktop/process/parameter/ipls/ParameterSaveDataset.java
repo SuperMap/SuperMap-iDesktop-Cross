@@ -34,7 +34,7 @@ public class ParameterSaveDataset extends AbstractParameter implements ISelectio
 	 * @return
 	 */
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 

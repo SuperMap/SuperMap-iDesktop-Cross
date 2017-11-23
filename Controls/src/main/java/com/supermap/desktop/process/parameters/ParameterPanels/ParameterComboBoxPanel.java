@@ -48,7 +48,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		if (this.parameterComboBox.getSelectedItem() != null) {
 			comboBox.setSelectedItem(this.parameterComboBox.getSelectedItem());
 		} else {
-			parameterComboBox.setFieldVale(ParameterComboBox.comboBoxValue, comboBox.getSelectedItem());
+			parameterComboBox.setFieldValue(ParameterComboBox.comboBoxValue, comboBox.getSelectedItem());
 		}
 		initListeners();
 		label.setText(getDescribe());
@@ -134,7 +134,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	 */
 	private String getDescribe() {
 		String describe = parameterComboBox.getDescription();
-		if (parameterComboBox.isRequisite()) {
+		if (parameterComboBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

@@ -93,7 +93,7 @@ public class ParameterPasswordPanel extends SwingPanel implements IParameterPane
 	 */
 	private String getDescribe() {
 		String describe = parameterPassword.getDescription();
-		if (parameterPassword.isRequisite()) {
+		if (parameterPassword.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

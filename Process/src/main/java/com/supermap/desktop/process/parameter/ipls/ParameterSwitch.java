@@ -110,8 +110,8 @@ public class ParameterSwitch extends AbstractParameter {
 	}
 
 	@Override
-	public boolean isRequisite() {
-		return currentParameter != null && currentParameter.isRequisite();
+	public boolean isRequired() {
+		return currentParameter != null && currentParameter.isRequired();
 	}
 
 	private class ParameterSwitchNode {

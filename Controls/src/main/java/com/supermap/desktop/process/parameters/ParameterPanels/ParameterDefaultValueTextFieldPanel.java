@@ -136,7 +136,7 @@ public class ParameterDefaultValueTextFieldPanel extends SwingPanel implements I
 	 */
 	private String getDescribe() {
 		String describe = parameterDefaultValueTextField.getDescription();
-		if (parameterDefaultValueTextField.isRequisite()) {
+		if (parameterDefaultValueTextField.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

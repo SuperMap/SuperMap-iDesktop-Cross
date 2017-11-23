@@ -257,7 +257,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 	 */
 	private String getDescribe() {
 		String describe = parameterFieldComboBox.getDescription();
-		if (parameterFieldComboBox.isRequisite()) {
+		if (parameterFieldComboBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

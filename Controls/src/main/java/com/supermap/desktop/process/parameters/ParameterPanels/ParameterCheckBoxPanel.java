@@ -80,7 +80,7 @@ public class ParameterCheckBoxPanel extends SwingPanel implements IParameterPane
 	 */
 	private String getDescribe() {
 		String describe = parameterCheckBox.getDescription();
-		if (parameterCheckBox.isRequisite()) {
+		if (parameterCheckBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

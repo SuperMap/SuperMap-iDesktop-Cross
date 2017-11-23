@@ -107,10 +107,10 @@ public class MetaProcessCreateDistanceRaster extends MetaProcessGridAnalyst {
 		this.parameterNumberMaxDistance.setMinValue(0);
 		this.parameterNumberMaxDistance.setIsIncludeMin(true);
 		this.parameterNumberMaxDistance.setSelectedItem(0);
-		this.parameterNumberMaxDistance.setRequisite(true);
+		this.parameterNumberMaxDistance.setRequired(true);
 		this.parameterNumberResolvingPower.setMinValue(0);
 		this.parameterNumberResolvingPower.setIsIncludeMin(false);
-		this.parameterNumberResolvingPower.setRequisite(true);
+		this.parameterNumberResolvingPower.setRequired(true);
 		Dataset dataset = DatasetUtilities.getDefaultDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION, DatasetType.GRID);
 		if (dataset != null) {
 			this.sourceDatasource.setSelectedItem(dataset.getDatasource());

@@ -96,7 +96,7 @@ public class ParameterEnumPanel extends SwingPanel {
 	 */
 	private String getDescribe() {
 		String describe = parameterEnum.getDescription();
-		if (parameterEnum.isRequisite()) {
+		if (parameterEnum.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

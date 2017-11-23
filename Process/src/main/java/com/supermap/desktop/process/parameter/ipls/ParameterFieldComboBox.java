@@ -46,7 +46,7 @@ public class ParameterFieldComboBox extends AbstractParameter implements ISelect
 	 * @return
 	 */
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return !isShowNullValue;
 	}
 

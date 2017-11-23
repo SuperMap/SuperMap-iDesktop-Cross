@@ -111,7 +111,7 @@ public class ParameterDatasourcePanel extends SwingPanel {
 	 */
 	private String getDescribe() {
 		String describe = parameterDatasource.getDescription();
-		if (parameterDatasource.isRequisite()) {
+		if (parameterDatasource.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

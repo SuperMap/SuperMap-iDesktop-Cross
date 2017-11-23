@@ -4,7 +4,7 @@ import com.supermap.desktop.process.parameter.events.FieldConstraintChangedListe
 import com.supermap.desktop.process.parameter.events.PanelPropertyChangedListener;
 import com.supermap.desktop.process.parameter.events.ParameterValueLegalListener;
 import com.supermap.desktop.process.parameter.events.UpdateValueListener;
-import com.supermap.desktop.process.parameter.interfaces.datas.Irequisite;
+import com.supermap.desktop.process.parameter.interfaces.datas.IRequired;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by highsad on 2017/1/5.
  */
-public interface IParameter extends IAbstractParameter, Irequisite {
+public interface IParameter extends IAbstractParameter, IRequired {
 	String getType();
 
 	boolean isEnabled();
@@ -70,13 +70,13 @@ public interface IParameter extends IAbstractParameter, Irequisite {
 
 	IParameters getParameters();
 
-	boolean setFieldVale(String fieldName, Object value);
+	boolean setFieldValue(String fieldName, Object value);
 
 	Object getFieldValue(String fieldName) throws Exception;
 
-	void setRequisite(boolean value);
+	void setRequired(boolean value);
 
-	boolean isRequisite();
+	boolean isRequired();
 
 	boolean isReady();
 

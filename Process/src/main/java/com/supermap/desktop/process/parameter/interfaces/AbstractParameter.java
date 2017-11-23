@@ -3,7 +3,7 @@ package com.supermap.desktop.process.parameter.interfaces;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.parameter.events.*;
-import com.supermap.desktop.process.parameter.interfaces.datas.Irequisite;
+import com.supermap.desktop.process.parameter.interfaces.datas.IRequired;
 import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author XiaJT
  */
-public abstract class AbstractParameter implements IParameter, Irequisite {
+public abstract class AbstractParameter implements IParameter, IRequired {
 
 	private Type valueType;
 	protected IParameterPanel panel;
@@ -202,7 +202,7 @@ public abstract class AbstractParameter implements IParameter, Irequisite {
 	 * @return
 	 */
 	@Override
-	public boolean setFieldVale(String fieldName, Object value) {
+	public boolean setFieldValue(String fieldName, Object value) {
 		Field[] fields = this.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			ParameterField annotation = field.getAnnotation(ParameterField.class);
@@ -275,7 +275,7 @@ public abstract class AbstractParameter implements IParameter, Irequisite {
 	 * @return
 	 */
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return this.isRequisite;
 	}
 
@@ -286,7 +286,7 @@ public abstract class AbstractParameter implements IParameter, Irequisite {
 	 * @param isRequisite
 	 */
 	@Override
-	public void setRequisite(boolean isRequisite) {
+	public void setRequired(boolean isRequisite) {
 		this.isRequisite = isRequisite;
 	}
 

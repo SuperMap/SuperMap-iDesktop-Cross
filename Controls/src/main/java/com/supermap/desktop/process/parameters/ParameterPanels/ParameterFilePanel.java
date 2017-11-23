@@ -107,7 +107,7 @@ public class ParameterFilePanel extends SwingPanel {
 	 */
 	private String getDescribe() {
 		String describe = parameterFile.getDescription();
-		if (parameterFile.isRequisite()) {
+		if (parameterFile.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

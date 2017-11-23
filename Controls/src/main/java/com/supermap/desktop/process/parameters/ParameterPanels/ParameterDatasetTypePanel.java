@@ -83,7 +83,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 
 	protected String getDescribe() {
 		String describe = parameterDatasetType.getDescription();
-		if (parameterDatasetType.isRequisite()) {
+		if (parameterDatasetType.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

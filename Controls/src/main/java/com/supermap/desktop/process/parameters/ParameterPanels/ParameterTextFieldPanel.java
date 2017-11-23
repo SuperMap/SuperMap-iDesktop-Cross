@@ -134,7 +134,7 @@ public class ParameterTextFieldPanel extends SwingPanel implements IParameterPan
 	 */
 	protected String getDescribe() {
 		String describe = parameterTextField.getDescription();
-		if (parameterTextField.isRequisite()) {
+		if (parameterTextField.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
