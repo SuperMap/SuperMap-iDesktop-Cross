@@ -46,7 +46,7 @@ public class ParameterPassword extends AbstractParameter implements ISelectionPa
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 }

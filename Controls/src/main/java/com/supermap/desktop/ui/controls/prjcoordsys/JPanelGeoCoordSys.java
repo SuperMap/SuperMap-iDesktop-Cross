@@ -118,10 +118,10 @@ public class JPanelGeoCoordSys extends JPanel {
 	//				geoCoordSys.setType((GeoCoordSysType) selectedItem);
 	//				lock = true;
 	//				geoCoordSys.setType((GeoCoordSysType) selectedItem);
-	//				geoCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
-	//				//comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoDatum().getType().name()));
-	//				//comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(geoCoordSys.getGeoPrimeMeridian().getType().name()));
-	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((GeoCoordSysType) selectedItem).name()));
+	//				geoCoordSys.setName(PrjCoordSysTypeUtilities.getDescription(((GeoCoordSysType) selectedItem).name()));
+	//				//comboBoxGeoDatumPlane.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(geoCoordSys.getGeoDatum().getType().name()));
+	//				//comboBoxCentralMeridianType.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(geoCoordSys.getGeoPrimeMeridian().getType().name()));
+	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(((GeoCoordSysType) selectedItem).name()));
 	//				lock = false;
 	//			} else {
 	//				if (StringUtilities.isNullOrEmptyString(selectedItem)) {

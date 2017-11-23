@@ -40,7 +40,7 @@ public class ParameterRasterReclassPanel extends SwingPanel{
 	private void initLayout(){
 		panel.setLayout(new GridBagLayout());
 		panel.add(rasterReclassValuePanel, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(1, 1));
-		panel.setBorder(new TitledBorder(this.parameterRasterReclass.getDescribe()));
+		panel.setBorder(new TitledBorder(this.parameterRasterReclass.getDescription()));
 
 	}
 

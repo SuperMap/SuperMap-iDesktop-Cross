@@ -21,7 +21,7 @@ public class ParameterHistogram extends AbstractParameter implements ISelectionP
 	private FunctionType functionType;
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return CoreProperties.getString("String_Histogram");
 	}
 

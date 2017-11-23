@@ -17,7 +17,7 @@ public class ParameterMultiBufferRadioList extends AbstractParameter implements 
 	}
 
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 

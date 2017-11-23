@@ -54,9 +54,9 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		parameterAnalystDataType.setiServerLogin(parameterIServerLogin);
 //		//设置分析数据
-		parameterSummaryType.setRequisite(true);
+		parameterSummaryType.setRequired(true);
 		parameterSummaryType.setItems(new ParameterDataNode(ProcessProperties.getString("String_summaryMesh"), "SUMMARYMESH"), new ParameterDataNode(ProcessProperties.getString("String_summaryRegion"), "SUMMARYREGION"));
-		parameterMeshType.setRequisite(true);
+		parameterMeshType.setRequired(true);
 		parameterMeshType.setItems(new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1"));
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");
 		parameterFeildName.setTipButtonMessage(ProcessProperties.getString("String_FeildNameTip"));
@@ -73,10 +73,10 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 		parameterStandardFields.setSelectedItem(false);
 		parameterWeightedFields.setSelectedItem(false);
 		parametersumShape.setSelectedItem(true);
-		parameterFeildName.setRequisite(true);
-		parameterStatisticMode.setRequisite(true);
-		parameterFeildName1.setRequisite(true);
-		parameterStatisticMode1.setRequisite(true);
+		parameterFeildName.setRequired(true);
+		parameterStatisticMode.setRequired(true);
+		parameterFeildName1.setRequired(true);
+		parameterStatisticMode1.setRequired(true);
 	}
 
 	private void initComponentState() {

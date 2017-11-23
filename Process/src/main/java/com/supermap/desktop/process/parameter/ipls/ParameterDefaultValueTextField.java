@@ -47,7 +47,7 @@ public class ParameterDefaultValueTextField extends ParameterTextField implement
 		return StringUtilities.isNullOrEmpty(value) ? (null == defaultWarningValue ? "" : defaultWarningValue) : value;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

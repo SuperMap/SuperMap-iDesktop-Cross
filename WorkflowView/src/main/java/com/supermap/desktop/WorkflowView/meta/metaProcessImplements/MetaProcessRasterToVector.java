@@ -161,27 +161,27 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 		vertorizeLineSetting.setEnabled(comboBoxType.getSelectedData() == DatasetType.LINE);
 
 		//textFieldNoValue.setSelectedItem("-9999");
-		textFieldNoValue.setRequisite(true);
+		textFieldNoValue.setRequired(true);
 		textFieldNoValueTolerance.setSelectedItem("0");
 		textFieldNoValueTolerance.setMinValue(0);
 		textFieldNoValueTolerance.setIsIncludeMin(true);
-		textFieldNoValueTolerance.setRequisite(true);
+		textFieldNoValueTolerance.setRequired(true);
 		textFieldGridField.setSelectedItem("value");
-		textFieldGridField.setRequisite(true);
+		textFieldGridField.setRequired(true);
 		textFieldGridValue.setSelectedItem("0");
 		textFieldGridValueTolerance.setSelectedItem("0");
 		textFieldGridValueTolerance.setMinValue(0);
 		textFieldGridValueTolerance.setIsIncludeMin(true);
 		//gridDatasetSetting.setEnabled(sourceDataset.getSelectedItem() instanceof DatasetGrid);
 		comboBoxBackColor.setSelectedItem(Color.WHITE);
-		comboBoxBackColor.setRequisite(true);
+		comboBoxBackColor.setRequired(true);
 
 		textFieldColorTolerance.setSelectedItem("0");
 		textFieldColorTolerance.setMinValue(0);
 		textFieldColorTolerance.setMaxValue(255);
 		textFieldColorTolerance.setIsIncludeMin(true);
 		textFieldColorTolerance.setIncludeMax(true);
-		textFieldColorTolerance.setRequisite(true);
+		textFieldColorTolerance.setRequired(true);
 		//imageDatasetSetting.setEnabled(sourceDataset.getSelectedItem() instanceof DatasetImage);
 	}
 

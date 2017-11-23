@@ -512,7 +512,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 				}
 			});
 		} else {
-			parameterFile.setRequisite(true);
+			parameterFile.setRequired(true);
 		}
 		parameterCombineSourceInfoSet.addParameters(parameterFile);
 		if (hasCharsetParameter) {

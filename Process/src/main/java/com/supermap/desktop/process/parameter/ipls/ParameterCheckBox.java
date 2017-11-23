@@ -69,7 +69,7 @@ public class ParameterCheckBox extends AbstractParameter implements ISelectionPa
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 }

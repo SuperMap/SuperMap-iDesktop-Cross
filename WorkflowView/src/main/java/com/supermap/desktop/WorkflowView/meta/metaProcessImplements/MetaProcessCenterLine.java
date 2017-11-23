@@ -47,8 +47,8 @@ public abstract class MetaProcessCenterLine extends MetaProcess {
 		this.parameterNumberMaxWidth = new ParameterNumber(CoreProperties.getString("String_MaxWidth"));
 		this.parameterNumberMinWidth = new ParameterNumber(CoreProperties.getString("String_MinWidth"));
 
-		this.parameterNumberMaxWidth.setRequisite(true);
-		this.parameterNumberMinWidth.setRequisite(true);
+		this.parameterNumberMaxWidth.setRequired(true);
+		this.parameterNumberMinWidth.setRequired(true);
 		ParameterCombine sourceData = new ParameterCombine();
 		sourceData.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		sourceData.addParameters(this.sourceDatasource, this.dataset);

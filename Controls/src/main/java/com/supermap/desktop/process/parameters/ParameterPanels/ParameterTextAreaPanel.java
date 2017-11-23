@@ -89,9 +89,9 @@ public class ParameterTextAreaPanel extends SwingPanel implements IParameterPane
 	private void initComponents() {
 		this.scrollPane = new JScrollPane();
 		this.label = new JLabel();
-		if (!StringUtilities.isNullOrEmpty(parameterTextArea.getDescribe()))
-			this.label.setText(parameterTextArea.getDescribe());
-		this.label.setToolTipText(parameterTextArea.getDescribe());
+		if (!StringUtilities.isNullOrEmpty(parameterTextArea.getDescription()))
+			this.label.setText(parameterTextArea.getDescription());
+		this.label.setToolTipText(parameterTextArea.getDescription());
 		this.textArea = new JTextArea();
 		if (!parameterTextArea.isEnabled()) {
 			this.textArea.setEnabled(parameterTextArea.isEnabled());
@@ -105,7 +105,7 @@ public class ParameterTextAreaPanel extends SwingPanel implements IParameterPane
 		if (parameterTextArea.isWrapStyleWord()) {
 			this.textArea.setWrapStyleWord(parameterTextArea.isWrapStyleWord());
 		}
-		ComponentUIUtilities.setName(this.textArea, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.textArea, parameter.getDescription());
 	}
 
 }

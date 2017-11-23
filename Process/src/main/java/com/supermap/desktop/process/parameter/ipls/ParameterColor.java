@@ -44,7 +44,7 @@ public class ParameterColor extends AbstractParameter implements ISelectionParam
 		return this.value;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

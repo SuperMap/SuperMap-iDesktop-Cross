@@ -42,7 +42,7 @@ public class MetaProcessPolygonAggregation extends MetaProcess {
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		parameterAnalystDataType.setiServerLogin(parameterIServerLogin);
 		ParameterDataNode parameterDataNode = new ParameterDataNode(ProcessProperties.getString("String_PolygonAggregationType"), "SUMMARYREGION");
-		parameterAggregationType.setRequisite(true);
+		parameterAggregationType.setRequired(true);
 		parameterAggregationType.setItems(parameterDataNode);
 		parameterAggregationType.setSelectedItem(parameterDataNode);
 		parameterStaticModel.setTipButtonMessage(ProcessProperties.getString("String_StatisticsModeTip"));

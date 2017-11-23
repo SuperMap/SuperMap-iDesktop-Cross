@@ -68,9 +68,9 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 	public ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals(parameterInputSourcePoint.getDescribe())) {
+			if (e.getActionCommand().equals(parameterInputSourcePoint.getDescription())) {
 				inputSourcePoint();
-			} else if (e.getActionCommand().equals(parameterInputTargetPoint.getDescribe())) {
+			} else if (e.getActionCommand().equals(parameterInputTargetPoint.getDescription())) {
 				inputTargetPoint();
 			}
 		}
@@ -101,10 +101,10 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 		parameterTargetPointX = new ParameterNumber(ControlsProperties.getString("String_TargetPointX"));
 		parameterTargetPointY = new ParameterNumber(ControlsProperties.getString("String_TargetPointY"));
 
-		parameterSourcePointX.setRequisite(true);
-		parameterSourcePointY.setRequisite(true);
-		parameterTargetPointX.setRequisite(true);
-		parameterTargetPointY.setRequisite(true);
+		parameterSourcePointX.setRequired(true);
+		parameterSourcePointY.setRequired(true);
+		parameterTargetPointX.setRequired(true);
+		parameterTargetPointY.setRequired(true);
 
 		parameterInputSourcePoint = new ParameterButton(ControlsProperties.getString("String_Label_InputSourcePoint"));
 		parameterInputTargetPoint = new ParameterButton(ControlsProperties.getString("String_Label_InputTargetPoint"));

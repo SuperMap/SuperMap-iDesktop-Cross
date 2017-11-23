@@ -98,7 +98,7 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 		this.parameterRadiusUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Inch"), BufferRadiusUnit.Inch));
 		this.parameterRadiusUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), BufferRadiusUnit.Mile));
 		this.parameterRadiusUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Yard"), BufferRadiusUnit.Yard));
-		this.parameterRadiusUnit.setRequisite(true);
+		this.parameterRadiusUnit.setRequired(true);
 
 		ParameterCombine parameterCombineRadioList = new ParameterCombine();
 		parameterCombineRadioList.setDescribe(ProcessProperties.getString("String_Title_BufferRadioList"));
@@ -113,7 +113,7 @@ public class MetaProcessMultiBuffer extends MetaProcess {
 		this.parameterTextFieldSemicircleLineSegment.setMaxBit(0);
 		this.parameterTextFieldSemicircleLineSegment.setMinValue(4);
 		this.parameterTextFieldSemicircleLineSegment.setMaxValue(200);
-		this.parameterTextFieldSemicircleLineSegment.setRequisite(true);
+		this.parameterTextFieldSemicircleLineSegment.setRequired(true);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
 		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));

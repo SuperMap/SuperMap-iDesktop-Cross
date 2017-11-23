@@ -131,7 +131,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 			}
 		});
 		for (int i = 0; i < parameters.size(); i++) {
-			item = new JMenuItem(parameters.get(i).getDescribe());
+			item = new JMenuItem(parameters.get(i).getDescription());
 			this.inputsMenu.add(item);
 			item.setEnabled((parameters.get(i)).isEnabled());
 			final JMenuItem finalItem = item;
@@ -149,7 +149,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, endGraph);
 							canvas.addGraph(connectionLineGraph);
 							canvas.getIterator().setBindProcess(endGraph.getProcess());
-							canvas.getIterator().setBindParameterDescription(parameters.get(selectedItemIndex).getDescribe());
+							canvas.getIterator().setBindParameterDescription(parameters.get(selectedItemIndex).getDescription());
 							canvas.repaint();
 							inputsMenu.setVisible(false);
 						}

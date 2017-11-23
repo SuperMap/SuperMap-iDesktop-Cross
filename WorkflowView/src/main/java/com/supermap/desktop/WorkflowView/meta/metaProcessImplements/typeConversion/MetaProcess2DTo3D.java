@@ -65,9 +65,9 @@ public class MetaProcess2DTo3D extends MetaProcessTypeConversion {
         comboBoxZ.setFieldType(FieldTypeUtilities.getNumericFieldType());
         comboBoxFrom.setFieldType(FieldTypeUtilities.getNumericFieldType());
         comboBoxTo.setFieldType(FieldTypeUtilities.getNumericFieldType());
-        comboBoxZ.setRequisite(true);
-		comboBoxFrom.setRequisite(true);
-		comboBoxTo.setRequisite(true);
+        comboBoxZ.setRequired(true);
+		comboBoxFrom.setRequired(true);
+		comboBoxTo.setRequired(true);
 
 		ParameterCombine inputCombine = new ParameterCombine();
 		inputCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));

@@ -181,7 +181,7 @@ public class MetaProcessOverlayAnalyst extends MetaProcess {
 			}
 			parameterTolerance.setMinValue(0);
 			parameterTolerance.setIsIncludeMin(true);
-			parameterTolerance.setRequisite(true);
+			parameterTolerance.setRequired(true);
 		} else {
 			parameterTolerance.setSelectedItem("");
 			parameterUnit.setDescribe("");

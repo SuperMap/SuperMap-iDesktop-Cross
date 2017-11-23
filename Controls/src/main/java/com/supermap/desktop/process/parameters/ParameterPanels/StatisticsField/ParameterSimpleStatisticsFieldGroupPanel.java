@@ -46,8 +46,8 @@ public class ParameterSimpleStatisticsFieldGroupPanel extends SwingPanel {
 	}
 
 	private void initComponent() {
-		label.setText(parameterSimpleStatisticsFieldGroup.getDescribe());
-		label.setToolTipText(parameterSimpleStatisticsFieldGroup.getDescribe());
+		label.setText(parameterSimpleStatisticsFieldGroup.getDescription());
+		label.setToolTipText(parameterSimpleStatisticsFieldGroup.getDescription());
 		table.setModel(tableModel);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		table.setDefaultRenderer(FieldType.class, new DefaultTableCellRenderer() {

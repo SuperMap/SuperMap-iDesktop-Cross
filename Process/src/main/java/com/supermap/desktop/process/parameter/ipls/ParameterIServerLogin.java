@@ -19,10 +19,10 @@ public class ParameterIServerLogin extends ParameterCombine {
 
 	public ParameterIServerLogin() {
 		super();
-		parameterTextFieldAddress.setRequisite(true);
+		parameterTextFieldAddress.setRequired(true);
 		parameterTextFieldAddress.setDefaultWarningValue("{ip}:{port}");
-		parameterTextFieldUserName.setRequisite(true);
-		parameterTextFieldPassword.setRequisite(true);
+		parameterTextFieldUserName.setRequired(true);
+		parameterTextFieldPassword.setRequired(true);
 		this.addParameters(parameterTextFieldAddress, parameterTextFieldUserName, parameterTextFieldPassword);
 		this.setDescribe(ProcessProperties.getString("String_loginInfo"));
 		registerEvents();

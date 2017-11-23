@@ -58,7 +58,7 @@ public class ParameterTextField extends AbstractParameter implements ISelectionP
 		return value;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

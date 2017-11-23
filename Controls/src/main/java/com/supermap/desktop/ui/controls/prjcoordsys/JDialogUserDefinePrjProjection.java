@@ -1,7 +1,7 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
-import com.supermap.data.*;
 import com.supermap.data.Enum;
+import com.supermap.data.*;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -188,9 +188,9 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	//				prjCoordSys.setType((PrjCoordSysType) selectedItem);
 	//				lock = true;
 	//				prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
-	//				prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+	//				prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescription(((PrjCoordSysType) selectedItem).name()));
 	//				panelGeoCoordSys.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
-	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(((PrjCoordSysType) selectedItem).name()));
 	//				resetProjectionTypeValues();
 	//				lock = false;
 	//			} else {

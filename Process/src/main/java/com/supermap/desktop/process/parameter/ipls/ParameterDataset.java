@@ -41,7 +41,7 @@ public class ParameterDataset extends AbstractParameter implements ISelectionPar
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return "";
 	}
 }

@@ -69,7 +69,7 @@ public class ParameterSpinner extends AbstractParameter implements ISelectionPar
 		return this;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

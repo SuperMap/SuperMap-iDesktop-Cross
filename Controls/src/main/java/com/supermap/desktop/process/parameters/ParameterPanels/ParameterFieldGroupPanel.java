@@ -41,10 +41,10 @@ public class ParameterFieldGroupPanel extends SwingPanel {
 	}
 
 	private void initComponent() {
-		label.setText(parameterFieldGroup.getDescribe());
-		label.setToolTipText(parameterFieldGroup.getDescribe());
+		label.setText(parameterFieldGroup.getDescription());
+		label.setToolTipText(parameterFieldGroup.getDescription());
 		tableFieldNameCaptionType.setDataset(parameterFieldGroup.getDataset());
-		ComponentUIUtilities.setName(this.tableFieldNameCaptionType, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.tableFieldNameCaptionType, parameter.getDescription());
 	}
 
 	private void initListener() {
