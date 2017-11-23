@@ -66,7 +66,7 @@ public interface IParameter extends IAbstractParameter, Irequisite {
 	void setParameters(IParameters parameters);
 
 
-	String getDescribe();
+	String getDescription();
 
 	IParameters getParameters();
 

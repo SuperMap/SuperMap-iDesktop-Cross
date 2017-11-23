@@ -22,6 +22,6 @@ public class ParameterSpinnerPanel extends SwingPanel implements IParameterPanel
 		super(parameterSpinner);
 		this.parameterSpinner = (ParameterSpinner) parameterSpinner;
 		spinner = new JSpinner();
-		ComponentUIUtilities.setName(this.spinner, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.spinner, parameter.getDescription());
 	}
 }

@@ -88,7 +88,7 @@ public class ParameterCombine extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

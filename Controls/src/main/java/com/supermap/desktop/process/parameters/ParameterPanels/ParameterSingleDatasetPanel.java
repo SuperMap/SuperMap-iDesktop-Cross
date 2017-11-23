@@ -131,7 +131,7 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 				this.datasetComboBox.setSelectedDataset(selectedItem);
 			}
 		}
-		ComponentUIUtilities.setName(this.datasetComboBox, parameterSingleDataset.getDescribe());
+		ComponentUIUtilities.setName(this.datasetComboBox, parameterSingleDataset.getDescription());
 	}
 
 	private void setSelectedDatasource(Datasource datasource) {
@@ -295,7 +295,7 @@ public class ParameterSingleDatasetPanel extends SwingPanel implements IParamete
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterSingleDataset.getDescribe();
+		String describe = parameterSingleDataset.getDescription();
 		if (parameterSingleDataset.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

@@ -113,7 +113,7 @@ public class ParameterComboBox extends AbstractParameter implements ISingleSelec
 		return this.value == null ? null : this.value.getData();
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

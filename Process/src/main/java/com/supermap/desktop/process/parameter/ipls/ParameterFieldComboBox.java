@@ -82,7 +82,7 @@ public class ParameterFieldComboBox extends AbstractParameter implements ISelect
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

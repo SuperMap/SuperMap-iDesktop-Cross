@@ -48,9 +48,9 @@ public class ParameterFilePanel extends SwingPanel {
 
 		fileChoose = new SmFileChoose(this.parameterFile.getModuleName());
 		fileChooserControl.setFileChooser(fileChoose);
-		ComponentUIUtilities.setName(this.fileChooserControl, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.fileChooserControl, parameter.getDescription());
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterFile.getDescribe());
+		label.setToolTipText(this.parameterFile.getDescription());
 		initListener();
 		initLayout();
 	}
@@ -106,7 +106,7 @@ public class ParameterFilePanel extends SwingPanel {
 	 * @return 判断是否为必要参数
 	 */
 	private String getDescribe() {
-		String describe = parameterFile.getDescribe();
+		String describe = parameterFile.getDescription();
 		if (parameterFile.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

@@ -40,12 +40,12 @@ public class ParameterTextFieldPanel extends SwingPanel implements IParameterPan
 		super(parameterTextField);
 		this.parameterTextField = (ParameterTextField) parameterTextField;
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterTextField.getDescribe());
+		label.setToolTipText(this.parameterTextField.getDescription());
 		label.setVisible(this.parameterTextField.isDescriptionVisible());
 		textField.setText(String.valueOf(this.parameterTextField.getSelectedItem()));
 		textField.setToolTipText(this.parameterTextField.getToolTip());
 		this.smTextFieldLegit = ((ParameterTextField) parameterTextField).getSmTextFieldLegit();
-		ComponentUIUtilities.setName(this.textField, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.textField, parameter.getDescription());
 
 		initLayout();
 		initListeners();
@@ -133,7 +133,7 @@ public class ParameterTextFieldPanel extends SwingPanel implements IParameterPan
 	 * @return
 	 */
 	protected String getDescribe() {
-		String describe = parameterTextField.getDescribe();
+		String describe = parameterTextField.getDescription();
 		if (parameterTextField.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

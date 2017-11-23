@@ -68,9 +68,9 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 	public ActionListener actionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals(parameterInputSourcePoint.getDescribe())) {
+			if (e.getActionCommand().equals(parameterInputSourcePoint.getDescription())) {
 				inputSourcePoint();
-			} else if (e.getActionCommand().equals(parameterInputTargetPoint.getDescribe())) {
+			} else if (e.getActionCommand().equals(parameterInputTargetPoint.getDescription())) {
 				inputTargetPoint();
 			}
 		}

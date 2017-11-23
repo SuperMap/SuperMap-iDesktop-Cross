@@ -36,9 +36,9 @@ public class ParameterPasswordPanel extends SwingPanel implements IParameterPane
 		super(parameter);
 		parameterPassword = (ParameterPassword) parameter;
 		label.setText(getDescribe());
-		label.setToolTipText(parameterPassword.getDescribe());
+		label.setToolTipText(parameterPassword.getDescription());
 		passwordField.setText(String.valueOf(parameterPassword.getSelectedItem()));
-		ComponentUIUtilities.setName(this.passwordField, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.passwordField, parameter.getDescription());
 		initLayout();
 		initListeners();
 	}
@@ -92,7 +92,7 @@ public class ParameterPasswordPanel extends SwingPanel implements IParameterPane
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterPassword.getDescribe();
+		String describe = parameterPassword.getDescription();
 		if (parameterPassword.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

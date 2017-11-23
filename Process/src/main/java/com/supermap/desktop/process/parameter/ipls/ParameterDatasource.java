@@ -103,7 +103,7 @@ public class ParameterDatasource extends AbstractParameter implements ISelection
 		return this.datasource;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return this.describe;
 	}
 

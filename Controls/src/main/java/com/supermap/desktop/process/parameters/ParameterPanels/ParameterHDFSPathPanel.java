@@ -52,8 +52,8 @@ public class ParameterHDFSPathPanel extends SwingPanel {
 		this.buttonInputBrowser.setText(ControlsProperties.getString("String_Scale"));
 		this.labelFileInputPath.setText(ProcessProperties.getString("label_ChooseFile"));
 		this.labelFileInputPath.setPreferredSize(ParameterUtil.LABEL_DEFAULT_SIZE);
-		ComponentUIUtilities.setName(this.textFieldFileInputPath, parameter.getDescribe() + "_textField");
-		ComponentUIUtilities.setName(this.buttonInputBrowser, parameter.getDescribe() + "button");
+		ComponentUIUtilities.setName(this.textFieldFileInputPath, parameter.getDescription() + "_textField");
+		ComponentUIUtilities.setName(this.buttonInputBrowser, parameter.getDescription() + "button");
 		panel.setLayout(new GridBagLayout());
 		panel.add(this.labelFileInputPath, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 		panel.add(this.textFieldFileInputPath, new GridBagConstraintsHelper(1, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 5, 0, 0).setWeight(1, 0));

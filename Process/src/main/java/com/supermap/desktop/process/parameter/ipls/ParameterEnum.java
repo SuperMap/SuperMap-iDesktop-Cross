@@ -64,7 +64,7 @@ public class ParameterEnum extends AbstractParameter implements ISelectionParame
 		return parser;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

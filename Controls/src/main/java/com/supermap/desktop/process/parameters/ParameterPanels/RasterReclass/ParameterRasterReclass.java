@@ -44,7 +44,7 @@ public class ParameterRasterReclass extends AbstractParameter implements IMultiS
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

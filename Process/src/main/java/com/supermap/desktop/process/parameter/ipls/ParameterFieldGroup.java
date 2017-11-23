@@ -48,7 +48,7 @@ public class ParameterFieldGroup extends AbstractParameter implements IMultiSele
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

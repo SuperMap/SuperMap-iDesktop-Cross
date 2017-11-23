@@ -83,7 +83,7 @@ public class ParameterSwitch extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

@@ -23,8 +23,8 @@ public class ParameterNumberPanel extends ParameterTextFieldPanel {
 	/**
 	 * @return
 	 */
-//	private String getDescribe() {
-//		String describe = parameterNumber.getDescribe();
+//	private String getDescription() {
+//		String describe = parameterNumber.getDescription();
 //		if (parameterNumber.isRequisite()) {
 //			return MessageFormat.format(CommonProperties.getString("String_IsRequiredLable"), describe);
 //		} else {

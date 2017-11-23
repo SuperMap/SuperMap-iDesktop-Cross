@@ -88,7 +88,7 @@ public class ParameterSingleDataset extends AbstractParameter implements ISelect
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

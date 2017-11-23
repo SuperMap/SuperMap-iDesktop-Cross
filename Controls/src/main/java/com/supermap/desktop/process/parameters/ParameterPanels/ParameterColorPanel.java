@@ -31,10 +31,10 @@ public class ParameterColorPanel extends SwingPanel implements IParameterPanel {
 		super(parameterColor);
 		this.parameterColor = (ParameterColor) parameterColor;
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterColor.getDescribe());
+		label.setToolTipText(this.parameterColor.getDescription());
 		initLayout();
 		this.componentDropDown.setColor(((ParameterColor) parameterColor).getInitColor());
-		ComponentUIUtilities.setName(this.componentDropDown, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.componentDropDown, parameter.getDescription());
 		initListeners();
 
 	}
@@ -79,7 +79,7 @@ public class ParameterColorPanel extends SwingPanel implements IParameterPanel {
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterColor.getDescribe();
+		String describe = parameterColor.getDescription();
 		if (parameterColor.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

@@ -24,7 +24,7 @@ public class ParameterLabelPanel extends SwingPanel {
 	public ParameterLabelPanel(IParameter parameter) {
 		super(parameter);
 		this.parameter = ((ParameterLabel) parameter);
-		label.setText(parameter.getDescribe());
+		label.setText(parameter.getDescription());
 		label.setPreferredSize(ParameterUtil.LABEL_DEFAULT_SIZE);
 		initComponent();
 		initListeners();

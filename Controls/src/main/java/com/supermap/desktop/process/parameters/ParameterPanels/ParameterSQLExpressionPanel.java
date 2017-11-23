@@ -31,7 +31,7 @@ public class ParameterSQLExpressionPanel extends SwingPanel implements IParamete
 
 	private void init() {
 		this.buttonExpression = new JButton();
-		this.buttonExpression.setText(parameterSQLExpression.getDescribe());
+		this.buttonExpression.setText(parameterSQLExpression.getDescription());
 		this.buttonExpression.setEnabled(parameterSQLExpression.isEnabled());
 		this.panel.setLayout(new GridBagLayout());
 		this.panel.add(this.buttonExpression, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(parameterSQLExpression.getAnchor()).setWeight(0, 0).setFill(GridBagConstraints.NONE));

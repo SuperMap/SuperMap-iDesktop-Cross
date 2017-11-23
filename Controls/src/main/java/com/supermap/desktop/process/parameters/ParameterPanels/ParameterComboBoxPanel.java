@@ -38,7 +38,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	public ParameterComboBoxPanel(IParameter parameterComboBox) {
 		super(parameterComboBox);
 		this.parameterComboBox = ((ParameterComboBox) parameterComboBox);
-		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescription());
 		ArrayList<ParameterDataNode> items = this.parameterComboBox.getItems();
 		if (items != null && items.size() > 0) {
 			for (ParameterDataNode item : items) {
@@ -52,7 +52,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		}
 		initListeners();
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterComboBox.getDescribe());
+		label.setToolTipText(this.parameterComboBox.getDescription());
 		label.setVisible(parameterComboBox.isDescriptionVisible());
 		comboBox.setRenderer(new ParameterComboBoxCellRender(this.parameterComboBox.getIConGetter()));
 		//comboBox.setEditable(this.parameterComboBox.isEditable());
@@ -68,7 +68,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 1));
 		panel.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 5, 0, 0));
 		// 当描述为空时，不显示其label-yuanR
-		if (StringUtilities.isNullOrEmpty(parameterComboBox.getDescribe())) {
+		if (StringUtilities.isNullOrEmpty(parameterComboBox.getDescription())) {
 			label.setVisible(false);
 		}
 	}
@@ -133,7 +133,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterComboBox.getDescribe();
+		String describe = parameterComboBox.getDescription();
 		if (parameterComboBox.isRequisite()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {

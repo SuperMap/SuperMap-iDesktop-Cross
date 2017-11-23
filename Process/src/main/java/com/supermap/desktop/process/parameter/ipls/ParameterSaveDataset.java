@@ -77,7 +77,7 @@ public class ParameterSaveDataset extends AbstractParameter implements ISelectio
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return CoreProperties.getString("String_Label_Dataset");
 	}
 

@@ -27,9 +27,9 @@ public class ParameterButtonPanel extends SwingPanel implements IParameterPanel 
 	public ParameterButtonPanel(IParameter parameterButton) {
 		super(parameterButton);
 		this.parameterButton = (ParameterButton) parameterButton;
-		jButton.setText(this.parameterButton.getDescribe());
+		jButton.setText(this.parameterButton.getDescription());
 		jButton.setEnabled(((ParameterButton) parameterButton).isEnabled());
-		ComponentUIUtilities.setName(this.jButton, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.jButton, parameter.getDescription());
 		initLayout();
 		initListeners();
 	}

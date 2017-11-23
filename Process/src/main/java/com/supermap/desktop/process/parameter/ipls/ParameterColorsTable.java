@@ -45,7 +45,7 @@ public class ParameterColorsTable extends AbstractParameter implements ISelectio
 		return this.value;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

@@ -264,7 +264,7 @@ public abstract class AbstractParameter implements IParameter, Irequisite {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return null;
 	}
 
