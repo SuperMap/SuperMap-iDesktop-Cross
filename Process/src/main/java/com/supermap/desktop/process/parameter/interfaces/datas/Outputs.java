@@ -5,9 +5,7 @@ import com.supermap.desktop.process.parameter.interfaces.IParameters;
 import com.supermap.desktop.process.types.Type;
 import com.supermap.desktop.utilities.StringUtilities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
  * Created by highsad on 2017/3/22.
@@ -15,12 +13,13 @@ import java.util.LinkedHashMap;
 public class Outputs {
 	private IProcess process;
 	//	private ConcurrentHashMap<String, OutputData> datas = new ConcurrentHashMap<>();
-	private LinkedHashMap<String, OutputData> datas = new LinkedHashMap<>();
+//	private Map<String, OutputData> datas = Collections.synchronizedMap(new LinkedHashMap<String, OutputData>());
+	private Map<String, OutputData> datas;
 	//  将ConcurrentHashMap改为LinkedHashMap，保存存入的OutputData拿出时顺序一致   ————李文发
 
 	public Outputs(IProcess process) {
+		datas=Collections.synchronizedMap(new LinkedHashMap<String, OutputData>());
 		this.process = process;
-		Collections.synchronizedMap(this.datas); //  LinkedHashMap由非线程安全改为线程安全的
 	}
 
 	public IProcess getProcess() {
