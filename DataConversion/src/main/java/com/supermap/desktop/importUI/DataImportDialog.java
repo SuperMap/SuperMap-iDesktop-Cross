@@ -162,6 +162,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 			if (!StringUtilities.isNullOrEmpty(fileType)) {
 				//导入信息参数设置
 				importInfo.setFileName(file.getName());
+				importInfo.setFilePath(file.getPath());
 				String filetype = FiletypeUtilities.getParseFile(file.getPath(), fileFilter);
 				importInfo.setFiletype(filetype);
 				importInfo.setState(DataConversionProperties.getString("string_change"));
@@ -800,6 +801,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 			importSetting.setSourceFilePath(directories);
 			importInfo.setImportSetting(importSetting);
 			importInfo.setFileName(directories);
+
 			importInfo.setState(DataConversionProperties.getString("string_change"));
 			IImportPanelFactory importPanelFactory = new ImportPanelFactory();
 			PanelImport panelImport = (PanelImport) importPanelFactory.createPanelImport(DataImportDialog.this, importInfo);
