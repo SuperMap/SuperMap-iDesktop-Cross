@@ -129,10 +129,12 @@ public class ImportSettingFactory implements IImportSettingFactory {
 			File file = new File(newFilePath);
 			if (file.exists()) {
 				importSetting = new ImportSettingSimpleJson();
-				((ImportSettingSimpleJson) importSetting).setImportEmptyDataset(true);
+				//Modify by xie 2017.11.24
+				//((ImportSettingSimpleJson) importSetting).setImportEmptyDataset(true);
 			} else {
 				importSetting = new ImportSettingGeoJson();
-				((ImportSettingGeoJson) importSetting).setImportEmptyDataset(true);
+				//Modify by xie 2017.11.24
+				//((ImportSettingGeoJson) importSetting).setImportEmptyDataset(true);
 			}
 		}
 		if (null != importSetting) {

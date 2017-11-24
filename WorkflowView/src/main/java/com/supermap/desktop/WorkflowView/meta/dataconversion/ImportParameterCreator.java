@@ -310,13 +310,13 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			reflectInfoArray.add(reflectInfoEncodeType);
 			reflectInfoArray.add(reflectInfoImportMode);
 			reflectInfoArray.add(reflectInfoDatasetType);
-			reflectInfoArray.add(reflectInfoSpatialIndex);
-			reflectInfoArray.add(reflectInfoFieldIndex);
 			if (importSetting instanceof ImportSettingGeoJson) {
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
 						parameterDatasetTypeEnum);
 			} else {
+				reflectInfoArray.add(reflectInfoSpatialIndex);
+				reflectInfoArray.add(reflectInfoFieldIndex);
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
 						parameterDatasetTypeEnum,
