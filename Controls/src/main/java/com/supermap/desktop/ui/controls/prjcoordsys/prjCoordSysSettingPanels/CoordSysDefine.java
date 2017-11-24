@@ -30,10 +30,6 @@ public class CoordSysDefine {
 	private CoordSysDefine parent;
 	private String caption = "";
 
-	public void setCoordSysType(int coordSysType) {
-		this.coordSysType = coordSysType;
-	}
-
 	private int coordSysType = PROJECTION_SYSTEM; // 坐标系类型
 	private int coordSysCode = -1; // 默认坐标系代码
 	private ArrayList<CoordSysDefine> children = new ArrayList<>();
@@ -151,10 +147,48 @@ public class CoordSysDefine {
 			for (CoordSysDefine coordSysDefine : children) {
 				if (coordSysDefine.getCoordSysCode() == coordSysCode) {
 					result = coordSysDefine;
-				} else {
-					result = coordSysDefine.getChildByCoordSysCode(coordSysCode);
 				}
+				if (result != null) {
+					break;
+				}
+			}
+		} catch (Exception e) {
+			result = null;
+		}
+		return result;
+	}
 
+	/**
+	 * 通过code、type、name属性一同查找
+	 *
+	 * @param prjCoordSys
+	 * @return
+	 */
+	public CoordSysDefine getChildByPrjCoordSys(PrjCoordSys prjCoordSys) {
+		CoordSysDefine result = null;
+		try {
+			for (CoordSysDefine coordSysDefine : children) {
+				if (coordSysDefine.getCoordSysType() == GEOGRAPHY_COORDINATE) {
+					// 根据类型、code值、caption
+					if (coordSysDefine.getGeoCoordSys() != null && prjCoordSys.getGeoCoordSys() != null
+							&& (coordSysDefine.getGeoCoordSys().getType()).equals(prjCoordSys.getGeoCoordSys().getType())
+							&& (coordSysDefine.getGeoCoordSys().getGeoPrimeMeridian().getType()).equals(prjCoordSys.getGeoCoordSys().getGeoPrimeMeridian().getType())
+							&& (coordSysDefine.getGeoCoordSys().getGeoDatum().getType()).equals(prjCoordSys.getGeoCoordSys().getGeoDatum().getType())
+							&& (coordSysDefine.getGeoCoordSys().getCoordUnit()).equals(prjCoordSys.getGeoCoordSys().getCoordUnit())
+							&& (coordSysDefine.getGeoCoordSys().getGeoSpatialRefType()).equals(prjCoordSys.getGeoCoordSys().getGeoSpatialRefType())
+							) {
+						result = coordSysDefine;
+					}
+				} else if (coordSysDefine.getCoordSysType() == PROJECTION_SYSTEM) {
+					if (coordSysDefine.getPrjCoordSys() != null && prjCoordSys != null
+							&& (coordSysDefine.getPrjCoordSys().getType()).equals(prjCoordSys.getType())
+							&& (coordSysDefine.getPrjCoordSys().getProjection().getType()).equals(prjCoordSys.getProjection().getType())
+							&& (coordSysDefine.getPrjCoordSys().getCoordUnit()).equals(prjCoordSys.getCoordUnit())
+							&& (coordSysDefine.getPrjCoordSys().getDistanceUnit()).equals(prjCoordSys.getDistanceUnit())
+							) {
+						result = coordSysDefine;
+					}
+				}
 				if (result != null) {
 					break;
 				}

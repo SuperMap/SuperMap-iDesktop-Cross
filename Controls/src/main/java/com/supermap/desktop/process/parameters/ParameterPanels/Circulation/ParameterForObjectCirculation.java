@@ -21,7 +21,7 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 	}
 
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 

@@ -66,8 +66,8 @@ public class ParameterComboBoxSwitch extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
-		return comboBox.getDescribe();
+	public String getDescription() {
+		return comboBox.getDescription();
 	}
 
 	public void setDescribe(String describe) {

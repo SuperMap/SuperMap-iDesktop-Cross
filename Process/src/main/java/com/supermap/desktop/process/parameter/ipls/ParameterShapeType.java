@@ -1,8 +1,6 @@
 package com.supermap.desktop.process.parameter.ipls;
 
 import com.supermap.analyst.spatialanalyst.NeighbourShape;
-import com.supermap.analyst.spatialanalyst.NeighbourShapeType;
-import com.supermap.analyst.spatialanalyst.NeighbourStatisticsParameter;
 import com.supermap.data.Dataset;
 import com.supermap.desktop.process.constraint.annotation.ParameterField;
 import com.supermap.desktop.process.enums.ParameterType;
@@ -54,7 +52,7 @@ public class ParameterShapeType extends AbstractParameter implements ISelectionP
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return "ShapeType";
 	}
 }

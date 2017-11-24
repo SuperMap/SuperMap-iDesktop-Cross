@@ -194,9 +194,9 @@ public class MetaProcessBuffer extends MetaProcess {
 		this.parameterTextFieldLeftRadius.setSelectedItem("10");
 		this.parameterTextFieldRightRadius.setSelectedItem("10");
 		this.parameterTextFieldSemicircleLineSegment.setSelectedItem("100");
-		this.parameterBufferRange.setRequisite(true);
-		this.parameterTextFieldLeftRadius.setRequisite(true);
-		this.parameterTextFieldSemicircleLineSegment.setRequisite(true);
+		this.parameterBufferRange.setRequired(true);
+		this.parameterTextFieldLeftRadius.setRequired(true);
+		this.parameterTextFieldSemicircleLineSegment.setRequired(true);
 
 		this.radioButtonFlatOrRound.setSelectedItem(this.radioButtonFlatOrRound.getItemAt(0));
 		this.checkBoxBufferLeft.setSelectedItem(true);

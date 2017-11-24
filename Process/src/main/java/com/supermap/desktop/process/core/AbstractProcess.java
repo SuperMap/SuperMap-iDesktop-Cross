@@ -158,7 +158,7 @@ public abstract class AbstractProcess implements IProcess {
 				ArrayList<IParameter> iParameters = anInputData.getParameters();
 				for (IParameter iParameter : iParameters) {
 					// 当导入数据不是“源数据”，并且是必要参数时才检查值得合法性-yuanR
-					if (iParameter instanceof ParameterCombine || iParameter instanceof ParameterSwitch || (iParameter instanceof AbstractParameter && iParameter.isRequisite())) {
+					if (iParameter instanceof ParameterCombine || iParameter instanceof ParameterSwitch || (iParameter instanceof AbstractParameter && iParameter.isRequired())) {
 						if (!iParameter.isReady()) {
 							return false;
 						}

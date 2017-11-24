@@ -42,12 +42,12 @@ public class ParameterDefaultValueTextFieldPanel extends SwingPanel implements I
 		super(parameterDefaultValueTextField);
 		this.parameterDefaultValueTextField = (ParameterDefaultValueTextField) parameterDefaultValueTextField;
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterDefaultValueTextField.getDescribe());
+		label.setToolTipText(this.parameterDefaultValueTextField.getDescription());
 		label.setVisible(this.parameterDefaultValueTextField.isDescriptionVisible());
 		textField.setText(String.valueOf(this.parameterDefaultValueTextField.getSelectedItem()));
 		textField.setDefaulWarningText(this.parameterDefaultValueTextField.getDefaultWarningValue());
 		//textField.setToolTipText(this.parameterDefaultValueTextField.getToolTip());
-		ComponentUIUtilities.setName(this.textField, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.textField, parameter.getDescription());
 		initLayout();
 		initListeners();
 	}
@@ -135,8 +135,8 @@ public class ParameterDefaultValueTextFieldPanel extends SwingPanel implements I
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterDefaultValueTextField.getDescribe();
-		if (parameterDefaultValueTextField.isRequisite()) {
+		String describe = parameterDefaultValueTextField.getDescription();
+		if (parameterDefaultValueTextField.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

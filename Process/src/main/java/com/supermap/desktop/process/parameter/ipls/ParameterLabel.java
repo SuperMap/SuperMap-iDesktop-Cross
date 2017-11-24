@@ -39,7 +39,7 @@ public class ParameterLabel extends AbstractParameter implements ISelectionParam
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 }

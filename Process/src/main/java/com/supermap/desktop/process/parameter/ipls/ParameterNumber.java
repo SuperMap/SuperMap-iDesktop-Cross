@@ -172,7 +172,7 @@ public class ParameterNumber extends ParameterTextField {
 	}
 
 	public String getToolTip() {
-		return StringUtilities.isNullOrEmpty(toolTip) ? getDescribe() + getRangeDescribe() : toolTip;
+		return StringUtilities.isNullOrEmpty(toolTip) ? getDescription() + getRangeDescribe() : toolTip;
 	}
 
 	public void setToolTip(String toolTip) {

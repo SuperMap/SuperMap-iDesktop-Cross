@@ -35,7 +35,7 @@ public class ParameterHDFSPath extends AbstractParameter implements ISelectionPa
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return null;
 	}
 

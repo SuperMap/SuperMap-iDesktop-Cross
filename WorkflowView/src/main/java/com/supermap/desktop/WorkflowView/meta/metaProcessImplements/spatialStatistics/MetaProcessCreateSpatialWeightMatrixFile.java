@@ -55,7 +55,7 @@ public class MetaProcessCreateSpatialWeightMatrixFile extends MetaProcessAnalyzi
 		parameterFile.setModuleName(modelName);
 		String defaultPath = System.getProperty("user.dir") + File.separator + "newFile.swmb";
 		parameterFile.setSelectedItem(defaultPath);
-		parameterFile.setRequisite(true);
+		parameterFile.setRequired(true);
 
 		ParameterCombine parameterCombine = new ParameterCombine();
 		parameterCombine.addParameters(parameterFile);

@@ -61,15 +61,15 @@ public class MetaProcessEdgeMatch extends MetaProcess {
 
 		targetDatasource = new ParameterDatasourceConstrained();
 		targetDataset = new ParameterSingleDataset(DatasetType.LINE);
-		targetDatasource.setRequisite(true);
-		targetDataset.setRequisite(true);
+		targetDatasource.setRequired(true);
+		targetDataset.setRequired(true);
 
 		edgeMatchMode = new ParameterComboBox(ProcessProperties.getString("String_EdgeMatchMode"));
 		edgeMatchMode.addItem(new ParameterDataNode(ProcessProperties.getString("String_EdgeMatchMode_THEOTHEREDGE"), EdgeMatchMode.THEOTHEREDGE));
 		edgeMatchMode.addItem(new ParameterDataNode(ProcessProperties.getString("String_EdgeMatchMode_THEMIDPOINT"), EdgeMatchMode.THEMIDPOINT));
 		// 暂时不支持交点位置接边
 //		edgeMatchMode.addItem(new ParameterDataNode(ProcessProperties.getString("String_EdgeMatchMode_THEINTERSECTION"), EdgeMatchMode.THEINTERSECTION));
-		edgeMatchMode.setRequisite(true);
+		edgeMatchMode.setRequired(true);
 
 		edgeTolerance = new ParameterNumber(ProcessProperties.getString("String_EdgeMatchTolerance"));
 		// 防止linux显示不全，先不添加提示图标-yuanR2017.9.21
@@ -77,7 +77,7 @@ public class MetaProcessEdgeMatch extends MetaProcess {
 		edgeTolerance.setMaxBit(22);
 		edgeTolerance.setMinValue(0);
 		edgeTolerance.setIsIncludeMin(false);
-		edgeTolerance.setRequisite(true);
+		edgeTolerance.setRequired(true);
 
 		union = new ParameterCheckBox(ProcessProperties.getString("String_EdgeMatchUnion"));
 		union.setTip(ProcessProperties.getString("String_EdgeMatchUnionTip"));

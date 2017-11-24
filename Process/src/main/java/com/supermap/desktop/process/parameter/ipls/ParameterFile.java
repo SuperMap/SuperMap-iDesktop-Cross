@@ -59,7 +59,7 @@ public class ParameterFile extends AbstractParameter implements ISelectionParame
 		return selectedPath;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

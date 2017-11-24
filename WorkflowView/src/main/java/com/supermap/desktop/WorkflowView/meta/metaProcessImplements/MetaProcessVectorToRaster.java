@@ -143,9 +143,9 @@ public class MetaProcessVectorToRaster extends MetaProcessGridAnalyst {
 		this.textCellSize.setIsIncludeMin(false);
 		this.comboBoxPixelFormat.setSelectedItem(parameterDataNodeBit32);
 		this.resultDataset.setDefaultDatasetName("result_vectorToGrid");
-		this.comboBoxValueField.setRequisite(true);
-		this.textCellSize.setRequisite(true);
-		this.comboBoxPixelFormat.setRequisite(true);
+		this.comboBoxValueField.setRequired(true);
+		this.textCellSize.setRequired(true);
+		this.comboBoxPixelFormat.setRequired(true);
 	}
 
 	private void initParameterConstraint() {

@@ -23,4 +23,10 @@ public class CtrlActionMapViewEntire extends CtrlAction {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
 	}
+
+	@Override
+	public boolean enable() {
+		IForm activeForm = Application.getActiveApplication().getActiveForm();
+		return activeForm!=null && activeForm instanceof IFormMap;
+	}
 }

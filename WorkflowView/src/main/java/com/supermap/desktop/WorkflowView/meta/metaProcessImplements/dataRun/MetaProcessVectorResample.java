@@ -81,8 +81,8 @@ public class MetaProcessVectorResample extends MetaProcess {
 		this.parameterVertexTolerance.setMaxBit(17);
 		this.parameterVertexTolerance.setMinValue(0);
 
-		this.parameterResampleType.setRequisite(true);
-		this.parameterResampleTolerance.setRequisite(true);
+		this.parameterResampleType.setRequired(true);
+		this.parameterResampleTolerance.setRequired(true);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
 		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));

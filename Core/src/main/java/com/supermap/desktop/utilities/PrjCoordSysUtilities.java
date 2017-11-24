@@ -39,7 +39,7 @@ public class PrjCoordSysUtilities {
 						CoreProperties.getString("String_CoordSysName"),
 						CoreProperties.getString("String_CoordSysUnit"),
 						CoreProperties.getString("String_EPSG_Code"),
-						CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"),
+						CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"),
 						CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"),
 						CoreProperties.getString("String_GeoSpheroid_Axis"),
 						CoreProperties.getString("String_GeoSpheroid_Flatten"),
@@ -100,12 +100,17 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CoordSysUnit"))) {
 						text += prj.getCoordUnit();
 					} else if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
-						if (prj.toEPSGCode() < 0) {
+						if (prj.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
+							prj.setEPSGCode(prj.getGeoCoordSys().getType().value());
+						} else {
+							prj.setEPSGCode(prj.getType().value());
+						}
+						if (prj.getEPSGCode() < 0) {
 							text += "0";
 						} else {
-							text += Integer.toString(prj.toEPSGCode());
+							text += Integer.toString(prj.getEPSGCode());
 						}
-					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeodeticCoordinateSystem"))) {
+					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getGeoSpheroid().getName();

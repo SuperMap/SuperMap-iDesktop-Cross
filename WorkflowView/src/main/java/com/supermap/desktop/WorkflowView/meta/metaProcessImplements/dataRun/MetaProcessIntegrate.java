@@ -59,11 +59,11 @@ public class MetaProcessIntegrate extends MetaProcess {
 		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.POINT, DatasetType.LINE, DatasetType.REGION);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
-		this.sourceDataset.setRequisite(true);
+		this.sourceDataset.setRequired(true);
 		this.numberTolerance = new ParameterNumber(ProcessProperties.getString("String_IntegrateTolerance"));
-		this.numberTolerance.setRequisite(true);
+		this.numberTolerance.setRequired(true);
 		this.comboBoxUnit = new ParameterComboBox(ProcessProperties.getString("Label_BufferRadius"));
-		this.comboBoxUnit.setRequisite(true);
+		this.comboBoxUnit.setRequired(true);
 		changeUnit(null);
 
 		ParameterCombine sourceData = new ParameterCombine();

@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 
 /**
  * 用来切换 度 <--> 度分秒的Panel
@@ -42,6 +43,15 @@ public class JPanelFormat extends JPanel {
 	private double value = 0;
 	private DecimalFormat df = new DecimalFormat("0.######################");
 	private boolean lock = false;
+
+	// 最大值-yuanR2017.11.23
+	// 通过maxValue控制该控件的模式
+	private int maxValue = 180;
+
+	public JPanelFormat(int maxValue) {
+		this.maxValue = maxValue;
+		init();
+	}
 
 	public JPanelFormat() {
 		init();
@@ -97,6 +107,10 @@ public class JPanelFormat extends JPanel {
 		buttonExchange.setMinimumSize(maximumSize);
 		buttonExchange.setPreferredSize(maximumSize);
 		buttonExchange.setToolTipText(ControlsProperties.getString("String_Button_Conversion"));
+
+		// 范围提示
+		smTextFieldAngle.setToolTipText(MessageFormat.format(ControlsProperties.getString("String_ValueRange"), "[-" + maxValue + ",+" + maxValue + "]"));
+		smTextFieldA.setToolTipText(MessageFormat.format(ControlsProperties.getString("String_ValueRange"), "[-" + maxValue + ",+" + maxValue + "]"));
 
 	}
 
@@ -156,7 +170,7 @@ public class JPanelFormat extends JPanel {
 				}
 				try {
 					Double aDouble = Double.valueOf(textFieldValue);
-					return !(aDouble < -180 || aDouble > 180) && updateValue();
+					return !(aDouble < -maxValue || aDouble > maxValue) && updateValue();
 				} catch (Exception e) {
 					return false;
 				}
@@ -175,7 +189,7 @@ public class JPanelFormat extends JPanel {
 				}
 				try {
 					Integer integer = Integer.valueOf(textFieldValue);
-					return !(integer > 180 || integer < -180) && updateValue();
+					return !(integer > maxValue || integer < -maxValue) && updateValue();
 				} catch (Exception e) {
 					return false;
 				}
@@ -240,7 +254,7 @@ public class JPanelFormat extends JPanel {
 					value = -value;
 				}
 			}
-			if (value < -180 || value > 180) {
+			if (value < -maxValue || value > maxValue) {
 				value = backValue;
 				return false;
 			}

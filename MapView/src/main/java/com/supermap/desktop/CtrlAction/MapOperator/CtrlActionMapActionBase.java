@@ -29,7 +29,8 @@ abstract public class CtrlActionMapActionBase extends CtrlAction {
 
 	@Override
 	public boolean enable() {
-		return true;
+		IForm activeForm = Application.getActiveApplication().getActiveForm();
+		return activeForm!=null && activeForm instanceof IFormMap;
 	}
 
 	@Override

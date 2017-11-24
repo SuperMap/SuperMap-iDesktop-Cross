@@ -50,7 +50,7 @@ public class ParameterTextArea extends AbstractParameter implements ISelectionPa
 		return this;
     }
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

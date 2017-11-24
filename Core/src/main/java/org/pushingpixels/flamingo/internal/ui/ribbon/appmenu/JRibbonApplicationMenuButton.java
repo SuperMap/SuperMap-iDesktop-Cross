@@ -29,8 +29,7 @@
  */
 package org.pushingpixels.flamingo.internal.ui.ribbon.appmenu;
 
-import com.supermap.desktop.utilities.PathUtilities;
-import com.supermap.desktop.utilities.XmlCommandUtilities;
+import com.supermap.desktop.Application;
 import org.pushingpixels.flamingo.api.common.AbstractCommandButton;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.CommandButtonLayoutManager;
@@ -60,12 +59,12 @@ public class JRibbonApplicationMenuButton extends JCommandButton {
 	public static final String uiClassID = "RibbonApplicationMenuButtonUI";
 
 	private final static CommandButtonDisplayState APP_MENU_BUTTON_STATE =
-			new CommandButtonDisplayState("Ribbon Application Menu Button", 24) {
+			new CommandButtonDisplayState("Ribbon Application Menu Button", 64) {
 				@Override
 				public CommandButtonLayoutManager createLayoutManager(AbstractCommandButton commandButton) {
 					return new CommandButtonLayoutManager() {
 						public int getPreferredIconSize(AbstractCommandButton commandButton) {
-							return FlamingoUtilities.getScaledSize(24, commandButton.getFont().getSize(),
+							return FlamingoUtilities.getScaledSize(40, commandButton.getFont().getSize(),
 									1.5, 4);
 						}
 
@@ -89,7 +88,7 @@ public class JRibbonApplicationMenuButton extends JCommandButton {
 						@Override
 						public Dimension getPreferredSize(
 								AbstractCommandButton commandButton) {
-							return new Dimension(40, 40);
+							return new Dimension(64, 64);
 						}
 
 						@Override
@@ -111,18 +110,6 @@ public class JRibbonApplicationMenuButton extends JCommandButton {
 	 */
 	public JRibbonApplicationMenuButton(JRibbon ribbon) {
 		super("", null);
-		String path = PathUtilities.getRootPathName();
-		String[] paths = new String[2];
-		paths[0] = path;
-		paths[1] = "../Resources/Frame";
-		path = PathUtilities.combinePath(paths, true);
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image image = toolkit.createImage(path + "iDesktop_Cross_128.png");
-		this.setIcon(XmlCommandUtilities.getICon(image));
-
-//		if (ribbon != null && ribbon.getRibbonFrame()!=null) {
-//			this.setIcon(XmlCommandUtilities.getICon(ribbon.getRibbonFrame().getIconImages().get(0)));
-//		}
 		this.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
 		this.setDisplayState(APP_MENU_BUTTON_STATE);
 		this.ribbon = ribbon;
@@ -153,6 +140,13 @@ public class JRibbonApplicationMenuButton extends JCommandButton {
 	}
 
 	public JRibbon getRibbon() {
+		try {
+			if (ribbon == null) {
+				ribbon = ((JRibbonFrame) Application.getActiveApplication().getMainFrame()).getRibbon();
+			}
+		} catch (Exception e) {
+			// ignore
+		}
 		return this.ribbon;
 	}
 }

@@ -22,10 +22,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by xie on 2017/8/24.
@@ -200,9 +197,10 @@ public class XlsUtilities {
 						if (StringUtilities.isNumber(name)) {
 							name = "Filed_" + String.valueOf(Convert.toInteger(name));
 						}
-						fieldInfo.setName(name);
+						// 增加文件名称时，需要进行去重处理，不然会抛异常
+						fieldInfo.setName(getSingletonName(name, fieldNames));
 						fieldInfos.add(fieldInfo);
-						fieldNames.add(name);
+						fieldNames.add(getSingletonName(name, fieldNames));
 					}
 				} else {
 					for (int j = 0; j < columnCount; j++) {
@@ -265,6 +263,29 @@ public class XlsUtilities {
 			Application.getActiveApplication().getOutput().output(e);
 		}
 		return importResults;
+	}
+
+	/**
+	 * 获得单一的文件名
+	 * yuanR
+	 *
+	 * @param caption
+	 * @param names
+	 * @return
+	 */
+	private static String getSingletonName(String caption, List<String> names) {
+		for (int i = 0; true; i++) {
+			if (!names.contains(getName(caption, i))) {
+				return getName(caption, i);
+			}
+		}
+	}
+
+	private static String getName(String caption, int i) {
+		if (i == 0) {
+			return caption;
+		}
+		return caption + "_" + i;
 	}
 
 	/**

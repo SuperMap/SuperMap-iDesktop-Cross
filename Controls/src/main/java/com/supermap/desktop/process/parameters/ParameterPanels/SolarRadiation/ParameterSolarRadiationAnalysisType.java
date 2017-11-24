@@ -36,7 +36,7 @@ public class ParameterSolarRadiationAnalysisType extends AbstractParameter imple
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return this.describe;
 	}
 

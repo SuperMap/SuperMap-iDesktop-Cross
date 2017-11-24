@@ -48,7 +48,7 @@ public class ParameterSimpleStatisticsFieldGroup extends AbstractParameter imple
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

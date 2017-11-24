@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class XMLRibbons extends XMLCommandBase {
 	private IXMLCreator xmlCreator = null;
+	private ArrayList<XMLTaskBar> taskBars = new ArrayList<>();
 	private ArrayList<XMLRibbon> ribbons;
 
 
@@ -54,6 +55,16 @@ public class XMLRibbons extends XMLCommandBase {
 					}
 				}
 			}
+			for (XMLTaskBar taskBar : ribbons.taskBars) {
+				if (taskBar.getID() != null) {
+					XMLTaskBar currentTaskBar = getTaskBar(taskBar.getID());
+					if (currentTaskBar != null) {
+						currentTaskBar.merge(taskBar);
+					}else {
+						taskBar.copyTo(this);
+					}
+				}
+			}
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
 			result = false;
@@ -70,6 +81,15 @@ public class XMLRibbons extends XMLCommandBase {
 		return null;
 	}
 
+	private XMLTaskBar getTaskBar(String id) {
+		for (XMLTaskBar taskBar : taskBars) {
+			if (taskBar.getID().equals(id)) {
+				return taskBar;
+			}
+		}
+		return null;
+	}
+
 	public ArrayList<XMLRibbon> getRibbons() {
 		return ribbons;
 	}
@@ -78,14 +98,17 @@ public class XMLRibbons extends XMLCommandBase {
 		if (ribbonsElement != null) {
 			NodeList childNodes = ribbonsElement.getChildNodes();
 			for (int i = 0; i < childNodes.getLength(); i++) {
-				XMLRibbon xmlRibbon = null;
 				Node item = childNodes.item(i);
-				if (item.getNodeType() == Node.ELEMENT_NODE && item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeRibbon)) {
-					xmlRibbon = new XMLRibbon(this.getPluginInfo(), this);
-					xmlRibbon.initialize((Element) item);
-				}
-				if (xmlRibbon != null) {
-					addSubItem(xmlRibbon);
+				if (item.getNodeType() == Node.ELEMENT_NODE) {
+					if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeRibbon)) {
+						XMLRibbon xmlRibbon = new XMLRibbon(this.getPluginInfo(), this);
+						xmlRibbon.initialize((Element) item);
+						addSubItem(xmlRibbon);
+					} else if (item.getNodeName().equalsIgnoreCase(_XMLTag.g_NodeTaskBar)) {
+						XMLTaskBar xmlTaskBar = new XMLTaskBar(getPluginInfo(), this);
+						xmlTaskBar.initialize((Element) item);
+						addSubItem(xmlTaskBar);
+					}
 				}
 			}
 		}
@@ -93,17 +116,32 @@ public class XMLRibbons extends XMLCommandBase {
 
 
 	@Override
-	public void addSubItem(XMLCommandBase xmlRibbon) {
-		for (int j = 0; j < this.ribbons.size(); j++) {
-			if (ribbons.get(j).getIndex() > xmlRibbon.getIndex()) {
-				ribbons.add(j, (XMLRibbon) xmlRibbon);
-				break;
+	public void addSubItem(XMLCommandBase xmlCommandBase) {
+		if (xmlCommandBase instanceof XMLRibbon) {
+			for (int j = 0; j < this.ribbons.size(); j++) {
+				if (ribbons.get(j).getIndex() > xmlCommandBase.getIndex()) {
+					ribbons.add(j, (XMLRibbon) xmlCommandBase);
+					break;
+				}
+			}
+			if (!ribbons.contains(xmlCommandBase)) {
+				ribbons.add((XMLRibbon) xmlCommandBase);
+			}
+		} else if (xmlCommandBase instanceof XMLTaskBar) {
+			for (int i = 0; i < this.taskBars.size(); i++) {
+				if (taskBars.get(i).getIndex() > xmlCommandBase.getIndex()) {
+					taskBars.add(i, (XMLTaskBar) xmlCommandBase);
+				}
+			}
+			if (!taskBars.contains(xmlCommandBase)) {
+				taskBars.add((XMLTaskBar) xmlCommandBase);
 			}
 		}
-		if (!ribbons.contains(xmlRibbon)) {
-			ribbons.add((XMLRibbon) xmlRibbon);
-		}
+
 	}
 
 
+	public ArrayList<XMLTaskBar> getTaskBars() {
+		return taskBars;
+	}
 }

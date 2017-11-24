@@ -46,7 +46,7 @@ public class MetaProcessSingleQuery extends MetaProcess {
 		parameterClipDataType.setiServerLogin(parameterIServerLogin);
 		//设置分析参数
 		parameterQueryTypeComboBox = new ParameterComboBox(CoreProperties.getString("String_AnalystType"));
-		parameterQueryTypeComboBox.setRequisite(true);
+		parameterQueryTypeComboBox.setRequired(true);
 		parameterQueryTypeComboBox.setItems(
 				new ParameterDataNode(CoreProperties.getString("String_SpatialQuery_ContainCHS"), "CONTAIN"),
 				new ParameterDataNode(CoreProperties.getString("String_SpatialQuery_CrossCHS"), "CROSS"),

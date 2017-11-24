@@ -57,7 +57,7 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterNumberDistance.setMaxBit(22);
 		parameterNumberDistance.setMinValue(0);
 		parameterNumberDistance.setIsIncludeMin(false);
-		parameterNumberDistance.setRequisite(true);
+		parameterNumberDistance.setRequired(true);
 
 		parameterNumberMinPilePointCount = new ParameterNumber(ProcessProperties.getString("String_AggregatePoints_MinPilePointCount"));
 		// 防止linux显示不全，先不添加提示图标-yuanR2017.9.21
@@ -65,7 +65,7 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterNumberMinPilePointCount.setMaxBit(0);
 		parameterNumberMinPilePointCount.setMinValue(2);
 		parameterNumberMinPilePointCount.setIsIncludeMin(true);
-		parameterNumberMinPilePointCount.setRequisite(true);
+		parameterNumberMinPilePointCount.setRequired(true);
 
 		parameterComboBoxUnit = new ParameterComboBox(null);
 		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Millimeter"), Unit.MILIMETER));

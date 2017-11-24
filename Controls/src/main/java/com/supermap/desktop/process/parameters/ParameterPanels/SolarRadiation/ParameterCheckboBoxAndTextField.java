@@ -35,7 +35,7 @@ public class ParameterCheckboBoxAndTextField extends AbstractParameter implement
 		return ParameterType.CHECK_AND_TEXTFIELD;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return this.describe;
 	}
 

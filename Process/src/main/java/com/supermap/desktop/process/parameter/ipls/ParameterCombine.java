@@ -88,7 +88,7 @@ public class ParameterCombine extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 
@@ -121,7 +121,7 @@ public class ParameterCombine extends AbstractParameter {
 
 	private void addParameterToList(IParameter parameter) {
 		parameterList.add(parameter);
-		parameter.setRequisite(parameter.isRequisite() || isRequisite());
+		parameter.setRequired(parameter.isRequired() || isRequired());
 		for (PropertyChangeListener propertyChangedListener : propertyChangedListeners) {
 			parameter.addPropertyListener(propertyChangedListener);
 		}
@@ -187,17 +187,17 @@ public class ParameterCombine extends AbstractParameter {
 	}
 
 	@Override
-	public void setRequisite(boolean isRequisite) {
-		super.setRequisite(isRequisite);
+	public void setRequired(boolean isRequisite) {
+		super.setRequired(isRequisite);
 		for (IParameter parameter : parameterList) {
-			parameter.setRequisite(parameter.isRequisite() || isRequisite);
+			parameter.setRequired(parameter.isRequired() || isRequisite);
 		}
 	}
 
 	@Override
 	public boolean isReady() {
 		for (IParameter iParameter : parameterList) {
-			if (iParameter.isRequisite() && !iParameter.isReady()) {
+			if (iParameter.isRequired() && !iParameter.isReady()) {
 				return false;
 			}
 		}

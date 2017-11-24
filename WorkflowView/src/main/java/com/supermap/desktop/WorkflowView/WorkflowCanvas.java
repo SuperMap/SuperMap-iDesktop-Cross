@@ -308,7 +308,7 @@ public class WorkflowCanvas extends GraphCanvas
 				public void updateDataValue(OutputDataValueChangedEvent e) {
 
 					for (IParameter parameter : parameters) {
-						if (parameter instanceof ISelectionParameter && parameter.isEnabled() && parameter.getDescribe().equals(iterator.getBindParameterDescription())) {
+						if (parameter instanceof ISelectionParameter && parameter.isEnabled() && parameter.getDescription().equals(iterator.getBindParameterDescription())) {
 							((ISelectionParameter) parameter).setSelectedItem(e.getNewValue());
 						}
 					}
