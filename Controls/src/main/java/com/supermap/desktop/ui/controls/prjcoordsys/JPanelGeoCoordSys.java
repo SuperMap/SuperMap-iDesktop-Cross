@@ -334,9 +334,9 @@ public class JPanelGeoCoordSys extends JPanel {
 		// endregion
 
 		// 默认初始化geoCoordSys
-		this.geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
+		// 默认初始化类型为：WGS-84,不用设置为user_define
+		//this.geoCoordSys.setType(GeoCoordSysType.GCS_USER_DEFINE);
 		this.geoCoordSys.setName(DEFAULT_NAME);
-
 	}
 
 	/**

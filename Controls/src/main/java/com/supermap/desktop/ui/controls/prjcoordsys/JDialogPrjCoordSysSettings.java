@@ -1329,43 +1329,6 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 重新实现导出方法
 	 */
 	private void exportActive() {
-		// 设置导出功能文本对话框，文件名称，根据是否为多选进行设置
-		//
-		//SmFileChoose prjFileExportFileChoose;
-		//if (tablePrjCoordSys.getSelectedRowCount() > 1 || currentDefine.getIsFolderNode()) {
-		//	String moduleName = "ExportPrjFolder";
-		//	if (!SmFileChoose.isModuleExist(moduleName)) {
-		//		// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
-		//		String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_PrjFile"), "NOEXIST");
-		//		SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-		//				ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
-		//	}
-		//	prjFileExportFileChoose = new SmFileChoose(moduleName);
-		//	if (currentDefine.getIsFolderNode() && tablePrjCoordSys.getSelectedRowCount() <= 1) {
-		//		prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
-		//	} else {
-		//		prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getParent().getCaption()));
-		//	}
-		//} else {
-		//	// 导出单个投影文件
-		//	String moduleName = "ExportPrjFile";
-		//	if (!SmFileChoose.isModuleExist(moduleName)) {
-		//		// 为确保导出文件名称不可修改，筛选的后缀名称为不存在-yuanR2017.11.1
-		//		String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ImportPrjFileXml"), "NOEXIST");
-		//		SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-		//				ControlsProperties.getString("String_ExportPrjFile"), moduleName, "SaveOne");
-		//	}
-		//	prjFileExportFileChoose = new SmFileChoose(moduleName);
-		//	prjFileExportFileChoose.setSelectedFile(new File(currentDefine.getCaption()));
-		//}
-
-		// 获得文件选择器当中的TextField控件，设置为不可用
-		//Component comp = prjFileExportFileChoose.getLabelForInChooser("FileChooser.fileNameLabelText");
-		//if (comp instanceof JTextField) {
-		//	JTextField field = ((JTextField) comp);
-		//	//field.setVisible(false);
-		//	//field.setEnabled(false);
-		//}
 
 		if (!SmFileChoose.isModuleExist("DataExportFrame_OutPutDirectories")) {
 			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_Export"),
@@ -1437,16 +1400,13 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 		}
 		SmFileChoose prjFileImportFileChoose = new SmFileChoose(moduleName);
 		if (prjFileImportFileChoose.showDefaultDialog() == JFileChooser.APPROVE_OPTION) {
-			// 导入文件需要增加到自定义节点下userImportCoordsysParentName目录当中
-			File file = prjFileImportFileChoose.getSelectedFile();
-			//CoordSysDefine userDefine = customizeCoordinate.getChildByCaption(userImportCoordsysParentName);
-			//if (userDefine == null) {
-			//	userDefine = new CoordSysDefine(CoordSysDefine.CUSTOM_COORDINATE, customizeCoordinate, userImportCoordsysParentName).setFolderNode(true);
-			//}
-			CoordSysDefine result = addToCoordSysDefine(getPrjCoordSysFromImportFile(file.getPath()), customizeCoordinate);
-			if (result != null && exportPrjCoordSys(result, customizeProjectionConfigPath)) {
-				// 当增加成功，在tree中显示
-				addToTree(result, customizeCoordinate.getCaption(), customizeCoordinate, customizeCoordinate.getCaption());
+			File[] files = prjFileImportFileChoose.getSelectFiles();
+			for (int i = 0; i < files.length; i++) {
+				CoordSysDefine result = addToCoordSysDefine(getPrjCoordSysFromImportFile(files[i].getPath()), customizeCoordinate);
+				if (result != null && exportPrjCoordSys(result, customizeProjectionConfigPath)) {
+					// 当增加成功，在tree中显示
+					addToTree(result, customizeCoordinate.getCaption(), customizeCoordinate, customizeCoordinate.getCaption());
+				}
 			}
 		}
 	}
@@ -1723,15 +1683,15 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 					PrjCoordSys exportPrjCoordSys = new PrjCoordSys();
 					if (anAllCoordSysDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 						GeoCoordSys exportGeoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(anAllCoordSysDefine).clone();
-						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
 						exportPrjCoordSys.setType(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
-						exportPrjCoordSys.setName(coordSysDefine.getCaption());
+						exportPrjCoordSys.setGeoCoordSys(exportGeoCoordSys);
+						exportPrjCoordSys.setName(anAllCoordSysDefine.getCaption());
 						exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
 					} else if (anAllCoordSysDefine.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						try {
 							exportPrjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(anAllCoordSysDefine).clone();
-							exportPrjCoordSys.setName(coordSysDefine.getCaption());
-							exportPrjCoordSys.setEPSGCode(coordSysDefine.getCoordSysCode());
+							exportPrjCoordSys.setName(anAllCoordSysDefine.getCaption());
+							exportPrjCoordSys.setEPSGCode(anAllCoordSysDefine.getCoordSysCode());
 						} catch (Exception ex) {
 							continue;
 						}

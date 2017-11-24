@@ -92,10 +92,14 @@ public class PrjCoordSysSettingsUtilties {
 						prjCoordSys.setCoordUnit((Unit) Enum.parse(Unit.class, define.getCoordSysCode()));
 					} else if (define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(define);
+						// 确保描述中坐标系名称和JTable中显示一致
+						prjCoordSys.setName(define.getCaption());
 					} else if (define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 						GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(define);
 						prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
 						prjCoordSys.setGeoCoordSys(geoCoordSys);
+						// 确保描述中坐标系名称和JTable中显示一致
+						prjCoordSys.setName(define.getCaption());
 					}
 
 					if (prjCoordSys != null) {
