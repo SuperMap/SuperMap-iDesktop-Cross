@@ -435,6 +435,7 @@ public class WorkflowCanvas extends GraphCanvas
 				if (relation != null && this.relationMap.containsKey(relation)) {
 					this.relationMap.remove(relation);
 				}
+				removeIterator();
 			}
 		}
 	}

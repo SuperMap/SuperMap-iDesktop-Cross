@@ -8,6 +8,8 @@ import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.DefaultParameters;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by xie on 2017/10/27.
@@ -103,4 +105,18 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 		return this.parameterDescription;
 	}
 
+	/**
+	 * 判断是否满足设置的通配符
+	 * @param src
+	 * @param des
+	 * @return
+	 */
+	public boolean isMatching(String src,String des){
+
+		String des1 = des.replace("*", "\\w*");
+		des1 = des1.replace("?", "\\w{1}");
+		Pattern p = Pattern.compile(des1);
+		Matcher m = p.matcher(src);
+		return m.matches();
+	}
 }

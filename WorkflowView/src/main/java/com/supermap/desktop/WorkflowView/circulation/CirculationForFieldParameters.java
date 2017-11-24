@@ -13,6 +13,7 @@ import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasetTypeUtilities;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.DatasourceUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -25,7 +26,9 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 	private ParameterDatasetType datasetType;
 	private ParameterSingleDataset dataset;
 	private ParameterFieldComboBox fieldComboBox;
+	private ParameterTextField wildcard;
 	private Datasource currentDatasource;
+
 	private PropertyChangeListener datasetChangeListener = new PropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
@@ -64,6 +67,8 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 		this.dataset.setDatasetTypes(DatasetTypeUtilities.getDatasetTypeVector());
 		this.fieldComboBox = new ParameterFieldComboBox();
 		this.fieldComboBox.setDescribe(CoreProperties.getString("String_FieldValue"));
+		this.wildcard = new ParameterTextField(ProcessProperties.getString("String_Wildcard"));
+
 		this.currentDatasource = DatasourceUtilities.getDefaultResultDatasource();
 		if (null != this.currentDatasource) {
 			this.datasource.setSelectedItem(this.currentDatasource);
@@ -74,7 +79,7 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 			this.dataset.setSelectedItem(datasetVector);
 			this.fieldComboBox.setFieldName(datasetVector);
 		}
-		addParameters(this.datasource, this.datasetType, this.dataset, this.fieldComboBox);
+		addParameters(this.datasource, this.datasetType, this.dataset, this.fieldComboBox, this.wildcard);
 	}
 
 	@Override
@@ -82,16 +87,27 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 		this.count = 0;
 		this.infoList.clear();
 		if (null != this.fieldComboBox.getFieldName()) {
-			this.infoList.add(this.fieldComboBox.getFieldName());
+			String wildcardStr = wildcard.getSelectedItem();
+			if (StringUtilities.isNullOrEmpty(wildcardStr)) {
+				this.infoList.add(this.fieldComboBox.getFieldName());
+			} else if (isMatching(this.fieldComboBox.getFieldName(), wildcardStr)) {
+				this.infoList.add(this.fieldComboBox.getFieldName());
+			}
 			if (null != this.dataset.getSelectedDataset() && this.dataset.getSelectedDataset() instanceof DatasetVector) {
 				FieldInfos tempFieldInfo = ((DatasetVector) this.dataset.getSelectedDataset()).getFieldInfos();
 				for (int i = 0, size = tempFieldInfo.getCount(); i < size; i++) {
 					if (!fieldComboBox.getFieldName().equalsIgnoreCase(tempFieldInfo.get(i).getName()) && !tempFieldInfo.get(i).isSystemField()) {
-						infoList.add(tempFieldInfo.get(i).getName());
+						if (StringUtilities.isNullOrEmpty(wildcardStr)) {
+							infoList.add(tempFieldInfo.get(i).getName());
+						} else if (isMatching(tempFieldInfo.get(i).getName(), wildcardStr)) {
+							infoList.add(tempFieldInfo.get(i).getName());
+						}
 					}
 				}
 			}
-			outputData.setValue(this.fieldComboBox.getFieldName());
+			if (this.infoList.size()>0) {
+				outputData.setValue(this.infoList.get(0));
+			}
 		}
 	}
 

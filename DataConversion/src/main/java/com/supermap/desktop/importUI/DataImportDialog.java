@@ -506,7 +506,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		pane.setLayout(new GridBagLayout());
 		this.panelImportInfo.add(this.labelTitle, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(5).setWeight(1, 0));
 		this.panelImportInfo.add(pane, new GridBagConstraintsHelper(0, 1, 2, 1).setAnchor(GridBagConstraints.NORTH).setFill(GridBagConstraintsHelper.BOTH).setWeight(1, 1));
-		this.panelImportInfo.add(this.buttonImport, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 10).setWeight(1, 0));
+		this.panelImportInfo.add(this.buttonImport, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(1, 0));
 		this.panelImportInfo.add(this.buttonClose, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(0, 0));
 		this.labelTitle.setPreferredSize(new Dimension(200, 30));
 		this.labelTitle.setMinimumSize(new Dimension(200, 30));
