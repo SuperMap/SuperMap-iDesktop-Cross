@@ -1,5 +1,6 @@
 package com.supermap.desktop.process.parameter.ipls;
 
+import com.supermap.desktop.Application;
 import com.supermap.desktop.lbs.IServerServiceImpl;
 import com.supermap.desktop.lbs.Interface.IServerService;
 import com.supermap.desktop.lbs.params.IServerLoginInfo;
@@ -52,6 +53,8 @@ public class ParameterIServerLogin extends ParameterCombine {
 		if (null != client) {
 			result = true;
 			IServerLoginInfo.client = client;
+		}else{
+			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_LoginiServerExcetpion"));
 		}
 		return result;
 	}
