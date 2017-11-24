@@ -18,6 +18,8 @@ public class ImportInfo implements IImportInfo {
 	private String fileType = "";
 	// 导入状态
 	private String state = "";
+	// 导入路径
+	private String filePath = "";
 
 	public ImportInfo() {
 		super();
@@ -31,6 +33,16 @@ public class ImportInfo implements IImportInfo {
 	@Override
 	public String getFileName() {
 		return this.fileName;
+	}
+
+	@Override
+	public String getFilePath() {
+		return this.filePath;
+	}
+
+	@Override
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 	@Override
