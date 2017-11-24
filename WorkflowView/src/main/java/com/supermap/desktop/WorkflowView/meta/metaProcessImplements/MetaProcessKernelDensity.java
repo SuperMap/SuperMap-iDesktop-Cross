@@ -127,7 +127,10 @@ public class MetaProcessKernelDensity extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.KERNEL_DENSITY, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();
