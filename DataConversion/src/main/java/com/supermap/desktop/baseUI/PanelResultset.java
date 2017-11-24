@@ -771,20 +771,22 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			// 导入如果是rgb和rgba的image，默认就是EncodeType设置为png-yuanR2017.11.24
 			try {
 				BufferedImage bufferedImage = ImageIO.read(new File(importInfo.getFilePath()));
-				if (PixelFormat.RGB.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))
-						|| PixelFormat.RGBA.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))) {
-					this.comboBoxEncodeType.setSelectedItem("PNG");
+				if (bufferedImage != null && bufferedImage.getColorModel() != null) {
+					if (PixelFormat.RGB.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))
+							|| PixelFormat.RGBA.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))) {
+						this.comboBoxEncodeType.setSelectedItem("PNG");
+					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
-
 			setDefaultImportSettingEncode();
 			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
 			setDefaultLayout();
 			this.panelCheckBox.removeAll();
 			initTargetDatasetTypeForImage();
 			setDefaultSize();
+
 		} else if (importSetting instanceof ImportSettingSIT || importSetting instanceof ImportSettingGRD ||
 				importSetting instanceof ImportSettingGBDEM || importSetting instanceof ImportSettingUSGSDEM ||
 				importSetting instanceof ImportSettingSHP || importSetting instanceof ImportSettingE00 ||
