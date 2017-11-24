@@ -70,7 +70,7 @@ public class PanelParameterSet extends JPanel {
 		this.checkBoxDisplayInScene.setVisible(false);
 		this.labelSemicircleLineSegment = new JLabel("SemicircleLineSegment");
 
-		this.textFieldSemicircleLineSegment = new WaringTextField("4");
+		this.textFieldSemicircleLineSegment = new WaringTextField("100");
 		this.textFieldSemicircleLineSegment.setInitInfo(DEFAULT_MIN, DEFAULT_MAX, WaringTextField.INTEGER_TYPE, "null");
 
 	}

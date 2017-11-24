@@ -1443,9 +1443,7 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	 * 新建地理坐标系
 	 */
 	private void newGeoCoordsys() {
-		for (int i = 0; i < 5000; i++) {
-			System.out.print("啊" + String.valueOf(i));
-		}
+
 		JDialogUserDefinePrjGeography geography = new JDialogUserDefinePrjGeography();
 		if (this.currentDefine != null && !this.currentDefine.getIsFolderNode() && this.currentDefine.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 			GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(this.currentDefine);
