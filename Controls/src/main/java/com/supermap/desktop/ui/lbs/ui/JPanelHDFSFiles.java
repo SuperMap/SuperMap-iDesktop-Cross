@@ -22,9 +22,7 @@ import java.util.ArrayList;
  * Created by xie on 2017/2/25.
  */
 public class JPanelHDFSFiles extends JPanel {
-	private static final int COLUMN_INDEX_Name = 0;
 	private static final int ROW_HEADER_WIDTH = 70;
-//	private static final int ROW_HEIGHT = 23;
 
 	private JLabel labelServerURL;
 	private JTextField textServerURL;
@@ -144,7 +142,6 @@ public class JPanelHDFSFiles extends JPanel {
 		HDFSTableModel tableModel = new HDFSTableModel();
 		this.table.setModel(tableModel);
 		this.table.putClientProperty("terminateEditOnFocusLost", true);
-//		this.table.setRowHeight(ROW_HEIGHT);
 		ListModel<?> listModel = new LeftTableHeaderListModel(table);
 		this.rowHeader = new JList(listModel);
 		this.rowHeader.setFixedCellWidth(ROW_HEADER_WIDTH);
