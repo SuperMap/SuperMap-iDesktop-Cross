@@ -180,6 +180,22 @@ public class XlsUtilities {
 					//总列数
 					columnCount = row.getPhysicalNumberOfCells();
 				}
+				// 对要导入的数据进行预读，获得每列需要的最大值，当最大值大于1000时，可以考虑导入失败,暂时支持导入-yuanR2017.11.24
+				ArrayList<Integer> maxLengthList = new ArrayList<>();
+				for (int j = 0; j < columnCount; j++) {
+					maxLengthList.add(255);
+				}
+				for (int j = 0; j < rowCount; j++) {
+					XSSFRow xssfRow = sheet.getRow(j);
+					for (int k = 0; k < columnCount; k++) {
+						if (xssfRow.getCell(k).getCellType() == XSSFCell.CELL_TYPE_STRING) {
+							if (xssfRow.getCell(k).getStringCellValue().length() > maxLengthList.get(k)) {
+								maxLengthList.set(k, (xssfRow.getCell(k).getStringCellValue().length() + 10));
+							}
+						}
+					}
+				}
+
 				info = new DatasetVectorInfo();
 				Datasets datasets = datasource.getDatasets();
 				info.setName(datasets.getAvailableDatasetName(xlsName + "_" + sheet.getSheetName()));
@@ -190,6 +206,7 @@ public class XlsUtilities {
 					for (int j = 0; j < columnCount; j++) {
 						fieldInfo = new FieldInfo();
 						fieldInfo.setType(FieldType.TEXT);
+						fieldInfo.setMaxLength(maxLengthList.get(j));
 						String name = sheet.getRow(0).getCell(j).getStringCellValue();
 						if (name.startsWith("Sm")) {
 							name = "Field_" + name;
@@ -197,7 +214,7 @@ public class XlsUtilities {
 						if (StringUtilities.isNumber(name)) {
 							name = "Filed_" + String.valueOf(Convert.toInteger(name));
 						}
-						// 增加文件名称时，需要进行去重处理，不然会抛异常
+						// 增加文件名称时，需要进行去重处理，不然会抛异常-yuanR2017.11.24
 						fieldInfo.setName(getSingletonName(name, fieldNames));
 						fieldInfos.add(fieldInfo);
 						fieldNames.add(getSingletonName(name, fieldNames));
@@ -206,6 +223,7 @@ public class XlsUtilities {
 					for (int j = 0; j < columnCount; j++) {
 						fieldInfo = new FieldInfo();
 						fieldInfo.setType(FieldType.TEXT);
+						fieldInfo.setMaxLength(maxLengthList.get(j));
 						String name = j == 0 ? "NewField" : "NewField" + "_" + String.valueOf(j);
 						fieldInfo.setName(name);
 						fieldInfos.add(fieldInfo);
