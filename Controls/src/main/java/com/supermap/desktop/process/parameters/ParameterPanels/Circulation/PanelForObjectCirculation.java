@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels.Circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -18,6 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +45,8 @@ public class PanelForObjectCirculation extends JPanel {
 	private ExchangeTableModel exchangeTableModel;
 
 	protected ArrayList<String> pathList = new ArrayList<>();
+	private String fileType;
+	private final String ISDIR = "Directory";
 
 	public PanelForObjectCirculation() {
 		initComponents();
@@ -134,19 +138,35 @@ public class PanelForObjectCirculation extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String modelName = "CirculationForObjectModel";
-				if (!SmFileChoose.isModuleExist(modelName)) {
-					SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
-							modelName, "OpenMany");
+				String fileFilters = "";
+				String modelType = "OpenMany";
+				if (null != fileType) {
+					modelName += fileType;
+					if (!fileType.equals(ISDIR)) {
+						fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(MessageFormat.format(ProcessProperties.getString("String_ImportFileType"), fileType.toUpperCase(), fileType.toLowerCase()), fileType.toLowerCase()));
+					} else if (fileType.equals(ISDIR)) {
+						modelType = "GetDirectories";
+					}
+					if (!SmFileChoose.isModuleExist(modelName)) {
+						SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
+								modelName, modelType);
+					}
 				}
+
 				SmFileChoose smFileChoose = new SmFileChoose(modelName);
 				smFileChoose.setAcceptAllFileFilterUsed(true);
 				int state = smFileChoose.showDefaultDialog();
 				if (state == JFileChooser.APPROVE_OPTION) {
-					File[] files = smFileChoose.getSelectFiles();
-					for (int i = 0, length = files.length; i < length; i++) {
-						exchangeTableModel.addRow(files[i].getAbsolutePath());
+					if (null != fileType && fileType.equals(ISDIR)) {
+						exchangeTableModel.addRow(smFileChoose.getSelectedFile().getAbsolutePath());
+					} else {
+						File[] files = smFileChoose.getSelectFiles();
+						for (int i = 0, length = files.length; i < length; i++) {
+							exchangeTableModel.addRow(files[i].getAbsolutePath());
+						}
 					}
 					tableForObjectCirculation.setRowSelectionInterval(tableForObjectCirculation.getRowCount() - 1, tableForObjectCirculation.getRowCount() - 1);
+
 				}
 			}
 		});
@@ -293,5 +313,9 @@ public class PanelForObjectCirculation extends JPanel {
 
 	public ArrayList<String> getPathList() {
 		return pathList;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 }

@@ -13,9 +13,9 @@ import java.util.Vector;
 
 /**
  * @author 李海軍
- * @since 1.0.0
  * @version 1.0.0 2012/10/23 初版
  *          <p>
+ * @since 1.0.0
  */
 public class MutiTableModel extends AbstractTableModel {
 	/**
@@ -42,7 +42,7 @@ public class MutiTableModel extends AbstractTableModel {
 	 * 数据内容列表
 	 */
 	protected transient List<Object> contents;
-	
+
 	/**
 	 * 表格行后台数据列表
 	 */
@@ -61,7 +61,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 构造函数。
-	 * 
+	 *
 	 * @param columnNames 指定列头
 	 */
 	public MutiTableModel(String[] columnNames) {
@@ -79,8 +79,8 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 构造函数。
-	 * 
-	 * @param datas 数据
+	 *
+	 * @param datas       数据
 	 * @param columnNames 列头
 	 * @throws Exception 抛出数据数不正确的异常
 	 */
@@ -96,8 +96,8 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 根据指定的数据刷新列表内容。<br>
-	 * 
-	 * @param datas　指定的数据
+	 *
+	 * @param datas 　指定的数据
 	 */
 	public void refreshContents(Object[][] datas) throws Exception {
 		// 先情况原来的内容
@@ -117,8 +117,8 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 添加指定数据的一行。<br>
-	 * 
-	 * @param data　数据
+	 *
+	 * @param data 　数据
 	 * @throws Exception 抛出数据数不正确的异常
 	 */
 	public void addRow(Object[] data, Object tag) {
@@ -147,11 +147,11 @@ public class MutiTableModel extends AbstractTableModel {
 		contents.add(content);
 		rowTagContents.add(tag);
 	}
-	
+
 	/**
 	 * 添加指定数据的一行。<br>
-	 * 
-	 * @param data　数据
+	 *
+	 * @param data 　数据
 	 * @throws Exception 抛出数据数不正确的异常
 	 */
 	public void addRow(Object[] data) {
@@ -182,7 +182,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 删除指定的行。<br>
-	 * 
+	 *
 	 * @param row 行序号
 	 */
 	public void removeRow(int row) {
@@ -194,8 +194,8 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 删除指定的行。<br>
-	 * 
-	 * @param row 行序号
+	 *
+	 * @param row   行序号
 	 * @param count 行数
 	 */
 	public void removeRows(int row, int count) {
@@ -211,7 +211,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 删除多行数据
-	 * 
+	 *
 	 * @param rows
 	 */
 	public void removeRows(int[] rows) {
@@ -247,19 +247,19 @@ public class MutiTableModel extends AbstractTableModel {
 	 * 
 	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public void setValueAt(Object value, int row, int col) {
 		((Vector) contents.get(row)).set(col, value);
 		this.fireTableCellUpdated(row, col);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int, int)
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void setRowTagAt(Object value, int row) {
 		if (this.rowTagContents.size() <= row) {
 			rowTagContents.add(value);
@@ -317,9 +317,12 @@ public class MutiTableModel extends AbstractTableModel {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getValueAt(int row, int col) {
-		return ((Vector) contents.get(row)).get(col);
+		if (contents.size() > 0) {
+			return ((Vector) contents.get(row)).get(col);
+		}
+		return "";
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -342,7 +345,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 获取支持选中的列。<br>
-	 * 
+	 *
 	 * @return 支持选中的列的索引
 	 */
 	public int getCheckColumn() {
@@ -351,7 +354,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 设置支持选中的列。<br>
-	 * 
+	 *
 	 * @param checkColumn 支持选中的列的索引
 	 */
 	public void setCheckColumn(int checkColumn) {
@@ -360,7 +363,7 @@ public class MutiTableModel extends AbstractTableModel {
 
 	/**
 	 * 得到TableModel中的数据
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Object> getContents() {

@@ -176,6 +176,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo targetDatasource = new ReflectInfo();
 		targetDatasource.methodName = "setTargetDatasource";
 		parameterDatasource = new ParameterDatasourceConstrained();
+		parameterDatasource.setRequired(true);
 		parameterDatasource.addValueLegalListener(new ParameterValueLegalListener() {
 			@Override
 			public boolean isValueLegal(ParameterValueLegalEvent event) {
