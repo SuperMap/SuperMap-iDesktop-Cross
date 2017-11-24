@@ -66,6 +66,10 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 	private final static int ENCODE_TYPE = 3;
 	private final static int SPATIALINDEX_TYPE = 4;
 	private final static int FIELDINDEX_TYPE = 5;
+	private final static int IMPORTEMPTYDATASET_TYPE = 6;
+
+	//Modify by xie 2017.11.24 新增空数据集判断
+	private TristateCheckBox checkBoxImportEmptyDataset;
 
 	private ItemListener datasourceListener = new ItemListener() {
 		@Override
@@ -437,6 +441,8 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		this.labelDatasetType = new JLabel();
 		this.checkBoxFieldIndex = new TristateCheckBox();
 		this.checkBoxSpatialIndex = new TristateCheckBox();
+		this.checkBoxImportEmptyDataset = new TristateCheckBox();
+		this.checkBoxImportEmptyDataset.setSelected(true);
 		this.checkBoxSpatialIndex.setSelected(false);
 		this.checkBoxFieldIndex.setSelected(false);
 		this.comboBoxEncodeType.setEditable(true);
@@ -459,6 +465,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		ComponentUIUtilities.setName(this.checkBoxFieldIndex, "PanelResultset_checkBoxFieldIndex");
 		ComponentUIUtilities.setName(this.checkBoxSpatialIndex, "PanelResultset_checkBoxSpatialIndex");
 		ComponentUIUtilities.setName(this.textFieldDatasetName, "PanelResultset_textFieldDatasetName");
+		ComponentUIUtilities.setName(this.checkBoxImportEmptyDataset, "PanelResultset_checkBoxImportEmptyDataset");
 	}
 
 	private void removeDatasource() {
@@ -627,6 +634,8 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			result = panelImport.getResultset().getCheckBoxSpatialIndex();
 		} else if (type == FIELDINDEX_TYPE) {
 			result = panelImport.getResultset().getCheckBoxFieldIndex();
+		} else if (type == IMPORTEMPTYDATASET_TYPE) {
+			result = panelImport.getResultset().getCheckBoxImportEmptyDataset();
 		}
 		return result;
 	}
@@ -729,8 +738,10 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			initTargetDatasetTypeForVector();
 			setFullsize();
 			if (importSetting instanceof ImportSettingGeoJson || importSetting instanceof ImportSettingSimpleJson) {
-				this.checkBoxFieldIndex.setVisible(false);
 				this.checkBoxSpatialIndex.setVisible(false);
+				this.checkBoxFieldIndex.setVisible(false);
+				this.panelCheckBox.removeAll();
+				this.panelCheckBox.add(this.checkBoxImportEmptyDataset, new GridBagConstraintsHelper(0, 0, 4, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 0, 5, 10).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 			}
 			// SimpleJson数据类型无法设置导入的数据集类型，数据集类型控件不做显示-yuanR2017.9.4
 			if (importSetting instanceof ImportSettingSimpleJson) {
@@ -753,10 +764,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			setDefaultImportSettingEncode();
 			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
 			setDefaultLayout();
-			panelCheckBox.remove(this.checkBoxFieldIndex);
-			panelCheckBox.remove(this.checkBoxSpatialIndex);
-			this.checkBoxFieldIndex.setVisible(false);
-			this.checkBoxSpatialIndex.setVisible(false);
+			this.panelCheckBox.removeAll();
 			initTargetDatasetTypeForImage();
 			setDefaultSize();
 		} else if (importSetting instanceof ImportSettingSIT || importSetting instanceof ImportSettingGRD ||
@@ -830,6 +838,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		if (null != panelImports) {
 			this.checkBoxSpatialIndex.setSelectedEx(externalDataSelectAll(SPATIALINDEX_TYPE));
 			this.checkBoxFieldIndex.setSelectedEx(externalDataSelectAll(FIELDINDEX_TYPE));
+			this.checkBoxImportEmptyDataset.setSelectedEx(externalDataSelectAll(IMPORTEMPTYDATASET_TYPE));
 		}
 	}
 
@@ -976,6 +985,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		this.labelDatasetType.setText(DataConversionProperties.getString("string_label_lblDatasetType"));
 		this.checkBoxFieldIndex.setText(ControlsProperties.getString("string_checkbox_chckbxFieldIndex"));
 		this.checkBoxSpatialIndex.setText(ControlsProperties.getString("string_checkbox_chckbxSpatialIndex"));
+		this.checkBoxImportEmptyDataset.setText(ControlsProperties.getString("String_checkbox_chckbxImportEmptyDataset"));
 		this.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
 	}
 
@@ -1005,5 +1015,9 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 
 	public JCheckBox getCheckBoxSpatialIndex() {
 		return checkBoxSpatialIndex;
+	}
+
+	public TristateCheckBox getCheckBoxImportEmptyDataset() {
+		return checkBoxImportEmptyDataset;
 	}
 }

@@ -19,6 +19,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
@@ -74,17 +76,16 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	}
 
 	private void initListeners() {
-		// 意义何在？-yuanR存疑2017.11.3{
-		//MouseAdapter comboBoxClicked = new MouseAdapter() {
-		//	//添加右边按钮点击时事件
-		//	@Override
-		//	public void mouseReleased(MouseEvent e) {
-		//		parameterComboBox.firePropertyChangeListener(new PropertyChangeEvent(parameterComboBox, "ComboBoxClicked", "", ""));
-		//	}
-		//};
-		//comboBox.addMouseListener(comboBoxClicked);
-		//comboBox.getComponent(0).addMouseListener(comboBoxClicked);
-		//}
+		MouseAdapter comboBoxClicked = new MouseAdapter() {
+			//添加右边按钮点击时事件
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				parameterComboBox.firePropertyChangeListener(new PropertyChangeEvent(parameterComboBox, "ComboBoxClicked", "", ""));
+			}
+		};
+		comboBox.addMouseListener(comboBoxClicked);
+		comboBox.getComponent(0).addMouseListener(comboBoxClicked);
+
 		parameterComboBox.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {

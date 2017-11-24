@@ -58,4 +58,10 @@ public interface IImportSettingResultset extends IPanelModel {
      */
     JCheckBox getCheckBoxSpatialIndex();
 
+    /**
+     * 是否导入空数据集
+     * @return
+     */
+    JCheckBox getCheckBoxImportEmptyDataset();
+
 }
