@@ -13,8 +13,11 @@ import java.util.ArrayList;
 public class ParameterForObjectCirculation extends AbstractParameter implements ISelectionParameter {
 	private ArrayList<String> infoList = new ArrayList<>();
 	private String fileType;
+	private String nowInfo;
+	private boolean isShowAddButton = true;
 	public final String FILE_TYPE_CHANGED = "fileTypeChanged";
 	private final String LIST_CHANGED="infoListChanged";
+	public final String NEW_INFO_ADDED="newInfoAdded";
 
 	public ParameterForObjectCirculation() {
 
@@ -60,5 +63,19 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 	@Override
 	public String getType() {
 		return ParameterType.CIRCULATION_FOR_OBJECT;
+	}
+
+	public boolean isShowAddButton() {
+		return isShowAddButton;
+	}
+
+	public void setShowAddButton(boolean showAddButton) {
+		isShowAddButton = showAddButton;
+	}
+
+	public void addRow(Object newInfo) {
+		String oldValue = this.nowInfo;
+		this.nowInfo = (String) newInfo;
+		firePropertyChangeListener(new PropertyChangeEvent(this, NEW_INFO_ADDED, oldValue, this.nowInfo));
 	}
 }

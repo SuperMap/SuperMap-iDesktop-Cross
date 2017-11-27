@@ -25,7 +25,7 @@ public class ParameterForObjectCirculationPanel implements IParameterPanel {
 	}
 
 	private void init() {
-		this.panelForObjectCirculation = new PanelForObjectCirculation();
+		this.panelForObjectCirculation = new PanelForObjectCirculation(parameterForObjectCirculation.isShowAddButton());
 		this.parameterForObjectCirculation.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -33,6 +33,11 @@ public class ParameterForObjectCirculationPanel implements IParameterPanel {
 					isSelectedChanged = true;
 					panelForObjectCirculation.setFileType((String) evt.getNewValue());
 					isSelectedChanged = false;
+				} else if (!isSelectedChanged && evt.getPropertyName().equals(parameterForObjectCirculation.NEW_INFO_ADDED)) {
+					isSelectedChanged = true;
+					panelForObjectCirculation.addRow(evt.getNewValue());
+					isSelectedChanged = false;
+
 				}
 			}
 		});
