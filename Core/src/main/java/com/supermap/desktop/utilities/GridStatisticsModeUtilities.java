@@ -15,17 +15,17 @@ public class GridStatisticsModeUtilities {
 		String name = "";
 		try {
 			if (mode == GridStatisticsMode.MAX) {
-				name = CoreProperties.getString("String_GridStatisticsMode_Max");
+				name = CoreProperties.getString("String_StatisticsType_MAX");
 			} else if (mode == GridStatisticsMode.MIN) {
-				name = CoreProperties.getString("String_GridStatisticsMode_Min");
+				name = CoreProperties.getString("String_StatisticsType_MIN");
 			} else if (mode == GridStatisticsMode.MEAN) {
-				name = CoreProperties.getString("String_GridStatisticsMode_Mean");
+				name = CoreProperties.getString("String_StatisticsType_MEAN");
 			} else if (mode == GridStatisticsMode.MEDIAN) {
-				name = CoreProperties.getString("String_GridStatisticsMode_Median");
+				name = CoreProperties.getString("String_StatisticsType_MEDIAN");
 			} else if (mode == GridStatisticsMode.SUM) {
 				name = CoreProperties.getString("String_GridStatisticsMode_Sum");
 			} else if (mode == GridStatisticsMode.MAJORITY) {
-				name = CoreProperties.getString("String_GridStatisticsMode_Majority");
+				name = CoreProperties.getString("String_TerrainStatisticType_Majority");
 			} else if (mode == GridStatisticsMode.MINORITY) {
 				name = CoreProperties.getString("String_GridStatisticsMode_Minority");
 			} else if (mode == GridStatisticsMode.VARIETY) {
@@ -44,17 +44,17 @@ public class GridStatisticsModeUtilities {
 	public static GridStatisticsMode getGridStatisticsMode(String name) {
 		GridStatisticsMode type = GridStatisticsMode.MAX;
 		try {
-			if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Max"))) {
+			if (name.equalsIgnoreCase(CoreProperties.getString("String_StatisticsType_MAX"))) {
 				type = GridStatisticsMode.MAX;
-			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Min"))) {
+			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_StatisticsType_MIN"))) {
 				type = GridStatisticsMode.MIN;
-			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Mean"))) {
+			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_StatisticsType_MEAN"))) {
 				type = GridStatisticsMode.MEAN;
-			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Median"))) {
+			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_StatisticsType_MEDIAN"))) {
 				type = GridStatisticsMode.MEDIAN;
 			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Sum"))) {
 				type = GridStatisticsMode.SUM;
-			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_GridStatisticsMode_Majority"))) {
+			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_TerrainStatisticType_Majority"))) {
 				type = GridStatisticsMode.MAJORITY;
 			} else if (name.equalsIgnoreCase(CoreProperties.getString("String_StatisticsType_Minority"))) {
 				type = GridStatisticsMode.MINORITY;

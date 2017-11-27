@@ -295,7 +295,7 @@ public class ExportsSetDialog extends SmDialog implements IPanelModel {
 	}
 
 	private void initResources() {
-		this.setTitle(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.setTitle(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.checkBoxFileType.setText(ControlsProperties.getString("String_ExportType"));
 		this.checkBoxOverwirte.setText(DataConversionProperties.getString("String_OverWrite"));
 		this.radioButtonOK.setText(CoreProperties.getString(CoreProperties.yes));

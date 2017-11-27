@@ -49,7 +49,7 @@ public class TableModelScene extends AbstractTableModel {
 				return this.scenes.get(row);
 			}
 			if (col == COLUMN_TYPE) {
-				return ControlsProperties.getString("String_ToolBar_HideScene");
+				return ControlsProperties.getString("String_Scenes");
 			}
 		}
 		return "";

@@ -545,7 +545,7 @@ public class WorkspaceManagerWindow extends FormBaseChild {
 						}
 					}
 					//点击了地图(多选单选一起判断)
-					else if (levelNum == SECOND_LEVEL && getActiveApplication().getWorkspace().getMaps().getCount() > 0 && jTable.getModel().getValueAt(0, COLUMN_TYPE).equals(ControlsProperties.getString("String_ToolBar_HideMap"))) {
+					else if (levelNum == SECOND_LEVEL && getActiveApplication().getWorkspace().getMaps().getCount() > 0 && jTable.getModel().getValueAt(0, COLUMN_TYPE).equals(ControlsProperties.getString("String_Maps"))) {
 						//清除选择
 						getWorkspaceManager().getWorkspaceTree().setSelectionPath(null);
 						for (int i = 0; i < jTable.getSelectedRowCount(); i++) {
@@ -571,7 +571,7 @@ public class WorkspaceManagerWindow extends FormBaseChild {
 						}
 					}
 					//点击了场景节点(多选单选一起判断)
-					else if (levelNum == SECOND_LEVEL && getActiveApplication().getWorkspace().getScenes().getCount() > 0 && jTable.getModel().getValueAt(0, COLUMN_TYPE).equals(ControlsProperties.getString("String_ToolBar_HideScene"))) {
+					else if (levelNum == SECOND_LEVEL && getActiveApplication().getWorkspace().getScenes().getCount() > 0 && jTable.getModel().getValueAt(0, COLUMN_TYPE).equals(ControlsProperties.getString("String_Scenes"))) {
 						//清除选择
 						getWorkspaceManager().getWorkspaceTree().setSelectionPath(null);
 						for (int i = 0; i < jTable.getSelectedRowCount(); i++) {

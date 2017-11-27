@@ -113,12 +113,12 @@ public class DialogMapClip extends SmDialog {
 					// 获得是否擦除或者精确裁剪，需要根据数据集类型分别赋值
 					if (targetDataset instanceof DatasetVector) {
 						String isErase = (String) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_ERASE);
-						if (isErase.equals(CoreProperties.getString("String_True"))) {
+						if (isErase.equals(CoreProperties.getString("String_yes"))) {
 							isExactClipOrIsEarsesource = true;
 						}
 					} else {
 						String isExactClip = (String) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_EXACTCLIP);
-						if (isExactClip.equals(CoreProperties.getString("String_True"))) {
+						if (isExactClip.equals(CoreProperties.getString("String_yes"))) {
 							isExactClipOrIsEarsesource = true;
 						}
 //                        isExactClipOrIsEarsesource = (Boolean) ((Vector) (this.layerJTableInfo.get(i))).get(COLUMN_INDEX_EXACTCLIP);
@@ -699,7 +699,7 @@ public class DialogMapClip extends SmDialog {
 		this.buttonSet.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
-		this.buttonSet.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonSet.setToolTipText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 	}
 }
 

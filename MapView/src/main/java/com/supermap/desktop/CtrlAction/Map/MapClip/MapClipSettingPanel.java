@@ -155,7 +155,7 @@ public class MapClipSettingPanel extends JPanel {
 		this.labelDataset.setText(ControlsProperties.getString("String_Label_TargetDataset"));
 		this.saveMapCheckBox.setText(MapViewProperties.getString("String_MapClip_SaveMap"));
 		this.wipeClipRegionCheckBox.setText(MapViewProperties.getString("String_MapClip_EraseCheck"));
-		this.exactClippingCheckBox.setText(MapViewProperties.getString("String_MapClip_ExactClip"));
+		this.exactClippingCheckBox.setText(MapViewProperties.getString("String_MapClip_AcurrentClip"));
 		this.insideRegion.setText(MapViewProperties.getString("String_MapClip_InsideRegion"));
 		this.outsideRegion.setText(MapViewProperties.getString("String_MapClip_OutsideRegion"));
 	}

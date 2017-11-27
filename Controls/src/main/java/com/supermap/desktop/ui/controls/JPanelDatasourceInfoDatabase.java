@@ -490,7 +490,7 @@ public class JPanelDatasourceInfoDatabase extends JPanel {
 		jLabelUserName = new JLabel(ControlsProperties.getString("String_Label_UserName"));
 		jLabelPassword = new JLabel(ControlsProperties.getString("String_Label_UserPassword"));
 		jLabelDatasourceAlias = new JLabel(ControlsProperties.getString("String_Label_DatasourseAlias"));
-		jLabelOpenType = new JLabel(ControlsProperties.getString("String_Label_OpenType"));
+		jLabelOpenType = new JLabel(ControlsProperties.getString("String_OpenMode"));
 		jComboBoxServer = new JComboBox<String>();
 		jLabelMaxConnPoolNum = new JLabel(ControlsProperties.getString("String_Label_MaxConnPoolCount"));
 		jTextFieldMaxConnPoolNum = new JTextField("1");

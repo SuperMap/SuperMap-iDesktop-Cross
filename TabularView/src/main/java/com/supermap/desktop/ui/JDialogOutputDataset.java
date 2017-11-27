@@ -225,15 +225,15 @@ public class JDialogOutputDataset extends SmDialog {
 		//this.buttonDelete.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_Delete.png"));
 		//this.buttonDelete.setToolTipText(CommonProperties.getString("String_Delete"));
 		this.buttonSelectAllSystemField.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectSystemField.png"));
-		this.buttonSelectAllSystemField.setToolTipText(CoreProperties.getString("String_SelectAllSystemField"));
+		this.buttonSelectAllSystemField.setToolTipText(CoreProperties.getString("String_ToolBar_SelectSystemField"));
 		this.buttonSelectAllNonSystemField.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectNonSystemField.png"));
-		this.buttonSelectAllNonSystemField.setToolTipText(CoreProperties.getString("String_SelectAllNonSystemField"));
+		this.buttonSelectAllNonSystemField.setToolTipText(CoreProperties.getString("String_ToolBar_SelectUnSystemField"));
 		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.labelResultType.setText(CoreProperties.getString("String_ResultDatasetType"));
 		this.labelCodeType.setText(CoreProperties.getString("String_CodeType"));
 		this.checkBoxIsSaveRows.setText(CoreProperties.getString("String_OnlySaveSelectedRows"));
-		this.buttonOK.setText(CoreProperties.getString("String_FormEdgeCount_OK"));
+		this.buttonOK.setText(CoreProperties.getString("String_OK"));
 		this.buttonCancel.setText(CoreProperties.getString("String_Cancel"));
 	}
 

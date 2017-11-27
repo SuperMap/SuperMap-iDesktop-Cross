@@ -14,7 +14,7 @@ public interface IEditor {
 	 */
 	void deactivate(EditEnvironment environment);
 
-	boolean enble(EditEnvironment environment);
+    boolean enable(EditEnvironment environment);
 
 	boolean check(EditEnvironment environment);
 }

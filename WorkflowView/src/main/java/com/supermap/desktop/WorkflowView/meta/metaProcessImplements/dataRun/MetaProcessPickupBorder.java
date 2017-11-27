@@ -55,7 +55,7 @@ public class MetaProcessPickupBorder extends MetaProcess {
 		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(this.isPreProcessed);
 		this.parameters.setParameters(sourceData, paramSet, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.REGION, sourceData);

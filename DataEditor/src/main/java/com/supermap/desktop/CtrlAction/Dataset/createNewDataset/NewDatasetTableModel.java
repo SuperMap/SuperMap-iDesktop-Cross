@@ -27,7 +27,7 @@ public class NewDatasetTableModel extends DefaultTableModel {
 
 	private final String[] columnNames = new String[]{
 			CoreProperties.getString("String_ColumnHeader_Index"),
-			CoreProperties.getString("String_ColumnHeader_TargetDatasource"),
+			CoreProperties.getString("String_Label_TargetDatasource"),
 			DataEditorProperties.getString("String_CreateType"),
 			ControlsProperties.getString("String_DatasetName"),
 //			CommonProperties.getString("String_ColumnHeader_EncodeType"),

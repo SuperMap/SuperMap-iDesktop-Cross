@@ -214,7 +214,7 @@ public class ThemeUniqueContainer extends ThemeChangePanel {
 	 * 资源化
 	 */
 	private void initResources() {
-		this.labelExpression.setText(MapViewProperties.getString("String_label_Expression"));
+		this.labelExpression.setText(MapViewProperties.getString("String_Label_Expression"));
 		this.labelColorStyle.setText(ControlsProperties.getString("String_LabelColorScheme"));
 		this.buttonVisble.setToolTipText(MapViewProperties.getString("String_Title_Visible"));
 		this.buttonGeoStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
@@ -987,8 +987,8 @@ public class ThemeUniqueContainer extends ThemeChangePanel {
 		private void setOffsetUnity() {
 			if (ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit").equals(comboBoxOffsetUnity.getSelectedItem().toString())) {
 				themeUnique.setOffsetFixed(true);
-				labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
-				labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+				labelOffsetXUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
+				labelOffsetYUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
 			} else {
 				themeUnique.setOffsetFixed(false);
 				labelOffsetXUnity.setText(UnitValue.parseToString(map.getCoordUnit()));

@@ -56,7 +56,7 @@ public class LineToRegionEditor extends GeometryConvertEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), ILineFeature.class);
-	}
+    public boolean enable(EditEnvironment environment) {
+        return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), ILineFeature.class);
+    }
 }

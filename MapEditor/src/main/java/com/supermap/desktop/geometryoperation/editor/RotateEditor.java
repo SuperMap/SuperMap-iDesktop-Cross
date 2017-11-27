@@ -32,9 +32,9 @@ public class RotateEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
-				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(), ICompoundFeature.class,
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
+                && ListUtilities.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(), ICompoundFeature.class,
 						ITextFeature.class, IPointFeature.class, IRegionFeature.class, ILineFeature.class);
 	}
 

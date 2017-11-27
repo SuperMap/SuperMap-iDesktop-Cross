@@ -12,9 +12,9 @@ import java.util.Map;
 public class LineToPointEditor extends GeometryConvertEditor {
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), ILineFeature.class);
-	}
+    public boolean enable(EditEnvironment environment) {
+        return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), ILineFeature.class);
+    }
 
 	public DatasetType getDesDatasetType() {
 		return DatasetType.POINT;

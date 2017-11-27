@@ -52,7 +52,7 @@ public class UnitValue {
 			result = CoreProperties.getString("String_DistanceUnit_Millimeter");
 		}
 		if (unit.equals(Unit.MINUTE)) {
-			result = CoreProperties.getString("String_AngleUnit_Minute");
+			result = CoreProperties.getString("String_Time_Minutes");
 		}
 		if (unit.equals(Unit.RADIAN)) {
 			result = CoreProperties.getString("String_AngleUnit_Radian");

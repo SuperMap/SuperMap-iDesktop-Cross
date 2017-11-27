@@ -61,7 +61,7 @@ public class CirculationForFieldParameters extends AbstractCirculationParameters
 		this.datasource = new ParameterDatasourceConstrained();
 		this.datasetType = new ParameterDatasetType();
 		this.datasetType.setAllShown(true);
-		this.datasetType.setDescribe(ProcessProperties.getString("String_DatasetType"));
+		this.datasetType.setDescribe(ProcessProperties.getString("string_label_lblDatasetType"));
 		this.dataset = new ParameterSingleDataset();
 		this.dataset.setDescribe(CoreProperties.getString(CoreProperties.Label_Dataset));
 		this.dataset.setDatasetTypes(DatasetTypeUtilities.getDatasetTypeVector());

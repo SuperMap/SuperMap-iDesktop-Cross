@@ -867,7 +867,7 @@ public class TextStylePanel extends JPanel {
 			jComboBoxTextAlignment = new JComboBox(TEXTALIGNMENT_NAMES);
 			jComboBoxTextAlignment.setPreferredSize(new Dimension(150, 28));
 			jComboBoxTextAlignment.setMinimumSize(new Dimension(150, 28));
-			String name = ControlsProperties.getString("String_TopLeftCorner");
+			String name = ControlsProperties.getString("String_TextAlignment_LeftTop");
 			Object[] textAlignmentValues = hashMapTextAlignment.values().toArray();
 			Object[] textAlignmentNames = hashMapTextAlignment.keySet().toArray();
 			for (int i = 0; i < textAlignmentValues.length; i++) {

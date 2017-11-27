@@ -189,13 +189,13 @@ public abstract class JPanelDatasetChoose extends JPanel {
 		this.buttonMoveDown.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveDown.png"));
 		this.buttonMoveLast.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveLast.png"));
 //		this.buttonRefresh.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Refresh.png"));
-		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_AddColor"));
+		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_Add"));
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_ToolBar_Remove"));
-		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_ToolBar_MoveFirst"));
+		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_MoveToFrist"));
 		this.buttonMoveUp.setToolTipText(CoreProperties.getString("String_ToolBar_MoveUp"));
-		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_ToolBar_MoveDown"));
+		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_MoveToNext"));
 		this.buttonMoveLast.setToolTipText(CoreProperties.getString("String_ToolBar_MoveLast"));
 //		this.buttonRefresh.setToolTipText(CommonProperties.getString("String_Tooltip_RefreshStatus"));
 	}

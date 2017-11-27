@@ -70,9 +70,9 @@ public enum LengthUnit {
 		} else if (this == YARD) {
 			return CoreProperties.getString("String_DistanceUnit_Yard");
 		} else if (this == SECOND) {
-			return CoreProperties.getString("String_AngleUnit_Second");
+			return CoreProperties.getString("String_Second");
 		} else if (this == MINUTE) {
-			return CoreProperties.getString("String_AngleUnit_Minute");
+			return CoreProperties.getString("String_Time_Minutes");
 		} else if (this == DEGREE) {
 			return CoreProperties.getString("String_AngleUnit_Degree");
 		} else if (this == FOOT) {
@@ -98,9 +98,9 @@ public enum LengthUnit {
 			return INCH;
 		} else if (name.equals(CoreProperties.getString("String_DistanceUnit_Yard"))) {
 			return YARD;
-		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Second"))) {
+		} else if (name.equals(CoreProperties.getString("String_Second"))) {
 			return SECOND;
-		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Minute"))) {
+		} else if (name.equals(CoreProperties.getString("String_Time_Minutes"))) {
 			return MINUTE;
 		} else if (name.equals(CoreProperties.getString("String_AngleUnit_Degree"))) {
 			return DEGREE;

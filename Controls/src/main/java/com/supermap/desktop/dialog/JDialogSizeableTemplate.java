@@ -199,7 +199,7 @@ public class JDialogSizeableTemplate extends SmDialog {
 			table.getColumnModel().getColumn(2).setHeaderValue(CoreProperties.getString("String_Type"));
 
 			this.buttonDelete.setText(CoreProperties.getString("String_ToolBar_Delete"));
-			this.buttonSetting.setText(CoreProperties.getString("String_ToolBar_SetBatch"));
+			this.buttonSetting.setText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 			this.buttonSelectAll.setText(CoreProperties.getString("String_ToolBar_SelectAll"));
 			this.buttonSelectInvert.setText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 			this.chckbxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));

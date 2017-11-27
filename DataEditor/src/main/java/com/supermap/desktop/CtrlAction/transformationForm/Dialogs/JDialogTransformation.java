@@ -228,7 +228,7 @@ public class JDialogTransformation extends SmDialog {
 	}
 
 	private void initPanelProperties() {
-		panelProperties.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_FormEdgeCount_Text")));
+		panelProperties.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_GroupBox_ParamSetting")));
 		panelProperties.setLayout(new GridBagLayout());
 		panelProperties.add(labelTransformationFile, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setInsets(10, 10, 0, 0).setAnchor(GridBagConstraints.WEST));
 		panelProperties.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setInsets(10, 5, 0, 10).setFill(GridBagConstraints.HORIZONTAL));
@@ -253,7 +253,7 @@ public class JDialogTransformation extends SmDialog {
 	}
 
 	private void initPanelSetting() {
-//		panelSetting.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString("String_ToolBar_SetBatch")));
+//		panelSetting.setBorder(BorderFactory.createTitledBorder(CommonProperties.getString("String_toolStripButtonAdvanced")));
 		panelSetting.setLayout(new GridBagLayout());
 		panelSetting.add(checkBoxIsSaveAs, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 1).setInsets(10, 5, 0, 0));
 		panelSetting.add(comboBoxDatasources, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 1).setInsets(10, 5, 0, 10).setFill(GridBagConstraints.HORIZONTAL));

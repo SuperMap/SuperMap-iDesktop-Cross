@@ -132,8 +132,8 @@ public class MetaProcessCutFillRegion extends MetaProcessCalTerrain {
 				}
 				isSuccessful = result != null;
 				if (isSuccessful) {
-					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + result.getFillVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
-					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + result.getCutVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
+					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + result.getFillVolume() + CoreProperties.getString("String_VolumeUnit_Meter"));
+					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + result.getCutVolume() + CoreProperties.getString("String_VolumeUnit_Meter"));
 					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + result.getFillArea() + CoreProperties.getString("String_AreaUnit_Meter"));
 					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + result.getCutArea() + CoreProperties.getString("String_AreaUnit_Meter"));
 					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + result.getRemainderArea() + CoreProperties.getString("String_AreaUnit_Meter"));

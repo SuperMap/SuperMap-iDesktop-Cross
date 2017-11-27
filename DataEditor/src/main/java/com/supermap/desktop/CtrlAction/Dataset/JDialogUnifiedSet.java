@@ -224,7 +224,7 @@ public class JDialogUnifiedSet extends JDialog {
 		cancelButton.setText(CoreProperties.getString("String_Cancel"));
 		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_toolStripButtonAdvanced"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));
-		checkboxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
+		checkboxTargetDatasource.setText(CoreProperties.getString("String_Label_TargetDatasource"));
 		checkboxEncodeType.setText(CoreProperties.getString("String_ColumnHeader_EncodeType"));
 		checkboxCharset.setText(DataEditorProperties.getString("String_Charset"));
 	}

@@ -167,7 +167,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 	private ArrayList<Double> currentMapCacheScale;
 	private static final String showScalePrePart = "1:";
 	private static final String colon = ":";
-	private String[] globalSplitTableTitle = {"", MapViewProperties.getString("MapCache_Scale")};
+	private String[] globalSplitTableTitle = {"", MapViewProperties.getString("String_Scales")};
 	private Rectangle2D cacheRangeBounds = null;
 	private Rectangle2D indexRangeBounds = null;
 	private Double[] globalScaleSortKeys;
@@ -223,7 +223,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 
 		this.scrollPane = new JScrollPane();
 		this.toolBar = new JToolBar();
-		this.jMenuItemAddScale = new JMenuItem(MapViewProperties.getString("MapCache_AddScale"), CoreResources.getIcon(urlStr + "Image_ToolButton_AddScale.png"));
+		this.jMenuItemAddScale = new JMenuItem(MapViewProperties.getString("String_AddScale"), CoreResources.getIcon(urlStr + "Image_ToolButton_AddScale.png"));
 		this.jMenuItemDefaultScale = new JMenuItem(MapViewProperties.getString("MapCache_DefaultScale"), CoreResources.getIcon(urlStr + "Image_ToolButton_DefaultScale.png"));
 		this.jMenuItemImportCacheConfigs = new JMenuItem(MapViewProperties.getString("MapCache_ImportCacheConfigs"), CoreResources.getIcon(urlStr + "Image_ToolButton_ExportScale.png"));
 		this.jMenuItemImportScale = new JMenuItem(MapViewProperties.getString("MapCache_ImportScale"), CoreResources.getIcon(urlStr + "Image_ToolButton_DefaultScale.png"));
@@ -608,7 +608,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.mutiProcessCache.setText(MapViewProperties.getString("MapCache_MutiProcessCache"));
 		this.buttonSetting.setText(MapViewProperties.getString("MapCache_Setting"));
 		this.buttonOK.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
-		this.buttonCancel.setText(MapViewProperties.getString("String_BatchAddColorTableCancelButton"));
+		this.buttonCancel.setText(MapViewProperties.getString("String_Cancel"));
 
 
 		this.buttonSelectAll.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectAll.png"));
@@ -833,7 +833,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setMaxWidth(125);
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setMinWidth(125);
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_INDEX).setHeaderValue("");
-		this.localSplitTable.getColumnModel().getColumn(COLUMN_SCALE).setHeaderValue(MapViewProperties.getString("MapCache_Scale"));
+		this.localSplitTable.getColumnModel().getColumn(COLUMN_SCALE).setHeaderValue(MapViewProperties.getString("String_Scales"));
 		this.localSplitTable.getColumnModel().getColumn(COLUMN_TITLE).setHeaderValue(CoreProperties.getString("String_Caption"));
 	}
 
@@ -1228,7 +1228,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 			} else {
 				Application.getActiveApplication().getOutput().output("\"" + this.mapCacheBuilder.getMap().getName() + "\"" + MapViewProperties.getString("MapCache_StartCreateFailed"));
 			}
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + CoreProperties.getString("String_Time_Seconds"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + CoreProperties.getString("String_Second"));
 			if (this.autoCloseDialog.isSelected()) {
 				cancelAndCloseDailog();
 				this.mapCacheBuilder.dispose();

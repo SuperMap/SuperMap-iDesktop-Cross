@@ -174,7 +174,7 @@ public class MetaProcessAlgebraOperation extends MetaProcessGridAnalyst {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_RasterAlgebraExpression"), "xml");
 			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-					ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"), moduleName, "OpenMany");
+					ControlsProperties.getString("String_OpenColorTable"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
 		int state = smFileChoose.showDefaultDialog();

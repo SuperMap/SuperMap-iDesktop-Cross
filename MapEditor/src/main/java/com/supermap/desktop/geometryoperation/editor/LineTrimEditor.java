@@ -100,9 +100,9 @@ public class LineTrimEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getEditableDatasetTypes().contains(DatasetType.LINE)
-				|| environment.getEditProperties().getEditableDatasetTypes().contains(DatasetType.CAD);
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getEditableDatasetTypes().contains(DatasetType.LINE)
+                || environment.getEditProperties().getEditableDatasetTypes().contains(DatasetType.CAD);
 	}
 
 	@Override
