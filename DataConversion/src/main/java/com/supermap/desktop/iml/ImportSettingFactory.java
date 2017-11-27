@@ -23,12 +23,14 @@ public class ImportSettingFactory implements IImportSettingFactory {
 		if (fileType.equalsIgnoreCase(FileTypeLocale.DXF_STRING)) {
 			if (!fileFilter.equalsIgnoreCase(ControlsProperties.getString("string_filetype_3ds"))) {
 				importSetting = new ImportSettingDXF();
-				((ImportSettingDXF) importSetting).setImportEmptyDataset(true);
+				//Modify by xie 2017.11.27
+				//((ImportSettingDXF) importSetting).setImportEmptyDataset(true);
 			} else {
 				importSetting = new ImportSettingModelDXF();
 			}
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.DWG_STRING)) {
-			importSetting = new ImportSettingDWG();
+			//Modify by xie 2017.11.27
+			//importSetting = new ImportSettingDWG();
 			((ImportSettingDWG) importSetting).setImportEmptyDataset(true);
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.VCT_STRING)) {
 			importSetting = new ImportSettingVCT();
