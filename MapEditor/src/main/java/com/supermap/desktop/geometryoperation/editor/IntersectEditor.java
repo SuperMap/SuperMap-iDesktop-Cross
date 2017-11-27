@@ -64,9 +64,9 @@ public class IntersectEditor extends AbstractEditor {
 	 */
 	// @formatter:on
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		boolean enable = false;
-		if (environment.getEditProperties().getSelectedGeometryCount() > 1 // 选中数至少2个
+    public boolean enable(EditEnvironment environment) {
+        boolean enable = false;
+        if (environment.getEditProperties().getSelectedGeometryCount() > 1 // 选中数至少2个
 				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class)
 				&& environment.getEditProperties().getEditableDatasetTypes().size() > 0
 				&& ListUtilities.isListContainAny(environment.getEditProperties().getEditableDatasetTypes(), DatasetType.CAD, DatasetType.REGION)) {

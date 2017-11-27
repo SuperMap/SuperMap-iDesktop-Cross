@@ -28,9 +28,9 @@ public class ReverseEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
-				&& ListUtilities.isListContainAny(environment.getEditProperties().getEditableSelectedGeometryTypes(), GeometryType.GEOLINE,
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
+                && ListUtilities.isListContainAny(environment.getEditProperties().getEditableSelectedGeometryTypes(), GeometryType.GEOLINE,
 						GeometryType.GEOLINEM, GeometryType.GEOREGION, GeometryType.GEOREGION3D, GeometryType.GEOLINE3D);
 	}
 

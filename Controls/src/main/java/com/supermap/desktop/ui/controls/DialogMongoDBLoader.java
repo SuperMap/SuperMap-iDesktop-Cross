@@ -140,10 +140,10 @@ public class DialogMongoDBLoader extends SmDialog {
             @Override
             public Component getListCellRendererComponent(JList<? extends TileVersion> list, TileVersion value, int index, boolean isSelected, boolean cellHasFocus) {
                 JLabel label;
-                if (value != null) {
+                if (value != null && !value.getDesc().equals("")) {
                     label = new JLabel(value.getDesc());
                 } else {
-                    label = new JLabel("");
+                    label = new JLabel(" ");
                 }
                 label.setOpaque(true);
                 if (isSelected) {

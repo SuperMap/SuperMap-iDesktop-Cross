@@ -52,7 +52,7 @@ public class UnionEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
+	public boolean enable(EditEnvironment environment) {
 		boolean enable = false;
 		if (environment.getEditProperties().getSelectedGeometryCount() > 1 // 选中数至少2个
 				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class, ILineFeature.class)
@@ -79,7 +79,7 @@ public class UnionEditor extends AbstractEditor {
 						|| layer.getDataset().getType() == DatasetType.LINE) {
 					if (layer.getDataset().getType() == DatasetType.CAD && geoStyle == null) {
 						Selection selection = new Selection(layer.getSelection());
-						if (selection != null && selection.getCount() > 0) {
+						if (selection.getCount() > 0) {
 							Recordset recordset = ((DatasetVector) layer.getDataset()).getRecordset(false, CursorType.STATIC);
 							recordset.seekID(selection.get(0));
 							geoStyle = recordset.getGeometry().getStyle().clone();
@@ -91,7 +91,7 @@ public class UnionEditor extends AbstractEditor {
 					if(ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), ILineFeature.class)){
 						Recordset recordsetSelected = layer.getSelection().toRecordset();
 						//将选中数据转化为几何对象存放在arrayList中
-						ArrayList<GeoLine> arrayList = new ArrayList();
+						ArrayList<GeoLine> arrayList = new ArrayList<>();
 						while (!recordsetSelected.isEOF()) {
 							Geometry tempGeometry = recordsetSelected.getGeometry();
 							if (tempGeometry instanceof GeoLine) {

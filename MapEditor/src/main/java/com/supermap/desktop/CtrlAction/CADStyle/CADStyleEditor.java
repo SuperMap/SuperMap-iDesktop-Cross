@@ -5,7 +5,10 @@ import com.supermap.data.Recordset;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IFormMap;
-import com.supermap.desktop.event.*;
+import com.supermap.desktop.event.DockbarClosedEvent;
+import com.supermap.desktop.event.DockbarClosedListener;
+import com.supermap.desktop.event.FormActivatedEvent;
+import com.supermap.desktop.event.FormDeactivatedEvent;
 import com.supermap.desktop.geometryoperation.EditControllerAdapter;
 import com.supermap.desktop.geometryoperation.EditEnvironment;
 import com.supermap.desktop.geometryoperation.IEditController;
@@ -15,9 +18,8 @@ import com.supermap.desktop.utilities.ListUtilities;
 import com.supermap.desktop.utilities.MapUtilities;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.Map;
-import com.supermap.mapping.MapOpenedEvent;
-import com.supermap.mapping.MapOpenedListener;
-import com.supermap.ui.*;
+import com.supermap.ui.GeometrySelectChangedEvent;
+import com.supermap.ui.MapControl;
 
 import java.util.ArrayList;
 
@@ -98,9 +100,9 @@ public class CADStyleEditor extends AbstractEditor {
 
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		// FIXME: 2016/12/30 enable()方法中集成的响应太多，包括地图刷新事件，而cad操作中包含很多地图刷新事件会造成文本风格中事件的重复调用,将选择事件单独移出
-		boolean result = ListUtilities.isListContainAny(environment.getEditProperties().getSelectedDatasetTypes(), DatasetType.CAD, DatasetType.TEXT)
+    public boolean enable(EditEnvironment environment) {
+        // FIXME: 2016/12/30 enable()方法中集成的响应太多，包括地图刷新事件，而cad操作中包含很多地图刷新事件会造成文本风格中事件的重复调用,将选择事件单独移出
+        boolean result = ListUtilities.isListContainAny(environment.getEditProperties().getSelectedDatasetTypes(), DatasetType.CAD, DatasetType.TEXT)
 				&& isEditable(environment.getMap());
 		return result;
 	}

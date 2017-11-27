@@ -21,6 +21,7 @@ import com.supermap.mapping.LayerGroup;
 import com.supermap.mapping.Layers;
 import com.supermap.mapping.Map;
 
+import javax.swing.border.TitledBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class TransformationTarget extends TransformationBase implements ITransfo
 		this.formTransformation = formTransformation;
 		this.mapControl.getMap().setWorkspace(Application.getActiveApplication().getWorkspace());
 		this.mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_TargetLayer"));
-	}
+        this.mapControl.setBorder(new TitledBorder(CoreProperties.getString("String_Transfernation_TargetLayer")));
+    }
 
 	@Override
 	public void addDatas(List<Object> datas) {

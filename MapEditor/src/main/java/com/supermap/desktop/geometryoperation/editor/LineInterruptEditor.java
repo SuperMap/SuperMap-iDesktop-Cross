@@ -1,30 +1,13 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoPoint;
-import com.supermap.data.Geometrist;
-import com.supermap.data.Geometry;
-import com.supermap.data.Point2D;
-import com.supermap.data.Point2Ds;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
-import com.supermap.data.SpatialQueryMode;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.core.recordset.RecordsetDelete;
 import com.supermap.desktop.geometry.Abstract.IGeometry;
 import com.supermap.desktop.geometry.Abstract.ILineFeature;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
-import com.supermap.desktop.geometryoperation.EditControllerAdapter;
-import com.supermap.desktop.geometryoperation.EditEnvironment;
-import com.supermap.desktop.geometryoperation.IEditController;
-import com.supermap.desktop.geometryoperation.IEditModel;
-import com.supermap.desktop.geometryoperation.NullEditController;
-import com.supermap.desktop.geometryoperation.RegionAndLineHighLightStyle;
+import com.supermap.desktop.geometryoperation.*;
 import com.supermap.desktop.geometryoperation.control.JDialogLineInterrruptSelect;
 import com.supermap.desktop.geometryoperation.control.MapControlTip;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
@@ -144,7 +127,7 @@ public class LineInterruptEditor extends AbstractEditor {
     }
 
     @Override
-    public boolean enble(EditEnvironment environment) {
+    public boolean enable(EditEnvironment environment) {
         return ((IFormMap) Application.getActiveApplication().getActiveForm()).getMapControl().getActiveEditableLayer() != null &&
                 (((IFormMap) Application.getActiveApplication().getActiveForm()).getMapControl().getActiveEditableLayer().isEditable() && environment.getActiveEditableLayer().getDataset().getType() == DatasetType.LINE
                         || environment.getActiveEditableLayer().getDataset().getType() == DatasetType.CAD);

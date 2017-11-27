@@ -1,15 +1,6 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.Geometry;
-import com.supermap.data.GeometryType;
-import com.supermap.data.Point2D;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.core.recordset.RecordsetDelete;
 import com.supermap.desktop.geometry.Abstract.IGeometry;
@@ -54,7 +45,7 @@ public abstract class JointLineEditorBase extends AbstractEditor {
     }
 
     @Override
-    public boolean enble(EditEnvironment environment) {
+    public boolean enable(EditEnvironment environment) {
         boolean result = false;
 
         if (ListUtilities.isListContainAny(environment.getEditProperties().getEditableDatasetTypes(), DatasetType.CAD, DatasetType.LINE)
