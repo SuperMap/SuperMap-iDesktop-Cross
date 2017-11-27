@@ -35,19 +35,7 @@ public class ToolbarUIUtilities {
 	 */
 	public static void updataToolbarsState() {
 		updateRibbonState();
-		updateLayersTreeToolbar();
 //		updateToolbar();
-	}
-
-	public static void updateLayersTreeToolbar() {
-		if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
-			UICommonToolkit.getLayersManager().setToolBarVisible(true);
-		} else {
-			LayersComponentManager layersComponentManager = UICommonToolkit.getLayersManager();
-			if (layersComponentManager != null) {
-				layersComponentManager.setToolBarVisible(false);
-			}
-		}
 	}
 
 	private static void updateRibbonState() {
