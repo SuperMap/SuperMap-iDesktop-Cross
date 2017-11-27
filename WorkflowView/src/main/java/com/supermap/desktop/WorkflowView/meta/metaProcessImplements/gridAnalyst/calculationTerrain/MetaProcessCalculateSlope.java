@@ -43,7 +43,7 @@ public class MetaProcessCalculateSlope extends MetaProcessCalTerrain {
 		);
 		parameterComboBoxSlopeType.setSelectedItem(SlopeType.DEGREE);
 
-		parameterZFactor = new ParameterNumber(ProcessProperties.getString("String_CalculateSlope_zFactor"));
+		parameterZFactor = new ParameterNumber(ProcessProperties.getString("String_ZFactor"));
 		parameterZFactor.setMinValue(0);
 		parameterZFactor.setIsIncludeMin(false);
 		parameterZFactor.setMaxBit(22);

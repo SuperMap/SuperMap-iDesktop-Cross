@@ -35,7 +35,7 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterFile parameterDataSourcePath = new ParameterFile(ProcessProperties.getString("String_DataSourcePath"));
 	private ParameterComboBox parameterDatasetName = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
 	private ParameterTextField parameterDatasetName1 = new ParameterTextField(ProcessProperties.getString("String_Label_DatasetName"));
-	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("String_DatasetType"));
+	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("string_label_lblDatasetType"));
 	private ParameterDefaultValueTextField parameterSpark = new ParameterDefaultValueTextField(ProcessProperties.getString("String_numSlices"));
 	private ParameterSwitch parameterSwitchUDB = new ParameterSwitch();
 	private ParameterCombine parameterCombineDatasetInfo = new ParameterCombine();
@@ -45,7 +45,7 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterDefaultValueTextField parameterDataBaseName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_DataBaseName"));
 	private ParameterDefaultValueTextField parameterTextFieldAddress = new ParameterDefaultValueTextField(CoreProperties.getString("String_Server"));
 	private ParameterDefaultValueTextField parameterTextFieldUserName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_UserName"));
-	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_PassWord"));
+	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_Password"));
 	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Open"));
 	private static final int OVERLAY_ANALYST_GEO = 0;
 	private static final int SINGLE_QUERY = 1;

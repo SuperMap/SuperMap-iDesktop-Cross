@@ -511,9 +511,9 @@ public class MapBoundsPropertyControl extends AbstractPropertyControl {
 		this.labelMapViewTop.setText(MapViewProperties.getString("String_Top"));
 		this.labelMapViewRight.setText(MapViewProperties.getString("String_Right"));
 		this.labelMapViewBottom.setText(MapViewProperties.getString("String_Bottom"));
-		this.buttonClipRegion.setText(MapViewProperties.getString("Button_Setting"));
-		this.buttonSetLockedViewBounds.setText(MapViewProperties.getString("Button_Setting"));
-		this.buttonSetCustomBounds.setText(MapViewProperties.getString("Button_Setting"));
+		this.buttonClipRegion.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
+		this.buttonSetLockedViewBounds.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
+		this.buttonSetCustomBounds.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
 	}
 
 	@Override

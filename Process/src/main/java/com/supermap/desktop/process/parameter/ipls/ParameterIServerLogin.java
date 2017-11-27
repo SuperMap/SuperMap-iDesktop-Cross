@@ -15,7 +15,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 public class ParameterIServerLogin extends ParameterCombine {
 	private ParameterDefaultValueTextField parameterTextFieldAddress = new ParameterDefaultValueTextField(CoreProperties.getString("String_Server"));
 	private ParameterDefaultValueTextField parameterTextFieldUserName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_UserName"));
-	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_PassWord"));
+	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_Password"));
 	public IServerServiceImpl service;
 
 	public ParameterIServerLogin() {
