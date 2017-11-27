@@ -39,10 +39,10 @@ public class ToolbarUIUtilities {
 //		updateToolbar();
 	}
 
-	public static void updateLayersTreeToolbar(){
-		if (Application.getActiveApplication().getActiveForm() instanceof IFormMap){
+	public static void updateLayersTreeToolbar() {
+		if (Application.getActiveApplication().getActiveForm() instanceof IFormMap) {
 			UICommonToolkit.getLayersManager().setToolBarVisible(true);
-		}else{
+		} else {
 			LayersComponentManager layersComponentManager = UICommonToolkit.getLayersManager();
 			if (layersComponentManager != null) {
 				layersComponentManager.setToolBarVisible(false);
@@ -55,6 +55,7 @@ public class ToolbarUIUtilities {
 		IFormMain mainFrame = Application.getActiveApplication().getMainFrame();
 		if (mainFrame instanceof JRibbonFrame) {
 			JRibbon ribbon = ((JRibbonFrame) mainFrame).getRibbon();
+			// 检查当前选项卡下的控件状态
 			updateRibbonTaskState(ribbon.getSelectedTask());
 //			for (int i = 0; i < ribbon.getTaskCount(); i++) {
 //				RibbonTask task = ribbon.getTask(i);
@@ -80,7 +81,7 @@ public class ToolbarUIUtilities {
 				if (taskbarComponent instanceof IBaseItem) {
 					if (((IBaseItem) taskbarComponent).getCtrlAction() == null) {
 						taskbarComponent.setEnabled(false);
-					}else {
+					} else {
 						taskbarComponent.setEnabled(((IBaseItem) taskbarComponent).getCtrlAction().enable());
 					}
 				}
@@ -97,42 +98,46 @@ public class ToolbarUIUtilities {
 		}
 	}
 
+	/**
+	 * 传入当前选项卡下的控件
+	 * @param abstractRibbonBand
+	 */
 	private static void updateRibbonBandTask(AbstractRibbonBand<?> abstractRibbonBand) {
 		AbstractBandControlPanel controlPanel = abstractRibbonBand.getControlPanel();
-			if (controlPanel != null) {
-				for (int i = 0; i < controlPanel.getComponentCount(); i++) {
-					Component component = controlPanel.getComponent(i);
-					if (component instanceof IBaseItem) {
-						if (((IBaseItem) component).getCtrlAction() != null) {
-							try {
-								component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
-								((IBaseItem) component).setIgnoreEvent(true);
-								if (component instanceof AbstractButton) {
-									((AbstractButton) component).setSelected(((IBaseItem) component).getCtrlAction().check());
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}finally {
-								((IBaseItem) component).setIgnoreEvent(false);
+		if (controlPanel != null) {
+			for (int i = 0; i < controlPanel.getComponentCount(); i++) {
+				Component component = controlPanel.getComponent(i);
+				if (component instanceof IBaseItem) {
+					if (((IBaseItem) component).getCtrlAction() != null) {
+						try {
+							component.setEnabled(((IBaseItem) component).getCtrlAction().enable());
+							((IBaseItem) component).setIgnoreEvent(true);
+							if (component instanceof AbstractButton) {
+								((AbstractButton) component).setSelected(((IBaseItem) component).getCtrlAction().check());
 							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							((IBaseItem) component).setIgnoreEvent(false);
 						}
-					} else if (component instanceof JRibbonGallery) {
-						JRibbonGallery ribbonGallery = (JRibbonGallery) component;
-						for (int j = 0; j < ribbonGallery.getButtonCount(); j++) {
-							JCommandToggleButton button = ribbonGallery.getButtonAt(j);
-							if (button instanceof IBaseItem) {
-								if (((IBaseItem) button).getCtrlAction() != null) {
-									try {
-										button.setEnabled(((IBaseItem) button).getCtrlAction().enable());
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
+					}
+				} else if (component instanceof JRibbonGallery) {
+					JRibbonGallery ribbonGallery = (JRibbonGallery) component;
+					for (int j = 0; j < ribbonGallery.getButtonCount(); j++) {
+						JCommandToggleButton button = ribbonGallery.getButtonAt(j);
+						if (button instanceof IBaseItem) {
+							if (((IBaseItem) button).getCtrlAction() != null) {
+								try {
+									button.setEnabled(((IBaseItem) button).getCtrlAction().enable());
+								} catch (Exception e) {
+									e.printStackTrace();
 								}
 							}
 						}
 					}
 				}
 			}
+		}
 	}
 
 	public static JToolBar.Separator getVerticalSeparator() {
