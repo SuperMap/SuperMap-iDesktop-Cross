@@ -726,7 +726,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonExportsSet.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
-		this.buttonExportsSet.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonExportsSet.setToolTipText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.buttonAddDataset.setToolTipText(DataConversionProperties.getString("string_button_add"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));

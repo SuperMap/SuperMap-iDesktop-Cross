@@ -92,14 +92,14 @@ public class MapClipSetDialog extends SmDialog {
         this.clipModeComboBox.setEnabled(false);
 
         this.accuratelyClipCheckBox = new JCheckBox();
-        this.accuratelyClipComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_True")});
+        this.accuratelyClipComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_yes")});
         this.accuratelyClipComboBox.setPreferredSize(ControlDefaultValues.DEFAULT_PREFERREDSIZE);
         this.accuratelyClipComboBox.setRenderer(new ListDataCellRender());
         this.accuratelyClipComboBox.setUI(new DefaultComboBoxUI());
         this.accuratelyClipComboBox.setEnabled(false);
 
         this.eraseCheckBox = new JCheckBox();
-        this.eraseComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_True")});
+        this.eraseComboBox = new JComboBox(new String[]{MapViewProperties.getString("String_MapClip_No"), CoreProperties.getString("String_yes")});
         this.eraseComboBox.setPreferredSize(ControlDefaultValues.DEFAULT_PREFERREDSIZE);
         this.eraseComboBox.setRenderer(new ListDataCellRender());
         this.eraseComboBox.setUI(new DefaultComboBoxUI());

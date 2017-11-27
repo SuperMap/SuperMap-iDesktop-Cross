@@ -186,7 +186,7 @@ public class JDialogDatasetNew extends SmDialog {
 		this.buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.buttonSetting.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonSetting.setToolTipText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.buttonSetting.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
 		this.checkboxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 	}

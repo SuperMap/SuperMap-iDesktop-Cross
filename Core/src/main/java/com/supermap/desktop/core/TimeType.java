@@ -8,7 +8,7 @@ import com.supermap.desktop.properties.CoreProperties;
 public enum TimeType {
 	MILLISECOND(1, 0, 999, CoreProperties.getString("String_MilliSecond")),
 	SECOND(2, 0, 59, CoreProperties.getString("String_Second")),
-	MINUTE(3, 0, 59, CoreProperties.getString("String_Minute")),
+	MINUTE(3, 0, 59, CoreProperties.getString("String_Time_Minutes")),
 	HOUR(4, 0, 23, CoreProperties.getString("String_Hour")),
 	DAY(5, 0, Integer.MAX_VALUE, CoreProperties.getString("String_Day"));
 

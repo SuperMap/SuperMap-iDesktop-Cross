@@ -56,7 +56,7 @@ public abstract class MetaProcessCenterLine extends MetaProcess {
 		targetData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		targetData.addParameters(this.saveDataset);
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(this.parameterNumberMaxWidth);
 		paramSet.addParameters(this.parameterNumberMinWidth);
 

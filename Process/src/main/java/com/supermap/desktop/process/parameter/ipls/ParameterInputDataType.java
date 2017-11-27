@@ -46,7 +46,7 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterDefaultValueTextField parameterTextFieldAddress = new ParameterDefaultValueTextField(CoreProperties.getString("String_Server"));
 	private ParameterDefaultValueTextField parameterTextFieldUserName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_UserName"));
 	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_PassWord"));
-	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Button_Open"));
+	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Open"));
 	private static final int OVERLAY_ANALYST_GEO = 0;
 	private static final int SINGLE_QUERY = 1;
 	private static final int POLYGON_AGGREGATION = 2;

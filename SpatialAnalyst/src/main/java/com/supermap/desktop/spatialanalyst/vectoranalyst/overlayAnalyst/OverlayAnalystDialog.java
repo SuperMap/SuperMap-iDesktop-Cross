@@ -600,7 +600,7 @@ public class OverlayAnalystDialog extends SmDialog {
 		this.checkboxResultAnalyst.setText(CoreProperties.getString("String_CheckBox_ResultComparison"));
 		this.panelSource.setBorder(new TitledBorder(ControlsProperties.getString("String_GroupBox_SourceDataset")));
 		this.panelOverlayAnalyst.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_OverlayDataset")));
-		this.panelTarget.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
+		this.panelTarget.setBorder(new TitledBorder(CoreProperties.getString("String_ResultSet")));
 	}
 
 	private void initComponents() {

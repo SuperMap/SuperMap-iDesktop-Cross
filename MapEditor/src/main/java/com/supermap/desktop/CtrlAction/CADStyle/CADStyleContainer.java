@@ -1166,7 +1166,7 @@ public class CADStyleContainer extends JPanel {
         this.labelFillGradientOffsetY.setText(CoreProperties.getString("String_Label_YOffsetRate"));
         this.labelFillGradientOffsetYUnity.setText("%");
         this.labelFillGradientAngel.setText(CoreProperties.getString("String_GeometryDrawingParam_Angle"));
-        this.labelFillGradientAngelUnity.setText(CoreProperties.getString("String_Degree_Format_Degree"));
+        this.labelFillGradientAngelUnity.setText(CoreProperties.getString("String_AngleUnit_Degree"));
         this.labelFillOpaque.setText(ControlsProperties.getString("String_Label_Transparence"));
     }
 

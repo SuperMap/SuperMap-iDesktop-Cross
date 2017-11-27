@@ -39,7 +39,7 @@ public class MetaProcessCalculateSlope extends MetaProcessCalTerrain {
 		parameterComboBoxSlopeType.setItems(
 				new ParameterDataNode(ControlsProperties.getString("String_SlopeType_Degree"), SlopeType.DEGREE),
 				new ParameterDataNode(ControlsProperties.getString("String_ThemeGraphTextFormat_Percent"), SlopeType.PERCENT),
-				new ParameterDataNode(CoreProperties.getString("String_Degree_Format_Radian"), SlopeType.RADIAN)
+				new ParameterDataNode(CoreProperties.getString("String_AngleUnit_Radian"), SlopeType.RADIAN)
 		);
 		parameterComboBoxSlopeType.setSelectedItem(SlopeType.DEGREE);
 

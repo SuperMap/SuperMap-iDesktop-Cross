@@ -1228,7 +1228,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 			} else {
 				Application.getActiveApplication().getOutput().output("\"" + this.mapCacheBuilder.getMap().getName() + "\"" + MapViewProperties.getString("MapCache_StartCreateFailed"));
 			}
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + CoreProperties.getString("String_Time_Seconds"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("MapCache_Time") + time + " " + CoreProperties.getString("String_Second"));
 			if (this.autoCloseDialog.isSelected()) {
 				cancelAndCloseDailog();
 				this.mapCacheBuilder.dispose();

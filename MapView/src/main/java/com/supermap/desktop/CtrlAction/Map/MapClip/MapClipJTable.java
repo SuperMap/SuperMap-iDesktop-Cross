@@ -83,9 +83,9 @@ public class MapClipJTable extends JTable {
 
 		String[] clipType = {MapViewProperties.getString("String_MapClip_Out"), MapViewProperties.getString("String_MapClip_In")};
 		JComboBox clipTypeComboBox = new JComboBox(clipType);
-		String[] erase = {CoreProperties.getString("String_True"), MapViewProperties.getString("String_MapClip_No")};
+		String[] erase = {CoreProperties.getString("String_yes"), MapViewProperties.getString("String_MapClip_No")};
 		JComboBox eraseComboBox = new JComboBox(erase);
-		String[] acurrent = {CoreProperties.getString("String_True"), MapViewProperties.getString("String_MapClip_No")};
+		String[] acurrent = {CoreProperties.getString("String_yes"), MapViewProperties.getString("String_MapClip_No")};
 		JComboBox acurrentComboBox = new JComboBox(acurrent);
 
 		this.layerCaptionColumn = this.getColumn(this.getModel().getColumnName(COLUMN_INDEX_LAYERCAPTION));
@@ -206,7 +206,7 @@ public class MapClipJTable extends JTable {
 
 			String clipType = MapViewProperties.getString("String_MapClip_In");
 			String erase = MapViewProperties.getString("String_MapClip_No");
-			String exactClip = CoreProperties.getString("String_True");
+			String exactClip = CoreProperties.getString("String_yes");
 			this.mapClipTableModel.addRowLayerInfo(layerCaption, targetDatasource, targetDatasetName, clipType, erase, exactClip);
 		}
 		if (this.mapClipTableModel.getRowCount() >= 1) {

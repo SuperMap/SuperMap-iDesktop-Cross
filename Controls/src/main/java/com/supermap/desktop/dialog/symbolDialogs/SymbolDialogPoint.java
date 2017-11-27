@@ -421,7 +421,7 @@ public class SymbolDialogPoint extends SymbolDialog {
 
         labelSymbolColor.setText(CoreProperties.getString("String_Label_SymbolColor"));
         labelSymbolAngle.setText(ControlsProperties.getString("String_Label_SymbolAngle"));
-        labelSymbolAngleUnit.setText(CoreProperties.getString("String_Degree_Format_Degree"));
+        labelSymbolAngleUnit.setText(CoreProperties.getString("String_AngleUnit_Degree"));
 
         labelOpaqueRate.setText(ControlsProperties.getString("String_Label_Transparence"));
         labelOpaqueRateUnit.setText(ControlsProperties.getString("String_precent"));
