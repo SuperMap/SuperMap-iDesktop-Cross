@@ -74,7 +74,7 @@ public class CirculationDialog extends SmDialog {
 					size = 376;
 					break;
 				case forObjectType:
-					size = 300;
+					size = 320;
 					break;
 				case forFieldType:
 					size = 230;

@@ -250,16 +250,18 @@ public class MetaProcessDissolve extends MetaProcess {
             recordsetResult = resultDataset.getRecordset(false, CursorType.DYNAMIC);
             recordsetResult.addSteppedListener(steppedListener);
 
-            //记录对应SmID的记录是否已经进行过查询
-            boolean[] isQueryAlready = new boolean[src.getRecordCount()];
 
             Stack<Recordset> queryStack = new Stack<>();
             //将满足字段相等条件的记录放到一个记录集里，再将所有这样的记录集用栈queryStack来存储
             String[] fieldNames = dissolveParameter.getFieldNames();
             Recordset srcRecordset = src.getRecordset(false, CursorType.DYNAMIC);
+            //记录对应SmID的记录是否已经进行过查询
+            srcRecordset.moveLast();
+            boolean[] isQueryAlready = new boolean[srcRecordset.getID() + 1];
+            srcRecordset.moveFirst();
             while (!srcRecordset.isEOF()) {
                 //没进行过查询的方能执行之后的步骤
-                if (!isQueryAlready[srcRecordset.getID() - 1]) {
+                if (!isQueryAlready[srcRecordset.getID()]) {
                     boolean isContainNull = false;
                     StringBuilder s = new StringBuilder();
                     for (String fieldName : fieldNames) {
@@ -288,7 +290,7 @@ public class MetaProcessDissolve extends MetaProcess {
                         query = src.query(new int[]{srcRecordset.getID()}, CursorType.DYNAMIC);
                     }
                     while (!query.isEOF()) {
-                        isQueryAlready[query.getID() - 1] = true;
+                        isQueryAlready[query.getID()] = true;
                         query.moveNext();
                     }
                     queryStack.push(query);
