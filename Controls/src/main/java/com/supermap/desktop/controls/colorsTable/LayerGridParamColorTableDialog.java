@@ -421,17 +421,17 @@ public class LayerGridParamColorTableDialog extends SmDialog {
 	}
 
 	private void initResources() {
-		buttonAddColor.setToolTipText(ControlsProperties.getString("String_AddColor"));
+		buttonAddColor.setToolTipText(ControlsProperties.getString("String_Add"));
 		buttonBatchAddColor.setToolTipText(ControlsProperties.getString("String_AddRange"));
 		buttonInsertColor.setToolTipText(ControlsProperties.getString("String_Insert"));
 		buttonRemoveColor.setToolTipText(ControlsProperties.getString("String_RemoveColor"));
 		buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
 		buttonInvertColors.setToolTipText(ControlsProperties.getString("String_ReverseColor"));
-		buttonMoveTop.setToolTipText(ControlsProperties.getString("String_FirstColor"));
-		buttonMoveUp.setToolTipText(ControlsProperties.getString("String_UpColor"));
-		buttonMoveDown.setToolTipText(ControlsProperties.getString("String_DownColor"));
-		buttonMoveBottom.setToolTipText(ControlsProperties.getString("String_LastColor"));
+		buttonMoveTop.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
+		buttonMoveUp.setToolTipText(ControlsProperties.getString("String_MoveUp"));
+		buttonMoveDown.setToolTipText(ControlsProperties.getString("String_MoveDown"));
+		buttonMoveBottom.setToolTipText(ControlsProperties.getString("String_MoveLast"));
 
 		buttonApply.setText(CoreProperties.getString(CoreProperties.OK));
 		buttonCancel.setText(CoreProperties.getString(CoreProperties.Cancel));
