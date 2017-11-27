@@ -151,6 +151,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 	}
 
 	private void addExportInfo() {
+		// 增加要导出的数据集到table
 		DatasetChooserDataExport datasetChooser = new DatasetChooserDataExport(DataExportDialog.this, tableExport);
 		datasetChooser = null;
 	}
