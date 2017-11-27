@@ -4,28 +4,12 @@ package com.supermap.desktop.geometryoperation.editor;
  * @author lixiaoyao
  */
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoRegion;
-import com.supermap.data.Geometry;
-import com.supermap.data.GeometryType;
-import com.supermap.data.Point2D;
-import com.supermap.data.Point2Ds;
-import com.supermap.data.QueryParameter;
-import com.supermap.data.Recordset;
-import com.supermap.data.SpatialQueryMode;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.geometry.Abstract.IGeometry;
 import com.supermap.desktop.geometry.Abstract.IMultiPartFeature;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
-import com.supermap.desktop.geometryoperation.EditControllerAdapter;
-import com.supermap.desktop.geometryoperation.EditEnvironment;
-import com.supermap.desktop.geometryoperation.IEditController;
-import com.supermap.desktop.geometryoperation.IEditModel;
-import com.supermap.desktop.geometryoperation.NullEditController;
+import com.supermap.desktop.geometryoperation.*;
 import com.supermap.desktop.geometryoperation.control.MapControlTip;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
 import com.supermap.desktop.utilities.ListUtilities;
@@ -37,11 +21,7 @@ import com.supermap.ui.GeometrySelectChangedEvent;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConcertEditor extends AbstractEditor {
 
@@ -126,7 +106,7 @@ public class ConcertEditor extends AbstractEditor {
     }
 
     @Override
-    public boolean enble(EditEnvironment environment) {
+    public boolean enable(EditEnvironment environment) {
         return environment.getEditProperties().getSelectedGeometryCount() == 1
                 && environment.getEditProperties().getEditableSelectedGeometryCount() == 1
                 && (environment.getActiveEditableLayer().getDataset().getType() == DatasetType.REGION

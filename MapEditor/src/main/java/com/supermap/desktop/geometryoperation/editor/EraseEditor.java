@@ -142,7 +142,7 @@ public class EraseEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
+	public boolean enable(EditEnvironment environment) {
 		return environment.getMapControl().getEditableLayers().length > 0
 				&& environment.getEditProperties().getSelectedGeometryCount() > 0
 				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class,

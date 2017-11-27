@@ -27,9 +27,9 @@ public class NullEditor implements IEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return false;
-	}
+    public boolean enable(EditEnvironment environment) {
+        return false;
+    }
 
 	@Override
 	public boolean check(EditEnvironment environment) {

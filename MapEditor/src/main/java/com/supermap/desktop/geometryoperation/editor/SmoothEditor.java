@@ -28,9 +28,9 @@ public class SmoothEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return ListUtilities
-				.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypes(), GeometryType.GEOLINE, GeometryType.GEOREGION);
+    public boolean enable(EditEnvironment environment) {
+        return ListUtilities
+                .isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypes(), GeometryType.GEOLINE, GeometryType.GEOREGION);
 	}
 
 	private void smooth(EditEnvironment environment, int smoothRatio) {

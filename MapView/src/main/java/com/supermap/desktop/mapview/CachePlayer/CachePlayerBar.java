@@ -239,9 +239,11 @@ public class CachePlayerBar extends JToolBar {
     //region Getter&Setter
     public void setEffectsTime(int effectsInterval) {
         this.effectsInterval = effectsInterval;
-//        for (LayerCache layerCache : layerCaches) {
-//            layerCache.setEffectsTime(effectsTime);
-//        }
+        if (isEffects) {
+            for (LayerCache layerCache : layerCaches) {
+                layerCache.setEffectsTime(effectsInterval);
+            }
+        }
     }
 
     public void setEffects(boolean isEffects) {

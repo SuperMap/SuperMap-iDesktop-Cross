@@ -73,9 +73,9 @@ public class RegionExtractCenterEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getSelectedLayers().size() == 1
-				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedDatasetTypes(), DatasetType.REGION);
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getSelectedLayers().size() == 1
+                && ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedDatasetTypes(), DatasetType.REGION);
 	}
 
 	private DatasetVector convert(EditEnvironment environment, Datasource desDatasource, String newDatasetName, double maxWidth, double minWidth,

@@ -19,6 +19,7 @@ import com.supermap.mapping.Layers;
 import com.supermap.mapping.Map;
 import com.supermap.ui.MapControl;
 
+import javax.swing.border.TitledBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,9 @@ public class TransformationReference extends TransformationBase implements ITran
 		super(formTransformation);
 		mapControl.getMap().setWorkspace(Application.getActiveApplication().getWorkspace());
 		mapControl.getMap().setName(CoreProperties.getString("String_Transfernation_ReferLayer"));
-		this.addedMaps = new ArrayList<>();
-	}
+        this.mapControl.setBorder(new TitledBorder(CoreProperties.getString("String_Transfernation_ReferLayer")));
+        this.addedMaps = new ArrayList<>();
+    }
 
 
 	@Override

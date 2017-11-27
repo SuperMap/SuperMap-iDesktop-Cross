@@ -492,6 +492,8 @@ public class LayersComponentManager extends JComponent {
                     }
                 } else if (layer instanceof LayerGroup) {
                     popupMenu = this.layerGroupPopupMenu;
+                } else if (layer instanceof LayerCache) {
+                    popupMenu = this.layerCachePopupMenu;
                 } else {
                     popupMenu = this.layerPopupMenu;
                 }

@@ -145,8 +145,8 @@ public class DialogCachePlayerSetting extends SmDialog {
 
     private void apply() {
         cachePlayerBar.setInterval(Integer.parseInt(textFieldPlayInterval.getText()));
-        cachePlayerBar.setEffectsTime(Integer.parseInt(textFieldEffectsInterval.getText()));
         cachePlayerBar.setEffects(checkBoxEffectsEnable.isSelected());
+        cachePlayerBar.setEffectsTime(Integer.parseInt(textFieldEffectsInterval.getText()));
         cachePlayerBar.setVisible(checkBoxShowBar.isSelected());
         ArrayList<TableData> tableDatas = ((CachePlayerSettingTableModel) table.getModel()).getTableDatas();
         ArrayList<CacheWithVersion> playList = cachePlayerBar.getPlayList();
