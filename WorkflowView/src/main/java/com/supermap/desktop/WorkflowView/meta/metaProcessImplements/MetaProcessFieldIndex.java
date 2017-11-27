@@ -75,7 +75,7 @@ public class MetaProcessFieldIndex extends MetaProcess {
 //		parameterCombineParent.setWeightIndex(0);
 
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(parameterTextField, parameterTextAreaField);
 
 		this.parameters.setParameters(sourceData, paramSet);

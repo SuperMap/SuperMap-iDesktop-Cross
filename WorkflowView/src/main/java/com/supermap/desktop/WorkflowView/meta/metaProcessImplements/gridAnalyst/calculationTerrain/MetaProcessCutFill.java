@@ -69,8 +69,8 @@ public class MetaProcessCutFill extends MetaProcessCalTerrain {
 			}
 			CutFillResult cutFillResult = CalculationTerrain.cutFill(datasetGrid, datasetGridBehind, parameterSaveDataset.getResultDatasource(), parameterSaveDataset.getDatasetName());
 			isSuccessful = cutFillResult != null;
-			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + cutFillResult.getFillVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
-			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + cutFillResult.getCutVolume() + CoreProperties.getString("String_VolumnUnit_Meter"));
+			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillVolume") + cutFillResult.getFillVolume() + CoreProperties.getString("String_VolumeUnit_Meter"));
+			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutVolume") + cutFillResult.getCutVolume() + CoreProperties.getString("String_VolumeUnit_Meter"));
 			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_FillArea") + cutFillResult.getFillArea() + CoreProperties.getString("String_AreaUnit_Meter"));
 			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_CutArea") + cutFillResult.getCutArea() + CoreProperties.getString("String_AreaUnit_Meter"));
 			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_Print_RemainderArea") + cutFillResult.getRemainderArea() + CoreProperties.getString("String_AreaUnit_Meter"));

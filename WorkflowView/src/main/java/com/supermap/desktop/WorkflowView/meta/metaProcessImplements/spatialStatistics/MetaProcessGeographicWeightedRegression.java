@@ -66,7 +66,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		ParameterCombine parameterCombineSourceDataset = new ParameterCombine();
 		parameterCombineSourceDataset.addParameters(datasourceConstraint);
 		parameterCombineSourceDataset.addParameters(parameterSingleDataset);
-		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 
 		ParameterCombine parameterSetting = new ParameterCombine();
 

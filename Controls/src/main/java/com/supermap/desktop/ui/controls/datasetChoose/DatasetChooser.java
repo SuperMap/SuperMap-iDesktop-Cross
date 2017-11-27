@@ -92,7 +92,7 @@ public class DatasetChooser extends SmDialog {
 			}
 		}
 
-		setTitle(CoreProperties.getString("String_FormDatasetBrowse_FormText"));
+		setTitle(CoreProperties.getString("String_Choose"));
 		setSize(677, 456);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);

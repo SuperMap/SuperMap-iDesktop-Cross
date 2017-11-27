@@ -263,8 +263,8 @@ public class DMSLongitudeTextField extends JPanel {
 
 	private void initResources() {
 		//this.labelD.setText(CommonProperties.getString("String_AngleUnit_Degree"));
-		//this.labelM.setText(CommonProperties.getString("String_AngleUnit_Minute"));
-		//this.labelS.setText(CommonProperties.getString("String_AngleUnit_Second"));
+		//this.labelM.setText(CommonProperties.getString("String_Time_Minutes"));
+		//this.labelS.setText(CommonProperties.getString("String_Second"));
 		this.labelD.setText("°");
 		this.labelM.setText("′");
 		this.labelS.setText("″");

@@ -41,7 +41,7 @@ public class MetaProcessRasterReclass extends MetaProcess {
 	private void initParameters() {
 		this.sourceDatasource = new ParameterDatasourceConstrained();
 		this.dataset = new ParameterSingleDataset(DatasetType.GRID);
-		this.parameterRasterReclass = new ParameterRasterReclass(CoreProperties.getString("String_FormEdgeCount_Text"));
+		this.parameterRasterReclass = new ParameterRasterReclass(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		this.saveDataset = new ParameterSaveDataset();
 
 		ParameterCombine sourceData = new ParameterCombine();
