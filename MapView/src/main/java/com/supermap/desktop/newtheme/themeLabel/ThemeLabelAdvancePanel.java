@@ -296,9 +296,9 @@ public class ThemeLabelAdvancePanel extends ThemeChangePanel {
 		this.labelFontCount.setText(MapViewProperties.getString("String_CharCount"));
 
 		this.labelMaxFontHeight.setText(MapViewProperties.getString("String_MaxHeight"));
-		this.labelMaxFontHeightUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+		this.labelMaxFontHeightUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
 		this.labelMinFontHeight.setText(MapViewProperties.getString("String_MinHeight"));
-		this.labelMinFontHeightUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+		this.labelMinFontHeightUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
 
 		// this.labelMaxFontWidth.setText(MapViewProperties.getString("String_MaxWidth"));
 		// this.labelMaxFontWidthUnity.setText(MapViewProperties.getString("String_Combobox_MM"));

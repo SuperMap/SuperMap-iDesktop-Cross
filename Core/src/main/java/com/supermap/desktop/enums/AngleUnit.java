@@ -38,11 +38,11 @@ public enum AngleUnit {
 	}
 
 	public static AngleUnit getvalueOf(String s) {
-		if(s.equals(CoreProperties.getString("String_Degree_Format_Degree"))){
+		if(s.equals(CoreProperties.getString("String_AngleUnit_Degree"))){
 			return AngleUnit.DEGREE;
 		}else if(s.equals(CoreProperties.getString("String_Degree_Format_DDMMSS"))){
 			return AngleUnit.DEGREE_MINUTE_SECOND;
-		} else if(s.equals(CoreProperties.getString("String_Degree_Format_Radian"))) {
+		} else if(s.equals(CoreProperties.getString("String_AngleUnit_Radian"))) {
 			return AngleUnit.RADIAN;
 		}
 		return AngleUnit.DEGREE;
@@ -50,12 +50,12 @@ public enum AngleUnit {
 
 	public String toString() {
 		if (this == AngleUnit.DEGREE) {
-			return CoreProperties.getString("String_Degree_Format_Degree");
+			return CoreProperties.getString("String_AngleUnit_Degree");
 		} else if (this == AngleUnit.DEGREE_MINUTE_SECOND) {
 			return CoreProperties.getString("String_Degree_Format_DDMMSS");
 		} else if (this == AngleUnit.RADIAN) {
-			return CoreProperties.getString("String_Degree_Format_Radian");
+			return CoreProperties.getString("String_AngleUnit_Radian");
 		}
-		return CoreProperties.getString("String_Degree_Format_Degree");
+		return CoreProperties.getString("String_AngleUnit_Degree");
 	}
 }

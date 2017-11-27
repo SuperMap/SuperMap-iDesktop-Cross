@@ -42,8 +42,8 @@ public class JDialogMeasureSetting extends SmDialog {
 			CoreProperties.getString("String_AreaUnit_Yard"), CoreProperties.getString("String_AreaUnit_Meter"),
 			CoreProperties.getString("String_AreaUnit_Kilometer"), CoreProperties.getString("String_AreaUnit_Mile"),};
 
-	private static final String[] angleModel = new String[] { CoreProperties.getString("String_Degree_Format_Degree"),
-			CoreProperties.getString("String_Degree_Format_DDMMSS"), CoreProperties.getString("String_Degree_Format_Radian") };
+	private static final String[] angleModel = new String[] { CoreProperties.getString("String_AngleUnit_Degree"),
+			CoreProperties.getString("String_Degree_Format_DDMMSS"), CoreProperties.getString("String_AngleUnit_Radian") };
 
 	private JPanel panelButton;
 	private SmButton buttonOk;

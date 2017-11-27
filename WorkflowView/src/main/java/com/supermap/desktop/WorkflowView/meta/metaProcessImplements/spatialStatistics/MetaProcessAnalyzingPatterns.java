@@ -40,7 +40,7 @@ public abstract class MetaProcessAnalyzingPatterns extends MetaProcess {
 		ParameterCombine parameterCombine = new ParameterCombine();
 		parameterCombine.addParameters(datasource, dataset);
 		parameters.setParameters(parameterCombine, parameterPatternsParameter);
-		parameterCombine.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombine.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.SIMPLE_VECTOR, parameterCombine);
 	}
 

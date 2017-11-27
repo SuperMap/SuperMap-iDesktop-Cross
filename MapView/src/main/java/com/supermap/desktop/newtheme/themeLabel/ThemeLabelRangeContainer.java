@@ -129,7 +129,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
         this.panelProperty = new ThemeLabelPropertyPanel(themeLabelLayer);
         this.panelAdvance = new ThemeLabelAdvancePanel(themeLabelLayer);
         this.tabbedPane.add(MapViewProperties.getString("String_Theme_Property"), this.panelProperty);
-        this.tabbedPane.add(MapViewProperties.getString("String_Theme_Style"), this.panelStyle);
+        this.tabbedPane.add(MapViewProperties.getString("String_Title_Sytle"), this.panelStyle);
         this.tabbedPane.add(MapViewProperties.getString("String_Theme_Advanced"), this.panelAdvance);
         this.tabbedPane.setSelectedIndex(1);
         this.add(this.tabbedPane, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH)
@@ -243,7 +243,7 @@ public class ThemeLabelRangeContainer extends ThemeChangePanel {
      * 资源化
      */
     private void initResources() {
-        this.labelExpression.setText(MapViewProperties.getString("String_label_Expression"));
+        this.labelExpression.setText(MapViewProperties.getString("String_Label_Expression"));
         this.labelRangeMethod.setText(MapViewProperties.getString("String_Label_RangeMethed"));
         this.labelRangeCount.setText(ControlsProperties.getString("String_Label_RangeCount"));
         this.labelRangeLength.setText(MapViewProperties.getString("String_Label_RangeSize"));

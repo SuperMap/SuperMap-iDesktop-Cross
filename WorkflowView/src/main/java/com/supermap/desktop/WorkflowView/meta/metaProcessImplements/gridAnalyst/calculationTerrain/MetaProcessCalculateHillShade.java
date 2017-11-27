@@ -49,7 +49,7 @@ public class MetaProcessCalculateHillShade extends MetaProcessCalTerrain {
 
 		parameterAzimuth = new ParameterNumber(ControlsProperties.getString("String_Label_LightAzimuth"));
 		parameterAltitudeAngle = new ParameterNumber(ControlsProperties.getString("String_Label_LightAltitudeAngle"));
-		parameterZFactor = new ParameterNumber(ProcessProperties.getString("String_CalculateSlope_zFactor"));
+		parameterZFactor = new ParameterNumber(ProcessProperties.getString("String_ZFactor"));
 
 		parameterAzimuth.setMinValue(0);
 		parameterAzimuth.setIsIncludeMin(true);

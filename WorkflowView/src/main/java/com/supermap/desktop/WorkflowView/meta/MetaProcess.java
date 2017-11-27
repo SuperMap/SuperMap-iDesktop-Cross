@@ -22,7 +22,7 @@ import javax.swing.*;
 public abstract class MetaProcess extends AbstractProcess {
 
 	protected static final String SOURCE_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_SourceData");
-	protected static final String SETTING_PANEL_DESCRIPTION = CoreProperties.getString("String_FormEdgeCount_Text");
+	protected static final String SETTING_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_ParamSetting");
 	protected static final String RESULT_PANEL_DESCRIPTION = CoreProperties.getString("String_GroupBox_ResultData");
 
 	private final ParameterPropertyChangedListener parameterPropertyChangedListener;

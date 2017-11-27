@@ -172,9 +172,9 @@ public class JDialogDatasetNew extends SmDialog {
 	private void initPanelButton() {
 		panelButton.setLayout(new GridBagLayout());
 		panelButton.add(checkboxAutoClose, new GridBagConstraintsHelper(0, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.WEST).setWeight(1, 1));
-		panelButton.add(buttonOk, new GridBagConstraintsHelper(1, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.EAST).setWeight(0, 1).setInsets(0,0,0,5));
-		panelButton.add(buttonCancel, new GridBagConstraintsHelper(2, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.EAST).setWeight(0, 1));
-	}
+        panelButton.add(buttonOk, new GridBagConstraintsHelper(1, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.EAST).setWeight(0, 1).setInsets(0, 0, 0, 10));
+        panelButton.add(buttonCancel, new GridBagConstraintsHelper(2, 0, 1, 1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.EAST).setWeight(0, 1).setInsets(0, 0, 0, 10));
+    }
 
 	private void initResources() {
 		this.setTitle(DataEditorProperties.getString("String_ToolStripMenuItem_NewDataset"));
@@ -186,7 +186,7 @@ public class JDialogDatasetNew extends SmDialog {
 		this.buttonSelectInvert.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
-		this.buttonSetting.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonSetting.setToolTipText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.buttonSetting.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
 		this.checkboxAutoClose.setText(CoreProperties.getString("String_CheckBox_CloseDialog"));
 	}

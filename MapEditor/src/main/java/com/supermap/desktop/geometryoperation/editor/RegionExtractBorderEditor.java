@@ -49,7 +49,7 @@ public class RegionExtractBorderEditor extends GeometryConvertEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class);
-	}
+    public boolean enable(EditEnvironment environment) {
+        return ListUtilities.isListContainAny(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class);
+    }
 }

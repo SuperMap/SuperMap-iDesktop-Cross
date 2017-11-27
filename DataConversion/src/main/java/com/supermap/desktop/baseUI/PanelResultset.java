@@ -1044,7 +1044,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 		this.checkBoxFieldIndex.setText(ControlsProperties.getString("string_checkbox_chckbxFieldIndex"));
 		this.checkBoxSpatialIndex.setText(ControlsProperties.getString("string_checkbox_chckbxSpatialIndex"));
 		this.checkBoxImportEmptyDataset.setText(ControlsProperties.getString("String_checkbox_chckbxImportEmptyDataset"));
-		this.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
+		this.setBorder(new TitledBorder(CoreProperties.getString("String_ResultSet")));
 	}
 
 	public DatasourceComboBox getComboBoxDatasource() {

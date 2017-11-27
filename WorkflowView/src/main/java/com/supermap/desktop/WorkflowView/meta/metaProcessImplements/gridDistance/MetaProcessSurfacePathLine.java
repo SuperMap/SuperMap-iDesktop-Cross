@@ -121,7 +121,7 @@ public class MetaProcessSurfacePathLine extends MetaProcess {
 				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
 				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_POLISH"), SmoothMethod.POLISH));
 		// 光滑系数
-		parameterPathLineSmoothDegree = new ParameterNumber(CoreProperties.getString("String_Smooth"));
+		parameterPathLineSmoothDegree = new ParameterNumber(CoreProperties.getString("String_SmoothNess"));
 		parameterPathLineSmoothDegree.setSelectedItem("2");
 		parameterPathLineSmoothDegree.setMinValue(2);
 		parameterPathLineSmoothDegree.setMaxValue(10);

@@ -33,9 +33,9 @@ public class CollectionDatasetTableModel extends AbstractTableModel {
 		super();
 		title = collectionType == IMAGE_COLLECTION_TYPE ?
 				new String[]{CoreProperties.getString("String_Field_Caption"),
-						CoreProperties.getString("String_FieldName"),
+						CoreProperties.getString("String_Name"),
 						CoreProperties.getString("String_State")} :
-				new String[]{CoreProperties.getString("String_FieldName")
+				new String[]{CoreProperties.getString("String_Name")
 						, CoreProperties.getString("String_DatasourceConnectionInfo")
 				};
 	}

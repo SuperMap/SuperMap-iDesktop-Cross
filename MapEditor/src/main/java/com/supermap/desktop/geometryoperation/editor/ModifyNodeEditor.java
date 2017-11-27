@@ -47,9 +47,9 @@ public class ModifyNodeEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getSelectedGeometryCount() == 1
-				&& environment.getEditProperties().getEditableSelectedGeometryCount() == 1
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getSelectedGeometryCount() == 1
+                && environment.getEditProperties().getEditableSelectedGeometryCount() == 1
 				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypes(), GeometryType.GEOLINE, GeometryType.GEOLINE3D,
 				GeometryType.GEOREGION);
 	}

@@ -112,7 +112,7 @@ public class JDialogTopoBuildRegions extends SmDialog {
 		this.labelResultDataset.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.checkBoxtopologyPropress.setText(DataTopologyProperties.getString("String_Topo_Build"));
 		this.checkBoxtopologyPropress.setToolTipText(ControlsProperties.getString("String_TopoLineTipsInfo"));
-		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
+		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_SourceData"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		this.panelResultData.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_ResultData"), TitledBorder.LEADING, TitledBorder.TOP,
 				null, null));

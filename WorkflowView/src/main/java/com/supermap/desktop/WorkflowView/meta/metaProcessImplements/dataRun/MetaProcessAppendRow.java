@@ -27,8 +27,8 @@ import java.util.ArrayList;
  * Created by xie on 2017/8/8.
  */
 public class MetaProcessAppendRow extends MetaProcess {
-	private final String INPUT_DATA = CoreProperties.getString("String_ColumnHeader_SourceData");
-	private final String OUTPUT_DATA = CoreProperties.getString("String_ColumnHeader_TargetData");
+	private final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final String OUTPUT_DATA = CoreProperties.getString("String_GroupBox_TargetData");
 	private ParameterDatasource datasource;
 	private ParameterSingleDataset dataset;
 	private ParameterCombine targetData;

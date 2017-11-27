@@ -72,7 +72,7 @@ public class MetaProcessRarefyPoints extends MetaProcess {
 		targetData.addParameters(saveDataset);
 
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(parameterNumberRadius, comboBoxStatisticsType, checkBoxRandomSaveRerefyPoints, checkBoxSaveOriginField, statisticsFieldGroupForRarefyPoints);
 
 		this.parameters.setParameters(sourceData, paramSet, targetData);

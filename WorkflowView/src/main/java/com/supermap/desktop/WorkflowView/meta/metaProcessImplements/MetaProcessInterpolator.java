@@ -171,7 +171,7 @@ public class MetaProcessInterpolator extends MetaProcessGridAnalyst {
 		parameterTension = new ParameterNumber(CoreProperties.getString("String_Tension"));
 		parameterTension.setSelectedItem(40);
 		parameterTension.setMinValue(0);
-		parameterSmooth = new ParameterNumber(CoreProperties.getString("String_Smooth"));
+		parameterSmooth = new ParameterNumber(CoreProperties.getString("String_SmoothNess"));
 		parameterSmooth.setSelectedItem(0.1);
 		parameterSmooth.setMinValue(0);
 		parameterSmooth.setMaxValue(1);

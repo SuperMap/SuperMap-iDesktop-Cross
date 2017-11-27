@@ -72,7 +72,7 @@ public class StatisticsTypeUtilities {
 			} else if (type == StatisticsFieldType.SAMPLEVARIANCE) {
 				name = CoreProperties.getString("String_SampleEvariance");
 			} else if (type == StatisticsFieldType.STDDEVIATION) {
-				name = CoreProperties.getString("String_Stddev");
+				name = CoreProperties.getString("String_GridStatisticsMode_Stdev");
 			}else if (type == StatisticsFieldType.SUM) {
 				name = CoreProperties.getString("String_StatisticsType_SUM");
 			}else if (type == StatisticsFieldType.VARIANCE) {

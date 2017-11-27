@@ -165,6 +165,11 @@ public class LayersTree extends JTree {
                 this.registerListeners();
             }
         }
+        if(map!=null){
+            UICommonToolkit.getLayersManager().setToolBarVisible(true);
+        }else{
+            UICommonToolkit.getLayersManager().setToolBarVisible(false);
+        }
     }
 
     /**

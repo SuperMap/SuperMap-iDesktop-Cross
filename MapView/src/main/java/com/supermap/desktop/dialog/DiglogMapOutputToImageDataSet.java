@@ -147,7 +147,7 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 	}
 
 	private void initPanelResultSettingLayout() {
-		this.panelResultSetting.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_GroupBox_ResultSetting")));
+		this.panelResultSetting.setBorder(BorderFactory.createTitledBorder(CoreProperties.getString("String_ResultSet")));
 		GroupLayout groupLayout = new GroupLayout(this.panelResultSetting);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);
@@ -266,9 +266,9 @@ public class DiglogMapOutputToImageDataSet extends SmDialog {
 		String time = String.valueOf((endTime - startTime) / 1000.0);
 		Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetEnd"));
 		if (result) {
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetSucessed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Time_Seconds"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetSucessed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Second"));
 		} else {
-			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetFailed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Time_Seconds"));
+			Application.getActiveApplication().getOutput().output(MapViewProperties.getString("String_OutputImageDataset_CcreateImageDataset") + "\"" + this.textFieldDataset.getText() + "\"" + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetFailed") + MapViewProperties.getString("String_OutputImageDataset_CcreateImageDatasetTime") + time + " " + CoreProperties.getString("String_Second"));
 		}
 		cancelAndCloseDailog();
 		CursorUtilities.setDefaultCursor();

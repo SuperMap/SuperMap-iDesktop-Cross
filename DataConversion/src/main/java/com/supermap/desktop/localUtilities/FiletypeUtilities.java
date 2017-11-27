@@ -58,7 +58,7 @@ public class FiletypeUtilities {
 			// ArcGIS 交换格式(*.shp,*.grd,*.txt,*.e00,*.dem，*dbf)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.TAB_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.MIF_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.WOR_STRING)) {
-			fileType = DataConversionProperties.getString("String_FormImport_MapInfo");
+			fileType = DataConversionProperties.getString("String_FileTypeMIF");
 			// MapInfo 交换格式(*.tab,*.mif,*.wor)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.WAL_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.WAN_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.WAP_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.WAT_STRING)) {

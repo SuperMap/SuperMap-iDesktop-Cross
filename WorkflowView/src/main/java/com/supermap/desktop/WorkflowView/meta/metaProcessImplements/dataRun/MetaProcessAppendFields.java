@@ -27,8 +27,8 @@ import java.util.ArrayList;
  * 追加列
  */
 public class MetaProcessAppendFields extends MetaProcess {
-	private final String INPUT_DATA = CoreProperties.getString("String_ColumnHeader_SourceData");
-	private final String OUTPUT_DATA = CoreProperties.getString("String_ColumnHeader_TargetData");
+	private final String INPUT_DATA = CoreProperties.getString("String_GroupBox_SourceData");
+	private final String OUTPUT_DATA = CoreProperties.getString("String_GroupBox_TargetData");
 	private ParameterCombine sourceDataCombine;
 	private ParameterDatasource sourceDatasource;
 	private ParameterSingleDataset sourceDataset;

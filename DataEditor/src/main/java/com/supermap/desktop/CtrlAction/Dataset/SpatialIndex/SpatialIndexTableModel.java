@@ -28,8 +28,8 @@ public class SpatialIndexTableModel extends SortableTableModel {
 	private List<SpatialIndexTableModelBean> datas = new ArrayList<>();
 
 	private String[] columnNames = new String[]{
-			CoreProperties.getString("String_ColumnHeader_Dataset"),
-			CoreProperties.getString("String_ColumnHeader_Datasource"),
+			CoreProperties.getString("String_JustDataset"),
+			CoreProperties.getString("String_Datasource"),
 			DataEditorProperties.getString("String_CurrentInedxType"),
 			DataEditorProperties.getString("String_DealIndexType")
 	};

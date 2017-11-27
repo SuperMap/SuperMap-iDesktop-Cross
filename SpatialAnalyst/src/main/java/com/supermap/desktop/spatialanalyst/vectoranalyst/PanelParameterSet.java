@@ -1,6 +1,7 @@
 package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.TextFields.RightValueListener;
@@ -54,6 +55,7 @@ public class PanelParameterSet extends JPanel {
 
 	public PanelParameterSet() {
 		initComponent();
+		setComponentName();
 		initResources();
 		setOtherPanelResultSetLayout();
 //		setOtherPanelResultSetLayout();
@@ -73,6 +75,11 @@ public class PanelParameterSet extends JPanel {
 		this.textFieldSemicircleLineSegment = new WaringTextField("100");
 		this.textFieldSemicircleLineSegment.setInitInfo(DEFAULT_MIN, DEFAULT_MAX, WaringTextField.INTEGER_TYPE, "null");
 
+	}
+
+	private void setComponentName() {
+		ComponentUIUtilities.setName(this.checkBoxUnionBuffer, "String_UnionBufferItem");
+		ComponentUIUtilities.setName(this.checkBoxDisplayInMap, "String_DisplayInMap");
 	}
 
 	private void initResources() {

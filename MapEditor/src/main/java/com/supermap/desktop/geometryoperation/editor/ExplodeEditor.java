@@ -1,15 +1,6 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EngineType;
-import com.supermap.data.FieldInfo;
-import com.supermap.data.FieldInfos;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.Point2D;
-import com.supermap.data.Point2Ds;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.core.recordset.RecordsetAddNew;
 import com.supermap.desktop.core.recordset.RecordsetSet;
@@ -109,9 +100,9 @@ public class ExplodeEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return ListUtilities.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(), ILineFeature.class);
-	}
+    public boolean enable(EditEnvironment environment) {
+        return ListUtilities.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(), ILineFeature.class);
+    }
 
 	private void setStyle(GeoStyle style, ArrayList<GeoLine> lines) {
 		if (lines != null) {

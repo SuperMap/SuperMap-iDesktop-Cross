@@ -133,7 +133,7 @@ public class DialogSaveAsMap extends SmDialog {
 		this.isNewWindow = isNewWindow;
 
 		if (this.isNewWindow) {
-			this.setTitle(MapViewProperties.getString("String_Form_SaveMap"));
+			this.setTitle(MapViewProperties.getString("String_MapClip_SaveMap"));
 		} else {
 			this.setTitle(MapViewProperties.getString("String_Form_SaveAsMap"));
 		}

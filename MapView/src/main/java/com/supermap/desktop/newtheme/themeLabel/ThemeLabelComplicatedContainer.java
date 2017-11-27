@@ -126,7 +126,7 @@ public class ThemeLabelComplicatedContainer extends ThemeChangePanel {
 		this.panelAdvance.getCheckBoxOptimizeMutilineAlignment().setVisible(false);
 		this.panelStyle = new JPanel();
 		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Property"), this.panelProperty);
-		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Style"), this.panelStyle);
+		this.tabbedPane.add(MapViewProperties.getString("String_Title_Sytle"), this.panelStyle);
 		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Advanced"), this.panelAdvance);
 		this.tabbedPane.setSelectedIndex(1);
 		this.add(this.tabbedPane, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH)

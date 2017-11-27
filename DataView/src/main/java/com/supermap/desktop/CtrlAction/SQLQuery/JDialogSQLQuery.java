@@ -328,8 +328,8 @@ public class JDialogSQLQuery extends SmDialog {
 		this.buttonJoinItems.setText(DataViewProperties.getString("String_SQLQueryRelated"));
 		this.buttonExport.setText(ControlsProperties.getString("String_Export"));
 		this.buttonImport.setText(ControlsProperties.getString("String_Import"));
-		this.buttonQuery.setText(DataViewProperties.getString("String_SQLButtonQuery"));
-		this.buttonClear.setText(DataViewProperties.getString("String_SQLButtonClean"));
+		this.buttonQuery.setText(DataViewProperties.getString("String_Query"));
+		this.buttonClear.setText(DataViewProperties.getString("String_Clear"));
 		this.buttonClose.setText(DataViewProperties.getString("String_SQLButtonClose"));
 	}
 
@@ -660,7 +660,7 @@ public class JDialogSQLQuery extends SmDialog {
 	 */
 	private void initPanelShowResult() {
 		// @formatter:off
-		panelShowResult.setBorder(BorderFactory.createTitledBorder(DataViewProperties.getString("String_SQLQueryResultVisible")));
+		panelShowResult.setBorder(BorderFactory.createTitledBorder(DataViewProperties.getString("String_DisplayResult")));
 		panelShowResult.setLayout(new GridBagLayout());
 		panelShowResult.add(checkBoxShowTabular,new GridBagConstraintsHelper(0,0,1,1).setWeight(1,1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));
 		panelShowResult.add(checkBoxHighLigthMap,new GridBagConstraintsHelper(1,0,1,1).setWeight(1,1).setFill(GridBagConstraints.NONE).setAnchor(GridBagConstraints.CENTER));

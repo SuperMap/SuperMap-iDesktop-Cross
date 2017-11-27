@@ -29,7 +29,7 @@ public class PanelSaveSearchResult extends SmComponentPanel {
 
 	public PanelSaveSearchResult() {
 		super(new JCheckBox());
-		checkBoxSaveResult.setText(DataViewProperties.getString("String_SQLQueryLabelSaveResult"));
+		checkBoxSaveResult.setText(DataViewProperties.getString("String_SaveResult"));
 		checkBoxSaveResult.setSelected(false);
 		this.setTitleComponent(checkBoxSaveResult);
 		this.setTransmittingAllowed(true);

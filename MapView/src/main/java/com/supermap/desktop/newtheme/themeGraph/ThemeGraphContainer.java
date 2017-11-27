@@ -225,7 +225,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.buttonDraftLine.setText(MapViewProperties.getString("String_Button_LineStyle"));
         this.labelMaxValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMaxSize"));
         this.labelMinValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMinSize"));
-        this.labelOffsetUnity.setText(MapViewProperties.getString("String_Label_GetoffUnit"));
+        this.labelOffsetUnity.setText(MapViewProperties.getString("String_LabelOffsetUnit"));
         this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
         this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
         this.labelRemarkFormat.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelGraphLabelFormat"));
@@ -1301,8 +1301,8 @@ public class ThemeGraphContainer extends ThemeChangePanel {
             switch (offsetUnity) {
                 case 0:
                     themeGraph.setOffsetFixed(true);
-                    labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
-                    labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+                    labelOffsetXUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
+                    labelOffsetYUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
                     break;
                 case 1:
                     themeGraph.setOffsetFixed(false);

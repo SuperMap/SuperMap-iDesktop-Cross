@@ -42,7 +42,7 @@ public abstract class MetaProcessCalTerrain extends MetaProcess {
 	private void initParameters() {
 		parameterCombineSourceDataset = new ParameterCombine();
 		parameterCombineSourceDataset.addParameters(this.datasource, this.sourceDataset);
-		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 
 		this.parameters.addInputParameters(INPUT_SOURCE_DATASET, DatasetTypes.GRID, parameterCombineSourceDataset);
 		this.parameters.setParameters(parameterCombineSourceDataset);
