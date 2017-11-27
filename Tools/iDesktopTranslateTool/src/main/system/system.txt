@@ -1,0 +1,3 @@
+RootPath=D:\WorkCode\SuperMap-iDesktop-Cross
+PropertiesType=zh_CN,en_US
+AttributesType=label,screenTip,title
