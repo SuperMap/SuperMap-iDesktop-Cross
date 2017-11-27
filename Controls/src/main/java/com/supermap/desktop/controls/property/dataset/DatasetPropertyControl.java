@@ -228,7 +228,7 @@ public class DatasetPropertyControl extends AbstractPropertyControl {
 		ComponentUIUtilities.setName(this.buttonApply,"DatasetPropertyControl_buttonApply");
 	}
 	private void initializeResources() {
-		this.labelName.setText(ControlsProperties.getString("String_LabelDatasetName"));
+		this.labelName.setText(ControlsProperties.getString("String_Label_Name"));
 		this.labelName.setToolTipText(this.labelName.getText());
 		this.labelDatasetType.setText(ControlsProperties.getString("String_Label_Type"));
 		this.labelDatasetType.setToolTipText(this.labelDatasetType.getText());

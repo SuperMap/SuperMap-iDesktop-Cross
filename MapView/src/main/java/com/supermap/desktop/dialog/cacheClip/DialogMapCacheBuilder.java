@@ -608,7 +608,7 @@ public class DialogMapCacheBuilder extends SmDialog {
 		this.mutiProcessCache.setText(MapViewProperties.getString("MapCache_MutiProcessCache"));
 		this.buttonSetting.setText(MapViewProperties.getString("MapCache_Setting"));
 		this.buttonOK.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
-		this.buttonCancel.setText(MapViewProperties.getString("String_BatchAddColorTableCancelButton"));
+		this.buttonCancel.setText(MapViewProperties.getString("String_Cancel"));
 
 
 		this.buttonSelectAll.setIcon(CoreResources.getIcon(urlStr + "Image_ToolButton_SelectAll.png"));

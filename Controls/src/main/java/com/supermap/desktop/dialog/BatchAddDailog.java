@@ -197,14 +197,14 @@ public class BatchAddDailog extends SmDialog {
         ComponentUIUtilities.setName(this.cancelSmButton, "BatchAddColorTableDailog_cancelSmButton");
     }
     private void initResources() {
-        setTitle(ControlsProperties.getString("String_BatchAddColorTable"));
+        setTitle(ControlsProperties.getString("String_AddRange"));
         this.startValue.setText(ControlsProperties.getString("String_BatchAddColorTableMinValue"));
         this.endValue.setText(ControlsProperties.getString("String_BatchAddColorTableMaxValue"));
         this.stepLength.setText(ControlsProperties.getString("String_BatchAddColorTableStepLength"));
         this.seriesNum.setText(ControlsProperties.getString("String_BatchAddColorTableSeriesNum"));
         this.resetEndValue.setText(ControlsProperties.getString("String_BatchAddColorTableResetCalculValue"));
         this.okSmButton.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
-        this.cancelSmButton.setText(ControlsProperties.getString("String_BatchAddColorTableCancelButton"));
+        this.cancelSmButton.setText(ControlsProperties.getString("String_Cancel"));
     }
 
     private void registerEvents() {

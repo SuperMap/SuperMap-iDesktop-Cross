@@ -49,7 +49,7 @@ public class TableModelMap extends AbstractTableModel {
 				return this.maps.get(row);
 			}
 			if (col == COLUMN_TYPE) {
-				return ControlsProperties.getString("String_ToolBar_HideMap");
+				return ControlsProperties.getString("String_Maps");
 			}
 		}
 		return "";

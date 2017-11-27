@@ -211,10 +211,10 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.buttonDelete.setToolTipText(MapViewProperties.getString("String_Title_Delete"));
         this.buttonAdd.setToolTipText(MapViewProperties.getString("String_Title_Add"));
         this.buttonStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
-        this.buttonMoveToFrist.setToolTipText(ControlsProperties.getString("String_FirstColor"));
-        this.buttonMoveToForward.setToolTipText(ControlsProperties.getString("String_UpColor"));
-        this.buttonMoveToNext.setToolTipText(ControlsProperties.getString("String_DownColor"));
-        this.buttonMoveToLast.setToolTipText(ControlsProperties.getString("String_LastColor"));
+        this.buttonMoveToFrist.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
+        this.buttonMoveToForward.setToolTipText(ControlsProperties.getString("String_MoveUp"));
+        this.buttonMoveToNext.setToolTipText(ControlsProperties.getString("String_MoveDown"));
+        this.buttonMoveToLast.setToolTipText(ControlsProperties.getString("String_MoveLast"));
         this.checkBoxRemark.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxDisplayLabel"));
         this.checkBoxAxis.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxAxe"));
         this.checkBoxShowFlow.setText(MapViewProperties.getString("String_CheckBox_ShowFlow"));

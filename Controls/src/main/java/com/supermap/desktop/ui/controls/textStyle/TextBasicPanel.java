@@ -507,7 +507,7 @@ public class TextBasicPanel extends JPanel implements ITextStyle {
         this.removeAll();
         initTextStyleTypeMap();
 //		initCheckBoxState();
-        this.panelEffect.setBorder(new TitledBorder(ControlsProperties.getString("String_GeometryPropertyTextControl_GroupBoxFontEffect")));
+        this.panelEffect.setBorder(new TitledBorder(ControlsProperties.getString("String_FontEffect")));
         this.panelEffect.setLayout(new GridBagLayout());
         this.panelEffect.add(this.checkBoxBorder, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 1).setInsets(2, 10, 2, 10));
         this.panelEffect.add(this.checkBoxStrickout, new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 1).setInsets(2, 10, 2, 10));

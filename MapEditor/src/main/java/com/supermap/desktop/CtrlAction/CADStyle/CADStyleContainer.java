@@ -1148,7 +1148,7 @@ public class CADStyleContainer extends JPanel {
         this.labelPointWidthUnity.setText("mm");
         this.labelPointHeight.setText(ControlsProperties.getString("String_ShowHeight"));
         this.labelPointHeightUnity.setText("mm");
-        this.checkboxWAndH.setText(ControlsProperties.getString("String_CheckBox_ChangeMarkerWidthAndHeight"));
+        this.checkboxWAndH.setText(ControlsProperties.getString("String_LockMarkerWidthAndHeight"));
         this.labelPointColor.setText(ControlsProperties.getString("String_SymbolColor") + ":");
 
         this.labelLineColor.setText(ControlsProperties.getString("String_Column_Color") + ":");

@@ -299,14 +299,14 @@ public class ColorSchemeEditorDialog extends SmDialog {
 	}
 
 	private void initResources() {
-		jButtonAddColorButton.setToolTipText(ControlsProperties.getString("String_AddColor"));
+		jButtonAddColorButton.setToolTipText(ControlsProperties.getString("String_Add"));
 		jButtonRemoveColorButton.setToolTipText(ControlsProperties.getString("String_RemoveColor"));
 		jButtonSelectAllButton.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		jButtonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
-		jButtonMoveTopButton.setToolTipText(ControlsProperties.getString("String_FirstColor"));
-		jButtonMoveUpButton.setToolTipText(ControlsProperties.getString("String_UpColor"));
-		jButtonMoveDownButton.setToolTipText(ControlsProperties.getString("String_DownColor"));
-		jButtonMoveBottomButton.setToolTipText(ControlsProperties.getString("String_LastColor"));
+		jButtonMoveTopButton.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
+		jButtonMoveUpButton.setToolTipText(ControlsProperties.getString("String_MoveUp"));
+		jButtonMoveDownButton.setToolTipText(ControlsProperties.getString("String_MoveDown"));
+		jButtonMoveBottomButton.setToolTipText(ControlsProperties.getString("String_MoveLast"));
 		buttonImport.setToolTipText(CoreProperties.getString(CoreProperties.IMPORT));
 		buttonExport.setToolTipText(CoreProperties.getString(CoreProperties.EXPORT));
 		jButtonConfirmButton.setText(CoreProperties.getString(CoreProperties.OK));
@@ -629,7 +629,7 @@ public class ColorSchemeEditorDialog extends SmDialog {
 		if (jPanelPreView == null) {
 			jPanelPreView = new JPanel();
 			jPanelPreView.setLayout(new BorderLayout());
-			jPanelPreView.setBorder(new TitledBorder(null, ControlsProperties.getString("String_Title_Preview"), TitledBorder.DEFAULT_JUSTIFICATION,
+			jPanelPreView.setBorder(new TitledBorder(null, ControlsProperties.getString("String_Preview"), TitledBorder.DEFAULT_JUSTIFICATION,
 					TitledBorder.DEFAULT_POSITION, null, null));
 			jPanelPreView.add(getPreViewLabel(), BorderLayout.CENTER);
 		}
