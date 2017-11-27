@@ -91,7 +91,10 @@ public class MetaProcessSingleQuery extends MetaProcess {
 			commonSettingCombine.add(input, analyst);
 			CursorUtilities.setWaitCursor();
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.SINGLE_QUERY, commonSettingCombine.getFinalJSon());
 			if (null != response) {

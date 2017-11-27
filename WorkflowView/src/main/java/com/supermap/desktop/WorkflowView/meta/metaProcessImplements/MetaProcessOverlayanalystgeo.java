@@ -88,7 +88,10 @@ public class MetaProcessOverlayanalystgeo extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.OVERLAYANALYSTGEO, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();

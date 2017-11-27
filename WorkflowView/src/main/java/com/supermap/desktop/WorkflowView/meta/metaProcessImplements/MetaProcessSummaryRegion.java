@@ -198,7 +198,10 @@ public class MetaProcessSummaryRegion extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst, type);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.SUMMARY_REGION, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();

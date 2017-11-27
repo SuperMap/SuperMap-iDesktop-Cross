@@ -6,6 +6,7 @@ import com.supermap.data.conversion.ImportSetting;
  * Created by xie on 2016/10/12.
  * 自己封装的导入类，其中包括导入的主类（ImportSetting）
  * 以及需要导入后处理的信息
+ * 增加文件路径-yuanR
  */
 public interface IImportInfo {
     //
@@ -16,6 +17,7 @@ public interface IImportInfo {
     //isSplitMore;
     //fileName;
     //fileType;
+    //filePath
 
     /**
      * 设置导入文件名
@@ -30,6 +32,20 @@ public interface IImportInfo {
      * @return
      */
     String getFileName();
+
+    /**
+     * 获取导入文件路径
+     *
+     * @return
+     */
+    String getFilePath();
+
+    /**
+     * 设置导入文件路径
+     *
+     * @param filePath
+     */
+    void setFilePath(String filePath);
 
     /**
      * 设置导入文件的中文对应类型
