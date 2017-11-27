@@ -35,7 +35,7 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterFile parameterDataSourcePath = new ParameterFile(ProcessProperties.getString("String_DataSourcePath"));
 	private ParameterComboBox parameterDatasetName = new ParameterComboBox(CoreProperties.getString("String_Label_Dataset"));
 	private ParameterTextField parameterDatasetName1 = new ParameterTextField(ProcessProperties.getString("String_Label_DatasetName"));
-	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("String_DatasetType"));
+	private ParameterComboBox parameterDatasetType = new ParameterComboBox(ProcessProperties.getString("string_label_lblDatasetType"));
 	private ParameterDefaultValueTextField parameterSpark = new ParameterDefaultValueTextField(ProcessProperties.getString("String_numSlices"));
 	private ParameterSwitch parameterSwitchUDB = new ParameterSwitch();
 	private ParameterCombine parameterCombineDatasetInfo = new ParameterCombine();
@@ -45,8 +45,8 @@ public class ParameterInputDataType extends ParameterCombine {
 	private ParameterDefaultValueTextField parameterDataBaseName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_DataBaseName"));
 	private ParameterDefaultValueTextField parameterTextFieldAddress = new ParameterDefaultValueTextField(CoreProperties.getString("String_Server"));
 	private ParameterDefaultValueTextField parameterTextFieldUserName = new ParameterDefaultValueTextField(ProcessProperties.getString("String_UserName"));
-	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_PassWord"));
-	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Button_Open"));
+	private ParameterPassword parameterTextFieldPassword = new ParameterPassword(ProcessProperties.getString("String_Password"));
+	private ParameterButton parameterButton = new ParameterButton(CoreProperties.getString("String_Open"));
 	private static final int OVERLAY_ANALYST_GEO = 0;
 	private static final int SINGLE_QUERY = 1;
 	private static final int POLYGON_AGGREGATION = 2;
@@ -250,17 +250,17 @@ public class ParameterInputDataType extends ParameterCombine {
 		//udb文件
 		parameterDataSourceType.setSelectedItem("UDB");
 		parameterDataSourceType.setEnabled(false);
-		parameterDataSourcePath.setRequisite(true);
+		parameterDataSourcePath.setRequired(true);
 		parameterDataSourcePath.setModuleName("InputDataTypeDatasource");
 		parameterDataSourcePath.addExtension(ProcessProperties.getString("String_UDBFileFilterName"), "udb");
 		parameterDataSourcePath.setModuleType("OpenOne");
-		parameterDatasetName.setRequisite(true);
-		parameterDatasetName1.setRequisite(true);
+		parameterDatasetName.setRequired(true);
+		parameterDatasetName1.setRequired(true);
 		parameterCombineDatasetInfo.addParameters(parameterDatasetName1, parameterDatasetType);
 
 		parameterSwitchUDB.add("0", parameterDatasetName);
 		parameterSwitchUDB.add("1", parameterCombineDatasetInfo);
-		parameterSpark.setRequisite(true);
+		parameterSpark.setRequired(true);
 		parameterSpark.setDefaultWarningValue("36");
 		parameterCombine1 = new ParameterCombine();
 		parameterCombine1.addParameters(
@@ -269,19 +269,19 @@ public class ParameterInputDataType extends ParameterCombine {
 				parameterSpark);
 
 		//pg数据库
-		parameterSourceDataset.setRequisite(true);
+		parameterSourceDataset.setRequired(true);
 		parameterSourceDataset.setDescribe(ProcessProperties.getString("String_Label_DatasetName"));
 		ParameterCombine parameterOpenPG = new ParameterCombine(ParameterCombine.HORIZONTAL);
 		parameterOpenPG.addParameters(parameterSourceDataset, parameterButton);
 		parameterEngineType.setSelectedItem("POSTGRESQL");
 		parameterEngineType.setEnabled(false);
-		parameterTextFieldAddress.setRequisite(true);
+		parameterTextFieldAddress.setRequired(true);
 		parameterTextFieldAddress.setDefaultWarningValue("{ip}");
-		parameterDataBaseName.setRequisite(true);
+		parameterDataBaseName.setRequired(true);
 //		parameterDataBaseName.setDefaultWarningValue("");
-		parameterTextFieldUserName.setRequisite(true);
+		parameterTextFieldUserName.setRequired(true);
 //		parameterTextFieldUserName.setDefaultWarningValue("");
-		parameterTextFieldPassword.setRequisite(true);
+		parameterTextFieldPassword.setRequired(true);
 //		parameterTextFieldPassword.setSelectedItem("supermap");
 		ParameterCombine parameterCombine2 = new ParameterCombine();
 		parameterCombine2.addParameters(
@@ -293,7 +293,7 @@ public class ParameterInputDataType extends ParameterCombine {
 		);
 
 		//BigDataStore
-		bigDataStoreName.setRequisite(true);
+		bigDataStoreName.setRequired(true);
 		ParameterCombine parameterCombine3 = new ParameterCombine();
 		parameterCombine3.addParameters(bigDataStoreName);
 		IConGetter getter = new IConGetter() {

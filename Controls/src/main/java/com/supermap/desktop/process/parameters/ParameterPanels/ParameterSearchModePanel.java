@@ -236,12 +236,12 @@ public class ParameterSearchModePanel extends SwingPanel implements IParameterPa
         textFieldSearchCount.setMinValue(1);
         textFieldMaxPointCount.setMinValue(4);
         textFieldMaxPointCount.setIncludeMin(false);
-	    ComponentUIUtilities.setName(this.radioSearchModelCount, parameter.getDescribe() + "_radio");
-	    ComponentUIUtilities.setName(this.radioSearchModelRadius, parameter.getDescribe() + "_radio1");
-	    ComponentUIUtilities.setName(this.radioSearchModelQuadTree, parameter.getDescribe() + "_radio2");
-	    ComponentUIUtilities.setName(this.textFieldMaxRadius, parameter.getDescribe() + "_textField");
-	    ComponentUIUtilities.setName(this.textFieldMaxPointCount, parameter.getDescribe() + "_textField1");
-	    ComponentUIUtilities.setName(this.textFieldSearchCount, parameter.getDescribe() + "_textField2");
+	    ComponentUIUtilities.setName(this.radioSearchModelCount, parameter.getDescription() + "_radio");
+	    ComponentUIUtilities.setName(this.radioSearchModelRadius, parameter.getDescription() + "_radio1");
+	    ComponentUIUtilities.setName(this.radioSearchModelQuadTree, parameter.getDescription() + "_radio2");
+	    ComponentUIUtilities.setName(this.textFieldMaxRadius, parameter.getDescription() + "_textField");
+	    ComponentUIUtilities.setName(this.textFieldMaxPointCount, parameter.getDescription() + "_textField1");
+	    ComponentUIUtilities.setName(this.textFieldSearchCount, parameter.getDescription() + "_textField2");
     }
 
     private void initLayout() {

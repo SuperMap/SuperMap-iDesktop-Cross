@@ -19,7 +19,6 @@ import com.supermap.desktop.process.parameter.ParameterDataNode;
 import com.supermap.desktop.process.parameter.interfaces.IParameterPanel;
 import com.supermap.desktop.process.parameter.ipls.*;
 import com.supermap.desktop.process.types.BasicTypes;
-import com.supermap.desktop.process.types.CommonTypes;
 import com.supermap.desktop.process.types.DatasetTypes;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.utilities.DatasourceUtilities;
@@ -127,7 +126,7 @@ public class MetaProcessAbstractExport extends MetaProcess {
 		this.targetName.setEnabled(false);
 		this.exportPath = new ParameterFile(ControlsProperties.getString("String_ExportPath"));
 		this.exportPath.setValueType(BasicTypes.STRING);
-		this.exportPath.setRequisite(true);
+		this.exportPath.setRequired(true);
 		this.exportPath.setEnabled(false);
 		this.cover = new ParameterCheckBox(ControlsProperties.getString("string_coverage"));
 		this.cover.setEnabled(false);

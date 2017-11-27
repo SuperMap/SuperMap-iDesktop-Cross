@@ -434,7 +434,7 @@ public class ThemeRangeContainer extends ThemeChangePanel {
      * 资源化
      */
     private void initResources() {
-        this.labelExpression.setText(MapViewProperties.getString("String_label_Expression"));
+        this.labelExpression.setText(MapViewProperties.getString("String_Label_Expression"));
         this.labelRangeMethod.setText(MapViewProperties.getString("String_Label_RangeMethed"));
         this.labelRangeCount.setText(ControlsProperties.getString("String_Label_RangeCount"));
         this.labelRangeLength.setText(MapViewProperties.getString("String_Label_RangeSize"));
@@ -1465,8 +1465,8 @@ public class ThemeRangeContainer extends ThemeChangePanel {
         private void setOffsetUnity() {
             if (ControlsProperties.getString("String_MapBorderLineStyle_LabelDistanceUnit").equals(comboBoxOffsetUnity.getSelectedItem().toString())) {
                 themeRange.setOffsetFixed(true);
-                labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
-                labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+                labelOffsetXUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
+                labelOffsetYUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
             } else {
                 themeRange.setOffsetFixed(false);
                 labelOffsetXUnity.setText(UnitValue.parseToString(map.getCoordUnit()));

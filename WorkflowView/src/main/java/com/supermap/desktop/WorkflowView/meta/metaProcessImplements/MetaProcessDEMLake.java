@@ -106,7 +106,7 @@ public class MetaProcessDEMLake extends MetaProcess {
 		lakeDataCombine.setDescribe(CoreProperties.getString("String_GroupBox_LakeData"));
 		lakeDataCombine.addParameters(lakeDatasource, lakeDataset);
 		ParameterCombine parameterSetting = new ParameterCombine();
-		parameterSetting.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		parameterSetting.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		parameterSetting.addParameters(fieldOrValue, heightFieldComboBox, heightValue);
 		this.parameters.setParameters(DEMDataCombine, lakeDataCombine, parameterSetting);
 		this.parameters.addInputParameters(DEM_DATA, DatasetTypes.GRID, DEMDataCombine);

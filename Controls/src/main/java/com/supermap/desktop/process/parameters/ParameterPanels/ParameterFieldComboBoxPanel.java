@@ -42,7 +42,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 	public ParameterFieldComboBoxPanel(IParameter parameter) {
 		super(parameter);
 		this.parameterFieldComboBox = (ParameterFieldComboBox) parameter;
-		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescription());
 		parameterFieldComboBox.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -145,7 +145,7 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 				return jLabel;
 			}
 		});
-		String describe = parameterFieldComboBox.getDescribe();
+		String describe = parameterFieldComboBox.getDescription();
 		if (describe != null) {
 			label.setText(describe);
 			label.setText(getDescribe());
@@ -256,8 +256,8 @@ public class ParameterFieldComboBoxPanel extends SwingPanel implements IParamete
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterFieldComboBox.getDescribe();
-		if (parameterFieldComboBox.isRequisite()) {
+		String describe = parameterFieldComboBox.getDescription();
+		if (parameterFieldComboBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

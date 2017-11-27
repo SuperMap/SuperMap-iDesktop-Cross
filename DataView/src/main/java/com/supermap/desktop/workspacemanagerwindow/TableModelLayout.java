@@ -49,7 +49,7 @@ public class TableModelLayout extends AbstractTableModel {
 				return this.layouts.get(row);
 			}
 			if (col == COLUMN_TYPE) {
-				return ControlsProperties.getString("String_ToolBar_HideLayout");
+				return ControlsProperties.getString("String_Layouts");
 			}
 		}
 		return "";

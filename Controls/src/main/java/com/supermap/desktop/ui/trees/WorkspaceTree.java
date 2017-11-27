@@ -28,14 +28,10 @@ import com.supermap.desktop.event.WorkflowsChangedListener;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.DatasetCopyCallable;
-import com.supermap.desktop.ui.trees.InternalDatasetGridCollection;
-import com.supermap.desktop.ui.trees.InternalDatasetImageCollection;
 import com.supermap.desktop.ui.controls.progress.FormProgressTotal;
 import com.supermap.desktop.utilities.*;
 
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -200,12 +196,17 @@ public class WorkspaceTree extends JTree implements IDisposable {
 	private EngineType[] UN_SUPPORT_TYPE = new EngineType[]{EngineType.OGC, EngineType.ISERVERREST, EngineType.SUPERMAPCLOUD, EngineType.GOOGLEMAPS,
 			EngineType.BAIDUMAPS, EngineType.OPENSTREETMAPS};
 
-	private TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
-		@Override
-		public void valueChanged(TreeSelectionEvent e) {
-			ToolbarUIUtilities.updataToolbarsState();
-		}
-	};
+	/**
+	 * tree改变监听放在具体实现的类中-yuanR2017.11.27
+	 */
+	//private TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
+	//	@Override
+	//	public void valueChanged(TreeSelectionEvent e) {
+	//		// 当tree选择改变时，对Ribbon状态进行更新
+	//		ToolbarUIUtilities.updataToolbarsState();
+	//	}
+	//};
+
 	// WorkspaceTree里面注册了Deleting事件等，用户用代码而非界面操作删除数据集等，也弹出提示框来
 	// 所以增加一个变量控制只有在界面操作时才需要弹出提示框 by gouyu 2013-5-24
 	private boolean needShowMessageBox = false;
@@ -987,7 +988,7 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		addMapListener();
 		addLayoutsListener();
 		addScenesListener();
-		addUpdataToolBarsListener();
+		//addUpdataToolBarsListener();
 		addWorkFlowChangedListener();
 	}
 
@@ -995,9 +996,14 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		Application.getActiveApplication().addWorkflowsChangedListener(workflowsChangedListener);
 	}
 
-	private void addUpdataToolBarsListener() {
-		this.addTreeSelectionListener(treeSelectionListener);
-	}
+	/**
+	 * 增加树选择改变对工具栏状态的监听
+	 * 将此监听放在对WorkspaceTree的具体实现类中
+	 * 修改原因：当树选择改变时，先从这里触发了updataToolbarsState()方法，导致toolBar的状态判定与实际选择情况不符-yuanR2017.11.27
+	 */
+	//private void addUpdataToolBarsListener() {
+	//this.addTreeSelectionListener(treeSelectionListener);
+	//}
 
 	/**
 	 * 删除全部事件，除了KeyListener,KeyListerer是注册在WorkspaceTree
@@ -1008,7 +1014,7 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		removeMapListener();
 		removeLayoutsListener();
 		removeScenesListener();
-		removeUpdataToolBarsListener();
+		//removeUpdataToolBarsListener();
 		removeWorkflowChangedListener();
 	}
 
@@ -1016,9 +1022,12 @@ public class WorkspaceTree extends JTree implements IDisposable {
 		Application.getActiveApplication().removeWorkflowsChangedListener(workflowsChangedListener);
 	}
 
-	private void removeUpdataToolBarsListener() {
-		this.removeTreeSelectionListener(treeSelectionListener);
-	}
+	/**
+	 * 移除树选择改变对工具栏状态的监听
+	 */
+	//private void removeUpdataToolBarsListener() {
+	//this.removeTreeSelectionListener(treeSelectionListener);
+	//}
 
 	/**
 	 * 添加工作空间事件

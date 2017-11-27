@@ -154,7 +154,7 @@ public class SeriesSettingDialog extends SmDialog {
 		this.stepLength.setText(ControlsProperties.getString("String_StepLength"));
 		this.seriesNum.setText(ControlsProperties.getString("String_BatchAddColorTableSeriesNum"));
 		this.okSmButton.setText(ControlsProperties.getString("String_BatchAddColorTableOKButton"));
-		this.cancelSmButton.setText(ControlsProperties.getString("String_BatchAddColorTableCancelButton"));
+		this.cancelSmButton.setText(ControlsProperties.getString("String_Cancel"));
 	}
 
 	private void registerEvents() {

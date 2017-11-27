@@ -108,11 +108,11 @@ public class MetaProcessThinRaster extends MetaProcessGridAnalyst {
 
 		resultDataset.setDefaultDatasetName("result_thinRaster");
 		//textFieldNoValue.setSelectedItem("-9999");
-		textFieldNoValue.setRequisite(true);
+		textFieldNoValue.setRequired(true);
 		textFieldNoValueTolerance.setSelectedItem("0");
 		textFieldNoValueTolerance.setMinValue(0);
 		textFieldNoValueTolerance.setIsIncludeMin(true);
-		textFieldNoValueTolerance.setRequisite(true);
+		textFieldNoValueTolerance.setRequired(true);
 	}
 
 	private void registerListener() {

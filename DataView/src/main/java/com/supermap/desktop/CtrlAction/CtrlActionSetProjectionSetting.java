@@ -15,6 +15,7 @@ import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.PropertyManagerUtilities;
+import com.supermap.desktop.utilities.StringUtilities;
 
 import java.text.MessageFormat;
 
@@ -45,13 +46,17 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 					break;
 				}
 			}
-		} else {
+		} else if (datasources.length > 0) {
 			// 数据源
 			prjCoordSys = datasources[0].getPrjCoordSys();
 			titleName = ControlsProperties.getString("String_Label_Datasource") + datasources[0].getAlias();
 		}
-
-		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
+		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings;
+		if (!StringUtilities.isNullOrEmpty(titleName)) {
+			dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
+		} else {
+			dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
+		}
 		if (prjCoordSys != null) {
 			dialogPrjCoordSysSettings.setPrjCoordSys(prjCoordSys);
 		}
@@ -83,7 +88,7 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 							// 提示是否设置到所有数据集
 							JDialogConfirm dialogConfirm = new JDialogConfirm(MessageFormat.format(ControlsProperties.getString("String_ApplyPrjCoordSys"),
 									datasource.getAlias()), true);
-							dialogConfirm.showDialogWithYesNoOpition();
+							dialogConfirm.showDialog();
 							isDontAskSetToAllDatasets = dialogConfirm.isUsedAsDefault();
 							if (dialogConfirm.getDialogResult() == DialogResult.OK) {
 								isSetToAllDatasets = true;
@@ -126,17 +131,15 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 									datasource.getDatasets().get(i).setPrjCoordSys(newPrjCoordSys);
 								}
 							}
+							Application
+									.getActiveApplication()
+									.getOutput()
+									.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
+											newPrjCoordSys.getName()));
 						}
-
-						Application
-								.getActiveApplication()
-								.getOutput()
-								.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
-										newPrjCoordSys.getName()));
 					}
 				}
 			}
-			// TODO 刷新属性
 			PropertyManagerUtilities.refreshPropertyManager();
 		}
 	}

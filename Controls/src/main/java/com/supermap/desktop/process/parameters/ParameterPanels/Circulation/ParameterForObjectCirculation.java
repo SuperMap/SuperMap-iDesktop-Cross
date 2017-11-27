@@ -12,13 +12,16 @@ import java.util.ArrayList;
  */
 public class ParameterForObjectCirculation extends AbstractParameter implements ISelectionParameter {
 	private ArrayList<String> infoList = new ArrayList<>();
+	private String fileType;
+	public final String FILE_TYPE_CHANGED = "fileTypeChanged";
+	private final String LIST_CHANGED="infoListChanged";
 
 	public ParameterForObjectCirculation() {
 
 	}
 
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 
@@ -32,7 +35,7 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 			oldValue = this.infoList;
 			this.infoList = (ArrayList) item;
 		}
-		firePropertyChangeListener(new PropertyChangeEvent(this, "radioLists", oldValue, this.infoList));
+		firePropertyChangeListener(new PropertyChangeEvent(this, LIST_CHANGED, oldValue, this.infoList));
 	}
 
 
@@ -42,6 +45,16 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 			return null;
 		}
 		return this.infoList;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		String oldValue = this.fileType;
+		this.fileType = fileType;
+		firePropertyChangeListener(new PropertyChangeEvent(this, FILE_TYPE_CHANGED, oldValue, this.fileType));
 	}
 
 	@Override

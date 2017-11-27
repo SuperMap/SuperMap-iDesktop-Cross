@@ -68,7 +68,7 @@ public class ParameterButton extends AbstractParameter implements ISelectionPara
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

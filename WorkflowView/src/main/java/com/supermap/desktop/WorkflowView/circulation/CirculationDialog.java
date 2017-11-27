@@ -56,13 +56,32 @@ public class CirculationDialog extends SmDialog {
 		this.add(this.buttonClose, new GridBagConstraintsHelper(1, 4, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.EAST).setFill(GridBagConstraints.NONE).setInsets(0, 5, 10, 10));
 		this.buttonOK.addActionListener(this.actionListener);
 		this.buttonClose.addActionListener(this.actionListener);
-		int size;
-		if (parameters.getParameters().size() == 1 && (type != CirculationType.forObjectType || isOutput)) {
+		int size = 0;
+		if (isOutput) {
 			size = 120;
-		} else if (parameters.getParameters().size() == 1 && type == CirculationType.forObjectType && !isOutput) {
-			size = 300;
 		} else {
-			size = parameters.getParameters().size() * 60;
+			switch (type) {
+				case forDatasourceType:
+					size = 150;
+					break;
+				case forDatasetType:
+					size = 200;
+					break;
+				case forType:
+					size = 180;
+					break;
+				case forFileType:
+					size = 376;
+					break;
+				case forObjectType:
+					size = 300;
+					break;
+				case forFieldType:
+					size = 230;
+					break;
+				default:
+					break;
+			}
 		}
 		this.setSize(new Dimension(420, size));
 		this.setMinimumSize(new Dimension(420, size));

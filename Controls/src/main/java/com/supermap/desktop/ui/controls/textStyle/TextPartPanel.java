@@ -131,7 +131,7 @@ public class TextPartPanel extends JPanel implements ITextPart {
 		//@formatter:off
 		JPanel panelPartInfo = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
-		panelPartInfo.setBorder(new TitledBorder(ControlsProperties.getString("String_GeometryPropertyTextControl_GroupBoxChildPart")));
+		panelPartInfo.setBorder(new TitledBorder(ControlsProperties.getString("String_SubObject")));
 		panelPartInfo.setLayout(new GridBagLayout());
 		panelPartInfo.add(this.labelSubobject,      new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setWeight(1, 0).setInsets(2,10,2,10));
 		panelPartInfo.add(this.comboBoxSubobject,   new GridBagConstraintsHelper(1, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0).setInsets(2,10,2,10));

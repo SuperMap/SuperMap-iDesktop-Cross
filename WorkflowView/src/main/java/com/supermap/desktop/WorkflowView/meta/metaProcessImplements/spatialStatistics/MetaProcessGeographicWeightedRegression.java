@@ -66,7 +66,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		ParameterCombine parameterCombineSourceDataset = new ParameterCombine();
 		parameterCombineSourceDataset.addParameters(datasourceConstraint);
 		parameterCombineSourceDataset.addParameters(parameterSingleDataset);
-		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 
 		ParameterCombine parameterSetting = new ParameterCombine();
 
@@ -198,7 +198,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 						+ ProcessProperties.getString("String_BandWidthDistanceTolerance") + gwrSummary.getBandwidth() + "\n"
 						+ ProcessProperties.getString("String_Edf") + gwrSummary.getEdf() + "\n"
 						+ ProcessProperties.getString("String_EffectiveNumber") + gwrSummary.getEffectiveNumber() + "\n"
-						+ ProcessProperties.getString("String_KNeighbors") + gwrSummary.getNeighbors() + "\n"
+						+ ProcessProperties.getString("String_Neighbors") + gwrSummary.getNeighbors() + "\n"
 						+ ProcessProperties.getString("String_R²") + gwrSummary.getR2() + "\n"
 						+ ProcessProperties.getString("String_R²Adjusted") + gwrSummary.getR2Adjusted() + "\n"
 						+ ProcessProperties.getString("String_ResidualSquares") + gwrSummary.getResidualSquares() + "\n"

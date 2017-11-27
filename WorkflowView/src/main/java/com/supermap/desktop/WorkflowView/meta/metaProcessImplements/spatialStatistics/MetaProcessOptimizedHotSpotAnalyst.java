@@ -159,7 +159,7 @@ public class MetaProcessOptimizedHotSpotAnalyst extends MetaProcess {
 		ParameterCombine parameterCombineSource = new ParameterCombine();
 		parameterCombineSource.addParameters(parameterDatasource);
 		parameterCombineSource.addParameters(parameterSingleDataset);
-		parameterCombineSource.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSource.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 		// 参数面板
 		ParameterCombine parameterCombineSet = new ParameterCombine();
 		parameterCombineSet.addParameters(parameterSwitchDatasetType);

@@ -47,7 +47,7 @@ public class ParameterDatasourcePanel extends SwingPanel {
 		panel.setLayout(new GridBagLayout());
 		panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setFill(GridBagConstraints.NONE));
 		panel.add(datasourceComboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 5, 0, 0));
-		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.datasourceComboBox, parameter.getDescription());
 	}
 
 	private void initListener() {
@@ -110,8 +110,8 @@ public class ParameterDatasourcePanel extends SwingPanel {
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterDatasource.getDescribe();
-		if (parameterDatasource.isRequisite()) {
+		String describe = parameterDatasource.getDescription();
+		if (parameterDatasource.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

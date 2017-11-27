@@ -65,7 +65,7 @@ public class ThemeLabelUniformContainer extends ThemeChangePanel {
 		this.panelAdvance.addPropertyChangeListener("ThemeChange", this.propertyChangeListener);
 		this.textStyleContainer.setUniformStyle(true);
 		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Property"), this.panelProperty);
-		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Style"), textStyleContainer);
+		this.tabbedPane.add(MapViewProperties.getString("String_Title_Sytle"), textStyleContainer);
 		this.tabbedPane.add(MapViewProperties.getString("String_Theme_Advanced"), this.panelAdvance);
 		this.add(this.tabbedPane, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH)
 				.setWeight(1, 1));

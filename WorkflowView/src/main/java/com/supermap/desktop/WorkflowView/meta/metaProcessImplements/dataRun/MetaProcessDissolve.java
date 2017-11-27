@@ -127,7 +127,7 @@ public class MetaProcessDissolve extends MetaProcess {
         this.comboBoxDissolveMode.setSelectedItem(parameterDataNodeOnlySingle);
         this.numberDissolveTolerance.setMinValue(0);
         this.numberDissolveTolerance.setIsIncludeMin(true);
-        this.numberDissolveTolerance.setRequisite(true);
+        this.numberDissolveTolerance.setRequired(true);
     }
 
     private void initParameterConstraint() {

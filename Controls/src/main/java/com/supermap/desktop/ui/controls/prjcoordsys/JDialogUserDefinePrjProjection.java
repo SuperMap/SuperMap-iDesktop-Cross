@@ -1,7 +1,7 @@
 package com.supermap.desktop.ui.controls.prjcoordsys;
 
-import com.supermap.data.*;
 import com.supermap.data.Enum;
+import com.supermap.data.*;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.properties.CoreProperties;
@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 import java.util.Arrays;
 
 /**
@@ -84,7 +85,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 	// 原点纬线
 	private JLabel labelCentralParallel = new JLabel();
-	private JPanelFormat panelCentralParallel = new JPanelFormat();
+	private JPanelFormat panelCentralParallel = new JPanelFormat(90);
 	// 垂直偏移
 	private JLabel labelFalseNorthing = new JLabel();
 	private SmTextFieldLegit textFieldFalseNorthing = new SmTextFieldLegit();
@@ -95,10 +96,10 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 	// 第一标准纬线
 	private JLabel labelStandardParallel1 = new JLabel();
-	private JPanelFormat panelStandardParallel1 = new JPanelFormat();
+	private JPanelFormat panelStandardParallel1 = new JPanelFormat(90);
 	// 第二标准纬线
 	private JLabel labelStandardParallel2 = new JLabel();
-	private JPanelFormat panelStandardParallel2 = new JPanelFormat();
+	private JPanelFormat panelStandardParallel2 = new JPanelFormat(90);
 
 	// 第一点的经度
 	private JLabel labelFirstPointLongitude = new JLabel();
@@ -110,7 +111,11 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 	// 方位角
 	private JLabel labelAzimuth = new JLabel();
-	private JPanelFormat panelAzimuth = new JPanelFormat();
+	private JPanelFormat panelAzimuth = new JPanelFormat(90);
+
+	private PrjCoordSys prjCoordSys = new PrjCoordSys();
+	private JTextField textFieldName = new JTextField();
+
 	private final ItemListener radioAMSListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -129,10 +134,28 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		}
 	};
 
-	private PrjCoordSys prjCoordSys = new PrjCoordSys();
-	private JTextField textFieldName = new JTextField();
+	private ISmTextFieldLegit fieldLegit = new ISmTextFieldLegit() {
+		@Override
+		public boolean isTextFieldValueLegit(String textFieldValue) {
+			if (StringUtilities.isNullOrEmpty(textFieldValue) || textFieldValue.contains("d")) {
+				return false;
+			}
+			try {
+				Double aDouble = Double.valueOf(textFieldValue);
+				if (aDouble < -100000000000d || aDouble > 100000000000d) {
+					return false;
+				}
+			} catch (Exception e) {
+				return false;
+			}
+			return true;
+		}
 
-	private ISmTextFieldLegit fieldLegit;
+		@Override
+		public String getLegitValue(String currentValue, String backUpValue) {
+			return backUpValue;
+		}
+	};
 	private Boolean lockUnit = false;
 	private ItemListener comboBoxUnitListener = new ItemListener() {
 		@Override
@@ -165,9 +188,9 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	//				prjCoordSys.setType((PrjCoordSysType) selectedItem);
 	//				lock = true;
 	//				prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
-	//				prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+	//				prjCoordSys.setName(PrjCoordSysTypeUtilities.getDescription(((PrjCoordSysType) selectedItem).name()));
 	//				panelGeoCoordSys.setGeoCoordSys(prjCoordSys.getGeoCoordSys());
-	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescribe(((PrjCoordSysType) selectedItem).name()));
+	//				comboBoxName.setSelectedItem(PrjCoordSysTypeUtilities.getDescription(((PrjCoordSysType) selectedItem).name()));
 	//				resetProjectionTypeValues();
 	//				lock = false;
 	//			} else {
@@ -303,28 +326,6 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		// endregion
 
 		// region 垂直偏移\水平偏移\比例因子
-		this.fieldLegit = new ISmTextFieldLegit() {
-			@Override
-			public boolean isTextFieldValueLegit(String textFieldValue) {
-				if (StringUtilities.isNullOrEmpty(textFieldValue) || textFieldValue.contains("d")) {
-					return false;
-				}
-				try {
-					Double aDouble = Double.valueOf(textFieldValue);
-					if (aDouble < -100000000000d || aDouble > 100000000000d) {
-						return false;
-					}
-				} catch (Exception e) {
-					return false;
-				}
-				return true;
-			}
-
-			@Override
-			public String getLegitValue(String currentValue, String backUpValue) {
-				return backUpValue;
-			}
-		};
 		this.textFieldFalseNorthing.setSmTextFieldLegit(this.fieldLegit);
 		this.textFieldFalseEasting.setSmTextFieldLegit(this.fieldLegit);
 		this.textFieldScaleFactor.setSmTextFieldLegit(new ISmTextFieldLegit() {
@@ -352,13 +353,15 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 		this.textFieldFalseEasting.setText("0");
 		this.textFieldFalseNorthing.setText("0");
 		this.textFieldScaleFactor.setText("0");
+		this.textFieldFalseEasting.setToolTipText(MessageFormat.format(ControlsProperties.getString("String_ValueRange"), "[-100000000000,100000000000]"));
+		this.textFieldFalseNorthing.setToolTipText(MessageFormat.format(ControlsProperties.getString("String_ValueRange"), "[-100000000000,100000000000]"));
+		this.textFieldScaleFactor.setToolTipText(MessageFormat.format(ControlsProperties.getString("String_ValueRange"), "[0,1]"));
+
 		// endregion
 
 		this.prjCoordSys.setType(PrjCoordSysType.PCS_USER_DEFINED);
 		this.prjCoordSys.setName(DEFAULT_NAME);
 
-		// 设置控件不可编辑
-		setComponentEditable(false);
 	}
 
 	// region 初始化布局
@@ -557,6 +560,8 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 
 		this.panelGeoCoordSys.setGeoCoordSys(this.prjCoordSys.getGeoCoordSys());
 		resetProjectionTypeValues();
+		// 非自定义时设置控件不可编辑
+		setComponentEditable(false);
 	}
 
 	public void clean() {
@@ -571,7 +576,7 @@ public class JDialogUserDefinePrjProjection extends SmDialog {
 	 * @param isEditable
 	 */
 	public void setComponentEditable(Boolean isEditable) {
-		//comboBoxCoordSysUnit.setEnabled(isEditable);
+		this.comboBoxCoordSysUnit.setEnabled(isEditable);
 		this.panelCentralMeridian.setTextFieldEditable(isEditable);
 		this.textFieldFalseEasting.setEditable(isEditable);
 		this.panelCentralParallel.setTextFieldEditable(isEditable);

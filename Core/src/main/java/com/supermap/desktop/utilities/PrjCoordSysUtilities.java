@@ -100,16 +100,18 @@ public class PrjCoordSysUtilities {
 					} else if (info.equals(CoreProperties.getString("String_CoordSysUnit"))) {
 						text += prj.getCoordUnit();
 					} else if (info.equals(CoreProperties.getString("String_EPSG_Code"))) {
+						int value;
 						if (prj.getType() == PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE) {
-							prj.setEPSGCode(prj.getGeoCoordSys().getType().value());
+							value = prj.getGeoCoordSys().getType().value();
+							//prj.setEPSGCode(prj.getGeoCoordSys().getType().value());
 						} else {
-							prj.setEPSGCode(prj.getType().value());
+							value = prj.getType().value();
+							//prj.setEPSGCode(prj.getType().value());
 						}
-						if (prj.getEPSGCode() < 0) {
-							text += "0";
-						} else {
-							text += Integer.toString(prj.getEPSGCode());
+						if (value < 0) {
+							value = 0;
 						}
+						text += Integer.toString(value);
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_GeoDatumPlane"))) {
 						text += prj.getGeoCoordSys().getGeoDatum().getName();
 					} else if (info.equals(CoreProperties.getString("String_GeoCoordSys_ReferenceSpheroid"))) {

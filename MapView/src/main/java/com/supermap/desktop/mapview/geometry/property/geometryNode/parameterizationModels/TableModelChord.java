@@ -13,7 +13,7 @@ public class TableModelChord extends GeometryParameterModel {
 			ControlsProperties.getString("String_GeoEllipse_Center"),
 			"X",
 			"Y",
-			ControlsProperties.getString("String_Geometry_Rotation"),
+			ControlsProperties.getString("String_RotationAngle"),
 			ControlsProperties.getString("String_Geometry_SemimajorAxis"),
 			ControlsProperties.getString("String_Geometry_SemiminorAxis"),
 			ControlsProperties.getString("String_GeoCircle_StartAngle"),

@@ -38,7 +38,7 @@ public class MetaProcessTextToField extends MetaProcessTypeConversion {
 		parameterFieldComboBox.setFieldType(new FieldType[]{FieldType.TEXT, FieldType.WTEXT});
 
 		parameterFieldComboBox.setShowNullValue(false);
-		parameterFieldComboBox.setRequisite(true);
+		parameterFieldComboBox.setRequired(true);
 
 		// 源数据
 		ParameterCombine parameterCombineSourceData = new ParameterCombine();

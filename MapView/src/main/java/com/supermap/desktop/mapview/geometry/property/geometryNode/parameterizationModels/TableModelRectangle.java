@@ -13,7 +13,7 @@ public class TableModelRectangle extends GeometryParameterModel {
 			ControlsProperties.getString("String_Geometry_Center"),
 			"X",
 			"Y",
-			ControlsProperties.getString("String_Geometry_Rotation"),
+			ControlsProperties.getString("String_RotationAngle"),
 			ControlsProperties.getString("String_Geometry_Height"),
 			ControlsProperties.getString("String_Geometry_Width")
 	};

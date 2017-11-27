@@ -42,17 +42,17 @@ public class MetaProcessGridRegionAggregation extends MetaProcess {
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT);
 		ParameterDataNode parameterDataNode = new ParameterDataNode(ProcessProperties.getString("String_GridRegionAggregationType"), "SUMMARYMESH");
-		parameterAggregationType.setRequisite(true);
+		parameterAggregationType.setRequired(true);
 		parameterAggregationType.setItems(parameterDataNode);
 		parameterAggregationType.setSelectedItem(parameterDataNode);
 
 		ParameterDataNode[] parameterDataNodes = {new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"), new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1")};
 		parameterMeshType.setSelectedItem(parameterDataNodes[0]);
-		parameterMeshType.setRequisite(true);
+		parameterMeshType.setRequired(true);
 		parameterMeshType.setItems(parameterDataNodes);
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");
 		parameterResolution.setDefaultWarningValue("100");
-		parameterResolution.setRequisite(true);
+		parameterResolution.setRequired(true);
 		parameterStaticModel.setTipButtonMessage(ProcessProperties.getString("String_StatisticsModeTip"));
 		parameterWeightIndex.setTipButtonMessage(ProcessProperties.getString("String_WeightIndexTip"));
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT);
@@ -100,7 +100,10 @@ public class MetaProcessGridRegionAggregation extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst, type);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.GRIDREGION_AGGREGATION, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();

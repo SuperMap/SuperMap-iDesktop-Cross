@@ -365,7 +365,7 @@ public class JPanelDatasourceInfoWeb extends JPanel {
 		this.jLabelServerType.setText(CoreProperties.getString("String_Label_DataSource_ServerType"));
 		this.jLabelUserName.setText(ControlsProperties.getString("String_Label_UserName"));
 		this.jLabelDatasourceAlias.setText(ControlsProperties.getString("String_Label_DatasourseAlias"));
-		this.jLabelOpenType.setText(ControlsProperties.getString("String_Label_OpenType"));
+		this.jLabelOpenType.setText(ControlsProperties.getString("String_OpenMode"));
 		this.jCheckBoxReadonly.setText(CoreProperties.getString("String_ReadOnly"));
 	}
 }

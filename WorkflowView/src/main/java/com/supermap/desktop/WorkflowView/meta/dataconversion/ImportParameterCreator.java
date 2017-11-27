@@ -176,6 +176,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo targetDatasource = new ReflectInfo();
 		targetDatasource.methodName = "setTargetDatasource";
 		parameterDatasource = new ParameterDatasourceConstrained();
+		parameterDatasource.setRequired(true);
 		parameterDatasource.addValueLegalListener(new ParameterValueLegalListener() {
 			@Override
 			public boolean isValueLegal(ParameterValueLegalEvent event) {
@@ -309,13 +310,13 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			reflectInfoArray.add(reflectInfoEncodeType);
 			reflectInfoArray.add(reflectInfoImportMode);
 			reflectInfoArray.add(reflectInfoDatasetType);
-			reflectInfoArray.add(reflectInfoSpatialIndex);
-			reflectInfoArray.add(reflectInfoFieldIndex);
 			if (importSetting instanceof ImportSettingGeoJson) {
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
 						parameterDatasetTypeEnum);
 			} else {
+				reflectInfoArray.add(reflectInfoSpatialIndex);
+				reflectInfoArray.add(reflectInfoFieldIndex);
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
 						parameterDatasetTypeEnum,
@@ -512,7 +513,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 				}
 			});
 		} else {
-			parameterFile.setRequisite(true);
+			parameterFile.setRequired(true);
 		}
 		parameterCombineSourceInfoSet.addParameters(parameterFile);
 		if (hasCharsetParameter) {

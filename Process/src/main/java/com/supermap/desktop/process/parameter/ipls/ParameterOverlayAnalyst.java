@@ -54,7 +54,7 @@ public class ParameterOverlayAnalyst extends AbstractParameter implements ISelec
     }
 
     @Override
-    public String getDescribe() {
+    public String getDescription() {
         return "OverlayAnalyst";
     }
 }

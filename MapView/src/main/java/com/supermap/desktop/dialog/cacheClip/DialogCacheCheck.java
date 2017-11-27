@@ -182,7 +182,7 @@ public class DialogCacheCheck extends JFrame {
 		this.setIconImages(CacheUtilities.getIconImages());
 		this.labelCachePath.setText(cacheProperties.getString("MapCache_LabelCachePath"));
 		this.labelCheckBounds.setText(cacheProperties.getString("String_CheckBounds"));
-		this.labelProcessCount.setText(cacheProperties.getString("String_NewProcessCount"));
+		this.labelProcessCount.setText(cacheProperties.getString("String_ProcessCount"));
 		this.textFieldProcessCount.setText("3");
 		this.radioButtonMultiCheck.setText(cacheProperties.getString("String_CacheCheck_Multi"));
 		this.checkBoxSaveErrorData.setText(cacheProperties.getString("String_SaveErrorData"));

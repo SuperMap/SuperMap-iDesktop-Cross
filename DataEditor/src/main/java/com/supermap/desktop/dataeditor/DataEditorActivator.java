@@ -64,7 +64,7 @@ public class DataEditorActivator implements BundleActivator {
 
 			if (form == null) {
 				if (StringUtilities.isNullOrEmpty(name)) {
-					name = DataEditorProperties.getString("String_transformationFormTitle");
+					name = DataEditorProperties.getString("String_transformation");
 					ArrayList<String> names = new ArrayList<>();
 					for (int i = 0; i < formManager.getCount(); i++) {
 						names.add(formManager.get(i).getText());

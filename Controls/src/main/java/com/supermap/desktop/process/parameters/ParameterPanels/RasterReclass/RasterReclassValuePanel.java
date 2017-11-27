@@ -476,7 +476,7 @@ public class RasterReclassValuePanel extends JPanel {
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			String fileFilters = SmFileChoose.createFileFilter(ControlsProperties.getString("String_ReclassFile"), "xml");
 			SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"),
-					ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"), moduleName, "OpenMany");
+					ControlsProperties.getString("String_OpenColorTable"), moduleName, "OpenMany");
 		}
 		SmFileChoose smFileChoose = new SmFileChoose(moduleName);
 		int state = smFileChoose.showDefaultDialog();

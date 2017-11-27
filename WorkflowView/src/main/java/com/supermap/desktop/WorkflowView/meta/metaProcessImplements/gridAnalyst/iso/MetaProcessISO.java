@@ -128,7 +128,7 @@ public abstract class MetaProcessISO extends MetaProcess {
 		resultInfo.setEnabled(false);
 
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(datumValue, interval, resampleTolerance, smoothMethod, smoothness);
 		this.parameters.setParameters(sourceData, paramSet, resultInfo, targetData);
 		this.parameters.addInputParameters(INPUT_DATA, DatasetTypes.GRID, sourceData);

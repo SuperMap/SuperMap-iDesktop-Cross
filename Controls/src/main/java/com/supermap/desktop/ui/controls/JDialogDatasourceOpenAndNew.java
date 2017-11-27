@@ -72,13 +72,13 @@ public class JDialogDatasourceOpenAndNew extends SmDialog {
 		this.buttonOk.setPreferredSize(new Dimension(75, 23));
 		if (DatasourceOperatorType.OPENDATABASE == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_OpenDatabaseDataSourse"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_Open"));
+			this.buttonOk.setText(CoreProperties.getString("String_Open"));
 		} else if (DatasourceOperatorType.NEWDATABASE == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_NewDatabaseDataSourse"));
 			this.buttonOk.setText(ControlsProperties.getString("String_Button_Creat"));
 		} else if (DatasourceOperatorType.OPENWEB == type) {
 			this.setTitle(ControlsProperties.getString("String_Title_OpenWebDataSourse"));
-			this.buttonOk.setText(CoreProperties.getString("String_Button_Open"));
+			this.buttonOk.setText(CoreProperties.getString("String_Open"));
 		}
 		this.initializeDatasourceType(type);
 		this.datasourceOperatorType = type;

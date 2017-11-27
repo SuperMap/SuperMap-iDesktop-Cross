@@ -124,7 +124,7 @@ public class MetaProcessDEMBuild extends MetaProcess {
 		textFieldColumnCount = new ParameterTextField(CoreProperties.getString("String_Column"));
 		textFieldSizeOf = new ParameterTextField(ProcessProperties.getString("String_Label_SizeOf"));
 		ParameterCombine resultSetting = new ParameterCombine();
-		resultSetting.setDescribe(CoreProperties.getString("String_GroupBox_ResultSetting"));
+		resultSetting.setDescribe(CoreProperties.getString("String_ResultSet"));
 		resultSetting.addParameters(comboBoxEncodeType, comboBoxPixelFormat, textFieldCellSize, textFieldRowCount, textFieldColumnCount, textFieldSizeOf);
 
 		resultDataset = new ParameterSaveDataset();

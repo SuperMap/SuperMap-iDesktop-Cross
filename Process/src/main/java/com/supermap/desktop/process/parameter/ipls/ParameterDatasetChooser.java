@@ -41,7 +41,7 @@ public class ParameterDatasetChooser extends AbstractParameter implements ISelec
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return "";
 	}
 

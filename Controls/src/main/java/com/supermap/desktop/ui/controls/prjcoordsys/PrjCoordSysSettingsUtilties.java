@@ -27,23 +27,22 @@ public class PrjCoordSysSettingsUtilties {
 
 	public static PrjCoordSys getPrjCoordSys(CoordSysDefine define) {
 		PrjCoordSys result = null;
-
-		try {
-			// 没有子项，则为具体的投影定义
-			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
-				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED) {
+		// 没有子项，则为具体的投影定义
+		if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
+			if (define.getCoordSysCode() != -1) {
+				try {
 					PrjCoordSysType type = (PrjCoordSysType) Enum.parse(PrjCoordSysType.class, define.getCoordSysCode());
 					if (type != null) {
 						result = new PrjCoordSys(type);
 					}
-				} else {
-					result = define.getPrjCoordSys();
+				} catch (Exception e) {
+					//Enum值错误 不抛异常
+					Application.getActiveApplication().getOutput().output(e.getMessage());
+					e.printStackTrace();
 				}
+			} else {
+				result = define.getPrjCoordSys();
 			}
-		} catch (Exception e) {
-			//Enum值错误 不抛异常
-			Application.getActiveApplication().getOutput().output(e.getMessage());
-			e.printStackTrace();
 		}
 		return result;
 	}
@@ -56,18 +55,19 @@ public class PrjCoordSysSettingsUtilties {
 	 */
 	public static GeoCoordSys getGeoCoordSys(CoordSysDefine define) {
 		GeoCoordSys result = null;
-
-		try {
-			if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
-				if (define.getCoordSysCode() != CoordSysDefine.USER_DEFINED) {
+		if (define.size() == 0 && define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
+			if (define.getCoordSysCode() != -1) {
+				try {
 					GeoCoordSysType type = (GeoCoordSysType) Enum.parse(GeoCoordSysType.class, define.getCoordSysCode());
-					result = new GeoCoordSys(type, GeoSpatialRefType.SPATIALREF_EARTH_LONGITUDE_LATITUDE);
-				} else {
-					result = define.getGeoCoordSys();
+					if (type != null) {
+						result = new GeoCoordSys(type, GeoSpatialRefType.SPATIALREF_EARTH_LONGITUDE_LATITUDE);
+					}
+				} catch (Exception e) {
+					Application.getActiveApplication().getOutput().output(e);
 				}
+			} else {
+				result = define.getGeoCoordSys();
 			}
-		} catch (Exception e) {
-			Application.getActiveApplication().getOutput().output(e);
 		}
 		return result;
 	}
@@ -78,6 +78,7 @@ public class PrjCoordSysSettingsUtilties {
 	 * @param define
 	 * @return
 	 */
+
 	public static String getDescription(CoordSysDefine define) {
 		String description = "";
 
@@ -91,10 +92,14 @@ public class PrjCoordSysSettingsUtilties {
 						prjCoordSys.setCoordUnit((Unit) Enum.parse(Unit.class, define.getCoordSysCode()));
 					} else if (define.getCoordSysType() == CoordSysDefine.PROJECTION_SYSTEM) {
 						prjCoordSys = PrjCoordSysSettingsUtilties.getPrjCoordSys(define);
+						// 确保描述中坐标系名称和JTable中显示一致
+						prjCoordSys.setName(define.getCaption());
 					} else if (define.getCoordSysType() == CoordSysDefine.GEOGRAPHY_COORDINATE) {
 						GeoCoordSys geoCoordSys = PrjCoordSysSettingsUtilties.getGeoCoordSys(define);
 						prjCoordSys = new PrjCoordSys(PrjCoordSysType.PCS_EARTH_LONGITUDE_LATITUDE);
 						prjCoordSys.setGeoCoordSys(geoCoordSys);
+						// 确保描述中坐标系名称和JTable中显示一致
+						prjCoordSys.setName(define.getCaption());
 					}
 
 					if (prjCoordSys != null) {

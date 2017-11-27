@@ -48,7 +48,7 @@ public class MetaProcessOverlayanalystgeo extends MetaProcess {
 		parameterClipDataType.setiServerLogin(parameterIServerLogin);
 		//设置分析参数
 		parameterOverlayTypeComboBox = new ParameterComboBox(CoreProperties.getString("String_OverlayAnalystType"));
-		parameterOverlayTypeComboBox.setRequisite(true);
+		parameterOverlayTypeComboBox.setRequired(true);
 		parameterOverlayTypeComboBox.setItems(
 				new ParameterDataNode(CoreProperties.getString("String_Clip"), "clip"),
 				new ParameterDataNode(CoreProperties.getString("String_Intersect"), "intersect")
@@ -88,7 +88,10 @@ public class MetaProcessOverlayanalystgeo extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.OVERLAYANALYSTGEO, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();

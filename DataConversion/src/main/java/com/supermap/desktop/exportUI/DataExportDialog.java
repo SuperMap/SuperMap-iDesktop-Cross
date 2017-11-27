@@ -674,7 +674,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		panel.setLayout(new GridBagLayout());
 		panel.add(panelContent, new GridBagConstraintsHelper(0, 0).setFill(GridBagConstraints.BOTH).setWeight(1, 1));
 		this.panelExportInfo.add((Component) panel, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraintsHelper.BOTH).setWeight(0, 1));
-		this.panelExportInfo.add(this.buttonExport, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 10).setWeight(1, 0));
+		this.panelExportInfo.add(this.buttonExport, new GridBagConstraintsHelper(0, 1, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(1, 0));
 		this.panelExportInfo.add(this.buttonClose, new GridBagConstraintsHelper(1, 1, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(0, 0));
 	}
 
@@ -726,7 +726,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 		this.buttonInvertSelect.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectInverse.png"));
 		this.buttonDelete.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Delete.png"));
 		this.buttonExportsSet.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Setting.PNG"));
-		this.buttonExportsSet.setToolTipText(CoreProperties.getString("String_ToolBar_SetBatch"));
+		this.buttonExportsSet.setToolTipText(CoreProperties.getString("String_toolStripButtonAdvanced"));
 		this.buttonAddDataset.setToolTipText(DataConversionProperties.getString("string_button_add"));
 		this.buttonDelete.setToolTipText(DataConversionProperties.getString("string_button_delete"));
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));

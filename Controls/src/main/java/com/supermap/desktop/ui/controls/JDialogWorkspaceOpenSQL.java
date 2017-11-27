@@ -77,7 +77,7 @@ public class JDialogWorkspaceOpenSQL extends SmDialog {
 				jButtonCloseActionPerformed();
 			}
 		});
-		jButtonOpen.setText(CoreProperties.getString("String_Button_Open"));
+		jButtonOpen.setText(CoreProperties.getString("String_Open"));
 		jButtonOpen.setPreferredSize(new java.awt.Dimension(75, 23));
 
 		// TODO Oracle或Sql Server实例列表初始化

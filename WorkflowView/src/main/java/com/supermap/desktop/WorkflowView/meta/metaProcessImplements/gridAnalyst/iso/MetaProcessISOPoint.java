@@ -239,7 +239,7 @@ public class MetaProcessISOPoint extends MetaProcess {
 		resultData.setDescribe(CoreProperties.getString("String_GroupBox_ResultData"));
 		resultData.addParameters(targetDataset, maxISOLine, minISOLine, isoLine);
 		ParameterCombine paramSet = new ParameterCombine();
-		paramSet.setDescribe(CoreProperties.getString("String_FormEdgeCount_Text"));
+		paramSet.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));
 		paramSet.addParameters(fields, terrainInterpolateType, resolution, datumValue, interval,
 				resampleTolerance, smoothMethod, smoothness);
 

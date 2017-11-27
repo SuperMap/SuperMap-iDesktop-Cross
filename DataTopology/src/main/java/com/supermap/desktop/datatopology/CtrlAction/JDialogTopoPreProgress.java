@@ -135,7 +135,7 @@ public class JDialogTopoPreProgress extends SmDialog {
 		buttonSure.setEnabled(false);
 		buttonSure.setText(CoreProperties.getString("String_OK"));
 		buttonQuite.setText(CoreProperties.getString("String_Cancel"));
-		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_FormEdgeCount_Text"), TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_ParamSetting"), TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
 	}
 

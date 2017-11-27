@@ -42,7 +42,7 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 			this.datasetTypeComboBox.setAllShown(true);
 		}
 		this.datasetTypeComboBox.setSelectedItem(this.parameterDatasetType.getSelectedItem());
-		ComponentUIUtilities.setName(this.datasetTypeComboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.datasetTypeComboBox, parameter.getDescription());
 		initLayout();
 		initListener();
 		if (datasetTypeComboBox.getSelectedIndex() == -1 && datasetTypeComboBox.getItemCount() > 0) {
@@ -82,8 +82,8 @@ public class ParameterDatasetTypePanel extends SwingPanel {
 	}
 
 	protected String getDescribe() {
-		String describe = parameterDatasetType.getDescribe();
-		if (parameterDatasetType.isRequisite()) {
+		String describe = parameterDatasetType.getDescription();
+		if (parameterDatasetType.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;
