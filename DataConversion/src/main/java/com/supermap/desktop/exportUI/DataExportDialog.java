@@ -599,7 +599,8 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 
 	public void replaceExportPanelForFileType(ExportSetting newExportSetting, ExportSetting tempExportsetting, ExportFileInfo exportFileInfo, int selectRow) {
 		newExportSetting.setSourceData(tempExportsetting.getSourceData());
-		newExportSetting.setTargetFileCharset(tempExportsetting.getTargetFileCharset());
+		// 当导出类型替换时，不要沿用上一个ExportSetting的Charset设置-yuanR2017.22.28
+		//newExportSetting.setTargetFileCharset(tempExportsetting.getTargetFileCharset());
 		newExportSetting.setFilter(tempExportsetting.getFilter());
 		newExportSetting.setOverwrite(tempExportsetting.isOverwrite());
 		exportFileInfo.setExportSetting(newExportSetting);

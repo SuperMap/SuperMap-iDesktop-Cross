@@ -205,6 +205,7 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 		if (null != exportsFileInfo && null != exportsFileInfo.getExportSetting()) {
 			this.textAreaExpression.setText(exportsFileInfo.getExportSetting().getFilter());
 			this.charsetComboBox.setSelectCharset(exportsFileInfo.getExportSetting().getTargetFileCharset().name());
+			this.comboBoxVCTVersion.setSelectedItem(((ExportSettingVCT) exportsFileInfo.getExportSetting()).getVersion());
 		} else if (null != panels) {
 			// 当以多个面板进行初始化时，设置表达式块和设置数据集集合不可用
 			this.buttonSetDatasets.setEnabled(false);
