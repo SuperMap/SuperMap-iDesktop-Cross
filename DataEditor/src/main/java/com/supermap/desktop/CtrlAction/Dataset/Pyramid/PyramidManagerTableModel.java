@@ -21,7 +21,7 @@ public class PyramidManagerTableModel extends SortableTableModel {
 
 	private List<Dataset> currentDatasets = new ArrayList<>();
 	private String[] columnNames = new String[]{
-			CoreProperties.getString("String_JustDataset"),
+			CoreProperties.getString("String_Dataset"),
 			CoreProperties.getString("String_Datasource"),
 			DataEditorProperties.getString("String_FormDatasetPyramidManager_ColumnHasPyramid"),
 			ControlsProperties.getString("String_Geometry_Width"),

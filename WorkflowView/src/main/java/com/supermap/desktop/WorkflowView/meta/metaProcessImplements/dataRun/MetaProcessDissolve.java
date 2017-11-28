@@ -186,8 +186,12 @@ public class MetaProcessDissolve extends MetaProcess {
             dissolveParameter.setTolerance(Double.valueOf(this.numberDissolveTolerance.getSelectedItem()));
             dissolveParameter.setFilterString(this.textAreaSQLExpression.getSelectedItem());
             dissolveParameter.setNullValue(Boolean.parseBoolean(checkBoxIsNullValue.getSelectedItem()));
-            String[] fieldNames = getFieldName(this.fieldsDissolve.getSelectedFields());
-            dissolveParameter.setFieldNames(fieldNames);
+            try {
+                String[] fieldNames = getFieldName(this.fieldsDissolve.getSelectedFields());
+                dissolveParameter.setFieldNames(fieldNames);
+            } catch (Exception e) {
+                return false;
+            }
             if (this.statisticsFieldGroup.getSelectedFields() != null) {
                 dissolveParameter.setStatisticsFieldNames(getFieldName(this.statisticsFieldGroup.getSelectedFields()));
                 dissolveParameter.setStatisticsTypes(this.statisticsFieldGroup.getSelectedStatisticsType());
@@ -243,7 +247,10 @@ public class MetaProcessDissolve extends MetaProcess {
                 for (int i = 0; i < statisticFieldNames.length; i++) {
                     String appendSuffix = appendSuffix(statisticFieldNames[i], statisticsTypes[i]);
                     FieldType type = src.getFieldInfos().get(statisticFieldNames[i]).getType();
-                    resultDataset.getFieldInfos().add(new FieldInfo(appendSuffix, type));
+                    FieldInfo fieldInfo = new FieldInfo();
+                    fieldInfo.setName(appendSuffix);
+                    fieldInfo.setType(type);
+                    resultDataset.getFieldInfos().add(fieldInfo);
                 }
             }
 
@@ -251,7 +258,7 @@ public class MetaProcessDissolve extends MetaProcess {
             recordsetResult.addSteppedListener(steppedListener);
 
 
-            Stack<Recordset> queryStack = new Stack<>();
+            Stack<RecordsetWithStyle> queryStack = new Stack<>();
             //将满足字段相等条件的记录放到一个记录集里，再将所有这样的记录集用栈queryStack来存储
             String[] fieldNames = dissolveParameter.getFieldNames();
             Recordset srcRecordset = src.getRecordset(false, CursorType.DYNAMIC);
@@ -282,18 +289,21 @@ public class MetaProcessDissolve extends MetaProcess {
                         s.append(fieldValue).append(" AND ");
                     }
                     Recordset query;
-                    s.delete(s.length() - 5, s.length());
+                    if (s.length() > 5) {
+                        s.delete(s.length() - 5, s.length());
+                    }
                     if (!isContainNull) {
                         s.append(dissolveParameter.getFilterString());
                         query = src.query(s.toString(), CursorType.DYNAMIC);
                     } else {
                         query = src.query(new int[]{srcRecordset.getID()}, CursorType.DYNAMIC);
                     }
+                    TextStyle textStyle = ((GeoText) query.getGeometry()).getTextStyle().clone();
                     while (!query.isEOF()) {
                         isQueryAlready[query.getID()] = true;
                         query.moveNext();
                     }
-                    queryStack.push(query);
+                    queryStack.push(new RecordsetWithStyle(query, textStyle));
                 }
                 srcRecordset.moveNext();
             }
@@ -302,19 +312,21 @@ public class MetaProcessDissolve extends MetaProcess {
             recordsetResult.getBatch().setMaxRecordCount(2000);
             recordsetResult.getBatch().begin();
             while (!queryStack.empty()) {
-                Recordset pop = queryStack.pop();
-                Map<String, Object> value = mergePropertyData(resultDataset, pop, statisticFieldNames, statisticsTypes);
+                RecordsetWithStyle pop = queryStack.pop();
+                Recordset recordset = pop.recordset;
+                Map<String, Object> value = mergePropertyData(resultDataset, recordset, statisticFieldNames, statisticsTypes);
                 GeoText geoText = new GeoText();
-                while (!pop.isEOF()) {
-                    GeoText popText = (GeoText) pop.getGeometry();
+                geoText.setTextStyle(pop.textStyle);
+                while (!recordset.isEOF()) {
+                    GeoText popText = (GeoText) recordset.getGeometry();
                     for (int i = 0; i < popText.getPartCount(); i++) {
                         geoText.addPart(popText.getPart(i));
                     }
-                    pop.moveNext();
+                    recordset.moveNext();
                 }
                 recordsetResult.addNew(geoText, value);
                 geoText.dispose();
-                pop.dispose();
+                recordset.dispose();
             }
             recordsetResult.getBatch().update();
         } catch (Exception e) {
@@ -399,18 +411,28 @@ public class MetaProcessDissolve extends MetaProcess {
 
     private String appendSuffix(String fieldName, StatisticsType type) {
         if (type == StatisticsType.FIRST) {
-            fieldName += "_FIRST";
+            fieldName = "FIRST_" + fieldName;
         } else if (type == StatisticsType.LAST) {
-            fieldName += "_LAST";
+            fieldName = "LAST_" + fieldName;
         } else if (type == StatisticsType.SUM) {
-            fieldName += "_SUM";
+            fieldName = "SUM_" + fieldName;
         } else if (type == StatisticsType.MAX) {
-            fieldName += "_MAX";
+            fieldName = "MAX_" + fieldName;
         } else if (type == StatisticsType.MIN) {
-            fieldName += "_MIN";
+            fieldName = "MIN_" + fieldName;
         } else if (type == StatisticsType.MEAN) {
-            fieldName += "_MEAN";
+            fieldName = "MEAN_" + fieldName;
         }
         return fieldName;
+    }
+
+    private class RecordsetWithStyle {
+        Recordset recordset;
+        TextStyle textStyle;
+
+        public RecordsetWithStyle(Recordset recordset, TextStyle textStyle) {
+            this.recordset = recordset;
+            this.textStyle = textStyle;
+        }
     }
 }

@@ -109,8 +109,8 @@ public class JDialogOutputDataset extends SmDialog {
 		this.smTextFieldLegit.setText(this.datasourceComboBox.getSelectedDatasource().getDatasets().getAvailableDatasetName("NewDataset"));
 		this.comboBoxResultType.addItem(CoreProperties.getString("String_AttrsTable"));
 		String datasetTypeName = CommonToolkit.DatasetTypeWrap.findName(this.tabular.getDataset().getType());
-		if (!datasetTypeName.replace(CoreProperties.getString("String_JustDataset"), "").equals(CoreProperties.getString("String_AttrsTable"))) {
-			this.comboBoxResultType.addItem(datasetTypeName.replace(CoreProperties.getString("String_JustDataset"), ""));
+		if (!datasetTypeName.replace(CoreProperties.getString("String_Dataset"), "").equals(CoreProperties.getString("String_AttrsTable"))) {
+			this.comboBoxResultType.addItem(datasetTypeName.replace(CoreProperties.getString("String_Dataset"), ""));
 		}
 		changCodeType();
 		hideSystemField();

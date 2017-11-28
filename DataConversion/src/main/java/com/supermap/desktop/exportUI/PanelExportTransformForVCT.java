@@ -1,12 +1,14 @@
 package com.supermap.desktop.exportUI;
 
 import com.supermap.data.Dataset;
-import com.supermap.data.conversion.*;
+import com.supermap.data.conversion.ExportSettingVCT;
+import com.supermap.data.conversion.VCTVersion;
 import com.supermap.desktop.baseUI.PanelExportTransform;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.dataconversion.DataConversionProperties;
 import com.supermap.desktop.iml.ExportFileInfo;
+import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.utilities.CharsetUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
@@ -43,6 +45,62 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 	private JButton buttonExpression;
 
 
+	private FileChooserPathChangedListener configFileChangedListener = new FileChooserPathChangedListener() {
+		@Override
+		public void pathChanged() {
+
+			if (null != panels) {
+				for (PanelExportTransform tempPanel : panels) {
+					if (tempPanel instanceof PanelExportTransformForVCT) {
+						((PanelExportTransformForVCT) tempPanel).getConfigFileChooserControl().setPath(configFileChooserControl.getPath());
+					}
+				}
+			} else {
+				((ExportSettingVCT) exportsFileInfo.getExportSetting()).setConfigFilePath(configFileChooserControl.getPath());
+			}
+		}
+	};
+
+	private ActionListener setDatasetsListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource().equals(buttonSetDatasets) && null == panels) {
+				ArrayList<Dataset> datasets = new ArrayList<>();
+				for (int i = 0; i < ((ExportSettingVCT) exportsFileInfo.getExportSetting()).getSourceDatas().length; i++) {
+					datasets.add((Dataset) ((ExportSettingVCT) exportsFileInfo.getExportSetting()).getSourceDatas()[i]);
+				}
+				DatasetChooseDialog datasetChooseDialog = new DatasetChooseDialog(datasets);
+
+				if (datasetChooseDialog.showDialog() == DialogResult.OK) {
+					// 只有设置的数据集集合数量大于1时才进行设置
+					if (datasetChooseDialog.getDatasets().size() > 1) {
+						// 数据集集合窗口可以任意设置，当输出结果必须包含SourceData，才能setSourceDatas（）成功
+						if (datasetChooseDialog.getDatasets().contains((exportsFileInfo.getExportSetting()).getSourceData())) {
+							((ExportSettingVCT) exportsFileInfo.getExportSetting()).setSourceDatas(datasetChooseDialog.getDatasets().toArray());
+						}
+					}
+				}
+			}
+		}
+	};
+
+	private ItemListener VCTVersionListener = new ItemListener() {
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getStateChange() == ItemEvent.SELECTED && comboBoxVCTVersion.getSelectedItem() instanceof VCTVersion) {
+				if (null != panels) {
+					for (PanelExportTransform tempPanel : panels) {
+						if (tempPanel instanceof PanelExportTransformForVCT) {
+							((PanelExportTransformForVCT) tempPanel).getComboBoxVCTVersion().setSelectedItem(comboBoxVCTVersion.getSelectedItem());
+						}
+					}
+				} else {
+					((ExportSettingVCT) exportsFileInfo.getExportSetting()).setVersion((VCTVersion) comboBoxVCTVersion.getSelectedItem());
+				}
+			}
+		}
+	};
+
 	private ItemListener charsetListener = new ItemListener() {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
@@ -59,29 +117,6 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 			}
 		}
 	};
-
-
-	//private ItemListener cadVersionListener = new ItemListener() {
-	//	@Override
-	//	public void itemStateChanged(ItemEvent e) {
-	//		if (e.getStateChange() == ItemEvent.SELECTED) {
-	//			if (null != panels) {
-	//				for (PanelExportTransform tempPanel : panels) {
-	//					((PanelExportTransformForVector) tempPanel).getComboBoxCADVersion().setSelectedItem(comboBoxCADVersion.getSelectedItem());
-	//				}
-	//			} else {
-	//				String cadVersion = comboBoxCADVersion.getSelectedItem().toString();
-	//				ExportSetting exportSetting = exportsFileInfo.getExportSetting();
-	//				if (exportSetting instanceof ExportSettingDWG) {
-	//					((ExportSettingDWG) exportSetting).setVersion(getCADVersion(cadVersion));
-	//				} else if (exportSetting instanceof ExportSettingDXF) {
-	//					((ExportSettingDXF) exportSetting).setVersion(getCADVersion(cadVersion));
-	//				}
-	//			}
-	//		}
-	//	}
-	//
-	//};
 
 
 	private DocumentListener expressionListener = new DocumentListener() {
@@ -104,6 +139,8 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 			exportsFileInfo.getExportSetting().setFilter(textAreaExpression.getText());
 		}
 	};
+
+
 	private ActionListener buttonExpressionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -117,32 +154,7 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 			}
 		}
 	};
-	//private StateChangeListener exportPointAsWKTListener = new StateChangeListener() {
-	//	@Override
-	//	public void stateChange(StateChangeEvent e) {
-	//		if (null != panels) {
-	//			for (PanelExportTransform tempPanel : panels) {
-	//				((PanelExportTransformForVector) tempPanel).getCheckBoxExportPointAsWKT().setSelected(checkBoxExportPointAsWKT.isSelected());
-	//			}
-	//		} else {
-	//			ExportSetting exportSetting = exportsFileInfo.getExportSetting();
-	//			((ExportSettingCSV) exportSetting).setIsExportPointAsWKT(checkBoxExportPointAsWKT.isSelected());
-	//		}
-	//	}
-	//};
-	//private StateChangeListener exportFieldNameListener = new StateChangeListener() {
-	//	@Override
-	//	public void stateChange(StateChangeEvent e) {
-	//		if (null != panels) {
-	//			for (PanelExportTransform tempPanel : panels) {
-	//				((PanelExportTransformForVector) tempPanel).getCheckBoxExportFieldName().setSelected(checkBoxExportFieldName.isSelected());
-	//			}
-	//		} else {
-	//			ExportSetting exportSetting = exportsFileInfo.getExportSetting();
-	//			((ExportSettingCSV) exportSetting).setIsExportFieldName(checkBoxExportFieldName.isSelected());
-	//		}
-	//	}
-	//};
+
 
 	public PanelExportTransformForVCT(ExportFileInfo exportsFileInfo) {
 		super(exportsFileInfo);
@@ -159,16 +171,28 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 		// 配置文件路径
 		this.labelConfigFilePath = new JLabel();
 		this.configFileChooserControl = new JFileChooserControl();
+		String moduleName = "InputVCTConfigFile";
+		if (!SmFileChoose.isModuleExist(moduleName)) {
+			SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_Import")
+					, moduleName, "OpenOne");
+		}
+		SmFileChoose fileChoose = new SmFileChoose(moduleName);
+		fileChoose.setAcceptAllFileFilterUsed(true);
+		this.configFileChooserControl.setFileChooser(fileChoose);
+
 		// vct版本
 		this.labelVCTVersion = new JLabel();
 		this.comboBoxVCTVersion = new JComboBox<>();
 		this.comboBoxVCTVersion.setModel(new DefaultComboBoxModel<>(new VCTVersion[]{VCTVersion.CNSDTF_VCT, VCTVersion.LANDUSE_VCT}));
+
 		// 设置数据集集合
 		this.labelSetDatasets = new JLabel();
 		this.buttonSetDatasets = new JButton();
+
 		// 字符集
 		this.labelCharset = new JLabel();
 		this.charsetComboBox = new CharsetComboBox();
+
 		// 表达式块
 		this.labelExpression = new JLabel();
 		this.scrollPaneExpression = new JScrollPane();
@@ -181,12 +205,16 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 		if (null != exportsFileInfo && null != exportsFileInfo.getExportSetting()) {
 			this.textAreaExpression.setText(exportsFileInfo.getExportSetting().getFilter());
 			this.charsetComboBox.setSelectCharset(exportsFileInfo.getExportSetting().getTargetFileCharset().name());
+			this.comboBoxVCTVersion.setSelectedItem(((ExportSettingVCT) exportsFileInfo.getExportSetting()).getVersion());
 		} else if (null != panels) {
-			// 当以多个面板进行初始化时，设置表达式块不可用
+			// 当以多个面板进行初始化时，设置表达式块和设置数据集集合不可用
+			this.buttonSetDatasets.setEnabled(false);
 			this.textAreaExpression.setEnabled(false);
 			this.buttonExpression.setEnabled(false);
 			// 当以多个面板进行初始化时，当各面板字符集选中不同时，设置项为空
+			this.configFileChooserControl.setPath(selectSameConfigFilePath(panels).toString());
 			this.charsetComboBox.setSelectedItem(selectSameCharsetItem(panels));
+			this.comboBoxVCTVersion.setSelectedItem(selectSameVCTVersionItem(panels));
 		}
 	}
 
@@ -207,6 +235,34 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 	}
 
 	/**
+	 * 统一所有面板Config文件路径 ，当有差异时返回空
+	 *
+	 * @param panels
+	 * @return
+	 */
+	private Object selectSameConfigFilePath(ArrayList<PanelExportTransform> panels) {
+		Object result = "";
+		String temp = "";
+		if (panels.get(0) instanceof PanelExportTransformForVCT) {
+			temp = ((PanelExportTransformForVCT) panels.get(0)).getConfigFileChooserControl().getPath();
+		}
+		boolean isSame = true;
+		for (PanelExportTransform tempPanel : panels) {
+			if (tempPanel instanceof PanelExportTransformForVCT) {
+				String tempObject = ((PanelExportTransformForVCT) tempPanel).getConfigFileChooserControl().getPath();
+				if (!temp.equals(tempObject)) {
+					isSame = false;
+					break;
+				}
+			}
+		}
+		if (isSame) {
+			result = temp;
+		}
+		return result;
+	}
+
+	/**
 	 * 统一所有面板字符集选中，当有差异时返回空
 	 *
 	 * @param panels
@@ -215,13 +271,41 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 	private Object selectSameCharsetItem(ArrayList<PanelExportTransform> panels) {
 		Object result = "";
 		String temp = "";
-		if (panels.get(0) instanceof PanelExportTransformForVector) {
-			temp = ((PanelExportTransformForVector) panels.get(0)).getCharsetComboBox().getSelectedItem().toString();
+		if (panels.get(0) instanceof PanelExportTransformForVCT) {
+			temp = ((PanelExportTransformForVCT) panels.get(0)).getCharsetComboBox().getSelectedItem().toString();
 		}
 		boolean isSame = true;
 		for (PanelExportTransform tempPanel : panels) {
-			if (tempPanel instanceof PanelExportTransformForVector) {
-				String tempObject = ((PanelExportTransformForVector) tempPanel).getCharsetComboBox().getSelectedItem().toString();
+			if (tempPanel instanceof PanelExportTransformForVCT) {
+				String tempObject = ((PanelExportTransformForVCT) tempPanel).getCharsetComboBox().getSelectedItem().toString();
+				if (!temp.equals(tempObject)) {
+					isSame = false;
+					break;
+				}
+			}
+		}
+		if (isSame) {
+			result = temp;
+		}
+		return result;
+	}
+
+	/**
+	 * 统一所有面板VCT模式选中，当有差异时返回空
+	 *
+	 * @param panels
+	 * @return
+	 */
+	private Object selectSameVCTVersionItem(ArrayList<PanelExportTransform> panels) {
+		Object result = null;
+		Object temp = null;
+		if (panels.get(0) instanceof PanelExportTransformForVCT) {
+			temp = ((PanelExportTransformForVCT) panels.get(0)).getComboBoxVCTVersion().getSelectedItem();
+		}
+		boolean isSame = true;
+		for (PanelExportTransform tempPanel : panels) {
+			if (tempPanel instanceof PanelExportTransformForVCT) {
+				Object tempObject = ((PanelExportTransformForVCT) tempPanel).getComboBoxVCTVersion().getSelectedItem();
 				if (!temp.equals(tempObject)) {
 					isSame = false;
 					break;
@@ -274,26 +358,30 @@ public class PanelExportTransformForVCT extends PanelExportTransform {
 	@Override
 	public void registEvents() {
 		removeEvents();
-		//this.checkBoxExportExternalData.addStateChangeListener(this.externalDataListener);
-		//this.checkBoxExportExternalRecord.addStateChangeListener(this.externalRecordListener);
-		//this.checkBoxExportPointAsWKT.addStateChangeListener(this.exportPointAsWKTListener);
-		//this.checkBoxExportFieldName.addStateChangeListener(this.exportFieldNameListener);
+		this.configFileChooserControl.addFileChangedListener(this.configFileChangedListener);
+		this.comboBoxVCTVersion.addItemListener(this.VCTVersionListener);
+		this.buttonSetDatasets.addActionListener(this.setDatasetsListener);
 		this.charsetComboBox.addItemListener(this.charsetListener);
-		//this.comboBoxCADVersion.addItemListener(this.cadVersionListener);
 		this.textAreaExpression.getDocument().addDocumentListener(this.expressionListener);
 		this.buttonExpression.addActionListener(this.buttonExpressionListener);
 	}
 
 	@Override
 	public void removeEvents() {
-		//this.checkBoxExportExternalData.removeStateChangeListener(this.externalDataListener);
-		//this.checkBoxExportExternalRecord.removeStateChangeListener(this.externalRecordListener);
-		//this.checkBoxExportPointAsWKT.removeStateChangeListener(this.exportPointAsWKTListener);
-		//this.checkBoxExportFieldName.removeStateChangeListener(this.exportFieldNameListener);
+		this.configFileChooserControl.removePathChangedListener(this.configFileChangedListener);
+		this.comboBoxVCTVersion.removeItemListener(this.VCTVersionListener);
+		this.buttonSetDatasets.removeActionListener(this.setDatasetsListener);
 		this.charsetComboBox.removeItemListener(this.charsetListener);
-		//this.comboBoxCADVersion.removeItemListener(this.cadVersionListener);
 		this.textAreaExpression.getDocument().removeDocumentListener(this.expressionListener);
 		this.buttonExpression.removeActionListener(this.buttonExpressionListener);
+	}
+
+	public JFileChooserControl getConfigFileChooserControl() {
+		return configFileChooserControl;
+	}
+
+	public JComboBox<VCTVersion> getComboBoxVCTVersion() {
+		return comboBoxVCTVersion;
 	}
 
 	public CharsetComboBox getCharsetComboBox() {
