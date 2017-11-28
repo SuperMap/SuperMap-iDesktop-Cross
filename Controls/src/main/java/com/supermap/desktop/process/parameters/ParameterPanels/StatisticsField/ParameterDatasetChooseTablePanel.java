@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	private ParameterDatasetChooseTable datasetChooseTable;
 	private JPanelDatasetChooseForParameter datasetChoosePanel;
-	private final String[] columnNames = {"", CoreProperties.getString("String_JustDataset"), CoreProperties.getString("String_Datasource")};
+	private final String[] columnNames = {"", CoreProperties.getString("String_Dataset"), CoreProperties.getString("String_Datasource")};
 	private final boolean[] enables = {false, false, false};
 
 	public ParameterDatasetChooseTablePanel(IParameter parameter) {
@@ -67,7 +67,7 @@ public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	}
 
 	private void initComponents() {
-		this.datasetChoosePanel = new JPanelDatasetChooseForParameter((ArrayList<Dataset>) datasetChooseTable.getSelectedItem(), columnNames, enables);
+		this.datasetChoosePanel = new JPanelDatasetChooseForParameter(new ArrayList<Dataset>(), columnNames, enables);
 		this.datasetChoosePanel.setIllegalDataset(this.datasetChooseTable.getDataset());
 		if (null != this.datasetChooseTable.getDataset()) {
 			this.datasetChoosePanel.setSupportDatasetTypes(new DatasetType[]{this.datasetChooseTable.getDataset().getType()});

@@ -15,7 +15,6 @@ import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.prjcoordsys.JDialogPrjCoordSysSettings;
 import com.supermap.desktop.utilities.DatasetUtilities;
 import com.supermap.desktop.utilities.PropertyManagerUtilities;
-import com.supermap.desktop.utilities.StringUtilities;
 
 import java.text.MessageFormat;
 
@@ -51,12 +50,9 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 			prjCoordSys = datasources[0].getPrjCoordSys();
 			titleName = ControlsProperties.getString("String_Label_Datasource") + datasources[0].getAlias();
 		}
-		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings;
-		if (!StringUtilities.isNullOrEmpty(titleName)) {
-			dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
-		} else {
-			dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings();
-		}
+
+		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
+
 		if (prjCoordSys != null) {
 			dialogPrjCoordSysSettings.setPrjCoordSys(prjCoordSys);
 		}
