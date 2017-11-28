@@ -282,7 +282,9 @@ public class MetaProcessDissolve extends MetaProcess {
                         s.append(fieldValue).append(" AND ");
                     }
                     Recordset query;
-                    s.delete(s.length() - 5, s.length());
+                    if (s.length() > 5) {
+                        s.delete(s.length() - 5, s.length());
+                    }
                     if (!isContainNull) {
                         s.append(dissolveParameter.getFilterString());
                         query = src.query(s.toString(), CursorType.DYNAMIC);

@@ -14,7 +14,6 @@ public class CtrlActionLayerProperty extends CtrlAction {
 
 	public CtrlActionLayerProperty(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
-
 	}
 
 	@Override
