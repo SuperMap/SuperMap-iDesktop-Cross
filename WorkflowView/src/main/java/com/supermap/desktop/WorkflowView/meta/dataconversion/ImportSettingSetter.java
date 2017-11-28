@@ -26,14 +26,14 @@ public class ImportSettingSetter {
 		Class importSettingClass = importSetting.getClass();
 		try {
 			Method[] methods = importSettingClass.getMethods();
-
-			for (Method method : methods) {
-				//默认设置导入空数据集
-				if (method.getName().equals("setImportEmptyDataset")) {
-					method.invoke(importSetting, true);
-					break;
-				}
-			}
+//
+//			for (Method method : methods) {
+//				//默认设置导入空数据集
+//				if (method.getName().equals("setImportEmptyDataset")) {
+//					method.invoke(importSetting, true);
+//					break;
+//				}
+//			}
 			String methodName;
 			for (ReflectInfo reflectInfo : reflectInfoArray) {
 				for (Method method : methods) {

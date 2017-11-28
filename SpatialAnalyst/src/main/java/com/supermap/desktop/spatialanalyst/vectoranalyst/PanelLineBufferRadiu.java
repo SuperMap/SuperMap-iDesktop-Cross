@@ -2,6 +2,7 @@ package com.supermap.desktop.spatialanalyst.vectoranalyst;
 
 import com.supermap.data.DatasetVector;
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.spatialanalyst.SpatialAnalystProperties;
 import com.supermap.desktop.ui.controls.comboBox.ComboBoxLengthUnit;
@@ -45,6 +46,7 @@ public class PanelLineBufferRadiu extends JPanel {
 
 	public PanelLineBufferRadiu() {
 		initComponent();
+		setComponentName();
 		initResources();
 		initLayout();
 		registerEvent();
@@ -77,6 +79,12 @@ public class PanelLineBufferRadiu extends JPanel {
 		this.numericFieldComboBoxLeft = new SmNumericFieldComboBox();
 		this.numericFieldComboBoxRight = new SmNumericFieldComboBox();
 	}
+
+	private void setComponentName() {
+		ComponentUIUtilities.setName(this.comboBoxUnit, "comboBoxUnit");
+		ComponentUIUtilities.setName(this.numericFieldComboBoxLeft, "numericFieldComboBoxLeft");
+	}
+
 
 	private void initResources() {
 		this.labelUnit.setText(SpatialAnalystProperties.getString("String_BufferRadiusUnit"));

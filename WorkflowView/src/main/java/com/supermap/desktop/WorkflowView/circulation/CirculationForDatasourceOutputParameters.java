@@ -20,7 +20,7 @@ public class CirculationForDatasourceOutputParameters extends AbstractCirculatio
 
 	private void initParameters() {
 		this.currentValue = new ParameterDatasourceConstrained();
-		this.currentValue.setDescribe(ProcessProperties.getString("String_CurrentValue") + ":");
+		this.currentValue.setDescribe(ProcessProperties.getString("String_CurrentValueStr"));
 		if (null != this.outputData.getValue()) {
 			this.currentValue.setSelectedItem(this.outputData.getValue());
 		}

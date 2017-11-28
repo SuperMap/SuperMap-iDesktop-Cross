@@ -10,6 +10,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.ui.controls.ComponentDropDown;
+import com.supermap.desktop.ui.controls.DialogMongoDBLoader;
 import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.desktop.ui.controls.datasetChoose.DatasetChooser;
 import com.supermap.desktop.ui.trees.Layer3DsTree;
@@ -350,7 +351,8 @@ public class LayersComponentManager extends JComponent {
     private ActionListener loadMongoDBListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            DialogMongoDBLoader dialogMongoDBLoader = new DialogMongoDBLoader();
+            dialogMongoDBLoader.showDialog();
         }
     };
     //endregion

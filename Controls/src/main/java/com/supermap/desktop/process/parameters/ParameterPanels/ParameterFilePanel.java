@@ -8,10 +8,7 @@ import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 import com.supermap.desktop.process.parameter.ipls.ParameterFile;
 import com.supermap.desktop.process.util.ParameterUtil;
 import com.supermap.desktop.properties.CoreProperties;
-import com.supermap.desktop.ui.controls.FileChooserPathChangedListener;
-import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
-import com.supermap.desktop.ui.controls.JFileChooserControl;
-import com.supermap.desktop.ui.controls.SmFileChoose;
+import com.supermap.desktop.ui.controls.*;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -23,7 +20,7 @@ import java.util.Objects;
 
 /**
  * @author XiaJT
- * 当设置为必要参数时，重绘显示-yuanR 2017.8.29
+ *         当设置为必要参数时，重绘显示-yuanR 2017.8.29
  */
 @ParameterPanelDescribe(parameterPanelType = ParameterType.FILE)
 public class ParameterFilePanel extends SwingPanel {
@@ -69,6 +66,19 @@ public class ParameterFilePanel extends SwingPanel {
 				}
 			}
 		});
+		this.fileChooserControl.addFileCommiteddListener(new FileChooserPathCommittedListener() {
+			@Override
+			public void pathCommitted() {
+				if (!isSelectingFile) {
+					try {
+						isSelectingFile = true;
+						parameterFile.firePropertyChangeListener(new PropertyChangeEvent(parameterFile, parameterFile.FILE_COMMITTED, null, fileChooserControl.getPath()));
+					} finally {
+						isSelectingFile = false;
+					}
+				}
+			}
+		});
 
 		parameterFile.addPropertyListener(new PropertyChangeListener() {
 			@Override
@@ -95,10 +105,10 @@ public class ParameterFilePanel extends SwingPanel {
 		fileChooserControl.setPreferredSize(new Dimension(20, 23));
 		panel.setLayout(new GridBagLayout());
 		if (StringUtilities.isNullOrEmpty(label.getText())) {
-			panel.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setInsets(0, 5, 0, 0).setFill(GridBagConstraints.HORIZONTAL));
+			panel.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL));
 		} else {
-			panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.NONE));
-			panel.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setInsets(0, 5, 0, 0).setFill(GridBagConstraints.HORIZONTAL));
+			panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 0).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.NONE).setInsets(0, 5, 5, 0));
+			panel.add(fileChooserControl, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL));
 		}
 	}
 
