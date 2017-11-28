@@ -42,8 +42,8 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 	private TristateCheckBox checkBoxExportExternalRecord;
 	private TristateCheckBox checkBoxExportPointAsWKT;
 	private TristateCheckBox checkBoxExportFieldName;
-	//    private JCheckBox checkBoxExportPointAsWKT;
-	private JLabel labelDatasets;
+
+	private JLabel labelCharset;
 	private CharsetComboBox charsetComboBox;
 	private JLabel labelCADVersion;
 	private JComboBox<String> comboBoxCADVersion;
@@ -223,7 +223,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		this.checkBoxExportExternalRecord = new TristateCheckBox();
 		this.checkBoxExportPointAsWKT = new TristateCheckBox();
 		this.checkBoxExportFieldName = new TristateCheckBox();
-		this.labelDatasets = new JLabel();
+		this.labelCharset = new JLabel();
 		this.charsetComboBox = new CharsetComboBox();
 		this.labelCADVersion = new JLabel();
 		this.comboBoxCADVersion = new JComboBox<>();
@@ -252,7 +252,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		ComponentUIUtilities.setName(this.checkBoxExportExternalRecord, "checkBoxExportExternalRecord");
 		ComponentUIUtilities.setName(this.checkBoxExportPointAsWKT, "checkBoxExportPointAsWKT");
 		ComponentUIUtilities.setName(this.checkBoxExportFieldName, "checkBoxExportFieldName");
-		ComponentUIUtilities.setName(this.labelDatasets, "labelDatasets");
+		ComponentUIUtilities.setName(this.labelCharset, "labelCharset");
 		ComponentUIUtilities.setName(this.charsetComboBox, "charsetComboBox");
 		ComponentUIUtilities.setName(this.labelCADVersion, "labelCADVersion");
 		ComponentUIUtilities.setName(this.comboBoxCADVersion, "comboBoxCADVersion");
@@ -278,7 +278,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		Boolean exportFieldNameSelectAll = exportFieldNameSelectAll(panels);
 		this.checkBoxExportFieldName.setEnabled(fieladNameEnabledAll(panels));
 		this.checkBoxExportPointAsWKT.setEnabled(pointAsWKTEnabledAll(panels));
-		this.buttonExpression.setEnabled(sqlExpressionEnabledAll(panels));
+		//this.buttonExpression.setEnabled(sqlExpressionEnabledAll(panels));
 		this.checkBoxExportPointAsWKT.setSelectedEx(exportPointAsWKTSelectAll);
 		this.checkBoxExportFieldName.setSelectedEx(exportFieldNameSelectAll);
 	}
@@ -311,19 +311,25 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		return result;
 	}
 
-	private boolean sqlExpressionEnabledAll(ArrayList<PanelExportTransform> panels) {
-		boolean result = false;
-		int selectCount = 0;
-		for (PanelExportTransform tempPanel : panels) {
-			if (((PanelExportTransformForVector) tempPanel).getButtonExpression().isEnabled()) {
-				selectCount++;
-			}
-		}
-		if (selectCount == panels.size()) {
-			result = true;
-		}
-		return result;
-	}
+	/**
+	 * 为什么要判断所有的表达式设置按妞是否可用，当多选时，表达式设置按妞也不可用才对-yuanR2017.11.27
+	 *
+	 * @param panels
+	 * @return
+	 */
+	//private boolean sqlExpressionEnabledAll(ArrayList<PanelExportTransform> panels) {
+	//	boolean result = false;
+	//	int selectCount = 0;
+	//	for (PanelExportTransform tempPanel : panels) {
+	//		if (((PanelExportTransformForVector) tempPanel).getButtonExpression().isEnabled()) {
+	//			selectCount++;
+	//		}
+	//	}
+	//	if (selectCount == panels.size()) {
+	//		result = true;
+	//	}
+	//	return result;
+	//}
 
 	private Boolean exportFieldNameSelectAll(ArrayList<PanelExportTransform> panels) {
 		Boolean result = null;
@@ -363,6 +369,12 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		return result;
 	}
 
+	/**
+	 * 统一所有面板字符集选中，当有差异时返回空
+	 *
+	 * @param panels
+	 * @return
+	 */
 	private Object selectSameCharsetItem(ArrayList<PanelExportTransform> panels) {
 		Object result = "";
 		String temp = "";
@@ -526,7 +538,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		panelContent.add(this.checkBoxExportExternalRecord, new GridBagConstraintsHelper(0, 1, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(0).setFill(GridBagConstraints.HORIZONTAL).setWeight(0, 0));
 		panelContent.add(this.checkBoxExportPointAsWKT, new GridBagConstraintsHelper(0, 2, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(0).setFill(GridBagConstraints.HORIZONTAL).setWeight(0, 0));
 		panelContent.add(this.checkBoxExportFieldName, new GridBagConstraintsHelper(0, 3, 2, 1).setAnchor(GridBagConstraints.WEST).setInsets(0).setFill(GridBagConstraints.HORIZONTAL).setWeight(0, 0));
-		panelContent.add(this.labelDatasets, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
+		panelContent.add(this.labelCharset, new GridBagConstraintsHelper(0, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 		panelContent.add(this.charsetComboBox, new GridBagConstraintsHelper(1, 4, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 5).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
 		panelContent.add(this.labelCADVersion, new GridBagConstraintsHelper(0, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 20).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 		panelContent.add(this.comboBoxCADVersion, new GridBagConstraintsHelper(1, 5, 1, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 5).setFill(GridBagConstraints.HORIZONTAL).setWeight(1, 0));
@@ -546,7 +558,7 @@ public class PanelExportTransformForVector extends PanelExportTransform {
 		this.checkBoxExportExternalRecord.setText(ControlsProperties.getString("String_ExportExternalRecord"));
 		this.checkBoxExportPointAsWKT.setText(CoreProperties.getString("String_ExportPointAsWKT"));
 		this.checkBoxExportFieldName.setText(CoreProperties.getString("String_ExportFieldName"));
-		this.labelDatasets.setText(ControlsProperties.getString("String_LabelCharset"));
+		this.labelCharset.setText(ControlsProperties.getString("String_LabelCharset"));
 		this.labelCADVersion.setText(ControlsProperties.getString("string_label_lblCAD"));
 		this.labelExpression.setText(ControlsProperties.getString("String_LabelFilter"));
 		this.buttonExpression.setText(ControlsProperties.getString("String_SQLExpression") + "...");

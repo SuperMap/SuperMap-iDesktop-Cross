@@ -25,6 +25,7 @@ public class ParameterFile extends AbstractParameter implements ISelectionParame
 	private String moduleName;
 	private String title;
 	private String moduleType;
+	public final String FILE_COMMITTED="fileCommitted";
 
 	private int fileSelectionMode = 0;
 

@@ -153,15 +153,11 @@ public class ImportCallable extends UpdateProgressCallable {
 			dataImport.removeImportSteppedListener(percentProgress);
 		}
 		// 更新行
-		((ImportTableModel) table.getModel()).
-
-				updateRows(fileInfos);
+		((ImportTableModel) table.getModel()).updateRows(fileInfos);
 		if (null != percentProgress && percentProgress.isCancel()) {
 			return null;
 		}
-		if (!dataImportDialog.isVisible())
-
-		{
+		if (!dataImportDialog.isVisible()) {
 			importSetting.dispose();
 		}
 		dataImport.dispose();

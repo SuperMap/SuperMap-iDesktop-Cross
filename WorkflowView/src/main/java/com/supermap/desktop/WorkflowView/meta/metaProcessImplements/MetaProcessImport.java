@@ -47,6 +47,7 @@ public class MetaProcessImport extends MetaProcess {
 	private final static String OUTPUT_DATA = "ImportResult";
 	protected ImportSetting importSetting;
 	private String importType = "";
+	private ImportSetting resultImportSetting = null;
 	private ImportParameterCreator parameterCreator;
 	private ImportSteppedListener importStepListener = new ImportSteppedListener() {
 		@Override
@@ -231,6 +232,7 @@ public class MetaProcessImport extends MetaProcess {
 				Application.getActiveApplication().getOutput().output(e);
 			} finally {
 				dataImport.removeImportSteppedListener(this.importStepListener);
+				updateDataset(resultImportSetting);
 			}
 		}
 		return isSuccessful;
@@ -242,7 +244,7 @@ public class MetaProcessImport extends MetaProcess {
 		ImportSetting[] succeedSettings = result.getSucceedSettings();
 		if (succeedSettings.length > 0) {
 			isSuccessful = true;
-			updateDataset(succeedSettings[0]);
+			resultImportSetting = succeedSettings[0];
 			endTime = System.currentTimeMillis(); // 获取结束时间
 			time = endTime - startTime;
 			printMessage(result, time);
@@ -286,9 +288,13 @@ public class MetaProcessImport extends MetaProcess {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				if (null != datasource && null != datasource.getDatasets().get(succeedSetting.getTargetDatasetName())) {
-					UICommonToolkit.refreshSelectedDatasetNode(datasource.getDatasets().get(succeedSetting.getTargetDatasetName()));
+				if (null != succeedSetting.getTargetDatasource()) {
+					UICommonToolkit.refreshSelectedDatasourceNode(succeedSetting.getTargetDatasource().getAlias());
 				}
+				if (null != succeedSetting && null != succeedSetting.getTargetDatasource().getDatasets().get(succeedSetting.getTargetDatasetName())) {
+					UICommonToolkit.refreshSelectedDatasetNode(succeedSetting.getTargetDatasource().getDatasets().get(succeedSetting.getTargetDatasetName()));
+				}
+
 			}
 		});
 		if (importSetting instanceof ImportSettingWOR) {
