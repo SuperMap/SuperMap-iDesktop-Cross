@@ -186,8 +186,12 @@ public class MetaProcessDissolve extends MetaProcess {
             dissolveParameter.setTolerance(Double.valueOf(this.numberDissolveTolerance.getSelectedItem()));
             dissolveParameter.setFilterString(this.textAreaSQLExpression.getSelectedItem());
             dissolveParameter.setNullValue(Boolean.parseBoolean(checkBoxIsNullValue.getSelectedItem()));
-            String[] fieldNames = getFieldName(this.fieldsDissolve.getSelectedFields());
-            dissolveParameter.setFieldNames(fieldNames);
+            try {
+                String[] fieldNames = getFieldName(this.fieldsDissolve.getSelectedFields());
+                dissolveParameter.setFieldNames(fieldNames);
+            } catch (Exception e) {
+                return false;
+            }
             if (this.statisticsFieldGroup.getSelectedFields() != null) {
                 dissolveParameter.setStatisticsFieldNames(getFieldName(this.statisticsFieldGroup.getSelectedFields()));
                 dissolveParameter.setStatisticsTypes(this.statisticsFieldGroup.getSelectedStatisticsType());
@@ -243,7 +247,10 @@ public class MetaProcessDissolve extends MetaProcess {
                 for (int i = 0; i < statisticFieldNames.length; i++) {
                     String appendSuffix = appendSuffix(statisticFieldNames[i], statisticsTypes[i]);
                     FieldType type = src.getFieldInfos().get(statisticFieldNames[i]).getType();
-                    resultDataset.getFieldInfos().add(new FieldInfo(appendSuffix, type));
+                    FieldInfo fieldInfo = new FieldInfo();
+                    fieldInfo.setName(appendSuffix);
+                    fieldInfo.setType(type);
+                    resultDataset.getFieldInfos().add(fieldInfo);
                 }
             }
 
@@ -404,17 +411,17 @@ public class MetaProcessDissolve extends MetaProcess {
 
     private String appendSuffix(String fieldName, StatisticsType type) {
         if (type == StatisticsType.FIRST) {
-            fieldName += "_FIRST";
+            fieldName = "FIRST_" + fieldName;
         } else if (type == StatisticsType.LAST) {
-            fieldName += "_LAST";
+            fieldName = "LAST_" + fieldName;
         } else if (type == StatisticsType.SUM) {
-            fieldName += "_SUM";
+            fieldName = "SUM_" + fieldName;
         } else if (type == StatisticsType.MAX) {
-            fieldName += "_MAX";
+            fieldName = "MAX_" + fieldName;
         } else if (type == StatisticsType.MIN) {
-            fieldName += "_MIN";
+            fieldName = "MIN_" + fieldName;
         } else if (type == StatisticsType.MEAN) {
-            fieldName += "_MEAN";
+            fieldName = "MEAN_" + fieldName;
         }
         return fieldName;
     }

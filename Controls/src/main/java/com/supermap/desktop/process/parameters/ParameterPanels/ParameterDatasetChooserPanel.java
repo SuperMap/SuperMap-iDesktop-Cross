@@ -82,8 +82,8 @@ public class ParameterDatasetChooserPanel extends SwingPanel implements IParamet
 		this.buttonChooseDataset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isSelectingItem == false) {
-					isSelectingItem = true;
+                if (!isSelectingItem) {
+                    isSelectingItem = true;
 					DatasetChooser tempDatasetChooser = new DatasetChooser(null) {
 						@Override
 						protected boolean isSupportDatasource(Datasource datasource) {
