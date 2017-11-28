@@ -108,7 +108,7 @@ public class JPanelDatasetChooseForParameter extends JPanelDatasetChoose {
 			return new Object[0][0];
 		}
 		int size = datasets.size();
-		Object[][] result = new Object[size][];
+		Object[][] result = new Object[size][3];
 		DataCell datasetCell;
 		DataCell datasourceCell;
 		for (int i = 0; i < size; i++) {

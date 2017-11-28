@@ -72,6 +72,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		// 当描述为空时，不显示其label-yuanR
 		if (StringUtilities.isNullOrEmpty(parameterComboBox.getDescription())) {
 			label.setVisible(false);
+			ComponentUIUtilities.setName(this.comboBox, parameterComboBox.getItemCount() <= 0 ? "null" : parameterComboBox.getItemAt(0).getDescribe());
 		}
 	}
 

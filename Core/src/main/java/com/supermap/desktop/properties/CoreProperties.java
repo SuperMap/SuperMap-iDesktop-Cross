@@ -88,7 +88,7 @@ public class CoreProperties extends Properties {
 	public static final String File = "String_File";
 	public static final String Directory = "String_Directory";
 	public static final String IsEditable = "String_IsEditable";
-	public static final String stringDataset = "String_JustDataset";
+	public static final String stringDataset = "String_Dataset";
 	public static final String stringDatasource = "String_Datasource";
 	public static final String STRING_DATASET_TYPE = "String_DatasetType";
 	public static final String yes = "String_yes";
