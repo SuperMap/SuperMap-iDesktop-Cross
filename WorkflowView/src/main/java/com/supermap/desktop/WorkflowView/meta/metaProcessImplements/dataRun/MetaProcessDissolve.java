@@ -251,7 +251,7 @@ public class MetaProcessDissolve extends MetaProcess {
             recordsetResult.addSteppedListener(steppedListener);
 
 
-            Stack<Recordset> queryStack = new Stack<>();
+            Stack<RecordsetWithStyle> queryStack = new Stack<>();
             //将满足字段相等条件的记录放到一个记录集里，再将所有这样的记录集用栈queryStack来存储
             String[] fieldNames = dissolveParameter.getFieldNames();
             Recordset srcRecordset = src.getRecordset(false, CursorType.DYNAMIC);
@@ -289,11 +289,12 @@ public class MetaProcessDissolve extends MetaProcess {
                     } else {
                         query = src.query(new int[]{srcRecordset.getID()}, CursorType.DYNAMIC);
                     }
+                    TextStyle textStyle = ((GeoText) query.getGeometry()).getTextStyle().clone();
                     while (!query.isEOF()) {
                         isQueryAlready[query.getID()] = true;
                         query.moveNext();
                     }
-                    queryStack.push(query);
+                    queryStack.push(new RecordsetWithStyle(query, textStyle));
                 }
                 srcRecordset.moveNext();
             }
@@ -302,19 +303,21 @@ public class MetaProcessDissolve extends MetaProcess {
             recordsetResult.getBatch().setMaxRecordCount(2000);
             recordsetResult.getBatch().begin();
             while (!queryStack.empty()) {
-                Recordset pop = queryStack.pop();
-                Map<String, Object> value = mergePropertyData(resultDataset, pop, statisticFieldNames, statisticsTypes);
+                RecordsetWithStyle pop = queryStack.pop();
+                Recordset recordset = pop.recordset;
+                Map<String, Object> value = mergePropertyData(resultDataset, recordset, statisticFieldNames, statisticsTypes);
                 GeoText geoText = new GeoText();
-                while (!pop.isEOF()) {
-                    GeoText popText = (GeoText) pop.getGeometry();
+                geoText.setTextStyle(pop.textStyle);
+                while (!recordset.isEOF()) {
+                    GeoText popText = (GeoText) recordset.getGeometry();
                     for (int i = 0; i < popText.getPartCount(); i++) {
                         geoText.addPart(popText.getPart(i));
                     }
-                    pop.moveNext();
+                    recordset.moveNext();
                 }
                 recordsetResult.addNew(geoText, value);
                 geoText.dispose();
-                pop.dispose();
+                recordset.dispose();
             }
             recordsetResult.getBatch().update();
         } catch (Exception e) {
@@ -412,5 +415,15 @@ public class MetaProcessDissolve extends MetaProcess {
             fieldName += "_MEAN";
         }
         return fieldName;
+    }
+
+    private class RecordsetWithStyle {
+        Recordset recordset;
+        TextStyle textStyle;
+
+        public RecordsetWithStyle(Recordset recordset, TextStyle textStyle) {
+            this.recordset = recordset;
+            this.textStyle = textStyle;
+        }
     }
 }
