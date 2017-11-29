@@ -145,15 +145,7 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 		if (null != Application.getActiveApplication().getActiveDatasets() && null != Application.getActiveApplication().getActiveDatasources()) {
 			Dataset[] datasets = Application.getActiveApplication().getActiveDatasets();
 			Datasource[] datasources = Application.getActiveApplication().getActiveDatasources();
-			// 选中数据集且存在不为属性表的数据集
-			if (datasets.length > 0) {
-				for (Dataset dataset : datasets) {
-					if (DatasetType.TABULAR != dataset.getType()) {
-						return true;
-					}
-				}
-				return false;
-			}
+
 			// 选中数据源且不含只读数据源
 			if (datasources.length > 0) {
 				for (Datasource datasource : datasources) {
@@ -163,6 +155,17 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 				}
 				return true;
 			}
+
+			// 选中数据集且存在不为属性表的数据集
+			if (datasets.length > 0) {
+				for (Dataset dataset : datasets) {
+					if (DatasetType.TABULAR != dataset.getType() && !dataset.isReadOnly()) {
+						return true;
+					}
+				}
+				return false;
+			}
+
 		}
 		return false;
 	}
