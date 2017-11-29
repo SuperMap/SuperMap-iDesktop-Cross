@@ -9,6 +9,7 @@ import javax.swing.*;
 public class LayerComboBox extends JComboBox<Object> {
 	private static final long serialVersionUID = 1L;
 
+
 	/**
 	 * 根据给定的数据集集合创建下拉选择框
 	 * 
@@ -28,6 +29,9 @@ public class LayerComboBox extends JComboBox<Object> {
 		super(initLayerComboBoxItem(layers));
 		ListCellRenderer<Object> renderer = new CommonListCellRenderer();
 		setRenderer(renderer);
+	}
+
+	public LayerComboBox() {
 	}
 
 	/**

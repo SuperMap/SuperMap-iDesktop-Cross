@@ -195,7 +195,7 @@ public class FillRegionEditor extends AbstractEditor {
                     && layer.getDataset() instanceof DatasetVector
                     && (layer.getDataset().getType() == DatasetType.REGION || layer.getDataset().getType() == DatasetType.CAD)
                     && layer.getSelection().getCount() == 1)) {
-                break;
+                continue;
             }
             GeoRegion geometry = (GeoRegion) layer.getSelection().toRecordset().getGeometry();
             GeometryUtilities.setGeometryStyle(geometry, RegionAndLineHighLightStyle.getRegionStyleRed());
