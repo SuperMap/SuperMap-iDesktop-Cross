@@ -69,7 +69,7 @@ public class TableFieldNameCaptionType extends SmSortTable implements ITable {
 		if (this.modelFieldNameCaptionType == null) {
 			init();
 		} else {
-			this.modelFieldNameCaptionType.setDataset((DatasetVector) this.dataset,this.isShowSystemField);
+			this.modelFieldNameCaptionType.setDataset((DatasetVector) this.dataset, this.isShowSystemField);
 		}
 	}
 
@@ -77,6 +77,10 @@ public class TableFieldNameCaptionType extends SmSortTable implements ITable {
 		return this.fieldTypes;
 	}
 
+	/**
+	 * 注意：字段类型的设置需要在数据集设置之前-yuanR2017.11.29
+	 * @param fieldTypes
+	 */
 	public void setFieldTypes(FieldType[] fieldTypes) {
 		this.fieldTypes = fieldTypes;
 	}
@@ -115,7 +119,7 @@ public class TableFieldNameCaptionType extends SmSortTable implements ITable {
 	}
 
 	private void init() {
-		this.modelFieldNameCaptionType = new ModelFieldNameCaptionType(this.fieldTypes, this.isShowSystemField);
+		this.modelFieldNameCaptionType = new ModelFieldNameCaptionType(getFieldTypes(), this.isShowSystemField);
 		if (this.dataset == null) {
 			this.modelFieldNameCaptionType.setDataset(null);
 		} else {
