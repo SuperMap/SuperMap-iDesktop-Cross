@@ -1,4 +1,4 @@
-package com.supermap.desktop;
+package com.supermap.desktop.controls;
 
 public class DefaultValues {
 	public static final int DEFAULT_LABEL_WIDTH = 100;

@@ -1,6 +1,6 @@
 package com.supermap.desktop.mapview.layer.propertycontrols;
 
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerPropertyModel;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerPropertyModelFactory;
