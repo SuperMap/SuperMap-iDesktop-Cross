@@ -51,11 +51,16 @@ public class ParameterCombinePanel extends SwingPanel implements ParameterCombin
 		}
 		String combineType = parameterCombine.getCombineType();
 		int weightIndex = parameterCombine.getWeightIndex();
-		for (IParameter parameter : parameterList) {
+		for (int i = 0; i < parameterList.size(); i++) {
+			IParameter parameter = parameterList.get(i);
 			int weightX = combineType.equals(ParameterCombine.VERTICAL) ? 1 : (weightIndex == -1 || weightIndex == x ? 1 : 0);
 			int weightY = combineType.equals(ParameterCombine.HORIZONTAL) ? 1 : (weightIndex == -1 || weightIndex == y ? 1 : 0);
 			JPanel panel = (JPanel) parameter.getParameterPanel().getPanel();
-			this.panel.add(panel, new GridBagConstraintsHelper(x, y, 1, 1).setWeight(weightX, weightY).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(y > 0 ? 5 : defaultInset, x > 0 ? 5 : defaultInset, 0, 0));
+			int top = y > 0 ? 5 : defaultInset;
+			int left = x > 0 ? 5 : defaultInset;
+			int bottom = combineType.equals(ParameterCombine.VERTICAL) ? (i == parameterList.size() - 1 ? 5 : 0) : 5;
+			int right = combineType.equals(ParameterCombine.HORIZONTAL) ? (i == parameterList.size() - 1 ? 5: 0) : 5;
+			this.panel.add(panel, new GridBagConstraintsHelper(x, y, 1, 1).setWeight(weightX, weightY).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(top, left, bottom, right));
 			if (combineType.equals(ParameterCombine.VERTICAL)) {
 				y++;
 			} else {
