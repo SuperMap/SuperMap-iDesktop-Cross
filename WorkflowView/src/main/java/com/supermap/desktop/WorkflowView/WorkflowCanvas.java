@@ -9,6 +9,7 @@ import com.supermap.desktop.WorkflowView.graphics.events.GraphRemovingListener;
 import com.supermap.desktop.WorkflowView.graphics.graphs.*;
 import com.supermap.desktop.WorkflowView.graphics.interaction.canvas.*;
 import com.supermap.desktop.process.ProcessManager;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.core.*;
 import com.supermap.desktop.process.events.RelationAddedEvent;
 import com.supermap.desktop.process.events.RelationAddedListener;
@@ -273,6 +274,9 @@ public class WorkflowCanvas extends GraphCanvas
 			this.setCirculationGraph(this.circulationGraph);
 			this.circulationGraph.setLocation(canvasLocation);
 			this.addGraph(this.circulationGraph);
+			if (circulationType==CirculationType.whileType){
+				outputData.setText(ProcessProperties.getString("String_Condition"));
+			}
 			this.circulationGraphOutputGraph = new CirculationOutputGraph(this, outputData);
 			this.circulationGraphOutputGraph.setLocation(outputPoint);
 			this.circulationGraphOutputGraph.setCirculationDialog(new CirculationDialog(circulationType, true, outputData));
@@ -408,6 +412,8 @@ public class WorkflowCanvas extends GraphCanvas
 					this.outputLinesMap.remove(((OutputGraph) e.getGraph()).getProcessData());
 				}
 			}
+		} else if (e.getGraph() instanceof CirculationGraph) {
+			removeIterator();
 		} else if (e.getGraph() instanceof ConnectionLineGraph) {
 			ConnectionLineGraph connection = (ConnectionLineGraph) e.getGraph();
 
@@ -435,7 +441,6 @@ public class WorkflowCanvas extends GraphCanvas
 				if (relation != null && this.relationMap.containsKey(relation)) {
 					this.relationMap.remove(relation);
 				}
-				removeIterator();
 			}
 		}
 	}

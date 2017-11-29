@@ -21,6 +21,7 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 	protected CirculationType circulationType;
 	protected IProcess process;
 	protected String parameterDescription;
+	private boolean isRunning;
 
 	public AbstractCirculationParameters(IProcess process) {
 		super(process);
@@ -103,6 +104,16 @@ public class AbstractCirculationParameters<T> extends DefaultParameters implemen
 	@Override
 	public String getBindParameterDescription() {
 		return this.parameterDescription;
+	}
+
+	@Override
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	@Override
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 
 	/**

@@ -8,19 +8,19 @@ import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterTextField;
 
 /**
- * Created by xie on 2017/10/27.
+ * Created by xie on 2017/11/29.
  */
-public class CirculationForOutputParameters extends AbstractCirculationParameters {
+public class CirculationWhileOutputParameters extends AbstractCirculationParameters {
 	private ParameterTextField currentValue;
 	private OutputData outputData;
 
-	public CirculationForOutputParameters(OutputData outputData) {
+	public CirculationWhileOutputParameters(OutputData outputData) {
 		this.outputData = outputData;
 		initParameters();
 	}
 
 	protected void initParameters() {
-		this.currentValue = new ParameterTextField(ProcessProperties.getString("String_CurrentValueStr"));
+		this.currentValue = new ParameterTextField(ProcessProperties.getString("String_ConditionStr"));
 		if (null != this.outputData.getValue()) {
 			this.currentValue.setSelectedItem(this.outputData.getValue());
 		}
@@ -29,9 +29,10 @@ public class CirculationForOutputParameters extends AbstractCirculationParameter
 		outputData.addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
 			@Override
 			public void updateDataValue(OutputDataValueChangedEvent e) {
-				currentValue.setSelectedItem(e.getNewValue());
+				currentValue.setSelectedItem(e.getNewValue().toString());
 			}
 		});
 	}
 
 }
+
