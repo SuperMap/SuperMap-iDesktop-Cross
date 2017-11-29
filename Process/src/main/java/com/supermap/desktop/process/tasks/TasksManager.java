@@ -297,4 +297,8 @@ public class TasksManager {
 	public void setCancel(boolean cancel) {
 		isCancel = cancel;
 	}
+
+	public int getStatus() {
+		return status;
+	}
 }
