@@ -45,4 +45,8 @@ public interface CirculationIterator<T> extends Iterator {
 	void setBindParameterDescription(String parameterDescription);
 
 	String getBindParameterDescription();
+
+	boolean isRunning();
+
+	void setRunning(boolean b);
 }

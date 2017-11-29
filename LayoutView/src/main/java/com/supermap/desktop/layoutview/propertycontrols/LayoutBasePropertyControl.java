@@ -2,17 +2,18 @@ package com.supermap.desktop.layoutview.propertycontrols;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IFormLayout;
-import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.DefaultValues;
+import com.supermap.desktop.dialog.DialogRulerLinesManager;
 import com.supermap.desktop.layoutview.LayoutViewProperties;
-import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.controls.DialogResult;
 import com.supermap.layout.MapLayout;
+import com.supermap.layout.RulerLine;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,16 +46,12 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 	private boolean isShowRulerLines = false;
 	private double minZoomRatio = 0;
 	private double maxZoomRatio = 0;
+	private RulerLine[] rulerLines=null;
 
-	private transient PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
+	private transient ActionListener actionListener=new ActionListener() {
 		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-//			if (evt.getSource() == textFieldLayoutName) {
-//				textFieldLayoutNameChange(evt);
-//			} else
-			if (evt.getSource() == buttonRulerLinesManager) {
-
-			}
+		public void actionPerformed(ActionEvent e) {
+			buttonRulerLineManagerChange();
 		}
 	};
 
@@ -152,7 +149,6 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 	public void apply() {
 		if (getFormLayout() != null) {
 			MapLayout mapLayout = getFormLayout().getMapLayoutControl().getMapLayout();
-//			mapLayout.setName(this.layoutName);
 			getFormLayout().getMapLayoutControl().setHorizontalScrollbarVisible(this.isShowHScrollBar);
 			getFormLayout().getMapLayoutControl().setVerticalScrollbarVisible(this.isShowVScrollBar);
 			mapLayout.getRulerSetting().setRulerVisible(this.isShowRuler);
@@ -160,6 +156,8 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 			mapLayout.getRulerLines().setVisible(this.isShowRulerLines);
 			mapLayout.setMinZoomRatio(this.minZoomRatio);
 			mapLayout.setMaxZoomRatio(this.maxZoomRatio);
+			mapLayout.getRulerLines().clear();
+			mapLayout.getRulerLines().addRange(this.rulerLines);
 			mapLayout.refresh();
 		}
 	}
@@ -189,19 +187,19 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 			this.isShowRulerLines = mapLayout.getRulerLines().isVisible();
 			this.minZoomRatio = mapLayout.getMinZoomRatio();
 			this.maxZoomRatio = mapLayout.getMaxZoomRatio();
+			this.rulerLines=mapLayout.getRulerLines().toArray();
 		}
 	}
 
 	@Override
 	protected void registerEvents() {
 		super.registerEvents();
-//		this.textFieldLayoutName.addPropertyChangeListener(this.propertyChangeListener);
 		this.checkBoxHScrollBar.addItemListener(this.itemListener);
 		this.checkBoxVScrollBar.addItemListener(this.itemListener);
 		this.checkBoxRuler.addItemListener(this.itemListener);
 		this.checkBoxOverlapDisplayed.addItemListener(this.itemListener);
 		this.checkBoxRulerLines.addItemListener(this.itemListener);
-		this.buttonRulerLinesManager.addPropertyChangeListener(this.propertyChangeListener);
+		this.buttonRulerLinesManager.addActionListener(this.actionListener);
 		this.comboBoxMinZoomRatio.addItemListener(this.itemListener);
 		this.comboBoxMaxZoomRatio.addItemListener(this.itemListener);
 	}
@@ -209,22 +207,18 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 	@Override
 	protected void unregisterEvents() {
 		super.unregisterEvents();
-//		this.textFieldLayoutName.removePropertyChangeListener(this.propertyChangeListener);
 		this.checkBoxHScrollBar.removeItemListener(this.itemListener);
 		this.checkBoxVScrollBar.removeItemListener(this.itemListener);
 		this.checkBoxRuler.removeItemListener(this.itemListener);
 		this.checkBoxOverlapDisplayed.removeItemListener(this.itemListener);
 		this.checkBoxRulerLines.removeItemListener(this.itemListener);
-		this.buttonRulerLinesManager.removePropertyChangeListener(this.propertyChangeListener);
+		this.buttonRulerLinesManager.removeActionListener(this.actionListener);
 		this.comboBoxMinZoomRatio.removeItemListener(this.itemListener);
 		this.comboBoxMaxZoomRatio.removeItemListener(this.itemListener);
 	}
 
 	@Override
 	protected void fillComponents() {
-//		if (this.layoutName.equals("UntitledMapLayout")){
-//			this.layoutName= CoreProperties.getString("String_WorkspaceNodeCaptionLayout");
-//		}
 		this.textFieldLayoutName.setText(this.layoutName);
 		this.checkBoxHScrollBar.setSelected(this.isShowHScrollBar);
 		this.checkBoxVScrollBar.setSelected(this.isShowVScrollBar);
@@ -248,7 +242,8 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 				|| getFormLayout().getMapLayoutControl().getMapLayout().isOverlapDisplayed() != this.isOverlapDisplayed
 				|| getFormLayout().getMapLayoutControl().getMapLayout().getRulerLines().isVisible() != this.isShowRulerLines
 				|| Double.compare(getFormLayout().getMapLayoutControl().getMapLayout().getMinZoomRatio(), this.minZoomRatio) != 0
-				|| Double.compare(getFormLayout().getMapLayoutControl().getMapLayout().getMaxZoomRatio(), this.maxZoomRatio) != 0;
+				|| Double.compare(getFormLayout().getMapLayoutControl().getMapLayout().getMaxZoomRatio(), this.maxZoomRatio) != 0
+				|| getFormLayout().getMapLayoutControl().getMapLayout().getRulerLines().toArray()!=this.rulerLines;
 	}
 
 	private void fillComboBoxZoomRatio() {
@@ -322,18 +317,6 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 		return dScale;
 	}
 
-//	private void textFieldLayoutNameChange(PropertyChangeEvent e) {
-//		try {
-//			if ("value".equalsIgnoreCase(e.getPropertyName())) {
-//				String newLayoutName = e.getNewValue().toString();
-//				this.layoutName = newLayoutName;
-//				verify();
-//			}
-//		} catch (Exception ex) {
-//			Application.getActiveApplication().getOutput().output(ex);
-//		}
-//	}
-
 	private void checkBoxIsShowHScrollBarChange() {
 		try {
 			this.isShowHScrollBar = this.checkBoxHScrollBar.isSelected();
@@ -393,6 +376,20 @@ public class LayoutBasePropertyControl extends AbstractPropertyControl {
 			this.maxZoomRatio = getScaleByText(this.comboBoxMaxZoomRatio.getSelectedItem().toString());
 			verify();
 		} catch (Exception e) {
+			Application.getActiveApplication().getOutput().output(e);
+		}
+	}
+
+	private void buttonRulerLineManagerChange(){
+		try {
+			DialogRulerLinesManager dialogRulerLinesManager=new DialogRulerLinesManager(this.rulerLines);
+			dialogRulerLinesManager.showDialog();
+			DialogResult dialogResult=dialogRulerLinesManager.getDialogResult();
+			if (dialogResult==DialogResult.OK){
+				this.rulerLines=dialogRulerLinesManager.getRulerLines();
+				verify();
+			}
+		}catch (Exception e){
 			Application.getActiveApplication().getOutput().output(e);
 		}
 	}

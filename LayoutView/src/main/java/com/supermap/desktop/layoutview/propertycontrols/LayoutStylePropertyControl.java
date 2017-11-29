@@ -99,6 +99,7 @@ public class LayoutStylePropertyControl extends AbstractPropertyControl {
 	@Override
 	protected void fillComponents() {
 		this.dropDownBackColor.setColor(this.backColor);
+		this.updateUI();
 	}
 
 	@Override

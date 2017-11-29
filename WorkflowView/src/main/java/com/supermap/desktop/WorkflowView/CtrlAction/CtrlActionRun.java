@@ -5,11 +5,16 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IDockbar;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
-import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
+import com.supermap.desktop.process.core.CirculationIterator;
+import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.process.tasks.TasksManager;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,26 +41,25 @@ public class CtrlActionRun extends CtrlAction {
 							@Override
 							public void run() {
 								CirculationIterator iterator = formWorkflow.iterator();
+								iterator.setRunning(true);
 								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorStart"));
-								while (iterator.hasNext()) {
-									formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
-									if (formWorkflow.getTasksManager().getStatus() == TasksManager.WORKFLOW_STATE_COMPLETED
-											|| formWorkflow.getTasksManager().getStatus() == TasksManager.WORKFLOW_STATE_INTERRUPTED) {
-										formWorkflow.getTasksManager().reset();
+								if (iterator.getCirculationType() != CirculationType.whileType) {
+									while (iterator.hasNext()) {
+										formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
+										formWorkflow.runIterator();
 									}
-									formWorkflow.getTasksManager().setStatus(TasksManager.WORKER_STATE_RUNNING);
-									formWorkflow.getTasksManager().initialize();
-									// 正在运行的时候禁止添加、删除节点，禁止调整连接关系和状态
-									formWorkflow.getTasksManager().getWorkflow().setEditable(false);
-									formWorkflow.getTasksManager().getScheduler().start();
-									while (formWorkflow.getTasksManager().getScheduler().isRunning()) {
-										try {
-											TimeUnit.SECONDS.sleep(10);
-										} catch (InterruptedException e) {
-											e.printStackTrace();
+								} else {
+									try {
+										boolean conditionValue = (boolean) formWorkflow.getCanvas().getCirculationGraph().getOutputData().getValue();
+										while (validateAllCondition(iterator.getInfoList(), conditionValue) && !formWorkflow.getTasksManager().isCancel()) {
+											formWorkflow.runIterator();
 										}
+									} catch (Exception e) {
+										Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_whileTypeException"));
 									}
 								}
+								iterator.setRunning(false);
+								formWorkflow.getTasksManager().setCancel(false);
 								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorExecuted"));
 							}
 						}).start();
@@ -68,6 +72,16 @@ public class CtrlActionRun extends CtrlAction {
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e);
 		}
+	}
+
+	private boolean validateAllCondition(ArrayList infoList, boolean conditionValue) throws ScriptException {
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("js");
+		boolean result = conditionValue;
+		for (int i = 0; i < infoList.size(); i++) {
+			result = result && (engine.eval((String) infoList.get(i)) == conditionValue);
+		}
+		return result;
 	}
 
 	@Override
