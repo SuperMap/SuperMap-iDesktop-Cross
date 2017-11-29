@@ -4,11 +4,12 @@ import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.geometry.Abstract.IRegionFeature;
 import com.supermap.desktop.geometryoperation.*;
-import com.supermap.desktop.geometryoperation.control.JDialogFieldOperationSetting;
 import com.supermap.desktop.geometryoperation.control.MapControlTip;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.ui.controls.DialogResult;
-import com.supermap.desktop.utilities.*;
+import com.supermap.desktop.utilities.GeometryUtilities;
+import com.supermap.desktop.utilities.ListUtilities;
+import com.supermap.desktop.utilities.MapUtilities;
+import com.supermap.desktop.utilities.RecordsetUtilities;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.Selection;
 import com.supermap.ui.Action;
@@ -17,6 +18,7 @@ import com.supermap.ui.TrackedEvent;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,13 +40,7 @@ public class FillRegionEditor extends AbstractEditor {
             } else if (SwingUtilities.isRightMouseButton(e)) {
                 if (editModel.isTracking) {
                     editModel.isTracking = false;
-                    JDialogFieldOperationSetting form = new JDialogFieldOperationSetting(MapEditorProperties.getString("String_GeometryOperation_FillRegion"), environment
-                            .getMapControl().getMap(), environment.getEditProperties().getSelectedDatasetTypes().get(0));
-                    if (form.showDialog() == DialogResult.OK) {
-                        CursorUtilities.setWaitCursor(environment.getMapControl());
-                        fillRegion(environment, form.getEditLayer(), form.getPropertyData());
-                        TabularUtilities.refreshTabularStructure((DatasetVector) form.getEditLayer().getDataset());
-                    }
+                    fillRegion(environment);
                 }
                 environment.stopEditor();
                 MapUtilities.clearTrackingObjects(environment.getMap(), TAG_FILLREGION);
@@ -112,7 +108,11 @@ public class FillRegionEditor extends AbstractEditor {
 
     @Override
     public boolean enable(EditEnvironment environment) {
-        return environment.getEditProperties().getSelectedGeometryCount() == 1 // 选中数至少2个
+        boolean isEditableLayerSelected = false;
+        for (Layer layer : environment.getEditableLayers()) {
+            isEditableLayerSelected = layer.getSelection().getCount() > 0 || isEditableLayerSelected;
+        }
+        return environment.getEditProperties().getSelectedGeometryCount() == 1 && isEditableLayerSelected
                 && ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class)
                 && environment.getEditProperties().getEditableDatasetTypes().size() > 0
                 && ListUtilities.isListContainAny(environment.getEditProperties().getEditableDatasetTypes(), DatasetType.CAD, DatasetType.REGION);
@@ -123,50 +123,35 @@ public class FillRegionEditor extends AbstractEditor {
         return environment.getEditor() instanceof FillRegionEditor;
     }
 
-    private void fillRegion(EditEnvironment environment, Layer editLayer, Map<String, Object> propertyData) {
+    private void fillRegion(EditEnvironment environment) {
         GeoRegion result = null;
         Recordset targetRecordset = null;
         environment.getMapControl().getEditHistory().batchBegin();
         FillRegionEditModel editModel = (FillRegionEditModel) environment.getEditModel();
         try {
-            List<Layer> layers = environment.getEditProperties().getSelectedLayers();
-            for (Layer layer : layers) {
-                if (layer.getDataset().getType() != DatasetType.REGION && layer.getDataset().getType() != DatasetType.CAD) {
-                    break;
-                }
-                Recordset recordset = ((DatasetVector) layer.getDataset()).getRecordset(false, CursorType.STATIC);
-                while (!recordset.isEOF()) {
-                    if (!(recordset.getGeometry() instanceof GeoRegion)) {
-                        break;
-                    }
-                    GeoRegion geoRegion = (GeoRegion) recordset.getGeometry();
-                    editModel.createdRegion = (GeoRegion) Geometrist.erase(editModel.createdRegion, geoRegion);
-                    recordset.moveNext();
-                }
-                recordset.dispose();
+            targetRecordset = ((DatasetVector) editModel.layer.getDataset()).getRecordset(false, CursorType.DYNAMIC);
+            while (!targetRecordset.isEOF()) {
+                GeoRegion geoRegion = (GeoRegion) targetRecordset.getGeometry();
+                editModel.createdRegion = (GeoRegion) Geometrist.erase(editModel.createdRegion, geoRegion);
+                targetRecordset.moveNext();
             }
             result = (GeoRegion) GeometryUtilities.union(editModel.baseRegion, editModel.createdRegion, true);
-            if (editLayer != null && result != null) {
-                targetRecordset = ((DatasetVector) editLayer.getDataset()).getRecordset(false, CursorType.DYNAMIC);
-                targetRecordset.getBatch().begin();
-                Selection selection = editLayer.getSelection();
-                for (int i = 0; i < selection.getCount(); i++) {
-                    targetRecordset.seekID(selection.get(i));
-                    environment.getMapControl().getEditHistory().add(EditType.DELETE, targetRecordset, true);
-                    targetRecordset.delete();
-                }
-                targetRecordset.addNew(result, propertyData);
-                targetRecordset.getBatch().update();
+            targetRecordset.getBatch().begin();
+            Selection selection = editModel.layer.getSelection();
+            targetRecordset.seekID(selection.get(0));
+            HashMap<String, Object> propertyData = mergePropertyData(((DatasetVector) editModel.layer.getDataset()), targetRecordset.getFieldInfos(), RecordsetUtilities.getFieldValuesIgnoreCase(targetRecordset));
+            environment.getMapControl().getEditHistory().add(EditType.DELETE, targetRecordset, true);
+            targetRecordset.delete();
 
-                editLayer.getSelection().clear();
-                int addedId = targetRecordset.getID();
-                if (addedId > -1) {
-                    selection.add(addedId);
-                }
-                environment.getMapControl().getEditHistory().add(EditType.ADDNEW, targetRecordset, true);
-            } else {
-                Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_FailedToFillRegion"));
+            targetRecordset.addNew(result, propertyData);
+            targetRecordset.getBatch().update();
+
+            editModel.layer.getSelection().clear();
+            int addedId = targetRecordset.getID();
+            if (addedId > -1) {
+                selection.add(addedId);
             }
+            environment.getMapControl().getEditHistory().add(EditType.ADDNEW, targetRecordset, true);
         } catch (Exception e) {
             Application.getActiveApplication().getOutput().output(e);
         } finally {
@@ -178,6 +163,7 @@ public class FillRegionEditor extends AbstractEditor {
                 targetRecordset.dispose();
                 targetRecordset.close();
             }
+            environment.getMapControl().getMap().refresh();
         }
     }
 
@@ -197,11 +183,13 @@ public class FillRegionEditor extends AbstractEditor {
                     && layer.getSelection().getCount() == 1)) {
                 continue;
             }
+            editModel.layer = layer;
             GeoRegion geometry = (GeoRegion) layer.getSelection().toRecordset().getGeometry();
             GeometryUtilities.setGeometryStyle(geometry, RegionAndLineHighLightStyle.getRegionStyleRed());
             environment.getMap().getTrackingLayer().add(geometry, TAG_FILLREGION);
             editModel.baseRegion = geometry;
             environment.getMap().refreshTrackingLayer();
+            break;
         }
     }
 
@@ -211,8 +199,32 @@ public class FillRegionEditor extends AbstractEditor {
         MapUtilities.clearTrackingObjects(environment.getMap(), TAG_FILLREGION);
     }
 
+    private HashMap<String, Object> mergePropertyData(DatasetVector des, FieldInfos srcFieldInfos, Map<String, Object> properties) {
+        HashMap<String, Object> results = new HashMap<>();
+        FieldInfos desFieldInfos = des.getFieldInfos();
+
+        for (int i = 0; i < desFieldInfos.getCount(); i++) {
+            FieldInfo desFieldInfo = desFieldInfos.get(i);
+
+            if (!desFieldInfo.isSystemField() && properties.containsKey(desFieldInfo.getName().toLowerCase())) {
+                FieldInfo srcFieldInfo = srcFieldInfos.get(desFieldInfo.getName());
+
+                if (desFieldInfo.getType() == srcFieldInfo.getType()) {
+                    // 如果要源字段和目标字段类型一致，直接保存
+                    results.put(desFieldInfo.getName(), properties.get(desFieldInfo.getName().toLowerCase()));
+                } else if (desFieldInfo.getType() == FieldType.WTEXT || desFieldInfo.getType() == FieldType.TEXT) {
+
+                    // 如果目标字段与源字段类型不一致，则只有目标字段是文本型字段时，将源字段值做 toString 处理
+                    results.put(desFieldInfo.getName(), properties.get(desFieldInfo.getName().toLowerCase()).toString());
+                }
+            }
+        }
+        return results;
+    }
+
     private class FillRegionEditModel implements IEditModel {
         MapControlTip tip;
+        Layer layer;
         JLabel labelMessage;
         GeoRegion baseRegion;
         GeoRegion createdRegion;
@@ -234,6 +246,7 @@ public class FillRegionEditor extends AbstractEditor {
             if (baseRegion != null) {
                 baseRegion.dispose();
             }
+            layer = null;
             createdRegion = null;
             isTracking = false;
         }
