@@ -284,7 +284,6 @@ public class MetaProcessImport extends MetaProcess {
 	}
 
 	private void updateDataset(final ImportSetting succeedSetting) {
-		final Datasource datasource = succeedSetting.getTargetDatasource();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -309,8 +308,10 @@ public class MetaProcessImport extends MetaProcess {
 				}
 			});
 		}
-		Dataset dataset = datasource.getDatasets().get(succeedSetting.getTargetDatasetName());
-		this.getParameters().getOutputs().getData(OUTPUT_DATA).setValue(dataset);
+		if (null != succeedSetting.getTargetDatasource()) {
+			Dataset dataset = succeedSetting.getTargetDatasource().getDatasets().get(succeedSetting.getTargetDatasetName());
+			this.getParameters().getOutputs().getData(OUTPUT_DATA).setValue(dataset);
+		}
 	}
 
 	@Override
