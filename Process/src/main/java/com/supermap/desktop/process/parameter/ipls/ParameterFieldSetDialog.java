@@ -36,7 +36,7 @@ public class ParameterFieldSetDialog extends AbstractParameter {
 
 	//region getter and setter
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

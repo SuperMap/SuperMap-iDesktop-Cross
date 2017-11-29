@@ -47,7 +47,7 @@ public class ParameterSearchMode extends AbstractParameter implements ISelection
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return "SearchMode";
 	}
 

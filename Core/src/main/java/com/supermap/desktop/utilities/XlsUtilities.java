@@ -22,10 +22,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by xie on 2017/8/24.
@@ -183,6 +180,22 @@ public class XlsUtilities {
 					//总列数
 					columnCount = row.getPhysicalNumberOfCells();
 				}
+				// 对要导入的数据进行预读，获得每列需要的最大值，当最大值大于1000时，可以考虑导入失败,暂时支持导入-yuanR2017.11.24
+				ArrayList<Integer> maxLengthList = new ArrayList<>();
+				for (int j = 0; j < columnCount; j++) {
+					maxLengthList.add(255);
+				}
+				for (int j = 0; j < rowCount; j++) {
+					XSSFRow xssfRow = sheet.getRow(j);
+					for (int k = 0; k < columnCount; k++) {
+						if (xssfRow.getCell(k).getCellType() == XSSFCell.CELL_TYPE_STRING) {
+							if (xssfRow.getCell(k).getStringCellValue().length() > maxLengthList.get(k)) {
+								maxLengthList.set(k, (xssfRow.getCell(k).getStringCellValue().length() + 10));
+							}
+						}
+					}
+				}
+
 				info = new DatasetVectorInfo();
 				Datasets datasets = datasource.getDatasets();
 				info.setName(datasets.getAvailableDatasetName(xlsName + "_" + sheet.getSheetName()));
@@ -193,6 +206,7 @@ public class XlsUtilities {
 					for (int j = 0; j < columnCount; j++) {
 						fieldInfo = new FieldInfo();
 						fieldInfo.setType(FieldType.TEXT);
+						fieldInfo.setMaxLength(maxLengthList.get(j));
 						String name = sheet.getRow(0).getCell(j).getStringCellValue();
 						if (name.startsWith("Sm")) {
 							name = "Field_" + name;
@@ -200,14 +214,16 @@ public class XlsUtilities {
 						if (StringUtilities.isNumber(name)) {
 							name = "Filed_" + String.valueOf(Convert.toInteger(name));
 						}
-						fieldInfo.setName(name);
+						// 增加文件名称时，需要进行去重处理，不然会抛异常-yuanR2017.11.24
+						fieldInfo.setName(getSingletonName(name, fieldNames));
 						fieldInfos.add(fieldInfo);
-						fieldNames.add(name);
+						fieldNames.add(getSingletonName(name, fieldNames));
 					}
 				} else {
 					for (int j = 0; j < columnCount; j++) {
 						fieldInfo = new FieldInfo();
 						fieldInfo.setType(FieldType.TEXT);
+						fieldInfo.setMaxLength(maxLengthList.get(j));
 						String name = j == 0 ? "NewField" : "NewField" + "_" + String.valueOf(j);
 						fieldInfo.setName(name);
 						fieldInfos.add(fieldInfo);
@@ -265,6 +281,29 @@ public class XlsUtilities {
 			Application.getActiveApplication().getOutput().output(e);
 		}
 		return importResults;
+	}
+
+	/**
+	 * 获得单一的文件名
+	 * yuanR
+	 *
+	 * @param caption
+	 * @param names
+	 * @return
+	 */
+	private static String getSingletonName(String caption, List<String> names) {
+		for (int i = 0; true; i++) {
+			if (!names.contains(getName(caption, i))) {
+				return getName(caption, i);
+			}
+		}
+	}
+
+	private static String getName(String caption, int i) {
+		if (i == 0) {
+			return caption;
+		}
+		return caption + "_" + i;
 	}
 
 	/**

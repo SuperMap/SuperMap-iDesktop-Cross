@@ -136,7 +136,7 @@ public class DecomposeEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		return environment.getEditProperties().getEditableSelectedMaxPartCount() > 1;
-	}
+    public boolean enable(EditEnvironment environment) {
+        return environment.getEditProperties().getEditableSelectedMaxPartCount() > 1;
+    }
 }

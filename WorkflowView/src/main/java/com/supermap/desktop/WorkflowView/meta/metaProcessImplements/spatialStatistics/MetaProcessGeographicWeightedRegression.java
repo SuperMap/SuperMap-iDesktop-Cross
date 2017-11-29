@@ -22,9 +22,11 @@ import com.supermap.desktop.utilities.FieldTypeUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.MessageFormat;
 
 /**
  * @author XiaJT
+ * 地理加权回归分析
  */
 public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 	private static final String INPUT_SOURCE_DATASET = CoreProperties.getString("String_GroupBox_SourceData");
@@ -51,9 +53,9 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 	}
 
 	private void initParameter() {
-        parameterExplanatory.setFieldType(FieldTypeUtilities.getNumericFieldType());
-        parameterModelField.setFieldType(FieldTypeUtilities.getNumericFieldType());
-        parameterBandWidthType.setItems(new ParameterDataNode(ProcessProperties.getString("String_BindWidthType_AICC"), BandWidthType.AICC),
+		parameterExplanatory.setFieldType(FieldTypeUtilities.getNumericFieldType());
+		parameterModelField.setFieldType(FieldTypeUtilities.getNumericFieldType());
+		parameterBandWidthType.setItems(new ParameterDataNode(ProcessProperties.getString("String_BindWidthType_AICC"), BandWidthType.AICC),
 				new ParameterDataNode(ProcessProperties.getString("String_BindWidthType_BANDWIDTH"), BandWidthType.BANDWIDTH),
 				new ParameterDataNode(ProcessProperties.getString("String_BindWidthType_CV"), BandWidthType.CV));
 		parameterKernelFunction.setItems(new ParameterDataNode(ProcessProperties.getString("String_KernelFunction_BISQUARE"), KernelFunction.BISQUARE),
@@ -66,7 +68,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		ParameterCombine parameterCombineSourceDataset = new ParameterCombine();
 		parameterCombineSourceDataset.addParameters(datasourceConstraint);
 		parameterCombineSourceDataset.addParameters(parameterSingleDataset);
-		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_ColumnHeader_SourceData"));
+		parameterCombineSourceDataset.setDescribe(CoreProperties.getString("String_GroupBox_SourceData"));
 
 		ParameterCombine parameterSetting = new ParameterCombine();
 
@@ -157,31 +159,46 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		} else {
 			datasetVector = (DatasetVector) parameterSingleDataset.getSelectedItem();
 		}
+		// 判断原始数据数量是否大于20
+		if (datasetVector.getRecordCount() < 20) {
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_Sample_Size_Need_To_More_Than"), 20));
+			return false;
+		}
 		GWRParameter gwrParameter = new GWRParameter();
 		BandWidthType bandWidthType = (BandWidthType) parameterBandWidthType.getSelectedData();
+		// 带宽方式
 		gwrParameter.setBandWidthType(bandWidthType);
-
 		FieldInfo[] selectedFields = parameterExplanatory.getSelectedFields();
 		if (selectedFields != null) {
 			String[] explanatoryFields = new String[selectedFields.length];
 			for (int i = 0; i < selectedFields.length; i++) {
 				explanatoryFields[i] = selectedFields[i].getName();
 			}
+			// 解释字段
 			gwrParameter.setExplanatoryFeilds(explanatoryFields);
+		} else {
+			Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_ExplanatoryFieldsIsNull"));
+			return false;
 		}
-
+		// 核函数类型
 		gwrParameter.setKernelFunction((KernelFunction) parameterKernelFunction.getSelectedData());
+		// 建模字段
 		gwrParameter.setModelFeild(parameterModelField.getFieldName());
 		KernelType kernelType = (KernelType) parameterKernelType.getSelectedData();
+		//带宽类型
 		gwrParameter.setKernelType(kernelType);
+
 		if (bandWidthType == BandWidthType.BANDWIDTH) {
 			if (kernelType == KernelType.ADAPTIVE) {
-				gwrParameter.setNeighbors(Integer.valueOf((String) parameterNeighbors.getSelectedItem()));
+				// 相邻数目
+				gwrParameter.setNeighbors(Integer.valueOf(parameterNeighbors.getSelectedItem()));
 			} else {
 				try {
-					gwrParameter.setDistanceTolerance(Double.valueOf((String) parameterDistanceTolerance.getSelectedItem()));
+					// 带宽范围
+					gwrParameter.setDistanceTolerance(Double.valueOf(parameterDistanceTolerance.getSelectedItem()));
 				} catch (NumberFormatException e) {
 					Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_DistanceToleranceMustOverZero"));
+					return false;
 				}
 			}
 		}
@@ -190,22 +207,23 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 			GWRAnalystResult gwrAnalystResult = SpatialRelModeling.geographicWeightedRegression(datasetVector, parameterSaveDataset.getResultDatasource(),
 					parameterSaveDataset.getResultDatasource().getDatasets().getAvailableDatasetName(parameterSaveDataset.getDatasetName()), gwrParameter);
 			if (gwrAnalystResult != null) {
-				parameters.getOutputs().getData(OUTPUT_DATASET).setValue(gwrAnalystResult.getResultDataset());
 				isSuccessful = true;
+				parameters.getOutputs().getData(OUTPUT_DATASET).setValue(gwrAnalystResult.getResultDataset());
 				GWRSummary gwrSummary = gwrAnalystResult.getGWRSummary();
 				String result = ProcessProperties.getString("String_AIC") + gwrSummary.getAIC() + "\n"
 						+ ProcessProperties.getString("String_AICc") + gwrSummary.getAICc() + "\n"
 						+ ProcessProperties.getString("String_BandWidthDistanceTolerance") + gwrSummary.getBandwidth() + "\n"
 						+ ProcessProperties.getString("String_Edf") + gwrSummary.getEdf() + "\n"
 						+ ProcessProperties.getString("String_EffectiveNumber") + gwrSummary.getEffectiveNumber() + "\n"
-						+ ProcessProperties.getString("String_KNeighbors") + gwrSummary.getNeighbors() + "\n"
+						+ ProcessProperties.getString("String_Neighbors") + gwrSummary.getNeighbors() + "\n"
 						+ ProcessProperties.getString("String_R²") + gwrSummary.getR2() + "\n"
 						+ ProcessProperties.getString("String_R²Adjusted") + gwrSummary.getR2Adjusted() + "\n"
 						+ ProcessProperties.getString("String_ResidualSquares") + gwrSummary.getResidualSquares() + "\n"
 						+ ProcessProperties.getString("String_Sigma") + gwrSummary.getSigma() + "\n"
 						// 输出窗口增加"how to use"链接信息-yuanR2017.9.5
+
 						+ "-----------------------------------------" + "\n"
-						+ "How to Use?" + "\n"
+						+ ProcessProperties.getString("String_Label_DetailedUse")
 						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html?SpatialStatisticalAnalysis";
 
 				// 不显示时间-yuanR2017.9.6
@@ -217,9 +235,10 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 			Application.getActiveApplication().getOutput().output(e.getMessage());
 			e.printStackTrace();
 		} finally {
+			gwrParameter.dispose();
 			SpatialRelModeling.removeSteppedListener(steppedListener);
+			return isSuccessful;
 		}
-		return isSuccessful;
 	}
 
 	@Override

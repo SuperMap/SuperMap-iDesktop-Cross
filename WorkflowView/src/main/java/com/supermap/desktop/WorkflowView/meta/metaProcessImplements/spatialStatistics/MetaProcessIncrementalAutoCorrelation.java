@@ -22,6 +22,7 @@ import com.supermap.desktop.ui.OutputFrame;
 import com.supermap.desktop.utilities.DatasetUtilities;
 
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 
 /**
  * @author XiaJT
@@ -186,10 +187,10 @@ public class MetaProcessIncrementalAutoCorrelation extends MetaProcess {
 						distance = incrementalResults[i].getDistance();
 					}
 				}
-				result += ProcessProperties.getString("String_Max_Peak") + dcmFmtDistance.format(distance) + "," + dcmFmtOthers.format(z) + "\n";
+				result += MessageFormat.format(ProcessProperties.getString("String_IncrementalAutoCorrelation_ResultDescription"), dcmFmtOthers.format(z), dcmFmtDistance.format(distance)) + "\n";
 				result += "-----------------------------------------" + "\n"
-						+ "How to Use?" + "\n"
-						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html?SpatialStatisticalAnalysis,AnalyzingPatterns1";
+						+ ProcessProperties.getString("String_Label_DetailedUse")
+						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html?SpatialStatisticalAnalysis,MeasureGeographicDistr,Clusters1,AnalyzingPatterns1";
 
 
 				// 不显示时间-yuanR2017.9.6

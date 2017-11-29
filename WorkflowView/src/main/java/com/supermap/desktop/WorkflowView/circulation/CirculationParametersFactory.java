@@ -27,6 +27,12 @@ public class CirculationParametersFactory {
 			case forDatasourceType:
 				circulationOutParameters = new CirculationForDatasourceOutputParameters(outputData);
 				break;
+			case forFileType:
+				circulationOutParameters = new CirculationForFileOutputParameters(outputData);
+				break;
+			case whileType:
+				circulationOutParameters = new CirculationWhileOutputParameters(outputData);
+				break;
 			default:
 				break;
 		}
@@ -51,6 +57,12 @@ public class CirculationParametersFactory {
 				break;
 			case forDatasourceType:
 				circulationParameters = new CirculationForDatasourceParameters(outputData);
+				break;
+			case forFileType:
+				circulationParameters = new CirculationForFileParameters(outputData);
+				break;
+			case whileType:
+				circulationParameters = new CirculationWhileParameters(outputData);
 				break;
 			default:
 				break;

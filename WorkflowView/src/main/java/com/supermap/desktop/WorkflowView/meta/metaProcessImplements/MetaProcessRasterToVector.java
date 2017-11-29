@@ -76,7 +76,7 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 		comboBoxType = new ParameterComboBox(ProcessProperties.getString("string_label_lblDatasetType"));
 
 		comboBoxSmoothMethod = new ParameterComboBox(CoreProperties.getString("String_SmoothMethod"));
-		textFieldSmoothDegree = new ParameterNumber(CoreProperties.getString("String_Smooth"));
+		textFieldSmoothDegree = new ParameterNumber(CoreProperties.getString("String_SmoothNess"));
 		checkBoxThinRaster = new ParameterCheckBox(CoreProperties.getString("String_CheckBox_IsThinRaster"));
 
 		textFieldNoValue = new ParameterNumber(CoreProperties.getString("String_Label_NoData"));
@@ -145,9 +145,9 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 		}
 
 		resultDataset.setDefaultDatasetName("result_gridToVector");
-		comboBoxType.setItems(new ParameterDataNode(CoreProperties.getString("String_Item_Point"), DatasetType.POINT),
-				new ParameterDataNode(CoreProperties.getString("String_Item_Line"), DatasetType.LINE),
-				new ParameterDataNode(CoreProperties.getString("String_Item_Region"), DatasetType.REGION));
+		comboBoxType.setItems(new ParameterDataNode(CoreProperties.getString("String_SpatialQuery_Point"), DatasetType.POINT),
+				new ParameterDataNode(CoreProperties.getString("String_SpatialQuery_Line"), DatasetType.LINE),
+				new ParameterDataNode(CoreProperties.getString("String_SpatialQuery_Region"), DatasetType.REGION));
 
 		comboBoxSmoothMethod.setItems(new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_NONE"), SmoothMethod.NONE),
 				new ParameterDataNode(CoreProperties.getString("String_SmoothMethod_BSLine"), SmoothMethod.BSPLINE),
@@ -161,27 +161,27 @@ public class MetaProcessRasterToVector extends MetaProcessGridAnalyst {
 		vertorizeLineSetting.setEnabled(comboBoxType.getSelectedData() == DatasetType.LINE);
 
 		//textFieldNoValue.setSelectedItem("-9999");
-		textFieldNoValue.setRequisite(true);
+		textFieldNoValue.setRequired(true);
 		textFieldNoValueTolerance.setSelectedItem("0");
 		textFieldNoValueTolerance.setMinValue(0);
 		textFieldNoValueTolerance.setIsIncludeMin(true);
-		textFieldNoValueTolerance.setRequisite(true);
+		textFieldNoValueTolerance.setRequired(true);
 		textFieldGridField.setSelectedItem("value");
-		textFieldGridField.setRequisite(true);
+		textFieldGridField.setRequired(true);
 		textFieldGridValue.setSelectedItem("0");
 		textFieldGridValueTolerance.setSelectedItem("0");
 		textFieldGridValueTolerance.setMinValue(0);
 		textFieldGridValueTolerance.setIsIncludeMin(true);
 		//gridDatasetSetting.setEnabled(sourceDataset.getSelectedItem() instanceof DatasetGrid);
 		comboBoxBackColor.setSelectedItem(Color.WHITE);
-		comboBoxBackColor.setRequisite(true);
+		comboBoxBackColor.setRequired(true);
 
 		textFieldColorTolerance.setSelectedItem("0");
 		textFieldColorTolerance.setMinValue(0);
 		textFieldColorTolerance.setMaxValue(255);
 		textFieldColorTolerance.setIsIncludeMin(true);
 		textFieldColorTolerance.setIncludeMax(true);
-		textFieldColorTolerance.setRequisite(true);
+		textFieldColorTolerance.setRequired(true);
 		//imageDatasetSetting.setEnabled(sourceDataset.getSelectedItem() instanceof DatasetImage);
 	}
 

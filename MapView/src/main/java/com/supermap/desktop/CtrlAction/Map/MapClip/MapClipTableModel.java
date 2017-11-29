@@ -61,7 +61,7 @@ public class MapClipTableModel extends DefaultTableModel {
         } else if (column == COLUMN_INDEX_AIMDATASOURCE) {
             return ControlsProperties.getString("String_TargetDatasource");
         } else if (column == COLUMN_INDEX_AIMDATASET) {
-            return CoreProperties.getString("String_ColumnHeader_TargetDataset");
+            return CoreProperties.getString("String_Label_TargetDataset");
         } else if (column == COLUMN_INDEX_CLIPTYPE) {
             return MapViewProperties.getString("String_MapClip_ClipType");
         } else if (column == COLUMN_INDEX_ERASE) {

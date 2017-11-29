@@ -329,14 +329,14 @@ public class DefaultParameters implements IParameters {
 
 	private boolean isParameterReady(IParameter parameter, boolean isParentRequisite) {
 		if (parameter instanceof ISelectionParameter || parameter instanceof ParameterSwitch) {
-			if ((isParentRequisite || parameter.isRequisite()) && !parameter.isReady()) {
+			if ((isParentRequisite || parameter.isRequired()) && !parameter.isReady()) {
 				return false;
 			}
 		}
 		if (parameter instanceof ParameterCombine) {
 			ArrayList<IParameter> parameterList = ((ParameterCombine) parameter).getParameterList();
 			for (IParameter iParameterChild : parameterList) {
-				if (!isParameterReady(iParameterChild, isParentRequisite || parameter.isRequisite())) {
+				if (!isParameterReady(iParameterChild, isParentRequisite || parameter.isRequired())) {
 					return false;
 				}
 			}

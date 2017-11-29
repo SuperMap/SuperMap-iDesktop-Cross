@@ -295,7 +295,7 @@ public class JPanelSettingCommon extends BaseSettingPanel {
 //		checkBoxIsBindQueryWhileClickHead.setText(FrameProperties.getString("String_IsBindQueryWhileClickHead"));
 		checkBoxWorkspaceRecovery.setText(FrameProperties.getString("String_WorkspaceRecovery"));
 		labelMapRefreshDelayWhileResize.setText(FrameProperties.getString("String_MapRefreshDelay"));
-		labelMapDelayUnit.setText(CoreProperties.getString("String_ms"));
+		labelMapDelayUnit.setText(CoreProperties.getString("String_MilliSecond"));
 //		checkBoxAutoSaveWorkspace.setText(FrameProperties.getString("String_AutoSaveWorkspace"));
 		labelAutoSaveTime.setText(FrameProperties.getString("String_AutoSaveWorkspaceTime"));
 		labelAutoSaveTimeUnit.setText(CoreProperties.getString("String_Time_Minutes"));

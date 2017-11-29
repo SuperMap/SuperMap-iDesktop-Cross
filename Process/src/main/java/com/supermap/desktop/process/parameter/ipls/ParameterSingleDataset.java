@@ -41,7 +41,7 @@ public class ParameterSingleDataset extends AbstractParameter implements ISelect
 	 * @return
 	 */
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return !this.isShowNullValue;
 	}
 
@@ -88,7 +88,7 @@ public class ParameterSingleDataset extends AbstractParameter implements ISelect
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

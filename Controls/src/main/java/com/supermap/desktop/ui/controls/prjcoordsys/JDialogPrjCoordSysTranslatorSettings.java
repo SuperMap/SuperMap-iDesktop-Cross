@@ -365,7 +365,7 @@ public class JDialogPrjCoordSysTranslatorSettings extends SmDialog {
 		String moduleName = "ImportPrjCoordSysTranslatorFile";
 		if (!SmFileChoose.isModuleExist(moduleName)) {
 			SmFileChoose.addNewNode(SmFileChoose.createFileFilter(ControlsProperties.getString("String_TransParamFile"), "ctp"),
-					CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_OpenRasterAlgebraExpressionFile"),
+					CoreProperties.getString("String_DefaultFilePath"), ControlsProperties.getString("String_OpenColorTable"),
 					moduleName, "OpenOne");
 		}
 		SmFileChoose fileChooseImport = new SmFileChoose(moduleName);

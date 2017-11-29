@@ -19,6 +19,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.MessageFormat;
@@ -38,7 +40,7 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	public ParameterComboBoxPanel(IParameter parameterComboBox) {
 		super(parameterComboBox);
 		this.parameterComboBox = ((ParameterComboBox) parameterComboBox);
-		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescription());
 		ArrayList<ParameterDataNode> items = this.parameterComboBox.getItems();
 		if (items != null && items.size() > 0) {
 			for (ParameterDataNode item : items) {
@@ -48,11 +50,11 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		if (this.parameterComboBox.getSelectedItem() != null) {
 			comboBox.setSelectedItem(this.parameterComboBox.getSelectedItem());
 		} else {
-			parameterComboBox.setFieldVale(ParameterComboBox.comboBoxValue, comboBox.getSelectedItem());
+			parameterComboBox.setFieldValue(ParameterComboBox.comboBoxValue, comboBox.getSelectedItem());
 		}
 		initListeners();
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterComboBox.getDescribe());
+		label.setToolTipText(this.parameterComboBox.getDescription());
 		label.setVisible(parameterComboBox.isDescriptionVisible());
 		comboBox.setRenderer(new ParameterComboBoxCellRender(this.parameterComboBox.getIConGetter()));
 		//comboBox.setEditable(this.parameterComboBox.isEditable());
@@ -68,23 +70,23 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 		panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(0, 1));
 		panel.add(comboBox, new GridBagConstraintsHelper(1, 0, 1, 1).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(0, 5, 0, 0));
 		// 当描述为空时，不显示其label-yuanR
-		if (StringUtilities.isNullOrEmpty(parameterComboBox.getDescribe())) {
+		if (StringUtilities.isNullOrEmpty(parameterComboBox.getDescription())) {
 			label.setVisible(false);
+			ComponentUIUtilities.setName(this.comboBox, parameterComboBox.getItemCount() <= 0 ? "null" : parameterComboBox.getItemAt(0).getDescribe());
 		}
 	}
 
 	private void initListeners() {
-		// 意义何在？-yuanR存疑2017.11.3{
-		//MouseAdapter comboBoxClicked = new MouseAdapter() {
-		//	//添加右边按钮点击时事件
-		//	@Override
-		//	public void mouseReleased(MouseEvent e) {
-		//		parameterComboBox.firePropertyChangeListener(new PropertyChangeEvent(parameterComboBox, "ComboBoxClicked", "", ""));
-		//	}
-		//};
-		//comboBox.addMouseListener(comboBoxClicked);
-		//comboBox.getComponent(0).addMouseListener(comboBoxClicked);
-		//}
+		MouseAdapter comboBoxClicked = new MouseAdapter() {
+			//添加右边按钮点击时事件
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				parameterComboBox.firePropertyChangeListener(new PropertyChangeEvent(parameterComboBox, "ComboBoxClicked", "", ""));
+			}
+		};
+		comboBox.addMouseListener(comboBoxClicked);
+		comboBox.getComponent(0).addMouseListener(comboBoxClicked);
+
 		parameterComboBox.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -133,8 +135,8 @@ public class ParameterComboBoxPanel extends SwingPanel implements IParameterPane
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterComboBox.getDescribe();
-		if (parameterComboBox.isRequisite()) {
+		String describe = parameterComboBox.getDescription();
+		if (parameterComboBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

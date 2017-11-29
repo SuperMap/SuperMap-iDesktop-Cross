@@ -45,7 +45,7 @@ public class CoreProperties extends Properties {
 	//common转移
 	public static final String Reset = "String_Reset";
 	public static final String Apply = "String_Apply";
-	public static java.lang.String down = "String_Down";
+	public static java.lang.String down = "String_MoveToNext";
 	public static java.lang.String up = "String_Up";
 	public static final String Cancel = "String_Cancel";
 	public static final String Cancelling = "String_Cancelling";
@@ -56,7 +56,7 @@ public class CoreProperties extends Properties {
 	public static final String PixelFormat = "String_PixelFormat";
 	public static final String Button_Setting = "String_Button_Setting";
 	public static final String NoValue = "String_Label_NoValue";
-	public static final String FieldName = "String_FieldName";
+	public static final String FieldName = "String_Name";
 	public static final String Caption = "String_Field_Caption";
 	public static final String FieldType = "String_Type";
 	public static final String FieldValue = "String_FieldValue";
@@ -68,8 +68,8 @@ public class CoreProperties extends Properties {
 	public static final String ReRun = "String_ReRun";
 	public static final String Delete = "String_Delete";
 	public static final String Modify = "String_Modify";
-	public static final String True = "String_True";
-	public static final String False = "String_False";
+	public static final String True = "String_yes";
+	public static final String False = "String_no";
 	public static final String NULL = "String_NULL";
 	public static final String Label_Datasource = "String_Label_Datasource";
 	public static final String Label_Dataset = "String_Label_Dataset";
@@ -88,8 +88,8 @@ public class CoreProperties extends Properties {
 	public static final String File = "String_File";
 	public static final String Directory = "String_Directory";
 	public static final String IsEditable = "String_IsEditable";
-	public static final String stringDataset = "String_ColumnHeader_Dataset";
-	public static final String stringDatasource = "String_ColumnHeader_Datasource";
+	public static final String stringDataset = "String_Dataset";
+	public static final String stringDatasource = "String_Datasource";
 	public static final String STRING_DATASET_TYPE = "String_DatasetType";
 	public static final String yes = "String_yes";
 	public static final String no = "String_no";
@@ -101,13 +101,13 @@ public class CoreProperties extends Properties {
 	public static final String selectInverse = "String_ToolBar_SelectInverse";
 	public static final String IMPORT = "String_Import";
 	public static final String EXPORT = "String_Export";
-	public static final String open = "String_Button_Open";
+	public static final String open = "String_Open";
 	public static final String SourceDataset = "String_ColumnHeader_SourceDataset";
-	public static final String TargetDataset = "String_ColumnHeader_TargetDataset";
+	public static final String TargetDataset = "String_Label_TargetDataset";
 	public static final String keepThisChose = "String_KeepThisChose";
 	public static final String moveToFrist = "String_MoveToFrist";
 	public static final String moveToNext = "String_MoveToNext";
-	public static final String moveToForward = "String_MoveToForward";
-	public static final String moveToLast = "String_MoveToLast";
+	public static final String moveToForward = "String_ToolBar_MoveUp";
+	public static final String moveToLast = "String_ToolBar_MoveLast";
 	public static final String createField = "String_FieldCreate";
 }

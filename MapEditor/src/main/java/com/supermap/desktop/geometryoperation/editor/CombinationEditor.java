@@ -57,9 +57,9 @@ public class CombinationEditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		boolean result = false;
-		try {
+    public boolean enable(EditEnvironment environment) {
+        boolean result = false;
+        try {
 
 			// 多种数据集或者只选中了点数据集时，目标要为CAD
 			if (environment.getEditProperties().getSelectedGeometryCount() > 1) {

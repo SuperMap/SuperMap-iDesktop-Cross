@@ -36,5 +36,4 @@ public class GeometrySplitByDrawingRegionEditor extends GeometryDrawingSplitEdit
         result = geometrySplitByRegion.SplitGeometry(environment, geometry, splitGeometry, resultGeometry, values, geoStyle, tolerance);
         return result;
     }
-
 }

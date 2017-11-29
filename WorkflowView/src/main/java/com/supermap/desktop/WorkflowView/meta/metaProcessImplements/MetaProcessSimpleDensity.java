@@ -45,16 +45,16 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 		parameterInputDataType.setiServerLogin(parameterIServerLogin);
 		parameterInputDataType.setSupportDatasetType(DatasetType.POINT);
 		ParameterDataNode parameterDataNode = new ParameterDataNode(ControlsProperties.getString("String_SimpleDensity"), "0");
-		parameterComboBoxAnalyseType.setRequisite(true);
+		parameterComboBoxAnalyseType.setRequired(true);
 		parameterComboBoxAnalyseType.setItems(parameterDataNode);
 		parameterComboBoxAnalyseType.setSelectedItem(parameterDataNode);
 		parameterComboBoxMeshType.setItems(new ParameterDataNode(ControlsProperties.getString("String_QuadrilateralMesh"), "0"),
 				new ParameterDataNode(ControlsProperties.getString("String_HexagonalMesh"), "1"));
-		parameterComboBoxMeshType.setRequisite(true);
+		parameterComboBoxMeshType.setRequired(true);
 		//流程图中不支持在地图中绘制范围，范围表示与iServer的表示相同
 		parameterBounds.setDefaultWarningValue("-74.050,40.650,-73.850,40.850");
 		parameterIndex.setTipButtonMessage(ProcessProperties.getString("String_WeightIndexTip"));
-		parameterMeshSize.setRequisite(true);
+		parameterMeshSize.setRequired(true);
 		parameterMeshSize.setDefaultWarningValue("50");
 		parameterMeshSizeUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), "Meter"),
 				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
@@ -62,7 +62,7 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Foot"), "Foot"),
 				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Mile"), "Mile")
 		);
-		parameterRadius.setRequisite(true);
+		parameterRadius.setRequired(true);
 		parameterRadius.setDefaultWarningValue("300");
 		parameterRadiusUnit.setItems(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Meter"), "Meter"),
 				new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Kilometer"), "Kilometer"),
@@ -126,7 +126,10 @@ public class MetaProcessSimpleDensity extends MetaProcess {
 			CommonSettingCombine commonSettingCombine = new CommonSettingCombine("", "");
 			commonSettingCombine.add(input, analyst);
 			if (null == parameterIServerLogin.getService()) {
-				parameterIServerLogin.login();
+				isSuccessful = parameterIServerLogin.login();
+				if (!isSuccessful){
+					return isSuccessful;
+				}
 			}
 			JobResultResponse response = parameterIServerLogin.getService().queryResult(MetaKeys.SIMPLE_DENSITY, commonSettingCombine.getFinalJSon());
 			CursorUtilities.setWaitCursor();

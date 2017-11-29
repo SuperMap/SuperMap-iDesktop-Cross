@@ -64,8 +64,8 @@ public class ParameterDatasetChooserPanel extends SwingPanel implements IParamet
 	private void initResources() {
 		this.labelDatasetName.setText(CoreProperties.getString("String_Label_Dataset"));
 		this.buttonChooseDataset.setText(CoreProperties.getString("String_Choose"));
-		ComponentUIUtilities.setName(this.buttonChooseDataset, parameter.getDescribe() + "_button");
-		ComponentUIUtilities.setName(this.textFieldDatasetName, parameter.getDescribe() + "_textField");
+		ComponentUIUtilities.setName(this.buttonChooseDataset, parameter.getDescription() + "_button");
+		ComponentUIUtilities.setName(this.textFieldDatasetName, parameter.getDescription() + "_textField");
 	}
 
 	private void initLayout() {
@@ -82,8 +82,8 @@ public class ParameterDatasetChooserPanel extends SwingPanel implements IParamet
 		this.buttonChooseDataset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isSelectingItem == false) {
-					isSelectingItem = true;
+                if (!isSelectingItem) {
+                    isSelectingItem = true;
 					DatasetChooser tempDatasetChooser = new DatasetChooser(null) {
 						@Override
 						protected boolean isSupportDatasource(Datasource datasource) {

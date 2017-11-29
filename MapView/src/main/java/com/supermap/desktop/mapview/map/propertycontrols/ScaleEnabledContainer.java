@@ -463,7 +463,7 @@ public class ScaleEnabledContainer extends SmDialog {
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
 		this.buttonImport.setToolTipText(CoreProperties.getString("String_Import"));
 		this.buttonExport.setToolTipText(CoreProperties.getString("String_Export"));
-		this.addScale.setToolTip(MapViewProperties.getString("MapCache_AddScale"));
+		this.addScale.setToolTip(MapViewProperties.getString("String_AddScale"));
 	}
 
 	private void initComponents() {

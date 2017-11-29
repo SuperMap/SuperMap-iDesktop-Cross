@@ -28,8 +28,8 @@ public class ParameterDatasource extends AbstractParameter implements ISelection
 	private boolean isReadOnlyNeeded = true;
 //	private boolean isDatasourceRequisite = true;
 //
-//	public void setDatasourceRequisite(boolean isRequisite) {
-//		this.isDatasourceRequisite = isRequisite;
+//	public void setDatasourceRequisite(boolean isRequired) {
+//		this.isDatasourceRequisite = isRequired;
 //	}
 //	/**
 //	 * 默认数据源为必要参数
@@ -38,7 +38,7 @@ public class ParameterDatasource extends AbstractParameter implements ISelection
 //	 * @return
 //	 */
 //	@Override
-//	public boolean isRequisite() {
+//	public boolean isRequired() {
 //		return this.isDatasourceRequisite;
 //	}
 
@@ -103,7 +103,7 @@ public class ParameterDatasource extends AbstractParameter implements ISelection
 		return this.datasource;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return this.describe;
 	}
 

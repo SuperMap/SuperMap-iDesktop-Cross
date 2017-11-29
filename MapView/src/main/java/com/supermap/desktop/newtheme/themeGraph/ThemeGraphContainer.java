@@ -211,10 +211,10 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.buttonDelete.setToolTipText(MapViewProperties.getString("String_Title_Delete"));
         this.buttonAdd.setToolTipText(MapViewProperties.getString("String_Title_Add"));
         this.buttonStyle.setToolTipText(MapViewProperties.getString("String_Title_Sytle"));
-        this.buttonMoveToFrist.setToolTipText(ControlsProperties.getString("String_FirstColor"));
-        this.buttonMoveToForward.setToolTipText(ControlsProperties.getString("String_UpColor"));
-        this.buttonMoveToNext.setToolTipText(ControlsProperties.getString("String_DownColor"));
-        this.buttonMoveToLast.setToolTipText(ControlsProperties.getString("String_LastColor"));
+        this.buttonMoveToFrist.setToolTipText(ControlsProperties.getString("String_MoveFirst"));
+        this.buttonMoveToForward.setToolTipText(ControlsProperties.getString("String_MoveUp"));
+        this.buttonMoveToNext.setToolTipText(ControlsProperties.getString("String_MoveDown"));
+        this.buttonMoveToLast.setToolTipText(ControlsProperties.getString("String_MoveLast"));
         this.checkBoxRemark.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxDisplayLabel"));
         this.checkBoxAxis.setText(MapViewProperties.getString("String_ThemeGraphAdvance_CheckBoxAxe"));
         this.checkBoxShowFlow.setText(MapViewProperties.getString("String_CheckBox_ShowFlow"));
@@ -225,7 +225,7 @@ public class ThemeGraphContainer extends ThemeChangePanel {
         this.buttonDraftLine.setText(MapViewProperties.getString("String_Button_LineStyle"));
         this.labelMaxValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMaxSize"));
         this.labelMinValue.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelMinSize"));
-        this.labelOffsetUnity.setText(MapViewProperties.getString("String_Label_GetoffUnit"));
+        this.labelOffsetUnity.setText(MapViewProperties.getString("String_LabelOffsetUnit"));
         this.labelOffsetX.setText(ControlsProperties.getString("String_FalseEasting"));
         this.labelOffsetY.setText(ControlsProperties.getString("String_FalseNorthing"));
         this.labelRemarkFormat.setText(MapViewProperties.getString("String_ThemeGraphAdvance_LabelGraphLabelFormat"));
@@ -1301,8 +1301,8 @@ public class ThemeGraphContainer extends ThemeChangePanel {
             switch (offsetUnity) {
                 case 0:
                     themeGraph.setOffsetFixed(true);
-                    labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
-                    labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+                    labelOffsetXUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
+                    labelOffsetYUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
                     break;
                 case 1:
                     themeGraph.setOffsetFixed(false);

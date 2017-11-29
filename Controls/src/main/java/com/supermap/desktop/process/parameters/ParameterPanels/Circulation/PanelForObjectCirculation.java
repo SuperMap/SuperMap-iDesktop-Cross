@@ -2,6 +2,7 @@ package com.supermap.desktop.process.parameters.ParameterPanels.Circulation;
 
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ControlsResources;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.properties.CoreProperties;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.ui.controls.SmFileChoose;
@@ -18,6 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -39,12 +41,16 @@ public class PanelForObjectCirculation extends JPanel {
 	private SmButton buttonMoveTop;
 	private SmButton buttonMoveBottom;
 
+	private boolean isShowAddButton;
 	protected JTable tableForObjectCirculation;
 	private ExchangeTableModel exchangeTableModel;
 
 	protected ArrayList<String> pathList = new ArrayList<>();
+	private String fileType;
+	private final String ISDIR = "Directory";
 
-	public PanelForObjectCirculation() {
+	public PanelForObjectCirculation(boolean isShowAddButton) {
+		this.isShowAddButton = isShowAddButton;
 		initComponents();
 		initLayout();
 		initResources();
@@ -55,8 +61,10 @@ public class PanelForObjectCirculation extends JPanel {
 		this.toolBar = new JToolBar();
 		this.toolBar.setFloatable(false);
 
-		this.buttonAddObject = new SmButton();
-		this.buttonAddObject.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/add.png"));
+		if (isShowAddButton) {
+			this.buttonAddObject = new SmButton();
+			this.buttonAddObject.setIcon(ControlsResources.getIcon("/controlsresources/ToolBar/ColorScheme/add.png"));
+		}
 
 		this.buttonSelectAll = new SmButton();
 		this.buttonSelectAll.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_SelectAll.png"));
@@ -101,8 +109,10 @@ public class PanelForObjectCirculation extends JPanel {
 	}
 
 	private void initLayout() {
-		this.toolBar.add(this.buttonAddObject);
-		this.toolBar.addSeparator();
+		if (isShowAddButton) {
+			this.toolBar.add(this.buttonAddObject);
+			this.toolBar.addSeparator();
+		}
 		this.toolBar.add(this.buttonSelectAll);
 		this.toolBar.add(this.buttonSelectInvert);
 		this.toolBar.addSeparator();
@@ -119,7 +129,9 @@ public class PanelForObjectCirculation extends JPanel {
 	}
 
 	private void initResources() {
-		this.buttonAddObject.setToolTipText(ControlsProperties.getString("String_Add"));
+		if (isShowAddButton) {
+			this.buttonAddObject.setToolTipText(ControlsProperties.getString("String_Add"));
+		}
 		this.buttonSelectAll.setToolTipText(ControlsProperties.getString("String_SelectAll"));
 		this.buttonSelectInvert.setToolTipText(ControlsProperties.getString("String_SelectReverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_Delete"));
@@ -130,26 +142,43 @@ public class PanelForObjectCirculation extends JPanel {
 	}
 
 	private void registerEvent() {
-		this.buttonAddObject.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String modelName = "CirculationForObjectModel";
-				if (!SmFileChoose.isModuleExist(modelName)) {
-					SmFileChoose.addNewNode("", CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
-							modelName, "OpenMany");
-				}
-				SmFileChoose smFileChoose = new SmFileChoose(modelName);
-				smFileChoose.setAcceptAllFileFilterUsed(true);
-				int state = smFileChoose.showDefaultDialog();
-				if (state == JFileChooser.APPROVE_OPTION) {
-					File[] files = smFileChoose.getSelectFiles();
-					for (int i = 0, length = files.length; i < length; i++) {
-						exchangeTableModel.addRow(files[i].getAbsolutePath());
+		if (isShowAddButton) {
+			this.buttonAddObject.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String modelName = "CirculationForObjectModel";
+					String fileFilters = "";
+					String modelType = "OpenMany";
+					if (null != fileType) {
+						modelName += fileType;
+						if (!fileType.equals(ISDIR)) {
+							fileFilters = SmFileChoose.buildFileFilters(SmFileChoose.createFileFilter(MessageFormat.format(ProcessProperties.getString("String_ImportFileType"), fileType.toUpperCase(), fileType.toLowerCase()), fileType.toLowerCase()));
+						} else if (fileType.equals(ISDIR)) {
+							modelType = "GetDirectories";
+						}
+						if (!SmFileChoose.isModuleExist(modelName)) {
+							SmFileChoose.addNewNode(fileFilters, CoreProperties.getString("String_DefaultFilePath"), CoreProperties.getString("String_SelectFile"),
+									modelName, modelType);
+						}
 					}
-					tableForObjectCirculation.setRowSelectionInterval(tableForObjectCirculation.getRowCount() - 1, tableForObjectCirculation.getRowCount() - 1);
+
+					SmFileChoose smFileChoose = new SmFileChoose(modelName);
+					smFileChoose.setAcceptAllFileFilterUsed(true);
+					int state = smFileChoose.showDefaultDialog();
+					if (state == JFileChooser.APPROVE_OPTION) {
+						if (null != fileType && fileType.equals(ISDIR)) {
+							exchangeTableModel.addRow(smFileChoose.getSelectedFile().getAbsolutePath());
+						} else {
+							File[] files = smFileChoose.getSelectFiles();
+							for (int i = 0, length = files.length; i < length; i++) {
+								exchangeTableModel.addRow(files[i].getAbsolutePath());
+							}
+						}
+						tableForObjectCirculation.setRowSelectionInterval(tableForObjectCirculation.getRowCount() - 1, tableForObjectCirculation.getRowCount() - 1);
+					}
 				}
-			}
-		});
+			});
+		}
 		this.buttonSelectAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -293,5 +322,16 @@ public class PanelForObjectCirculation extends JPanel {
 
 	public ArrayList<String> getPathList() {
 		return pathList;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public void addRow(Object rowInfo) {
+		this.exchangeTableModel.addRow(rowInfo);
+		if (this.tableForObjectCirculation.getRowCount() > 0) {
+			this.tableForObjectCirculation.setRowSelectionInterval(this.tableForObjectCirculation.getRowCount() - 1, this.tableForObjectCirculation.getRowCount() - 1);
+		}
 	}
 }

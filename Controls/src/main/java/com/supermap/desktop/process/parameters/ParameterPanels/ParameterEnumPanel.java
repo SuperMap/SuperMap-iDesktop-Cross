@@ -39,7 +39,7 @@ public class ParameterEnumPanel extends SwingPanel {
 		label.setText(getDescribe());
 		initComboBoxItems();
 		comboBox.setSelectedItem(this.parameterEnum.getSelectedItem());
-		ComponentUIUtilities.setName(this.comboBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.comboBox, parameter.getDescription());
 		initListeners();
 		initLayout();
 	}
@@ -95,8 +95,8 @@ public class ParameterEnumPanel extends SwingPanel {
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterEnum.getDescribe();
-		if (parameterEnum.isRequisite()) {
+		String describe = parameterEnum.getDescription();
+		if (parameterEnum.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

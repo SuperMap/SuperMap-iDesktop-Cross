@@ -21,7 +21,7 @@ public class ParameterTargetCoordSys extends AbstractParameter implements ISelec
 	}
 
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 

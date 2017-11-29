@@ -459,8 +459,8 @@ public class JDialogDatasetCopy extends SmDialog {
 
 			table.getColumnModel().getColumn(COLUMN_INDEX_Dataset).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDataset"));
 			table.getColumnModel().getColumn(COLUMN_INDEX_CurrentDatasource).setHeaderValue(CoreProperties.getString("String_ColumnHeader_SourceDatasource"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDatasource).setHeaderValue(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
-			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDataset).setHeaderValue(CoreProperties.getString("String_ColumnHeader_TargetDataset"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDatasource).setHeaderValue(CoreProperties.getString("String_Label_TargetDatasource"));
+			table.getColumnModel().getColumn(COLUMN_INDEX_TargetDataset).setHeaderValue(CoreProperties.getString("String_Label_TargetDataset"));
 			table.getColumnModel().getColumn(COLUMN_INDEX_EncodeType).setHeaderValue(CoreProperties.getString("String_ColumnHeader_EncodeType"));
 			table.getColumnModel().getColumn(COLUMN_INDEX_Charset).setHeaderValue(DataEditorProperties.getString("String_Charset"));
 

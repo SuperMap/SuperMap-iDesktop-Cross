@@ -332,7 +332,7 @@ public class DialogCacheOperationView extends SmDialog {
 				this.labelSciFileForResume.setText(CoreProperties.getString("String_SciFilePath"));
 				break;
 			case DialogMapCacheClipBuilder.MultiProcessClip:
-				this.radioButtonMultiMissionNew.setText(CoreProperties.getString("String_MultiCacheNew"));
+				this.radioButtonMultiMissionNew.setText(CoreProperties.getString("String_NewCacheMission"));
 				this.labelMultiMissionNew.setText(CoreProperties.getString("String_MultiCacheNewTip"));
 				this.radioButtonMultiMissionExecute.setText(CoreProperties.getString("String_MultiCacheExecute"));
 				this.labelMultiMissionExecute.setText(CoreProperties.getString("String_MultiCahceExecuteTip"));

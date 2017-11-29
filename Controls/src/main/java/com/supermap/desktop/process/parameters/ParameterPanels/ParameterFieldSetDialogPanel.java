@@ -32,9 +32,9 @@ public class ParameterFieldSetDialogPanel extends SwingPanel {
 	}
 
 	private void initComponents() {
-		String describe = parameterFieldSetDialog.getDescribe() == null ? CoreProperties.getString("String_FieldsSetting") : parameterFieldSetDialog.getDescribe();
+		String describe = parameterFieldSetDialog.getDescription() == null ? CoreProperties.getString("String_FieldsSetting") : parameterFieldSetDialog.getDescription();
 		button.setText(describe);
-		ComponentUIUtilities.setName(this.button, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.button, parameter.getDescription());
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

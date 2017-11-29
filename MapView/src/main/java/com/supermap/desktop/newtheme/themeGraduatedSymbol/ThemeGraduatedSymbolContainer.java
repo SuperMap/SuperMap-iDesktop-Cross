@@ -515,8 +515,8 @@ public class ThemeGraduatedSymbolContainer extends ThemeChangePanel {
 					switch (unity) {
 						case 0:
 							themeGraduatedSymbol.setOffsetFixed(true);
-							labelOffsetXUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
-							labelOffsetYUnity.setText(MapViewProperties.getString("String_Combobox_MM"));
+							labelOffsetXUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
+							labelOffsetYUnity.setText(MapViewProperties.getString("String_DistanceUnit_Millimeter"));
 							refreshAtOnce();
 							break;
 						case 1:

@@ -176,6 +176,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		ReflectInfo targetDatasource = new ReflectInfo();
 		targetDatasource.methodName = "setTargetDatasource";
 		parameterDatasource = new ParameterDatasourceConstrained();
+		parameterDatasource.setRequired(true);
 		parameterDatasource.addValueLegalListener(new ParameterValueLegalListener() {
 			@Override
 			public boolean isValueLegal(ParameterValueLegalEvent event) {
@@ -265,6 +266,11 @@ public class ImportParameterCreator implements IImportParameterCreator {
 		reflectInfoSpatialIndex.parameter = parameterSpatialIndex;
 		ParameterCombine parameterCombineDatasetIndex = new ParameterCombine(ParameterCombine.HORIZONTAL).addParameters(parameterSpatialIndex, parameterFieldIndex);
 		ReflectInfo reflectInfoDatasetType;
+		ReflectInfo reflectInfoImportEmptyDataset = new ReflectInfo();
+		ParameterCheckBox parameterImportEmptyDataset = new ParameterCheckBox(ControlsProperties.getString("String_checkbox_chckbxImportEmptyDataset"));
+		reflectInfoImportEmptyDataset.parameter = parameterImportEmptyDataset;
+		reflectInfoImportEmptyDataset.methodName = "setImportEmptyDataset";
+
 		if (importSetting instanceof ImportSettingGPX) {
 			//导入为GPX类型时直接返回
 			reflectInfoArray.add(targetDatasource);
@@ -309,13 +315,22 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			reflectInfoArray.add(reflectInfoEncodeType);
 			reflectInfoArray.add(reflectInfoImportMode);
 			reflectInfoArray.add(reflectInfoDatasetType);
-			reflectInfoArray.add(reflectInfoSpatialIndex);
-			reflectInfoArray.add(reflectInfoFieldIndex);
 			if (importSetting instanceof ImportSettingGeoJson) {
+				reflectInfoArray.add(reflectInfoImportEmptyDataset);
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
-						parameterDatasetTypeEnum);
+						parameterDatasetTypeEnum, parameterImportEmptyDataset);
 			} else {
+				reflectInfoArray.add(reflectInfoSpatialIndex);
+				reflectInfoArray.add(reflectInfoFieldIndex);
+				if (importSetting instanceof ImportSettingDXF || importSetting instanceof ImportSettingDWG) {
+					reflectInfoArray.add(reflectInfoImportEmptyDataset);
+					return initResultsetParameterCombine(parameterCombineSaveResult,
+							parameterCombineSecond,
+							parameterDatasetTypeEnum,
+							parameterCombineDatasetIndex,
+							parameterImportEmptyDataset);
+				}
 				return initResultsetParameterCombine(parameterCombineSaveResult,
 						parameterCombineSecond,
 						parameterDatasetTypeEnum,
@@ -358,12 +373,16 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			if (importSetting instanceof ImportSettingSHP) {
 				reflectInfoArray.add(reflectInfoSpatialIndex);
 				reflectInfoArray.add(reflectInfoFieldIndex);
-				return initResultsetParameterCombine(parameterCombineSaveResult, parameterCombineSecond, parameterCombineDatasetIndex);
+				reflectInfoArray.add(reflectInfoImportEmptyDataset);
+				return initResultsetParameterCombine(parameterCombineSaveResult, parameterCombineSecond, parameterCombineDatasetIndex, parameterImportEmptyDataset);
 			} else if (importSetting instanceof ImportSettingE00 || importSetting instanceof ImportSettingGJB
 					|| importSetting instanceof ImportSettingTEMSVector || importSetting instanceof ImportSettingTEMSBuildingVector
 					|| importSetting instanceof ImportSettingFileGDBVector) {
 				reflectInfoArray.add(reflectInfoSpatialIndex);
 				return initResultsetParameterCombine(parameterCombineSaveResult, parameterCombineSecond, parameterSpatialIndex);
+			} else if (importSetting instanceof ImportSettingSimpleJson) {
+				reflectInfoArray.add(reflectInfoImportEmptyDataset);
+				return initResultsetParameterCombine(parameterCombineSaveResult, parameterCombineSecond, parameterImportEmptyDataset);
 			} else {
 				return initResultsetParameterCombine(parameterCombineSaveResult, parameterCombineSecond);
 			}
@@ -512,7 +531,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 				}
 			});
 		} else {
-			parameterFile.setRequisite(true);
+			parameterFile.setRequired(true);
 		}
 		parameterCombineSourceInfoSet.addParameters(parameterFile);
 		if (hasCharsetParameter) {

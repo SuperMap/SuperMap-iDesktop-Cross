@@ -179,7 +179,7 @@ public class JDialogSetAll extends SmDialog {
 	 * 控件资源化
 	 */
 	private void initializeResource() {
-		this.checkBoxTargetDatasource.setText(CoreProperties.getString("String_ColumnHeader_TargetDatasource"));
+		this.checkBoxTargetDatasource.setText(CoreProperties.getString("String_Label_TargetDatasource"));
 		this.checkBoxDatasetType.setText(DataEditorProperties.getString("String_CreateType"));
 //		this.checkBoxEncodingType.setText(CommonProperties.getString("String_ColumnHeader_EncodeType"));
 //		this.checkBoxCharest.setText(DataEditorProperties.getString("String_Charset"));

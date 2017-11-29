@@ -1,7 +1,7 @@
 package com.supermap.desktop.mapview.layer.propertycontrols;
 
 import com.supermap.desktop.Application;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.ScaleModel;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.exception.InvalidScaleException;
@@ -105,10 +105,10 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		this.textFieldLayerCaption = new JTextField();
 		this.spinnerTransparence = new SMSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 		this.comboBoxMinVisibleScale = new JComboBox<>();
-		this.minScaleError=new WarningOrHelpProvider(MapViewProperties.getString("String_MinScaleErroe"),true);
+		this.minScaleError = new WarningOrHelpProvider(MapViewProperties.getString("String_MinScaleErroe"), true);
 		this.minScaleError.hideWarning();
 		this.comboBoxMaxVisibleScale = new JComboBox<>();
-		this.maxScaleError=new WarningOrHelpProvider(MapViewProperties.getString("String_MaxScaleError"),true);
+		this.maxScaleError = new WarningOrHelpProvider(MapViewProperties.getString("String_MaxScaleError"), true);
 		this.maxScaleError.hideWarning();
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -126,11 +126,11 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 						.addComponent(labelTransparence)
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(labelMinVisibleScale)
-								.addComponent(this.minScaleError,23,23,23))
+								.addComponent(this.minScaleError, 23, 23, 23))
 						.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(labelMaxVisibleScale)
-								.addComponent(this.maxScaleError,23,23,23))
-						)
+								.addComponent(this.maxScaleError, 23, 23, 23))
+				)
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsEditable)
 						.addComponent(checkBoxIsSnapable)
@@ -139,7 +139,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 						.addComponent(spinnerTransparence, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)
 						.addComponent(comboBoxMinVisibleScale, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)
 						.addComponent(comboBoxMaxVisibleScale, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)));
-		
+
 		groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
 				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxIsVisible)
@@ -167,6 +167,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		// @formatter:on
 		setComponentName();
 	}
+
 	private void setComponentName() {
 		ComponentUIUtilities.setName(this.checkBoxIsVisible, "LayerBasePropertyControl_checkBoxIsVisible");
 		ComponentUIUtilities.setName(this.checkBoxIsEditable, "LayerBasePropertyControl_checkBoxIsEditable");
@@ -183,6 +184,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		ComponentUIUtilities.setName(this.comboBoxMinVisibleScale, "LayerBasePropertyControl_comboBoxMinVisibleScale");
 		ComponentUIUtilities.setName(this.comboBoxMaxVisibleScale, "LayerBasePropertyControl_comboBoxMaxVisibleScale");
 	}
+
 	@Override
 	protected void initializeResources() {
 		((TitledBorder) this.getBorder()).setTitle(MapViewProperties.getString("String_MapProperty_VisualControl"));
@@ -252,11 +254,11 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 	}
 
 	//
-	private void isShowWarning(){
+	private void isShowWarning() {
 		this.minScaleError.hideWarning();
 		this.maxScaleError.hideWarning();
-		if (Double.compare(getLayerPropertyModel().getMinVisibleScale(),getLayerPropertyModel().getMaxVisibleScale())>=0 &&
-				Double.compare(getLayerPropertyModel().getMinVisibleScale(),0)!=0 &&Double.compare(getLayerPropertyModel().getMaxVisibleScale(),0)!=0){
+		if (Double.compare(getLayerPropertyModel().getMinVisibleScale(), getLayerPropertyModel().getMaxVisibleScale()) >= 0 &&
+				Double.compare(getLayerPropertyModel().getMinVisibleScale(), 0) != 0 && Double.compare(getLayerPropertyModel().getMaxVisibleScale(), 0) != 0) {
 			this.minScaleError.showWarning();
 		}
 	}
@@ -325,14 +327,14 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 		checkChanged();
 	}
 
-	private boolean precisionControl(double d1,double d2){
-		boolean isEqual =false;
-		if (Double.compare(d1,d2)==-1){
-			isEqual= DoubleUtilities.equals(d2,d1,8);
-		}else if (Double.compare(d1,d2)==0){
-			isEqual =true;
-		}else{
-			isEqual= DoubleUtilities.equals(d1,d2,8);
+	private boolean precisionControl(double d1, double d2) {
+		boolean isEqual = false;
+		if (Double.compare(d1, d2) == -1) {
+			isEqual = DoubleUtilities.equals(d2, d1, 8);
+		} else if (Double.compare(d1, d2) == 0) {
+			isEqual = true;
+		} else {
+			isEqual = DoubleUtilities.equals(d1, d2, 8);
 		}
 		return isEqual;
 	}
@@ -350,7 +352,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					getModifiedLayerPropertyModel().setMinVisibleScale(selectedScale);
 					this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 					isChanged = true;
-					if (!precisionControl(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) &&Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
+					if (!precisionControl(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) && Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), selectedScale) > 0
 							|| Double.compare(getModifiedLayerPropertyModel().getMaxVisibleScale(), 0) == 0) {
 						this.minScaleError.hideWarning();
 						this.maxScaleError.hideWarning();
@@ -362,13 +364,13 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 //						this.maxScaleError.hideWarning();
 //					}
 					// 如果选中的是当前可见比例尺，那么就把文本设置为当前比例尺，如果选中的是清除，那么就把文本设置为 NONE
-                    if (this.comboBoxMinVisibleScale.getSelectedItem().toString()
-                            .equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
+					if (this.comboBoxMinVisibleScale.getSelectedItem().toString()
+							.equalsIgnoreCase(MapViewProperties.getString("String_SetCurrentScale"))) {
 						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
-                    } else if (this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
-                        this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
+					} else if (this.comboBoxMinVisibleScale.getSelectedItem().toString().equalsIgnoreCase(CoreProperties.getString(CoreProperties.Clear))) {
+						this.comboBoxMinVisibleScale.removeItemListener(comboBoxItemListener);
 						this.comboBoxMinVisibleScale.setSelectedItem(new ScaleModel(ScaleModel.NONE_SCALE));
 						this.comboBoxMinVisibleScale.addItemListener(comboBoxItemListener);
 					}
@@ -392,7 +394,7 @@ public class LayerBasePropertyControl extends AbstractLayerPropertyControl imple
 					getModifiedLayerPropertyModel().setMaxVisibleScale(selectedScale);
 					this.comboBoxMaxVisibleScale.setSelectedItem(new ScaleModel(selectedScale));
 					isChanged = true;
-					if (!precisionControl(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale())&& Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
+					if (!precisionControl(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) && Double.compare(selectedScale, getModifiedLayerPropertyModel().getMinVisibleScale()) > 0 || Double.compare(selectedScale, 0) == 0) {
 						this.maxScaleError.hideWarning();
 						this.minScaleError.hideWarning();
 					} else {

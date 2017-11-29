@@ -46,11 +46,11 @@ public class MetaProcessGridSlice extends MetaProcess {
 		this.sourceDatasource.setDescribe(CoreProperties.getString("String_Label_Datasource"));
 		this.sourceDataset = new ParameterSingleDataset(DatasetType.GRID);
 		this.sourceDataset.setDescribe(CoreProperties.getString("String_Label_Dataset"));
-		this.sourceDataset.setRequisite(true);
+		this.sourceDataset.setRequired(true);
 		this.numberSeries = new ParameterNumber(ProcessProperties.getString("String_SeriesNumber"));
-		this.numberSeries.setRequisite(true);
+		this.numberSeries.setRequired(true);
 		this.numberMinValue = new ParameterNumber(ControlsProperties.getString("String_LabelMinValue"));
-		this.numberMinValue.setRequisite(true);
+		this.numberMinValue.setRequired(true);
 		this.numberMinValue.setTipButtonMessage(ProcessProperties.getString("String_SeriesTip"));
 		this.resultDataset = new ParameterSaveDataset();
 

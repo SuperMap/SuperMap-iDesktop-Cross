@@ -35,8 +35,8 @@ public class ParameterStatisticsFieldGroupForRarefyPointsPanel extends SwingPane
 	}
 
 	private void initComponent() {
-		label.setText(parameterStatisticsFieldGroupForRarefyPoints.getDescribe());
-		label.setToolTipText(parameterStatisticsFieldGroupForRarefyPoints.getDescribe());
+		label.setText(parameterStatisticsFieldGroupForRarefyPoints.getDescription());
+		label.setToolTipText(parameterStatisticsFieldGroupForRarefyPoints.getDescription());
 		tableRarefyPoints.setDatasetVector(null);
 	}
 

@@ -30,7 +30,7 @@ public class ParameterUserDefine extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return "UserDefine";
 	}
 }

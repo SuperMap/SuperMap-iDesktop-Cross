@@ -104,7 +104,7 @@ public class ComputerUtilities {
                 String line;
                 while ((line = br.readLine()) != null) {
                     String info = "HWaddr";
-	                String infoChina = CoreProperties.getString("String_ChinaMac");
+	                String infoChina = CoreProperties.getString("String_MacAddress");
 	                if (line.contains(info)&&line.indexOf(info) > 0) {
                             int index = line.indexOf(info) + info.length();
                             address = line.substring(index);

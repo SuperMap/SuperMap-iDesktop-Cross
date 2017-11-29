@@ -45,13 +45,14 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 					break;
 				}
 			}
-		} else {
+		} else if (datasources.length > 0) {
 			// 数据源
 			prjCoordSys = datasources[0].getPrjCoordSys();
 			titleName = ControlsProperties.getString("String_Label_Datasource") + datasources[0].getAlias();
 		}
 
 		JDialogPrjCoordSysSettings dialogPrjCoordSysSettings = new JDialogPrjCoordSysSettings(titleName);
+
 		if (prjCoordSys != null) {
 			dialogPrjCoordSysSettings.setPrjCoordSys(prjCoordSys);
 		}
@@ -83,7 +84,7 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 							// 提示是否设置到所有数据集
 							JDialogConfirm dialogConfirm = new JDialogConfirm(MessageFormat.format(ControlsProperties.getString("String_ApplyPrjCoordSys"),
 									datasource.getAlias()), true);
-							dialogConfirm.showDialogWithYesNoOpition();
+							dialogConfirm.showDialog();
 							isDontAskSetToAllDatasets = dialogConfirm.isUsedAsDefault();
 							if (dialogConfirm.getDialogResult() == DialogResult.OK) {
 								isSetToAllDatasets = true;
@@ -126,17 +127,15 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 									datasource.getDatasets().get(i).setPrjCoordSys(newPrjCoordSys);
 								}
 							}
+							Application
+									.getActiveApplication()
+									.getOutput()
+									.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
+											newPrjCoordSys.getName()));
 						}
-
-						Application
-								.getActiveApplication()
-								.getOutput()
-								.output(MessageFormat.format(DataViewProperties.getString("String_DatasourcePrjCoordSysSuccessful"), datasource.getAlias(),
-										newPrjCoordSys.getName()));
 					}
 				}
 			}
-			// TODO 刷新属性
 			PropertyManagerUtilities.refreshPropertyManager();
 		}
 	}
@@ -146,15 +145,7 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 		if (null != Application.getActiveApplication().getActiveDatasets() && null != Application.getActiveApplication().getActiveDatasources()) {
 			Dataset[] datasets = Application.getActiveApplication().getActiveDatasets();
 			Datasource[] datasources = Application.getActiveApplication().getActiveDatasources();
-			// 选中数据集且存在不为属性表的数据集
-			if (datasets.length > 0) {
-				for (Dataset dataset : datasets) {
-					if (DatasetType.TABULAR != dataset.getType()) {
-						return true;
-					}
-				}
-				return false;
-			}
+
 			// 选中数据源且不含只读数据源
 			if (datasources.length > 0) {
 				for (Datasource datasource : datasources) {
@@ -164,6 +155,17 @@ public class CtrlActionSetProjectionSetting extends CtrlAction {
 				}
 				return true;
 			}
+
+			// 选中数据集且存在不为属性表的数据集
+			if (datasets.length > 0) {
+				for (Dataset dataset : datasets) {
+					if (DatasetType.TABULAR != dataset.getType() && !dataset.isReadOnly()) {
+						return true;
+					}
+				}
+				return false;
+			}
+
 		}
 		return false;
 	}

@@ -81,7 +81,7 @@ public class JDialogDatasetLineTopo extends SmDialog {
 		this.checkboxRedundantVerticesCleaned.setText(DataTopologyProperties.getString("String_RedundantVertices"));
 		this.labelDatasource.setText(CoreProperties.getString("String_Label_Datasource"));
 		this.labelDataset.setText(CoreProperties.getString("String_Label_Dataset"));
-		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_ColumnHeader_SourceData"), TitledBorder.LEADING,
+		this.panelDatasource.setBorder(new TitledBorder(null, CoreProperties.getString("String_GroupBox_SourceData"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		this.panelTopoProcessingOptions.setBorder(new TitledBorder(null, DataTopologyProperties.getString("String_FixTopoErrorSettings"), TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));

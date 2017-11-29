@@ -5,7 +5,7 @@ import com.supermap.data.FieldType;
 import com.supermap.data.GeoStyle;
 import com.supermap.data.TextStyle;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
@@ -55,17 +55,17 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 	private JLabel labelMinColorTransparence;
 	private SMSpinner smSpinnerMinColorTransparence;
 	private JCheckBox checkboxShowLabel;
-	private JButton buttonSetingLabel;
-	private JPanel panelBorderStyle;
-	private JLabel labelLineType;
+    private JButton buttonSettingLabel;
+    private JPanel panelBorderStyle;
+    private JLabel labelLineType;
 	private SmComboBox comboBoxLineType;
 	private JLabel labelLineColor;
 	private ComponentDropDown componentDropDownLineColor;
 	private JLabel labelBorderTransparence;
 	private SMSpinner smSpinnerLineColorTransparence;
-	private JLabel labelBoderWidth;
-	private SMSpinner smSpinnerLineWidth;
-	private TextStyle textStyle;
+    private JLabel labelBorderWidth;
+    private SMSpinner smSpinnerLineWidth;
+    private TextStyle textStyle;
 	private GeoStyle lineStyle;
 	private LabelSettingDialog labelSettingDialog = null;
 	private final String urlStr = "/coreresources/";
@@ -108,19 +108,19 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.labelMinColorTransparence = new JLabel("MinColorTransparence");
 		this.smSpinnerMinColorTransparence = new SMSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 		this.checkboxShowLabel = new JCheckBox();
-		this.buttonSetingLabel = new JButton("SetingLabel");
-		this.panelBorderStyle = new JPanel();
-		this.labelLineType = new JLabel("LineType");
+        this.buttonSettingLabel = new JButton("SetingLabel");
+        this.panelBorderStyle = new JPanel();
+        this.labelLineType = new JLabel("LineType");
 		this.comboBoxLineType = new SmComboBox();
 		this.labelLineColor = new JLabel("LineColor");
 		this.componentDropDownLineColor = new ComponentDropDown(ComponentDropDown.COLOR_TYPE);
 		this.labelBorderTransparence = new JLabel("BorderTransparence");
 		this.smSpinnerLineColorTransparence = new SMSpinner(new SpinnerNumberModel(0, 0, 100, 1));
-		this.labelBoderWidth = new JLabel("BoderWidth");
-		this.smSpinnerLineWidth = new SMSpinner(new SpinnerNumberModel(0.1, 0.1, 20, 1));
-		this.buttonSetingLabel.setEnabled(false);
-		this.dataCellNULL = new DataCell();
-		this.dataCellSolidLine = new DataCell();
+        this.labelBorderWidth = new JLabel("BoderWidth");
+        this.smSpinnerLineWidth = new SMSpinner(new SpinnerNumberModel(0.1, 0.1, 20, 1));
+        this.buttonSettingLabel.setEnabled(false);
+        this.dataCellNULL = new DataCell();
+        this.dataCellSolidLine = new DataCell();
 		this.dataCellDottedLine = new DataCell();
 		this.dataCellNULL.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_Null.png")), CoreProperties.getString("String_None"));
 		this.dataCellSolidLine.initDataImage(((ImageIcon) CoreResources.getIcon(urlStr + "Image_SolidLine.png")), MapViewProperties.getString("String_SymbolImage_SolidLine"));
@@ -137,9 +137,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 						.addComponent(this.labelLineType)
 						.addComponent(this.labelLineColor)
 						.addComponent(this.labelBorderTransparence)
-						.addComponent(this.labelBoderWidth))
-				.addGap(50)
-				.addGroup(groupLayoutBorderStyle.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(this.labelBorderWidth))
+                .addGap(50)
+                .addGroup(groupLayoutBorderStyle.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addComponent(this.comboBoxLineType, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)
 						.addComponent(this.componentDropDownLineColor, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)
 						.addComponent(this.smSpinnerLineColorTransparence, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)
@@ -156,9 +156,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 						.addComponent(this.labelBorderTransparence)
 						.addComponent(this.smSpinnerLineColorTransparence, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayoutBorderStyle.createParallelGroup(GroupLayout.Alignment.CENTER)
-						.addComponent(this.labelBoderWidth)
-						.addComponent(this.smSpinnerLineWidth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		);
+                        .addComponent(this.labelBorderWidth)
+                        .addComponent(this.smSpinnerLineWidth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        );
 //		if (this.textStyle == null) {
 //			this.textStyle = new TextStyle();
 //		}
@@ -196,7 +196,7 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 												.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 														.addComponent(this.smSpinnerMaxColorTransparence, 55, 55, Short.MAX_VALUE)
 														.addComponent(this.smSpinnerMinColorTransparence, 55, 55, Short.MAX_VALUE)))
-										.addComponent(this.buttonSetingLabel, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)))
+                                        .addComponent(this.buttonSettingLabel, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_WIDTH, Short.MAX_VALUE)))
 //				.addComponent(this.panelTextStyle)
 						.addComponent(this.panelBorderStyle)
 		);
@@ -228,7 +228,7 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 						.addComponent(this.smSpinnerMinColorTransparence, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
 						.addComponent(this.checkboxShowLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(this.buttonSetingLabel, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_HEIGHT, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(this.buttonSettingLabel, GroupLayout.PREFERRED_SIZE, DefaultValues.DEFAULT_COMPONENT_HEIGHT, GroupLayout.PREFERRED_SIZE))
 //				.addComponent(this.panelTextStyle)
 				.addComponent(this.panelBorderStyle));
 
@@ -248,12 +248,12 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.labelMinColor.setText(MapViewProperties.getString("String_LayerHeatmap_MinColor"));
 		this.labelMinColorTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
 		this.checkboxShowLabel.setText(MapViewProperties.getString("String_LayerGridAggregation_ShowLabel"));
-		this.buttonSetingLabel.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
-		this.labelLineType.setText(MapViewProperties.getString("String_LayerGridAggregation_LineType"));
-		this.labelLineColor.setText(ControlsProperties.getString("String_Label_LineColor"));
+        this.buttonSettingLabel.setText(MapViewProperties.getString("String_LayerGridAggregation_SetingLabel"));
+        this.labelLineType.setText(MapViewProperties.getString("String_LayerGridAggregation_LineType"));
+        this.labelLineColor.setText(ControlsProperties.getString("String_Label_LineColor"));
 		this.labelBorderTransparence.setText(ControlsProperties.getString("String_Label_Transparence"));
-		this.labelBoderWidth.setText(CoreProperties.getString("String_Label_LineWidth"));
-	}
+        this.labelBorderWidth.setText(CoreProperties.getString("String_Label_LineWidth"));
+    }
 
 	@Override
 	protected void fillComponents() {
@@ -266,9 +266,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 			this.smSpinnerMaxColorTransparence.setValue(getLayerPropertyModel().getMaxColorTransparence());
 			this.smSpinnerMinColorTransparence.setValue(getLayerPropertyModel().getMinColorTransparence());
 			this.checkboxShowLabel.setSelected(getLayerPropertyModel().getShowGridLabel());
-			this.buttonSetingLabel.setEnabled(this.checkboxShowLabel.isSelected());
-			fillLineStyle(getLayerPropertyModel().getLineStyle());
-			if (getLayerPropertyModel().getTextStyle() == null) {
+            this.buttonSettingLabel.setEnabled(this.checkboxShowLabel.isSelected());
+            fillLineStyle(getLayerPropertyModel().getLineStyle());
+            if (getLayerPropertyModel().getTextStyle() == null) {
 				this.textStyle = new TextStyle();
 			} else {
 				this.textStyle = getLayerPropertyModel().getTextStyle();
@@ -287,9 +287,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.componentDropDownMinColor.addPropertyChangeListener(this.propertyChangeListenerMinColor);
 		this.smSpinnerMinColorTransparence.addChangeListener(this.changeListenerMinColorTransparence);
 		this.checkboxShowLabel.addActionListener(this.actionListenerIsSettingLabelStyle);
-		this.buttonSetingLabel.addActionListener(this.buttonSettingLabelStyle);
-		this.comboBoxLineType.addItemListener(this.selectedChangeListenerLineType);
-		this.componentDropDownLineColor.addPropertyChangeListener(this.propertyChangeListenerlineColor);
+        this.buttonSettingLabel.addActionListener(this.buttonSettingLabelStyle);
+        this.comboBoxLineType.addItemListener(this.selectedChangeListenerLineType);
+        this.componentDropDownLineColor.addPropertyChangeListener(this.propertyChangeListenerlineColor);
 		this.smSpinnerLineColorTransparence.addChangeListener(this.changeListenerLineColorTransparence);
 		this.smSpinnerLineWidth.addChangeListener(this.changeListenerLineWidth);
 	}
@@ -304,9 +304,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 		this.componentDropDownMinColor.removePropertyChangeListener(this.propertyChangeListenerMinColor);
 		this.smSpinnerMinColorTransparence.removeChangeListener(this.changeListenerMinColorTransparence);
 		this.checkboxShowLabel.removeActionListener(this.actionListenerIsSettingLabelStyle);
-		this.buttonSetingLabel.removeActionListener(this.buttonSettingLabelStyle);
-		this.comboBoxLineType.removeItemListener(this.selectedChangeListenerLineType);
-		this.componentDropDownLineColor.removePropertyChangeListener(this.propertyChangeListenerlineColor);
+        this.buttonSettingLabel.removeActionListener(this.buttonSettingLabelStyle);
+        this.comboBoxLineType.removeItemListener(this.selectedChangeListenerLineType);
+        this.componentDropDownLineColor.removePropertyChangeListener(this.propertyChangeListenerlineColor);
 		this.smSpinnerLineColorTransparence.removeChangeListener(this.changeListenerLineColorTransparence);
 		this.smSpinnerLineWidth.removeChangeListener(this.changeListenerLineWidth);
 	}
@@ -577,9 +577,9 @@ public class LayerGridAggregationPropertyControl extends AbstractLayerPropertyCo
 	}
 
 	private void showLabelChange() {
-		this.buttonSetingLabel.setEnabled(this.checkboxShowLabel.isSelected());
-		getModifiedLayerPropertyModel().setShowGridLabel(this.checkboxShowLabel.isSelected());
-		checkChanged();
+        this.buttonSettingLabel.setEnabled(this.checkboxShowLabel.isSelected());
+        getModifiedLayerPropertyModel().setShowGridLabel(this.checkboxShowLabel.isSelected());
+        checkChanged();
 	}
 
 	private void textStyleChange() {

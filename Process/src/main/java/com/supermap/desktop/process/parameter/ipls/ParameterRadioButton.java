@@ -76,7 +76,7 @@ public class ParameterRadioButton extends AbstractParameter implements ISingleSe
 		Collections.addAll(items, parameterDataNodes);
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

@@ -38,7 +38,7 @@ public class ParameterDatasets extends AbstractParameter implements IMultiSelect
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return null;
 	}
 }

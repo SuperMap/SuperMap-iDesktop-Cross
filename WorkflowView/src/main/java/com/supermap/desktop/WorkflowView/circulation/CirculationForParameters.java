@@ -28,7 +28,7 @@ public class CirculationForParameters extends AbstractCirculationParameters {
 		this.startValue = new ParameterTextField(ControlsProperties.getString("String_BatchAddColorTableMinValue"));
 		this.startValue.setSelectedItem(0);
 		this.endValue = new ParameterTextField(ControlsProperties.getString("String_BatchAddColorTableMaxValue"));
-		this.endValue.setRequisite(true);
+		this.endValue.setRequired(true);
 		this.iteratorValue = new ParameterTextField(ProcessProperties.getString("String_MeasureValue"));
 		this.iteratorValue.setSelectedItem(1);
 		nowValue = start = 0;

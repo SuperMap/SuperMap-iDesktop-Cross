@@ -36,8 +36,8 @@ public class ParameterColorsTablePanel extends SwingPanel implements IParameterP
 		this.parameterColorsTable = (ParameterColorsTable) parameterColor;
 		this.parameterColorsTable.setSelectedItem(colorsComboBox.getSelectedItem());
 		label.setText(getDescribe());
-		label.setToolTipText(this.parameterColorsTable.getDescribe());
-		ComponentUIUtilities.setName(this.colorsComboBox, parameter.getDescribe());
+		label.setToolTipText(this.parameterColorsTable.getDescription());
+		ComponentUIUtilities.setName(this.colorsComboBox, parameter.getDescription());
 		initLayout();
 		initListeners();
 	}
@@ -73,8 +73,8 @@ public class ParameterColorsTablePanel extends SwingPanel implements IParameterP
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterColorsTable.getDescribe();
-		if (parameterColorsTable.isRequisite()) {
+		String describe = parameterColorsTable.getDescription();
+		if (parameterColorsTable.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

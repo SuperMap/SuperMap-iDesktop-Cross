@@ -162,6 +162,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 			if (!StringUtilities.isNullOrEmpty(fileType)) {
 				//导入信息参数设置
 				importInfo.setFileName(file.getName());
+				importInfo.setFilePath(file.getPath());
 				String filetype = FiletypeUtilities.getParseFile(file.getPath(), fileFilter);
 				importInfo.setFiletype(filetype);
 				importInfo.setState(DataConversionProperties.getString("string_change"));
@@ -506,7 +507,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 		pane.setLayout(new GridBagLayout());
 		this.panelImportInfo.add(this.labelTitle, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.HORIZONTAL).setInsets(5).setWeight(1, 0));
 		this.panelImportInfo.add(pane, new GridBagConstraintsHelper(0, 1, 2, 1).setAnchor(GridBagConstraints.NORTH).setFill(GridBagConstraintsHelper.BOTH).setWeight(1, 1));
-		this.panelImportInfo.add(this.buttonImport, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 10).setWeight(1, 0));
+		this.panelImportInfo.add(this.buttonImport, new GridBagConstraintsHelper(0, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(1, 0));
 		this.panelImportInfo.add(this.buttonClose, new GridBagConstraintsHelper(1, 2, 1, 1).setAnchor(GridBagConstraints.EAST).setInsets(5, 0, 5, 5).setWeight(0, 0));
 		this.labelTitle.setPreferredSize(new Dimension(200, 30));
 		this.labelTitle.setMinimumSize(new Dimension(200, 30));
@@ -800,6 +801,7 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 			importSetting.setSourceFilePath(directories);
 			importInfo.setImportSetting(importSetting);
 			importInfo.setFileName(directories);
+
 			importInfo.setState(DataConversionProperties.getString("string_change"));
 			IImportPanelFactory importPanelFactory = new ImportPanelFactory();
 			PanelImport panelImport = (PanelImport) importPanelFactory.createPanelImport(DataImportDialog.this, importInfo);

@@ -46,7 +46,7 @@ public class ParameterStatisticsFieldGroupForRarefyPoints extends AbstractParame
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

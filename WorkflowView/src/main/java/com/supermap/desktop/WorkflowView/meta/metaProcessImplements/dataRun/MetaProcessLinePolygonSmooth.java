@@ -51,12 +51,12 @@ public class MetaProcessLinePolygonSmooth extends MetaProcess {
 		this.parameterTextFieldSmoothness.setMaxBit(0);
 		this.parameterTextFieldSmoothness.setMinValue(2);
 		this.parameterTextFieldSmoothness.setMaxValue(10);
-		this.parameterTextFieldSmoothness.setRequisite(true);
+		this.parameterTextFieldSmoothness.setRequired(true);
 
 		ParameterCombine parameterCombineSourceData = new ParameterCombine();
 		parameterCombineSourceData.addParameters(this.datasource, this.dataset);
 		parameterCombineSourceData.setDescribe(ControlsProperties.getString("String_GroupBox_SourceDataset"));
-		parameterCombineSourceData.setRequisite(true);
+		parameterCombineSourceData.setRequired(true);
 
 		ParameterCombine parameterCombineParameter = new ParameterCombine();
 		parameterCombineParameter.setDescribe(CoreProperties.getString("String_GroupBox_ParamSetting"));

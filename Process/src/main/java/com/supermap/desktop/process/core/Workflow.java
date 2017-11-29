@@ -183,9 +183,11 @@ public class Workflow implements IWorkflow {
 			bindProcessNode.setAttribute("Key", iterator.getBindProcess().getKey());
 			bindProcessNode.setAttribute("SerialID", String.valueOf(iterator.getBindProcess().getSerialID()));
 			iteratorNode.appendChild(bindProcessNode);
-			Element bindParameterNode = doc.createElement("bindParameter");
-			bindParameterNode.setAttribute("Description", iterator.getBindParameterDescription());
-			iteratorNode.appendChild(bindParameterNode);
+			if (null != iterator.getBindParameterDescription()) {
+				Element bindParameterNode = doc.createElement("bindParameter");
+				bindParameterNode.setAttribute("Description", iterator.getBindParameterDescription());
+				iteratorNode.appendChild(bindParameterNode);
+			}
 			workflowNode.appendChild(iteratorNode);
 		}
 	}
@@ -228,7 +230,9 @@ public class Workflow implements IWorkflow {
 			IProcess process = getProcess(key, serialID);
 			currentIterator.setBindProcess(process);
 			Element bindParameterNode = XmlUtilities.getChildElementNodeByName(iteratorNode, "bindParameter");
-			currentIterator.setBindParameterDescription(bindParameterNode.getAttribute("Description"));
+			if (null != bindParameterNode) {
+				currentIterator.setBindParameterDescription(bindParameterNode.getAttribute("Description"));
+			}
 			this.setIterator(currentIterator);
 		}
 		// 处理 Relation

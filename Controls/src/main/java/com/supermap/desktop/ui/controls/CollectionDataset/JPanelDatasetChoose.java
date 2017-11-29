@@ -91,15 +91,15 @@ public abstract class JPanelDatasetChoose extends JPanel {
 				moveLast();
 				int length = datasets.size();
 				int rowCount = tableDatasetDisplay.getSelectedRowCount();
-				for (int i = length - 1; i >= length-rowCount; i--) {
+				for (int i = length - 1; i >= length - rowCount; i--) {
 					//删除数据集集合内的数据集
 					datasets.remove(datasets.get(i));
 					tableModel.removeRow(i);
 				}
 				if (newSelection < tableModel.getRowCount()) {
 					tableDatasetDisplay.setRowSelectionInterval(newSelection, newSelection);
-				} else if(tableModel.getRowCount()>=1){
-					tableDatasetDisplay.setRowSelectionInterval(newSelection-1,newSelection-1);
+				} else if (tableModel.getRowCount() >= 1) {
+					tableDatasetDisplay.setRowSelectionInterval(newSelection - 1, newSelection - 1);
 				}
 			}
 		}
@@ -130,13 +130,20 @@ public abstract class JPanelDatasetChoose extends JPanel {
 		}
 	};
 
-	private ListSelectionListener listSelectionListener=new ListSelectionListener() {
+	private ListSelectionListener listSelectionListener = new ListSelectionListener() {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			setButtonState();
 		}
 	};
 
+	/**
+	 * 默认构造函数，传入的ArrayList<Dataset> datasets，是初始显示
+	 *
+	 * @param datasets
+	 * @param columnName
+	 * @param enableColumn
+	 */
 	public JPanelDatasetChoose(ArrayList<Dataset> datasets, String[] columnName, boolean[] enableColumn) {
 		this.datasets = datasets;
 		this.columnName = columnName;
@@ -189,13 +196,13 @@ public abstract class JPanelDatasetChoose extends JPanel {
 		this.buttonMoveDown.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveDown.png"));
 		this.buttonMoveLast.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_MoveLast.png"));
 //		this.buttonRefresh.setIcon(CoreResources.getIcon("/coreresources/ToolBar/Image_ToolButton_Refresh.png"));
-		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_AddColor"));
+		this.buttonAddDataset.setToolTipText(ControlsProperties.getString("String_Add"));
 		this.buttonSelectAll.setToolTipText(CoreProperties.getString("String_ToolBar_SelectAll"));
 		this.buttonInvertSelect.setToolTipText(CoreProperties.getString("String_ToolBar_SelectInverse"));
 		this.buttonDelete.setToolTipText(CoreProperties.getString("String_ToolBar_Remove"));
-		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_ToolBar_MoveFirst"));
+		this.buttonMoveFirst.setToolTipText(CoreProperties.getString("String_MoveToFrist"));
 		this.buttonMoveUp.setToolTipText(CoreProperties.getString("String_ToolBar_MoveUp"));
-		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_ToolBar_MoveDown"));
+		this.buttonMoveDown.setToolTipText(CoreProperties.getString("String_MoveToNext"));
 		this.buttonMoveLast.setToolTipText(CoreProperties.getString("String_ToolBar_MoveLast"));
 //		this.buttonRefresh.setToolTipText(CommonProperties.getString("String_Tooltip_RefreshStatus"));
 	}
@@ -208,7 +215,8 @@ public abstract class JPanelDatasetChoose extends JPanel {
 	}
 
 	protected void initComponents() {
-		this.datasets = new ArrayList<>();
+		// 去除下列这行代码，才能实现面板的初始化定制-yuanR2017.11.28
+		//this.datasets = new ArrayList<>();
 		this.scrollPane = new JScrollPane();
 		this.buttonAddDataset = new JButton();
 		this.buttonSelectAll = new JButton();
@@ -382,18 +390,18 @@ public abstract class JPanelDatasetChoose extends JPanel {
 		if (tableDatasetDisplay.getSelectedRows().length > 0) {
 			this.buttonDelete.setEnabled(true);
 
-			if (tableDatasetDisplay.getSelectedRows()[tableDatasetDisplay.getSelectedRows().length-1]==tableDatasetDisplay.getRowCount()-1){
+			if (tableDatasetDisplay.getSelectedRows()[tableDatasetDisplay.getSelectedRows().length - 1] == tableDatasetDisplay.getRowCount() - 1) {
 				this.buttonMoveDown.setEnabled(false);
 				this.buttonMoveLast.setEnabled(false);
-			}else{
+			} else {
 				this.buttonMoveDown.setEnabled(true);
 				this.buttonMoveLast.setEnabled(true);
 			}
 
-			if (tableDatasetDisplay.getSelectedRows()[0]==0){
+			if (tableDatasetDisplay.getSelectedRows()[0] == 0) {
 				this.buttonMoveUp.setEnabled(false);
 				this.buttonMoveFirst.setEnabled(false);
-			}else{
+			} else {
 				this.buttonMoveUp.setEnabled(true);
 				this.buttonMoveFirst.setEnabled(true);
 			}
@@ -468,9 +476,9 @@ public abstract class JPanelDatasetChoose extends JPanel {
 	 */
 	public ArrayList<Dataset> getDatasets() {
 		this.datasets.clear();
-		for (int i=0;i<tableModel.getRowCount();i++){
-			DataCell dataCell=(DataCell) tableModel.getValueAt(i,1);
-			this.datasets.add((Dataset)dataCell.getData());
+		for (int i = 0; i < tableModel.getRowCount(); i++) {
+			DataCell dataCell = (DataCell) tableModel.getValueAt(i, 1);
+			this.datasets.add((Dataset) dataCell.getData());
 		}
 		return datasets;
 	}

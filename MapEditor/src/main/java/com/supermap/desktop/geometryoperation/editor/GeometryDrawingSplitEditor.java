@@ -4,13 +4,7 @@ package com.supermap.desktop.geometryoperation.editor;
  * @author lixiaoyao
  */
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.Geometry;
-import com.supermap.data.GeometryType;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.core.recordset.RecordsetAddNew;
 import com.supermap.desktop.core.recordset.RecordsetDelete;
@@ -18,20 +12,10 @@ import com.supermap.desktop.geometry.Abstract.IGeometry;
 import com.supermap.desktop.geometry.Abstract.ILineFeature;
 import com.supermap.desktop.geometry.Abstract.IRegionFeature;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
-import com.supermap.desktop.geometryoperation.EditControllerAdapter;
-import com.supermap.desktop.geometryoperation.EditEnvironment;
-import com.supermap.desktop.geometryoperation.IEditController;
-import com.supermap.desktop.geometryoperation.IEditModel;
-import com.supermap.desktop.geometryoperation.NullEditController;
-import com.supermap.desktop.geometryoperation.RegionAndLineHighLightStyle;
+import com.supermap.desktop.geometryoperation.*;
 import com.supermap.desktop.geometryoperation.control.MapControlTip;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.utilities.ArrayUtilities;
-import com.supermap.desktop.utilities.GeometryUtilities;
-import com.supermap.desktop.utilities.ListUtilities;
-import com.supermap.desktop.utilities.MapUtilities;
-import com.supermap.desktop.utilities.RecordsetUtilities;
-import com.supermap.desktop.utilities.TabularUtilities;
+import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.Layer;
 import com.supermap.ui.Action;
 import com.supermap.ui.TrackMode;
@@ -126,7 +110,7 @@ public abstract class GeometryDrawingSplitEditor extends AbstractEditor {
     }
 
     @Override
-    public boolean enble(EditEnvironment environment) {
+    public boolean enable(EditEnvironment environment) {
         return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
                 && ListUtilities.isListContainAny(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(),
                 IRegionFeature.class, ILineFeature.class);

@@ -9,6 +9,7 @@ import com.supermap.desktop.WorkflowView.graphics.connection.IConnectable;
 import com.supermap.desktop.WorkflowView.graphics.connection.LineGraph;
 import com.supermap.desktop.WorkflowView.graphics.graphs.*;
 import com.supermap.desktop.WorkflowView.graphics.graphs.decorators.LineErrorDecorator;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.core.DataMatch;
 import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.parameter.events.OutputDataValueChangedEvent;
@@ -45,7 +46,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 	private LineGraph preview;
 	private LineErrorDecorator errorDecorator;
 	private boolean isConnecting = false;
-	private int selectedItemIndex;
+	private int selectedItemIndex = -1;
 
 	public GraphConnectAction(WorkflowCanvas canvas) {
 		this.canvas = canvas;
@@ -125,13 +126,28 @@ public class GraphConnectAction extends CanvasActionAdapter {
 		fromData.addOutputDataValueChangedListener(new OutputDataValueChangedListener() {
 			@Override
 			public void updateDataValue(OutputDataValueChangedEvent e) {
-				if (parameters.get(selectedItemIndex) instanceof ISelectionParameter && parameters.get(selectedItemIndex).isEnabled()) {
+				if (null != parameters.get(selectedItemIndex) &&
+						parameters.get(selectedItemIndex) instanceof ISelectionParameter
+						&& parameters.get(selectedItemIndex).isEnabled()) {
 					((ISelectionParameter) parameters.get(selectedItemIndex)).setSelectedItem(e.getNewValue());
 				}
 			}
 		});
+		JMenuItem premiseItem = new JMenuItem(ProcessProperties.getString("String_premise"));
+		this.inputsMenu.addSeparator();
+		this.inputsMenu.add(premiseItem);
+		premiseItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, endGraph);
+				canvas.addGraph(connectionLineGraph);
+				canvas.getIterator().setBindProcess(endGraph.getProcess());
+				canvas.repaint();
+				inputsMenu.setVisible(false);
+			}
+		});
 		for (int i = 0; i < parameters.size(); i++) {
-			item = new JMenuItem(parameters.get(i).getDescribe());
+			item = new JMenuItem(parameters.get(i).getDescription());
 			this.inputsMenu.add(item);
 			item.setEnabled((parameters.get(i)).isEnabled());
 			final JMenuItem finalItem = item;
@@ -149,7 +165,7 @@ public class GraphConnectAction extends CanvasActionAdapter {
 							ConnectionLineGraph connectionLineGraph = new ConnectionLineGraph(canvas, fromGraph, endGraph);
 							canvas.addGraph(connectionLineGraph);
 							canvas.getIterator().setBindProcess(endGraph.getProcess());
-							canvas.getIterator().setBindParameterDescription(parameters.get(selectedItemIndex).getDescribe());
+							canvas.getIterator().setBindParameterDescription(parameters.get(selectedItemIndex).getDescription());
 							canvas.repaint();
 							inputsMenu.setVisible(false);
 						}
@@ -308,7 +324,9 @@ public class GraphConnectAction extends CanvasActionAdapter {
 			ret = true;
 //			}
 		} else if (this.startGraph instanceof CirculationOutputGraph) {
-			ret = ParameterUtil.getSameTypeParameters(process, ((CirculationOutputGraph) this.startGraph).getOutputData().getType()).size() == 0 ? false : true;
+			//modify by xie 2017.11.29,迭代器可作为前置条件(没有类型匹配的工作流)，执行n次（迭代次数）
+//			ret = ParameterUtil.getSameTypeParameters(process, ((CirculationOutputGraph) this.startGraph).getOutputData().getType()).size() == 0 ? false : true;
+			ret = true;
 		}
 		return ret;
 	}

@@ -101,7 +101,7 @@ public class ParameterPatternsParameter extends ParameterCombine {
 		}
 		this.parameterFile.setModuleName(modelName);
 
-		this.parameterTextFieldKNeighbors.setDescribe(ProcessProperties.getString("String_KNeighbors"));
+		this.parameterTextFieldKNeighbors.setDescribe(ProcessProperties.getString("String_Neighbors"));
 		this.parameterSelfWeightFieldComboBox.setDescribe(ProcessProperties.getString("String_SelfWeightField"));
 
 		this.parameterComboBoxConceptModel.setItems(

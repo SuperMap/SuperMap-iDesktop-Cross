@@ -11,12 +11,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -144,6 +139,7 @@ public class JFileChooserControl extends JComponent {
 		this.textEditor.setBackground(Color.white);
 		this.textEditor.setAutoscrolls(true);
 		this.textEditor.setHorizontalAlignment(JTextField.LEFT);
+		this.textEditor.setPreferredSize(new Dimension(100, 23));
 
 		Dimension buttonDimension = new Dimension(23, 23);
 		this.button = new JButton();
@@ -159,8 +155,8 @@ public class JFileChooserControl extends JComponent {
 		this.fileChooser = new SmFileChoose("");
 
 		this.setLayout(new GridBagLayout());
-		this.add(this.textEditor, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(2, 0));
-		this.add(this.button, new GridBagConstraintsHelper(2, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setWeight(0, 0).setInsets(0, 5, 0, 0));
+		this.add(this.textEditor, new GridBagConstraintsHelper(0, 0, 2, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.HORIZONTAL).setWeight(2, 0).setInsets(0, 0, 5, 0));
+		this.add(this.button, new GridBagConstraintsHelper(2, 0, 1, 1).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE).setWeight(0, 0).setInsets(0, 5, 5, 0));
 	}
 
 	private void setComponentName() {
@@ -249,7 +245,8 @@ public class JFileChooserControl extends JComponent {
 		textComponent.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				firePathCommitted();
+				if (e.isTemporary())
+					firePathCommitted();
 			}
 		});
 

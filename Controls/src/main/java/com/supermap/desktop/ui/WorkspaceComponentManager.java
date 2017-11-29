@@ -8,6 +8,7 @@ import com.supermap.desktop.Interface.*;
 import com.supermap.desktop.controls.property.WorkspaceTreeDataPropertyFactory;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.controls.utilities.SymbolDialogFactory;
+import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.trees.TreeNodeData;
@@ -71,7 +72,7 @@ public class WorkspaceComponentManager extends JComponent {
 		this.workspaceTree.setDragEnabled(true);
 		this.workspaceTree.setShowsRootHandles(true);
 		this.workspaceTree.setTransferHandler(new WorkspaceTreeTransferHandler());
-		this.workspaceTree.setLayoutsNodeVisible(false);
+		this.workspaceTree.setLayoutsNodeVisible(true);
 		if (SystemPropertyUtilities.isWindows()) {
 			this.workspaceTree.setScenesNodeVisible(true);
 		} else {
@@ -450,6 +451,9 @@ public class WorkspaceComponentManager extends JComponent {
 					if (Application.getActiveApplication().getMainFrame().getPropertyManager().isUsable()) {
 						setSelectedDataProperty();
 					}
+					// 去除WorkspaceTree类中树改变监听的事件，在这里才进行事件，确保先设置选择的状态，再设置toolBar的状态
+					// 当tree选择改变时，对Ribbon状态进行更新,因为setActiveDatasourcesAndDatasets（），此时active的数据已做了更新，是正确的。-yuanR2017.11.27
+					ToolbarUIUtilities.updataToolbarsState();
 				}
 			});
 		} catch (Exception ex) {
@@ -567,7 +571,7 @@ public class WorkspaceComponentManager extends JComponent {
 			if (buttonType == MouseEvent.BUTTON3 && clickCount == 1) {
 				//  fix by lixiaoyao 2017/10/10
 				// 当当前点击的坐标超出树当前显示的高度时不需要显示右键菜单，否则显示的右键菜单是当前选中的对象对应的右键菜单，不合理
-				if (this.workspaceTree.getRowForLocation(evt.getX(),evt.getY())!=-1) {
+				if (this.workspaceTree.getRowForLocation(evt.getX(), evt.getY()) != -1) {
 					TreePath[] selectedPaths = this.workspaceTree.getSelectionPaths();
 					CopyOnWriteArrayList<TreeNodeData> selectedNodeDatas = new CopyOnWriteArrayList<TreeNodeData>();
 					for (TreePath selectedPath : selectedPaths) {

@@ -264,7 +264,7 @@ public class DialogSaveChildForms extends SmDialog {
 				} else if (form instanceof IFormLayout) {
 					type = CoreProperties.getString("String_WorkspaceNodeLayout");
 				} else if (form instanceof IFormTabular) {
-					type = CoreProperties.getString("String_WorkspaceNodeTabular");
+					type = CoreProperties.getString("String_AttrsTable");
 				}
 				datas[i] = new Object[]{true, form.getText(), type};
 			}
@@ -328,7 +328,7 @@ public class DialogSaveChildForms extends SmDialog {
 				} else if (form instanceof IFormLayout) {
 					type = CoreProperties.getString("String_WorkspaceNodeLayout");
 				} else if (form instanceof IFormTabular) {
-					type = CoreProperties.getString("String_WorkspaceNodeTabular");
+					type = CoreProperties.getString("String_AttrsTable");
 				}
 				if (tableChildForms.getModel().getValueAt(tableChildForms.getSelectedRow(), 1).equals(form.getText())
 						&& type.equals(tableChildForms.getModel().getValueAt(tableChildForms.getSelectedRow(), 2))) {

@@ -9,7 +9,7 @@ import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.implement.CtrlAction;
 
 /**
- * Created by  on 2017/11/9.
+ * Created by xie on 2017/11/9.
  */
 public class CtrlActionCirculationForDatasourceType extends CtrlAction {
 	public CtrlActionCirculationForDatasourceType(IBaseItem caller, IForm formClass) {

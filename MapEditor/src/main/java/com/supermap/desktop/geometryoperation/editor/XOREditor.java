@@ -1,11 +1,6 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.EditType;
-import com.supermap.data.Geometry;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.geometry.Abstract.IRegionFeature;
 import com.supermap.desktop.geometryoperation.EditEnvironment;
@@ -59,9 +54,9 @@ public class XOREditor extends AbstractEditor {
 	}
 
 	@Override
-	public boolean enble(EditEnvironment environment) {
-		boolean enable = false;
-		if (environment.getEditProperties().getSelectedGeometryCount() > 1 // 选中数至少2个
+    public boolean enable(EditEnvironment environment) {
+        boolean enable = false;
+        if (environment.getEditProperties().getSelectedGeometryCount() > 1 // 选中数至少2个
 				&& ListUtilities.isListOnlyContain(environment.getEditProperties().getSelectedGeometryTypeFeatures(), IRegionFeature.class)
 				&& environment.getEditProperties().getEditableDatasetTypes().size() > 0
 				&& ListUtilities.isListContainAny(environment.getEditProperties().getEditableDatasetTypes(), DatasetType.CAD, DatasetType.REGION)) {

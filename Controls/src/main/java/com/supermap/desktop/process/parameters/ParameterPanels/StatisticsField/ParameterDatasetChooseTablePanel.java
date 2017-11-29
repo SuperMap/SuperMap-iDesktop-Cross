@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	private ParameterDatasetChooseTable datasetChooseTable;
 	private JPanelDatasetChooseForParameter datasetChoosePanel;
-	private final String[] columnNames = {"", CoreProperties.getString("String_ColumnHeader_Dataset"), CoreProperties.getString("String_ColumnHeader_Datasource")};
+	private final String[] columnNames = {"", CoreProperties.getString("String_Dataset"), CoreProperties.getString("String_Datasource")};
 	private final boolean[] enables = {false, false, false};
 
 	public ParameterDatasetChooseTablePanel(IParameter parameter) {
@@ -63,11 +63,11 @@ public class ParameterDatasetChooseTablePanel extends SwingPanel {
 	private void initLayout() {
 		panel.setLayout(new GridBagLayout());
 		panel.add(this.datasetChoosePanel, new GridBagConstraintsHelper(0, 0, 1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setWeight(1, 1));
-		panel.setBorder(new TitledBorder(CoreProperties.getString("String_ColumnHeader_SourceData")));
+		panel.setBorder(new TitledBorder(CoreProperties.getString("String_GroupBox_SourceData")));
 	}
 
 	private void initComponents() {
-		this.datasetChoosePanel = new JPanelDatasetChooseForParameter((ArrayList<Dataset>) datasetChooseTable.getSelectedItem(), columnNames, enables);
+		this.datasetChoosePanel = new JPanelDatasetChooseForParameter(new ArrayList<Dataset>(), columnNames, enables);
 		this.datasetChoosePanel.setIllegalDataset(this.datasetChooseTable.getDataset());
 		if (null != this.datasetChooseTable.getDataset()) {
 			this.datasetChoosePanel.setSupportDatasetTypes(new DatasetType[]{this.datasetChooseTable.getDataset().getType()});

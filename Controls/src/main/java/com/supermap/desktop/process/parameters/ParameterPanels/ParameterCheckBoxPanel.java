@@ -34,7 +34,7 @@ public class ParameterCheckBoxPanel extends SwingPanel implements IParameterPane
 		super(parameterCheckBox);
 		this.parameterCheckBox = (ParameterCheckBox) parameterCheckBox;
 		checkBox.setText(getDescribe());
-		ComponentUIUtilities.setName(this.checkBox, parameter.getDescribe());
+		ComponentUIUtilities.setName(this.checkBox, parameter.getDescription());
 		checkBox.setSelected(Boolean.valueOf(String.valueOf(this.parameterCheckBox.getSelectedItem())));
 		initLayout();
 		initListeners();
@@ -79,8 +79,8 @@ public class ParameterCheckBoxPanel extends SwingPanel implements IParameterPane
 	 * @return
 	 */
 	private String getDescribe() {
-		String describe = parameterCheckBox.getDescribe();
-		if (parameterCheckBox.isRequisite()) {
+		String describe = parameterCheckBox.getDescription();
+		if (parameterCheckBox.isRequired()) {
 			return MessageFormat.format(CoreProperties.getString("String_IsRequiredLable"), describe);
 		} else {
 			return describe;

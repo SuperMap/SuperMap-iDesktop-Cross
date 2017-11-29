@@ -14,7 +14,9 @@ public enum CirculationType {
 	forFieldType("ForFieldType"),
 	forObjectType("ForObjectType"),
 	forDatasetType("ForDatasetType"),
-	forDatasourceType("ForDatasourceType");
+	forDatasourceType("ForDatasourceType"),
+	forFileType("ForFileType"),
+	whileType("whileType");
 
 	private String description;
 
@@ -37,6 +39,12 @@ public enum CirculationType {
 		}
 		if (description.equals(forDatasourceType.toString())) {
 			return forDatasourceType;
+		}
+		if (description.equals(forFileType.toString())) {
+			return forFileType;
+		}
+		if (description.equals(whileType.toString())) {
+			return whileType;
 		}
 		return null;
 	}
@@ -64,6 +72,12 @@ public enum CirculationType {
 			case forDatasourceType:
 				result = ProcessProperties.getString("String_ForDatasourceType");
 				break;
+			case forFileType:
+				result = ProcessProperties.getString("String_ForFileType");
+				break;
+			case whileType:
+				result = ProcessProperties.getString("String_WhileType");
+				break;
 			default:
 				break;
 		}
@@ -88,6 +102,12 @@ public enum CirculationType {
 				break;
 			case forDatasourceType:
 				result = CommonTypes.DATASOURCE;
+				break;
+			case forFileType:
+				result = BasicTypes.STRING;
+				break;
+			case whileType:
+				result = BasicTypes.BASICTYPES;
 				break;
 			default:
 				break;

@@ -1,42 +1,15 @@
 package com.supermap.desktop.geometryoperation.editor;
 
-import com.supermap.data.CoordSysTransMethod;
-import com.supermap.data.CoordSysTransParameter;
-import com.supermap.data.CoordSysTranslator;
-import com.supermap.data.CursorType;
-import com.supermap.data.DatasetType;
-import com.supermap.data.DatasetVector;
-import com.supermap.data.FieldInfos;
-import com.supermap.data.GeoLine;
-import com.supermap.data.GeoRegion;
-import com.supermap.data.GeoStyle;
-import com.supermap.data.Geometrist;
-import com.supermap.data.Geometry;
-import com.supermap.data.GeometryType;
-import com.supermap.data.Recordset;
+import com.supermap.data.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.core.recordset.RecordsetAddNew;
 import com.supermap.desktop.core.recordset.RecordsetDelete;
-import com.supermap.desktop.geometry.Abstract.IGeometry;
-import com.supermap.desktop.geometry.Abstract.ILineFeature;
-import com.supermap.desktop.geometry.Abstract.IMultiPartFeature;
-import com.supermap.desktop.geometry.Abstract.IPointFeature;
-import com.supermap.desktop.geometry.Abstract.IRegionFeature;
+import com.supermap.desktop.geometry.Abstract.*;
 import com.supermap.desktop.geometry.Implements.DGeometryFactory;
-import com.supermap.desktop.geometryoperation.EditControllerAdapter;
-import com.supermap.desktop.geometryoperation.EditEnvironment;
-import com.supermap.desktop.geometryoperation.IEditController;
-import com.supermap.desktop.geometryoperation.IEditModel;
-import com.supermap.desktop.geometryoperation.NullEditController;
-import com.supermap.desktop.geometryoperation.RegionAndLineHighLightStyle;
+import com.supermap.desktop.geometryoperation.*;
 import com.supermap.desktop.geometryoperation.control.MapControlTip;
 import com.supermap.desktop.mapeditor.MapEditorProperties;
-import com.supermap.desktop.utilities.ArrayUtilities;
-import com.supermap.desktop.utilities.CursorUtilities;
-import com.supermap.desktop.utilities.GeometryUtilities;
-import com.supermap.desktop.utilities.ListUtilities;
-import com.supermap.desktop.utilities.MapUtilities;
-import com.supermap.desktop.utilities.TabularUtilities;
+import com.supermap.desktop.utilities.*;
 import com.supermap.mapping.Layer;
 import com.supermap.ui.Action;
 import com.supermap.ui.GeometrySelectedEvent;
@@ -193,33 +166,33 @@ public class SplitByGeometryEditor extends AbstractEditor {
 
         for (Layer layer : layers) {
             if (layer.getSelection().getCount() == 1) {
-                Recordset selectrecordset = null;
-                IGeometry selecteometry = null;
+                Recordset selectedRecordset = null;
+                IGeometry selectedGeometry = null;
 
-                selectrecordset = layer.getSelection().toRecordset();
-                selecteometry = DGeometryFactory.create(selectrecordset.getGeometry()); // 单选
+                selectedRecordset = layer.getSelection().toRecordset();
+                selectedGeometry = DGeometryFactory.create(selectedRecordset.getGeometry()); // 单选
 
-                if (selecteometry instanceof IPointFeature) {
+                if (selectedGeometry instanceof IPointFeature) {
                     if (!editModel.isContainRegion) {
-                        splitGeometry = selecteometry.getGeometry();
+                        splitGeometry = selectedGeometry.getGeometry();
                     } else {
                         Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_RegionCannotSplitByPoint"));
                     }
-                } else if (selecteometry instanceof ILineFeature) {
-                    if (selecteometry instanceof IMultiPartFeature<?> && ((IMultiPartFeature<?>) selecteometry).getPartCount() > 1) {
+                } else if (selectedGeometry instanceof ILineFeature) {
+                    if (selectedGeometry instanceof IMultiPartFeature<?> && ((IMultiPartFeature<?>) selectedGeometry).getPartCount() > 1) {
                         splitGeometry = null;
                         Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_Failed_Message"));
                         Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_NotCorrectGeometry"));
                     } else {
-                        splitGeometry = ((ILineFeature) selecteometry).convertToLine(120);
+                        splitGeometry = ((ILineFeature) selectedGeometry).convertToLine(120);
                     }
-                } else if (selecteometry instanceof IRegionFeature) {
-                    if (selecteometry instanceof IMultiPartFeature<?> && ((IMultiPartFeature<?>) selecteometry).getPartCount() > 1) {
+                } else if (selectedGeometry instanceof IRegionFeature) {
+                    if (selectedGeometry instanceof IMultiPartFeature<?> && ((IMultiPartFeature<?>) selectedGeometry).getPartCount() > 1) {
                         splitGeometry = null;
                         Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_Failed_Message"));
                         Application.getActiveApplication().getOutput().output(MapEditorProperties.getString("String_NotCorrectGeometry"));
                     } else {
-                        splitGeometry = ((IRegionFeature) selecteometry).convertToRegion(120);
+                        splitGeometry = ((IRegionFeature) selectedGeometry).convertToRegion(120);
                     }
                 } else {
                     splitGeometry = null;
@@ -500,7 +473,7 @@ public class SplitByGeometryEditor extends AbstractEditor {
     }
 
     @Override
-    public boolean enble(EditEnvironment environment) {
+    public boolean enable(EditEnvironment environment) {
         // @formatter:off
         return environment.getEditProperties().getEditableSelectedGeometryCount() > 0
                 && ListUtilities.isListOnlyContain(environment.getEditProperties().getEditableSelectedGeometryTypeFeatures(), ILineFeature.class, IRegionFeature.class);

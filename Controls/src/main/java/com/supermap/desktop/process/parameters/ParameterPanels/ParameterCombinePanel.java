@@ -40,8 +40,8 @@ public class ParameterCombinePanel extends SwingPanel implements ParameterCombin
 		}
 		panel.setLayout(new GridBagLayout());
 		int defaultInset = 0;
-		if (!StringUtilities.isNullOrEmpty(parameterCombine.getDescribe())) {
-			panel.setBorder(new TitledBorder(parameterCombine.getDescribe()));
+		if (!StringUtilities.isNullOrEmpty(parameterCombine.getDescription())) {
+			panel.setBorder(new TitledBorder(parameterCombine.getDescription()));
 			defaultInset = 10;
 		}
 
@@ -67,7 +67,7 @@ public class ParameterCombinePanel extends SwingPanel implements ParameterCombin
 				x++;
 			}
 		}
-		ComponentUIUtilities.setName(panel, parameter.getDescribe());
+		ComponentUIUtilities.setName(panel, parameter.getDescription());
 	}
 
 	@Override

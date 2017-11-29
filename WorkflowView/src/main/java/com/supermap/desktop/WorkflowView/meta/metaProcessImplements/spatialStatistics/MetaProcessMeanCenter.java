@@ -5,6 +5,7 @@ import com.supermap.data.DatasetVector;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.WorkflowView.meta.MetaKeys;
 import com.supermap.desktop.controls.ControlsProperties;
+import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.ui.OutputFrame;
 
 /**
@@ -37,7 +38,7 @@ public class MetaProcessMeanCenter extends MetaProcessSpatialMeasure {
 			this.getParameters().getOutputs().getData(OUTPUT_DATASET).setValue(result);
 			isSuccessful = result != null;
 			if (isSuccessful) {
-				String message = "How to Use?" + "\n"
+				String message = ProcessProperties.getString("String_Label_DetailedUse")
 						+ "http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html?SpatialStatisticalAnalysis,MeasureGeographicDistr,Clusters1,SpatialRelationshipModeling1,AnalyzingPatterns1";
 				((OutputFrame) Application.getActiveApplication().getOutput()).setShowTime(false);
 				Application.getActiveApplication().getOutput().output(message);

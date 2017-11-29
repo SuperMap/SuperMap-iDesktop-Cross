@@ -35,13 +35,13 @@ public class ParameterCheckboBoxAndTextFieldPanel extends SwingPanel {
 
 	private void initComponent() {
 		this.checkBox = new JCheckBox();
-		this.checkBox.setText(this.checkboBoxAndTextField.getDescribe());
-		this.checkBox.setToolTipText(this.checkboBoxAndTextField.getDescribe());
+		this.checkBox.setText(this.checkboBoxAndTextField.getDescription());
+		this.checkBox.setToolTipText(this.checkboBoxAndTextField.getDescription());
 		this.checkBox.setSelected(true);
 		this.textField = new SmTextFieldLegit();
 		this.textField.setText(this.checkboBoxAndTextField.getSelectedItem());
-		ComponentUIUtilities.setName(this.checkBox, parameter.getDescribe() + "_checkBox");
-		ComponentUIUtilities.setName(this.textField, parameter.getDescribe() + "_textField");
+		ComponentUIUtilities.setName(this.checkBox, parameter.getDescription() + "_checkBox");
+		ComponentUIUtilities.setName(this.textField, parameter.getDescription() + "_textField");
 	}
 
 	private void initLayout() {

@@ -7,6 +7,8 @@ import com.supermap.desktop.process.parameter.interfaces.ParameterPanelDescribe;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Created by xie on 2017/11/7.
@@ -15,6 +17,7 @@ import javax.swing.event.TableModelListener;
 public class ParameterForObjectCirculationPanel implements IParameterPanel {
 	private PanelForObjectCirculation panelForObjectCirculation;
 	private ParameterForObjectCirculation parameterForObjectCirculation;
+	private boolean isSelectedChanged = false;
 
 	public ParameterForObjectCirculationPanel(IParameter parameter) {
 		this.parameterForObjectCirculation = (ParameterForObjectCirculation) parameter;
@@ -22,11 +25,30 @@ public class ParameterForObjectCirculationPanel implements IParameterPanel {
 	}
 
 	private void init() {
-		this.panelForObjectCirculation = new PanelForObjectCirculation();
+		this.panelForObjectCirculation = new PanelForObjectCirculation(parameterForObjectCirculation.isShowAddButton());
+		this.parameterForObjectCirculation.addPropertyListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				if (!isSelectedChanged && evt.getPropertyName().equals(parameterForObjectCirculation.FILE_TYPE_CHANGED)) {
+					isSelectedChanged = true;
+					panelForObjectCirculation.setFileType((String) evt.getNewValue());
+					isSelectedChanged = false;
+				} else if (!isSelectedChanged && evt.getPropertyName().equals(parameterForObjectCirculation.NEW_INFO_ADDED)) {
+					isSelectedChanged = true;
+					panelForObjectCirculation.addRow(evt.getNewValue());
+					isSelectedChanged = false;
+
+				}
+			}
+		});
 		this.panelForObjectCirculation.getExchangeTableModel().addTableModelListener(new TableModelListener() {
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				parameterForObjectCirculation.setSelectedItem(panelForObjectCirculation.getPathList());
+				if (!isSelectedChanged) {
+					isSelectedChanged = true;
+					parameterForObjectCirculation.setSelectedItem(panelForObjectCirculation.getPathList());
+					isSelectedChanged = false;
+				}
 			}
 		});
 	}

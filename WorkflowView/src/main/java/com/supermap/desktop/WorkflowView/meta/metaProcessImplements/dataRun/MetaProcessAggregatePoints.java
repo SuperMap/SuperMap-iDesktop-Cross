@@ -57,7 +57,7 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterNumberDistance.setMaxBit(22);
 		parameterNumberDistance.setMinValue(0);
 		parameterNumberDistance.setIsIncludeMin(false);
-		parameterNumberDistance.setRequisite(true);
+		parameterNumberDistance.setRequired(true);
 
 		parameterNumberMinPilePointCount = new ParameterNumber(ProcessProperties.getString("String_AggregatePoints_MinPilePointCount"));
 		// 防止linux显示不全，先不添加提示图标-yuanR2017.9.21
@@ -65,7 +65,7 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 		parameterNumberMinPilePointCount.setMaxBit(0);
 		parameterNumberMinPilePointCount.setMinValue(2);
 		parameterNumberMinPilePointCount.setIsIncludeMin(true);
-		parameterNumberMinPilePointCount.setRequisite(true);
+		parameterNumberMinPilePointCount.setRequired(true);
 
 		parameterComboBoxUnit = new ParameterComboBox(null);
 		parameterComboBoxUnit.addItem(new ParameterDataNode(CoreProperties.getString("String_DistanceUnit_Millimeter"), Unit.MILIMETER));
@@ -140,13 +140,13 @@ public class MetaProcessAggregatePoints extends MetaProcess {
 				src = (DatasetVector) this.dataset.getSelectedItem();
 			}
 			Generalization.addSteppedListener(steppedListener);
-			Generalization.aggregatePoints(src, Double.valueOf(parameterNumberDistance.getSelectedItem().toString()),
+			isSuccessful = Generalization.aggregatePoints(src, Double.valueOf(parameterNumberDistance.getSelectedItem().toString()),
 					(Unit) parameterComboBoxUnit.getSelectedData(),
 					Integer.valueOf(parameterNumberMinPilePointCount.getSelectedItem().toString()),
 					saveDataset.getResultDatasource(), datasetName, null);
 			Dataset dataset = saveDataset.getResultDatasource().getDatasets().get(datasetName);
 			this.getParameters().getOutputs().getData(OUTPUT_DATA).setValue(dataset);
-			isSuccessful = dataset != null;
+		 
 		} catch (Exception e) {
 			Application.getActiveApplication().getOutput().output(e.getMessage());
 			e.printStackTrace();

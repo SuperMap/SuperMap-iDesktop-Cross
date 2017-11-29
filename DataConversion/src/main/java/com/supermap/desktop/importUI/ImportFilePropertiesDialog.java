@@ -68,7 +68,7 @@ public class ImportFilePropertiesDialog extends SmDialog {
 			this.labelPath.setText(filePath);
 			File file = new File(filePath);
 			if (file.isDirectory()) {
-				this.labelType.setText(CoreProperties.getString("String_Dir"));
+				this.labelType.setText(CoreProperties.getString("String_Directory"));
 			} else {
 				this.labelType.setText(FileUtilities.getFileType(filePath));
 			}

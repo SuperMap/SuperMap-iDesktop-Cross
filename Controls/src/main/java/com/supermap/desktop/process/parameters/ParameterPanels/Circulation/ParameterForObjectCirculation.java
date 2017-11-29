@@ -12,13 +12,19 @@ import java.util.ArrayList;
  */
 public class ParameterForObjectCirculation extends AbstractParameter implements ISelectionParameter {
 	private ArrayList<String> infoList = new ArrayList<>();
+	private String fileType;
+	private String nowInfo;
+	private boolean isShowAddButton = true;
+	public final String FILE_TYPE_CHANGED = "fileTypeChanged";
+	private final String LIST_CHANGED="infoListChanged";
+	public final String NEW_INFO_ADDED="newInfoAdded";
 
 	public ParameterForObjectCirculation() {
 
 	}
 
 	@Override
-	public boolean isRequisite() {
+	public boolean isRequired() {
 		return true;
 	}
 
@@ -32,7 +38,7 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 			oldValue = this.infoList;
 			this.infoList = (ArrayList) item;
 		}
-		firePropertyChangeListener(new PropertyChangeEvent(this, "radioLists", oldValue, this.infoList));
+		firePropertyChangeListener(new PropertyChangeEvent(this, LIST_CHANGED, oldValue, this.infoList));
 	}
 
 
@@ -44,8 +50,32 @@ public class ParameterForObjectCirculation extends AbstractParameter implements 
 		return this.infoList;
 	}
 
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		String oldValue = this.fileType;
+		this.fileType = fileType;
+		firePropertyChangeListener(new PropertyChangeEvent(this, FILE_TYPE_CHANGED, oldValue, this.fileType));
+	}
+
 	@Override
 	public String getType() {
 		return ParameterType.CIRCULATION_FOR_OBJECT;
+	}
+
+	public boolean isShowAddButton() {
+		return isShowAddButton;
+	}
+
+	public void setShowAddButton(boolean showAddButton) {
+		isShowAddButton = showAddButton;
+	}
+
+	public void addRow(Object newInfo) {
+		String oldValue = this.nowInfo;
+		this.nowInfo = (String) newInfo;
+		firePropertyChangeListener(new PropertyChangeEvent(this, NEW_INFO_ADDED, oldValue, this.nowInfo));
 	}
 }

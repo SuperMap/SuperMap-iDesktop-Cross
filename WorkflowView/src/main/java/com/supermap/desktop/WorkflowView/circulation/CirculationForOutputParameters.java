@@ -19,8 +19,8 @@ public class CirculationForOutputParameters extends AbstractCirculationParameter
 		initParameters();
 	}
 
-	private void initParameters() {
-		this.currentValue = new ParameterTextField(ProcessProperties.getString("String_CurrentValue") + ":");
+	protected void initParameters() {
+		this.currentValue = new ParameterTextField(ProcessProperties.getString("String_CurrentValueStr"));
 		if (null != this.outputData.getValue()) {
 			this.currentValue.setSelectedItem(this.outputData.getValue());
 		}

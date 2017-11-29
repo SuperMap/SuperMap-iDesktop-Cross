@@ -41,7 +41,7 @@ public class ParameterDatasetType extends AbstractParameter implements ISelectio
 		return datasetType;
 	}
 
-	public String getDescribe() {
+	public String getDescription() {
 		return describe;
 	}
 

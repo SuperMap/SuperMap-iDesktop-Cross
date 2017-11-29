@@ -72,7 +72,7 @@ public class ParameterStatisticsField extends AbstractParameter {
 	}
 
 	@Override
-	public String getDescribe() {
+	public String getDescription() {
 		return null;
 	}
 }
