@@ -1,7 +1,7 @@
 package com.supermap.desktop.mapview.layer.propertycontrols;
 
 import com.supermap.data.ColorSpaceType;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;
 import com.supermap.desktop.mapview.layer.propertymodel.LayerImageParamPropertyModel;

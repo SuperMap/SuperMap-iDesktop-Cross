@@ -73,7 +73,7 @@ public class MetaProcessVectorResample extends MetaProcess {
 		this.parameterIsTopologyPreprocess = new ParameterCheckBox(CoreProperties.getString("String_TopyPreProcessed"));
 		this.parameterVertexTolerance = new ParameterNumber(ProcessProperties.getString("String_Resample_VertexInterval"));
 
-		this.parameterResampleType.addItem(new ParameterDataNode(ControlsProperties.getString("String_RTBend"), ResampleType.RTBEND));
+		this.parameterResampleType.addItem(new ParameterDataNode(ProcessProperties.getString("String_ResampleType_RTBEND"), ResampleType.RTBEND));
 		this.parameterResampleType.addItem(new ParameterDataNode(ProcessProperties.getString("String_ResampleType_RTGENERAL"), ResampleType.RTGENERAL));
 		this.parameterResampleTolerance.setMaxBit(17);
 		this.parameterResampleTolerance.setMinValue(0);

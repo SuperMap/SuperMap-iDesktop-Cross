@@ -10,18 +10,17 @@ import com.supermap.desktop.mapview.layer.propertycontrols.LayerPropertyContaine
 
 public class CtrlActionLayerProperty extends CtrlAction {
 
-	private static final String LAYER_PRPERTY_CONTROL_CLASS = "com.supermap.desktop.mapview.layer.propertycontrols.LayerPropertyContainer";
+    private static final String LAYER_PROPERTY_CONTROL_CLASS = "com.supermap.desktop.mapview.layer.propertycontrols.LayerPropertyContainer";
 
 	public CtrlActionLayerProperty(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
-
 	}
 
 	@Override
 	public void run() {
 		try {
 			IDockbar dockbarPropertyContainer = Application.getActiveApplication().getMainFrame().getDockbarManager()
-					.get(Class.forName(LAYER_PRPERTY_CONTROL_CLASS));
+                    .get(Class.forName(LAYER_PROPERTY_CONTROL_CLASS));
 
 			if (dockbarPropertyContainer != null) {
 				LayerPropertyContainer container = (LayerPropertyContainer) dockbarPropertyContainer.getInnerComponent();

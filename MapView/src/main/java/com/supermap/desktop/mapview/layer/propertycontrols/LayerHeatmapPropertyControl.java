@@ -2,7 +2,7 @@ package com.supermap.desktop.mapview.layer.propertycontrols;
 
 import com.supermap.data.FieldInfos;
 import com.supermap.data.FieldType;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;

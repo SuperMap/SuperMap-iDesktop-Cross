@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * Created by ChenS on 2017/11/24 0024.
- * 依障碍拓面：选择基面后开始绘面，绘制完成后会自动擦除与已有面重合的部分，并与基面合并。绘成的面若与基面不相交则执行失败。
+ * 填缝：选择基面后开始绘面，绘制完成后会自动擦除与已有面重合的部分，并与基面合并。绘成的面若与基面不相交则执行失败。
  */
 public class FillRegionEditor extends AbstractEditor {
     private final static String TAG_FILLREGION = "Tag_FillRegion";
@@ -195,7 +195,7 @@ public class FillRegionEditor extends AbstractEditor {
                     && layer.getDataset() instanceof DatasetVector
                     && (layer.getDataset().getType() == DatasetType.REGION || layer.getDataset().getType() == DatasetType.CAD)
                     && layer.getSelection().getCount() == 1)) {
-                break;
+                continue;
             }
             GeoRegion geometry = (GeoRegion) layer.getSelection().toRecordset().getGeometry();
             GeometryUtilities.setGeometryStyle(geometry, RegionAndLineHighLightStyle.getRegionStyleRed());

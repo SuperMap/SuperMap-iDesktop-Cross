@@ -227,7 +227,9 @@ public class JDialogPrjCoordSysSettings extends SmDialog {
 	public JDialogPrjCoordSysSettings(String targetTitle) {
 		this();
 		// 坐标系设置title根据选中数据进行展开
-		this.setTitle(ControlsProperties.getString("String_SetCoordsys") + "-[" + targetTitle + "]");
+		if (!StringUtilities.isNullOrEmpty(targetTitle)) {
+			this.setTitle(ControlsProperties.getString("String_SetCoordsys") + "-[" + targetTitle + "]");
+		}
 	}
 
 	/**

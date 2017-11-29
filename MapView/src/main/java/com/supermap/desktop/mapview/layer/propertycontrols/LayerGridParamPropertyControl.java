@@ -1,6 +1,6 @@
 package com.supermap.desktop.mapview.layer.propertycontrols;
 
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorsTable.ColorsDictionarySet;
 import com.supermap.desktop.controls.colorsTable.LayerGridParamColorTableDialog;
