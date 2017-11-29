@@ -1,4 +1,4 @@
-package com.supermap.desktop.ui.xmlRibbons;
+package com.supermap.desktop.ui.xmlStartMenus;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.PluginInfo;
@@ -13,32 +13,31 @@ import java.util.ArrayList;
 /**
  * @author XiaJT
  */
-public class XMLRibbon extends XMLCommand {
+public class XMLStartMenu  extends XMLCommand {
 	private ArrayList<XMLCommand> commands = new ArrayList<>();
-	private String formClassName;
 
-	public XMLRibbon(PluginInfo pluginInfo, XMLCommandBase parent) {
+	public XMLStartMenu(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo, parent);
 		canMerge = true;
 	}
 
 	@Override
 	public void merge(XMLCommand otherCommand) {
-		if (otherCommand instanceof XMLRibbon) {
-			XMLRibbon otherRibbon = (XMLRibbon) otherCommand;
-			for (int i = 0; i < otherRibbon.getLength(); i++) {
-				XMLCommand otherRibbonCommand = otherRibbon.getCommandAtIndex(i);
+		if (otherCommand instanceof XMLStartMenu) {
+			XMLStartMenu otherMenu = (XMLStartMenu) otherCommand;
+			for (int i = 0; i < otherMenu.getLength(); i++) {
+				XMLCommand otherStartMenuCommand = otherMenu.getCommandAtIndex(i);
 				boolean isContain = false;
 				for (XMLCommand command : commands) {
-					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(otherRibbonCommand.getID())) {
-						command.merge(otherRibbonCommand);
+					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(otherStartMenuCommand.getID())) {
+						command.merge(otherStartMenuCommand);
 						isContain = true;
 						break;
 					}
 
 				}
 				if (!isContain) {
-					otherRibbonCommand.copyTo(this);
+					otherStartMenuCommand.copyTo(this);
 				}
 			}
 		}
@@ -56,13 +55,13 @@ public class XMLRibbon extends XMLCommand {
 	public boolean initialize(Element element) {
 		super.initialize(element);
 		try {
-			if (element.hasAttribute(g_AttributionFormClass)) {
-				formClassName = element.getAttribute(g_AttributionFormClass);
-			}
 			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
 				Node item = element.getChildNodes().item(i);
 				if (item.getNodeType() == Node.ELEMENT_NODE) {
 					XMLCommand xmlCommand = this.buildCommand((Element) item);
+					if (xmlCommand != null) {
+						xmlCommand.initialize((Element) item);
+					}
 					if (xmlCommand != null) {
 						addSubItem(xmlCommand);
 					}
@@ -73,6 +72,15 @@ public class XMLRibbon extends XMLCommand {
 			return false;
 		}
 		return true;
+	}
+
+	private XMLCommand buildCommand(Element item) {
+		String nodeName = item.getNodeName();
+		XMLCommand xmlCommand = null;
+		if (nodeName.equalsIgnoreCase(g_NodeSecondMenu)) {
+			xmlCommand = new XMLSubMenus(getPluginInfo(),this);
+		}
+		return xmlCommand;
 	}
 
 	@Override
@@ -89,29 +97,10 @@ public class XMLRibbon extends XMLCommand {
 		}
 	}
 
-	private XMLCommand buildCommand(Element item) {
-		String nodeName = item.getNodeName();
-		XMLCommand xmlCommand = null;
-		if (nodeName.equalsIgnoreCase(g_NodeGroup)) {
-			xmlCommand = new XMLRibbonBand(getPluginInfo(), this);
-		} else if (nodeName.equalsIgnoreCase(g_NodeFlowGroup)) {
-			xmlCommand = new XMLFlowBand(getPluginInfo(), this);
-		}
-		if (xmlCommand != null) {
-			xmlCommand.initialize(item);
-		}
-		return xmlCommand;
-	}
-
 	@Override
 	protected XMLCommandBase createNew(XMLCommandBase parent) {
-		XMLRibbon xmlRibbon = new XMLRibbon(getPluginInfo(), parent);
-		xmlRibbon.commands = commands;
-		xmlRibbon.formClassName = formClassName;
-		return xmlRibbon;
-	}
-
-	public String getFormClassName() {
-		return this.formClassName;
+		XMLStartMenu xmlStartMenu = new XMLStartMenu(getPluginInfo(), parent);
+		xmlStartMenu.commands = commands;
+		return xmlStartMenu;
 	}
 }

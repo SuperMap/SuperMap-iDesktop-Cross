@@ -1,9 +1,11 @@
-package com.supermap.desktop.ui.xmlRibbons;
+package com.supermap.desktop.ui.xmlStartMenus;
 
 import com.supermap.desktop.Application;
 import com.supermap.desktop.PluginInfo;
 import com.supermap.desktop.ui.XMLCommand;
 import com.supermap.desktop.ui.XMLCommandBase;
+import com.supermap.desktop.ui.xmlRibbons.XmlRibbonCommandMenuButton;
+import com.supermap.desktop.ui.xmlRibbons.XmlRibbonCommandMenuSeparator;
 import com.supermap.desktop.utilities.StringUtilities;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,32 +15,32 @@ import java.util.ArrayList;
 /**
  * @author XiaJT
  */
-public class XMLRibbon extends XMLCommand {
+public class XMLSubMenus extends XMLCommand {
 	private ArrayList<XMLCommand> commands = new ArrayList<>();
-	private String formClassName;
+	private String panelClass = "";
 
-	public XMLRibbon(PluginInfo pluginInfo, XMLCommandBase parent) {
+	public XMLSubMenus(PluginInfo pluginInfo, XMLCommandBase parent) {
 		super(pluginInfo, parent);
 		canMerge = true;
 	}
 
 	@Override
 	public void merge(XMLCommand otherCommand) {
-		if (otherCommand instanceof XMLRibbon) {
-			XMLRibbon otherRibbon = (XMLRibbon) otherCommand;
-			for (int i = 0; i < otherRibbon.getLength(); i++) {
-				XMLCommand otherRibbonCommand = otherRibbon.getCommandAtIndex(i);
+		if (otherCommand instanceof XMLSubMenus) {
+			XMLSubMenus otherMenu = (XMLSubMenus) otherCommand;
+			for (int i = 0; i < otherMenu.getLength(); i++) {
+				XMLCommand otherStartMenuCommand = otherMenu.getCommandAtIndex(i);
 				boolean isContain = false;
 				for (XMLCommand command : commands) {
-					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(otherRibbonCommand.getID())) {
-						command.merge(otherRibbonCommand);
+					if (command.canMerge() && !StringUtilities.isNullOrEmpty(command.getID()) && command.getID().equals(otherStartMenuCommand.getID())) {
+						command.merge(otherStartMenuCommand);
 						isContain = true;
 						break;
 					}
 
 				}
 				if (!isContain) {
-					otherRibbonCommand.copyTo(this);
+					otherStartMenuCommand.copyTo(this);
 				}
 			}
 		}
@@ -52,18 +54,20 @@ public class XMLRibbon extends XMLCommand {
 		return commands.size();
 	}
 
+
 	@Override
 	public boolean initialize(Element element) {
 		super.initialize(element);
 		try {
-			if (element.hasAttribute(g_AttributionFormClass)) {
-				formClassName = element.getAttribute(g_AttributionFormClass);
+			if (element.hasAttribute(g_NodePanelClass)) {
+				panelClass = element.getAttribute(g_NodePanelClass);
 			}
 			for (int i = 0; i < element.getChildNodes().getLength(); i++) {
 				Node item = element.getChildNodes().item(i);
 				if (item.getNodeType() == Node.ELEMENT_NODE) {
 					XMLCommand xmlCommand = this.buildCommand((Element) item);
 					if (xmlCommand != null) {
+						xmlCommand.initialize((Element) item);
 						addSubItem(xmlCommand);
 					}
 				}
@@ -73,6 +77,21 @@ public class XMLRibbon extends XMLCommand {
 			return false;
 		}
 		return true;
+	}
+
+	private XMLCommand buildCommand(Element item) {
+		String nodeName = item.getNodeName();
+		XMLCommand xmlCommand = null;
+		if (nodeName.equalsIgnoreCase(g_ControlButton)) {
+			xmlCommand= new XmlRibbonCommandMenuButton(getPluginInfo(), this);
+		} else if (nodeName.equalsIgnoreCase(g_ControlSeparator)) {
+			xmlCommand = new XmlRibbonCommandMenuSeparator(getPluginInfo(), this);
+		}
+		return xmlCommand;
+	}
+
+	public String getPanelClass() {
+		return panelClass;
 	}
 
 	@Override
@@ -89,29 +108,11 @@ public class XMLRibbon extends XMLCommand {
 		}
 	}
 
-	private XMLCommand buildCommand(Element item) {
-		String nodeName = item.getNodeName();
-		XMLCommand xmlCommand = null;
-		if (nodeName.equalsIgnoreCase(g_NodeGroup)) {
-			xmlCommand = new XMLRibbonBand(getPluginInfo(), this);
-		} else if (nodeName.equalsIgnoreCase(g_NodeFlowGroup)) {
-			xmlCommand = new XMLFlowBand(getPluginInfo(), this);
-		}
-		if (xmlCommand != null) {
-			xmlCommand.initialize(item);
-		}
-		return xmlCommand;
-	}
-
 	@Override
 	protected XMLCommandBase createNew(XMLCommandBase parent) {
-		XMLRibbon xmlRibbon = new XMLRibbon(getPluginInfo(), parent);
-		xmlRibbon.commands = commands;
-		xmlRibbon.formClassName = formClassName;
-		return xmlRibbon;
-	}
-
-	public String getFormClassName() {
-		return this.formClassName;
+		XMLSubMenus xmlSubMenus = new XMLSubMenus(getPluginInfo(), parent);
+		xmlSubMenus.panelClass = panelClass;
+		xmlSubMenus.commands = commands;
+		return xmlSubMenus;
 	}
 }
