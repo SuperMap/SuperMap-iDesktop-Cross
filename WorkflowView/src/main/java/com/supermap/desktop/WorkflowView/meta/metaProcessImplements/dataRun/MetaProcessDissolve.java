@@ -293,17 +293,27 @@ public class MetaProcessDissolve extends MetaProcess {
                         s.delete(s.length() - 5, s.length());
                     }
                     if (!isContainNull) {
-                        s.append(dissolveParameter.getFilterString());
+                        if (!dissolveParameter.getFilterString().equals("")) {
+                            s.append(" AND ").append(dissolveParameter.getFilterString());
+                        }
                         query = src.query(s.toString(), CursorType.DYNAMIC);
                     } else {
-                        query = src.query(new int[]{srcRecordset.getID()}, CursorType.DYNAMIC);
+                        String s1 = "SmID=" + srcRecordset.getID();
+                        if (!dissolveParameter.getFilterString().equals("")) {
+                            s1 += " AND " + dissolveParameter.getFilterString();
+                        }
+                        query = src.query(s1, CursorType.DYNAMIC);
                     }
-                    TextStyle textStyle = ((GeoText) query.getGeometry()).getTextStyle().clone();
-                    while (!query.isEOF()) {
-                        isQueryAlready[query.getID()] = true;
-                        query.moveNext();
+                    if (query.getRecordCount() > 0) {
+                        TextStyle textStyle = ((GeoText) query.getGeometry()).getTextStyle().clone();
+                        while (!query.isEOF()) {
+                            isQueryAlready[query.getID()] = true;
+                            query.moveNext();
+                        }
+                        queryStack.push(new RecordsetWithStyle(query, textStyle));
+                    } else {
+                        query.dispose();
                     }
-                    queryStack.push(new RecordsetWithStyle(query, textStyle));
                 }
                 srcRecordset.moveNext();
             }
