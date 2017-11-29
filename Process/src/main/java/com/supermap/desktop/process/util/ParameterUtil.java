@@ -117,7 +117,7 @@ public class ParameterUtil {
 			}
 		} else if (null != ((AbstractParameter) parameter).getValueType()
 				&& ((AbstractParameter) parameter).getValueType().equals(startGraphType)) {
-			valueTypes.add((AbstractParameter) parameter);
+			valueTypes.add(parameter);
 		}
 	}
 }

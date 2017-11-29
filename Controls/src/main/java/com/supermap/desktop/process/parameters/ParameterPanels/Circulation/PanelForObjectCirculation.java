@@ -330,5 +330,8 @@ public class PanelForObjectCirculation extends JPanel {
 
 	public void addRow(Object rowInfo) {
 		this.exchangeTableModel.addRow(rowInfo);
+		if (this.tableForObjectCirculation.getRowCount() > 0) {
+			this.tableForObjectCirculation.setRowSelectionInterval(this.tableForObjectCirculation.getRowCount() - 1, this.tableForObjectCirculation.getRowCount() - 1);
+		}
 	}
 }

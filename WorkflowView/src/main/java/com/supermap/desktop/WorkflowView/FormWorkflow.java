@@ -6,7 +6,6 @@ import com.supermap.desktop.Interface.IDataEntry;
 import com.supermap.desktop.Interface.IFormManager;
 import com.supermap.desktop.Interface.IFormWorkflow;
 import com.supermap.desktop.Interface.IWorkflow;
-import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.WorkflowView.graphics.ScrollGraphCanvas;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphSelectChangedListener;
 import com.supermap.desktop.WorkflowView.graphics.events.GraphSelectedChangedEvent;
@@ -19,6 +18,7 @@ import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.dialog.SmDialogFormSaveAs;
 import com.supermap.desktop.enums.WindowType;
 import com.supermap.desktop.event.*;
+import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.process.core.IProcess;
 import com.supermap.desktop.process.core.Workflow;
 import com.supermap.desktop.process.events.*;
@@ -406,12 +406,16 @@ public class FormWorkflow extends FormBaseChild implements IFormWorkflow {
 		getTasksManager().run();
 	}
 
+	public void runIterator(){
+		getTasksManager().runIterator();
+	}
+
 	public boolean isEditable() {
 		return workflow.isEditable();
 	}
 
 	public void stop() {
-		if (tasksManager.isRunning()) {
+		if (tasksManager.isRunning() || iterator().isRunning()) {
 			tasksManager.cancel();
 		}
 	}

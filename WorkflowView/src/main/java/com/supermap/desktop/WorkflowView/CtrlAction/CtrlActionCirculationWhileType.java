@@ -5,24 +5,25 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.WorkflowView.FormWorkflow;
 import com.supermap.desktop.WorkflowView.circulation.CirculationGraphFactory;
-import com.supermap.desktop.process.core.CirculationType;
 import com.supermap.desktop.implement.CtrlAction;
+import com.supermap.desktop.process.core.CirculationType;
 
 /**
- * Created by xie on 2017/11/9.
+ * Created by xie on 2017/11/29.
  */
-public class CtrlActionCirculationForDatasourceType extends CtrlAction {
-	public CtrlActionCirculationForDatasourceType(IBaseItem caller, IForm formClass) {
+public class CtrlActionCirculationWhileType extends CtrlAction {
+	public CtrlActionCirculationWhileType(IBaseItem caller, IForm formClass) {
 		super(caller, formClass);
 	}
 
 	@Override
 	protected void run() {
-		CirculationGraphFactory.addCirculationGraph(CirculationType.forDatasourceType);
+		CirculationGraphFactory.addCirculationGraph(CirculationType.whileType);
 	}
 
 	@Override
 	public boolean enable() {
 		return Application.getActiveApplication().getActiveForm() instanceof FormWorkflow;
 	}
+
 }

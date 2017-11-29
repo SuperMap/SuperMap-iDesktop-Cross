@@ -5,6 +5,7 @@ import com.supermap.desktop.process.core.AbstractCirculationParameters;
 import com.supermap.desktop.process.parameter.interfaces.datas.OutputData;
 import com.supermap.desktop.process.parameter.ipls.ParameterFile;
 import com.supermap.desktop.process.parameters.ParameterPanels.Circulation.ParameterForObjectCirculation;
+import com.supermap.desktop.utilities.StringUtilities;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,7 +27,8 @@ public class CirculationForObjectParameters extends AbstractCirculationParameter
 		this.parameterFile.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				if (evt.getPropertyName().equals(parameterFile.FILE_COMMITTED)) {
+				if (evt.getPropertyName().equals(parameterFile.FILE_COMMITTED)
+						&& !StringUtilities.isNullOrEmpty(evt.getNewValue().toString())) {
 					parameterForObjectCirculation.addRow(evt.getNewValue());
 				}
 			}

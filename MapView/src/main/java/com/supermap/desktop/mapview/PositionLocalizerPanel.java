@@ -7,6 +7,7 @@ import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -27,7 +28,6 @@ public class PositionLocalizerPanel extends JPanel {
     //endregion
 
     private transient IFormMap formMap;
-
 
     public PositionLocalizerPanel() {
         initComponent();
@@ -73,23 +73,74 @@ public class PositionLocalizerPanel extends JPanel {
     }
 
     private void initTable() {
-        tableResult = new JTable();
+        tableResult = new JTable(new LayerNameWithIDTableModel());
+        tableResult.setRowHeight(20);
+        tableResult.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     public void setFormMap(IFormMap forMap) {
         this.formMap = forMap;
     }
 
-    private class LayerNameWithIDTableModel {
+    private class LayerNameWithIDTableModel extends DefaultTableModel {
         ArrayList<LayerNameWithID> nameWithIDList = new ArrayList<>();
         static final int COLUMN_SMID = 0;
         static final int COLUMN_LAYER_NAME = 1;
-        String[] columnNames = new String[]{CoreProperties.getString("String_ColumnHeader_Index"),
-                MapViewProperties.getString("String_TerrainUniformLayer")};
+        String[] columnNames = new String[]{"SmID", MapViewProperties.getString("String_TerrainUniformLayer")};
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            return columnNames[column];
+        }
+
+        @Override
+        public int getRowCount() {
+            return nameWithIDList == null ? 0 : nameWithIDList.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            if (columnIndex == COLUMN_SMID) {
+                return Integer.class;
+            } else {
+                return String.class;
+            }
+        }
+
+        public void removeAll() {
+            int size = nameWithIDList.size();
+            if (size > 0) {
+                this.nameWithIDList.clear();
+                fireTableRowsDeleted(0, size - 1);
+            }
+        }
+
+        public void addItem(String name, int id) {
+            if (this.nameWithIDList == null) {
+                this.nameWithIDList = new ArrayList<>();
+            }
+            this.nameWithIDList.add(new LayerNameWithID(id, name));
+            fireTableDataChanged();
+        }
     }
 
     private class LayerNameWithID {
         int id;
         String name;
+
+        public LayerNameWithID(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
     }
 }

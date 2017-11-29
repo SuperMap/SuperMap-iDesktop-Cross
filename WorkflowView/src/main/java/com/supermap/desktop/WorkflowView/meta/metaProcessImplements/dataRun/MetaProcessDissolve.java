@@ -410,18 +410,21 @@ public class MetaProcessDissolve extends MetaProcess {
     }
 
     private String appendSuffix(String fieldName, StatisticsType type) {
+        if (fieldName.startsWith("Sm")) {
+            fieldName = "Field_" + fieldName;
+        }
         if (type == StatisticsType.FIRST) {
-            fieldName = "FIRST_" + fieldName;
+            fieldName += "_FIRST";
         } else if (type == StatisticsType.LAST) {
-            fieldName = "LAST_" + fieldName;
+            fieldName += "_LAST";
         } else if (type == StatisticsType.SUM) {
-            fieldName = "SUM_" + fieldName;
+            fieldName += "_SUM";
         } else if (type == StatisticsType.MAX) {
-            fieldName = "MAX_" + fieldName;
+            fieldName += "_MAX";
         } else if (type == StatisticsType.MIN) {
-            fieldName = "MIN_" + fieldName;
+            fieldName += "_MIN";
         } else if (type == StatisticsType.MEAN) {
-            fieldName = "MEAN_" + fieldName;
+            fieldName += "_MEAN";
         }
         return fieldName;
     }

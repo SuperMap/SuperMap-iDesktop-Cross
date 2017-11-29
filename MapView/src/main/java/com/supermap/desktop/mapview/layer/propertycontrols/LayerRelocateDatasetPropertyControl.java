@@ -3,7 +3,7 @@ package com.supermap.desktop.mapview.layer.propertycontrols;
 import com.supermap.data.*;
 import com.supermap.data.Enum;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.utilities.ComponentUIUtilities;
 import com.supermap.desktop.mapview.MapViewProperties;

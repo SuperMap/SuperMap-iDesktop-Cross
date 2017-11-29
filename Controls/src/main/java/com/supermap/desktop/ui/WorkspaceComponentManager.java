@@ -72,7 +72,7 @@ public class WorkspaceComponentManager extends JComponent {
 		this.workspaceTree.setDragEnabled(true);
 		this.workspaceTree.setShowsRootHandles(true);
 		this.workspaceTree.setTransferHandler(new WorkspaceTreeTransferHandler());
-		this.workspaceTree.setLayoutsNodeVisible(false);
+		this.workspaceTree.setLayoutsNodeVisible(true);
 		if (SystemPropertyUtilities.isWindows()) {
 			this.workspaceTree.setScenesNodeVisible(true);
 		} else {

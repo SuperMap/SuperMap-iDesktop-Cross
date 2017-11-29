@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -76,14 +77,6 @@ public class TasksManager {
 		for (int i = 0; i < processes.size(); i++) {
 			addNewProcess(processes.get(i));
 		}
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 	public ProcessWorker getWorkerByProcess(IProcess process) {
@@ -158,7 +151,24 @@ public class TasksManager {
 
 		return true;
 	}
-
+	public void runIterator() {
+		if (this.status == TasksManager.WORKFLOW_STATE_COMPLETED
+				|| this.status == TasksManager.WORKFLOW_STATE_INTERRUPTED) {
+			reset();
+		}
+		this.status =TasksManager.WORKER_STATE_RUNNING;
+		initialize();
+		// 正在运行的时候禁止添加、删除节点，禁止调整连接关系和状态
+		this.workflow.setEditable(false);
+		this.scheduler.start();
+		while (this.scheduler.isRunning()) {
+			try {
+				TimeUnit.SECONDS.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public boolean isRunning() {
 		return this.status == WORKFLOW_STATE_RUNNING;
 	}
@@ -279,7 +289,12 @@ public class TasksManager {
 		}
 	}
 
-	public Timer getScheduler() {
-		return scheduler;
+
+	public boolean isCancel() {
+		return isCancel;
+	}
+
+	public void setCancel(boolean cancel) {
+		isCancel = cancel;
 	}
 }

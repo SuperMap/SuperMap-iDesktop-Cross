@@ -5,7 +5,7 @@ import com.supermap.data.FieldType;
 import com.supermap.data.GeoStyle;
 import com.supermap.data.TextStyle;
 import com.supermap.desktop.Application;
-import com.supermap.desktop.DefaultValues;
+import com.supermap.desktop.controls.DefaultValues;
 import com.supermap.desktop.Interface.ISmTextFieldLegit;
 import com.supermap.desktop.controls.ControlsProperties;
 import com.supermap.desktop.controls.colorScheme.ColorsComboBox;
