@@ -447,13 +447,13 @@ public class FormLayout extends FormBaseChild implements IFormLayout {
 
 	private void elementSelectedChange(ElementSelectedEvent elementSelectedEvent) {
 		try {
+			this.mapLayoutControl.getMapLayout().getElements().refresh();
 			if (this.firstSelectedGeometry != null) {
 				this.firstSelectedGeometry.dispose();
 				this.firstSelectedGeometry = null;
 			}
 			LayoutSelection layoutSelection = this.mapLayoutControl.getMapLayout().getSelection();
 			if (layoutSelection.getCount() > 0) {
-				this.mapLayoutControl.getMapLayout().getElements().refresh();
 //				if(this.mapLayoutControl.getMapLayout().getElements().moveTo(layoutSelection.get(0))){
 				this.mapLayoutControl.getMapLayout().getElements().seekID(layoutSelection.get(0));
 				this.firstSelectedGeometry = this.mapLayoutControl.getMapLayout().getElements().getGeometry().clone();
