@@ -40,6 +40,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -298,7 +299,7 @@ public class DataExportDialog extends SmDialog implements IPanelModel {
 			int state = tempfileChooser.showDefaultDialog();
 			if (state == JFileChooser.APPROVE_OPTION) {
 				String directories = tempfileChooser.getFilePath();
-				if (FileUtilities.isFilePath(directories)) {
+				if (null != directories && new File(directories).exists() && new File(directories).isDirectory()) {
 					tableExport.setValueAt(directories, selectRow, COLUMN_FILEPATH);
 					tableExport.updateUI();
 				}

@@ -380,7 +380,7 @@ public class JPanelHDFSFiles extends JPanel {
 			HDFSDefine define = (HDFSDefine) ((HDFSTableModel) this.table.getModel()).getRowTagAt(index);
 			this.setText(String.valueOf(index + 1));
 			if (define.isDir()) {
-				this.setToolTipText(CoreProperties.getString("String_Dir"));
+				this.setToolTipText(ControlsProperties.getString("String_Directory"));
 				this.setIcon(ControlsResources.getIcon("/controlsresources/Image_DatasetGroup_Normal.png"));
 			} else {
 				this.setToolTipText(CoreProperties.getString("String_File"));
