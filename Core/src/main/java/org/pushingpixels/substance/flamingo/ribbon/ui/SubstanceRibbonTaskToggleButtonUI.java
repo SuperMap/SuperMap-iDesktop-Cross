@@ -103,7 +103,7 @@ public class SubstanceRibbonTaskToggleButtonUI extends
 		this.commandButton.setOpaque(false);
 		this.commandButton.setBorder(new Border() {
 			public Insets getBorderInsets(Component c) {
-				return new Insets(0, 12, 0, 12);
+				return new Insets(0, 0, 0, 0);
 			}
 
 			public boolean isBorderOpaque() {
