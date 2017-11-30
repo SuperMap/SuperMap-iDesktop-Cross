@@ -14,8 +14,10 @@ import com.supermap.desktop.localUtilities.CommonUtilities;
 import com.supermap.desktop.localUtilities.FiletypeUtilities;
 import com.supermap.desktop.localUtilities.LocalFileUtilities;
 import com.supermap.desktop.properties.CoreProperties;
-import com.supermap.desktop.ui.controls.*;
-import com.supermap.desktop.utilities.FileUtilities;
+import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.JFileChooserControl;
+import com.supermap.desktop.ui.controls.SmDialog;
+import com.supermap.desktop.ui.controls.SmFileChoose;
 import com.supermap.desktop.utilities.StringUtilities;
 
 import javax.swing.*;
@@ -85,15 +87,6 @@ public class ExportsSetDialog extends SmDialog implements IPanelModel {
 			}
 
 			ExportsSetDialog.this.dispose();
-		}
-	};
-	private FileChooserPathChangedListener setExportPathListener = new FileChooserPathChangedListener() {
-		@Override
-		public void pathChanged() {
-			String directories = fileChooserControlExportPath.getPath();
-			if (FileUtilities.isFilePath(directories)) {
-				fileChooserControlExportPath.setPath(directories);
-			}
 		}
 	};
 
@@ -311,7 +304,6 @@ public class ExportsSetDialog extends SmDialog implements IPanelModel {
 		this.checkBoxExportPath.addItemListener(this.checkBoxListener);
 		this.radioButtonOK.addActionListener(this.radioListener);
 		this.radioButtonNO.addActionListener(this.radioListener);
-		this.fileChooserControlExportPath.addFileChangedListener(this.setExportPathListener);
 		this.buttonOK.addActionListener(this.exportsSetListener);
 		this.buttonCancel.addActionListener(this.cancelListener);
 		this.addWindowListener(new WindowAdapter() {
@@ -327,7 +319,6 @@ public class ExportsSetDialog extends SmDialog implements IPanelModel {
 		this.checkBoxFileType.removeItemListener(this.checkBoxListener);
 		this.checkBoxOverwirte.removeItemListener(this.checkBoxListener);
 		this.checkBoxExportPath.removeItemListener(this.checkBoxListener);
-		this.fileChooserControlExportPath.removePathChangedListener(this.setExportPathListener);
 		this.buttonOK.removeActionListener(this.exportsSetListener);
 		this.buttonCancel.removeActionListener(this.cancelListener);
 	}
