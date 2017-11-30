@@ -52,8 +52,13 @@ import com.supermap.desktop.utilities.XmlUtilities;
 import com.supermap.layout.MapLayout;
 import com.supermap.realspace.Scene;
 import org.flexdock.docking.DockingManager;
+import org.pushingpixels.flamingo.api.common.JCommandButton;
+import org.pushingpixels.flamingo.api.common.popup.JPopupPanel;
+import org.pushingpixels.flamingo.api.common.popup.PopupPanelCallback;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
 import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenu;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenuEntryPrimary;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenuEntrySecondary;
 import org.w3c.dom.Element;
 
 import javax.swing.*;
@@ -65,6 +70,8 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -87,6 +94,7 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 	private transient ToolbarManager toolbarManager = null;
 	private transient DockbarManager dockbarManager = null;
 	private transient StatusbarManager statusbarManager = null;
+	private ApplicationMenuManager applicationMenuManager = null;
 	// private transient IPropertyManager propertyManager = null;
 	private int defaultType = -1;
 	private int workspaceType = 0;
@@ -102,11 +110,12 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 		this.toolbarManager = new ToolbarManager();
 		this.dockbarManager = new DockbarManager(this.formManager);
 		this.statusbarManager = new StatusbarManager();
+		applicationMenuManager = new ApplicationMenuManager();
 		ribbonManager = new RibbonManager();
 		this.jMenuBarMain = new JMenuBar();
 //        this.propertyManager = new JDialogDataPropertyContainer(this);
-		RibbonApplicationMenu ram = new RibbonApplicationMenu();
-		getRibbon().setApplicationMenu(ram);
+
+
 //		ram.addMenuEntry(new RibbonApplicationMenuEntryPrimary());
 
 //		JMenu menu = new JMenu("loading");
@@ -114,9 +123,37 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 		jMenuBarMain.setMinimumSize(new Dimension(20, 23));
 		jMenuBarMain.setPreferredSize(new Dimension(20, 23));
 //		this.setJMenuBar(this.jMenuBarMain);
-
 		this.addWindowListener(new FormBaseListener());
 		initDrag();
+	}
+
+	private void hehe() {
+		RibbonApplicationMenu ram = new RibbonApplicationMenu();
+
+		RibbonApplicationMenuEntryPrimary first = new RibbonApplicationMenuEntryPrimary(null, "first", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(1);
+			}
+		}, JCommandButton.CommandButtonKind.POPUP_ONLY);
+		RibbonApplicationMenuEntrySecondary first2 = new RibbonApplicationMenuEntrySecondary(null, "first2", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		}, JCommandButton.CommandButtonKind.POPUP_ONLY);
+		first.addSecondaryMenuGroup("first1", first2);
+		first2.setPopupCallback(new PopupPanelCallback() {
+			@Override
+			public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+				JPopupPanel jPopupPanel = new JPopupPanel(){
+
+				};
+				return null;
+			}
+		});
+		ram.addMenuEntry(first);
+		getRibbon().setApplicationMenu(ram);
 	}
 
 	@Override
@@ -177,6 +214,12 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 			this.contextMenuManager.load(workEnvironment);
 			this.statusbarManager.load(workEnvironment);
 			this.dockbarManager.load(workEnvironment);
+			RibbonApplicationMenu ribbonApplicationMenu = new RibbonApplicationMenu();
+			this.applicationMenuManager.load(ribbonApplicationMenu,workEnvironment);
+			getRibbon().setApplicationMenu(ribbonApplicationMenu);
+
+//			hehe();// debug
+
 			this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 			IDockbar outputDockbar = this.dockbarManager.getOutputFrame();

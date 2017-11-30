@@ -23,11 +23,11 @@ import java.beans.PropertyChangeListener;
 public class ParameterFieldGroupPanel extends SwingPanel {
 	private ParameterFieldGroup parameterFieldGroup;
 	private JLabel label = new JLabel();
-	private TableFieldNameCaptionType tableFieldNameCaptionType = new  TableFieldNameCaptionType();
+	private TableFieldNameCaptionType tableFieldNameCaptionType = new TableFieldNameCaptionType();
 
 	public ParameterFieldGroupPanel(IParameter parameter) {
 		super(parameter);
-		parameterFieldGroup = (ParameterFieldGroup) parameter;
+		this.parameterFieldGroup = (ParameterFieldGroup) parameter;
 		initComponent();
 		initLayout();
 		initListener();
@@ -36,19 +36,21 @@ public class ParameterFieldGroupPanel extends SwingPanel {
 	@Override
 	public void fieldConstraintChanged(FieldConstraintChangedEvent event) {
 		if (event.getFieldName().equals(ParameterFieldGroup.FIELD_DATASET)) {
-			tableFieldNameCaptionType.setDataset(parameterFieldGroup.getDataset());
+			this.tableFieldNameCaptionType.setDataset(this.parameterFieldGroup.getDataset());
 		}
 	}
 
 	private void initComponent() {
-		label.setText(parameterFieldGroup.getDescription());
-		label.setToolTipText(parameterFieldGroup.getDescription());
-		tableFieldNameCaptionType.setDataset(parameterFieldGroup.getDataset());
-		ComponentUIUtilities.setName(this.tableFieldNameCaptionType, parameter.getDescription());
+		this.label.setText(this.parameterFieldGroup.getDescription());
+		this.label.setToolTipText(this.parameterFieldGroup.getDescription());
+		// 设置字段类型,类型设置在数据集设置之前-yuanR2017.11.29
+		this.tableFieldNameCaptionType.setFieldTypes(this.parameterFieldGroup.getFieldType());
+		this.tableFieldNameCaptionType.setDataset(this.parameterFieldGroup.getDataset());
+		ComponentUIUtilities.setName(this.tableFieldNameCaptionType, this.parameter.getDescription());
 	}
 
 	private void initListener() {
-		parameterFieldGroup.addPropertyListener(new PropertyChangeListener() {
+		this.parameterFieldGroup.addPropertyListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals(ParameterFieldGroup.FIELD_DATASET)) {
@@ -57,7 +59,7 @@ public class ParameterFieldGroupPanel extends SwingPanel {
 			}
 		});
 
-		tableFieldNameCaptionType.getTablesModel().addTableModelListener(new TableModelListener() {
+		this.tableFieldNameCaptionType.getTablesModel().addTableModelListener(new TableModelListener() {
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				if (e.getType() == TableModelEvent.UPDATE) {
@@ -68,11 +70,11 @@ public class ParameterFieldGroupPanel extends SwingPanel {
 	}
 
 	private void initLayout() {
-		panel.setPreferredSize(new Dimension(200, 200));
-		panel.setLayout(new GridBagLayout());
-		panel.add(label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE));
-		JScrollPane scrollPane = new JScrollPane(tableFieldNameCaptionType);
+		this.panel.setPreferredSize(new Dimension(200, 200));
+		this.panel.setLayout(new GridBagLayout());
+		this.panel.add(this.label, new GridBagConstraintsHelper(0, 0, 1, 1).setWeight(1, 0).setAnchor(GridBagConstraints.WEST).setFill(GridBagConstraints.NONE));
+		JScrollPane scrollPane = new JScrollPane(this.tableFieldNameCaptionType);
 		scrollPane.setPreferredSize(new Dimension(200, 200));
-		panel.add(scrollPane, new GridBagConstraintsHelper(0, 1, 1, 1).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setInsets(5, 0, 0, 0));
+		this.panel.add(scrollPane, new GridBagConstraintsHelper(0, 1, 1, 1).setWeight(1, 1).setAnchor(GridBagConstraints.CENTER).setFill(GridBagConstraints.BOTH).setInsets(5, 0, 0, 0));
 	}
 }

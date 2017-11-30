@@ -32,6 +32,7 @@ package org.pushingpixels.flamingo.internal.ui.ribbon.appmenu;
 import org.pushingpixels.flamingo.api.common.AbstractCommandButton;
 import org.pushingpixels.flamingo.api.common.CommandButtonLayoutManager;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
+import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
 import org.pushingpixels.flamingo.api.common.icon.ResizableIcon;
 import org.pushingpixels.flamingo.internal.utils.FlamingoUtilities;
 
@@ -91,6 +92,9 @@ public class CommandButtonLayoutManagerMenuTileLevel2 implements
 		Insets ins = commandButton.getInsets();
 		int height = commandButton.getHeight();
 		ResizableIcon buttonIcon = commandButton.getIcon();
+		if (buttonIcon == null) {
+			buttonIcon = new EmptyResizableIcon(0);
+		}
 		// bottom-right corner of the icon area
 		return new Point(ins.left + buttonIcon.getIconWidth(),
 				(height + buttonIcon.getIconHeight()) / 2);
@@ -140,6 +144,9 @@ public class CommandButtonLayoutManagerMenuTileLevel2 implements
 
 		ResizableIcon buttonIcon = commandButton.getIcon();
 		boolean ltr = commandButton.getComponentOrientation().isLeftToRight();
+		if (buttonIcon == null) {
+			buttonIcon = new EmptyResizableIcon(0);
+		}
 
 		if (ltr) {
 			int x = ins.left;

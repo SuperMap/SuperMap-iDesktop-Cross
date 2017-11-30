@@ -35,7 +35,8 @@ public class CtrlActionSceneGeometryFlying extends CtrlAction {
 			DesktopFlyingMode flyingMode = getFlyingMode();
 			Selection3D[] selection3Ds = formScene.getSceneControl().getScene().findSelection(true);
 			Selection3D selection = selection3Ds[0];
-			if (selection.getLayer().getType() == Layer3DType.DATASETVECTOR) {
+			// Layer3DType.DATASETVECTOR 找不到，导致编译不通过，替换成 Layer3DType.VECTORFILE，还未测-yuanR2017.11.29
+			if (selection.getLayer().getType() == Layer3DType.VECTORFILE) {
 				Recordset recordset = selection.toRecordset();
 				geometry = recordset.getGeometry();
 				needDisposeGeometry = true;
@@ -46,7 +47,7 @@ public class CtrlActionSceneGeometryFlying extends CtrlAction {
 					needInverse = true;
 					prjCoordSys = dataset.getPrjCoordSys();
 				}
-			} 
+			}
 
 			if (geometry != null) {
 				Rectangle2D bounds = geometry.getBounds();
@@ -114,7 +115,8 @@ public class CtrlActionSceneGeometryFlying extends CtrlAction {
 		Selection3D[] selection3Ds = formScene.getSceneControl().getScene().findSelection(true);
 		if (selection3Ds.length > 0) {
 			Selection3D selection = selection3Ds[0];
-			if (selection.getLayer().getType() == Layer3DType.DATASETVECTOR) {
+			//Layer3DType.DATASETVECTOR 找不到，导致编译不通过，替换成 Layer3DType.VECTORFILE，还未测-yuanR2017.11.29
+			if (selection.getLayer().getType() == Layer3DType.VECTORFILE) {
 				enable = true;
 			}
 		}
