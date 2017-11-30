@@ -343,6 +343,9 @@ public class FileUtilities {
 			if (!new File(filePath).exists()) {
 				isFile = false;
 			}
+			if (new File(filePath).isDirectory()) {
+				isFile = false;
+			}
 		} catch (Exception e) {
 			isFile = false;
 		}

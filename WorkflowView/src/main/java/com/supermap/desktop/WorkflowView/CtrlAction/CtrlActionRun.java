@@ -9,13 +9,11 @@ import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.process.core.CirculationType;
-import com.supermap.desktop.process.tasks.TasksManager;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by highsad on 2017/2/28.
@@ -44,7 +42,7 @@ public class CtrlActionRun extends CtrlAction {
 								iterator.setRunning(true);
 								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorStart"));
 								if (iterator.getCirculationType() != CirculationType.whileType) {
-									while (iterator.hasNext()) {
+									while (iterator.hasNext() && !formWorkflow.getTasksManager().isCancel()) {
 										formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
 										formWorkflow.runIterator();
 									}
@@ -77,7 +75,10 @@ public class CtrlActionRun extends CtrlAction {
 	private boolean validateAllCondition(ArrayList infoList, boolean conditionValue) throws ScriptException {
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("js");
-		boolean result = conditionValue;
+		//modify by xie 2017.11.30
+		// while循环中infoList集合中每一个对象对应的应该是一个逻辑判断语句，若出现非逻辑判断表达式
+		// 恒等于语句在编译是可能出现问题，故将result修改为应用类型
+		Boolean result = conditionValue;
 		for (int i = 0; i < infoList.size(); i++) {
 			result = result && (engine.eval((String) infoList.get(i)) == conditionValue);
 		}

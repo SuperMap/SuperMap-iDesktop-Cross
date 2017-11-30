@@ -66,9 +66,9 @@ public class DefaultGnomeFontPolicy implements FontPolicy {
 	 * javax.swing.UIDefaults)
 	 */
 	public FontSet getFontSet(String lafName, UIDefaults table) {
-		Object defaultGtkFontName = Toolkit.getDefaultToolkit()
-				.getDesktopProperty("gnome.Gtk/FontName");
-		String family = "";
+//		Object defaultGtkFontName = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Gtk/FontName");
+        Object defaultGtkFontName = "Dialog";
+        String family = "";
 		int style = Font.PLAIN;
 		int size = 10;
 		if (defaultGtkFontName instanceof String) {

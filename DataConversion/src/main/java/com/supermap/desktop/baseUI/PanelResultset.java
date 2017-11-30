@@ -852,8 +852,8 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 				this.add(this.checkBoxSpatialIndex, new GridBagConstraintsHelper(0, 2, 4, 1).setAnchor(GridBagConstraints.WEST).setInsets(0, 5, 5, 10).setFill(GridBagConstraints.NONE).setWeight(0, 0));
 				if (importSetting instanceof ImportSettingGJB || importSetting instanceof ImportSettingTEMSVector
 						|| importSetting instanceof ImportSettingTEMSBuildingVector || importSetting instanceof ImportSettingFileGDBVector) {
-					this.labelDatasetName.setEnabled(false);
-					this.textFieldDatasetName.setEnabled(false);
+					this.labelDatasetName.setEnabled(true);
+					this.textFieldDatasetName.setEnabled(true);
 				}
 				this.checkBoxFieldIndex.setVisible(false);
 			} else {
