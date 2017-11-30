@@ -161,7 +161,7 @@ public class MetaProcessGeographicWeightedRegression extends MetaProcess {
 		}
 		// 判断原始数据数量是否大于20
 		if (datasetVector.getRecordCount() < 20) {
-			Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_Sample_Size_Need_To_More_Than"), 20));
+			Application.getActiveApplication().getOutput().output(MessageFormat.format(ProcessProperties.getString("String_SampleSize_Need_To_More_Than"), 20));
 			return false;
 		}
 		GWRParameter gwrParameter = new GWRParameter();
