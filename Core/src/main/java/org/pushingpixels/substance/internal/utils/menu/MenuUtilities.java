@@ -713,7 +713,7 @@ public class MenuUtilities {
 				boolean useThemed = SubstanceCoreUtilities.useThemedDefaultIcon(menuItem);
 				graphics.translate(mli.iconRect.x, mli.iconRect.y);
 				if (!useThemed) {
-					if (((IBaseItem) menuItem).isChecked() && icon instanceof ImageIcon && ((ImageIcon) icon).getDescription().endsWith("SuperMap-iDesktop-Cross/Resources/MenuHeight16.png")) {
+					if (((IBaseItem) menuItem).isChecked() && icon instanceof ImageIcon && ((ImageIcon) icon).getDescription().endsWith("Resources/MenuHeight16.png")) {
 						icon = CheckBoxIConUtilties.getCheckBoxSelectedICon();
 						icon.paintIcon(menuItem, graphics, 0, 0);
 					}else {
