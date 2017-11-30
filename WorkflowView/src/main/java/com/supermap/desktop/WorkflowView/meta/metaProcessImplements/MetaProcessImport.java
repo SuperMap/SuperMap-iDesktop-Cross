@@ -284,6 +284,7 @@ public class MetaProcessImport extends MetaProcess {
 	}
 
 	private void updateDataset(final ImportSetting succeedSetting) {
+		if (null == succeedSetting) return;
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {

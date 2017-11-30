@@ -8,7 +8,8 @@ public enum ArithmeticStrategyType {
 	OR("OR Gateway"),//一进多出
 	AND("AND Gateway"),//合并
 	LOOP("LOOP Gateway")//循环
-	;
+
+	 ;
 	private String type;
 
 	ArithmeticStrategyType(String type) {

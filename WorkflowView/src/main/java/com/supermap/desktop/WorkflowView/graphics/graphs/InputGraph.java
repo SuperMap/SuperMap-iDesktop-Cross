@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * Created by xie on 2017/11/29.
  * 单独的输入节点图
- * 为工作流中单一功能提供值或者为计算值/while循环等功能提供输入
+ * 为工作流中计算值/while循环等功能提供输入
  */
 public class InputGraph extends EllipseGraph {
 	//实时修改显示文本（如外部修改为了radius表示半径等可以一眼明白输入值的含义）
@@ -23,6 +23,7 @@ public class InputGraph extends EllipseGraph {
 
 	public InputGraph(GraphCanvas canvas, OutputData outputData) {
 		super(canvas);
+		setDefaultColor(new Color(103, 166, 223));
 	}
 
 
@@ -34,12 +35,20 @@ public class InputGraph extends EllipseGraph {
 		g.setColor(Color.black);
 
 		int fontHeight = getCanvas().getFontMetrics(font).getHeight();
-		int fontWidth = SwingUtilities2.stringWidth(getCanvas(), getCanvas().getFontMetrics(font), text);
+		int fontWidth = SwingUtilities2.stringWidth(getCanvas(), getCanvas().getFontMetrics(font), getText());
 		int fontDescent = getCanvas().getFontMetrics(font).getDescent();
 
 		Point location = getLocation();
 		double width = getWidth();
 		double height = getHeight();
-		g.drawString(text, DoubleUtilities.intValue(location.getX() + (width - fontWidth) / 2), DoubleUtilities.intValue(location.getY() + height / 2 + fontHeight / 2 - fontDescent));
+		g.drawString(getText(), DoubleUtilities.intValue(location.getX() + (width - fontWidth) / 2), DoubleUtilities.intValue(location.getY() + height / 2 + fontHeight / 2 - fontDescent));
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }
