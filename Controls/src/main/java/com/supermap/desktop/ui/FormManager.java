@@ -96,10 +96,13 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormClosedEvent event = new FormClosedEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formClosed(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormClosed(event);
-				if (e.getPage().getComponent() instanceof IFormMap){
-					UICommonToolkit.getLayersManager().getLayersTree().removeIFormMap((IFormMap)e.getPage().getComponent());
+				if (e.getPage().getComponent() instanceof IFormMap) {
+					UICommonToolkit.getLayersManager().getLayersTree().removeIFormMap((IFormMap) e.getPage().getComponent());
 				}
+
 				FormManager.this.eventHelper.fireFormClosed(event);
+				// 关闭后，刷新ToolBar-yuanR2017.11.30
+				ToolbarUIUtilities.updataToolbarsState();
 			}
 
 			if (getPageCount() == 0) {
@@ -115,8 +118,8 @@ public class FormManager extends MdiPane implements IFormManager {
 				FormShownEvent event = new FormShownEvent((IForm) e.getPage().getComponent());
 				((FormBaseChild) e.getPage().getComponent()).formShown(event);
 				((FormBaseChild) e.getPage().getComponent()).fireFormShown(event);
-				if (e.getPage().getComponent() instanceof IFormMap){
-					UICommonToolkit.getLayersManager().getLayersTree().addIFormMap((IFormMap)e.getPage().getComponent());
+				if (e.getPage().getComponent() instanceof IFormMap) {
+					UICommonToolkit.getLayersManager().getLayersTree().addIFormMap((IFormMap) e.getPage().getComponent());
 				}
 				FormManager.this.eventHelper.fireFormShown(event);
 			}
@@ -480,14 +483,14 @@ public class FormManager extends MdiPane implements IFormManager {
 		if (beforeType != this.activatedChildFormType) {
 //			final FrameMenuManager frameMenuManager = (FrameMenuManager) Application.getActiveApplication().getMainFrame().getFrameMenuManager();
 //			final ToolbarManager toolbarManager = (ToolbarManager) Application.getActiveApplication().getMainFrame().getToolbarManager();
-            final RibbonManager ribbonManager = (RibbonManager) Application.getActiveApplication().getMainFrame().getRibbonManager();
+			final RibbonManager ribbonManager = (RibbonManager) Application.getActiveApplication().getMainFrame().getRibbonManager();
 
 			boolean needRefresh = false;
 			// 如果之前存在子窗口，则需要移除原来的子菜单和工具条
 			if (beforeType != WindowType.UNKNOWN) {
 				// 移除原子窗体的子菜单
 //				frameMenuManager.removeChildMenu(beforeType);
-                ribbonManager.removeChildMenu(beforeType);
+				ribbonManager.removeChildMenu(beforeType);
 				// 移除原子窗体的子工具条
 //				toolbarManager.removeChildToolbar(beforeType);
 
@@ -498,17 +501,17 @@ public class FormManager extends MdiPane implements IFormManager {
 			if (!this.activatedChildFormType.equals(WindowType.UNKNOWN)) {
 				// 激活新子窗体的子菜单
 //				frameMenuManager.loadChildMenu(activatedChildFormType);
-                ribbonManager.loadChildMenu(activatedChildFormType);
+				ribbonManager.loadChildMenu(activatedChildFormType);
 				// 激活新子窗体的子工具条
 //				toolbarManager.loadChildToolbar(activatedChildFormType);
 
 				needRefresh = true;
 			}
 			if (needRefresh) {
-                ToolbarUIUtilities.updataToolbarsState();
+				ToolbarUIUtilities.updataToolbarsState();
 //                frameMenuManager.getMenuBar().updateUI();
 //				toolbarManager.getToolbarsContainer().repaint();
-            }
+			}
 		}
 	}
 
