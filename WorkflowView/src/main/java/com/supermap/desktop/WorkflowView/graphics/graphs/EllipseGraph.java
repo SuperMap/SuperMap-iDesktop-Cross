@@ -11,6 +11,8 @@ import java.awt.geom.Ellipse2D;
  */
 public class EllipseGraph extends AbstractGraph implements IConnectable {
 
+	private Color defaultColor = new Color(254, 244, 236);
+
 	public EllipseGraph(GraphCanvas canvas) {
 		super(canvas, new Ellipse2D.Double(0, 0, 140, 50));
 	}
@@ -37,12 +39,20 @@ public class EllipseGraph extends AbstractGraph implements IConnectable {
 
 	@Override
 	protected void onPaint(Graphics g) {
-		g.setColor(new Color(254, 244, 236));
+		g.setColor(getDefaultColor());
 		((Graphics2D) g).fill(this.shape);
 	}
 
 	@Override
 	public IGraph getConnector() {
 		return this;
+	}
+
+	public Color getDefaultColor() {
+		return defaultColor;
+	}
+
+	public void setDefaultColor(Color defaultColor) {
+		this.defaultColor = defaultColor;
 	}
 }
