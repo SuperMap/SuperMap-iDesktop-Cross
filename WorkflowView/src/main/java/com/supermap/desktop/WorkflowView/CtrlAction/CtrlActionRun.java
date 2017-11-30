@@ -9,13 +9,11 @@ import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.process.ProcessProperties;
 import com.supermap.desktop.process.core.CirculationIterator;
 import com.supermap.desktop.process.core.CirculationType;
-import com.supermap.desktop.process.tasks.TasksManager;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by highsad on 2017/2/28.
@@ -44,7 +42,7 @@ public class CtrlActionRun extends CtrlAction {
 								iterator.setRunning(true);
 								Application.getActiveApplication().getOutput().output(ProcessProperties.getString("String_IteratorStart"));
 								if (iterator.getCirculationType() != CirculationType.whileType) {
-									while (iterator.hasNext()) {
+									while (iterator.hasNext() && !formWorkflow.getTasksManager().isCancel()) {
 										formWorkflow.getCanvas().getCirculationGraph().getOutputData().setValue(iterator.next());
 										formWorkflow.runIterator();
 									}

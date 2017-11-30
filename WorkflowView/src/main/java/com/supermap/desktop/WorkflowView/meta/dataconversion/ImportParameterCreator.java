@@ -130,12 +130,12 @@ public class ImportParameterCreator implements IImportParameterCreator {
 					isSelectingFile = true;
 					String fileName = (String) evt.getNewValue();
 					//set dataset name
-					String fileAlis = fileName.substring(fileName.lastIndexOf(File.separator) + 1, fileName.length());
-					if (fileAlis.length() > 0) {
+					String alis = FileUtilities.getFileAlias(fileName);
+					if (null != alis) {
 						if (parameterDatasource != null && parameterDatasource.getSelectedItem() != null) {
-							fileAlis = parameterDatasource.getSelectedItem().getDatasets().getAvailableDatasetName(fileAlis);
+							alis = parameterDatasource.getSelectedItem().getDatasets().getAvailableDatasetName(alis);
 						}
-						parameterDataset.setSelectedItem(fileAlis);
+						parameterDataset.setSelectedItem(alis);
 					}
 				} finally {
 					isSelectingFile = false;
@@ -367,7 +367,7 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			reflectInfoArray.add(reflectInfoImportMode);
 			if (importSetting instanceof ImportSettingGJB || importSetting instanceof ImportSettingTEMSVector
 					|| importSetting instanceof ImportSettingTEMSBuildingVector || importSetting instanceof ImportSettingFileGDBVector) {
-				parameterDataset.setEnabled(false);
+//				parameterDataset.setEnabled(false);
 				parameterDataset.setSelectedItem("");
 			}
 			if (importSetting instanceof ImportSettingSHP) {
