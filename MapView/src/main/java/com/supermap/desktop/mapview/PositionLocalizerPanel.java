@@ -3,12 +3,19 @@ package com.supermap.desktop.mapview;
 import com.supermap.desktop.Interface.IFormMap;
 import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.properties.CoreProperties;
+import com.supermap.desktop.ui.UICommonToolkit;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
+import com.supermap.desktop.ui.controls.TreeComboBox;
+import com.supermap.desktop.ui.trees.LayersTree;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 /**
@@ -21,13 +28,30 @@ public class PositionLocalizerPanel extends JPanel {
     private JButton buttonFinder;
     private JCheckBox checkBoxExact;
     private JLabel labelLayer;
-    private JComboBox comboBoxLayer;
+    private TreeComboBox comboBoxLayer;
     private JLabel labelField;
     private JComboBox<String> comboBoxField;
     private JTable tableResult;
     //endregion
 
     private transient IFormMap formMap;
+    private LayersTree layersTree;
+    private boolean isLayerUpdate = true;
+
+    //region Listener
+    private MouseAdapter comboBoxLayerUpdateListener = new MouseAdapter() {
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            refreshComboBoxLayer();
+        }
+    };
+    private PropertyChangeListener layersTreeChangeListener = new PropertyChangeListener() {
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            isLayerUpdate = true;
+        }
+    };
+    //endregion
 
     public PositionLocalizerPanel() {
         initComponent();
@@ -42,7 +66,7 @@ public class PositionLocalizerPanel extends JPanel {
         buttonFinder.setIcon(ControlsResources.getIcon("/controlsresources/SortType/Image_FindFiles.png"));
         checkBoxExact = new JCheckBox(CoreProperties.getString("String_FindExacted"));
         labelLayer = new JLabel(CoreProperties.getString("String_Label_ChooseLayer"));
-        comboBoxLayer = new JComboBox();
+        refreshComboBoxLayer();
         labelField = new JLabel(CoreProperties.getString("String_QueryField"));
         comboBoxField = new JComboBox<>();
         initTable();
@@ -65,11 +89,29 @@ public class PositionLocalizerPanel extends JPanel {
     }
 
     private void registerListener() {
-
+        comboBoxLayer.addMouseListener(comboBoxLayerUpdateListener);
+        layersTree.addPropertyChangeListener(layersTreeChangeListener);
     }
 
     private void removeListener() {
+        comboBoxLayer.removeMouseListener(comboBoxLayerUpdateListener);
+        layersTree.removePropertyChangeListener(layersTreeChangeListener);
+    }
 
+    private void refreshComboBoxLayer() {
+        if (!isLayerUpdate) {
+            return;
+        }
+        if (layersTree == null) {
+            layersTree = UICommonToolkit.getLayersManager().getLayersTree();
+            layersTree.setEditable(false);
+        }
+        if (comboBoxLayer == null) {
+            comboBoxLayer = new TreeComboBox(layersTree);
+        } else {
+            layersTree.updateUI();
+            comboBoxLayer.updateUI();
+        }
     }
 
     private void initTable() {

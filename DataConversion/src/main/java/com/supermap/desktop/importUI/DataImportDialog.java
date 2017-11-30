@@ -778,8 +778,10 @@ public class DataImportDialog extends SmDialog implements IPanelModel {
 
 				@Override
 				public void valueChanged(ListSelectionEvent e) {
-					int selectIndex = list.getSelectedIndex();
-					initImportDirectoryInfo(selectIndex);
+					if (e.getValueIsAdjusting()) {
+						int selectIndex = list.getSelectedIndex();
+						initImportDirectoryInfo(selectIndex);
+					}
 				}
 			});
 
