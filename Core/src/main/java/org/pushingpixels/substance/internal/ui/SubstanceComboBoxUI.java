@@ -36,13 +36,8 @@ import org.pushingpixels.substance.api.shaper.ClassicButtonShaper;
 import org.pushingpixels.substance.api.shaper.SubstanceButtonShaper;
 import org.pushingpixels.substance.internal.animation.StateTransitionTracker;
 import org.pushingpixels.substance.internal.animation.TransitionAwareUI;
-import org.pushingpixels.substance.internal.utils.RolloverTextControlListener;
-import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
+import org.pushingpixels.substance.internal.utils.*;
 import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities.TextComponentAware;
-import org.pushingpixels.substance.internal.utils.SubstanceDropDownButton;
-import org.pushingpixels.substance.internal.utils.SubstanceOutlineUtilities;
-import org.pushingpixels.substance.internal.utils.SubstanceSizeUtils;
-import org.pushingpixels.substance.internal.utils.SubstanceTextUtilities;
 import org.pushingpixels.substance.internal.utils.border.SubstanceTextComponentBorder;
 import org.pushingpixels.substance.internal.utils.combo.ComboBoxBackgroundDelegate;
 import org.pushingpixels.substance.internal.utils.combo.SubstanceComboBoxEditor;
@@ -689,11 +684,15 @@ public class SubstanceComboBoxUI extends BasicComboBoxUI implements TransitionAw
 		SubstanceButtonShaper shaper = ClassicButtonShaper.INSTANCE;
 		if (shaper == null)
 			return false;
-		Shape contour = SubstanceOutlineUtilities.getBaseOutline(this.comboBox,
-				SubstanceSizeUtils.getClassicButtonCornerRadius(
-						SubstanceSizeUtils.getComponentFontSize(this.comboBox)),
-				null);
-		return contour.contains(me.getPoint());
+		if (this.comboBox != null) {
+
+			Shape contour = SubstanceOutlineUtilities.getBaseOutline(this.comboBox,
+					SubstanceSizeUtils.getClassicButtonCornerRadius(
+							SubstanceSizeUtils.getComponentFontSize(this.comboBox)),
+					null);
+			return contour.contains(me.getPoint());
+		}
+		return false;
 	}
 
 	/*

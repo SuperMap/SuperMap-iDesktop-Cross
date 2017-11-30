@@ -14,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
-public class SmMenuItem extends JCheckBoxMenuItem implements IBaseItem {
+public class SmMenuItem extends JMenuItem implements IBaseItem {
 	private static final long serialVersionUID = 1L;
 	private transient IForm formClass = null;
 	private transient XMLCommand xmlCommand = null;

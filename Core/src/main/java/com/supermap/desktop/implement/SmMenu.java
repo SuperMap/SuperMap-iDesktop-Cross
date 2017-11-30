@@ -14,8 +14,6 @@ import com.supermap.desktop.utilities.RecentFileUtilties;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
 
 import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class SmMenu extends JMenu implements IMenu {
 	}
 
 	protected boolean initialize() {
-		this.getPopupMenu().addPopupMenuListener(new SetPopupMenuListener());
+//		this.getPopupMenu().addPopupMenuListener(new SetPopupMenuListener());
 		boolean result = false;
 		if (this.xmlMenu != null) {
 
@@ -334,26 +332,26 @@ public class SmMenu extends JMenu implements IMenu {
 		}
 	}
 
-	class SetPopupMenuListener implements PopupMenuListener {
-
-		@Override
-		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-			for (IBaseItem item : items()) {
-				if (item instanceof SmMenuItem) {
-					((SmMenuItem) item).checkNowState();
-				}
-			}
-		}
-
-		@Override
-		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-			// do nothing
-		}
-
-		@Override
-		public void popupMenuCanceled(PopupMenuEvent e) {
-			// do nothing
-		}
-
-	}
+//	class SetPopupMenuListener implements PopupMenuListener {
+//
+//		@Override
+//		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+//			for (IBaseItem item : items()) {
+//				if (item instanceof SmMenuItem) {
+//					((SmMenuItem) item).checkNowState();
+//				}
+//			}
+//		}
+//
+//		@Override
+//		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+//			// do nothing
+//		}
+//
+//		@Override
+//		public void popupMenuCanceled(PopupMenuEvent e) {
+//			// do nothing
+//		}
+//
+//	}
 }
