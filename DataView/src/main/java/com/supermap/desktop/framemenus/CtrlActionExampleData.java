@@ -6,6 +6,7 @@ import com.supermap.desktop.Interface.IBaseItem;
 import com.supermap.desktop.Interface.IForm;
 import com.supermap.desktop.implement.CtrlAction;
 import com.supermap.desktop.implement.SmMenuItem;
+import com.supermap.desktop.ui.xmlStartMenus.SmSubMenu;
 import com.supermap.desktop.utilities.DatasourceUtilities;
 import com.supermap.desktop.utilities.PathUtilities;
 import com.supermap.desktop.utilities.WorkspaceUtilities;
@@ -52,7 +53,7 @@ public class CtrlActionExampleData extends CtrlAction {
 	@Override
 	public boolean enable() {
 		boolean result = false;
-		String filePath = ((SmMenuItem) this.getCaller()).getToolTipText();
+		String filePath = ((SmSubMenu) this.getCaller()).getTooltip();
 		String configFile = PathUtilities.getFullPathName(filePath, false);
 		File file = new File(configFile);
 		if (file.exists()) {

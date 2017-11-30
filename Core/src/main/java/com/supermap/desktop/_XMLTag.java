@@ -14,7 +14,10 @@ public class _XMLTag {
 	public static final String g_NodeDockbar = "dockbar";
 	public static final String g_NodeDockPath = "dockPath";
 	public static final String g_NodeDirection = "direction";
+	public static final String g_NodeStartMenus = "startMenus";
 	public static final String g_NodeStartMenu = "startMenu";
+	public static final String g_NodeSecondMenu = "secondMenu";
+	public static final String g_NodePanelClass = "panelClass";
 	public static final String g_NodeStatusbar = "statusbar";
 	public static final String g_NodeStatusbars = "statusbars";
 	public static final String g_NodeGroup = "group";

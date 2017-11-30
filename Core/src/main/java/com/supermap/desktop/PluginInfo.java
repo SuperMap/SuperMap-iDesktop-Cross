@@ -2,8 +2,13 @@ package com.supermap.desktop;
 
 import com.supermap.desktop.Interface.IToolbarManager;
 import com.supermap.desktop.enums.XMLCommandType;
-import com.supermap.desktop.ui.*;
+import com.supermap.desktop.ui.XMLDockbars;
+import com.supermap.desktop.ui.XMLMenus;
+import com.supermap.desktop.ui.XMLStatusbars;
+import com.supermap.desktop.ui.XMLToolbar;
+import com.supermap.desktop.ui.XMLToolbars;
 import com.supermap.desktop.ui.xmlRibbons.XMLRibbons;
+import com.supermap.desktop.ui.xmlStartMenus.XMLStartMenus;
 import com.supermap.desktop.utilities.XmlUtilities;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,6 +22,7 @@ public class PluginInfo {
 	private Element statusbarsElement = null;
 	private Element dockbarsElement = null;
 	private Element ribbonsElement = null;
+	private Element startMenusElement = null;
 	private Element contextMenusElement = null;
 	private Element processManagerElement = null;
 
@@ -41,6 +47,7 @@ public class PluginInfo {
 	private XMLDockbars xmlDockbars = null;
 	private XMLMenus xmlContextMenus = null;
 	private XMLRibbons xmlRibbons = null;
+	private XMLStartMenus startMenus;
 
 
 	public PluginInfo(Element element) {
@@ -265,6 +272,8 @@ public class PluginInfo {
 						this.processManagerElement = item;
 					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeRibbons)) {
 						this.ribbonsElement = item;
+					} else if (nodeName.equalsIgnoreCase(_XMLTag.g_NodeStartMenus)) {
+						this.startMenusElement = item;
 					}
 				}
 			}
@@ -297,6 +306,9 @@ public class PluginInfo {
 
 		this.xmlRibbons = new XMLRibbons(this);
 		this.xmlRibbons.load(this.ribbonsElement);
+
+		this.startMenus = new XMLStartMenus(this);
+		this.startMenus.load(this.startMenusElement);
 
 		return true;
 	}
@@ -349,4 +361,7 @@ public class PluginInfo {
 	}
 
 
+	public XMLStartMenus getStartMenus() {
+		return startMenus;
+	}
 }

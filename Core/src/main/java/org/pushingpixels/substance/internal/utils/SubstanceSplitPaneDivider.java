@@ -166,6 +166,19 @@ public class SubstanceSplitPaneDivider extends BasicSplitPaneDivider implements 
 		if (SubstanceCoreUtilities.hasFlatAppearance(this.splitPane, true)) {
 			BackgroundPaintingUtils.updateIfOpaque(g, this.splitPane);
 		}
+		Color markColor = SubstanceColorUtilities.getMarkColor(SubstanceColorSchemeUtilities.getColorScheme(this,
+				ColorSchemeAssociationKind.MARK, ComponentState.ENABLED), this.isEnabled());
+		g.setColor(markColor);
+		if (this.splitPane.getOrientation() == JSplitPane.VERTICAL_SPLIT) {
+			g.fillRect(0, 0, getWidth(), 1);
+		}else {
+			g.fillRect(getWidth()-1, 0, 1, getHeight());
+		}
+		if (true) {
+			// 原来的方法是画点，现在改成画线
+			return;
+		}
+
 
 		Graphics2D graphics = (Graphics2D) g.create();
 
@@ -175,7 +188,7 @@ public class SubstanceSplitPaneDivider extends BasicSplitPaneDivider implements 
 				.getStateContributionMap();
 
 //		float alpha = SubstanceColorSchemeUtilities.getAlpha(this.splitPane, currState);
-		float alpha = 0f;
+		float alpha = 1f;
 
 		// compute the grip handle dimension
 		int minSizeForGripPresence = SubstanceSizeUtils

@@ -151,7 +151,7 @@ public class BasicRibbonApplicationMenuPopupPanelUI extends BasicPopupPanelUI {
 				}
 
 				Insets ins = parent.getInsets();
-				return new Dimension(width + ins.left + ins.right, height + ins.top + ins.bottom);
+				return new Dimension(width + ins.left + ins.right, Math.max(500,height + ins.top + ins.bottom));
 			}
 
 			@Override
@@ -227,6 +227,9 @@ public class BasicRibbonApplicationMenuPopupPanelUI extends BasicPopupPanelUI {
 							public void menuEntryActivated(JPanel targetPanel) {
 								targetPanel.removeAll();
 								targetPanel.setLayout(new BorderLayout());
+//								if (menuEntry instanceof SmStartMenu) {
+//									((SmStartMenu) menuEntry).freshEnable();
+//								}
 								JRibbonApplicationMenuPopupPanelSecondary secondary = new JRibbonApplicationMenuPopupPanelSecondary(
 										menuEntry) {
 									@Override

@@ -32,6 +32,7 @@ package org.pushingpixels.flamingo.internal.ui.ribbon.appmenu;
 import org.pushingpixels.flamingo.api.common.AbstractCommandButton;
 import org.pushingpixels.flamingo.api.common.CommandButtonLayoutManager;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
+import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
 import org.pushingpixels.flamingo.api.common.icon.ResizableIcon;
 import org.pushingpixels.flamingo.internal.utils.FlamingoUtilities;
 
@@ -80,6 +81,9 @@ public class CommandButtonLayoutManagerMenuTileLevel1 implements
 		Insets ins = commandButton.getInsets();
 		int height = commandButton.getHeight();
 		ResizableIcon buttonIcon = commandButton.getIcon();
+		if (buttonIcon == null) {
+			buttonIcon = new EmptyResizableIcon(0);
+		}
 		// bottom-right corner of the icon area
 		return new Point(ins.left + buttonIcon.getIconWidth(), height - ins.top
 				- ins.bottom);
@@ -129,6 +133,9 @@ public class CommandButtonLayoutManagerMenuTileLevel1 implements
 		boolean ltr = commandButton.getComponentOrientation().isLeftToRight();
 
 		ResizableIcon buttonIcon = commandButton.getIcon();
+		if (buttonIcon == null) {
+			buttonIcon = new EmptyResizableIcon(0);
+		}
 
 		if (ltr) {
 			int x = ins.left;
@@ -138,7 +145,7 @@ public class CommandButtonLayoutManagerMenuTileLevel1 implements
 			result.iconRect.width = buttonIcon.getIconWidth();
 			result.iconRect.height = buttonIcon.getIconHeight();
 
-			x += commandButton.getIcon().getIconWidth();
+			x += buttonIcon.getIconWidth();
 			if (buttonKind == JCommandButton.CommandButtonKind.ACTION_AND_POPUP_MAIN_POPUP) {
 				result.actionClickArea.x = 0;
 				result.actionClickArea.y = 0;
@@ -214,7 +221,7 @@ public class CommandButtonLayoutManagerMenuTileLevel1 implements
 			result.iconRect.width = buttonIcon.getIconWidth();
 			result.iconRect.height = buttonIcon.getIconHeight();
 
-			x -= commandButton.getIcon().getIconWidth();
+			x -= buttonIcon.getIconWidth();
 			if (buttonKind == JCommandButton.CommandButtonKind.ACTION_AND_POPUP_MAIN_POPUP) {
 				result.actionClickArea.x = x + layoutHGap;
 				result.actionClickArea.y = 0;

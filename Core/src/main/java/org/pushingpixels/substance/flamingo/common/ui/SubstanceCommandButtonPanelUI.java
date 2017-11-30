@@ -39,7 +39,6 @@ import org.pushingpixels.substance.api.SubstanceConstants.Side;
 import org.pushingpixels.substance.internal.painter.BackgroundPaintingUtils;
 import org.pushingpixels.substance.internal.painter.HighlightPainterUtils;
 import org.pushingpixels.substance.internal.utils.SubstanceColorSchemeUtilities;
-import org.pushingpixels.substance.internal.utils.SubstanceColorUtilities;
 import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
 import org.pushingpixels.substance.internal.utils.SubstanceSizeUtils;
 
@@ -111,9 +110,9 @@ public class SubstanceCommandButtonPanelUI extends BasicCommandButtonPanelUI {
 		SubstanceColorScheme scheme = SubstanceColorSchemeUtilities
 				.getColorScheme(buttonPanel, ComponentState.ENABLED);
 		Color background = scheme.getBackgroundFillColor();
-		if (groupIndex % 2 == 1)
-			background = SubstanceColorUtilities.getDarkerColor(background,
-					0.06);
+//		if (groupIndex % 2 == 1)
+//			background = SubstanceColorUtilities.getDarkerColor(background,
+//					0.06);
 
 		BackgroundPaintingUtils.fillAndWatermark(g, this.buttonPanel,
 				background, new Rectangle(x, y, width, height));
