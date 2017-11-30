@@ -112,6 +112,10 @@ public class FormLayout extends FormBaseChild implements IFormLayout {
 					.getLayoutAction() == Action.SELECTCIRCLE)) {
 				showPopupMenu(e);
 			}
+
+			if (buttonType == MouseEvent.BUTTON1 && (getMapLayoutControl().getLayoutAction() == Action.SELECT || getMapLayoutControl().getLayoutAction() == Action.SELECT2)){
+				elementSelectedChange(new ElementSelectedEvent(mapLayoutControl, mapLayoutControl.getMapLayout().getSelection().getCount()));
+			}
 		}
 	};
 
@@ -449,6 +453,7 @@ public class FormLayout extends FormBaseChild implements IFormLayout {
 			}
 			LayoutSelection layoutSelection = this.mapLayoutControl.getMapLayout().getSelection();
 			if (layoutSelection.getCount() > 0) {
+				this.mapLayoutControl.getMapLayout().getElements().refresh();
 //				if(this.mapLayoutControl.getMapLayout().getElements().moveTo(layoutSelection.get(0))){
 				this.mapLayoutControl.getMapLayout().getElements().seekID(layoutSelection.get(0));
 				this.firstSelectedGeometry = this.mapLayoutControl.getMapLayout().getElements().getGeometry().clone();
@@ -487,6 +492,13 @@ public class FormLayout extends FormBaseChild implements IFormLayout {
 	private void elementAdd(ElementEvent elementEvent) {
 		try {
 			LayoutElements elements = this.mapLayoutControl.getMapLayout().getElements();
+			elements.refresh();
+//			elements.moveFirst();
+//			for (int i=0;i<elements.getCount();i++){
+//				System.out.println(elements.getID());
+//				elements.moveNext();
+//			}
+//			elements.moveFirst();
 			boolean isFindGeometry = elements.seekID(elementEvent.getID());
 			if (isFindGeometry && this.mapLayoutControl.getTrackMode() == TrackMode.EDITGEOMAP) {
 				GeoMap map = (GeoMap) elements.getGeometry();
