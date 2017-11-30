@@ -29,9 +29,11 @@
  */
 package org.pushingpixels.substance.internal.utils.menu;
 
+import com.supermap.desktop.Interface.IBaseItem;
 import org.pushingpixels.lafwidget.LafWidgetUtilities;
 import org.pushingpixels.substance.api.ComponentState;
 import org.pushingpixels.substance.api.ComponentStateFacet;
+import org.pushingpixels.substance.api.SubstanceColorScheme;
 import org.pushingpixels.substance.api.SubstanceConstants.MenuGutterFillKind;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import org.pushingpixels.substance.internal.animation.StateTransitionTracker;
@@ -39,6 +41,7 @@ import org.pushingpixels.substance.internal.animation.TransitionAwareUI;
 import org.pushingpixels.substance.internal.utils.SubstanceColorSchemeUtilities;
 import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
 import org.pushingpixels.substance.internal.utils.SubstanceTextUtilities;
+import org.pushingpixels.substance.internal.utils.icon.CheckBoxIConUtilties;
 
 import javax.swing.*;
 import javax.swing.plaf.ButtonUI;
@@ -687,6 +690,7 @@ public class MenuUtilities {
 			if (useCheckAndArrow(menuItem)) {
 				graphics.translate(mli.checkIconRect.x, mli.checkIconRect.y);
 				checkIcon.paintIcon(menuItem, graphics, 0, 0);
+
 				graphics.translate(-mli.checkIconRect.x, -mli.checkIconRect.y);
 			}
 		}
@@ -707,10 +711,23 @@ public class MenuUtilities {
 
 			if (icon != null) {
 				boolean useThemed = SubstanceCoreUtilities.useThemedDefaultIcon(menuItem);
-
 				graphics.translate(mli.iconRect.x, mli.iconRect.y);
 				if (!useThemed) {
-					icon.paintIcon(menuItem, graphics, 0, 0);
+					if (((IBaseItem) menuItem).isChecked() && icon instanceof ImageIcon && ((ImageIcon) icon).getDescription().endsWith("SuperMap-iDesktop-Cross/Resources/MenuHeight16.png")) {
+						icon = CheckBoxIConUtilties.getCheckBoxSelectedICon();
+						icon.paintIcon(menuItem, graphics, 0, 0);
+					}else {
+						icon.paintIcon(menuItem, graphics, 0, 0);
+						if (menuItem instanceof IBaseItem && ((IBaseItem) menuItem).isChecked()) {
+							SubstanceColorScheme colorScheme = SubstanceColorSchemeUtilities.getColorScheme(menuItem, ComponentState.SELECTED);
+							Color lightColor = colorScheme.getMidColor();
+							graphics.setColor(lightColor);
+							graphics.drawLine(1, 0, icon.getIconWidth() - 2, 0);// 上
+							graphics.drawLine(icon.getIconWidth() - 2, 1, icon.getIconWidth() - 2, icon.getIconHeight() - 2);// 右
+							graphics.drawLine(1, icon.getIconHeight() - 2, icon.getIconWidth() - 2, icon.getIconHeight() - 2);// 下
+							graphics.drawLine(0, 1, 0, icon.getIconHeight() - 2);// 左
+						}
+					}
 				} else {
 					Icon themed = SubstanceCoreUtilities.getThemedIcon(
 							menuItem, icon);
