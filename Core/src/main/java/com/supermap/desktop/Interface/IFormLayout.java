@@ -1,5 +1,6 @@
 package com.supermap.desktop.Interface;
 
+import com.supermap.data.Geometry;
 import com.supermap.ui.MapLayoutControl;
 
 public interface IFormLayout extends IForm {
@@ -9,4 +10,10 @@ public interface IFormLayout extends IForm {
 	 * @return
 	 */
     MapLayoutControl getMapLayoutControl() ;
+
+	/**
+	 * Get the first selected object in the layout window selection object
+	 * @return
+	 */
+	Geometry getFirstSelectedGeometry();
 }
