@@ -342,9 +342,10 @@ public class SubstanceRibbonUI extends BasicRibbonUI {
 	 */
 	@Override
 	protected int getTabButtonGap() {
-		return SubstanceSizeUtils.getAdjustedSize(
-				SubstanceSizeUtils.getComponentFontSize(this.ribbon), super.getTabButtonGap(), 3, 1,
-				false);
+//		return SubstanceSizeUtils.getAdjustedSize(
+//				SubstanceSizeUtils.getComponentFontSize(this.ribbon), super.getTabButtonGap(), 3, 1,
+//				false);
+		return 2;
 	}
 
 	@Override

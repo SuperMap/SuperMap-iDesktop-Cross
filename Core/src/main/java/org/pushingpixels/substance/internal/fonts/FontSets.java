@@ -232,6 +232,9 @@ public final class FontSets {
 				File[] files = file.listFiles();
 				if (files != null) {
 					for (File fontFile : files) {
+						if (fontFile.isDirectory()) {
+							continue;
+						}
 						try (FileInputStream fileInputStream = new FileInputStream(fontFile);
 						     BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
 							Font font = Font.createFont(Font.TRUETYPE_FONT, bufferedInputStream);
