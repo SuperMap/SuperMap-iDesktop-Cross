@@ -30,9 +30,7 @@
 package org.pushingpixels.substance.api.fonts;
 
 import org.pushingpixels.lafwidget.utils.LookUtils;
-import org.pushingpixels.substance.internal.fonts.DefaultGnomeFontPolicy;
 import org.pushingpixels.substance.internal.fonts.DefaultKDEFontPolicy;
-import org.pushingpixels.substance.internal.fonts.DefaultMacFontPolicy;
 import org.pushingpixels.substance.internal.fonts.FontPolicies;
 import org.pushingpixels.substance.internal.fonts.ScaledFontSet;
 import org.pushingpixels.substance.internal.utils.SubstanceSizeUtils;
@@ -152,11 +150,11 @@ public class SubstanceFontUtilities {
 			defaultPolicy = FontPolicies.getDefaultWindowsPolicy();
 		} else {
 			if (LookUtils.IS_OS_MAC) {
-				defaultPolicy = new DefaultMacFontPolicy();
+//				defaultPolicy = new DefaultMacFontPolicy();
 			} else {
 				if (isKDE) {
 					// new in version 4.2
-					defaultPolicy = new DefaultKDEFontPolicy();
+//					defaultPolicy = new DefaultKDEFontPolicy();
 				} else {
 					try {
 						String desktop = AccessController
@@ -168,7 +166,7 @@ public class SubstanceFontUtilities {
 								});
 						if ("gnome".equals(desktop)) {
 							// new in version 4.1
-							defaultPolicy = new DefaultGnomeFontPolicy();
+//							defaultPolicy = new DefaultGnomeFontPolicy();
 							// isGnome = true;
 						}
 					} catch (Throwable t) {
