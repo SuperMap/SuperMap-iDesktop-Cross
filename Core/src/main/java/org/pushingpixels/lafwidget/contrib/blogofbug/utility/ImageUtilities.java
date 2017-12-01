@@ -15,6 +15,8 @@
 
 package org.pushingpixels.lafwidget.contrib.blogofbug.utility;
 
+import com.supermap.desktop.utilities.PathUtilities;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +25,7 @@ import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -227,6 +230,18 @@ public class ImageUtilities {
 		Graphics graphics = image.createGraphics();
 		component.paint(graphics);
 		graphics.dispose();
+		return image;
+	}
+
+	public static Image getFileImage(String imagePath) {
+		imagePath = imagePath.replace("\\", "/");
+		String[] pathPrams = new String[]{PathUtilities.getRootPathName(), imagePath};
+		String path = PathUtilities.combinePath(pathPrams, false);
+		File file = new File(path);
+		Image image = null;
+		if (file.exists()) {
+			image = new ImageIcon(path).getImage();
+		}
 		return image;
 	}
 }

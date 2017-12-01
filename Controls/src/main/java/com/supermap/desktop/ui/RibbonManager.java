@@ -10,9 +10,6 @@ import com.supermap.desktop.ui.xmlRibbons.XMLRibbonButton;
 import com.supermap.desktop.ui.xmlRibbons.XMLTaskBar;
 import com.supermap.desktop.utilities.StringUtilities;
 import com.supermap.desktop.utilities.SystemPropertyUtilities;
-import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
-import org.pushingpixels.flamingo.api.common.JCommandButton;
-import org.pushingpixels.flamingo.api.ribbon.JFlowRibbonBand;
 import org.pushingpixels.flamingo.api.ribbon.JRibbon;
 import org.pushingpixels.flamingo.api.ribbon.RibbonContextualTaskGroup;
 import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
@@ -68,22 +65,6 @@ public class RibbonManager implements IRibbonManager {
 			ribbon.addContextualTaskGroup(ribbonContextualTaskGroup);
 			ribbon.setVisible(ribbonContextualTaskGroup, false);
 		}
-//		JRibbonBand jRibbonBand = new JRibbonBand("band1", null);
-		JFlowRibbonBand jRibbonBand = new JFlowRibbonBand("band1",null,2);
-		JCommandButton top = new JCommandButton("TOP");
-		top.setDisplayState(CommandButtonDisplayState.BIG);
-		jRibbonBand.addFlowComponent(top);
-		jRibbonBand.addFlowComponent(new JCommandButton("MEDIUM1"));
-		jRibbonBand.addFlowComponent(new JCommandButton("MEDIUM2"));
-		jRibbonBand.addFlowComponent(new JCommandButton("low1"));
-		jRibbonBand.addFlowComponent(new JCommandButton("low2"));
-		jRibbonBand.addFlowComponent(new JCommandButton("low3"));
-		jRibbonBand.addFlowComponent(new JCommandButton("low4"));
-
-
-		RibbonTask test = new RibbonTask("test", jRibbonBand);
-		
-//		ribbon.addTask(test);
 	}
 
 	private WindowType getWindowType(String controlClass) {

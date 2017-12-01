@@ -2,6 +2,7 @@ package com.supermap.desktop.utilities;
 
 import com.supermap.desktop.ui.XMLCommand;
 import org.pushingpixels.flamingo.api.common.icon.ImageWrapperResizableIcon;
+import org.pushingpixels.lafwidget.contrib.blogofbug.utility.ImageUtilities;
 import sun.awt.image.ToolkitImage;
 
 import javax.swing.*;
@@ -16,15 +17,7 @@ public class XmlCommandUtilities {
 	private static final Dimension DEFAULT_ICON_SIZE = new Dimension(23, 23);
 
 	public static Image getXmlCommandImage(XMLCommand xmlCommand) {
-        String imagePath = xmlCommand.getImageFile().replace("\\", "/");
-        String[] pathPrams = new String[]{PathUtilities.getRootPathName(), imagePath};
-        String path = PathUtilities.combinePath(pathPrams, false);
-		File file = new File(path);
-		Image image = null;
-		if (file.exists()) {
-			image = new ImageIcon(path).getImage();
-		}
-		return image;
+		return ImageUtilities.getFileImage(xmlCommand.getImageFile());
 	}
 	public static Image getXmlCommandToolTipImage(XMLCommand xmlCommand) {
         String imagePath = xmlCommand.getTooltipImageFile().replace("\\", "/");

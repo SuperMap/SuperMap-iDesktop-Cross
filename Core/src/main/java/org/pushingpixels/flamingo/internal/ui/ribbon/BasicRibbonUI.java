@@ -29,6 +29,7 @@
  */
 package org.pushingpixels.flamingo.internal.ui.ribbon;
 
+import com.supermap.desktop.ui.xmlRibbons.JPanelPageHeader;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.CommandToggleButtonGroup;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
@@ -120,6 +121,8 @@ public class BasicRibbonUI extends RibbonUI {
 	protected JRibbonApplicationMenuButton applicationMenuButton;
 
 	protected JCommandButton helpButton;
+
+	protected JPanelPageHeader panelPageHeader;
 
 	/**
 	 * Map of toggle buttons of all tasks.
@@ -779,6 +782,7 @@ public class BasicRibbonUI extends RibbonUI {
 				x = ltr ? x + appMenuButtonSize : x - appMenuButtonSize;
 			}
 
+			int extraButtonWidth = 0;
 			// the help button
 			if (helpButton != null) {
 				Dimension preferred = helpButton.getPreferredSize();
@@ -787,21 +791,35 @@ public class BasicRibbonUI extends RibbonUI {
 				if (ltr) {
 					helpButton.setBounds(width - ins.right - preferred.width, y, preferred.width,
 							taskToggleButtonHeight);
+					extraButtonWidth += preferred.width + ins.right;
 				} else {
 					helpButton.setBounds(ins.left, y, preferred.width, taskToggleButtonHeight);
+					extraButtonWidth += preferred.width + ins.left;
+				}
+			}
+
+			if (panelPageHeader != null) {
+				Dimension preferredSize = panelPageHeader.getPreferredSize();
+				if (ltr) {
+					extraButtonWidth = preferredSize.width + (extraButtonWidth == 0 ? ins.right : (extraButtonWidth + tabButtonGap));
+					int pageHeaderX = width - extraButtonWidth;
+					panelPageHeader.setBounds(pageHeaderX, y, preferredSize.width, taskToggleButtonHeight);
+				} else {
+					int pageHeaderX = extraButtonWidth == 0 ? ins.right : (extraButtonWidth + tabButtonGap);
+					panelPageHeader.setBounds(pageHeaderX, y, preferredSize.width, taskToggleButtonHeight);
+					extraButtonWidth = preferredSize.width + (extraButtonWidth == 0 ? ins.left : (extraButtonWidth + tabButtonGap));
 				}
 			}
 
 			// task buttons
 			if (ltr) {
-				int taskButtonsWidth = (helpButton != null) ? (helpButton.getX() - tabButtonGap - x)
-						: (c.getWidth() - ins.right - x);
+//				int taskButtonsWidth = (helpButton != null) ? (helpButton.getX() - tabButtonGap - x) : (c.getWidth() - ins.right - x);
+				int taskButtonsWidth = extraButtonWidth != 0 ? (width - x - extraButtonWidth - tabButtonGap) : (width - ins.right - x);
 				taskToggleButtonsScrollablePanel.setBounds(x, y, taskButtonsWidth,
 						taskToggleButtonHeight);
 			} else {
-				int taskButtonsWidth = (helpButton != null)
-						? (x - tabButtonGap - helpButton.getX() - helpButton.getWidth())
-						: (x - ins.left);
+//				int taskButtonsWidth = (helpButton != null) ? (x - tabButtonGap - helpButton.getX() - helpButton.getWidth()) : (x - ins.left);
+				int taskButtonsWidth = (extraButtonWidth != 0) ? (x - extraButtonWidth - tabButtonGap) : (x - ins.left);
 				taskToggleButtonsScrollablePanel.setBounds(x - taskButtonsWidth, y,
 						taskButtonsWidth, taskToggleButtonHeight);
 			}
@@ -1044,7 +1062,7 @@ public class BasicRibbonUI extends RibbonUI {
 						}
 //						if (ltr) {
 						BasicGraphicsUtils.drawString(g2d, titleToShow, -1, (int) (startX + 0.5 * (width - fm.stringWidth(titleToShow))),
-									yOffset);
+								yOffset);
 //						} else {
 //							BasicGraphicsUtils.drawString(g2d, titleToShow, -1,
 //									startX + width - 5 - fm.stringWidth(titleToShow), yOffset);
@@ -1876,6 +1894,8 @@ public class BasicRibbonUI extends RibbonUI {
 			this.helpButton.setActionRichTooltip(this.ribbon.getHelpRichTooltip());
 			this.ribbon.add(this.helpButton);
 		}
+
+		panelPageHeader = ribbon.getPageHeader();
 
 		this.ribbon.revalidate();
 		this.ribbon.repaint();

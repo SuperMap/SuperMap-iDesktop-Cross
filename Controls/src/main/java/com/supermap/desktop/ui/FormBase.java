@@ -5,9 +5,27 @@ import com.supermap.data.Dataset;
 import com.supermap.data.Datasets;
 import com.supermap.data.Datasources;
 import com.supermap.data.WorkspaceConnectionInfo;
-import com.supermap.desktop.*;
+import com.supermap.desktop.Application;
+import com.supermap.desktop.CommonToolkit;
 import com.supermap.desktop.CtrlAction.WorkspaceRecovery;
-import com.supermap.desktop.Interface.*;
+import com.supermap.desktop.GlobalParameters;
+import com.supermap.desktop.Interface.IContextMenuManager;
+import com.supermap.desktop.Interface.IDockbar;
+import com.supermap.desktop.Interface.IDockbarManager;
+import com.supermap.desktop.Interface.IFormLayout;
+import com.supermap.desktop.Interface.IFormMain;
+import com.supermap.desktop.Interface.IFormManager;
+import com.supermap.desktop.Interface.IFormMap;
+import com.supermap.desktop.Interface.IFormScene;
+import com.supermap.desktop.Interface.IFrameMenuManager;
+import com.supermap.desktop.Interface.IPropertyManager;
+import com.supermap.desktop.Interface.IRibbonManager;
+import com.supermap.desktop.Interface.IStatusbarManager;
+import com.supermap.desktop.Interface.IToolbarManager;
+import com.supermap.desktop.Plugin;
+import com.supermap.desktop.PluginManager;
+import com.supermap.desktop.WorkEnvironment;
+import com.supermap.desktop.controls.utilities.ControlsResources;
 import com.supermap.desktop.controls.utilities.DatasourceOpenFileUtilties;
 import com.supermap.desktop.controls.utilities.MapViewUIUtilities;
 import com.supermap.desktop.controls.utilities.ToolbarUIUtilities;
@@ -25,7 +43,14 @@ import com.supermap.desktop.ui.controls.DockbarManager;
 import com.supermap.desktop.ui.trees.NodeDataType;
 import com.supermap.desktop.ui.trees.TreeNodeData;
 import com.supermap.desktop.ui.trees.WorkspaceTree;
-import com.supermap.desktop.utilities.*;
+import com.supermap.desktop.ui.xmlRibbons.JPanelPageHeader;
+import com.supermap.desktop.utilities.CursorUtilities;
+import com.supermap.desktop.utilities.DatasetUtilities;
+import com.supermap.desktop.utilities.DatasourceUtilities;
+import com.supermap.desktop.utilities.RecentFileUtilties;
+import com.supermap.desktop.utilities.StringUtilities;
+import com.supermap.desktop.utilities.WorkspaceUtilities;
+import com.supermap.desktop.utilities.XmlUtilities;
 import com.supermap.layout.MapLayout;
 import com.supermap.realspace.Scene;
 import org.flexdock.docking.DockingManager;
@@ -194,6 +219,9 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 			RibbonApplicationMenu ribbonApplicationMenu = new RibbonApplicationMenu();
 			this.applicationMenuManager.load(ribbonApplicationMenu, workEnvironment);
 			getRibbon().setApplicationMenu(ribbonApplicationMenu);
+			JPanelPageHeader pageHeader = new JPanelPageHeader();
+			initPageHeader(pageHeader);
+			getRibbon().setPageHeader(pageHeader);
 
 //			hehe();// debug
 
@@ -220,6 +248,15 @@ public class FormBase extends JRibbonFrame implements IFormMain {
 		} catch (Exception ex) {
 			Application.getActiveApplication().getOutput().output(ex);
 		}
+	}
+
+	private void initPageHeader(JPanelPageHeader pageHeader) {
+		JLabel labelSearch = new JLabel("");
+		labelSearch.setIcon(ControlsResources.getIcon("/controlsresources/SortType/Image_FindFiles.png"));
+		pageHeader.add(labelSearch);
+		JTextField textField = new JTextField();
+		pageHeader.add(textField);
+		textField.setPreferredSize(new Dimension(120,21));
 	}
 
 	private void loadProcessesMenu() {

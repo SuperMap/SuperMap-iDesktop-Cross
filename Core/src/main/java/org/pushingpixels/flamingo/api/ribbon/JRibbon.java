@@ -29,6 +29,7 @@
  */
 package org.pushingpixels.flamingo.api.ribbon;
 
+import com.supermap.desktop.ui.xmlRibbons.JPanelPageHeader;
 import org.pushingpixels.flamingo.api.common.AbstractCommandButton;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.RichTooltip;
@@ -239,6 +240,7 @@ public class JRibbon extends JComponent {
 	 * The UI class ID string.
 	 */
 	public static final String uiClassID = "RibbonUI";
+	private JPanelPageHeader pageHeader;
 
 	/**
 	 * Creates a new empty ribbon. Applications are highly encouraged to use
@@ -772,5 +774,15 @@ public class JRibbon extends JComponent {
 			throw new IllegalArgumentException(
 					"Can't hide ribbon on JRibbonFrame");
 		super.setVisible(flag);
+	}
+
+	public JPanelPageHeader getPageHeader() {
+		return pageHeader;
+	}
+
+	public void setPageHeader(JPanelPageHeader pageHeader) {
+		this.pageHeader = pageHeader;
+		this.add(pageHeader);
+		fireStateChanged();
 	}
 }
