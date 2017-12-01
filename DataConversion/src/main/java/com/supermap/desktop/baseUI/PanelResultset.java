@@ -809,7 +809,7 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			//} catch (IOException e) {
 			//	//e.printStackTrace();
 			//}
-			// 导入图位文件默认是png-yuanR2017.11.24
+			// 导入图位文件默认是png-yuanR2017.12.1
 			this.comboBoxEncodeType.setSelectedItem("PNG");
 			setDefaultImportSettingEncode();
 			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
@@ -833,6 +833,9 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 				this.comboBoxEncodeType.setModel(new DefaultComboBoxModel(new String[]{CoreProperties.getString("String_EncodeType_None"), "SGL", "LZW"}));
 			} else if (importSetting instanceof ImportSettingSIT) {
 				initComboboxEncodeType(true);
+				// 导入图位文件默认是png-yuanR2017.12.1
+				//SIT也是影像图位文件
+				this.comboBoxEncodeType.setSelectedItem("PNG");
 			} else {
 				initComboboxEncodeType(false);
 			}
