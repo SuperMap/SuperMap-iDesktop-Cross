@@ -3,7 +3,6 @@ package com.supermap.desktop.baseUI;
 import com.supermap.data.Datasource;
 import com.supermap.data.Datasources;
 import com.supermap.data.EncodeType;
-import com.supermap.data.PixelFormat;
 import com.supermap.data.conversion.*;
 import com.supermap.desktop.Application;
 import com.supermap.desktop.Interface.IImportSettingResultset;
@@ -25,10 +24,8 @@ import com.supermap.desktop.ui.controls.DatasourceComboBox;
 import com.supermap.desktop.ui.controls.GridBagConstraintsHelper;
 import com.supermap.desktop.utilities.EncodeTypeUtilities;
 import com.supermap.desktop.utilities.FileUtilities;
-import com.supermap.desktop.utilities.PixelFormatUtilities;
 import com.supermap.desktop.utilities.StringUtilities;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
@@ -36,9 +33,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -804,17 +798,19 @@ public class PanelResultset extends JPanel implements IImportSettingResultset {
 			}
 
 			// 导入如果是rgb和rgba的image，默认就是EncodeType设置为png-yuanR2017.11.24
-			try {
-				BufferedImage bufferedImage = ImageIO.read(new File(importInfo.getFilePath()));
-				if (bufferedImage != null && bufferedImage.getColorModel() != null) {
-					if (PixelFormat.RGB.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))
-							|| PixelFormat.RGBA.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))) {
-						this.comboBoxEncodeType.setSelectedItem("PNG");
-					}
-				}
-			} catch (IOException e) {
-				//e.printStackTrace();
-			}
+			//try {
+			//	BufferedImage bufferedImage = ImageIO.read(new File(importInfo.getFilePath()));
+			//	if (bufferedImage != null && bufferedImage.getColorModel() != null) {
+			//		if (PixelFormat.RGB.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))
+			//				|| PixelFormat.RGBA.equals(PixelFormatUtilities.valueOf(bufferedImage.getColorModel().getPixelSize()))) {
+			//			this.comboBoxEncodeType.setSelectedItem("PNG");
+			//		}
+			//	}
+			//} catch (IOException e) {
+			//	//e.printStackTrace();
+			//}
+			// 导入图位文件默认是png-yuanR2017.11.24
+			this.comboBoxEncodeType.setSelectedItem("PNG");
 			setDefaultImportSettingEncode();
 			this.comboBoxDatasetType = new DatasetTypeComboBox(new String[]{CoreProperties.getString("String_DatasetType_Image"), CoreProperties.getString("String_DatasetType_Grid")});
 			setDefaultLayout();

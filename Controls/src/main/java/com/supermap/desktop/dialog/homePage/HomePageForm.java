@@ -11,12 +11,15 @@ import java.awt.*;
  */
 public class HomePageForm extends FormBaseChild {
 
+	JPanelRecentlyUsed panelRecentlyUsed = new JPanelRecentlyUsed();
+
 	public HomePageForm(String title, Icon icon, Component component) {
 		super(title, icon, component);
 	}
 
 	public HomePageForm() {
 		super(ControlsProperties.getString("String_HomePage"), null, null);
+		this.add(panelRecentlyUsed);
 	}
 
 }
