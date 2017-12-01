@@ -620,7 +620,8 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
 			result = new ParameterEnum(parser);
-			result.setSelectedItem(EncodeType.DCT);
+			//  图位文件编码类型默认为png-yuanR2017.12.1
+			result.setSelectedItem(EncodeType.PNG);
 		} else if (importSetting instanceof ImportSettingECW) {
 			parser.setEnumNames(new String[]{"NONE"});
 			parser.setChName(new String[]{CoreProperties.getString("String_EncodeType_None")});
@@ -634,7 +635,8 @@ public class ImportParameterCreator implements IImportParameterCreator {
 			parser.setEnumClass(EncodeType.class);
 			parser.parse();
 			result = new ParameterEnum(parser);
-			result.setSelectedItem(EncodeType.DCT);
+			//  图位文件编码类型默认为png-yuanR2017.12.1
+			result.setSelectedItem(EncodeType.PNG);
 		}
 		return result;
 	}

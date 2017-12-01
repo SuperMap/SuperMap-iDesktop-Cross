@@ -383,10 +383,12 @@ public class PanelTransformForImage extends PanelTransform {
 		String temp = ((PanelTransformForImage) panelImports.get(0).getTransform()).getChooserControlPrjFile().getPath();
 		boolean isSame = true;
 		for (PanelImport tempPanel : panelImports) {
-			String tempObject = ((PanelTransformForImage) tempPanel.getTransform()).getChooserControlPrjFile().getPath();
-			if (!temp.equals(tempObject)) {
-				isSame = false;
-				break;
+			if (tempPanel.getTransform() instanceof PanelTransformForImage) {
+				String tempObject = ((PanelTransformForImage) tempPanel.getTransform()).getChooserControlPrjFile().getPath();
+				if (!temp.equals(tempObject)) {
+					isSame = false;
+					break;
+				}
 			}
 		}
 		if (isSame) {
