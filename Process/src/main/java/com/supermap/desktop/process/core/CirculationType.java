@@ -107,7 +107,7 @@ public enum CirculationType {
 				result = BasicTypes.STRING;
 				break;
 			case whileType:
-				result = BasicTypes.BASICTYPES;
+				result = BasicTypes.BOOLEAN;
 				break;
 			default:
 				break;

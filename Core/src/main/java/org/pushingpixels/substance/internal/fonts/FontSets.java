@@ -30,11 +30,15 @@
 
 package org.pushingpixels.substance.internal.fonts;
 
+import com.supermap.desktop.utilities.PathUtilities;
 import org.pushingpixels.substance.api.fonts.FontPolicy;
 import org.pushingpixels.substance.api.fonts.FontSet;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 
 /**
  * Provides predefined FontSet implementations.
@@ -219,12 +223,38 @@ public final class FontSets {
 		private FontUIResource titleFont;
 		private FontUIResource systemFont;
 		private FontUIResource smallFont;
+		private Font defaultFont = null;
+
+		public LogicalFontSet() {
+			String fullPathName = PathUtilities.getFullPathName("../Resources/Fonts", true);
+			File file = new File(fullPathName);
+			if (file.isDirectory()) {
+				File[] files = file.listFiles();
+				if (files != null) {
+					for (File fontFile : files) {
+						if (fontFile.isDirectory()) {
+							continue;
+						}
+						try (FileInputStream fileInputStream = new FileInputStream(fontFile);
+						     BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
+							Font font = Font.createFont(Font.TRUETYPE_FONT, bufferedInputStream);
+							defaultFont = font.deriveFont(Font.PLAIN, 12);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if (defaultFont != null) {
+							break;
+						}
+					}
+				}
+			}
+		}
 
 		public FontUIResource getControlFont() {
 			if (controlFont == null) {
 				controlFont = new FontUIResource(Font.getFont(
-						"swing.plaf.metal.controlFont", new Font("Dialog",
-								Font.PLAIN, 12)));
+						"swing.plaf.metal.controlFont", defaultFont == null ? new Font("Dialog",
+								Font.PLAIN, 12) : defaultFont));
 
 			}
 			return controlFont;
@@ -245,8 +275,8 @@ public final class FontSets {
 		public FontUIResource getSmallFont() {
 			if (smallFont == null) {
 				smallFont = new FontUIResource(Font.getFont(
-						"swing.plaf.metal.smallFont", new Font("Dialog",
-								Font.PLAIN, 10)));
+						"swing.plaf.metal.smallFont", defaultFont == null ? new Font("Dialog",
+								Font.PLAIN, 10) : defaultFont.deriveFont((float) 10)));
 			}
 			return smallFont;
 		}
@@ -254,8 +284,8 @@ public final class FontSets {
 		public FontUIResource getMessageFont() {
 			if (systemFont == null) {
 				systemFont = new FontUIResource(Font.getFont(
-						"swing.plaf.metal.systemFont", new Font("Dialog",
-								Font.PLAIN, 12)));
+						"swing.plaf.metal.systemFont", defaultFont == null ? new Font("Dialog",
+								Font.PLAIN, 12) : defaultFont));
 			}
 			return systemFont;
 		}

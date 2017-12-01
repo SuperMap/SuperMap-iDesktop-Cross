@@ -68,15 +68,22 @@ public class FiletypeUtilities {
 				|| fileType.equalsIgnoreCase(FileTypeLocale.XLS_STRING)) {
 			fileType = DataConversionProperties.getString("String_FormImport_MicroSoft");
 			// Microsoft 交换格式(*.xlsx,*.csv)
-		} else if(fileType.equalsIgnoreCase(FileTypeLocale.CSV_STRING)){
+		} else if (fileType.equalsIgnoreCase(FileTypeLocale.CSV_STRING)) {
 			fileType = MessageFormat.format(CoreProperties.getString("String_FileType"), "CSV");
-		}else if (fileType.equalsIgnoreCase(FileTypeLocale.SIT_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.IMG_STRING)
-				|| fileType.equalsIgnoreCase(FileTypeLocale.TIF_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.TIFF_STRING)
-				|| fileType.equalsIgnoreCase(FileTypeLocale.BMP_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.PNG_STRING)
+		} else if (fileType.equalsIgnoreCase(FileTypeLocale.SIT_STRING)) {
+			fileType = DataConversionProperties.getString("String_FormImport_FilterSit");
+		} else if (fileType.equalsIgnoreCase(FileTypeLocale.IMG_STRING)) {
+			fileType = DataConversionProperties.getString("String_FormImport_FilterImage");
+		}else if(fileType.equalsIgnoreCase(FileTypeLocale.TIF_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.TIFF_STRING)){
+			fileType = MessageFormat.format(CoreProperties.getString("String_FileType"), "TIFF");
+		} else if(fileType.equalsIgnoreCase(FileTypeLocale.BMP_STRING)){
+			fileType = DataConversionProperties.getString("String_FormImport_FilterBmp");
+		}else if (fileType.equalsIgnoreCase(FileTypeLocale.PNG_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.JPG_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.JPEG_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.GIF_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.JP2_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.JPK_STRING)) {
-			fileType = DataConversionProperties.getString("String_FormImport_FilterImage");
+			String tempType = fileType.substring(1, fileType.length());
+			fileType = MessageFormat.format(CoreProperties.getString("String_FileType"), tempType.toUpperCase());
 			// 影像位图文件(*.sit,*.img,*.tif,*.tiff,*.bmp,*.png,*.gif,*.jpg,*.jpeg)
 		} else if (fileType.equalsIgnoreCase(FileTypeLocale.SCV_STRING) || fileType.equalsIgnoreCase(FileTypeLocale.OSGB_STRING)
 				|| fileType.equalsIgnoreCase(FileTypeLocale.TDS_STRING)

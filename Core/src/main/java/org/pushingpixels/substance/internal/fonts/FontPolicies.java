@@ -130,9 +130,9 @@ public final class FontPolicies {
 	 * other platforms
 	 */
 	public static FontPolicy getDefaultPlasticPolicy() {
-		if (LookUtils.IS_OS_WINDOWS) {
-			return getDefaultPlasticOnWindowsPolicy();
-		}
+//		if (LookUtils.IS_OS_WINDOWS) {
+//			return getDefaultPlasticOnWindowsPolicy();
+//		}
 		return getLogicalFontsPolicy();
 		// return getDefaultCrossPlatformPolicy();
 	}
