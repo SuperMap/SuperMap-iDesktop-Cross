@@ -101,12 +101,11 @@ public class FormManager extends MdiPane implements IFormManager {
 				}
 
 				FormManager.this.eventHelper.fireFormClosed(event);
+				if (getPageCount() == 0) {
+					refreshMenusAndToolbars(null);
+				}
 				// 关闭后，刷新ToolBar-yuanR2017.11.30
 				ToolbarUIUtilities.updataToolbarsState();
-			}
-
-			if (getPageCount() == 0) {
-				refreshMenusAndToolbars(null);
 			}
 		}
 	};
