@@ -1,0 +1,1 @@
+!function(){"use strict";function e(){var e=this.value,t="",n=this.dataset.canonical;t="zh"===e?"/SuperMap-iDesktop-Cross/"+n:"/SuperMap-iDesktop-Cross/"+e+"/"+n,location.href=t}document.getElementById("lang-select").addEventListener("change",e),document.getElementById("mobile-lang-select").addEventListener("change",e)}();

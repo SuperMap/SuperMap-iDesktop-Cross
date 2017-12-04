@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>修改专题图 | SuperMap iDesktop Cross 9D</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html">
+    
+      <link rel="alternative" hreflang="en" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html/en">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/SuperMap-iDesktop-Cross/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/SuperMap-iDesktop-Cross/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+  <!-- RSS -->
+  <link rel="alternate" href="/SuperMap-iDesktop-Cross/atom.xml" title="SuperMap iDesktop Cross 9D">
+  <!-- Open Graph -->
+   <!--<meta name="description" content="通过默认模板创建的专题图通常都不能达到用户的需求，可通过修改“专题图”面板中提供的参数设置，使专题图的显示效果满足用户需求。各类型专题图的参数设置有所不同。 通用参数 表达式  　　表达式是用来制作专题图的字段或字段表达式，对于矢量数据而言，表达式可以是单字段，也可以是通过SQL表达式构建的单个或多个字段的数学表达式。例如，Pop_2006 为 2006 年的人口数字段，该字段的单位为万，那么">
+<meta property="og:type" content="website">
+<meta property="og:title" content="修改专题图">
+<meta property="og:url" content="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html">
+<meta property="og:site_name" content="SuperMap iDesktop Cross 9D">
+<meta property="og:description" content="通过默认模板创建的专题图通常都不能达到用户的需求，可通过修改“专题图”面板中提供的参数设置，使专题图的显示效果满足用户需求。各类型专题图的参数设置有所不同。 通用参数 表达式  　　表达式是用来制作专题图的字段或字段表达式，对于矢量数据而言，表达式可以是单字段，也可以是通过SQL表达式构建的单个或多个字段的数学表达式。例如，Pop_2006 为 2006 年的人口数字段，该字段的单位为万，那么">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-08-03T05:48:38.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修改专题图">
+<meta name="twitter:description" content="通过默认模板创建的专题图通常都不能达到用户的需求，可通过修改“专题图”面板中提供的参数设置，使专题图的显示效果满足用户需求。各类型专题图的参数设置有所不同。 通用参数 表达式  　　表达式是用来制作专题图的字段或字段表达式，对于矢量数据而言，表达式可以是单字段，也可以是通过SQL表达式构建的单个或多个字段的数学表达式。例如，Pop_2006 为 2006 年的人口数字段，该字段的单位为万，那么">
+<meta property="fb:admins" content="100000247608790">-->
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4910098-10', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/SuperMap-iDesktop-Cross/" id="logo">SuperMap iDesktop Cross</a>
+    </h1>
+    <h2 id="Productname">SuperMap iDesktop Cross</h2>
+    <nav id="main-nav">
+      <!--<a class="main-nav-link" href="/SuperMap-iDesktop-Cross/">Home</a>-->
+      <a href="/SuperMap-iDesktop-Cross/home/" class="main-nav-link">首页</a><a href="/SuperMap-iDesktop-Cross/docs/" class="main-nav-link">帮助文档</a>
+      <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="main-nav-link"><i class="fa fa-git"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="docs/Map/ThematicMap/ModifyThematicMap.html">
+        
+          <option value="zh" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">修改专题图</h1>
+                <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross-Docs/blob/master/source/docs/Map/ThematicMap/ModifyThematicMap.md" class="article-edit-link" title="获取本页源文件"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>　　通过默认模板创建的专题图通常都不能达到用户的需求，可通过修改“专题图”面板中提供的参数设置，使专题图的显示效果满足用户需求。各类型专题图的参数设置有所不同。</p>
+<h4 id="通用参数" class="article-heading"><a href="#通用参数" class="headerlink" title="通用参数"></a>通用参数<a class="article-anchor" href="#通用参数" aria-hidden="true"></a></h4><ul>
+<li><strong>表达式</strong></li>
+</ul>
+<p>　　表达式是用来制作专题图的字段或字段表达式，对于矢量数据而言，表达式可以是单字段，也可以是通过SQL表达式构建的单个或多个字段的数学表达式。例如，Pop_2006 为 2006 年的人口数字段，该字段的单位为<code>万</code>，那么在制作标签专题图时，可以用表达式“Pop_2006||万人”来做该专题图的专题变量。</p>
+<p>　　注意：对于 Oracle Plus、SQL Plus 引擎类型的数据制作专题图时，字段表达式只能为字段值或者字段运算式，如（SmID） 或者 （SmID + 1） 等。目前不支持通过条件表达式设置专题图字段的方式。如果设置的字段表达式是条件表达式，如：”SmID &gt; 100”，那么制作的专题图会失败，输出窗口会提示”专题图更新失败”。</p>
+<ul>
+<li><strong>专题图子项</strong></li>
+</ul>
+<p>　　不同类型专题图对应的专题图子项的含义不同，有专题图子项的专题图类型包括：单值专题图、统计专题图、分段专题图、标签专题图、栅格分段专题图、栅格单值专题图。一个子项内包含的要素视为一个整体，对该子项进行风格设置时，子项内的要素均会发生改变。</p>
+<ul>
+<li>单值专题图是将专题值相同的要素归为一类，为每一类设定一种渲染风格，其中每一类就是一个专题图子项。比如，利用单值专题图制作行政区划图，Name 字段代表省/直辖市名，该字段用来做专题变量，如果该字段的字段值总共有 5 种不同值，则该行政区划图有 5 个专题图子项，其中每一个子项内的要素 Name 字段值都相同。</li>
+<li>分段专题图是将专题值按照某种分段方式分成多个范围段，要素根据其所对应的专题值被分配到其中一个分段中，在同一个范围段中的要素使用相同的颜色、填充、符号等风格进行显示，其中每一个范围段就是一个分段专题图子项。 </li>
+<li>标签专题图用专题值对点、线、面等对象做标注，对于分段标签专题图而言，同一范围段内的标签具有相同的显示风格，其中每一个范围段就是一个专题图子项。</li>
+<li>统计专题图可以将多个专题值绘制在一个统计图上，从而一次对多个数值型变量进行分析统计。专题图子项的个数就是专题图中专题变量的个数。比如，一幅城乡人口比例图（三维柱状图），该图有两个专题变量，一个专题变量为字段城镇人口（代表城镇人口数量），另一个专题变量为字段农村人口（代表农村人口数量）。则该统计专题图的专题图子项有两个，分别为东北三省城镇人口字段的值所对应的统计图和农村人口字段的值所对应的统计图。</li>
+<li>栅格分段专题图类似于分段专题图，不同在于分段专题图的操作对象是矢量数据，而栅格分段专题图的操作对象是栅格数据，相应地，栅格分段专题图子项就是按照某种分段方式分成的不同的范围段。 </li>
+<li>栅格单值专题图是将属性值相同的像元归为一类，每一类是一个专题图子项。</li>
+</ul>
+<ul>
+<li><strong>颜色方案</strong></li>
+</ul>
+<p>　　颜色方案是为专题图的所有专题图子项的颜色渲染提供配色方案，同时会根据专题图子项的个数来合理分配给每个子项一个渲染颜色。根据专题图类型和适用情况，SuperMap 将颜色方案进行分类，分为适用晕渲图、适用 DEM、适用统计专题图、适用单值专题图、适用分段专题图、渐变色、随机色几大类别，同时，颜色方案支持用户自定义，用户可根据配图需求选择相应的颜色方案，颜色方案的具体介绍和操作请参见颜色方案管理器。</p>
+<ul>
+<li><strong>子项风格</strong></li>
+</ul>
+<p>　　在制作专题图时，如果需要对专题图子项的风格进行修改，可以选中多个专题图子项，对点、线、填充符号的风格进行修改。</p>
+<p>　　<strong>点符号</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名称</th>
+<th style="text-align:left">含义           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> 符号类型</td>
+<td style="text-align:left">所使用的点符号类型。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 符号大小</td>
+<td style="text-align:left">所使用的符号大小。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 符号颜色</td>
+<td style="text-align:left">点符号的颜色。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 图标</td>
+<td style="text-align:left">代替点符号显示的图标文件。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 缩放比</td>
+<td style="text-align:left">当采用图标来代替点符号时，设置图标的缩放比率。数值单位为：百分比(%)</td>
+</tr>
+<tr>
+<td style="text-align:left"> 旋转角度</td>
+<td style="text-align:left">当点符号为三维模型符号时，设置模型符号旋转角度。数值单位为：度(°)</td>
+</tr>
+</tbody>
+</table>
+<p>　　<strong>线符号</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名称</th>
+<th style="text-align:left">含义           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> 线型</td>
+<td style="text-align:left">使用的线符号或者填充符号的边界线类型 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 线宽度</td>
+<td style="text-align:left">线符号的宽度 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 线颜色</td>
+<td style="text-align:left">线符号的颜色 </td>
+</tr>
+</tbody>
+</table>
+<p>　　<strong>填充符号</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名称</th>
+<th style="text-align:left">含义           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> 填充类型</td>
+<td style="text-align:left">填充符号的类型。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 前景色</td>
+<td style="text-align:left">填充符号填充内容的颜色。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 背景色</td>
+<td style="text-align:left">填充符号非填充内容的颜色。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 透明度</td>
+<td style="text-align:left">填充符号的透明效果，透明度取值为0 到100之间的任意整数,0表示不透明，100表示完全透明。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 渐变类型</td>
+<td style="text-align:left">在启用渐变填充的情况下，使用的渐变填充类型。可以使用的渐变类型包括无渐变、线性渐变、辐射渐变、圆锥渐变或者方形渐变。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 渐变角度</td>
+<td style="text-align:left">设置渐变填充的旋转角度。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 渐变中心X偏移</td>
+<td style="text-align:left">渐变填充中心点相对于填充范围中心点的水平偏移百分比。 </td>
+</tr>
+<tr>
+<td style="text-align:left"> 渐变中心Y偏移</td>
+<td style="text-align:left">渐变填充中心点相对于填充范围中心点的垂直偏移百分比。 </td>
+</tr>
+</tbody>
+</table>
+<p>　　<strong>即时刷新</strong></p>
+<p>　　在“专题图”窗口中的各项参数设置都会实时反映到当前地图窗口中相应的专题图图层，即实现所见即所得。用户也可以通过取消勾选对话框底部的“启用即时刷新”复选框，不启用实时刷新。若不勾选“启用即时刷新”复选框，则用户完成各项参数设置后，可单击对话框底部的“应用”按钮，将对话框中的参数设置应用于当前专题图。</p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html">单值专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html">分段专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html">标签专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html">统计专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html">点密度专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html">等级符号专题图</a></p>
+<p>　　<a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html">自定义专题图</a></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-08-03T05:48:38.418Z" itemprop="dateModified">Last updated: 2017-08-03</time>
+                <a href="/SuperMap-iDesktop-Cross/docs/index.html" class="article-footer-next" title="产品介绍"><span>后一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">本页目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#通用参数"><span class="toc-text">通用参数</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><ul class="topnav"><li id="welcome"><strong class="sidebar-title">Welcome</strong><ul><li id="SuperMap Cross"><a href="/SuperMap-iDesktop-Cross/docs/index.html" class="sidebar-link">产品介绍</a></li><li id="License"><a href="/SuperMap-iDesktop-Cross/docs/Install/License.html" class="sidebar-link">许可配置</a></li></ul></li><li id="getting_started"><strong class="sidebar-title">产品入门</strong><ul><li id="SuperMapDataStructure"><a href="/SuperMap-iDesktop-Cross/docs/Basic/SuperMapDataStructure.html" class="sidebar-link">数据组织结构</a></li><li id="Pyramid"><a href="/SuperMap-iDesktop-Cross/docs/Basic/Pyramid.html" class="sidebar-link">影像金字塔</a></li><li id="GeoFormates"><a href="/SuperMap-iDesktop-Cross/docs/Basic/GeoFormates.html" class="sidebar-link">数据转换</a></li></ul></li><li id="DataProcess"><strong class="sidebar-title">数据处理</strong><ul><li id="Projection"><strong class="sidebar-subtitle">投影</strong><ul><li id="AboutMapProjection"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/AboutMapProjection.html" class="sidebar-link">投影概述</a></li><li id="ProjectionUsed"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionUsed.html" class="sidebar-link">常用投影</a></li><li id="PrjCoordSysType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/PrjCoordSysType.html" class="sidebar-link">坐标系类型</a></li><li id="SetPrjCoordSys"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/SetPrjCoordSys.html" class="sidebar-link">投影设置</a></li></ul></li><li id="Topo"><strong class="sidebar-subtitle">拓扑处理</strong><ul><li id="TopoProcess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcess.html" class="sidebar-link">拓扑处理规则</a></li><li id="TopoPreprocess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoPreprocess.html" class="sidebar-link">拓扑预处理</a></li><li id="TopoProcessLine"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcessLine.html" class="sidebar-link">线拓扑处理</a></li><li id="TopotoPolygon"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopotoPolygon.html" class="sidebar-link">拓扑构面</a></li></ul></li><li id="SQL"><strong class="sidebar-subtitle">SQL查询</strong><ul><li id="SQLQuery_Expression"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQuery_Expression.html" class="sidebar-link">构建SQL表达式</a></li><li id="SQLQueryDia"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDia.html" class="sidebar-link">SQL 查询</a></li><li id="SQLQueryDiaFuction"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html" class="sidebar-link">SQL函数运算符</a></li><li id="SQLSupporttedType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLSupporttedType.html" class="sidebar-link">SQL查询引擎支持</a></li></ul></li></ul></li><li id="Objects"><strong class="sidebar-title">对象操作</strong><ul><li id="CreateGeometry"><strong class="sidebar-subtitle">对象绘制</strong><ul><li id="AboutCreateGeometry"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/AboutCreateGeometry.html" class="sidebar-link">对象绘制概述</a></li><li id="Point"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Point.html" class="sidebar-link">绘制点</a></li><li id="DrawCurve"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawCurve.html" class="sidebar-link">绘制线</a></li><li id="DrawQuadRangle"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawQuadRangle.html" class="sidebar-link">绘制面</a></li><li id="Text"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Text.html" class="sidebar-link">绘制文本</a></li></ul></li><li id="EdittingGeometry"><strong class="sidebar-subtitle">对象编辑</strong><ul><li id="PolygonEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/PolygonEdit.html" class="sidebar-link">面对象编辑</a></li><li id="LineEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/LineEdit.html" class="sidebar-link">线对象编辑</a></li><li id="VertexEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/VertexEdit.html" class="sidebar-link">节点编辑</a></li><li id="ObjectsConversion"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/ObjectsConversion.html" class="sidebar-link">对象类型转换</a></li><li id="OtherEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/OtherEdit.html" class="sidebar-link">其他编辑</a></li></ul></li></ul></li><li id="DataAnalyst"><strong class="sidebar-title">数据分析</strong><ul><li id="BufferTheory"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferTheory.html" class="sidebar-link">缓冲区分析原理</a></li><li id="SingleBuffer"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/SingleBuffer.html" class="sidebar-link">单重缓冲区分析</a></li><li id="BufferAnalyst_Example"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferAnalyst_Example.html" class="sidebar-link">缓冲区应用实例</a></li><li id="FindRasterVaule"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/FindRasterVaule.html" class="sidebar-link">栅格查询</a></li></ul></li><li id="Map"><strong class="sidebar-title">地图制图</strong><ul><li id="Thematic"><strong class="sidebar-subtitle">专题图</strong><ul><li id="ThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap.html" class="sidebar-link">专题图概述</a></li><li id="CreatThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CreatThematicMap.html" class="sidebar-link">创建专题图</a></li></ul></li><li id="ModifyMap"><strong class="sidebar-subtitle">修改专题图</strong><ul><li id="ModifyThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html" class="sidebar-link">公用属性</a></li><li id="UniqueValueProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html" class="sidebar-link">单值专题图</a></li><li id="RangesMapGroupDia"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html" class="sidebar-link">分段专题图</a></li><li id="LabelProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html" class="sidebar-link">标签专题图</a></li><li id="GraphProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html" class="sidebar-link">统计专题图</a></li><li id="GraduatedSymbolProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html" class="sidebar-link">等级符号专题图</a></li><li id="DotDensityProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html" class="sidebar-link">点密度专题图</a></li><li id="CustomizeProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html" class="sidebar-link">自定义专题图</a></li></ul></li><li id="Style"><a href="/SuperMap-iDesktop-Cross/docs/Map/Style.html" class="sidebar-link">设置图层风格</a></li><li id="OverlapDisplayed"><a href="/SuperMap-iDesktop-Cross/docs/Map/OverlapDisplayed.html" class="sidebar-link">自动避让与压盖</a></li><li id="Measuregroup"><a href="/SuperMap-iDesktop-Cross/docs/Map/Measuregroup.html" class="sidebar-link">地图量算</a></li><li id="LayerSetting"><a href="/SuperMap-iDesktop-Cross/docs/Map/LayerSetting.html" class="sidebar-link">图层属性</a></li><li id="MapSetting_Basic"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Basic.html" class="sidebar-link">地图属性-基本</a></li><li id="MapSetting_Range"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Range.html" class="sidebar-link">地图属性-范围</a></li></ul></li><li id="Cache"><strong class="sidebar-title">地图缓存</strong><ul><li id="SingleProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/SingleProcessCache.html" class="sidebar-link">单进程切图</a></li><li id="MultiProcessesCache"><strong class="sidebar-subtitle">多进程切图</strong><ul><li id="MultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/MultiProcessCache.html" class="sidebar-link">多进程切图</a></li><li id="CreateMultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CreateMultiProcessCache.html" class="sidebar-link">新建地图缓存（多任务)</a></li><li id="ExecuteMultiProcessCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/ExecuteMultiProcessCaching.html" class="sidebar-link">执行切图任务</a></li></ul></li><li id="CacheCheck"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CacheCheck.html" class="sidebar-link">缓存检查</a></li><li id="UpdateCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/UpdateCache.html" class="sidebar-link">更新缓存</a></li><li id="RecoverCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/RecoverCaching.html" class="sidebar-link">续传缓存</a></li></ul></li><li id="SpatialStatisticalAnalysis"><strong class="sidebar-title">空间统计分析</strong><ul><li id="SpatialStatisticalAnalysisSummary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialStatisticalAnalysisSummary.html" class="sidebar-link">空间统计分析概述</a></li><li id="BasicVocabulary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/BasicVocabulary.html" class="sidebar-link">基础词汇</a></li><li id="MeasureGeographicDistr"><strong class="sidebar-subtitle">度量地理分析</strong><ul><li id="MeasureGeographicDistributions"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureGeographicDistributions.html" class="sidebar-link">度量地理分析概述</a></li><li id="CentralFeature"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html" class="sidebar-link">中心要素</a></li><li id="MeanCenter"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html" class="sidebar-link">平均中心</a></li><li id="MeanCenterResult"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenterResult.html" class="sidebar-link">中位数中心</a></li><li id="MeasureDirection"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureDirection.html" class="sidebar-link">方向分布</a></li><li id="MeasureLinearDirectional"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureLinearDirectional.html" class="sidebar-link">线性方向平均值</a></li><li id="MeasureStandardDistance"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureStandardDistance.html" class="sidebar-link">标准距离</a></li></ul></li><li id="Clusters1"><strong class="sidebar-subtitle">聚类分析</strong><ul><li id="Clusters"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/Clusters.html" class="sidebar-link">聚类分析概述</a></li><li id="HotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html" class="sidebar-link">热点分析</a></li><li id="OptimizedHotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/OptimizedHotSpotAnalyst.html" class="sidebar-link">优化的热点分析</a></li><li id="ClusterOutlierAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html" class="sidebar-link">聚类异常值分析</a></li></ul></li><li id="SpatialRelationshipModeling1"><strong class="sidebar-subtitle">空间关系建模</strong><ul><li id="SpatialRelationshipModeling"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html" class="sidebar-link">空间关系建模概述</a></li><li id="GeographicWeightedRegression"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/GeographicWeightedRegression.html" class="sidebar-link">地理加权回归分析</a></li></ul></li><li id="AnalyzingPatterns1"><strong class="sidebar-subtitle">分析模式</strong><ul><li id="AnalyzingPatterns"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AnalyzingPatterns.html" class="sidebar-link">分析模式概述</a></li><li id="SpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html" class="sidebar-link">空间自相关</a></li><li id="HighLowClustering"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HighLowClustering.html" class="sidebar-link">高低值聚类</a></li><li id="IncrementalSpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html" class="sidebar-link">增量空间自相关</a></li><li id="AverageNearestNeighbor"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html" class="sidebar-link">平均最近邻</a></li></ul></li></ul></li><li id="BigData"><strong class="sidebar-title">大数据在线分析</strong><ul><li id="BigDataAnalysisEnvironmentConfiguration"><a href="/SuperMap-iDesktop-Cross/docs/BigData/BigDataAnalysisEnvironmentConfiguration.html" class="sidebar-link">分析环境配置</a></li><li id="DataPreparation"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DataPreparation.html" class="sidebar-link">数据准备</a></li><li id="DensityAnalysis"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DensityAnalysis.html" class="sidebar-link">密度分析</a></li></ul></li><li id="Scene"><strong class="sidebar-title">三维场景</strong><ul><li id="SceneDia"><a href="/SuperMap-iDesktop-Cross/docs/Scene/SceneDia.html" class="sidebar-link">场景概述</a></li></ul></li><li id="FAQAll"><strong class="sidebar-title">FAQ</strong><ul><li id="FAQ"><a href="/SuperMap-iDesktop-Cross/docs/FAQ.html" class="sidebar-link">常见问题解答</a></li></ul></li><li id="News"><strong class="sidebar-title">新特性</strong><ul><li id="9DNews"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_900.html" class="sidebar-link">Cross 9D 新特性</a></li><li id="811News"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_811.html" class="sidebar-link">Cross 8C(2017) 新特性</a></li></ul></li></ul></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="http://www.supermap.com/" target="_blank">iDesktop</a><br>
+      Documentation Version 1.0.0
+    </div>
+    <div id="footer-links">
+      <!--a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a-->
+      <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="footer-link" target="_blank"><i class="fa fa-git"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/SuperMap-iDesktop-Cross/home/" class="mobile-nav-link">首页</a><a href="/SuperMap-iDesktop-Cross/docs/" class="mobile-nav-link">帮助文档</a>
+      <li class="mobile-nav-item">
+        <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="mobile-nav-link" rel="external" target="_blank">git.OSChina</a>
+      </li>
+    </ul>
+    
+      <ul class="topnav"><li id="welcome"><strong class="mobile-nav-title">Welcome</strong><ul><li id="SuperMap Cross"><a href="/SuperMap-iDesktop-Cross/docs/index.html" class="mobile-nav-link">产品介绍</a></li><li id="License"><a href="/SuperMap-iDesktop-Cross/docs/Install/License.html" class="mobile-nav-link">许可配置</a></li></ul></li><li id="getting_started"><strong class="mobile-nav-title">产品入门</strong><ul><li id="SuperMapDataStructure"><a href="/SuperMap-iDesktop-Cross/docs/Basic/SuperMapDataStructure.html" class="mobile-nav-link">数据组织结构</a></li><li id="Pyramid"><a href="/SuperMap-iDesktop-Cross/docs/Basic/Pyramid.html" class="mobile-nav-link">影像金字塔</a></li><li id="GeoFormates"><a href="/SuperMap-iDesktop-Cross/docs/Basic/GeoFormates.html" class="mobile-nav-link">数据转换</a></li></ul></li><li id="DataProcess"><strong class="mobile-nav-title">数据处理</strong><ul><li id="Projection"><strong class="mobile-nav-subtitle">投影</strong><ul><li id="AboutMapProjection"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/AboutMapProjection.html" class="mobile-nav-link">投影概述</a></li><li id="ProjectionUsed"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionUsed.html" class="mobile-nav-link">常用投影</a></li><li id="PrjCoordSysType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/PrjCoordSysType.html" class="mobile-nav-link">坐标系类型</a></li><li id="SetPrjCoordSys"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/SetPrjCoordSys.html" class="mobile-nav-link">投影设置</a></li></ul></li><li id="Topo"><strong class="mobile-nav-subtitle">拓扑处理</strong><ul><li id="TopoProcess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcess.html" class="mobile-nav-link">拓扑处理规则</a></li><li id="TopoPreprocess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoPreprocess.html" class="mobile-nav-link">拓扑预处理</a></li><li id="TopoProcessLine"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcessLine.html" class="mobile-nav-link">线拓扑处理</a></li><li id="TopotoPolygon"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopotoPolygon.html" class="mobile-nav-link">拓扑构面</a></li></ul></li><li id="SQL"><strong class="mobile-nav-subtitle">SQL查询</strong><ul><li id="SQLQuery_Expression"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQuery_Expression.html" class="mobile-nav-link">构建SQL表达式</a></li><li id="SQLQueryDia"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDia.html" class="mobile-nav-link">SQL 查询</a></li><li id="SQLQueryDiaFuction"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html" class="mobile-nav-link">SQL函数运算符</a></li><li id="SQLSupporttedType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLSupporttedType.html" class="mobile-nav-link">SQL查询引擎支持</a></li></ul></li></ul></li><li id="Objects"><strong class="mobile-nav-title">对象操作</strong><ul><li id="CreateGeometry"><strong class="mobile-nav-subtitle">对象绘制</strong><ul><li id="AboutCreateGeometry"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/AboutCreateGeometry.html" class="mobile-nav-link">对象绘制概述</a></li><li id="Point"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Point.html" class="mobile-nav-link">绘制点</a></li><li id="DrawCurve"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawCurve.html" class="mobile-nav-link">绘制线</a></li><li id="DrawQuadRangle"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawQuadRangle.html" class="mobile-nav-link">绘制面</a></li><li id="Text"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Text.html" class="mobile-nav-link">绘制文本</a></li></ul></li><li id="EdittingGeometry"><strong class="mobile-nav-subtitle">对象编辑</strong><ul><li id="PolygonEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/PolygonEdit.html" class="mobile-nav-link">面对象编辑</a></li><li id="LineEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/LineEdit.html" class="mobile-nav-link">线对象编辑</a></li><li id="VertexEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/VertexEdit.html" class="mobile-nav-link">节点编辑</a></li><li id="ObjectsConversion"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/ObjectsConversion.html" class="mobile-nav-link">对象类型转换</a></li><li id="OtherEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/OtherEdit.html" class="mobile-nav-link">其他编辑</a></li></ul></li></ul></li><li id="DataAnalyst"><strong class="mobile-nav-title">数据分析</strong><ul><li id="BufferTheory"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferTheory.html" class="mobile-nav-link">缓冲区分析原理</a></li><li id="SingleBuffer"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/SingleBuffer.html" class="mobile-nav-link">单重缓冲区分析</a></li><li id="BufferAnalyst_Example"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferAnalyst_Example.html" class="mobile-nav-link">缓冲区应用实例</a></li><li id="FindRasterVaule"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/FindRasterVaule.html" class="mobile-nav-link">栅格查询</a></li></ul></li><li id="Map"><strong class="mobile-nav-title">地图制图</strong><ul><li id="Thematic"><strong class="mobile-nav-subtitle">专题图</strong><ul><li id="ThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap.html" class="mobile-nav-link">专题图概述</a></li><li id="CreatThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CreatThematicMap.html" class="mobile-nav-link">创建专题图</a></li></ul></li><li id="ModifyMap"><strong class="mobile-nav-subtitle">修改专题图</strong><ul><li id="ModifyThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html" class="mobile-nav-link">公用属性</a></li><li id="UniqueValueProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html" class="mobile-nav-link">单值专题图</a></li><li id="RangesMapGroupDia"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html" class="mobile-nav-link">分段专题图</a></li><li id="LabelProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html" class="mobile-nav-link">标签专题图</a></li><li id="GraphProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html" class="mobile-nav-link">统计专题图</a></li><li id="GraduatedSymbolProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html" class="mobile-nav-link">等级符号专题图</a></li><li id="DotDensityProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html" class="mobile-nav-link">点密度专题图</a></li><li id="CustomizeProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html" class="mobile-nav-link">自定义专题图</a></li></ul></li><li id="Style"><a href="/SuperMap-iDesktop-Cross/docs/Map/Style.html" class="mobile-nav-link">设置图层风格</a></li><li id="OverlapDisplayed"><a href="/SuperMap-iDesktop-Cross/docs/Map/OverlapDisplayed.html" class="mobile-nav-link">自动避让与压盖</a></li><li id="Measuregroup"><a href="/SuperMap-iDesktop-Cross/docs/Map/Measuregroup.html" class="mobile-nav-link">地图量算</a></li><li id="LayerSetting"><a href="/SuperMap-iDesktop-Cross/docs/Map/LayerSetting.html" class="mobile-nav-link">图层属性</a></li><li id="MapSetting_Basic"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Basic.html" class="mobile-nav-link">地图属性-基本</a></li><li id="MapSetting_Range"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Range.html" class="mobile-nav-link">地图属性-范围</a></li></ul></li><li id="Cache"><strong class="mobile-nav-title">地图缓存</strong><ul><li id="SingleProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/SingleProcessCache.html" class="mobile-nav-link">单进程切图</a></li><li id="MultiProcessesCache"><strong class="mobile-nav-subtitle">多进程切图</strong><ul><li id="MultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/MultiProcessCache.html" class="mobile-nav-link">多进程切图</a></li><li id="CreateMultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CreateMultiProcessCache.html" class="mobile-nav-link">新建地图缓存（多任务)</a></li><li id="ExecuteMultiProcessCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/ExecuteMultiProcessCaching.html" class="mobile-nav-link">执行切图任务</a></li></ul></li><li id="CacheCheck"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CacheCheck.html" class="mobile-nav-link">缓存检查</a></li><li id="UpdateCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/UpdateCache.html" class="mobile-nav-link">更新缓存</a></li><li id="RecoverCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/RecoverCaching.html" class="mobile-nav-link">续传缓存</a></li></ul></li><li id="SpatialStatisticalAnalysis"><strong class="mobile-nav-title">空间统计分析</strong><ul><li id="SpatialStatisticalAnalysisSummary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialStatisticalAnalysisSummary.html" class="mobile-nav-link">空间统计分析概述</a></li><li id="BasicVocabulary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/BasicVocabulary.html" class="mobile-nav-link">基础词汇</a></li><li id="MeasureGeographicDistr"><strong class="mobile-nav-subtitle">度量地理分析</strong><ul><li id="MeasureGeographicDistributions"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureGeographicDistributions.html" class="mobile-nav-link">度量地理分析概述</a></li><li id="CentralFeature"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html" class="mobile-nav-link">中心要素</a></li><li id="MeanCenter"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html" class="mobile-nav-link">平均中心</a></li><li id="MeanCenterResult"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenterResult.html" class="mobile-nav-link">中位数中心</a></li><li id="MeasureDirection"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureDirection.html" class="mobile-nav-link">方向分布</a></li><li id="MeasureLinearDirectional"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureLinearDirectional.html" class="mobile-nav-link">线性方向平均值</a></li><li id="MeasureStandardDistance"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureStandardDistance.html" class="mobile-nav-link">标准距离</a></li></ul></li><li id="Clusters1"><strong class="mobile-nav-subtitle">聚类分析</strong><ul><li id="Clusters"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/Clusters.html" class="mobile-nav-link">聚类分析概述</a></li><li id="HotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html" class="mobile-nav-link">热点分析</a></li><li id="OptimizedHotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/OptimizedHotSpotAnalyst.html" class="mobile-nav-link">优化的热点分析</a></li><li id="ClusterOutlierAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html" class="mobile-nav-link">聚类异常值分析</a></li></ul></li><li id="SpatialRelationshipModeling1"><strong class="mobile-nav-subtitle">空间关系建模</strong><ul><li id="SpatialRelationshipModeling"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html" class="mobile-nav-link">空间关系建模概述</a></li><li id="GeographicWeightedRegression"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/GeographicWeightedRegression.html" class="mobile-nav-link">地理加权回归分析</a></li></ul></li><li id="AnalyzingPatterns1"><strong class="mobile-nav-subtitle">分析模式</strong><ul><li id="AnalyzingPatterns"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AnalyzingPatterns.html" class="mobile-nav-link">分析模式概述</a></li><li id="SpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html" class="mobile-nav-link">空间自相关</a></li><li id="HighLowClustering"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HighLowClustering.html" class="mobile-nav-link">高低值聚类</a></li><li id="IncrementalSpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html" class="mobile-nav-link">增量空间自相关</a></li><li id="AverageNearestNeighbor"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html" class="mobile-nav-link">平均最近邻</a></li></ul></li></ul></li><li id="BigData"><strong class="mobile-nav-title">大数据在线分析</strong><ul><li id="BigDataAnalysisEnvironmentConfiguration"><a href="/SuperMap-iDesktop-Cross/docs/BigData/BigDataAnalysisEnvironmentConfiguration.html" class="mobile-nav-link">分析环境配置</a></li><li id="DataPreparation"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DataPreparation.html" class="mobile-nav-link">数据准备</a></li><li id="DensityAnalysis"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DensityAnalysis.html" class="mobile-nav-link">密度分析</a></li></ul></li><li id="Scene"><strong class="mobile-nav-title">三维场景</strong><ul><li id="SceneDia"><a href="/SuperMap-iDesktop-Cross/docs/Scene/SceneDia.html" class="mobile-nav-link">场景概述</a></li></ul></li><li id="FAQAll"><strong class="mobile-nav-title">FAQ</strong><ul><li id="FAQ"><a href="/SuperMap-iDesktop-Cross/docs/FAQ.html" class="mobile-nav-link">常见问题解答</a></li></ul></li><li id="News"><strong class="mobile-nav-title">新特性</strong><ul><li id="9DNews"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_900.html" class="mobile-nav-link">Cross 9D 新特性</a></li><li id="811News"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_811.html" class="mobile-nav-link">Cross 8C(2017) 新特性</a></li></ul></li></ul>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/Map/ThematicMap/ModifyThematicMap.html">
+      
+        <option value="zh" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/SuperMap-iDesktop-Cross/js/lang_select.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/toc.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/mobile_nav.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/jquery-1.10.2.min.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/slider.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/jquery-1.5.2.min.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/sidebar.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<!--link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2.1.2/docsearch.css" /-->
+<link rel="stylesheet" href="/SuperMap-iDesktop-Cross/css/docsearch.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2.1.2/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+var host=window.location.host;
+if(host=='supermap-idesktop.github.io')
+{
+  docsearch({
+    apiKey: '87c625ea3b3f57f243d590e3c59b0748',
+    indexName: 'supermap-idesktop',
+    inputSelector: '#search-input'
+  });
+}
+else if(host=='')
+{
+  docsearch({
+    apiKey: '87c625ea3b3f57f243d590e3c59b0748',
+    indexName: 'supermap-idesktop',
+    inputSelector: '#search-input'
+  });
+}
+else(host=='support.supermap.com.cn')
+{
+  docsearch({
+    apiKey: '19f860b1fcffb4b23a7b2f928e8b0692',
+    indexName: 'supermap-cn',
+    inputSelector: '#search-input'
+  });
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>SQL语句运算符及函数 | SuperMap iDesktop Cross 9D</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html">
+    
+      <link rel="alternative" hreflang="en" href="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html/en">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/SuperMap-iDesktop-Cross/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/SuperMap-iDesktop-Cross/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/SuperMap-iDesktop-Cross/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/SuperMap-iDesktop-Cross/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
+  <!-- RSS -->
+  <link rel="alternate" href="/SuperMap-iDesktop-Cross/atom.xml" title="SuperMap iDesktop Cross 9D">
+  <!-- Open Graph -->
+   <!--<meta name="description" content="运算符号运算符号用于构造 SQL 查询条件，包括常用的数学运算符、逻辑运算符和一些比较特殊的运算符。 算术运算符    运算符 含义 示例                 ＋ 加法 RENT + UTILITIES &amp;lt;= 800    - 减法 POP_2002 - POP_1994    * 乘法 DENSITY * AREA &amp;gt; 5000000    / 除法 VALUE / PO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SQL语句运算符及函数">
+<meta property="og:url" content="http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html">
+<meta property="og:site_name" content="SuperMap iDesktop Cross 9D">
+<meta property="og:description" content="运算符号运算符号用于构造 SQL 查询条件，包括常用的数学运算符、逻辑运算符和一些比较特殊的运算符。 算术运算符    运算符 含义 示例                 ＋ 加法 RENT + UTILITIES &amp;lt;= 800    - 减法 POP_2002 - POP_1994    * 乘法 DENSITY * AREA &amp;gt; 5000000    / 除法 VALUE / PO">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-08-03T05:48:37.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL语句运算符及函数">
+<meta name="twitter:description" content="运算符号运算符号用于构造 SQL 查询条件，包括常用的数学运算符、逻辑运算符和一些比较特殊的运算符。 算术运算符    运算符 含义 示例                 ＋ 加法 RENT + UTILITIES &amp;lt;= 800    - 减法 POP_2002 - POP_1994    * 乘法 DENSITY * AREA &amp;gt; 5000000    / 除法 VALUE / PO">
+<meta property="fb:admins" content="100000247608790">-->
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4910098-10', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/SuperMap-iDesktop-Cross/" id="logo">SuperMap iDesktop Cross</a>
+    </h1>
+    <h2 id="Productname">SuperMap iDesktop Cross</h2>
+    <nav id="main-nav">
+      <!--<a class="main-nav-link" href="/SuperMap-iDesktop-Cross/">Home</a>-->
+      <a href="/SuperMap-iDesktop-Cross/home/" class="main-nav-link">首页</a><a href="/SuperMap-iDesktop-Cross/docs/" class="main-nav-link">帮助文档</a>
+      <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="main-nav-link"><i class="fa fa-git"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="docs/DataProcess/SQLQueryDiaFuction.html">
+        
+          <option value="zh" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">SQL语句运算符及函数</h1>
+                <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross-Docs/blob/master/source/docs/DataProcess/SQLQueryDiaFuction.md" class="article-edit-link" title="获取本页源文件"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h3 id="运算符号" class="article-heading"><a href="#运算符号" class="headerlink" title="运算符号"></a>运算符号<a class="article-anchor" href="#运算符号" aria-hidden="true"></a></h3><p>运算符号用于构造 SQL 查询条件，包括常用的数学运算符、逻辑运算符和一些比较特殊的运算符。</p>
+<p><strong>算术运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> ＋</td>
+<td style="text-align:left">加法</td>
+<td style="text-align:left">RENT + UTILITIES &lt;= 800</td>
+</tr>
+<tr>
+<td style="text-align:left"> -</td>
+<td style="text-align:left">减法</td>
+<td style="text-align:left">POP_2002 - POP_1994</td>
+</tr>
+<tr>
+<td style="text-align:left"> *</td>
+<td style="text-align:left">乘法</td>
+<td style="text-align:left">DENSITY * AREA &gt; 5000000</td>
+</tr>
+<tr>
+<td style="text-align:left"> /</td>
+<td style="text-align:left">除法</td>
+<td style="text-align:left">VALUE / POP = 50000</td>
+</tr>
+<tr>
+<td style="text-align:left"> \</td>
+<td style="text-align:left">取商</td>
+<td style="text-align:left">VALUE \　POP &gt; 100</td>
+</tr>
+<tr>
+<td style="text-align:left"> %</td>
+<td style="text-align:left">取模</td>
+<td style="text-align:left">VALUE1 % VALUE2</td>
+</tr>
+<tr>
+<td style="text-align:left"> Mod</td>
+<td style="text-align:left">取模</td>
+<td style="text-align:left">VALUE1 Mod VALUE2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>比较运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> =</td>
+<td style="text-align:left">等于</td>
+<td style="text-align:left">CODE = 100</td>
+</tr>
+<tr>
+<td style="text-align:left"> &gt;</td>
+<td style="text-align:left">大于</td>
+<td style="text-align:left">POP_2002 &gt; 5000000</td>
+</tr>
+<tr>
+<td style="text-align:left"> &lt;</td>
+<td style="text-align:left">小于</td>
+<td style="text-align:left">INDUST_GROWTH &lt; 0</td>
+</tr>
+<tr>
+<td style="text-align:left"> &gt;=</td>
+<td style="text-align:left">大于等于</td>
+<td style="text-align:left">RENT + UTILITIES &gt;= 800</td>
+</tr>
+<tr>
+<td style="text-align:left"> &lt;=</td>
+<td style="text-align:left">小于等于</td>
+<td style="text-align:left">RENT + UTILITIES &lt;= 800</td>
+</tr>
+<tr>
+<td style="text-align:left"> &lt;&gt;</td>
+<td style="text-align:left">不等于</td>
+<td style="text-align:left">VALUE &lt;&gt; 100</td>
+</tr>
+<tr>
+<td style="text-align:left"> !</td>
+<td style="text-align:left">非，!&lt;(不小于)、!&gt;（不大于）</td>
+<td style="text-align:left">VALUE !&gt; 100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>逻辑运算符</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> AND</td>
+<td style="text-align:left">连结两个布尔型表达式并当两个表达式都为 TRUE 时返回 TRUE</td>
+<td style="text-align:left">CODE = 100 AND VALUE &gt; 20000</td>
+</tr>
+<tr>
+<td style="text-align:left"> NOT</td>
+<td style="text-align:left">对任何其它布尔运算符的值取反</td>
+<td style="text-align:left">NOT IsBACHELOR</td>
+</tr>
+<tr>
+<td style="text-align:left"> OR</td>
+<td style="text-align:left">将两个条件结合起来，如果两个布尔表达式中的一个为 TRUE，那么就为 TRUE</td>
+<td style="text-align:left">SALES &gt; 20000 OR ORDERS &gt; 20000</td>
+</tr>
+<tr>
+<td style="text-align:left"> IN</td>
+<td style="text-align:left">如果操作数等于表达式列表中的一个，那么就为 TRUE</td>
+<td style="text-align:left">PROVINCE In (“GUANGDONG”)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Between</td>
+<td style="text-align:left">确定一个表达式在某个范围之内，那么就为 TRUE。一般与 AND 同时使用</td>
+<td style="text-align:left">SALES Between 4095 AND 20000</td>
+</tr>
+<tr>
+<td style="text-align:left"> Like</td>
+<td style="text-align:left">确定给定的字符串完全与指定的模式匹配</td>
+<td style="text-align:left">COUNTRY Like “CANADA”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>其他</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">运算符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> Is NULL</td>
+<td style="text-align:left">确定一个表达式是为 NULL，主要是文本型字段</td>
+<td style="text-align:left">CONTINENT Is NULL</td>
+</tr>
+<tr>
+<td style="text-align:left"> Is TRUE</td>
+<td style="text-align:left">确定一个表达式为 True，主要是布尔型字段</td>
+<td style="text-align:left">Value &lt; 0 Is TRUE</td>
+</tr>
+<tr>
+<td style="text-align:left"> Is FALSE</td>
+<td style="text-align:left">确定一个表达式为 False，主要是布尔型字段</td>
+<td style="text-align:left">Value &gt; 0 Is FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left"> #</td>
+<td style="text-align:left">匹配任意单个数字字符</td>
+<td style="text-align:left">World.SmID like ‘1#3’</td>
+</tr>
+<tr>
+<td style="text-align:left"> ´</td>
+<td style="text-align:left">用于字符型字段、日期型字段等的输入</td>
+<td style="text-align:left">World.COUNTRY like ‘*国’</td>
+</tr>
+<tr>
+<td style="text-align:left"> ˆ</td>
+<td style="text-align:left">异或</td>
+<td style="text-align:left">World.SmID \^ World.COLOR_MAP &gt;0</td>
+</tr>
+<tr>
+<td style="text-align:left"> ·</td>
+<td style="text-align:left">用于手动输入字段信息时使用</td>
+<td style="text-align:left">World.COUNTRY</td>
+</tr>
+<tr>
+<td style="text-align:left"> *</td>
+<td style="text-align:left">匹配任意数量的字符。可以在字符串中的任意位置使用星号 (*)</td>
+<td style="text-align:left">World.COUNTRY like ‘*国’</td>
+</tr>
+</tbody>
+</table>
+<h3 id="聚合函数" class="article-heading"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数<a class="article-anchor" href="#聚合函数" aria-hidden="true"></a></h3><p>聚合函数对一组值执行计算并得到单一的值。除 COUNT 函数之外，聚合函数忽略空值。聚合函数经常与 SELECT 语句的 GROUP BY 子句一同使用。所有聚合函数都具有确定性。任何时候用一组给定的输入值调用它们时，都得到相同的值。除 COUNT 函数外，其它聚合函数均不能对文本数据类型使用。在 SuperMap 中聚合函数中的表达式一般采用属性表的字段名。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">中文名称</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> Avg</td>
+<td style="text-align:left">平均值（均值）</td>
+<td style="text-align:left">返回在查询的指定字段（或表达式）中包含的一组值的算术平均值，空值将被忽略。</td>
+<td style="text-align:left">Avg(World.POP_1994)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Count</td>
+<td style="text-align:left">计数</td>
+<td style="text-align:left">返回各组中的记录数。</td>
+<td style="text-align:left">Count(*)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Max</td>
+<td style="text-align:left">最大值</td>
+<td style="text-align:left">返回在查询的指定字段内所包含的一组值的最大值。</td>
+<td style="text-align:left">Max(World.POP_1994)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Min</td>
+<td style="text-align:left">最小值</td>
+<td style="text-align:left">返回在查询的指定字段内所包含的一组值的最小值。</td>
+<td style="text-align:left">Min(World.POP_1994)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Sum</td>
+<td style="text-align:left">求和</td>
+<td style="text-align:left">返回在查询的指定字段中所包含的一组值的总计。</td>
+<td style="text-align:left">Sum(World.POP_1994)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Stdev</td>
+<td style="text-align:left">样本标准差</td>
+<td style="text-align:left">返回以查询的指定字段中包含的一组值作为总体样本抽样的标准偏差的估计值。对于Orcale 数据源，其函数名称为 STDDEV。</td>
+<td style="text-align:left">Stdev(World.POP_1994)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Var</td>
+<td style="text-align:left">样本方差</td>
+<td style="text-align:left">返回以查询的指定字段中包含的一组值作为总体样本抽样的方差的估计值。对于 Orcale 数据源，其函数名称为 VARIANCE。</td>
+<td style="text-align:left">Var(World.POP_1994)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数学函数" class="article-heading"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数<a class="article-anchor" href="#数学函数" aria-hidden="true"></a></h3><p>数学函数对数字表达式进行数学运算并返回运算结果。数学函数在 SuperMap 中的表达式一般采用属性表的字段名或其表达式，如 Cos(Slope）、Ceiling(Pop/Area）等。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> Abs</td>
+<td style="text-align:left">返回指定数字的绝对值，适用于短整型、长整型、单精度、双精度、货币等类型字段</td>
+<td style="text-align:left">Abs(World.SmID)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Acos</td>
+<td style="text-align:left">返回以弧度表示的角度值，取值范围从-π到π，该角度值的余弦为给定的 float 表达式；本函数亦称反余弦，适用于单精度或双精度类型字段，表达式的取值范围从-1到1，否则查询结果为空。</td>
+<td style="text-align:left">Acos(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Asin</td>
+<td style="text-align:left">返回以弧度表示的角度值，取值范围从-π到π，该角度值的正弦为给定的 float 表达式；本函数亦称反正弦，适用于单精度或双精度类型字段，表达式的取值范围从-1到1，否则查询结果为空。</td>
+<td style="text-align:left">Asin(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Atan</td>
+<td style="text-align:left">返回以弧度表示的角度值，该角度值的正切为给定的 float 表达式；本函数亦称反正切。</td>
+<td style="text-align:left">Atan(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Ceiling</td>
+<td style="text-align:left">返回大于或等于所给数字表达式的最小整数。适用于短整型、长整型、单精度、双精度、货币等类型字段。对于 Oracle 数据源，其函数名称为 CEIL。</td>
+<td style="text-align:left">Ceiling(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Cos</td>
+<td style="text-align:left">返回给定表达式中给定角度的三角余弦值，类型为双精度。</td>
+<td style="text-align:left">Cos(World.COLOR_MAP)</td>
+</tr>
+<tr>
+<td style="text-align:left"> cot</td>
+<td style="text-align:left">返回给定 float 表达式中指定角度的三角余切值。</td>
+<td style="text-align:left">Cot(angle)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Degrees</td>
+<td style="text-align:left">当给出以弧度为单位的角度时，返回相应的以度数为单位的角度。</td>
+<td style="text-align:left">Degrees(angle)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Exp</td>
+<td style="text-align:left">返回所给的 float 表达式的以 e（约等于2.71828182845905）为底的指数值。</td>
+<td style="text-align:left">Exp(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Floor</td>
+<td style="text-align:left">返回小于或等于所给数学表达式的最大整数。</td>
+<td style="text-align:left">Floor(23.45)，Floor(-123.45)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Log</td>
+<td style="text-align:left">返回所给数学表达式的自然对数，不适合 UDB 数据源使用；此外，对于 Oracle数据源，函数格式为 Log(n,m)，表示以 n 为底，m 的对数。</td>
+<td style="text-align:left">Log(World.SmID)，Log(n,m)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Power</td>
+<td style="text-align:left">返回给定表达式乘指定次方的值，第一个参数指定数值型字段，第二个参数指定次方数。</td>
+<td style="text-align:left">Power(expression,2) as Area</td>
+</tr>
+<tr>
+<td style="text-align:left"> Radians</td>
+<td style="text-align:left">对于在数字表达式中输入的度数值返回弧度值，并对弧度值进行了向下取整操作。</td>
+<td style="text-align:left">Radians(angle) as NewAngle</td>
+</tr>
+<tr>
+<td style="text-align:left"> Rand</td>
+<td style="text-align:left">返回 0 到1 之间的随机 float 值，函数输入为空。</td>
+<td style="text-align:left">Rand()</td>
+</tr>
+<tr>
+<td style="text-align:left"> Round</td>
+<td style="text-align:left">返回指定数值型字段的四舍五入到指定的小数位数的数字。第一个参数指定数值型字段），第二个参数指定小数位数。如果没有指定小数位数时，默认四舍五入为最接近的整数。</td>
+<td style="text-align:left">Round(World.SmArea,2)，Round(World.SmArea)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Sign</td>
+<td style="text-align:left">返回给定表达式的正负信息，包括正 (标记为+1)、零 (标记为0) 或负 (标记为-1) 号。</td>
+<td style="text-align:left">Sign(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Sin</td>
+<td style="text-align:left">返回给定角度（以弧度为单位）的三角正弦值，类型为双精度。</td>
+<td style="text-align:left">Sin(World.COLOR_MAP)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Square</td>
+<td style="text-align:left">返回给定表达式的平方。</td>
+<td style="text-align:left">Square(Production)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Sqrt</td>
+<td style="text-align:left">返回给定表达式的平方根。</td>
+<td style="text-align:left">Sqrt(Production)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Tan</td>
+<td style="text-align:left">返回输入表达式的正切值。</td>
+<td style="text-align:left">Tan(World.COLOR_MAP)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符函数" class="article-heading"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数<a class="article-anchor" href="#字符函数" aria-hidden="true"></a></h3><p>字符串函数用于对字符和二进制字符串进行各种操作，它们返回对字符数据进行操作时通常所需要的值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> Ascii</td>
+<td style="text-align:left">返回字符表达式最左端字符的 ASCII 代码值。 格式：ASCII（character_expression），character_expression 为文本类型字段组成的表达式。</td>
+<td style="text-align:left">Ascii(String)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Char</td>
+<td style="text-align:left">将 int 型表达式的值由 ASCII 代码转换为字符型的字符串。<br>格式：Char(integer_expression） integer_expression 为0～255之间整数表达式。如果整数表达式不在此范围内，将返回 NULL 值。</td>
+<td style="text-align:left">Char(data)</td>
+</tr>
+<tr>
+<td style="text-align:left"> InStr</td>
+<td style="text-align:left">返回字符串中指定表达式的起始位置。格式：InSt([start_location],expr1,expr2）start_location 是在 expr1中搜索expr2时的起始字符位置，expr1为一个字符串型表达式，其中包含要寻找的字符，expr2为一个字段串型表达式，标识要搜索的指定序列。起始字符位置不进行设置时，默认从第一个字符开始搜索。</td>
+<td style="text-align:left">InStr(1,World.CAPITAL,”京”)，InStr(World.CAPITAL,”京”)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Length</td>
+<td style="text-align:left">返回给定字符串表达式的长度（字符个数），空格计算在内。如果字段为空，则返回值为空。格式：Length(string_expression) string_expression 为要计算的字符串表达式。对 SQL 数据源，函数为 Len(string_expression）。</td>
+<td style="text-align:left">Lenth(World.CAPITAL)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Lower</td>
+<td style="text-align:left">将大写字符数据转换为小写字符数据后返回字符表达式。格式：Lower（character_expression） character_expression 是字符类型表达式。</td>
+<td style="text-align:left">Lower(World.CAPITAL) as capital</td>
+</tr>
+<tr>
+<td style="text-align:left"> Ltrim</td>
+<td style="text-align:left">删除指定字段串表达式的起始空格，返回无起始空格的字符串。格式：Ltrim（character_expression） character_exprssion 是字符类型表达式。</td>
+<td style="text-align:left">Ltrim(World.CAPITAL)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Replace</td>
+<td style="text-align:left">用第三个表达式替换第一个字符串表达式中出现的所有第二个给定字符串表达式。格式：Replace(‘string_expr1’,’string_expr2’,’string_expr3’) string_expr1是待搜索的字符串表达式；string_expr2是待查找的字符串表达式；string_expr3是替换用的字符串表达式。</td>
+<td style="text-align:left">Replace(World.CAPITAL,”尔”,”而”)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Reverse</td>
+<td style="text-align:left">返回字符表达式的反转。对 Oracle 数据源查询时，如果数据类型为文本型，对中文字符不处理，如果数据类型为字符型，对中文字符处理后会出现乱码。格式：Reverse(character_expression) character_expression 是由字符数据组成的表达式。</td>
+<td style="text-align:left">Reverse(World.CAPITAL) as NewName</td>
+</tr>
+<tr>
+<td style="text-align:left"> Rtrim</td>
+<td style="text-align:left">去除字符型表达式的所有尾随空格，返回无尾随空格的字符串。格式：Rtrim(character_expression) character_expression 是由字符数据组成的表达式</td>
+<td style="text-align:left">Rtrim(World.CAPITAL)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Soundex</td>
+<td style="text-align:left">返回由四个字符组成的代码 (SOUNDEX) 以评估两个字符串的相似性。格式：Soundex（character_expression） character_expression是字符数据的字母数字表达式</td>
+<td style="text-align:left">Soundex(word)</td>
+</tr>
+<tr>
+<td style="text-align:left"> Space</td>
+<td style="text-align:left">生成由指定个数的空格组成的字符串。如果指定个数为负值，则返回空字符串。</td>
+<td style="text-align:left">World.COUNTRY+Space(3)+World.CAPITAL as World_CAPITAL</td>
+</tr>
+<tr>
+<td style="text-align:left"> Substr</td>
+<td style="text-align:left">返回文本字符表达式的一部分。格式：Substr（expression, start, length）。expression 是字符串类型的不包含聚合函数的表达式；start 是一个整数，指定子串的开始位置；length是一个整数，指定子串的长度（要返回的字符数或字节数）。</td>
+<td style="text-align:left">Substr ( string, position, 1 )</td>
+</tr>
+<tr>
+<td style="text-align:left"> Unicode</td>
+<td style="text-align:left">按照 Unicode 标准的定义，返回输入表达式的第一个字符的整数值。格式：Unicode(‘ncharacter_expression’)。</td>
+<td style="text-align:left">Unicode(World.CAPITAL) as Unicode</td>
+</tr>
+<tr>
+<td style="text-align:left"> Upper</td>
+<td style="text-align:left">返回将小写字符数据转换为大写的字符表达式。对于 SDB 数据源，其函数名称为 UCase。格式：Upper(character_expression) character_expression 是由字符数据组成的表达式。</td>
+<td style="text-align:left">Upper(World.CAPITAL)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日期函数" class="article-heading"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数<a class="article-anchor" href="#日期函数" aria-hidden="true"></a></h3><p>日期函数用来查询关于日期的信息。这些函数适用于日期类型字段值，并对这些值执行算术运算。可将日期函数用于可使用表达式的任何地方。</p>
+<p><strong>表格：日期函数</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">日期函数</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> DateAdd</td>
+<td style="text-align:left">在给指定日期的基础上加上一段时间得到新的日期值。 格式：DateAdd（datepart, number, date） datepart 参数指定向日期哪一部分进行更新，详见下表；number 用来增加 datepart 的值；date 为日期型字段（或表达式）。</td>
+<td style="text-align:left">DateAdd(“yyyy”,2,World.GETDATE) as EndDate</td>
+</tr>
+<tr>
+<td style="text-align:left"> DateDiff</td>
+<td style="text-align:left">返回两个指定日期的时间差。格式：DateDiff（datepart，startdate，enddate） datepart 参数指定对日期哪一部分进行差值计算，详见下表；startdate 是开始日期，enddate 是终止日期。如果开始日期（如1990年）早于终止日期（如1994年），则结果为正，否则为负。</td>
+<td style="text-align:left">DateDiff ( “yyyy”, Start, End ) as DiffMonth，Datediff(‘yyyy’,’2010-02-25’,World.GETDATE)</td>
+</tr>
+<tr>
+<td style="text-align:left"> DatePart</td>
+<td style="text-align:left">返回指定日期的指定部分的整数。格式：DatePart（datepart ，date） datepart 参数标记了应返回日期的哪一部分，详见下表；date 为日期型字段（或表达式）。</td>
+<td style="text-align:left">Datepart(‘d’,World.GETDATE) as day</td>
+</tr>
+<tr>
+<td style="text-align:left"> Day</td>
+<td style="text-align:left">返回指定日期天部分的整数，等价于 Datepart(‘d’,data)。格式：Day(date) date 为日期型字段（或表达式）。</td>
+<td style="text-align:left">Day(World.GETDATE) as Day</td>
+</tr>
+<tr>
+<td style="text-align:left"> GetDate</td>
+<td style="text-align:left">按 SQL 标准格式返回当前系统的日期和时间，函数输入为空。</td>
+<td style="text-align:left">GetDate()</td>
+</tr>
+<tr>
+<td style="text-align:left"> GetUtcDate</td>
+<td style="text-align:left">返回表示当前 UTC 时间（格林尼治标准时间）的日期值，函数输入为空。当前的 UTC 时间得自当前的本地时间和运行 SQL Server 的计算机操作系统中的时区设置。</td>
+<td style="text-align:left">GetUtcDate()</td>
+</tr>
+<tr>
+<td style="text-align:left"> Month</td>
+<td style="text-align:left">返回指定日期月份部分的整数，等价于 DatePart(“m”,date)。适用日期型字段，格式：Month（date），date 为日期型字段。</td>
+<td style="text-align:left">Month(World.GETDATE) as Month</td>
+</tr>
+<tr>
+<td style="text-align:left"> Year</td>
+<td style="text-align:left">返回指定日期年份部分的整数。等价于 DatePartdate）。适用于日期型字段，格式：Year(date）date 为日期型字段。</td>
+<td style="text-align:left">Year(World.GETDATE) as Year</td>
+</tr>
+</tbody>
+</table>
+<p><strong>表格：datepart 参数设置</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">设置</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"> yyyy</td>
+<td style="text-align:left">年</td>
+</tr>
+<tr>
+<td style="text-align:left"> q</td>
+<td style="text-align:left">季度</td>
+</tr>
+<tr>
+<td style="text-align:left"> m</td>
+<td style="text-align:left">月</td>
+</tr>
+<tr>
+<td style="text-align:left"> y</td>
+<td style="text-align:left">某年的某一天</td>
+</tr>
+<tr>
+<td style="text-align:left"> d</td>
+<td style="text-align:left">天</td>
+</tr>
+<tr>
+<td style="text-align:left"> w</td>
+<td style="text-align:left">工作日</td>
+</tr>
+<tr>
+<td style="text-align:left"> ww</td>
+<td style="text-align:left">周</td>
+</tr>
+<tr>
+<td style="text-align:left"> h</td>
+<td style="text-align:left">时</td>
+</tr>
+<tr>
+<td style="text-align:left"> n</td>
+<td style="text-align:left">分</td>
+</tr>
+<tr>
+<td style="text-align:left"> s</td>
+<td style="text-align:left">秒</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-08-03T05:48:37.241Z" itemprop="dateModified">Last updated: 2017-08-03</time>
+                <a href="/SuperMap-iDesktop-Cross/docs/index.html" class="article-footer-next" title="产品介绍"><span>后一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">本页目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符号"><span class="toc-text">运算符号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合函数"><span class="toc-text">聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数学函数"><span class="toc-text">数学函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符函数"><span class="toc-text">字符函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日期函数"><span class="toc-text">日期函数</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><ul class="topnav"><li id="welcome"><strong class="sidebar-title">Welcome</strong><ul><li id="SuperMap Cross"><a href="/SuperMap-iDesktop-Cross/docs/index.html" class="sidebar-link">产品介绍</a></li><li id="License"><a href="/SuperMap-iDesktop-Cross/docs/Install/License.html" class="sidebar-link">许可配置</a></li></ul></li><li id="getting_started"><strong class="sidebar-title">产品入门</strong><ul><li id="SuperMapDataStructure"><a href="/SuperMap-iDesktop-Cross/docs/Basic/SuperMapDataStructure.html" class="sidebar-link">数据组织结构</a></li><li id="Pyramid"><a href="/SuperMap-iDesktop-Cross/docs/Basic/Pyramid.html" class="sidebar-link">影像金字塔</a></li><li id="GeoFormates"><a href="/SuperMap-iDesktop-Cross/docs/Basic/GeoFormates.html" class="sidebar-link">数据转换</a></li></ul></li><li id="DataProcess"><strong class="sidebar-title">数据处理</strong><ul><li id="Projection"><strong class="sidebar-subtitle">投影</strong><ul><li id="AboutMapProjection"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/AboutMapProjection.html" class="sidebar-link">投影概述</a></li><li id="ProjectionUsed"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionUsed.html" class="sidebar-link">常用投影</a></li><li id="PrjCoordSysType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/PrjCoordSysType.html" class="sidebar-link">坐标系类型</a></li><li id="SetPrjCoordSys"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/SetPrjCoordSys.html" class="sidebar-link">投影设置</a></li></ul></li><li id="Topo"><strong class="sidebar-subtitle">拓扑处理</strong><ul><li id="TopoProcess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcess.html" class="sidebar-link">拓扑处理规则</a></li><li id="TopoPreprocess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoPreprocess.html" class="sidebar-link">拓扑预处理</a></li><li id="TopoProcessLine"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcessLine.html" class="sidebar-link">线拓扑处理</a></li><li id="TopotoPolygon"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopotoPolygon.html" class="sidebar-link">拓扑构面</a></li></ul></li><li id="SQL"><strong class="sidebar-subtitle">SQL查询</strong><ul><li id="SQLQuery_Expression"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQuery_Expression.html" class="sidebar-link">构建SQL表达式</a></li><li id="SQLQueryDia"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDia.html" class="sidebar-link">SQL 查询</a></li><li id="SQLQueryDiaFuction"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html" class="sidebar-link">SQL函数运算符</a></li><li id="SQLSupporttedType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLSupporttedType.html" class="sidebar-link">SQL查询引擎支持</a></li></ul></li></ul></li><li id="Objects"><strong class="sidebar-title">对象操作</strong><ul><li id="CreateGeometry"><strong class="sidebar-subtitle">对象绘制</strong><ul><li id="AboutCreateGeometry"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/AboutCreateGeometry.html" class="sidebar-link">对象绘制概述</a></li><li id="Point"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Point.html" class="sidebar-link">绘制点</a></li><li id="DrawCurve"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawCurve.html" class="sidebar-link">绘制线</a></li><li id="DrawQuadRangle"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawQuadRangle.html" class="sidebar-link">绘制面</a></li><li id="Text"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Text.html" class="sidebar-link">绘制文本</a></li></ul></li><li id="EdittingGeometry"><strong class="sidebar-subtitle">对象编辑</strong><ul><li id="PolygonEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/PolygonEdit.html" class="sidebar-link">面对象编辑</a></li><li id="LineEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/LineEdit.html" class="sidebar-link">线对象编辑</a></li><li id="VertexEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/VertexEdit.html" class="sidebar-link">节点编辑</a></li><li id="ObjectsConversion"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/ObjectsConversion.html" class="sidebar-link">对象类型转换</a></li><li id="OtherEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/OtherEdit.html" class="sidebar-link">其他编辑</a></li></ul></li></ul></li><li id="DataAnalyst"><strong class="sidebar-title">数据分析</strong><ul><li id="BufferTheory"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferTheory.html" class="sidebar-link">缓冲区分析原理</a></li><li id="SingleBuffer"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/SingleBuffer.html" class="sidebar-link">单重缓冲区分析</a></li><li id="BufferAnalyst_Example"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferAnalyst_Example.html" class="sidebar-link">缓冲区应用实例</a></li><li id="FindRasterVaule"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/FindRasterVaule.html" class="sidebar-link">栅格查询</a></li></ul></li><li id="Map"><strong class="sidebar-title">地图制图</strong><ul><li id="Thematic"><strong class="sidebar-subtitle">专题图</strong><ul><li id="ThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap.html" class="sidebar-link">专题图概述</a></li><li id="CreatThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CreatThematicMap.html" class="sidebar-link">创建专题图</a></li></ul></li><li id="ModifyMap"><strong class="sidebar-subtitle">修改专题图</strong><ul><li id="ModifyThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html" class="sidebar-link">公用属性</a></li><li id="UniqueValueProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html" class="sidebar-link">单值专题图</a></li><li id="RangesMapGroupDia"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html" class="sidebar-link">分段专题图</a></li><li id="LabelProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html" class="sidebar-link">标签专题图</a></li><li id="GraphProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html" class="sidebar-link">统计专题图</a></li><li id="GraduatedSymbolProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html" class="sidebar-link">等级符号专题图</a></li><li id="DotDensityProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html" class="sidebar-link">点密度专题图</a></li><li id="CustomizeProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html" class="sidebar-link">自定义专题图</a></li></ul></li><li id="Style"><a href="/SuperMap-iDesktop-Cross/docs/Map/Style.html" class="sidebar-link">设置图层风格</a></li><li id="OverlapDisplayed"><a href="/SuperMap-iDesktop-Cross/docs/Map/OverlapDisplayed.html" class="sidebar-link">自动避让与压盖</a></li><li id="Measuregroup"><a href="/SuperMap-iDesktop-Cross/docs/Map/Measuregroup.html" class="sidebar-link">地图量算</a></li><li id="LayerSetting"><a href="/SuperMap-iDesktop-Cross/docs/Map/LayerSetting.html" class="sidebar-link">图层属性</a></li><li id="MapSetting_Basic"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Basic.html" class="sidebar-link">地图属性-基本</a></li><li id="MapSetting_Range"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Range.html" class="sidebar-link">地图属性-范围</a></li></ul></li><li id="Cache"><strong class="sidebar-title">地图缓存</strong><ul><li id="SingleProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/SingleProcessCache.html" class="sidebar-link">单进程切图</a></li><li id="MultiProcessesCache"><strong class="sidebar-subtitle">多进程切图</strong><ul><li id="MultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/MultiProcessCache.html" class="sidebar-link">多进程切图</a></li><li id="CreateMultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CreateMultiProcessCache.html" class="sidebar-link">新建地图缓存（多任务)</a></li><li id="ExecuteMultiProcessCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/ExecuteMultiProcessCaching.html" class="sidebar-link">执行切图任务</a></li></ul></li><li id="CacheCheck"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CacheCheck.html" class="sidebar-link">缓存检查</a></li><li id="UpdateCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/UpdateCache.html" class="sidebar-link">更新缓存</a></li><li id="RecoverCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/RecoverCaching.html" class="sidebar-link">续传缓存</a></li></ul></li><li id="SpatialStatisticalAnalysis"><strong class="sidebar-title">空间统计分析</strong><ul><li id="SpatialStatisticalAnalysisSummary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialStatisticalAnalysisSummary.html" class="sidebar-link">空间统计分析概述</a></li><li id="BasicVocabulary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/BasicVocabulary.html" class="sidebar-link">基础词汇</a></li><li id="MeasureGeographicDistr"><strong class="sidebar-subtitle">度量地理分析</strong><ul><li id="MeasureGeographicDistributions"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureGeographicDistributions.html" class="sidebar-link">度量地理分析概述</a></li><li id="CentralFeature"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html" class="sidebar-link">中心要素</a></li><li id="MeanCenter"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html" class="sidebar-link">平均中心</a></li><li id="MeanCenterResult"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenterResult.html" class="sidebar-link">中位数中心</a></li><li id="MeasureDirection"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureDirection.html" class="sidebar-link">方向分布</a></li><li id="MeasureLinearDirectional"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureLinearDirectional.html" class="sidebar-link">线性方向平均值</a></li><li id="MeasureStandardDistance"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureStandardDistance.html" class="sidebar-link">标准距离</a></li></ul></li><li id="Clusters1"><strong class="sidebar-subtitle">聚类分析</strong><ul><li id="Clusters"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/Clusters.html" class="sidebar-link">聚类分析概述</a></li><li id="HotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html" class="sidebar-link">热点分析</a></li><li id="OptimizedHotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/OptimizedHotSpotAnalyst.html" class="sidebar-link">优化的热点分析</a></li><li id="ClusterOutlierAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html" class="sidebar-link">聚类异常值分析</a></li></ul></li><li id="SpatialRelationshipModeling1"><strong class="sidebar-subtitle">空间关系建模</strong><ul><li id="SpatialRelationshipModeling"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html" class="sidebar-link">空间关系建模概述</a></li><li id="GeographicWeightedRegression"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/GeographicWeightedRegression.html" class="sidebar-link">地理加权回归分析</a></li></ul></li><li id="AnalyzingPatterns1"><strong class="sidebar-subtitle">分析模式</strong><ul><li id="AnalyzingPatterns"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AnalyzingPatterns.html" class="sidebar-link">分析模式概述</a></li><li id="SpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html" class="sidebar-link">空间自相关</a></li><li id="HighLowClustering"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HighLowClustering.html" class="sidebar-link">高低值聚类</a></li><li id="IncrementalSpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html" class="sidebar-link">增量空间自相关</a></li><li id="AverageNearestNeighbor"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html" class="sidebar-link">平均最近邻</a></li></ul></li></ul></li><li id="BigData"><strong class="sidebar-title">大数据在线分析</strong><ul><li id="BigDataAnalysisEnvironmentConfiguration"><a href="/SuperMap-iDesktop-Cross/docs/BigData/BigDataAnalysisEnvironmentConfiguration.html" class="sidebar-link">分析环境配置</a></li><li id="DataPreparation"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DataPreparation.html" class="sidebar-link">数据准备</a></li><li id="DensityAnalysis"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DensityAnalysis.html" class="sidebar-link">密度分析</a></li></ul></li><li id="Scene"><strong class="sidebar-title">三维场景</strong><ul><li id="SceneDia"><a href="/SuperMap-iDesktop-Cross/docs/Scene/SceneDia.html" class="sidebar-link">场景概述</a></li></ul></li><li id="FAQAll"><strong class="sidebar-title">FAQ</strong><ul><li id="FAQ"><a href="/SuperMap-iDesktop-Cross/docs/FAQ.html" class="sidebar-link">常见问题解答</a></li></ul></li><li id="News"><strong class="sidebar-title">新特性</strong><ul><li id="9DNews"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_900.html" class="sidebar-link">Cross 9D 新特性</a></li><li id="811News"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_811.html" class="sidebar-link">Cross 8C(2017) 新特性</a></li></ul></li></ul></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="http://www.supermap.com/" target="_blank">iDesktop</a><br>
+      Documentation Version 1.0.0
+    </div>
+    <div id="footer-links">
+      <!--a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a-->
+      <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="footer-link" target="_blank"><i class="fa fa-git"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/SuperMap-iDesktop-Cross/home/" class="mobile-nav-link">首页</a><a href="/SuperMap-iDesktop-Cross/docs/" class="mobile-nav-link">帮助文档</a>
+      <li class="mobile-nav-item">
+        <a href="http://git.oschina.net/supermap/SuperMap-iDesktop-Cross" class="mobile-nav-link" rel="external" target="_blank">git.OSChina</a>
+      </li>
+    </ul>
+    
+      <ul class="topnav"><li id="welcome"><strong class="mobile-nav-title">Welcome</strong><ul><li id="SuperMap Cross"><a href="/SuperMap-iDesktop-Cross/docs/index.html" class="mobile-nav-link">产品介绍</a></li><li id="License"><a href="/SuperMap-iDesktop-Cross/docs/Install/License.html" class="mobile-nav-link">许可配置</a></li></ul></li><li id="getting_started"><strong class="mobile-nav-title">产品入门</strong><ul><li id="SuperMapDataStructure"><a href="/SuperMap-iDesktop-Cross/docs/Basic/SuperMapDataStructure.html" class="mobile-nav-link">数据组织结构</a></li><li id="Pyramid"><a href="/SuperMap-iDesktop-Cross/docs/Basic/Pyramid.html" class="mobile-nav-link">影像金字塔</a></li><li id="GeoFormates"><a href="/SuperMap-iDesktop-Cross/docs/Basic/GeoFormates.html" class="mobile-nav-link">数据转换</a></li></ul></li><li id="DataProcess"><strong class="mobile-nav-title">数据处理</strong><ul><li id="Projection"><strong class="mobile-nav-subtitle">投影</strong><ul><li id="AboutMapProjection"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/AboutMapProjection.html" class="mobile-nav-link">投影概述</a></li><li id="ProjectionUsed"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionUsed.html" class="mobile-nav-link">常用投影</a></li><li id="PrjCoordSysType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/PrjCoordSysType.html" class="mobile-nav-link">坐标系类型</a></li><li id="SetPrjCoordSys"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/SetPrjCoordSys.html" class="mobile-nav-link">投影设置</a></li></ul></li><li id="Topo"><strong class="mobile-nav-subtitle">拓扑处理</strong><ul><li id="TopoProcess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcess.html" class="mobile-nav-link">拓扑处理规则</a></li><li id="TopoPreprocess"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoPreprocess.html" class="mobile-nav-link">拓扑预处理</a></li><li id="TopoProcessLine"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcessLine.html" class="mobile-nav-link">线拓扑处理</a></li><li id="TopotoPolygon"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/TopotoPolygon.html" class="mobile-nav-link">拓扑构面</a></li></ul></li><li id="SQL"><strong class="mobile-nav-subtitle">SQL查询</strong><ul><li id="SQLQuery_Expression"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQuery_Expression.html" class="mobile-nav-link">构建SQL表达式</a></li><li id="SQLQueryDia"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDia.html" class="mobile-nav-link">SQL 查询</a></li><li id="SQLQueryDiaFuction"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html" class="mobile-nav-link">SQL函数运算符</a></li><li id="SQLSupporttedType"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/SQLSupporttedType.html" class="mobile-nav-link">SQL查询引擎支持</a></li></ul></li></ul></li><li id="Objects"><strong class="mobile-nav-title">对象操作</strong><ul><li id="CreateGeometry"><strong class="mobile-nav-subtitle">对象绘制</strong><ul><li id="AboutCreateGeometry"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/AboutCreateGeometry.html" class="mobile-nav-link">对象绘制概述</a></li><li id="Point"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Point.html" class="mobile-nav-link">绘制点</a></li><li id="DrawCurve"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawCurve.html" class="mobile-nav-link">绘制线</a></li><li id="DrawQuadRangle"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawQuadRangle.html" class="mobile-nav-link">绘制面</a></li><li id="Text"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Text.html" class="mobile-nav-link">绘制文本</a></li></ul></li><li id="EdittingGeometry"><strong class="mobile-nav-subtitle">对象编辑</strong><ul><li id="PolygonEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/PolygonEdit.html" class="mobile-nav-link">面对象编辑</a></li><li id="LineEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/LineEdit.html" class="mobile-nav-link">线对象编辑</a></li><li id="VertexEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/VertexEdit.html" class="mobile-nav-link">节点编辑</a></li><li id="ObjectsConversion"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/ObjectsConversion.html" class="mobile-nav-link">对象类型转换</a></li><li id="OtherEdit"><a href="/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/OtherEdit.html" class="mobile-nav-link">其他编辑</a></li></ul></li></ul></li><li id="DataAnalyst"><strong class="mobile-nav-title">数据分析</strong><ul><li id="BufferTheory"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferTheory.html" class="mobile-nav-link">缓冲区分析原理</a></li><li id="SingleBuffer"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/SingleBuffer.html" class="mobile-nav-link">单重缓冲区分析</a></li><li id="BufferAnalyst_Example"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferAnalyst_Example.html" class="mobile-nav-link">缓冲区应用实例</a></li><li id="FindRasterVaule"><a href="/SuperMap-iDesktop-Cross/docs/DataAnalyst/FindRasterVaule.html" class="mobile-nav-link">栅格查询</a></li></ul></li><li id="Map"><strong class="mobile-nav-title">地图制图</strong><ul><li id="Thematic"><strong class="mobile-nav-subtitle">专题图</strong><ul><li id="ThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap.html" class="mobile-nav-link">专题图概述</a></li><li id="CreatThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CreatThematicMap.html" class="mobile-nav-link">创建专题图</a></li></ul></li><li id="ModifyMap"><strong class="mobile-nav-subtitle">修改专题图</strong><ul><li id="ModifyThematicMap"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html" class="mobile-nav-link">公用属性</a></li><li id="UniqueValueProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html" class="mobile-nav-link">单值专题图</a></li><li id="RangesMapGroupDia"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html" class="mobile-nav-link">分段专题图</a></li><li id="LabelProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html" class="mobile-nav-link">标签专题图</a></li><li id="GraphProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html" class="mobile-nav-link">统计专题图</a></li><li id="GraduatedSymbolProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html" class="mobile-nav-link">等级符号专题图</a></li><li id="DotDensityProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html" class="mobile-nav-link">点密度专题图</a></li><li id="CustomizeProperties"><a href="/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html" class="mobile-nav-link">自定义专题图</a></li></ul></li><li id="Style"><a href="/SuperMap-iDesktop-Cross/docs/Map/Style.html" class="mobile-nav-link">设置图层风格</a></li><li id="OverlapDisplayed"><a href="/SuperMap-iDesktop-Cross/docs/Map/OverlapDisplayed.html" class="mobile-nav-link">自动避让与压盖</a></li><li id="Measuregroup"><a href="/SuperMap-iDesktop-Cross/docs/Map/Measuregroup.html" class="mobile-nav-link">地图量算</a></li><li id="LayerSetting"><a href="/SuperMap-iDesktop-Cross/docs/Map/LayerSetting.html" class="mobile-nav-link">图层属性</a></li><li id="MapSetting_Basic"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Basic.html" class="mobile-nav-link">地图属性-基本</a></li><li id="MapSetting_Range"><a href="/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Range.html" class="mobile-nav-link">地图属性-范围</a></li></ul></li><li id="Cache"><strong class="mobile-nav-title">地图缓存</strong><ul><li id="SingleProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/SingleProcessCache.html" class="mobile-nav-link">单进程切图</a></li><li id="MultiProcessesCache"><strong class="mobile-nav-subtitle">多进程切图</strong><ul><li id="MultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/MultiProcessCache.html" class="mobile-nav-link">多进程切图</a></li><li id="CreateMultiProcessCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CreateMultiProcessCache.html" class="mobile-nav-link">新建地图缓存（多任务)</a></li><li id="ExecuteMultiProcessCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/ExecuteMultiProcessCaching.html" class="mobile-nav-link">执行切图任务</a></li></ul></li><li id="CacheCheck"><a href="/SuperMap-iDesktop-Cross/docs/Cache/CacheCheck.html" class="mobile-nav-link">缓存检查</a></li><li id="UpdateCache"><a href="/SuperMap-iDesktop-Cross/docs/Cache/UpdateCache.html" class="mobile-nav-link">更新缓存</a></li><li id="RecoverCaching"><a href="/SuperMap-iDesktop-Cross/docs/Cache/RecoverCaching.html" class="mobile-nav-link">续传缓存</a></li></ul></li><li id="SpatialStatisticalAnalysis"><strong class="mobile-nav-title">空间统计分析</strong><ul><li id="SpatialStatisticalAnalysisSummary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialStatisticalAnalysisSummary.html" class="mobile-nav-link">空间统计分析概述</a></li><li id="BasicVocabulary"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/BasicVocabulary.html" class="mobile-nav-link">基础词汇</a></li><li id="MeasureGeographicDistr"><strong class="mobile-nav-subtitle">度量地理分析</strong><ul><li id="MeasureGeographicDistributions"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureGeographicDistributions.html" class="mobile-nav-link">度量地理分析概述</a></li><li id="CentralFeature"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html" class="mobile-nav-link">中心要素</a></li><li id="MeanCenter"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html" class="mobile-nav-link">平均中心</a></li><li id="MeanCenterResult"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenterResult.html" class="mobile-nav-link">中位数中心</a></li><li id="MeasureDirection"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureDirection.html" class="mobile-nav-link">方向分布</a></li><li id="MeasureLinearDirectional"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureLinearDirectional.html" class="mobile-nav-link">线性方向平均值</a></li><li id="MeasureStandardDistance"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureStandardDistance.html" class="mobile-nav-link">标准距离</a></li></ul></li><li id="Clusters1"><strong class="mobile-nav-subtitle">聚类分析</strong><ul><li id="Clusters"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/Clusters.html" class="mobile-nav-link">聚类分析概述</a></li><li id="HotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html" class="mobile-nav-link">热点分析</a></li><li id="OptimizedHotSpotAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/OptimizedHotSpotAnalyst.html" class="mobile-nav-link">优化的热点分析</a></li><li id="ClusterOutlierAnalyst"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html" class="mobile-nav-link">聚类异常值分析</a></li></ul></li><li id="SpatialRelationshipModeling1"><strong class="mobile-nav-subtitle">空间关系建模</strong><ul><li id="SpatialRelationshipModeling"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html" class="mobile-nav-link">空间关系建模概述</a></li><li id="GeographicWeightedRegression"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/GeographicWeightedRegression.html" class="mobile-nav-link">地理加权回归分析</a></li></ul></li><li id="AnalyzingPatterns1"><strong class="mobile-nav-subtitle">分析模式</strong><ul><li id="AnalyzingPatterns"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AnalyzingPatterns.html" class="mobile-nav-link">分析模式概述</a></li><li id="SpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html" class="mobile-nav-link">空间自相关</a></li><li id="HighLowClustering"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HighLowClustering.html" class="mobile-nav-link">高低值聚类</a></li><li id="IncrementalSpatialAutocorrelation"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html" class="mobile-nav-link">增量空间自相关</a></li><li id="AverageNearestNeighbor"><a href="/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html" class="mobile-nav-link">平均最近邻</a></li></ul></li></ul></li><li id="BigData"><strong class="mobile-nav-title">大数据在线分析</strong><ul><li id="BigDataAnalysisEnvironmentConfiguration"><a href="/SuperMap-iDesktop-Cross/docs/BigData/BigDataAnalysisEnvironmentConfiguration.html" class="mobile-nav-link">分析环境配置</a></li><li id="DataPreparation"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DataPreparation.html" class="mobile-nav-link">数据准备</a></li><li id="DensityAnalysis"><a href="/SuperMap-iDesktop-Cross/docs/BigData/DensityAnalysis.html" class="mobile-nav-link">密度分析</a></li></ul></li><li id="Scene"><strong class="mobile-nav-title">三维场景</strong><ul><li id="SceneDia"><a href="/SuperMap-iDesktop-Cross/docs/Scene/SceneDia.html" class="mobile-nav-link">场景概述</a></li></ul></li><li id="FAQAll"><strong class="mobile-nav-title">FAQ</strong><ul><li id="FAQ"><a href="/SuperMap-iDesktop-Cross/docs/FAQ.html" class="mobile-nav-link">常见问题解答</a></li></ul></li><li id="News"><strong class="mobile-nav-title">新特性</strong><ul><li id="9DNews"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_900.html" class="mobile-nav-link">Cross 9D 新特性</a></li><li id="811News"><a href="/SuperMap-iDesktop-Cross/docs/news/what's_new_in_811.html" class="mobile-nav-link">Cross 8C(2017) 新特性</a></li></ul></li></ul>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/DataProcess/SQLQueryDiaFuction.html">
+      
+        <option value="zh" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/SuperMap-iDesktop-Cross/js/lang_select.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/toc.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/mobile_nav.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/jquery-1.10.2.min.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/slider.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/jquery-1.5.2.min.js"></script>
+<script src="/SuperMap-iDesktop-Cross/js/sidebar.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<!--link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2.1.2/docsearch.css" /-->
+<link rel="stylesheet" href="/SuperMap-iDesktop-Cross/css/docsearch.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2.1.2/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+var host=window.location.host;
+if(host=='supermap-idesktop.github.io')
+{
+  docsearch({
+    apiKey: '87c625ea3b3f57f243d590e3c59b0748',
+    indexName: 'supermap-idesktop',
+    inputSelector: '#search-input'
+  });
+}
+else if(host=='')
+{
+  docsearch({
+    apiKey: '87c625ea3b3f57f243d590e3c59b0748',
+    indexName: 'supermap-idesktop',
+    inputSelector: '#search-input'
+  });
+}
+else(host=='support.supermap.com.cn')
+{
+  docsearch({
+    apiKey: '19f860b1fcffb4b23a7b2f928e8b0692',
+    indexName: 'supermap-cn',
+    inputSelector: '#search-input'
+  });
+}
+</script>
+
+
+</body>
+</html>

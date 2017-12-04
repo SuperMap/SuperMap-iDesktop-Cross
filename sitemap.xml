@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/home/index.html</loc>
+    
+    <lastmod>2017-11-20T18:18:14.079Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/home/index.html</loc>
+    
+    <lastmod>2017-11-20T18:18:14.048Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/Measuregroup.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/LayerSetting.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/UpdateCache.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.731Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/SingleProcessCache.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.730Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/RecoverCaching.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.729Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/ExecuteMultiProcessCaching.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.729Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/MultiProcessCache.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.729Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/CreateMultiProcessCache.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.522Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Cache/CacheCheck.html</loc>
+    
+    <lastmod>2017-11-20T18:18:13.521Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/OptimizedHotSpotAnalyst.html</loc>
+    
+    <lastmod>2017-11-17T06:07:49.877Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/index.html</loc>
+    
+    <lastmod>2017-11-17T04:53:18.072Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/index.html</loc>
+    
+    <lastmod>2017-11-17T04:53:18.072Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/docs/index.html</loc>
+    
+    <lastmod>2017-11-17T04:53:18.071Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/docs/DataAnalyst/SingleBuffer.html</loc>
+    
+    <lastmod>2017-11-17T04:53:00.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/docs/DataAnalyst/FindRasterVaule.html</loc>
+    
+    <lastmod>2017-11-17T04:53:00.228Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/docs/DataAnalyst/BufferTheory.html</loc>
+    
+    <lastmod>2017-11-17T04:52:59.808Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/en/docs/DataAnalyst/BufferAnalyst_Example.html</loc>
+    
+    <lastmod>2017-11-17T04:52:59.808Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HotSpotAnalyst.html</loc>
+    
+    <lastmod>2017-11-14T01:13:07.659Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/OtherEdit.html</loc>
+    
+    <lastmod>2017-11-14T01:13:07.658Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/ObjectsConversion.html</loc>
+    
+    <lastmod>2017-11-14T01:13:07.657Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/LineEdit.html</loc>
+    
+    <lastmod>2017-11-14T01:13:07.656Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/BigData/DensityAnalysis.html</loc>
+    
+    <lastmod>2017-11-14T01:13:07.656Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialRelationshipModeling.html</loc>
+    
+    <lastmod>2017-10-31T17:37:05.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialAutocorrelation.html</loc>
+    
+    <lastmod>2017-10-31T17:37:05.803Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureStandardDistance.html</loc>
+    
+    <lastmod>2017-10-31T17:37:05.304Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureLinearDirectional.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.226Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureGeographicDistributions.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.225Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenterResult.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.224Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeasureDirection.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.224Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/MeanCenter.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.074Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/IncrementalSpatialAutocorrelation.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.073Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/HighLowClustering.html</loc>
+    
+    <lastmod>2017-10-31T17:37:04.072Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/GeographicWeightedRegression.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.957Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/Clusters.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.956Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/ClusterOutlierAnalyst.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.956Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/CentralFeature.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.955Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AverageNearestNeighbor.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.954Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/AnalyzingPatterns.html</loc>
+    
+    <lastmod>2017-10-31T17:37:03.880Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/SpatialStatisticalAnalysisSummary.html</loc>
+    
+    <lastmod>2017-09-08T07:09:31.656Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/SpatialStatisticalAnalysis/BasicVocabulary.html</loc>
+    
+    <lastmod>2017-09-08T07:09:31.323Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/BigData/DataPreparation.html</loc>
+    
+    <lastmod>2017-09-08T07:09:30.183Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/BigData/BigDataAnalysisEnvironmentConfiguration.html</loc>
+    
+    <lastmod>2017-09-08T07:09:30.151Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/index.html</loc>
+    
+    <lastmod>2017-08-25T15:47:53.611Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Scene/SceneDia.html</loc>
+    
+    <lastmod>2017-08-03T05:48:39.580Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Scene/BrowseScene.html</loc>
+    
+    <lastmod>2017-08-03T05:48:39.580Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/ModifyThematicMap.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.418Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/UniqueValueProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.418Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/RangesMapGroupDia.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.418Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/LabelProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.417Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraphProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.417Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/DotDensityProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.416Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/GraduatedSymbolProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.416Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CustomizeProperties.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap/CreatThematicMap.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.148Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/OverlapDisplayed.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.147Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/ThematicMap.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.147Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/Style.html</loc>
+    
+    <lastmod>2017-08-03T05:48:38.147Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Range.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.901Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Map/MapSetting_Basic.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.900Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Install/License.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.898Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/FAQ.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/TopotoPolygon.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.244Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcessLine.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.244Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/TopoPreprocess.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.243Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/TopoProcess.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.243Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLSupporttedType.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.242Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQuery_Expression.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.242Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDiaFuction.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.241Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/SQLQueryDia.html</loc>
+    
+    <lastmod>2017-08-03T05:48:37.236Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionType.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.763Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/SetPrjCoordSys.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.763Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/ProjectionUsed.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.763Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/AboutMapProjection.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/Projection/PrjCoordSysType.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/VertexEdit.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.131Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/EditObjects/PolygonEdit.html</loc>
+    
+    <lastmod>2017-08-03T05:48:36.131Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Text.html</loc>
+    
+    <lastmod>2017-08-03T05:48:35.782Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/Point.html</loc>
+    
+    <lastmod>2017-08-03T05:48:35.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawCurve.html</loc>
+    
+    <lastmod>2017-08-03T05:48:35.290Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/DrawQuadRangle.html</loc>
+    
+    <lastmod>2017-08-03T05:48:35.290Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataProcess/DataEdit/AboutCreateGeometry.html</loc>
+    
+    <lastmod>2017-08-03T05:48:35.289Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataAnalyst/SingleBuffer.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.992Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataAnalyst/FindRasterVaule.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.992Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferAnalyst_Example.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.837Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/DataAnalyst/BufferTheory.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.837Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Basic/SuperMapDataStructure.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Basic/Pyramid.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/docs/Basic/GeoFormates.html</loc>
+    
+    <lastmod>2017-08-03T05:48:34.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://supermap-idesktop.github.io/SuperMap-iDesktop-Cross/news/2017/08/03/whati-s-new/</loc>
+    
+    <lastmod>2017-08-03T05:48:34.828Z</lastmod>
+    
+  </url>
+  
+</urlset>
